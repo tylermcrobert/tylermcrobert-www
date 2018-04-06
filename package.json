@@ -1,12 +1,13 @@
 {
-  "name": "nodejs-sdk",
-  "version": "2.1.2",
+  "name": "tylermcrobert-www",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js",
     "lint": "eslint *.js",
-    "test": "node -c *.js"
+    "test": "node -c *.js",
+    "sass": "sass source/sass/app.scss public/css/app.css"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -30,7 +31,9 @@
     "babel-eslint": "~8.0.1",
     "eslint": "~4.8.0",
     "eslint-config-airbnb-base": "~12.0.1",
-    "eslint-plugin-import": "~2.7.0"
+    "eslint-plugin-import": "~2.7.0",
+    "nodemon": "^1.17.3",
+    "webpack": "^2.2.1"
   },
   "engines": {
     "node": ">=4.8.1",
