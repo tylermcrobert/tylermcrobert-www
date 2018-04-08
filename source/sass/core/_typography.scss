@@ -1,0 +1,27 @@
+body {
+  font-family: 'helvetica neue';
+  font-size: $p-size;
+  line-height: $p-line;
+  color: $grey-dk;
+  font-weight: 400;
+  letter-spacing: .01em;
+  font-size:$font-size-base;
+}
+
+
+p {
+  color: $grey-lt;
+  font-size: $p-size;
+};
+
+h3 {
+  font-size: $h3-size;
+}
+
+h2 {
+  font-size: $h2-size;
+}
+
+h1 {
+  font-size: $h1-size;
+}

@@ -3,20 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server/app.js",
-    "dev": "nodemon server/app.js",
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
     "lint": "eslint *.js",
     "test": "node -c *.js",
-    "sass": "sass source/sass/app.scss public/css/app.css"
+    "sass": "node-sass -o public/css/  source/sass/app.scss -w"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookies": "~0.7.0",
     "debug": "~3.1.0",
     "errorhandler": "~1.5.0",
-    "express": "~4.16.1",
+    "express": "^4.16.3",
     "method-override": "~2.3.10",
     "morgan": "~1.9.0",
+    "npm": "^5.8.0",
     "prismic-dom": "~2.0.4",
     "prismic-javascript": "~1.4.0",
     "pug": "~2.0.0-rc.2",
@@ -29,9 +30,11 @@
   },
   "devDependencies": {
     "babel-eslint": "~8.0.1",
+    "browser-sync": "^2.23.6",
     "eslint": "~4.8.0",
     "eslint-config-airbnb-base": "~12.0.1",
     "eslint-plugin-import": "~2.7.0",
+    "node-sass": "^4.8.3",
     "nodemon": "^1.17.3",
     "webpack": "^2.2.1"
   },
