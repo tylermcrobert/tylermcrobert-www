@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
     "start": "node server/server.js",
-=======
-    "start": "nodemon server/server.js",
->>>>>>> 72363081b3f95c892c3c9dd8d0792e4716271b85
     "dev": "nodemon server/server.js",
     "lint": "eslint *.js",
     "test": "node -c *.js",
