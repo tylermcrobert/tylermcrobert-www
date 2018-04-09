@@ -8,6 +8,9 @@ body {
   font-size:$font-size-base;
 }
 
+a {
+  color: $grey-dk;
+}
 
 p {
   color: $grey-lt;
@@ -16,12 +19,19 @@ p {
 
 h3 {
   font-size: $h3-size;
+  line-height: $h3-line;
 }
 
 h2 {
   font-size: $h2-size;
+  line-height: $h2-line;
 }
 
 h1 {
   font-size: $h1-size;
+  line-height: $h1-line;
+}
+
+.underline {
+  text-decoration: underline;
 }

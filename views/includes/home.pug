@@ -2,4 +2,10 @@ extends ../layout.pug
 
 block content
   .welcome
-      h1 HI!!!
+    h1
+      != PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
+    
+      //- each PrismicDOM.data.case_study_list;
+      //-   p asdf
+//- intro message: intro_message
+//- list: case_study_list
