@@ -29,29 +29,51 @@ app.use((req, res, next) => {
   });
 });
 
-//
-// app.get('/quickstart', (req, res) => {
-//   const page = req.params.id;
-//   req.prismic.api.getByUID('page', 'quickstart').then((document) => {
-//     res.render('test', { document });
-//   });
-// });
 
-app.get('/:caseStudy', (req, res) => {
+
+// class CaseStudyList {
+//   constructor(req, apiDocData, callback) {
+//     this.list = apiDocData.data.case_study_list;
+//     this.items = [];
+//     this.totalItemCount = 0;
+//
+//     this.list.forEach((item, index) => {
+//       this.items[index] = {
+//         id: item.case_study_item.id,
+//         number: index + 1,
+//         data() {
+//           return req.prismic.api.getByID(this.id).then((document) => {
+//             //this.data = document
+//             callback();
+//           });
+//         },
+//       };
+//       this.totalItemCount += 1; // probably pull this out of here
+//     });
+//   }
+// }
+
+app.get('/:caseStudy', (req, res, next) => {
   const caseStudy = req.params.caseStudy;
   req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
-    res.render('casestudy', { document });
+    if (document) {
+      res.render('casestudy', { document });
+    } else {
+      next();
+    }
   });
 });
 
 app.get('/', (req, res) => {
-  req.prismic.api.getSingle('homepage').then((document) => {
+  req.prismic.api.getSingle('homepage',{'fetchLinks': 'case_study.title'}).then((document) => {
+
+    let csList = document.data.case_study_list;
+
     res.render('home', { document });
-    // console.log(document.data.case_study_list);
   });
 });
 
-//eventually redirect this
+// eventually redirect this
 app.get('*', (req, res) => {
   res.render('404');
 });

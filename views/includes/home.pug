@@ -4,8 +4,10 @@ block content
   .welcome
     h1
       != PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
-    
-      //- each PrismicDOM.data.case_study_list;
-      //-   p asdf
-//- intro message: intro_message
-//- list: case_study_list
+  .caseStudies
+      h3.caseStudies__title
+      ul.caseStudies__list
+        each csItem in document.data.case_study_list
+          li.caseStudies__list__item
+            h2
+              a(href=`/${csItem.case_study_item.uid}`)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
