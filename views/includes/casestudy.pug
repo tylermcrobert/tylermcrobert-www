@@ -6,3 +6,6 @@ block content
       != PrismicDOM.RichText.asText(document.data.title, ctx.linkResolver)
     p
       != PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
+    .tags 
+      each tag in document.data.caseStudyContext.uniqueTags
+        p= tag

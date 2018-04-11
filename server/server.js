@@ -29,49 +29,51 @@ app.use((req, res, next) => {
   });
 });
 
+const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
+  const caseStudyList = docContainingList.data.case_study_list;
+  const uniqueTags = new Set();
+  let nextPageSlug;
+  let prevPageSlug;
 
+  caseStudyList.forEach((element) => {
+    const csItem = element.case_study_item;
+    const tags = [].concat(...csItem.tags);
 
-// class CaseStudyList {
-//   constructor(req, apiDocData, callback) {
-//     this.list = apiDocData.data.case_study_list;
-//     this.items = [];
-//     this.totalItemCount = 0;
-//
-//     this.list.forEach((item, index) => {
-//       this.items[index] = {
-//         id: item.case_study_item.id,
-//         number: index + 1,
-//         data() {
-//           return req.prismic.api.getByID(this.id).then((document) => {
-//             //this.data = document
-//             callback();
-//           });
-//         },
-//       };
-//       this.totalItemCount += 1; // probably pull this out of here
-//     });
-//   }
-// }
-
-app.get('/:caseStudy', (req, res, next) => {
-  const caseStudy = req.params.caseStudy;
-  req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
-    if (document) {
-      res.render('casestudy', { document });
-    } else {
-      next();
-    }
+    tags.forEach((tag) => {
+      uniqueTags.add(tag);
+    });
   });
-});
+  return {
+    caseStudyList,
+    uniqueTags: Array.from(uniqueTags),
+  };
+};
+
 
 app.get('/', (req, res) => {
-  req.prismic.api.getSingle('homepage',{'fetchLinks': 'case_study.title'}).then((document) => {
-
-    let csList = document.data.case_study_list;
-
+  req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((document) => {
     res.render('home', { document });
   });
 });
+
+
+app.get('/:caseStudy', (req, res, next) => {
+  const { caseStudy } = req.params;
+
+  req.prismic.api.getSingle('homepage').then((homepageDoc) => {
+    req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
+
+      document.data.caseStudyContext = getCaseStudyContext(homepageDoc)
+
+      if (document) {
+        res.render('casestudy', { document });
+      } else {
+        next();
+      }
+    });
+  });
+});
+
 
 // eventually redirect this
 app.get('*', (req, res) => {
