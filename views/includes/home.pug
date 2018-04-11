@@ -7,10 +7,11 @@ block content
       != PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
   .caseStudies
       h3.caseStudies__title Work
-      ul.caseStudies__list
-        - var csList = document.data.case_study_list
-        each csItem in csList
-          -var csTags = csItem.case_study_item.tags
-          li.caseStudies__list__item
-            h2
-              a(href=`/${csItem.case_study_item.uid}` data-tags=csTags)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
+      - var csList = document.data.case_study_list
+      each csItem in csList
+        -var csTags = csItem.case_study_item.tags
+      
+          ul(class="caseStudies__list" data-tags=csTags)
+            li.caseStudies__list__item
+              h2
+                a(href=`/${csItem.case_study_item.uid}`)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
