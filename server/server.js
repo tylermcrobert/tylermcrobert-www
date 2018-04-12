@@ -62,9 +62,7 @@ app.get('/:caseStudy', (req, res, next) => {
 
   req.prismic.api.getSingle('homepage').then((homepageDoc) => {
     req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
-
-      document.data.caseStudyContext = getCaseStudyContext(homepageDoc)
-
+      document.data.caseStudyContext = getCaseStudyContext(homepageDoc);
       if (document) {
         res.render('casestudy', { document });
       } else {

@@ -1,11 +1,18 @@
 extends ../layout.pug
 
+
 block content
-  .projectInfo
-    h1
+  -var cs_content = document.data.cs_content;
+
+  main.caseStudy
+  .caseStudy__info
+    h1.caseStudy__info__heading
       != PrismicDOM.RichText.asText(document.data.title, ctx.linkResolver)
     p
       != PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
     .tags 
       each tag in document.data.caseStudyContext.uniqueTags
         p= tag
+  .caseStudy__content
+    each item in cs_content
+      img.caseStudy__img(src=item.primary.image.url)
