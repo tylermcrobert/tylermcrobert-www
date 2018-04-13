@@ -15,4 +15,12 @@ block content
         p= tag
   .caseStudy__content
     each item in cs_content
-      img.caseStudy__img(src=item.primary.image.url)
+      if item.slice_type === 'single_image'
+        div(class="row caseStudy__block caseStudy__block--single")
+          img(class="caseStudy__img" src=item.primary.image.url)
+      if item.slice_type === 'double_image_block'
+        div(class="row caseStudy__block caseStudy__block--double")
+          div(class="col caseStudy__col--left")
+            img(src=item.primary.left_image.url)
+          div(class="col caseStudy__col--right")  
+          img(src=item.primary.right_image.url)
