@@ -1,1 +1,1 @@
-console.log('app');
+import '../sass/app.scss';

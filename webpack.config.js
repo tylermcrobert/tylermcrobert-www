@@ -1,4 +1,3 @@
-
 const path = require('path');
 
 module.exports = {
@@ -8,5 +7,29 @@ module.exports = {
     filename: 'app.js',
     publicPath: '/js/',
   },
-
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: { presets: ['env'] },
+        },
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader', // creates style nodes from JS strings
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+          },
+          {
+            loader: 'sass-loader', // compiles Sass to CSS
+          },
+        ],
+      },
+    ],
+  },
 };

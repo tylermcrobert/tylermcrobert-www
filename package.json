@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "nodemon server/server.js",
-    "lint": "eslint *.js",
+    "start": "npm run build && node server/server.js",
     "test": "node -c *.js",
-    "sass": "node-sass -o public/css/  source/sass/app.scss -w",
-    "build": "webpack"
+    "watch": "webpack --watch --colors --mode=development",
+    "build": "webpack --mode=production"
   },
   "dependencies": {
+    "babel-loader": "^7.1.4",
     "body-parser": "~1.18.2",
     "cookies": "~0.7.0",
     "debug": "~3.1.0",
     "errorhandler": "~1.5.0",
     "express": "^4.16.3",
+    "file-loader": "^1.1.11",
     "method-override": "~2.3.10",
     "morgan": "~1.9.0",
     "npm": "^5.8.0",
