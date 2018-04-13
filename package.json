@@ -7,7 +7,8 @@
     "dev": "nodemon server/server.js",
     "lint": "eslint *.js",
     "test": "node -c *.js",
-    "sass": "node-sass -o public/css/  source/sass/app.scss -w"
+    "sass": "node-sass -o public/css/  source/sass/app.scss -w",
+    "build": "webpack"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "babel-eslint": "~8.0.1",
+    "babel-preset-env": "^1.6.1",
     "browser-sync": "^2.23.6",
     "css-loader": "^0.28.11",
     "eslint": "~4.8.0",
@@ -39,7 +41,8 @@
     "nodemon": "^1.17.3",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "webpack": "^4.5.0"
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
   },
   "engines": {
     "node": ">=4.8.1",
