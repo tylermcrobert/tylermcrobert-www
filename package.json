@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run build && node server/server.js",
+    "start": "node server/server.js",
     "test": "node -c *.js",
     "watch": "webpack --watch --colors --mode=development",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "postinstall":"npm run build"
   },
   "dependencies": {
     "babel-loader": "^7.1.4",
