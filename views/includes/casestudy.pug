@@ -5,15 +5,15 @@ block content
   -var cs_content = document.data.cs_content;
 
   main.caseStudy
-    .caseStudy__info
+    div(class="csBlock caseStudy__info")
       div(class="caseStudy__info__title")
         h1
           != PrismicDOM.RichText.asText(document.data.title, ctx.linkResolver)
       div(class="caseStudy__info__desc")
         p!= PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
-      .tagIndicator 
+      .csBlock__tagIndicator
         each tag in document.data.caseStudyContext.uniqueTags
-          p.tagIndicator__tag= tag
+          p.csBlock__tagIndicator__tag= tag
     .caseStudy__content
       each item in cs_content
         if item.slice_type === 'single_image'

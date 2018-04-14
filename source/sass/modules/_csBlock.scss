@@ -1,0 +1,23 @@
+
+.csBlock {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__tagIndicator {
+    position: absolute;
+    top: 50vh;
+    width: 100vh;
+    transform: translate(0, -50%) rotate(270deg);
+    text-align: center;
+    left: calc(-50vh + 1.25em);
+
+    &__tag {
+      display: inline-block;
+      margin: 1em;
+    }
+  }
+}

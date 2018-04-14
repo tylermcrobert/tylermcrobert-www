@@ -4,8 +4,6 @@
 @import 'config/variables';
 // @import "config/mixins";
 
-
-
 /******************************************************************************
  * Core
 *******************************************************************************/
@@ -18,23 +16,21 @@
 // @import "core/images";
 @import "core/grid";
 
-
 /******************************************************************************
  * Modules
 *******************************************************************************/
-// @import "modules/navigation";
+@import 'modules/navigation';
 // @import "modules/screens";
 // @import "modules/views";
 // @import "modules/anims";
 @import 'modules/casestudy';
-// @import "modules/home";
+@import 'modules/csBlock';
+@import "modules/home";
 // @import "modules/video";
 // @import "modules/gallery";
 // @import "modules/about";
 // @import "modules/work";
 // @import "modules/classes";
-
-
 
 /******************************************************************************
  * UI State

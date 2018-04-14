@@ -1,8 +1,7 @@
-.row{
-  display:flex;
-  align-items:left;
+.row {
+  display: flex;
+  align-items: left;
   flex-wrap: wrap;
-
 }
 
 @mixin col {

@@ -1,17 +1,15 @@
 extends ../layout.pug
 
 block content
-  -console.log(document.data);
-  .welcome
+  .intro
     h1
       != PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
-  .caseStudies
+  div(class="csBlock caseStudies")
       h3.caseStudies__title Work
       - var csList = document.data.case_study_list
-      each csItem in csList
-        -var csTags = csItem.case_study_item.tags
-      
-          ul(class="caseStudies__list" data-tags=csTags)
-            li.caseStudies__list__item
-              h2
-                a(href=`/work/${csItem.case_study_item.uid}`)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
+      ul(class="caseStudies__list" data-tags=csTags)
+        each csItem in csList
+          -var csTags = csItem.case_study_item.tags
+          li.caseStudies__list__item
+            h2
+              a(href=`/work/${csItem.case_study_item.uid}`)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
