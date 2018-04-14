@@ -1,0 +1,15 @@
+.row{
+  display:flex;
+  align-items:left;
+  flex-wrap: wrap;
+
+}
+
+@mixin col {
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.col {
+  @include col;
+}

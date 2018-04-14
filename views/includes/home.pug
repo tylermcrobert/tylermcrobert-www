@@ -14,4 +14,4 @@ block content
           ul(class="caseStudies__list" data-tags=csTags)
             li.caseStudies__list__item
               h2
-                a(href=`/${csItem.case_study_item.uid}`)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
+                a(href=`/work/${csItem.case_study_item.uid}`)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)

@@ -1,7 +1,51 @@
+
+
+
 .caseStudy {
+
+  position: relative;
+
   &__content {
     .caseStudy__img {
       max-width: 100%;
+      height: auto;
     }
   }
+
+  &__info {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__title {
+      flex: 1; //fill remaining of height
+      min-height: 60%;
+      display: flex;
+      align-items: center;
+    }
+
+    &__desc {
+      flex: 0;
+      margin-bottom: 5%;
+      width:50%;
+    }
+
+  }
+
+
+  .tagIndicator {
+    position: absolute;
+    top: 50vh;
+    width: 100vh;
+    transform: translate(0, -50%) rotate(270deg);
+    text-align: center;
+    left: calc(-50vh + 1.25em);
+
+    &__tag {
+      display: inline-block;
+      margin: 0 10px;
+    }
+  }
+
 }

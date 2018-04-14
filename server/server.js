@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/:caseStudy', (req, res, next) => {
+app.get('/work/:caseStudy', (req, res, next) => {
   const { caseStudy } = req.params;
 
   req.prismic.api.getSingle('homepage').then((homepageDoc) => {
