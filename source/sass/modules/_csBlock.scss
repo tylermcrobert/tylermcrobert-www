@@ -18,10 +18,10 @@
     &__tag {
       display: inline-block;
       margin: 1em;
-      color: $grey-lt;
+      color: $color-text-secondary;
 
       &.active{
-        color: $grey-dk;
+        color: $color-text-main;
       }
     }
   }

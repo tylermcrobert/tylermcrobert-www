@@ -2,18 +2,18 @@ body {
   font-family: 'helvetica neue';
   font-size: $p-size;
   line-height: $p-line;
-  color: $grey-dk;
+  color: $color-text-main;
   font-weight: 400;
   letter-spacing: .01em;
   font-size: $font-size-base;
 }
 
 a {
-  color: $grey-dk;
+  color: $color-text-main;
 }
 
 p {
-  color: $grey-lt;
+  color: $color-text-secondary;
   font-size: $p-size;
 };
 
