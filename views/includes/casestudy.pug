@@ -10,13 +10,15 @@ block content
           != PrismicDOM.RichText.asText(document.data.title, ctx.linkResolver)
       div(class="caseStudy__info__desc")
         p!= PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
-      .csBlock__tagIndicator
+      .csBlock__tagIndicator.-left
         -console.log(document.tags)
         each tag in document.data.caseStudyContext.uniqueTags
           if  document.tags.indexOf(tag) > -1
             p.csBlock__tagIndicator__tag.active= tag
           else  
             p.csBlock__tagIndicator__tag= tag
+      .csBlock__tagIndicator.-right
+        p.csBlock__tagIndicator__tag 1 of 8
     
     .caseStudy__content
       each item in cs_content

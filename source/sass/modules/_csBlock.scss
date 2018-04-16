@@ -11,16 +11,31 @@
     position: absolute;
     top: 50vh;
     width: 100vh;
-    transform: translate(0, -50%) rotate(270deg);
+    transform: translate(0, -50%);
     text-align: center;
-    left: calc(-50vh + 1.25em);
+
+    &.-left {
+      left: calc(-50vh + 1.25em);
+      transform: rotate(270deg);
+    }
+
+    &.-right {
+      right: calc(-50vh + 1.25em);
+      transform: rotate(90deg);
+
+      p {
+        color: $color-text-main;
+      }
+    }
 
     &__tag {
       display: inline-block;
       margin: 1em;
       color: $color-text-secondary;
+      font-size: $p-size-small;
 
-      &.active{
+
+      &.active {
         color: $color-text-main;
       }
     }
