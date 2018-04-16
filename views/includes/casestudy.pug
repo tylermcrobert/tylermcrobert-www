@@ -1,6 +1,5 @@
 extends ../layout.pug
 
-
 block content
   -var cs_content = document.data.cs_content;
 
@@ -12,8 +11,13 @@ block content
       div(class="caseStudy__info__desc")
         p!= PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
       .csBlock__tagIndicator
+        -console.log(document.tags)
         each tag in document.data.caseStudyContext.uniqueTags
-          p.csBlock__tagIndicator__tag= tag
+          if  document.tags.indexOf(tag) > -1
+            p.csBlock__tagIndicator__tag.active= tag
+          else  
+            p.csBlock__tagIndicator__tag= tag
+    
     .caseStudy__content
       each item in cs_content
         if item.slice_type === 'single_image'

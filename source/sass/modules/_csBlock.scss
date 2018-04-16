@@ -18,6 +18,11 @@
     &__tag {
       display: inline-block;
       margin: 1em;
+      color: $grey-lt;
+
+      &.active{
+        color: $grey-dk;
+      }
     }
   }
 }

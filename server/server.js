@@ -29,29 +29,38 @@ app.use((req, res, next) => {
   });
 });
 
-const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
-  const caseStudyList = docContainingList.data.case_study_list;
+const getUniqueTags = (caseStudyList) => {
   const uniqueTags = new Set();
-  let nextPageSlug;
-  let prevPageSlug;
 
   caseStudyList.forEach((element) => {
-    const csItem = element.case_study_item;
-    const tags = [].concat(...csItem.tags);
+    const { case_study_item } = element;
+    const { tags } = case_study_item;
 
     tags.forEach((tag) => {
       uniqueTags.add(tag);
     });
   });
+
+  return Array.from(uniqueTags);
+};
+
+
+const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
+  const caseStudyList = docContainingList.data.case_study_list;
+  const uniqueTags = getUniqueTags(caseStudyList);
+  let nextPageSlug;
+  let prevPageSlug;
+
   return {
     caseStudyList,
-    uniqueTags: Array.from(uniqueTags),
+    uniqueTags,
   };
 };
 
 
 app.get('/', (req, res) => {
   req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((document) => {
+    document.data.uniqueTags = getUniqueTags(document.data.case_study_list);
     res.render('home', { document });
   });
 });
@@ -62,6 +71,7 @@ app.get('/work/:caseStudy', (req, res, next) => {
 
   req.prismic.api.getSingle('homepage').then((homepageDoc) => {
     req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
+      // Fix this
       document.data.caseStudyContext = getCaseStudyContext(homepageDoc);
       if (document) {
         res.render('casestudy', { document });

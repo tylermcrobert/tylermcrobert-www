@@ -6,10 +6,13 @@ block content
       != PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
   div(class="csBlock caseStudies")
       h3.caseStudies__title Work
+      .csBlock__tagIndicator
+        each tag in document.data.uniqueTags
+          p.csBlock__tagIndicator__tag= tag
       - var csList = document.data.case_study_list
       ul(class="caseStudies__list" data-tags=csTags)
         each csItem in csList
           -var csTags = csItem.case_study_item.tags
           li.caseStudies__list__item
-            h2
-              a(href=`/work/${csItem.case_study_item.uid}`)!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
+            a(href=`/work/${csItem.case_study_item.uid}`)
+              h2!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
