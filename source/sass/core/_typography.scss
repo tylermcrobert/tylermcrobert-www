@@ -1,0 +1,36 @@
+body {
+  font-family: 'helvetica neue';
+  line-height: $p-line;
+  color: $color-text-main;
+  font-weight: 400;
+  letter-spacing: .025em;
+  font-size: $font-size-base;
+}
+
+a {
+  color: $color-text-main;
+}
+
+p {
+  color: $color-text-secondary;
+  font-size: $p-size;
+};
+
+h3 {
+  font-size: $h3-size;
+  line-height: $h3-line;
+}
+
+h2 {
+  font-size: $h2-size;
+  line-height: $h2-line;
+}
+
+h1 {
+  font-size: $h1-size;
+  line-height: $h1-line;
+}
+
+.underline {
+  text-decoration: underline;
+}

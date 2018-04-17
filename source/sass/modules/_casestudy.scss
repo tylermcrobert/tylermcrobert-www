@@ -1,0 +1,23 @@
+.caseStudy {
+  &__content {
+    .caseStudy__img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__info {
+    &__title {
+      flex: 1; //fill remaining of height
+      min-height: 60%;
+      display: flex;
+      align-items: center;
+    }
+
+    &__desc {
+      flex: 0;
+      margin-bottom: 4em;
+      width: 50%;
+    }
+  }
+}
