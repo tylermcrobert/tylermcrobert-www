@@ -1,4 +1,3 @@
-import preview from './preview';
 const Prismic = require('prismic-javascript');
 const PrismicDOM = require('prismic-dom');
 const request = require('request');
@@ -82,10 +81,6 @@ app.get('/work/:caseStudy', (req, res, next) => {
     });
   });
 });
-
-
-app.get('/preview', preview);
-
 
 // eventually redirect this
 app.get('*', (req, res) => {
