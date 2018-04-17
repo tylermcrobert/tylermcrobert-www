@@ -22,12 +22,39 @@ block content
     
     .caseStudy__content
       each item in cs_content
+        
         if item.slice_type === 'single_image'
           div(class="row caseStudy__block caseStudy__block--single")
-            img(class="caseStudy__img" src=item.primary.image.url)
+            img(class="caseStudy__img" src!=item.primary.image.url)
+        
         if item.slice_type === 'double_image_block'
           div(class="row caseStudy__block caseStudy__block--double")
             div(class="col caseStudy__col --left")
-              img(class="caseStudy__img" src=item.primary.left_image.url)
+              img(class="caseStudy__img" src!=item.primary.left_image.url)
             div(class="col caseStudy__col--right")  
-              img(class="caseStudy__img" src=item.primary.right_image.url)
+              img(class="caseStudy__img" src!=item.primary.right_image.url)
+        
+        if item.slice_type === 'triple_image_block'
+          div(class="row caseStudy__block caseStudy__block--triple")
+            div(class="col caseStudy__col --left")
+              img(class="caseStudy__img" src!=item.primary.main_image.url)
+            div(class="col caseStudy__col --right")
+              img(class="caseStudy__img" src!=item.primary.secondary_image_1.url)
+              img(class="caseStudy__img" src!=item.primary.secondary_image_2.url)
+      
+        if item.slice_type === 'website'
+          -var browserSettings = {frameColor,}
+            div(class="row caseStudy__block caseStudy__block--website" 
+              style=`background-color: ${item.primary.background_color}`)
+              div.col.caseStudy__website
+                div(class="caseStudy__website__frame" 
+                    style=`background-color: ${item.primary.browser_frame_color}`)
+                  span.dot.-dot1 
+                  span.dot.-dot2 
+                  span.dot.-dot2 
+                div.caseStudy__website__window
+                  -console.log(item)
+                  if item.primary.browser_media.url
+                    | media needs dev work
+                  if item.primary.browser_image
+                    img(class="caseStudy__img caseStudy_website_image" src!=item.primary.browser_image.url)

@@ -5,7 +5,25 @@
       height: auto;
     }
   }
+  &__website{
+    margin: 10%;
 
+    &__frame{
+      padding:$browser-dot-size; //wack
+
+      .dot{
+        display:inline-block;
+
+        /* the following css is causing wack circles */
+
+        width: $browser-dot-size;
+        height: $browser-dot-size;
+        border-radius:$browser-dot-size/2;
+        margin-right:$browser-dot-size/2;
+        background: white;
+      }
+    }
+  }
   &__info {
     &__title {
       flex: 1; //fill remaining of height
