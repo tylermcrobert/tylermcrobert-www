@@ -20,8 +20,18 @@
     justify-content: center;
     align-items: center;
 
+    .-active {
+      color: $color-text-main;
+    }
+
     h2 {
       line-height: 2;
+      color: $color-text-secondary;
+
+      &:hover {
+        color: $color-text-main;
+      }
+
     }
   }
 
