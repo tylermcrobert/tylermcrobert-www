@@ -1,11 +1,19 @@
 doctype html(lang='en')
 
 head
-    include includes/credits.pug
-    title Tyler McRobert
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-    link(rel="stylesheet", href="/css/app.css")
-    script(src="/js/app.js")
+  include includes/credits.pug
+  title Tyler McRobert
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+  link(rel="stylesheet", href="/css/app.css")
+  script(src="/js/app.js")
+  
+  // Required for Previews and Experiments
+  script(src="https://code.jquery.com/jquery-1.12.4.min.js")
+  script
+    = ctx?"window.prismic = { endpoint: '" + ctx.endpoint + "' };":""
+  script(src="//static.cdn.prismic.io/prismic.min.js")
+  script(src="/javascript/vendors/highlight.min.js")
+  
 body
-    include includes/header.pug
-    block content
+  include includes/header.pug
+  block content

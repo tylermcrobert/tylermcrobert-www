@@ -1,26 +1,23 @@
 .caseStudy {
-  &__content {
-    .caseStudy__img {
-      max-width: 100%;
-      height: auto;
-    }
-  }
-  &__website{
+
+  &__website {
     margin: 10%;
 
-    &__frame{
-      padding:$browser-dot-size; //wack
+    &__frame {
+      padding: $browser-dot-size; //wack
+      background-color: $color-text-secondary;
+      border-radius: ($browser-dot-size / 2) ($browser-dot-size / 2) 0 0;
 
-      .dot{
-        display:inline-block;
+      .dot {
+        display: inline-block;
 
         /* the following css is causing wack circles */
 
         width: $browser-dot-size;
         height: $browser-dot-size;
-        border-radius:$browser-dot-size/2;
-        margin-right:$browser-dot-size/2;
-        background: white;
+        border-radius: $browser-dot-size / 2;
+        margin-right: $browser-dot-size / 2;
+        background: $color-bg;
       }
     }
   }
@@ -38,4 +35,11 @@
       width: 50%;
     }
   }
+
+  &__img,
+  &__video {
+    width: 100%;
+    height: auto;
+  }
+
 }
