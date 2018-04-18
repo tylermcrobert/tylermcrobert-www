@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 const Prismic = require('prismic-javascript');
 const PrismicDOM = require('prismic-dom');
 const request = require('request');
@@ -9,6 +11,7 @@ const PORT = app.get('port');
 app.listen(PORT, () => {
   process.stdout.write(`Point your browser to: http://localhost:${PORT}\n`);
 });
+
 
 // Middleware to inject prismic context
 app.use((req, res, next) => {
@@ -34,7 +37,8 @@ const getUniqueTags = (caseStudyList) => {
 
   caseStudyList.forEach((element) => {
     const { case_study_item } = element;
-    const { tags } = case_study_item;
+    const { tags } = case_study_item; // eslint-disable-line camelcase
+
 
     tags.forEach((tag) => {
       uniqueTags.add(tag);
@@ -58,6 +62,22 @@ const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
 };
 
 
+app.get('/preview', (req, res) => {
+  const { token } = req.query;
+  if (token) {
+    req.prismic.api.previewSession(token, PrismicConfig.linkResolver, '/').then((url) => {
+      const cookies = new Cookies(req, res);
+      cookies.set(Prismic.previewCookie, token, { maxAge: 30 * 60 * 1000, path: '/', httpOnly: false });
+      res.redirect(302, url);
+    }).catch((err) => {
+      res.status(500).send(`Error 500 in preview: ${err.message}`);
+    });
+  } else {
+    res.send(400, 'Missing token from querystring');
+  }
+});
+
+
 app.get('/', (req, res) => {
   req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((document) => {
     document.data.uniqueTags = getUniqueTags(document.data.case_study_list);
@@ -71,7 +91,6 @@ app.get('/work/:caseStudy', (req, res, next) => {
 
   req.prismic.api.getSingle('homepage').then((homepageDoc) => {
     req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
-      // Fix this
       document.data.caseStudyContext = getCaseStudyContext(homepageDoc);
       if (document) {
         res.render('casestudy', { document });
@@ -81,6 +100,7 @@ app.get('/work/:caseStudy', (req, res, next) => {
     });
   });
 });
+
 
 // eventually redirect this
 app.get('*', (req, res) => {
