@@ -6,10 +6,11 @@ block content
   main.caseStudy
     div.csBlock.caseStudy__info
       div.caseStudy__info__title
-        h1
+        h1.size-vw
           != PrismicDOM.RichText.asText(document.data.title, ctx.linkResolver)
       div.caseStudy__info__desc
-        p!= PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
+        p.roles lorem ipsum dolor sit amet 
+        p.overview!= PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
       .csBlock__tagIndicator.-left
         each tag in document.data.caseStudyContext.uniqueTags
           if  document.tags.indexOf(tag) > -1

@@ -1,12 +1,14 @@
+
 .caseStudy {
 
   &__website {
     margin: 10%;
 
     &__frame {
-      padding: $browser-dot-size; //wack
+      padding: $browser-dot-size * 1.5; //wack
       background-color: $color-text-secondary;
       border-radius: ($browser-dot-size / 2) ($browser-dot-size / 2) 0 0;
+      line-height: 0;
 
       .dot {
         display: inline-block;
@@ -23,9 +25,10 @@
   }
 
   &__info {
+
     &__title {
       flex: 1; //fill remaining of height
-      min-height: 60%;
+      min-height: 400px;
       display: flex;
       align-items: center;
     }
@@ -33,7 +36,21 @@
     &__desc {
       flex: 0;
       margin-bottom: 4em;
-      width: 50%;
+      display: flex;
+      margin: 0 (-$gutter) $spacer-xxl;
+
+      .overview,
+      .roles {
+       margin: 0 $gutter;
+      }
+
+      .overview {
+        max-width: 36em;
+      }
+
+      .roles {
+        flex-basis: 33%;
+      }
     }
   }
 

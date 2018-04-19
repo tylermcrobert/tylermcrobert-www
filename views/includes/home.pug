@@ -2,8 +2,8 @@ extends ../layout.pug
 
 block content
   .intro
-    h1
-      != PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
+    .intro__heading
+      h1.size-vw!= PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
   div(class="csBlock caseStudies")
       h3.caseStudies__title Work
       .csBlock__tagIndicator.-left
