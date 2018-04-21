@@ -39,7 +39,6 @@ const getUniqueTags = (caseStudyList) => {
     const { case_study_item } = element;
     const { tags } = case_study_item; // eslint-disable-line camelcase
 
-
     tags.forEach((tag) => {
       uniqueTags.add(tag);
     });
@@ -48,19 +47,34 @@ const getUniqueTags = (caseStudyList) => {
   return Array.from(uniqueTags);
 };
 
-
+/* for use within case study page */
 const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
   const caseStudyList = docContainingList.data.case_study_list;
   const uniqueTags = getUniqueTags(caseStudyList);
-  let nextPageSlug;
-  let prevPageSlug;
+  const listSize = caseStudyList.length;
+  let pageIndex;
+
+  caseStudyList.forEach((el, i) => {
+    if (el.case_study_item.uid === selectedCaseStudy) {
+      pageIndex = i;
+    }
+  });
+
+  const getNextPage = () => {
+    if (pageIndex >= (listSize - 1)) {
+      return caseStudyList[0].case_study_item;
+    }
+    return caseStudyList[pageIndex + 1].case_study_item;
+  };
 
   return {
     caseStudyList,
     uniqueTags,
+    pageIndex,
+    listSize,
+    nextPage: getNextPage(),
   };
 };
-
 
 app.get('/preview', (req, res) => {
   const { token } = req.query;
@@ -89,9 +103,9 @@ app.get('/', (req, res) => {
 app.get('/work/:caseStudy', (req, res, next) => {
   const { caseStudy } = req.params;
 
-  req.prismic.api.getSingle('homepage').then((homepageDoc) => {
+  req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((homepageDoc) => {
     req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
-      document.data.caseStudyContext = getCaseStudyContext(homepageDoc);
+      document.data.caseStudyContext = getCaseStudyContext(homepageDoc, caseStudy);
       if (document) {
         res.render('casestudy', { document });
       } else {

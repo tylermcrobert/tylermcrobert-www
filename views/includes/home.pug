@@ -5,12 +5,17 @@ block content
     .intro__heading
       h1.size-vw!= PrismicDOM.RichText.asText(document.data.intro_message, ctx.linkResolver)
   div(class="csBlock caseStudies")
+      
       h3.caseStudies__title Work
+      
+      //- Tags
       .csBlock__tagIndicator.-left
         each tag in document.data.uniqueTags
           p.csBlock__tagIndicator__tag= tag
       .csBlock__tagIndicator.-right 
         p.csBlock__tagIndicator__tag.-right No. 1 of 8
+      
+      //- List
       - var csList = document.data.case_study_list
       ul(class="caseStudies__list" data-tags=csTags)
         each csItem in csList

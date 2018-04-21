@@ -24,6 +24,10 @@ a {
 p {
   color: $color-text-secondary;
   font-size: $p-size;
+
+  &.small {
+    font-size: $p-size-small;
+  }
 };
 
 h3 {

@@ -6,9 +6,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 ($gutter * 2) + $p-size + .5; //gutter for each side of the block + size of p + a little extra
+  padding: $gutter;
+
+  @include breakpoint(tablet-portrait) {
+    padding: 0 ($gutter * 2) + $p-size + .5; //gutter for each side of the block + size of p + a little extra
+  }
 
   &__tagIndicator {
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+
     position: absolute;
     top: 50vh;
     width: 100vh;
