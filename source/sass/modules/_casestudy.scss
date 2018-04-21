@@ -67,8 +67,13 @@
   &__video {
     width: 100%;
     height: auto;
+<<<<<<< HEAD
     display: block; //Prevents weird space after images
     align-self: flex-start; //Prevents image stretching
+=======
+    display: block;
+    align-self: center;
+>>>>>>> 88694db6cbfdc57ad7072ef08e87518ddb0952d4
   }
 
   &__nextNav {
