@@ -4,6 +4,7 @@
   &__block {
     overflow: auto;
   }
+
   &__website {
     margin: 10%;
 
@@ -41,7 +42,8 @@
       flex: 0;
       margin-bottom: 4em;
       display: flex;
-      margin: 0 (-$gutter) $spacer-xxl;
+      margin: 0 (-$gutter) $spacer-xl;
+      max-width:46em;
 
       @include breakpoint(mobile) {
         display: block;
@@ -49,7 +51,7 @@
 
       .overview,
       .roles {
-       margin: 0 $gutter;
+       margin: $spacer $gutter;
       }
 
 
