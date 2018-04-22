@@ -13,23 +13,23 @@ block content
       )
         
   main.caseStudy
+    ul.csBlock__verticalData.-left.-tags
+      each tag in document.data.caseStudyContext.uniqueTags
+        if  document.tags.indexOf(tag) > -1
+          li.csBlock__verticalData__item.-active= tag
+        else  
+          li.csBlock__verticalData__item= tag
+    ul.csBlock__verticalData.-right.-index
+      li.csBlock__verticalData__item No. #{pageIndex + 1} of #{listSize}
+    
     div.csBlock.caseStudy__info
       div.caseStudy__info__title
         h1.size-vw
           != PrismicDOM.RichText.asText(entry.title)
       div.caseStudy__info__desc
-        p.roles.small!=entry.deliverables
+        p.roles!=entry.deliverables
         p.overview!= PrismicDOM.RichText.asText(entry.description)
 
-      .csBlock__tagIndicator.-left
-        each tag in document.data.caseStudyContext.uniqueTags
-          if  document.tags.indexOf(tag) > -1
-            p.csBlock__tagIndicator__tag.active= tag
-          else  
-            p.csBlock__tagIndicator__tag= tag
-      .csBlock__tagIndicator.-right
-        p.csBlock__tagIndicator__tag No. #{pageIndex + 1} of #{listSize}
-    
     .caseStudy__content
       each item in cs_content
         

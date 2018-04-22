@@ -2,11 +2,13 @@
   "parser": "babel-eslint",
   "extends": ["airbnb-base"],
   "env": {
-    "node": true
+    "node": true,
+    "browser": true
   },
   "rules": {
     "no-underscore-dangle": 0,
     "no-unused-vars": 0,
     "no-console": 0,
+    "spaced-comment": 0,
   }
 }

@@ -18,7 +18,6 @@
         display: inline-block;
 
         /* the following css is causing wack circles */
-
         width: $browser-dot-size;
         height: $browser-dot-size;
         border-radius: $browser-dot-size / 2;
@@ -43,7 +42,7 @@
       margin-bottom: 4em;
       display: flex;
       margin: 0 (-$gutter) $spacer-xl;
-      max-width:46em;
+      max-width: 48em;
 
       @include breakpoint(mobile) {
         display: block;

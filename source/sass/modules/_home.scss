@@ -26,18 +26,18 @@
     align-items: center;
     text-align: center;
 
-    .-active {
-      color: $color-text-main;
-    }
+    &__item {
 
-    h2 {
-      color: $color-text-secondary;
-      margin: $spacer-xs 0;
-
-      &:hover {
-        color: $color-text-main;
+      &.-active {
+        h2 {
+          color: $color-text-main;
+        }
       }
 
+      h2 {
+        color: $color-text-secondary;
+        margin: $spacer-xs 0;
+      }
     }
   }
 
