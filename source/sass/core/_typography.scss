@@ -5,6 +5,16 @@ body {
   font-weight: 400;
   letter-spacing: .025em;
   font-size: $font-size-base;
+
+  @include breakpoint(mobile) {
+    font-size: $font-size-mobile;
+  }
+  @include breakpoint(laptop) {
+    font-size: $font-size-laptop;
+  }
+  @include breakpoint(desktop) {
+    font-size: $font-size-desktop;
+  }
 }
 
 a {
@@ -14,6 +24,10 @@ a {
 p {
   color: $color-text-secondary;
   font-size: $p-size;
+
+  &.small {
+    font-size: $p-size-small;
+  }
 };
 
 h3 {
@@ -29,6 +43,10 @@ h2 {
 h1 {
   font-size: $h1-size;
   line-height: $h1-line;
+
+  &.size-vw {
+    font-size: $h1-size-vw;
+  }
 }
 
 .underline {

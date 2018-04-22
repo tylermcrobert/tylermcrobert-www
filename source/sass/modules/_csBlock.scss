@@ -6,37 +6,45 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: $gutter;
 
-  &__tagIndicator {
+  @include breakpoint(tablet-portrait) {
+    padding: 0 ($gutter * 2) + $p-size + .5; //gutter for each side of the block + size of p + a little extra
+  }
+
+  &__verticalData {
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+
     position: absolute;
     top: 50vh;
     width: 100vh;
-    transform: translate(0, -50%);
     text-align: center;
+    line-height: 1;
+
+    &__item {
+      display: inline-block;
+      margin: 0 $spacer;
+      font-size: $p-size-small;
+    }
 
     &.-left {
-      left: calc(-50vh + 1.25em);
-      transform: rotate(270deg);
+      left: -50vh;
+      transform: rotate(270deg) translateY(50%);
+      margin-left: $gutter;
     }
 
     &.-right {
-      right: calc(-50vh + 1.75em);
-      transform: rotate(90deg);
-
-      p {
-        color: $color-text-main;
-      }
+      right: -50vh;
+      transform: rotate(90deg) translateY(50%);
+      margin-right: $gutter;
     }
 
-    &__tag {
-      display: inline-block;
-      margin: 1em;
-      color: $color-text-secondary;
-      font-size: $p-size-small;
-
-
-      &.active {
-        color: $color-text-main;
+    &.-tags {
+      :not(.-active) {
+        color: $color-text-secondary;
       }
     }
   }

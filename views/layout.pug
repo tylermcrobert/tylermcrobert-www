@@ -5,7 +5,6 @@ head
   title Tyler McRobert
   meta(name="viewport", content="width=device-width, initial-scale=1")
   link(rel="stylesheet", href="/css/app.css")
-  script(src="/js/app.js")
   
   // Required for Previews and Experiments
   script
@@ -13,5 +12,6 @@ head
   script(src="//static.cdn.prismic.io/prismic.min.js")
   
 body
-  include includes/header.pug
+  include includes/nav.pug
   block content
+  script(src="/js/app.js")

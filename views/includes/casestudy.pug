@@ -1,31 +1,44 @@
 extends ../layout.pug
 
 block content
-  -var cs_content = document.data.cs_content;
-
+  -
+    var entry = document.data
+      var cs_content = entry.cs_content;
+      var csContext = entry.caseStudyContext;
+        var pageIndex = csContext.pageIndex;
+        var listSize = csContext.listSize;
+        var nextPage = csContext.nextPage;
+      console.log(
+        PrismicDOM.RichText.asText(nextPage.data.title)
+      )
+        
   main.caseStudy
+    ul.csBlock__verticalData.-left.-tags
+      each tag in document.data.caseStudyContext.uniqueTags
+        if  document.tags.indexOf(tag) > -1
+          li.csBlock__verticalData__item.-active= tag
+        else  
+          li.csBlock__verticalData__item= tag
+    ul.csBlock__verticalData.-right.-index
+      li.csBlock__verticalData__item No. #{pageIndex + 1} of #{listSize}
+    
     div.csBlock.caseStudy__info
       div.caseStudy__info__title
-        h1
-          != PrismicDOM.RichText.asText(document.data.title, ctx.linkResolver)
+        h1.size-vw
+          != PrismicDOM.RichText.asText(entry.title)
       div.caseStudy__info__desc
-        p!= PrismicDOM.RichText.asText(document.data.description, ctx.linkResolver)
-      .csBlock__tagIndicator.-left
-        each tag in document.data.caseStudyContext.uniqueTags
-          if  document.tags.indexOf(tag) > -1
-            p.csBlock__tagIndicator__tag.active= tag
-          else  
-            p.csBlock__tagIndicator__tag= tag
-      .csBlock__tagIndicator.-right
-        p.csBlock__tagIndicator__tag No. 1 of 8
-    
+        p.roles!=entry.deliverables
+        p.overview!= PrismicDOM.RichText.asText(entry.description)
+
     .caseStudy__content
       each item in cs_content
         
+        //- Single Image
         if item.slice_type === 'single_image'
           div(class="row caseStudy__block caseStudy__block--single")
             img(class="caseStudy__img" src!=item.primary.image.url)
         
+        //- Double Image
         if item.slice_type === 'double_image_block'
           div(class="row caseStudy__block caseStudy__block--double")
             div(class="col caseStudy__col --left")
@@ -33,6 +46,7 @@ block content
             div(class="col caseStudy__col--right")  
               img(class="caseStudy__img" src!=item.primary.right_image.url)
         
+        //- Triple Image
         if item.slice_type === 'triple_image_block'
           -var direction = item.primary.main_image_position
           div(class="row caseStudy__block caseStudy__block--triple")
@@ -48,7 +62,8 @@ block content
                   img(class="caseStudy__img" src!=item.primary.secondary_image_2.url)
                 div(class="col caseStudy__col --right")
                   img(class="caseStudy__img" src!=item.primary.main_image.url)
-      
+        
+        //- website
         if item.slice_type === 'website'
           -var browserSettings = {frameColor,}
             div.row.caseStudy__block.caseStudy__block--website(
@@ -67,3 +82,7 @@ block content
                       source(src=vidURL type="video/mp4")
                   else
                     img(class="caseStudy__img caseStudy_website_image" src!=imgURL)
+    .caseStudy__nextNav
+      p Next
+      h1
+        a(href=nextPage.uid)!= PrismicDOM.RichText.asText(nextPage.data.title)

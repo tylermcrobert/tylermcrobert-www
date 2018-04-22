@@ -24,14 +24,18 @@ $color-text-secondary: lighten($color-bg, 35%);
  * Typography
 *******************************************************************************/
 
-$font-size-base: 18px;
+$font-size-mobile: 17px;
+$font-size-base: 18px; //consider this "tablet size"
+$font-size-laptop: 21px;
+$font-size-desktop: 22px;
 
 $p-size: 1em;
 $p-size-small: .81em;
 $p-line: 1.7;
 
 $h1-size: 2.023em;
-$h1-size-large: 4.236em;
+$h1-size-large: 3.273em;
+$h1-size-vw: calc(2.023em + 1vw);
 $h1-line: 1.25;
 
 $h2-size: 1.618em;
@@ -52,10 +56,17 @@ $h5-line: 1.875;
  * layout
 *******************************************************************************/
 
-$gutter: 15px;
+$spacer: $p-size;
 
-/******************************************************************************
- * layout
-*******************************************************************************/
+
+$spacer-sm: ( $spacer / 1.618);
+$spacer-xs: ( $spacer-sm / 1.618);
+$spacer-xxs: ( $spacer-xs / 1.618);
+
+$spacer-lg: ( $spacer * 1.618 );
+$spacer-xl: ( $spacer-lg * 1.618);
+$spacer-xxl: ( $spacer-xl * 1.618);
+
+$gutter: ($spacer);
 
 $browser-dot-size: .8vw;
