@@ -1,5 +1,11 @@
 .nav {
   position: fixed;
   z-index: 50;
-  margin: $spacer-sm $gutter;
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+
+  &__item {
+    margin: $spacer-sm $gutter;
+  }
 }
