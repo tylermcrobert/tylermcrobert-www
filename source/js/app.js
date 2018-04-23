@@ -26,7 +26,7 @@ const csList = {
 
 
   render() {
-    /* tags */
+    // tags
     [].forEach.call(this.tagList, (item) => {
       item.classList.remove('-active');
 
@@ -38,8 +38,10 @@ const csList = {
 
     // Index
     this.indexIndicator.innerHTML = (this.currentIndex + 1);
-    this.csItems.forEach((e) => {
-      e.classList.remove('-active');
+
+    // List Items
+    this.csItems.forEach((el) => {
+      el.classList.remove('-active');
     });
     this.csItems[this.currentIndex].classList.add('-active');
   },
@@ -52,7 +54,6 @@ const csList = {
       });
     });
   },
-
 
 };
 csList.init();
