@@ -2,7 +2,7 @@ doctype html
 
 head
   include includes/credits.pug
-  script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-72543203-1')
+  script(async, src='https://www.googletagmanager.com/gtag/js?id=UA-72543203-1')
   script.
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -16,7 +16,7 @@ head
   // Required for Previews and Experiments
   script
     = ctx?"window.prismic = { endpoint: '" + ctx.endpoint + "' };":""
-  script(src="//static.cdn.prismic.io/prismic.min.js")
+  script(async src="//static.cdn.prismic.io/prismic.min.js")
   
 body
   include includes/nav.pug
