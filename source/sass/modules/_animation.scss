@@ -1,4 +1,10 @@
-.animate {
+.-animated {
+
+  animation: fadeIn $anim-speed-fast ease; //default animation
+
+  &.home__intro {
+    animation: fadeInUp $anim-speed-slow ease;
+  }
 
   &.csBlock {
     animation: fadeIn $anim-speed-fast ease;
@@ -15,12 +21,6 @@
         }
       }
     }
-  }
-}
-
-.csBlock__verticalData {
-  .-active {
-    transition: color $anim-speed-extra-fast ease;
   }
 }
 

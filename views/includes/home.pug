@@ -7,27 +7,28 @@ block content
       var uniqueTags = entry.uniqueTags
       console.log(csList.length)
 
-  .intro
-    .intro__heading
-      h1.size-vw!= PrismicDOM.RichText.asText(entry.intro_message)
-  
-  .csBlock.caseStudies(data-uniquetags=uniqueTags)
-  
-    //- Title
-    h3.caseStudies__title Work
+  main.home
+    .home__intro.-animated
+      .home__intro__heading
+        h1.size-vw!= PrismicDOM.RichText.asText(entry.intro_message)
     
-    //- Vertical Data (tags, index)
-    ul.csBlock__verticalData.-left.-tags
-      each tag in uniqueTags
-        li.csBlock__verticalData__item.-tag(data-tag=tag)= tag
+    .csBlock.caseStudies(data-uniquetags=uniqueTags)
     
-    ul.csBlock__verticalData.-right.-index
-      li.csBlock__verticalData__item.-right No. #[span.index 1] of #{csList.length}
-    
-    //- List
-    ul(class="caseStudies__list" data-tags=itemTags)
-      each csItem in csList
-        -var itemTags = csItem.case_study_item.tags
-        li.caseStudies__list__item(data-tags=itemTags)
-          a(href=`/work/${csItem.case_study_item.uid}`)
-            h2!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
+      //- Title
+      h3.caseStudies__title Work
+      
+      //- Vertical Data (tags, index)
+      ul.csBlock__verticalData.-left.-tags
+        each tag in uniqueTags
+          li.csBlock__verticalData__item.-tag(data-tag=tag)= tag
+      
+      ul.csBlock__verticalData.-right.-index
+        li.csBlock__verticalData__item.-right No. #[span.index 1] of #{csList.length}
+      
+      //- List
+      ul(class="caseStudies__list" data-tags=itemTags)
+        each csItem in csList
+          -var itemTags = csItem.case_study_item.tags
+          li.caseStudies__list__item(data-tags=itemTags)
+            a(href=`/work/${csItem.case_study_item.uid}`)
+              h2!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
