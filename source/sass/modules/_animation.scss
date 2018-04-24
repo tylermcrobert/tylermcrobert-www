@@ -23,7 +23,11 @@
     }
   }
 }
-
+.csBlock__verticalData {
+  .-active {
+    transition: color $anim-speed-extra-fast ease;
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
