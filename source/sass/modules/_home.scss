@@ -28,16 +28,20 @@
 
     &__item {
 
-      &.-active {
-        h2 {
-          color: $color-text-main;
-        }
+      &:not(.-active) {
+        color: $color-text-secondary;
+      }
+
+      a,
+      h2 {
+        color: inherit;
       }
 
       h2 {
-        color: $color-text-secondary;
         margin: $spacer-xs 0;
       }
+
+
     }
   }
 
