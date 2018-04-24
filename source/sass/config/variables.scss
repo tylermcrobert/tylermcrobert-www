@@ -58,7 +58,6 @@ $h5-line: 1.875;
 
 $spacer: $p-size;
 
-
 $spacer-sm: ( $spacer / 1.618);
 $spacer-xs: ( $spacer-sm / 1.618);
 $spacer-xxs: ( $spacer-xs / 1.618);
@@ -70,3 +69,12 @@ $spacer-xxl: ( $spacer-xl * 1.618);
 $gutter: ($spacer);
 
 $browser-dot-size: .8vw;
+
+/******************************************************************************
+ * Animation
+*******************************************************************************/
+
+$anim-speed: .75s;
+$anim-speed-slow: ($anim-speed * 1.25);
+$anim-speed-fast: ($anim-speed * .75);
+$anim-speed-extra-fast: ($anim-speed * .5);

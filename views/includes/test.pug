@@ -1,6 +1,0 @@
-extends ../layout.pug
-
-block content
-  .welcome
-      != PrismicDOM.RichText.asHtml(document.data.title, ctx.linkResolver)
-      != PrismicDOM.RichText.asHtml(document.data.description, ctx.linkResolver)

@@ -1,5 +1,6 @@
 
 .csBlock {
+
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -34,6 +35,8 @@
       left: -50vh;
       transform: rotate(270deg) translateY(50%);
       margin-left: $gutter;
+      animation: fadeInTags $anim-speed ease;
+
     }
 
     &.-right {
@@ -43,6 +46,7 @@
     }
 
     &.-tags {
+
       :not(.-active) {
         color: $color-text-secondary;
       }
