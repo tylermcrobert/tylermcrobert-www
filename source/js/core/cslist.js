@@ -14,7 +14,6 @@ const csList = {
     this.indexIndicator = this.el.querySelector('.-index .index');
   },
 
-
   setCurrentState(elem = this.csItems[0], index = 0) {
     this.currentIndex = index;
     this.currentTags = elem.dataset.tags;
