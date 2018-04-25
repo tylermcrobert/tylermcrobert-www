@@ -1,4 +1,6 @@
+import ScrollWatcher from '../class/Scrollwatcher';
 import util from '../core/util';
+
 
 const caseStudy = {
 
@@ -6,12 +8,23 @@ const caseStudy = {
 
   init() {
     if (util.elementExists(this.root)) {
-      this.animateInPhotos();
+      this.animateBlocks();
     }
   },
 
-  animateInPhotos() {
-    console.log('waddup case study page!!!');
+  animateBlocks() {
+    const blockSelector = '.caseStudy__block';
+    const blocks = document.querySelectorAll(blockSelector);
+
+    util.forEach(blocks, (index, value) => {
+      console.log(blocks[index]);
+  
+      // const animate = new ScrollWatcher(blocks[index]).init();
+      // //   element: blocks[index],
+      // //   handler function(){
+      // //     this.classList.add('go fuck yourself')
+      // //   }
+    });
   },
 
 };
