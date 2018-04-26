@@ -1,37 +1,45 @@
 import util from '../core/util';
-//
+
 class ScrollWatcher {
   constructor(element, offset) {
     this.element = element;
+    this.offset = offset;
+    this.animateClass = '-scroll-animate';
     this.toggledClass = '-is-animate';
   }
 
   init() {
+    this.addAnimateClass();
     this.bindEvents();
   }
 
   evaluateStatus() {
-    console.log('sdfasfd');
-    if (util.isInView(this.element)) {
+    if (util.isInView(this.element, this.offset)) {
       this.addClass(this.toggledClass);
-    } else {
-      this.removeClass(this.toggledClass);
     }
   }
 
-  addClass(className) {
-    this.element.classList.remove(className);
+  addAnimateClass() {
+    this.addClass(this.animateClass);
   }
 
   removeClass(className) {
+    this.element.classList.remove(className);
+  }
+
+  addClass(className) {
     this.element.classList.add(className);
   }
 
   bindEvents() {
-    document.addEventListener('scroll', this.evaluateStatus());
+    window.addEventListener('scroll', () => {
+      this.evaluateStatus();
+    });
+    window.addEventListener('resize', () => {
+      this.evaluateStatus();
+    });
   }
 }
-
 
 
 export default ScrollWatcher;

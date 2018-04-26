@@ -1,31 +1,23 @@
 import ScrollWatcher from '../class/Scrollwatcher';
 import util from '../core/util';
 
-
 const caseStudy = {
 
   root: 'main.caseStudy',
 
   init() {
     if (util.elementExists(this.root)) {
-      this.animateBlocks();
+      this.scrollWatch();
     }
   },
 
-  animateBlocks() {
+  scrollWatch() {
     const blockSelector = '.caseStudy__block';
     const blocks = document.querySelectorAll(blockSelector);
 
     util.forEach(blocks, (index, value) => {
-      console.log(blocks[index]);
-  
-      // const animate = new ScrollWatcher(blocks[index]).init();
-      // //   element: blocks[index],
-      // //   handler function(){
-      // //     this.classList.add('go fuck yourself')
-      // //   }
+      new ScrollWatcher(blocks[index], 0.05).init();
     });
   },
-
 };
 export default caseStudy;
