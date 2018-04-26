@@ -1,11 +1,14 @@
+import ScrollWatcher from '../class/Scrollwatcher';
+
 const csList = {
 
   init() {
     this.cacheDom();
+    this.addScrollWatcher();
     this.setCurrentState();
     this.events();
+    this.events();
   },
-
 
   cacheDom() { // cache dom
     this.el = document.querySelector('.csBlock');
@@ -20,6 +23,9 @@ const csList = {
     this.render();
   },
 
+  addScrollWatcher() {
+    new ScrollWatcher(this.el, 0.2).init();
+  },
 
   render() {
     // tags

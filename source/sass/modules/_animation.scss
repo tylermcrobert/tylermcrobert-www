@@ -23,11 +23,24 @@
     }
   }
 }
+
 .csBlock__verticalData {
   .-active {
     transition: color $anim-speed-extra-fast ease;
   }
 }
+
+.-scroll-animate {
+
+  transition: opacity $anim-speed-fast ease;
+  opacity: 0;
+
+  &.-is-animate {
+    opacity: 1;
+  }
+
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
