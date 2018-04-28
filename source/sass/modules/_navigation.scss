@@ -3,9 +3,11 @@
   z-index: 50;
   display: flex;
   width: 100vw;
+  box-sizing: border-box;
+  padding: 0 ($gutter / 2 );
 
   &__item {
-    margin: $spacer-sm $gutter;
+    margin: $spacer-sm ($gutter / 2);
 
     &.-brand {
       flex: 1;
@@ -21,12 +23,20 @@
       }
 
       &__content {
-        display: none;
-        width: 0;
+        max-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        opacity: 0;
+        transition:
+          max-width $anim-speed-extra-fast,
+          padding-left $anim-speed-extra-fast,
+          opacity $anim-speed-extra-fast;
 
         &.-enabled {
-          display: block;
-          width: auto;
+          max-width: 300px;
+          padding-left: $spacer-sm;
+          opacity: 1;
+
         }
 
         &--label {
