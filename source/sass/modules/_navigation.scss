@@ -20,6 +20,12 @@
       &__icon {
         display: flex;
         align-items: center;
+
+        &.-spinning {
+          svg{
+            animation: spin 3333ms linear infinite;
+          }
+        }
       }
 
       &__content {
