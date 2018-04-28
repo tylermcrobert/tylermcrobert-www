@@ -22,7 +22,7 @@ const loadSpotify = {
   getData(callback) {
     const base = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks';
     const user = 'tyler-mcrobert';
-    const apiKey = process.env.LAST_FM_KEY;
+    const apiKey = '1e87695de290cd017718696f211e84a4';
     const url = `${base}&limit=1&user=${user}&api_key=${apiKey}&format=json`;
 
     util.ajax(url, (response) => {
