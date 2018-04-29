@@ -26,6 +26,19 @@ const util = {
       callback.call(scope, i, array[i]); // passes back stuff we need
     }
   },
+
+  ajax(url, callback) {
+    this.url = url;
+
+    this.request = new XMLHttpRequest();
+
+    this.request.open('GET', this.url, true);
+    this.request.onload = () => {
+      callback(this.request.response);
+    };
+    this.request.send();
+  },
+
 };
 
 export default util;

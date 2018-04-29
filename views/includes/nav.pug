@@ -1,7 +1,20 @@
 header.nav
-  .nav__item
+  .nav__item.-brand
     a(href='/') Tyler McRobert
+  
   //- .nav__item
     | put things here, like "work", "Fuji Imaging", etc.
+  
   .nav__item
     a(href='mailto:hello@tylermcrobert.com') Contact
+  .nav__item.-nowPlaying
+    .nowPlaying
+      div.nowPlaying__icon.nowPlaying__icon
+        svg(width='27', height='27', xmlns='http://www.w3.org/2000/svg' stroke-width='1.5' fill='none' stroke='white')
+          circle(cx='14', cy='14', r='11.5')
+          circle(cx='14', cy='14', r='4')
+          circle(cx='14', cy='14', r='.2')
+      div.nowPlaying__content
+        //- span.nowPlaying__content--label Now Playing: 
+        span.nowPlaying__content--value
+      

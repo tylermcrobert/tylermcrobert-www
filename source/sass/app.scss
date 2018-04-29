@@ -10,29 +10,19 @@
 
 @import 'core/reset';
 @import 'core/doc';
-
 // @import "core/fonts";
-// @import "core/icons";
-// @import "core/document";
 @import 'core/typography';
-// @import "core/images";
 @import 'core/grid';
 
 /******************************************************************************
  * Modules
 *******************************************************************************/
-@import 'modules/navigation';
-// @import "modules/screens";
-// @import "modules/views";
+
 @import 'modules/animation';
+@import 'modules/navigation';
 @import 'modules/casestudy';
 @import 'modules/csBlock';
 @import 'modules/home';
-// @import "modules/video";
-// @import "modules/gallery";
-// @import "modules/about";
-// @import "modules/work";
-// @import "modules/classes";
 
 /******************************************************************************
  * UI State
