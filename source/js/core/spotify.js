@@ -53,11 +53,9 @@ const loadSpotify = {
     this.dom.icon.classList.add('-spinning');
 
     if (!this.enabled) {
-      this.dom.content.classList.remove('-enabled');
       this.dom.nav.classList.remove('-nowPLayingEnabled');
     } else {
       this.dom.nav.classList.add('-nowPLayingEnabled');
-      this.dom.content.classList.add('-enabled');
     }
   },
 };
