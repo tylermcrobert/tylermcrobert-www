@@ -7,24 +7,43 @@ const csList = {
     this.addScrollWatcher();
     this.setCurrentState();
     this.events();
-    this.events();
   },
 
   cacheDom() { // cache dom
-    this.el = document.querySelector('.csBlock');
-    this.csItems = this.el.querySelectorAll('.caseStudies__list__item');
-    this.tagList = this.el.querySelectorAll('.-tags .-tag');
-    this.indexIndicator = this.el.querySelector('.-index .index');
+    this.dom = {};
+    this.dom.root = document.querySelector('.csBlock');
+    this.dom.listItems = this.dom.root.querySelectorAll('.caseStudies__list__item');
+    this.tagList = this.dom.root.querySelectorAll('.-tags .-tag');
+    this.indexIndicator = this.dom.root.querySelector('.-index .index');
   },
 
-  setCurrentState(elem = this.csItems[0], index = 0) {
+  setCurrentState(elem = this.dom.listItems[0], index = 0) {
     this.currentIndex = index;
     this.currentTags = elem.dataset.tags;
     this.render();
   },
 
   addScrollWatcher() {
-    new ScrollWatcher(this.el, 0.2).init();
+    new ScrollWatcher(this.dom.root, 0.2).init();
+  },
+
+  setActiveTag(elem, index) {
+    this.currentTags = elem.dataset.tags;
+    this.render();
+  },
+
+  events() {
+    this.dom.listItems.forEach((elem, index) => {
+      elem.addEventListener('mouseover', () => {
+        csList.setCurrentState(elem, index);
+      });
+    });
+
+    this.tagList.forEach((elem, index) => {
+      elem.addEventListener('mouseover', () => {
+        csList.setActiveTag(elem, index);
+      });
+    });
   },
 
   render() {
@@ -42,21 +61,11 @@ const csList = {
     this.indexIndicator.innerHTML = (this.currentIndex + 1);
 
     // List Items
-    this.csItems.forEach((el) => {
+    this.dom.listItems.forEach((el) => {
       el.classList.remove('-active');
     });
-    this.csItems[this.currentIndex].classList.add('-active');
+    this.dom.listItems[this.currentIndex].classList.add('-active');
   },
-
-
-  events() {
-    this.csItems.forEach((elem, index) => {
-      elem.addEventListener('mouseover', () => {
-        csList.setCurrentState(elem, index);
-      });
-    });
-  },
-
 };
 
 export default csList;

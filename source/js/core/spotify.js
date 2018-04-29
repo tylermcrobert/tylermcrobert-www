@@ -13,6 +13,7 @@ const loadSpotify = {
 
   cacheDom() {
     this.dom = {};
+    this.dom.nav = document.querySelector('.nav');
     this.dom.root = document.querySelector('.nowPlaying');
     this.dom.icon = this.dom.root.querySelector('.nowPlaying__icon');
     this.dom.content = this.dom.root.querySelector('.nowPlaying__content');
@@ -49,9 +50,13 @@ const loadSpotify = {
       this.dom.value.innerHTML = `${track.name} - ${track.artist['#text']}`;
     }
 
+    this.dom.icon.classList.add('-spinning');
+
     if (!this.enabled) {
       this.dom.content.classList.remove('-enabled');
+      this.dom.nav.classList.remove('-nowPLayingEnabled');
     } else {
+      this.dom.nav.classList.add('-nowPLayingEnabled');
       this.dom.content.classList.add('-enabled');
     }
   },
