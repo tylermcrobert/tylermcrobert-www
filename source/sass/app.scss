@@ -1,6 +1,7 @@
 /******************************************************************************
  * Config
 *******************************************************************************/
+
 @import 'config/variables';
 @import 'config/mixins';
 
@@ -10,7 +11,6 @@
 
 @import 'core/reset';
 @import 'core/doc';
-// @import "core/fonts";
 @import 'core/typography';
 @import 'core/grid';
 
@@ -23,10 +23,3 @@
 @import 'modules/casestudy';
 @import 'modules/csBlock';
 @import 'modules/home';
-
-/******************************************************************************
- * UI State
-*******************************************************************************/
-// @import "state/modifiers";
-// @import "state/states";
-// @import "state/responsive";
