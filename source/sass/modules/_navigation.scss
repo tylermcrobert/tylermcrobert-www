@@ -19,10 +19,6 @@
       max-width: 100%;
       flex: 1;
     }
-
-    a {
-      max-width: 0;
-    }
   }
 
   .nowPlaying {
@@ -36,13 +32,17 @@
     }
 
     &__content {
-      transition-property: width, opacity, max-width, padding;
+      transition-property: width, opacity, max-width;
       transition-duration: $anim-speed-fast;
       flex: 1;
       text-overflow: ellipsis;
       overflow: hidden;
       max-width: 0;
       opacity: 0;
+
+      &--value {
+        padding-left: $spacer-sm;
+      }
 
       @include breakpoint(mobile) {
         max-width: none;
@@ -59,7 +59,6 @@
     }
 
     .nowPlaying__content {
-      padding-left: $spacer-sm;
       opacity: 1;
     }
 
@@ -91,7 +90,6 @@
 
           &__content {
             width: 100%;
-            padding-left: $spacer-sm;
             opacity: 1;
           }
         }
