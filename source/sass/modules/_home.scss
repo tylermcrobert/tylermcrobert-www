@@ -14,7 +14,9 @@
   &__title { //where it says "work"
     flex: 0;
     font-size: $p-size-small;
-    line-height: $spacer;
+    line-height: ($p-size * $p-line);
+    margin: $spacer auto;
+    // height: ($p-size * $p-line);
   }
 
   &__list {
