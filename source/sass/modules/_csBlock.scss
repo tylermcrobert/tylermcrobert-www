@@ -1,6 +1,5 @@
 
 .csBlock {
-
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -22,6 +21,7 @@
     position: absolute;
     top: 50vh;
     width: 100vh;
+    margin: ($spacer * -1) 0;
     text-align: center;
     line-height: 1;
 
