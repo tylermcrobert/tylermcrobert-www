@@ -99,8 +99,7 @@ app.get('/', (req, res) => {
   });
 });
 
-
-app.get('/work/:caseStudy', (req, res, next) => {
+app.get(['/:caseStudy', '/work/:caseStudy'], (req, res, next) => {
   const { caseStudy } = req.params;
 
   req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((homepageDoc) => {
@@ -114,7 +113,6 @@ app.get('/work/:caseStudy', (req, res, next) => {
     });
   });
 });
-
 
 // eventually redirect this
 app.get('*', (req, res) => {

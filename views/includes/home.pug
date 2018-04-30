@@ -30,5 +30,5 @@ block content
         each csItem in csList
           -var itemTags = csItem.case_study_item.tags
           li.caseStudies__list__item(data-tags=itemTags)
-            a(href=`/work/${csItem.case_study_item.uid}`)
+            a(href=`/${csItem.case_study_item.uid}`)
               h2!= PrismicDOM.RichText.asText(csItem.case_study_item.data.title)
