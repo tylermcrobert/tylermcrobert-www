@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 const Prismic = require('prismic-javascript');
 const PrismicDOM = require('prismic-dom');
 const request = require('request');
@@ -11,7 +9,6 @@ const PORT = app.get('port');
 app.listen(PORT, () => {
   process.stdout.write(`Point your browser to: http://localhost:${PORT}\n`);
 });
-
 
 // Middleware to inject prismic context
 app.use((req, res, next) => {
@@ -54,6 +51,7 @@ const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
   const listSize = caseStudyList.length;
   let pageIndex;
 
+
   caseStudyList.forEach((el, i) => {
     if (el.case_study_item.uid === selectedCaseStudy) {
       pageIndex = i;
@@ -66,7 +64,6 @@ const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
     }
     return caseStudyList[pageIndex + 1].case_study_item;
   };
-
   return {
     caseStudyList,
     uniqueTags,
@@ -91,27 +88,39 @@ app.get('/preview', (req, res) => {
   }
 });
 
-
 app.get('/', (req, res) => {
-  req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((document) => {
+  req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((doc) => {
+    const document = doc;
     document.data.uniqueTags = getUniqueTags(document.data.case_study_list);
     res.render('home', { document });
   });
 });
 
 app.get(['/:caseStudy', '/work/:caseStudy'], (req, res, next) => {
-  const { caseStudy } = req.params;
+  const param = req.params.caseStudy;
 
-  req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((homepageDoc) => {
-    req.prismic.api.getByUID('case_study', caseStudy).then((document) => {
-      document.data.caseStudyContext = getCaseStudyContext(homepageDoc, caseStudy);
-      if (document) {
-        res.render('casestudy', { document });
+  this.getHomepage = () => {
+    req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((doc) => {
+      this.getCaseStudy(doc);
+    });
+  };
+
+  this.getCaseStudy = (contextDoc) => {
+    req.prismic.api.getByUID('case_study', param).then((doc) => {
+      const caseStudy = doc;
+      caseStudy.data.caseStudyContext = getCaseStudyContext(contextDoc, param);
+
+      if (caseStudy) {
+        res.render('casestudy', { caseStudy });
       } else {
         next();
       }
+    }).catch((err) => {
+      res.render('404');
     });
-  });
+  };
+
+  this.getHomepage();
 });
 
 // eventually redirect this
