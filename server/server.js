@@ -50,10 +50,11 @@ const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
   const uniqueTags = getUniqueTags(caseStudyList);
   const listSize = caseStudyList.length;
   let pageIndex;
-
+  let existsInContext = false;
 
   caseStudyList.forEach((el, i) => {
     if (el.case_study_item.uid === selectedCaseStudy) {
+      existsInContext = true;
       pageIndex = i;
     }
   });
@@ -64,6 +65,11 @@ const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
     }
     return caseStudyList[pageIndex + 1].case_study_item;
   };
+
+  if (existsInContext === false) {
+    return null;
+  }
+
   return {
     caseStudyList,
     uniqueTags,
@@ -110,19 +116,14 @@ app.get(['/:caseStudy', '/work/:caseStudy'], (req, res, next) => {
       const caseStudy = docs[1];
       const checkContext = getCaseStudyContext(context, param);
 
-      if (context) {
-        caseStudy.data.caseStudyContext = checkContext;
-      }
-      if (caseStudy) {
-        res.render('casestudy', { caseStudy });
-      }
+      caseStudy.data.caseStudyContext = checkContext;
+      res.render('casestudy', { caseStudy });
     })
     .catch((err) => {
       res.render('404');
     });
 });
 
-// eventually redirect this
 app.get('*', (req, res) => {
   res.render('404');
 });
