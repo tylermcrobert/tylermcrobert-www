@@ -98,29 +98,19 @@ app.get('/', (req, res) => {
 
 app.get(['/:caseStudy', '/work/:caseStudy'], (req, res, next) => {
   const param = req.params.caseStudy;
+  const getContext = req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' });
+  const getCaseStudy = req.prismic.api.getByUID('case_study', param);
 
-  this.getHomepage = () => {
-    req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((doc) => {
-      this.getCaseStudy(doc);
-    });
-  };
+  getContext.then((contextDoc) => {
+    getCaseStudy.then((caseStudyDoc) => {
+      const caseStudy = caseStudyDoc;
 
-  this.getCaseStudy = (contextDoc) => {
-    req.prismic.api.getByUID('case_study', param).then((doc) => {
-      const caseStudy = doc;
       caseStudy.data.caseStudyContext = getCaseStudyContext(contextDoc, param);
-
-      if (caseStudy) {
-        res.render('casestudy', { caseStudy });
-      } else {
-        next();
-      }
+      res.render('casestudy', { caseStudy });
     }).catch((err) => {
       res.render('404');
     });
-  };
-
-  this.getHomepage();
+  });
 });
 
 // eventually redirect this
