@@ -1,6 +1,3 @@
-
-$ratio: 1.61803398875;
-
 /******************************************************************************
  * Colors
 *******************************************************************************/
@@ -41,7 +38,7 @@ $h1-size-large: 3.273em;
 $h1-size-vw: calc(2.023em + 1vw);
 $h1-line: 1.25;
 
-$h2-size: $ratio em;
+$h2-size: 1.618em;
 $h2-line: 1.25;
 
 $h3-size: 1.25em;
@@ -61,13 +58,13 @@ $h5-line: 1.875;
 
 $spacer: $p-size;
 
-$spacer-sm: ( $spacer / $ratio );
-$spacer-xs: ( $spacer-sm / $ratio );
-$spacer-xxs: ( $spacer-xs / $ratio );
+$spacer-sm: ( $spacer / 1.618);
+$spacer-xs: ( $spacer-sm / 1.618);
+$spacer-xxs: ( $spacer-xs / 1.618);
 
-$spacer-lg: ( $spacer * $ratio  );
-$spacer-xl: ( $spacer-lg * $ratio );
-$spacer-xxl: ( $spacer-xl * $ratio );
+$spacer-lg: ( $spacer * 1.618 );
+$spacer-xl: ( $spacer-lg * 1.618);
+$spacer-xxl: ( $spacer-xl * 1.618);
 
 $gutter: ($spacer);
 
