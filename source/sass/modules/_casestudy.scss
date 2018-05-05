@@ -74,9 +74,20 @@
   &__nextNav {
     padding: $spacer-xxl $gutter;
     text-align: center;
+    display: block;
+
+    h1 {
+      transition: transform ($anim-speed-extra-fast);
+    }
 
     p {
       margin-bottom: $spacer;
+    }
+
+    &:hover {
+      h1 {
+        transform: scale(.97);
+      }
     }
   }
 }

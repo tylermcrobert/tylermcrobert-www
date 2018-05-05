@@ -38,7 +38,7 @@ block content
     .caseStudy__content
       include partials/casestudy/content.pug
     if (csContext)
-      .caseStudy__nextNav
+      a(href=nextPage.uid).caseStudy__nextNav
         p Next
-        h1
-          a(href=nextPage.uid)!= PrismicDOM.RichText.asText(nextPage.data.title)
+        h1!= PrismicDOM.RichText.asText(nextPage.data.title)
+        
