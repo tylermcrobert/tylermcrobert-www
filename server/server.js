@@ -2,8 +2,11 @@ const Prismic = require('prismic-javascript');
 const PrismicDOM = require('prismic-dom');
 const request = require('request');
 const Cookies = require('cookies');
-const PrismicConfig = require('./prismic-configuration');
-const app = require('./config');
+const PrismicConfig = require('./config/prismic-configuration');
+const app = require('./config/config');
+const caseStudyContext = require('./core/caseStudyContext');
+
+const templateData = {};
 
 const PORT = app.get('port');
 app.listen(PORT, () => {
@@ -29,55 +32,6 @@ app.use((req, res, next) => {
   });
 });
 
-const getUniqueTags = (caseStudyList) => {
-  const uniqueTags = new Set();
-
-  caseStudyList.forEach((element) => {
-    const { case_study_item } = element;
-    const { tags } = case_study_item; // eslint-disable-line camelcase
-
-    tags.forEach((tag) => {
-      uniqueTags.add(tag);
-    });
-  });
-
-  return Array.from(uniqueTags);
-};
-
-/* for use within case study page */
-const getCaseStudyContext = (docContainingList, selectedCaseStudy) => {
-  const caseStudyList = docContainingList.data.case_study_list;
-  const uniqueTags = getUniqueTags(caseStudyList);
-  const listSize = caseStudyList.length;
-  let pageIndex;
-  let existsInContext = false;
-
-  caseStudyList.forEach((el, i) => {
-    if (el.case_study_item.uid === selectedCaseStudy) {
-      existsInContext = true;
-      pageIndex = i;
-    }
-  });
-
-  const getNextPage = () => {
-    if (pageIndex >= (listSize - 1)) {
-      return caseStudyList[0].case_study_item;
-    }
-    return caseStudyList[pageIndex + 1].case_study_item;
-  };
-
-  if (existsInContext === false) {
-    return null;
-  }
-
-  return {
-    caseStudyList,
-    uniqueTags,
-    pageIndex,
-    listSize,
-    nextPage: getNextPage(),
-  };
-};
 
 app.get('/preview', (req, res) => {
   const { token } = req.query;
@@ -97,10 +51,11 @@ app.get('/preview', (req, res) => {
 app.get('/', (req, res) => {
   req.prismic.api.getSingle('homepage', { fetchLinks: 'case_study.title' }).then((doc) => {
     const document = doc;
-    document.data.uniqueTags = getUniqueTags(document.data.case_study_list);
+    document.data.uniqueTags = caseStudyContext.getUniqueTags(document.data.case_study_list);
     res.render('home', { document });
   });
 });
+
 
 app.get(['/:caseStudy', '/work/:caseStudy'], (req, res, next) => {
   const param = req.params.caseStudy;
@@ -114,7 +69,7 @@ app.get(['/:caseStudy', '/work/:caseStudy'], (req, res, next) => {
     .then((docs) => {
       const context = docs[0];
       const caseStudy = docs[1];
-      const checkContext = getCaseStudyContext(context, param);
+      const checkContext = caseStudyContext.getCaseStudyContext(context, param);
 
       caseStudy.data.caseStudyContext = checkContext;
       res.render('casestudy', { caseStudy });
