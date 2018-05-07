@@ -1,118 +1,146 @@
 {
-  "artists": [
+  "artists" : [
     {
-      "name": "Kanye West",
-      "emoji": "🐻",
-      "albums": [
+      "name" : "Kanye West",
+      "emoji" : "🐻",
+      "albums" : [
         {
-          "title": "The College Dropout",
-          "emoji": "🐻"
+          "title" : "The College Dropout",
+          "emoji" : "🐻"
         },
         {
-          "title": "Late Registration",
-          "emoji": "⏰"
+          "title" : "Late Registration",
+          "emoji" : "⏰"
         },
         {
-          "title": "Graduation",
-          "emoji": "🎓"
+          "title" : "Graduation",
+          "emoji" : "🎓"
         },
         {
-          "title": "808s & Heartbreak",
-          "emoji": "💔"
+          "title" : "808s & Heartbreak",
+          "emoji" : "💔"
         },
         {
-          "title": "My Beautiful Dark Twisted Fantasy",
-          "emoji": "👹"
+          "title" : "My Beautiful Dark Twisted Fantasy",
+          "emoji" : "👹"
         },
         {
-          "title": "Yeezus",
-          "emoji": "💽"
+          "title" : "Yeezus",
+          "emoji" : "💽"
         },
         {
-          "title": "The Life Of Pablo",
-          "emoji": "👨\u200d👩\u200d👧\u200d👦"
+          "title" : "The Life Of Pablo",
+          "emoji" : "👨‍👩‍👧‍👦"
         },
         {
-          "title": "Lift Yourself",
-          "emoji": "💩"
+          "title" : "Lift Yourself",
+          "emoji" : "💩"
         }
       ]
     },
     {
-      "name": "Nirvana",
-      "emoji": "🥀",
-      "albums": [
+      "name" : "Nirvana",
+      "emoji" : "🥀",
+      "albums" : [
         {
-          "title": "Nevermind",
-          "emoji": "👶"
+          "title" : "Nevermind",
+          "emoji" : "👶"
         }
       ]
     },
     {
-      "name": "The Velvet Underground",
-      "emoji": "💉",
-      "albums": [
+      "name" : "The Velvet Underground",
+      "emoji" : "💉",
+      "albums" : [
         {
-          "title": "The Velvet Underground & Nico",
-          "emoji": "🍌"
+          "title" : "The Velvet Underground & Nico",
+          "emoji" : "🍌"
         }
       ]
     },
     {
-      "name": "The Beatles",
-      "emoji": "☮️"
+      "name" : "The Beatles",
+      "emoji" : "☮️"
     },
     {
-      "name": "Pink Floyd",
-      "emoji": "🍄"
+      "name" : "Pink Floyd",
+      "emoji" : "🍄"
     },
     {
-      "name": "Tomorrows Tulips",
-      "emoji": "🌷"
+      "name" : "T. Rex",
+      "emoji" : "🎩"
     },
     {
-      "name": "Ty Segall",
-      "emoji": "🎸"
+      "name" : "Syd Barrett",
+      "emoji" : "🃏"
     },
     {
-      "name": "Jimi Hendrix",
-      "emoji": "🎸"
+      "name" : "David Bowie",
+      "emoji" : "👨🏻‍🎤"
     },
     {
-      "name": "Stevie Ray Vaughan",
-      "emoji": "🎸"
+      "name" : "White Fence",
+      "emoji" : "🔮"
     },
     {
-      "name": "Jack White",
-      "emoji": "🎸"
+      "name" : "Tomorrows Tulips",
+      "emoji" : "🌷"
     },
     {
-      "name": "Fuzz",
-      "emoji": "🎸"
+      "name" : "Ty Segall",
+      "emoji" : "🎸"
     },
     {
-      "name": "Drake",
-      "emoji": "😢"
+      "name" : "Jimi Hendrix",
+      "emoji" : "🎸"
     },
     {
-      "name": "Bob Dylan",
-      "emoji": "👓"
+      "name" : "Stevie Ray Vaughan",
+      "emoji" : "🎸"
     },
     {
-      "name": "Kendrick Lamar",
-      "emoji": "💯"
+      "name" : "Jack White",
+      "emoji" : "🎸"
     },
     {
-      "name": "Vince Staples",
-      "emoji": "🎤"
+      "name" : "King Tuff",
+      "emoji" : "🎸"
     },
     {
-      "name": "Beastie Boys",
-      "emoji": "🗽"
+      "name" : "Fuzz",
+      "emoji" : "🎸"
     },
     {
-      "name": "J Dilla",
-      "emoji": "🎛"
+      "name" : "Drake",
+      "emoji" : "😢"
+    },
+    {
+      "name" : "Bob Dylan",
+      "emoji" : "👓"
+    },
+    {
+      "name" : "Kendrick Lamar",
+      "emoji" : "💯"
+    },
+    {
+      "name" : "Vince Staples",
+      "emoji" : "🎤"
+    },
+    {
+      "name" : "Beastie Boys",
+      "emoji" : "🗽"
+    },
+    {
+      "name" : "J Dilla",
+      "emoji" : "🎛"
+    },
+    {
+      "name" : "Madvillain",
+      "emoji" : "👺"
+    },
+    {
+      "name" : "Kid Cudi",
+      "emoji" : "💨"
     }
   ]
 }
