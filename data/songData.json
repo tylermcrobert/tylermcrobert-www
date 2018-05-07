@@ -1,0 +1,51 @@
+{
+  "artists": [
+    {
+      "name": "Nirvana",
+      "albums": [
+        {
+          "title": "Nevermind",
+          "emoji": "👶"
+        }
+      ]
+    },
+    {
+      "name": "Kanye West",
+      "emoji": "🐻",
+      "albums": [
+        {
+          "title": "The College Dropout",
+          "emoji": "🐻"
+        },
+        {
+          "title": "Late Registration",
+          "emoji": "⏰"
+        },
+        {
+          "title": "Graduation",
+          "emoji": "🎓"
+        },
+        {
+          "title": "808s & Heartbreak",
+          "emoji": "💔"
+        },
+        {
+          "title": "My Beautiful Dark Twisted Fantasy",
+          "emoji": "👹"
+        },
+        {
+          "title": "Yeezus",
+          "emoji": "💽"
+        },
+        {
+          "title": "The Life Of Pablo",
+          "emoji": "👨\u200d👩\u200d👧\u200d👦"
+        },
+        {
+          "title": "Lift Yourself",
+          "emoji": "💩"
+        }
+      ]
+    }
+  ]
+}
