@@ -1,15 +1,6 @@
 {
   "artists": [
     {
-      "name": "Nirvana",
-      "albums": [
-        {
-          "title": "Nevermind",
-          "emoji": "👶"
-        }
-      ]
-    },
-    {
       "name": "Kanye West",
       "emoji": "🐻",
       "albums": [
@@ -44,6 +35,30 @@
         {
           "title": "Lift Yourself",
           "emoji": "💩"
+        }
+      ]
+    },
+    {
+      "name": "Nirvana",
+      "emoji": "🥀",
+      "albums": [
+        {
+          "title": "Nevermind",
+          "emoji": "👶"
+        }
+      ]
+    },
+    {
+      "name": "Tomorrows Tulips",
+      "emoji": "🌷"
+    },
+    {
+      "name": "The Velvet Underground",
+      "emoji": "💉",
+      "albums": [
+        {
+          "title": "The Velvet Underground & Nico",
+          "emoji": "🍌"
         }
       ]
     }
