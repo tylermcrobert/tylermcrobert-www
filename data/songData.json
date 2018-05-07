@@ -49,10 +49,6 @@
       ]
     },
     {
-      "name": "Tomorrows Tulips",
-      "emoji": "🌷"
-    },
-    {
       "name": "The Velvet Underground",
       "emoji": "💉",
       "albums": [
@@ -61,6 +57,59 @@
           "emoji": "🍌"
         }
       ]
+    },
+    {
+      "name": "The Beatles",
+      "emoji": "☮️"
+    },
+    {
+      "name": "Pink Floyd",
+      "emoji": "🍄"
+    },
+    {
+      "name": "Tomorrows Tulips",
+      "emoji": "🌷"
+    },
+    {
+      "name": "Ty Segall",
+      "emoji": "🎸"
+    },
+    {
+      "name": "Jimi Hendrix",
+      "emoji": "🎸"
+    },
+    {
+      "name": "Stevie Ray Vaughan",
+      "emoji": "🎸"
+    },
+    {
+      "name": "Jack White",
+      "emoji": "🎸"
+    },
+    {
+      "name": "Fuzz",
+      "emoji": "🎸"
+    },
+    {
+      "name": "Drake",
+      "emoji": "😢"
+    },
+    {
+      "name": "Bob Dylan",
+      "emoji": "👓"
+    },
+    {
+      "name": "Kendrick Lamar",
+      "emoji": "💯"
+    },
+    {
+      "name": "Vince Staples",
+      "emoji": "🎤"
+    },
+    {
+      "name": "Beastie Boys",
+      "emoji": "🗽"
     }
+
   ]
 }
