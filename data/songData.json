@@ -49,6 +49,20 @@
       ]
     },
     {
+      "name" : "The Beach Boys",
+      "emoji" : "🏄‍♂️",
+      "albums" : [
+        {
+          "title" : "Pet Sounds",
+          "emoji" : "🐐"
+        },
+        {
+          "title" : "The Smile Sessions",
+          "emoji" : "😀"
+        }
+      ]
+    },
+    {
       "name" : "The Velvet Underground",
       "emoji" : "💉",
       "albums" : [
@@ -60,7 +74,17 @@
     },
     {
       "name" : "The Beatles",
-      "emoji" : "☮️"
+      "emoji" : "☮️",
+      "albums" : [
+        {
+          "title" : "The Beatles",
+          "emoji" : "◻️"
+        },
+        {
+          "title" : "Abbey Road",
+          "emoji" : "🚶‍♂️"
+        }
+      ]
     },
     {
       "name" : "Pink Floyd",
@@ -135,12 +159,44 @@
       "emoji" : "🎛"
     },
     {
+      "name" : "Daft Punk",
+      "emoji" : "🤖"
+    },
+    {
       "name" : "Madvillain",
       "emoji" : "👺"
     },
     {
       "name" : "Kid Cudi",
       "emoji" : "💨"
+    },
+    {
+      "name" : "The White Stripes",
+      "emoji" : "🔴"
+    },
+    {
+      "name" : "Television",
+      "emoji" : "📺"
+    },
+    {
+      "name" : "Death Grips",
+      "emoji" : "☠️"
+    },
+    {
+      "name" : "Iggy Pop",
+      "emoji" : "🔌"
+    },
+    {
+      "name" : "The Stooges",
+      "emoji" : "🔌"
+    },
+    {
+      "name" : "Mac Demarco",
+      "emoji" : "🚬"
+    },
+    {
+      "name" : "Black Flag",
+      "emoji" : "🏴"
     }
   ]
 }
