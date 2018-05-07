@@ -61,8 +61,9 @@ const loadSpotify = {
     this.getAlbumData = (artist) => {
       let albumData = null;
 
-      if (artist) {
-        const albums = artist.albums;
+
+      const albums = artist.albums;
+      if (albums) {
         albums.forEach((album) => {
           if (album.title === loadSpotify.currentTrack.album) {
             albumData = album;
