@@ -61,11 +61,10 @@ const loadSpotify = {
     this.getAlbumData = (artist) => {
       let albumData = null;
 
-
       const albums = artist.albums;
       if (albums) {
         albums.forEach((album) => {
-          if (album.title === loadSpotify.currentTrack.album) {
+          if (loadSpotify.currentTrack.album.startsWith(album.title)) {
             albumData = album;
           }
         });
