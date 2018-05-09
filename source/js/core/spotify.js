@@ -1,14 +1,19 @@
 import util from './util';
 
+const emojis = require('../../../data/songData.json');
+
 
 const loadSpotify = {
 
   enabled: false,
+  currentTrack: null,
+  sessionEmoji: sessionStorage.getItem('emoji'),
 
   init() {
     this.cacheDom();
     this.getData();
     this.bindEvents();
+    this.render();
   },
 
   cacheDom() {
@@ -20,18 +25,78 @@ const loadSpotify = {
     this.dom.value = this.dom.root.querySelector('.nowPlaying__content--value');
   },
 
-  getData(callback) {
+  getData() {
     const base = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks';
     const user = 'tyler-mcrobert';
     const apiKey = '1e87695de290cd017718696f211e84a4';
     const url = `${base}&limit=1&user=${user}&api_key=${apiKey}&format=json`;
 
-    util.ajax(url, (response) => {
-      this.response = JSON.parse(response);
-      const track = this.response.recenttracks.track[0];
+    this.fetchApiData = () => {
+      fetch(url)
+        .then(response => response.json())
+        .then((json) => {
+          const track = json.recenttracks.track[0];
 
-      this.render(track);
-    });
+          this.currentTrack = {
+            name: track.name,
+            artist: track.artist['#text'],
+            album: track.album['#text'],
+          };
+
+          this.currentTrack.emoji = this.getEmoji();
+          this.setSessionEmoji();
+          this.render(track);
+
+          console.log(this.currentTrack.emoji);
+        });
+    };
+    this.fetchApiData();
+    this.timerID = setInterval(() => this.fetchApiData(), 15000);
+  },
+
+  setSessionEmoji() {
+    sessionStorage.setItem('emoji', this.currentTrack.emoji);
+  },
+
+  getEmoji() {
+    this.getArtistData = () => {
+      let artistData = null;
+
+      emojis.artists.forEach((elem) => {
+        if (elem.name === this.currentTrack.artist) {
+          artistData = elem;
+        }
+      });
+
+      return artistData;
+    };
+
+    this.getAlbumData = (artist) => {
+      let albumData = null;
+
+      if (artist && artist.albums) {
+        artist.albums.forEach((album) => {
+          if (loadSpotify.currentTrack.album.startsWith(album.title)) {
+            albumData = album;
+          }
+        });
+      }
+      return albumData;
+    };
+
+    this.setEmoji = () => {
+      const artistData = this.getArtistData();
+      const albumData = this.getAlbumData(artistData);
+
+      if (albumData) {
+        return albumData.emoji;
+      } else if (artistData && artistData.emoji) {
+        return artistData.emoji;
+      }
+      return null;
+    };
+
+    return this.setEmoji();
   },
 
   toggleModule() {
@@ -50,7 +115,13 @@ const loadSpotify = {
       this.dom.value.innerHTML = `${track.name} - ${track.artist['#text']}`;
     }
 
-    this.dom.icon.classList.add('-spinning');
+    if (this.sessionEmoji !== 'null') {
+      this.dom.icon.innerHTML = this.sessionEmoji;
+    }
+
+    if (this.currentTrack && this.currentTrack.emoji) {
+      this.dom.icon.innerHTML = this.currentTrack.emoji;
+    }
 
     if (!this.enabled) {
       this.dom.nav.classList.remove('-nowPLayingEnabled');
