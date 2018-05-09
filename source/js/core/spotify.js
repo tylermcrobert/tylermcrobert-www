@@ -7,11 +7,13 @@ const loadSpotify = {
 
   enabled: false,
   currentTrack: null,
+  sessionEmoji: sessionStorage.getItem('emoji'),
 
   init() {
     this.cacheDom();
     this.getData();
     this.bindEvents();
+    this.render();
   },
 
   cacheDom() {
@@ -29,20 +31,31 @@ const loadSpotify = {
     const apiKey = '1e87695de290cd017718696f211e84a4';
     const url = `${base}&limit=1&user=${user}&api_key=${apiKey}&format=json`;
 
-    fetch(url)
-      .then(response => response.json())
-      .then((json) => {
-        const track = json.recenttracks.track[0];
+    this.fetchApiData = () => {
+      fetch(url)
+        .then(response => response.json())
+        .then((json) => {
+          const track = json.recenttracks.track[0];
 
-        this.currentTrack = {
-          name: track.name,
-          artist: track.artist['#text'],
-          album: track.album['#text'],
-        };
+          this.currentTrack = {
+            name: track.name,
+            artist: track.artist['#text'],
+            album: track.album['#text'],
+          };
 
-        this.currentTrack.emoji = this.getEmoji();
-        this.render(track);
-      });
+          this.currentTrack.emoji = this.getEmoji();
+          this.setSessionEmoji();
+          this.render(track);
+
+          console.log(this.currentTrack.emoji);
+        });
+    };
+
+    this.timerID = setInterval(() => this.fetchApiData(), 30000);
+  },
+
+  setSessionEmoji() {
+    sessionStorage.setItem('emoji', this.currentTrack.emoji);
   },
 
   getEmoji() {
@@ -102,11 +115,13 @@ const loadSpotify = {
       this.dom.value.innerHTML = `${track.name} - ${track.artist['#text']}`;
     }
 
-    if (this.currentTrack.emoji) {
-      this.dom.icon.innerHTML = this.currentTrack.emoji;
+    if (this.sessionEmoji !== 'null') {
+      this.dom.icon.innerHTML = this.sessionEmoji;
     }
 
-    this.dom.icon.classList.add('-spinning');
+    if (this.currentTrack && this.currentTrack.emoji) {
+      this.dom.icon.innerHTML = this.currentTrack.emoji;
+    }
 
     if (!this.enabled) {
       this.dom.nav.classList.remove('-nowPLayingEnabled');
