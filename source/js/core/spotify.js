@@ -46,8 +46,6 @@ const loadSpotify = {
           this.currentTrack.emoji = this.getEmoji();
           this.setSessionEmoji();
           this.render(track);
-
-          console.log(this.currentTrack.emoji);
         });
     };
     this.fetchApiData();
