@@ -113,7 +113,7 @@ const loadSpotify = {
       this.dom.value.innerHTML = `${track.name} - ${track.artist['#text']}`;
     }
 
-    if (this.sessionEmoji !== 'null') {
+    if (this.sessionEmoji !== 'null' && this.sessionEmoji !== null) {
       this.dom.icon.innerHTML = this.sessionEmoji;
     }
 
