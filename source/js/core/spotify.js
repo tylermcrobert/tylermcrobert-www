@@ -50,8 +50,8 @@ const loadSpotify = {
           console.log(this.currentTrack.emoji);
         });
     };
-
-    this.timerID = setInterval(() => this.fetchApiData(), 30000);
+    this.fetchApiData();
+    this.timerID = setInterval(() => this.fetchApiData(), 15000);
   },
 
   setSessionEmoji() {
