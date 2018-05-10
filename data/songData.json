@@ -197,6 +197,20 @@
     {
       "name" : "Black Flag",
       "emoji" : "🏴"
+    },
+    {
+      "name" : "Travi$ Scott",
+      "emoji" : "🌐"
+    },
+    {
+      "name" : "Childish Gambino",
+      "emoji" : "🎭",
+      "albums" : [
+        {
+          "title" : "This Is America",
+          "emoji" : "🇺🇸"
+        }
+      ]
     }
   ]
 }
