@@ -1,15 +1,17 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["airbnb-base"],
+  "extends": "eslint:recommended",
   "env": {
+    "browser": true,
+    "commonjs": true,
     "node": true,
-    "browser": true
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
   },
   "rules": {
-    "no-underscore-dangle": 0,
-    "no-unused-vars": 0,
-    "no-console": 0,
-    "spaced-comment": 0,
-    "prefer-destructuring": 0,
+    "no-console": "off",
+    "strict": ["error", "global"],
+    "curly": "warn"
   }
 }
