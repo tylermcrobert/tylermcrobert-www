@@ -4,11 +4,11 @@ import {
   // Date,
 } from 'prismic-reactjs';
 import React from 'react';
-import CaseStudies from './CaseStudyList/CaseStudyList';
-import NotFound from './NotFound';
-import Loading from './Loading';
-import PrismicConfig from './prismic/prismic-configuration';
-import './styles/app.css';
+import CaseStudies from '../CaseStudyList/CaseStudyList';
+import NotFound from '../NotFound/NotFound';
+import Loading from '../Loading/Loading';
+import PrismicConfig from '../../prismic/prismic-configuration';
+import '../../styles/app.css';
 
 function Intro(props) {
   const introText =

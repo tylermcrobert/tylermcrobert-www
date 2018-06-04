@@ -1,7 +1,7 @@
 import React from 'react';
 import 'whatwg-fetch';
 import Prismic from 'prismic-javascript';
-import PrismicConfig from './prismic/prismic-configuration';
+import PrismicConfig from '../prismic/prismic-configuration';
 import App from './App';
 
 export default class PrismicApp extends React.Component {

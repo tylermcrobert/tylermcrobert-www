@@ -1,5 +1,5 @@
 import React from 'react';
-import CaseStudy from '../CaseStudy/CaseStudy';
+import CaseStudy from './CaseStudy/CaseStudy';
 
 function Tag(props) {
   return (<li>{props.name}</li>);
