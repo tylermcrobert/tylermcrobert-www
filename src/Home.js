@@ -4,18 +4,29 @@ import {
   // Date,
 } from 'prismic-reactjs';
 import React from 'react';
+import CaseStudies from './CaseStudyList/CaseStudyList';
 import NotFound from './NotFound';
 import Loading from './Loading';
-import PrismicConfig from '../utils/prismic-configuration';
-import '../styles/app.css';
+import PrismicConfig from './prismic/prismic-configuration';
+import './styles/app.css';
+
+function Intro(props) {
+  const introText =
+    RichText.asText(props.doc.data.intro_message, PrismicConfig.linkResolver);
+
+  return (
+    <div className="home__intro">
+      <h2>{introText}</h2>
+    </div>
+  );
+}
+
 
 export default class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      doc: null,
-      notFound: false,
-    };
+  state = {
+    doc: null,
+    notFound: false,
+    currentCaseStudyUID: null,
   }
 
   componentWillMount() {
@@ -28,6 +39,10 @@ export default class Home extends React.Component {
 
   componentDidUpdate() {
     this.props.prismicCtx.toolbar();
+  }
+
+  changeCaseStudy = (uid) => {
+    this.setState({ currentCaseStudyUID: uid });
   }
 
   fetchPage(props) {
@@ -49,12 +64,15 @@ export default class Home extends React.Component {
 
   render() {
     if (this.state.doc) {
-      const introText =
-        RichText.render(this.state.doc.data.intro_message, PrismicConfig.linkResolver);
-
       return (
-        <div>
-          {introText}
+        <div className="home">
+          <Intro doc={this.state.doc} />
+          <CaseStudies
+            doc={this.state.doc}
+            prismicCtx={this.props.prismicCtx}
+            currentCaseStudy={this.state.currentCaseStudyUID}
+            changeCaseStudy={this.changeCaseStudy}
+          />
         </div>
       );
     } else if (this.state.notFound) {

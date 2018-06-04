@@ -6,9 +6,9 @@ import {
   // Redirect,
 } from 'react-router-dom';
 
-import Preview from './utils/Preview';
-import Home from './views/Home';
-import NotFound from './views/NotFound';
+import Preview from './prismic/Preview';
+import Home from './Home';
+import NotFound from './NotFound';
 
 const App = props => (
   <Router>
