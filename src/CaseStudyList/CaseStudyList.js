@@ -24,10 +24,12 @@ export default function CaseStudies(props) {
   const csListData = props.doc.data.case_study_list;
   const list = csListData.map(tag => (
     <CaseStudy
-      id={tag.case_study_item.slug}
+      slug={tag.case_study_item.slug}
+      id={tag.case_study_item.id}
       key={tag.case_study_item.id}
       currentCaseStudy={props.currentCaseStudy}
       changeCaseStudy={props.changeCaseStudy}
+      prismicCtx={props.prismicCtx}
     />
   ));
 
