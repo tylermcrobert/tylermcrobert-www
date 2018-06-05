@@ -14,11 +14,15 @@ function Intro(props) {
   const introText =
     RichText.asText(props.doc.data.intro_message, PrismicConfig.linkResolver);
 
-  return (
-    <div className="home__intro">
-      <h2>{introText}</h2>
-    </div>
-  );
+  let intro = null;
+  if (props.isOpen === true) {
+    intro = (
+      <div className="home__intro">
+        <h2>{introText}</h2>
+      </div>
+    );
+  }
+  return intro;
 }
 
 
@@ -66,7 +70,7 @@ export default class Home extends React.Component {
     if (this.state.doc) {
       return (
         <div className="home">
-          <Intro doc={this.state.doc} />
+          <Intro doc={this.state.doc} isOpen={!this.state.currentCaseStudyUID} />
           <CaseStudies
             doc={this.state.doc}
             prismicCtx={this.props.prismicCtx}

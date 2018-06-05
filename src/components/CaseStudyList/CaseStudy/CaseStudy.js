@@ -26,6 +26,7 @@ class CaseStudy extends React.Component {
       const title = data.title[0].text;
       const desc = data.description[0].text;
       const { deliverables } = data;
+      console.log(data.cs_content);
 
       return (
         <div>
