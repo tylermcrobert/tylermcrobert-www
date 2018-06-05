@@ -30,6 +30,9 @@ class CaseStudy extends React.Component {
 
       return (
         <div>
+          <button onClick={() => this.props.changeCaseStudy(null)}>
+            CLOSE
+          </button>
           <h2>{title}</h2>
           <p>{deliverables}</p>
           <p>{desc}</p>
