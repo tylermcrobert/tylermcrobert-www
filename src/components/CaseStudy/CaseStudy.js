@@ -3,9 +3,9 @@ import React from 'react';
 class CaseStudy extends React.Component {
   state = {
     doc: null,
-  };
+  }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchPage(this.props);
   }
 
@@ -14,8 +14,10 @@ class CaseStudy extends React.Component {
   }
 
   fetchPage(props) {
-    props.prismicCtx.api.getByID(props.id).then((doc) => {
-      this.setState({ doc });
+    props.prismicCtx.api.getByUID('case_study', props.slug).then((doc) => {
+      if (doc) {
+        this.setState({ doc });
+      }
     });
   }
 
@@ -26,20 +28,21 @@ class CaseStudy extends React.Component {
       const title = data.title[0].text;
       const desc = data.description[0].text;
       const { deliverables } = data;
-      console.log(data.cs_content);
 
       return (
-        <div>
+        <div className="caseStudy">
           <button onClick={() => this.props.changeCaseStudy(null)}>
             CLOSE
           </button>
-          <h2>{title}</h2>
-          <p>{deliverables}</p>
-          <p>{desc}</p>
+          <div className="caseStudy__intro">
+            <h2>{title}</h2>
+            <p>{deliverables}</p>
+            <p>{desc}</p>
+          </div>
         </div>
       );
     }
-    return 'loading';
+    return <div>loading</div>;
   }
 }
 
