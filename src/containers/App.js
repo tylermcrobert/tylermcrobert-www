@@ -7,13 +7,13 @@ import {
 } from 'react-router-dom';
 
 import Preview from '../prismic/Preview';
-import Home from '../components/Home/Home';
+import Layout from '../components/Layout/Layout';
 import NotFound from '../components/NotFound/NotFound';
 
 const App = props => (
   <Router>
     <Switch>
-      <Route exact path="/" render={routeProps => <Home {...routeProps} prismicCtx={props.prismicCtx} />} />
+      <Route exact path="/" render={routeProps => <Layout {...routeProps} prismicCtx={props.prismicCtx} />} />
       <Route exact path="/preview" render={routeProps => <Preview {...routeProps} prismicCtx={props.prismicCtx} />} />
       <Route component={NotFound} />
     </Switch>

@@ -1,34 +1,14 @@
-import {
-  // Link,
-  RichText,
-  // Date,
-} from 'prismic-reactjs';
 import React from 'react';
 import CaseStudy from '../CaseStudy/CaseStudy';
-import CaseStudyList from '../CaseStudyList/CaseStudyList';
+import CaseStudyIndex from '../CaseStudyIndex/CaseStudyIndex';
+import Intro from '../Intro/Intro';
 import Loading from '../Loading/Loading';
-import PrismicConfig from '../../prismic/prismic-configuration';
 import NotFound from '../NotFound/NotFound';
 import Tags from '../Tags/Tags';
 import '../../styles/app.css';
 
-function Intro(props) {
-  const introText =
-    RichText.asText(props.doc.data.intro_message, PrismicConfig.linkResolver);
 
-  let intro = null;
-  if (props.isOpen === true) {
-    intro = (
-      <div className="home__intro">
-        <h2>{introText}</h2>
-      </div>
-    );
-  }
-  return intro;
-}
-
-
-export default class Home extends React.Component {
+export default class Layout extends React.Component {
   state = {
     doc: null,
     notFound: false,
@@ -64,7 +44,7 @@ export default class Home extends React.Component {
 
     tags = Array.from(tags);
 
-
+    // add 'hovered', 'enabled', and 'key'
     tags = tags.map(tag => ({
       name: tag,
       enabled: false,
@@ -105,7 +85,7 @@ export default class Home extends React.Component {
     if (this.state.doc) {
       return (
         <React.Fragment>
-          <Intro doc={this.state.doc} isOpen={!caseStudyIsSelected} />
+          { !caseStudyIsSelected && <Intro doc={this.state.doc} />}
 
           <div className="caseStudies">
             <Tags tags={this.state.tags} />
@@ -116,7 +96,7 @@ export default class Home extends React.Component {
                 prismicCtx={this.props.prismicCtx}
                 changeCaseStudy={this.changeCaseStudy} />
             :
-              <CaseStudyList
+              <CaseStudyIndex
                 doc={this.state.doc}
                 prismicCtx={this.props.prismicCtx}
                 changeCaseStudy={this.changeCaseStudy}

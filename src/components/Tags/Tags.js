@@ -8,7 +8,7 @@ const Tags = (props) => {
   }
 
   return (
-    <ul>{tagList}</ul>
+    <ul className="caseStudies__tags">{tagList}</ul>
   );
 };
 
