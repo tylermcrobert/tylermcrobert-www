@@ -11,8 +11,14 @@ import '../../styles/app.css';
 export default class Layout extends React.Component {
   state = {
     doc: null,
+    currentCaseStudy: {
+      uid: null,
+      title: 'ballsack',
+      description: 'farts farts farts',
+      deliverables: null,
+      tags: null,
+    },
     notFound: false,
-    currentCaseStudyUID: null,
     tags: null,
   }
 
@@ -58,12 +64,19 @@ export default class Layout extends React.Component {
   }
 
   changeCaseStudy = (uid) => {
-    this.setState({ currentCaseStudyUID: uid });
+    this.setState({ currentCaseStudy: { uid } });
   }
 
   fetchPage(props) {
     if (props.prismicCtx) {
-      return props.prismicCtx.api.getSingle('homepage').then((doc) => {
+      return props.prismicCtx.api.getSingle(
+        'homepage',
+        {
+          fetchLinks: [
+            'case_study.title',
+            'case_study.description'],
+        },
+      ).then((doc) => {
         if (doc) {
           // We put the retrieved content in the state as a doc variable
           this.setState({ doc });
@@ -80,30 +93,31 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    const caseStudyIsSelected = this.state.currentCaseStudyUID !== null;
-
+    const caseStudyIsSelected = this.state.currentCaseStudy.uid !== null;
+    // console.log('Homepage Document', this.state.doc);
     if (this.state.doc) {
       return (
         <React.Fragment>
           { !caseStudyIsSelected && <Intro doc={this.state.doc} />}
-
-          <div className="caseStudies">
+          <main className="caseStudies">
             <Tags tags={this.state.tags} />
             { caseStudyIsSelected ?
               <CaseStudy
-                slug={this.state.currentCaseStudyUID}
-                key={this.state.currentCaseStudyUID}
+                slug={this.state.currentCaseStudy.uid}
+                key={this.state.currentCaseStudy.uid}
                 prismicCtx={this.props.prismicCtx}
-                changeCaseStudy={this.changeCaseStudy} />
+                changeCaseStudy={this.changeCaseStudy}
+              />
             :
               <CaseStudyIndex
                 doc={this.state.doc}
                 prismicCtx={this.props.prismicCtx}
                 changeCaseStudy={this.changeCaseStudy}
                 handleTagChange={this.handleTagChange}
-                currentCaseStudyUID={this.statecurrentCaseStudyUID} />
+                currentCaseStudyUID={this.state.currentCaseStudy.uid}
+              />
             }
-          </div>
+          </main>
         </React.Fragment>
       );
     } else if (this.state.notFound) {

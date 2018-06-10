@@ -1,4 +1,6 @@
 import React from 'react';
+import CaseStudyIntro from '../../components/CaseStudyIntro/CaseStudyIntro';
+import Loading from '../../components/Loading/Loading';
 
 class CaseStudy extends React.Component {
   state = {
@@ -25,24 +27,14 @@ class CaseStudy extends React.Component {
     const { doc } = this.state;
     if (doc) {
       const { data } = doc;
-      const title = data.title[0].text;
-      const desc = data.description[0].text;
-      const { deliverables } = data;
-
       return (
         <div className="caseStudy">
-          <button onClick={() => this.props.changeCaseStudy(null)}>
-            CLOSE
-          </button>
-          <div className="caseStudy__intro">
-            <h2>{title}</h2>
-            <p>{deliverables}</p>
-            <p>{desc}</p>
-          </div>
+          <CaseStudyIntro data={data} />
+          <p>projects go here</p>
         </div>
       );
     }
-    return <div>loading</div>;
+    return <Loading />;
   }
 }
 
