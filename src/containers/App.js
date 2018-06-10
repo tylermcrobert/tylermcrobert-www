@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Preview from '../prismic/Preview';
-import Layout from '../components/Layout/Layout';
+import Layout from './Layout/Layout';
 import NotFound from '../components/NotFound/NotFound';
 
 const App = props => (

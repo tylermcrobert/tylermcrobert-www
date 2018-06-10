@@ -1,10 +1,10 @@
 import React from 'react';
 import CaseStudy from '../CaseStudy/CaseStudy';
-import CaseStudyIndex from '../CaseStudyIndex/CaseStudyIndex';
-import Intro from '../Intro/Intro';
-import Loading from '../Loading/Loading';
-import NotFound from '../NotFound/NotFound';
-import Tags from '../Tags/Tags';
+import CaseStudyIndex from '../../components/CaseStudyIndex/CaseStudyIndex';
+import Intro from '../../components/Intro/Intro';
+import Loading from '../../components/Loading/Loading';
+import NotFound from '../../components/NotFound/NotFound';
+import Tags from '../../components/Tags/Tags';
 import '../../styles/app.css';
 
 
