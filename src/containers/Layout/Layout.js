@@ -11,19 +11,11 @@ import '../../styles/app.css';
 export default class Layout extends React.Component {
   state = {
     doc: null,
-    currentCaseStudy: {
-      uid: null,
-      title: 'ballsack',
-      description: 'farts farts farts',
-      deliverables: null,
-      tags: null,
-    },
+    currentCaseStudy: null,
     notFound: false,
     tags: null,
-  }
-
-  componentWillMount() {
-    this.fetchPage(this.props);
+    isFloating: false,
+    context: 'homepage',
   }
 
   componentWillReceiveProps(props) {
@@ -34,53 +26,49 @@ export default class Layout extends React.Component {
     this.props.prismicCtx.toolbar();
   }
 
-  setTags() {
-    const csList = this.state.doc.data.case_study_list;
-    let tags = new Set();
-
-    // Loop through each post
-    csList.forEach((item) => {
-      const entryTags = item.case_study_item.tags;
-
-      // Put each item in the array into 'tags'
-      entryTags.forEach((tag) => {
-        tags.add(tag);
-      });
-    });
-
-    tags = Array.from(tags);
-
-    // add 'hovered', 'enabled', and 'key'
-    tags = tags.map(tag => ({
-      name: tag,
-      enabled: false,
-      hovered: false,
-      key: tag,
-    }));
-
-    this.setState({
-      tags: [...tags],
-    });
+  getContextTags = (doc) => {
+    const ctxTags = doc.data.case_study_list
+      .map(list => list.case_study_item.tags)
+      .reduce(
+        (accumulator, currentValue) => accumulator.concat(currentValue),
+        [],
+      );
+    return Array.from(new Set(ctxTags));
   }
 
-  changeCaseStudy = (uid) => {
-    this.setState({ currentCaseStudy: { uid } });
+  isFloating = (doc) => {
+    const ctxSlugs = doc.data.case_study_list.map(list => list.case_study_item.slug);
+    if (this.state.currentCaseStudy) {
+      const isFloating = ctxSlugs.indexOf(this.state.currentCaseStudy.uid) === -1;
+      return isFloating;
+    }
+    return null;
+  }
+
+  contextualizeCaseStudy = (doc) => {
+    const tags = this.getContextTags(doc);
+    const isFloating = this.isFloating(doc);
+    this.setState({ doc, tags, isFloating });
+  }
+
+  changeCaseStudy = (caseStudy) => {
+    this.setState({ currentCaseStudy: caseStudy });
   }
 
   fetchPage(props) {
     if (props.prismicCtx) {
       return props.prismicCtx.api.getSingle(
-        'homepage',
+        this.state.context,
         {
           fetchLinks: [
             'case_study.title',
-            'case_study.description'],
+            // 'case_study.description'
+          ],
         },
       ).then((doc) => {
         if (doc) {
           // We put the retrieved content in the state as a doc variable
-          this.setState({ doc });
-          this.setTags();
+          this.contextualizeCaseStudy(doc);
         } else {
           // We changed the state to display error not found if no matched doc
           this.setState({
@@ -93,14 +81,22 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    const caseStudyIsSelected = this.state.currentCaseStudy.uid !== null;
-    // console.log('Homepage Document', this.state.doc);
+    // console.log('[layout] render called', this.state);
+
+    const caseStudyIsSelected = this.state.currentCaseStudy !== null;
+    const { isFloating } = this.state;
+
     if (this.state.doc) {
       return (
         <React.Fragment>
           { !caseStudyIsSelected && <Intro doc={this.state.doc} />}
           <main className="caseStudies">
-            <Tags tags={this.state.tags} />
+            { !isFloating &&
+              <Tags
+                tags={this.state.tags}
+                currentCaseStudy={this.state.currentCaseStudy}
+              />
+            }
             { caseStudyIsSelected ?
               <CaseStudy
                 slug={this.state.currentCaseStudy.uid}
@@ -114,7 +110,7 @@ export default class Layout extends React.Component {
                 prismicCtx={this.props.prismicCtx}
                 changeCaseStudy={this.changeCaseStudy}
                 handleTagChange={this.handleTagChange}
-                currentCaseStudyUID={this.state.currentCaseStudy.uid}
+                currentCaseStudy={this.state.currentCaseStudy}
               />
             }
           </main>

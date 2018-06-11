@@ -1,11 +1,12 @@
 import React from 'react';
 
 const Tags = (props) => {
-  let tagList;
-
-  if (props.tags) {
-    tagList = props.tags.map(tag => <li key={tag.name}>{tag.name}</li>);
-  }
+  const tagList = props.tags.map((tag) => {
+    const isActive = 'active';
+    return (
+      <li key={tag} className={isActive}>{tag}</li>
+    );
+  });
 
   return (
     <ul className="caseStudies__tags">{tagList}</ul>
