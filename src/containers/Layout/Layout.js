@@ -1,6 +1,7 @@
 import React from 'react';
 import CaseStudy from '../CaseStudy/CaseStudy';
 import CaseStudyIndex from '../../components/CaseStudyIndex/CaseStudyIndex';
+import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
 import Intro from '../../components/Intro/Intro';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
@@ -10,12 +11,11 @@ import '../../styles/app.css';
 
 export default class Layout extends React.Component {
   state = {
-    doc: null,
-    currentCaseStudy: null,
-    notFound: false,
-    tags: null,
-    isFloating: false,
     context: 'homepage',
+    currentCaseStudy: { uid: 'dwp18' },
+    doc: null,
+    tags: null,
+    notFound: false,
   }
 
   componentWillReceiveProps(props) {
@@ -36,19 +36,31 @@ export default class Layout extends React.Component {
     return Array.from(new Set(ctxTags));
   }
 
-  isFloating = (doc) => {
-    const ctxSlugs = doc.data.case_study_list.map(list => list.case_study_item.slug);
-    if (this.state.currentCaseStudy) {
-      const isFloating = ctxSlugs.indexOf(this.state.currentCaseStudy.uid) === -1;
-      return isFloating;
-    }
-    return null;
+  getPageIndex = (doc) => {
+    const ctxSlugs = doc.data.case_study_list.map(list => list.case_study_item.uid);
+    return ctxSlugs.indexOf(this.state.currentCaseStudy.uid);
   }
 
   contextualizeCaseStudy = (doc) => {
+    let { currentCaseStudy } = this.state;
     const tags = this.getContextTags(doc);
-    const isFloating = this.isFloating(doc);
-    this.setState({ doc, tags, isFloating });
+    let pageIndex;
+
+    // if CurrentCaseStudy is set on load
+    if (currentCaseStudy) {
+      currentCaseStudy.pageIndex = this.getPageIndex(doc);
+      const caseStudyIsFloating = currentCaseStudy.pageIndex !== -1;
+
+      if (caseStudyIsFloating) {
+        currentCaseStudy = doc.data.case_study_list[pageIndex].case_study_item;
+      }
+    }
+
+    this.setState({
+      doc,
+      tags,
+      currentCaseStudy,
+    });
   }
 
   changeCaseStudy = (caseStudy) => {
@@ -81,36 +93,41 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    // console.log('[layout] render called', this.state);
-
-    const caseStudyIsSelected = this.state.currentCaseStudy !== null;
-    const { isFloating } = this.state;
+    const { currentCaseStudy } = this.state;
 
     if (this.state.doc) {
       return (
         <React.Fragment>
-          { !caseStudyIsSelected && <Intro doc={this.state.doc} />}
+          { !currentCaseStudy && <Intro doc={this.state.doc} />}
+
           <main className="caseStudies">
-            { !isFloating &&
-              <Tags
-                tags={this.state.tags}
-                currentCaseStudy={this.state.currentCaseStudy}
-              />
+            { (!currentCaseStudy || currentCaseStudy.pageIndex !== -1) &&
+              <React.Fragment>
+                <Tags
+                  tags={this.state.tags}
+                  currentCaseStudy={currentCaseStudy}
+                />
+                <IndexIndicator
+                  currentCaseStudy={currentCaseStudy}
+                  getPageIndex={this.getPageIndex}
+                  doc={this.state.doc}
+                />
+              </React.Fragment>
             }
-            { caseStudyIsSelected ?
+            { currentCaseStudy ?
               <CaseStudy
-                slug={this.state.currentCaseStudy.uid}
-                key={this.state.currentCaseStudy.uid}
+                slug={currentCaseStudy.uid}
+                key={currentCaseStudy.uid}
                 prismicCtx={this.props.prismicCtx}
                 changeCaseStudy={this.changeCaseStudy}
+                isFloating={this.state.isFloating}
               />
             :
               <CaseStudyIndex
                 doc={this.state.doc}
                 prismicCtx={this.props.prismicCtx}
                 changeCaseStudy={this.changeCaseStudy}
-                handleTagChange={this.handleTagChange}
-                currentCaseStudy={this.state.currentCaseStudy}
+                currentCaseStudy={currentCaseStudy}
               />
             }
           </main>

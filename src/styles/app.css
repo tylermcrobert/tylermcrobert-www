@@ -64,6 +64,14 @@ li{
   margin: 1em 0;
 }
 
+.caseStudies__tags {
+	color: gray;
+}
+
+.caseStudies__tags.active {
+	font-weight: bold;
+	color: black;
+}
 
 .caseStudies{
 	min-height: 100vh;
