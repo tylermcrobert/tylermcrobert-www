@@ -11,6 +11,7 @@ export default function CaseStudyIndex(props) {
       <li key={caseStudy.slug}>
         <h2
           onClick={() => props.changeCaseStudy(caseStudy)}
+          onMouseEnter={() => props.hoverCaseStudy(caseStudy)}
           slug={caseStudy.slug}
         >
           {RichText.asText(caseStudy.data.title)}

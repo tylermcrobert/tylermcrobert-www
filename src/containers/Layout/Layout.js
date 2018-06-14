@@ -12,10 +12,12 @@ import '../../styles/app.css';
 export default class Layout extends React.Component {
   state = {
     context: 'homepage',
-    currentCaseStudy: { uid: 'dwp18' },
+    currentCaseStudy: null,
     doc: null,
     tags: null,
     notFound: false,
+    hoveredCaseStudy: null,
+    isFloating: true,
   }
 
   componentWillReceiveProps(props) {
@@ -26,45 +28,51 @@ export default class Layout extends React.Component {
     this.props.prismicCtx.toolbar();
   }
 
-  getContextTags = (doc) => {
-    const ctxTags = doc.data.case_study_list
-      .map(list => list.case_study_item.tags)
-      .reduce(
-        (accumulator, currentValue) => accumulator.concat(currentValue),
-        [],
-      );
-    return Array.from(new Set(ctxTags));
-  }
+  getContextTags = doc => Array // make array from set
+    .from(new Set(doc.data.case_study_list // create set of case studies in list
+      .map(list => list.case_study_item.tags) // flatten 'case_study_item.tags' out
+      .reduce((allTags, csTags) => allTags.concat(csTags), []))) // Put all csTags into master array
 
-  getPageIndex = (doc) => {
-    const ctxSlugs = doc.data.case_study_list.map(list => list.case_study_item.uid);
-    return ctxSlugs.indexOf(this.state.currentCaseStudy.uid);
-  }
+  getPageIndex = (doc, uid = this.state.currentCaseStudy.uid) =>
+    doc.data.case_study_list
+      .map(list => list.case_study_item.uid)
+      .indexOf(uid);
 
   contextualizeCaseStudy = (doc) => {
-    let { currentCaseStudy } = this.state;
+    // get case study uid if set
+    const initialCaseStudyState = (this.state.currentCaseStudy)
+      ? { ...this.state.currentCaseStudy }
+      : null;
+
+    // If case study is set, get index
+    const pageIndex = (initialCaseStudyState)
+      ? this.getPageIndex(doc)
+      : null;
+
+    const isFloating = (pageIndex === -1 && pageIndex !== null);
+
+    // If case study belongs to context
+    const currentCaseStudy = (initialCaseStudyState && !isFloating)
+      // Get index & tags for sidebar
+      ? { ...doc.data.case_study_list[pageIndex].case_study_item, pageIndex }
+      // Get index & tags for sidebar
+      : initialCaseStudyState;
+
     const tags = this.getContextTags(doc);
-    let pageIndex;
-
-    // if CurrentCaseStudy is set on load
-    if (currentCaseStudy) {
-      currentCaseStudy.pageIndex = this.getPageIndex(doc);
-      const caseStudyIsFloating = currentCaseStudy.pageIndex !== -1;
-
-      if (caseStudyIsFloating) {
-        currentCaseStudy = doc.data.case_study_list[pageIndex].case_study_item;
-      }
-    }
-
     this.setState({
       doc,
       tags,
       currentCaseStudy,
+      isFloating,
     });
   }
 
   changeCaseStudy = (caseStudy) => {
     this.setState({ currentCaseStudy: caseStudy });
+  }
+
+  hoverCaseStudyHandler = (caseStudy) => {
+    this.setState({ hoveredCaseStudy: caseStudy });
   }
 
   fetchPage(props) {
@@ -79,13 +87,9 @@ export default class Layout extends React.Component {
         },
       ).then((doc) => {
         if (doc) {
-          // We put the retrieved content in the state as a doc variable
           this.contextualizeCaseStudy(doc);
         } else {
-          // We changed the state to display error not found if no matched doc
-          this.setState({
-            notFound: !doc,
-          });
+          this.setState({ notFound: !doc });
         }
       });
     }
@@ -99,16 +103,17 @@ export default class Layout extends React.Component {
       return (
         <React.Fragment>
           { !currentCaseStudy && <Intro doc={this.state.doc} />}
-
           <main className="caseStudies">
-            { (!currentCaseStudy || currentCaseStudy.pageIndex !== -1) &&
+            { (!currentCaseStudy || !this.state.isFloating) &&
               <React.Fragment>
                 <Tags
                   tags={this.state.tags}
                   currentCaseStudy={currentCaseStudy}
+                  hoveredCaseStudy={this.state.hoveredCaseStudy}
                 />
                 <IndexIndicator
                   currentCaseStudy={currentCaseStudy}
+                  hoveredCaseStudy={this.state.hoveredCaseStudy}
                   getPageIndex={this.getPageIndex}
                   doc={this.state.doc}
                 />
@@ -128,6 +133,7 @@ export default class Layout extends React.Component {
                 prismicCtx={this.props.prismicCtx}
                 changeCaseStudy={this.changeCaseStudy}
                 currentCaseStudy={currentCaseStudy}
+                hoverCaseStudy={this.hoverCaseStudyHandler}
               />
             }
           </main>
