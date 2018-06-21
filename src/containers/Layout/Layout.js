@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import CaseStudy from '../CaseStudy/CaseStudy';
 import CaseStudyIndex from '../../components/CaseStudyIndex/CaseStudyIndex';
 import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
@@ -97,13 +98,18 @@ export default class Layout extends React.Component {
   }
 
   render() {
+    const Main = styled.main`
+      text-align:center;
+      position: relative;
+    `;
+
     const { currentCaseStudy } = this.state;
 
     if (this.state.doc) {
       return (
         <React.Fragment>
           { !currentCaseStudy && <Intro doc={this.state.doc} />}
-          <main className="caseStudies">
+          <Main className="caseStudies">
             { (!currentCaseStudy || !this.state.isFloating) &&
               <React.Fragment>
                 <Tags
@@ -136,7 +142,7 @@ export default class Layout extends React.Component {
                 hoverCaseStudy={this.hoverCaseStudyHandler}
               />
             }
-          </main>
+          </Main>
         </React.Fragment>
       );
     } else if (this.state.notFound) {

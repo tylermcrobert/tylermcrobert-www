@@ -53,8 +53,6 @@ table {
 body {
   font-family: helvetica, arial, sans-serif;
   letter-spacing: .03em;
-  max-width:900px;
-  margin:0px auto;
 }
 p{
   line-height: 1.5;
@@ -69,7 +67,6 @@ li{
 }
 
 .caseStudies__tags.active {
-	font-weight: bold;
 	color: black;
 }
 

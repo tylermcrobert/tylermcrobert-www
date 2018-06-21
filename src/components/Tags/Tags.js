@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const Tags = (props) => {
   const tagList = props.tags.map((tag) => {
@@ -21,8 +22,25 @@ const Tags = (props) => {
     );
   });
 
+  const TagWrapper = styled.div`
+    display: inline-block;
+    transform: rotate(270deg);
+    position: absolute;
+    left: calc(-50vh + 1em);
+    top: 50%;
+    width: 100vh;
+    text-align:center;
+
+    li {
+      display: inline-block;
+      margin auto 10px;
+    };
+  `;
+
   return (
-    <ul className="caseStudies__tags">{tagList}</ul>
+    <TagWrapper>
+      <ul className="caseStudies__tags">{tagList}</ul>
+    </TagWrapper>
   );
 };
 
