@@ -5,7 +5,7 @@ const CaseStudyIntro = (props) => {
   const { title, deliverables, description } = props.data;
   return (
     <div className="caseStudy__intro">
-      <h2>{RichText.asText(title)}</h2>
+      <h1>{RichText.asText(title)}</h1>
       <p>{deliverables}</p>
       <p>{RichText.asText(description)}</p>
     </div>

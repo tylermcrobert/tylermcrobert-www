@@ -15,18 +15,18 @@ const Tags = (props) => {
   const tagList = props.tags.map((tag) => {
     const csIsSelected = props.currentCaseStudy !== null;
     const csIsHovered = !csIsSelected && props.hoveredCaseStudy;
-    let recievedTag = false;
+    let tagShouldHighlight = false;
 
     if (csIsSelected) {
-      recievedTag = props.currentCaseStudy.tags.indexOf(tag) !== -1;
+      tagShouldHighlight = props.currentCaseStudy.tags.indexOf(tag) !== -1;
     } else if (csIsHovered) {
-      recievedTag = props.hoveredCaseStudy.tags.indexOf(tag) !== -1;
+      tagShouldHighlight = props.hoveredCaseStudy.tags.indexOf(tag) !== -1;
     }
 
     const Tag = styled.li`
       display: inline-block;
       margin: auto 10px;
-      color: ${recievedTag ? 'black' : '#aaa'}
+      color: ${tagShouldHighlight ? '#a5a5a5' : 'black'}
     `;
 
     return (
