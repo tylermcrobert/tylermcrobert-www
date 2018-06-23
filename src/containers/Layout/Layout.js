@@ -4,7 +4,8 @@ import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
 import CaseStudies from '../../components/CaseStudies/CaseStudies';
 
-import '../../styles/app.css';
+import '../../styles/reset.css';
+import '../../styles/typography.css';
 
 
 export default class Layout extends React.Component {

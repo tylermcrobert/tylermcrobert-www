@@ -9,6 +9,10 @@ const Main = styled.main`
   text-align:center;
   position: relative;
   padding: 0 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
 `;
 
 

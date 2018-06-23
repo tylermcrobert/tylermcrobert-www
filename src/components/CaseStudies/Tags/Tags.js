@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 const Tags = (props) => {
   const TagWrapper = styled.ul`
-    display: inline-block;
-    transform: rotate(270deg);
     position: absolute;
     left: calc(-50vh + 1.5em);
-    top: 50vh;
+    top: calc(50vh - 1em);
+    display: inline-block;
+    transform: rotate(270deg);
     width: 100vh;
     text-align: center;
   `;
@@ -27,16 +27,16 @@ const Tags = (props) => {
       display: inline-block;
       margin: auto 1em;
       font-size: .81em;
-      color: ${tagShouldHighlight ? '#a5a5a5' : 'black'}
+      color: ${tagShouldHighlight ? 'black' : '#a5a5a5'}
     `;
 
     return (
-      <Tag key={tag}>{tag}</Tag>
+      <Tag className="tagIndicator__tag" key={tag}>{tag}</Tag>
     );
   });
 
   return (
-    <TagWrapper>
+    <TagWrapper className="tagIndicator">
       {tagList}
     </TagWrapper>
   );

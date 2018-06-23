@@ -7,13 +7,12 @@ const CaseStudyIntro = (props) => {
 
   const CaseStudyIntroWrapper = styled.div`
     min-height: 100vh;
-    position: flex;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    h1{
+    .caseStudyIntro__title{
       flex:1;
       min-height: 400px;
       display: flex;
@@ -22,22 +21,28 @@ const CaseStudyIntro = (props) => {
       font-size: calc(2.023em + 1vw);
     }
 
-    div {
+    .caseStudyIntro__info {
       display: flex;
       text-align: left;
+      max-width: 48em;
 
-      p {
+      &__deliverables,
+      &__description {
         margin: 0 1em;
+      }
+
+      &__description {
+        flex-basis: 70%;
       }
     }
   `;
 
   return (
-    <CaseStudyIntroWrapper>
-      <h1>{RichText.asText(title)}</h1>
-      <div>
-        <p>{deliverables}</p>
-        <p>{RichText.asText(description)}</p>
+    <CaseStudyIntroWrapper className="caseStudyIntro">
+      <h1 className="caseStudyIntro__title">{RichText.asText(title)}</h1>
+      <div className="caseStudyIntro__info">
+        <p className="caseStudyIntro__info__deliverables">{deliverables}</p>
+        <p className="caseStudyIntro__info__description">{RichText.asText(description)}</p>
       </div>
     </CaseStudyIntroWrapper>
   );
