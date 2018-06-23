@@ -10,7 +10,7 @@ import '../../styles/app.css';
 export default class Layout extends React.Component {
   state = {
     context: 'homepage',
-    currentCaseStudy: {uid: 'dwp18'},
+    currentCaseStudy: null,
     doc: null,
     tags: null,
     notFound: false,

@@ -29,8 +29,6 @@ const Tags = (props) => {
       color: ${tagShouldHighlight ? '#a5a5a5' : 'black'}
     `;
 
-    console.log('hoveredCaseStudy', props.hoveredCaseStudy)
-
     return (
       <Tag key={tag}>{tag}</Tag>
     );
