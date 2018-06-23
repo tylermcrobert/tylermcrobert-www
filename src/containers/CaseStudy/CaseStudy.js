@@ -1,5 +1,5 @@
 import React from 'react';
-import CaseStudyIntro from '../../components/CaseStudyIntro/CaseStudyIntro';
+import CaseStudyIntro from '../../components/CaseStudies/CaseStudyIntro/CaseStudyIntro';
 import Loading from '../../components/Loading/Loading';
 
 class CaseStudy extends React.Component {
@@ -29,7 +29,7 @@ class CaseStudy extends React.Component {
       const { data } = doc;
       return (
         <div className="caseStudy">
-          <button onClick={() => this.props.changeCaseStudy(null)}>
+          <button onClick={() => this.props.changeCaseStudyHandler(null)}>
             CLOSE
           </button>
           <CaseStudyIntro data={data} />

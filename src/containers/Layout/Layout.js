@@ -1,19 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
-import CaseStudy from '../CaseStudy/CaseStudy';
-import CaseStudyIndex from '../../components/CaseStudyIndex/CaseStudyIndex';
-import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
 import Intro from '../../components/Intro/Intro';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
-import Tags from '../../components/Tags/Tags';
+import CaseStudies from '../../components/CaseStudies/CaseStudies';
+
 import '../../styles/app.css';
 
 
 export default class Layout extends React.Component {
   state = {
     context: 'homepage',
-    currentCaseStudy: null,
+    currentCaseStudy: {uid: 'dwp18'},
     doc: null,
     tags: null,
     notFound: false,
@@ -68,7 +65,7 @@ export default class Layout extends React.Component {
     });
   }
 
-  changeCaseStudy = (caseStudy) => {
+  changeCaseStudyHandler = (caseStudy) => {
     this.setState({ currentCaseStudy: caseStudy });
   }
 
@@ -98,51 +95,23 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    const Main = styled.main`
-      text-align:center;
-      position: relative;
-    `;
-
     const { currentCaseStudy } = this.state;
 
     if (this.state.doc) {
       return (
         <React.Fragment>
           { !currentCaseStudy && <Intro doc={this.state.doc} />}
-          <Main className="caseStudies">
-            { (!currentCaseStudy || !this.state.isFloating) &&
-              <React.Fragment>
-                <Tags
-                  tags={this.state.tags}
-                  currentCaseStudy={currentCaseStudy}
-                  hoveredCaseStudy={this.state.hoveredCaseStudy}
-                />
-                <IndexIndicator
-                  currentCaseStudy={currentCaseStudy}
-                  hoveredCaseStudy={this.state.hoveredCaseStudy}
-                  getPageIndex={this.getPageIndex}
-                  doc={this.state.doc}
-                />
-              </React.Fragment>
-            }
-            { currentCaseStudy ?
-              <CaseStudy
-                slug={currentCaseStudy.uid}
-                key={currentCaseStudy.uid}
-                prismicCtx={this.props.prismicCtx}
-                changeCaseStudy={this.changeCaseStudy}
-                isFloating={this.state.isFloating}
-              />
-            :
-              <CaseStudyIndex
-                doc={this.state.doc}
-                prismicCtx={this.props.prismicCtx}
-                changeCaseStudy={this.changeCaseStudy}
-                currentCaseStudy={currentCaseStudy}
-                hoverCaseStudy={this.hoverCaseStudyHandler}
-              />
-            }
-          </Main>
+          <CaseStudies
+            changeCaseStudyHandler={this.changeCaseStudyHandler}
+            currentCaseStudy={currentCaseStudy}
+            doc={this.state.doc}
+            getPageIndex={this.getPageIndex}
+            hoverCaseStudyHandler={this.hoverCaseStudyHandler}
+            hoveredCaseStudy={this.state.hoveredCaseStudy}
+            isFloating={this.state.isFloating}
+            prismicCtx={this.props.prismicCtx}
+            tags={this.state.tags}
+          />
         </React.Fragment>
       );
     } else if (this.state.notFound) {
