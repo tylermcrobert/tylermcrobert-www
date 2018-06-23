@@ -6,8 +6,8 @@ const Tags = (props) => {
     display: inline-block;
     transform: rotate(270deg);
     position: absolute;
-    left: calc(-50vh + 1em);
-    top: 50%;
+    left: calc(-50vh + 1.5em);
+    top: 50vh;
     width: 100vh;
     text-align: center;
   `;
@@ -25,7 +25,8 @@ const Tags = (props) => {
 
     const Tag = styled.li`
       display: inline-block;
-      margin: auto 10px;
+      margin: auto 1em;
+      font-size: .81em;
       color: ${tagShouldHighlight ? '#a5a5a5' : 'black'}
     `;
 

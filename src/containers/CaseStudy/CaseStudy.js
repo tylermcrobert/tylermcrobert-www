@@ -29,9 +29,9 @@ class CaseStudy extends React.Component {
       const { data } = doc;
       return (
         <div className="caseStudy">
-          <button onClick={() => this.props.changeCaseStudyHandler(null)}>
+          {/* <button onClick={() => this.props.changeCaseStudyHandler(null)}>
             CLOSE
-          </button>
+          </button> */}
           <CaseStudyIntro data={data} />
           <p>projects go here</p>
         </div>

@@ -8,6 +8,7 @@ import CaseStudy from '../../containers/CaseStudy/CaseStudy';
 const Main = styled.main`
   text-align:center;
   position: relative;
+  padding: 0 3em;
 `;
 
 

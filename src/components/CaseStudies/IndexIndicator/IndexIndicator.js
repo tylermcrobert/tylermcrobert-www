@@ -17,12 +17,14 @@ const IndexIndicator = (props) => {
 
   const IndexWrapper = styled.div`
     display: inline-block;
-    transform: rotate(270deg);
+    transform: rotate(90deg);
     position: absolute;
-    right: calc(-50vh + 1em);
-    top: 50%;
+    right: calc(-50vh + 2em);
+    top: 50vh;
     width: 100vh;
     text-align:center;
+    font-size: .81em;
+    height: .81em;
 
     p {
       display: inline-block;
@@ -32,7 +34,7 @@ const IndexIndicator = (props) => {
 
   return (
     <IndexWrapper>
-      <p className="caseStudies__IndexIndicator">{currentIndex + 1} of {indexTotal}</p>
+      <p className="caseStudies__IndexIndicator">No. {currentIndex + 1} of {indexTotal}</p>
     </IndexWrapper>
   );
 };
