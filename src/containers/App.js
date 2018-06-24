@@ -20,6 +20,11 @@ const App = props => (
       />
       <Route
         exact
+        path="/:rootSlug"
+        render={routeProps => (<Layout {...routeProps} prismicCtx={props.prismicCtx} />)}
+      />
+      <Route
+        exact
         path="/preview"
         render={routeProps => <Preview {...routeProps} prismicCtx={props.prismicCtx} />}
       />

@@ -26,13 +26,17 @@ const CaseStudyIntro = (props) => {
       text-align: left;
       max-width: 48em;
 
-      &__deliverables,
-      &__description {
+      &__deliverables, &__description {
         margin: 0 1em;
       }
 
       &__description {
         flex-basis: 70%;
+      }
+
+      &__deliverables {
+        font-size: .81em;
+        flex-basis: 30%;
       }
     }
   `;

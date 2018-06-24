@@ -20,6 +20,7 @@ export default class Layout extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    // this.parseURL();
     this.fetchPage(props);
   }
 
@@ -36,6 +37,16 @@ export default class Layout extends React.Component {
     doc.data.case_study_list
       .map(list => list.case_study_item.uid)
       .indexOf(uid);
+
+  // parseURL = () => {
+  //   let pathName = this.props.location.pathname; // get pathname
+  //   pathName = pathName.replace(/^\/+/g, ''); // remove leading slash
+  //   const didRecievePath = pathName !== '';
+  //
+  //   if (didRecievePath) {
+  //     this.setState({ currentCaseStudy: { uid: pathName } });
+  //   }
+  // }
 
   contextualizeCaseStudy = (doc) => {
     // get case study uid if set
