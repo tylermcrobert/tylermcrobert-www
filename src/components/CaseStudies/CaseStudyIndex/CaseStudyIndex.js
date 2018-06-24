@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
+import { Link } from 'react-router-dom';
 
 export default function CaseStudyIndex(props) {
   const csListData = props.doc.data.case_study_list;
@@ -18,15 +19,16 @@ export default function CaseStudyIndex(props) {
     `;
 
     return (
-      <li key={caseStudy.slug}>
-        <CaseStudyTitle
-          onClick={() => props.changeCaseStudyHandler(caseStudy)}
-          onMouseEnter={() => props.hoverCaseStudyHandler(caseStudy)}
-          slug={caseStudy.slug}
-        >
-          {RichText.asText(caseStudy.data.title)}
-        </CaseStudyTitle>
-      </li>
+      <Link to={caseStudy.uid} key={caseStudy.id}>
+        <li key={caseStudy.slug}>
+          <CaseStudyTitle
+            onMouseEnter={() => props.hoverCaseStudyHandler(caseStudy)}
+            slug={caseStudy.slug}
+          >
+            {RichText.asText(caseStudy.data.title)}
+          </CaseStudyTitle>
+        </li>
+      </Link>
     );
   });
   return (

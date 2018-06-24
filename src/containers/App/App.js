@@ -1,14 +1,23 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  // Redirect,
+} from 'react-router-dom';
 import Intro from '../../components/Intro/Intro';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
 import CaseStudies from '../../components/CaseStudies/CaseStudies';
+import CaseStudy from '../CaseStudy/CaseStudy';
+import Nav from '../../components/Nav/Nav';
+
 
 import '../../styles/reset.css';
 import '../../styles/typography.css';
 
 
-export default class Layout extends React.Component {
+export default class App extends React.Component {
   state = {
     context: 'homepage',
     currentCaseStudy: null,
@@ -17,6 +26,10 @@ export default class Layout extends React.Component {
     notFound: false,
     hoveredCaseStudy: null,
     isFloating: true,
+  };
+
+  componentWillMount() {
+    this.fetchPage(this.props);
   }
 
   componentWillReceiveProps(props) {
@@ -37,16 +50,6 @@ export default class Layout extends React.Component {
     doc.data.case_study_list
       .map(list => list.case_study_item.uid)
       .indexOf(uid);
-
-  // parseURL = () => {
-  //   let pathName = this.props.location.pathname; // get pathname
-  //   pathName = pathName.replace(/^\/+/g, ''); // remove leading slash
-  //   const didRecievePath = pathName !== '';
-  //
-  //   if (didRecievePath) {
-  //     this.setState({ currentCaseStudy: { uid: pathName } });
-  //   }
-  // }
 
   contextualizeCaseStudy = (doc) => {
     // get case study uid if set
@@ -112,18 +115,39 @@ export default class Layout extends React.Component {
     if (this.state.doc) {
       return (
         <React.Fragment>
-          { !currentCaseStudy && <Intro doc={this.state.doc} />}
-          <CaseStudies
-            changeCaseStudyHandler={this.changeCaseStudyHandler}
-            currentCaseStudy={currentCaseStudy}
-            doc={this.state.doc}
-            getPageIndex={this.getPageIndex}
-            hoverCaseStudyHandler={this.hoverCaseStudyHandler}
-            hoveredCaseStudy={this.state.hoveredCaseStudy}
-            isFloating={this.state.isFloating}
-            prismicCtx={this.props.prismicCtx}
-            tags={this.state.tags}
-          />
+          <Nav />
+          <Router>
+            <Switch>
+              <Route
+                exact
+                path="/:caseStudyUID"
+                render={routeProps => (
+                  <CaseStudy {...routeProps} prismicCtx={this.props.prismicCtx} />
+                  )}
+              />
+              <Route
+                exact
+                Path="/"
+                render={() => (
+                  <React.Fragment>
+                    <Intro doc={this.state.doc} />
+                    <CaseStudies
+                      changeCaseStudyHandler={this.changeCaseStudyHandler}
+                      currentCaseStudy={currentCaseStudy}
+                      doc={this.state.doc}
+                      getPageIndex={this.getPageIndex}
+                      hoverCaseStudyHandler={this.hoverCaseStudyHandler}
+                      hoveredCaseStudy={this.state.hoveredCaseStudy}
+                      isFloating={this.state.isFloating}
+                      prismicCtx={this.props.prismicCtx}
+                      tags={this.state.tags}
+                    />
+                  </React.Fragment>
+                  )}
+              />
+
+            </Switch>
+          </Router>
         </React.Fragment>
       );
     } else if (this.state.notFound) {

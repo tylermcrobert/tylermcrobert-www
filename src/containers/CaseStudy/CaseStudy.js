@@ -1,10 +1,12 @@
 import React from 'react';
 import CaseStudyIntro from '../../components/CaseStudies/CaseStudyIntro/CaseStudyIntro';
 import Loading from '../../components/Loading/Loading';
+import NotFound from '../../components/NotFound/NotFound';
 
 class CaseStudy extends React.Component {
   state = {
     doc: null,
+    notFound: false,
   }
 
   componentDidMount() {
@@ -16,26 +18,28 @@ class CaseStudy extends React.Component {
   }
 
   fetchPage(props) {
-    props.prismicCtx.api.getByUID('case_study', props.slug).then((doc) => {
-      if (doc) {
-        this.setState({ doc });
-      }
-    });
+    if (props.prismicCtx) {
+      const { caseStudyUID } = props.match.params;
+      props.prismicCtx.api.getByUID('case_study', caseStudyUID).then((doc) => {
+        if (doc) {
+          this.setState({ doc });
+        } else {
+          this.setState({ notFound: !doc });
+        }
+      });
+    }
   }
 
   render() {
-    const { doc } = this.state;
-    if (doc) {
-      const { data } = doc;
+    if (this.state.doc) {
       return (
         <div className="caseStudy">
-          {/* <button onClick={() => this.props.changeCaseStudyHandler(null)}>
-            CLOSE
-          </button> */}
-          <CaseStudyIntro data={data} />
+          <CaseStudyIntro data={this.state.doc.data} />
           <p>projects go here</p>
         </div>
       );
+    } else if (this.state.notFound) {
+      return <NotFound />;
     }
     return (<Loading />);
   }

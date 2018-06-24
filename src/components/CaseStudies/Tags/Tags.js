@@ -35,11 +35,14 @@ const Tags = (props) => {
     );
   });
 
-  return (
-    <TagWrapper className="tagIndicator">
-      {tagList}
-    </TagWrapper>
-  );
+  if (props.tags) {
+    return (
+      <TagWrapper className="tagIndicator">
+        {tagList}
+      </TagWrapper>
+    );
+  }
+  return null;
 };
 
 export default Tags;
