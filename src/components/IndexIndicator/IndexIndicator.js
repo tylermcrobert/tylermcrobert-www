@@ -1,20 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const IndexIndicator = (props) => {
-  const caseStudyIsSelected = props.currentCaseStudy !== null;
-  const caseStudyIsHovered = !caseStudyIsSelected && props.hoveredCaseStudy;
-  let currentIndex = 0;
-
-  if (caseStudyIsSelected) {
-    currentIndex = props.getPageIndex(props.doc);
-  }
-  if (caseStudyIsHovered) {
-    currentIndex = props.getPageIndex(props.doc, props.hoveredCaseStudy.uid);
-  }
-  const indexTotal = props.doc.data.case_study_list.length;
-
   const IndexWrapper = styled.div`
     display: inline-block;
     transform: rotate(90deg);
@@ -29,12 +16,13 @@ const IndexIndicator = (props) => {
     p {
       display: inline-block;
       margin auto 10px;
+      color: black;
     };
   `;
 
   return (
     <IndexWrapper>
-      <p className="caseStudies__IndexIndicator">No. {currentIndex + 1} of {indexTotal}</p>
+      <p className="caseStudies__IndexIndicator">No. {props.currentIndex + 1} of {props.indexLength}</p>
     </IndexWrapper>
   );
 };

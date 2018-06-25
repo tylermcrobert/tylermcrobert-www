@@ -1,7 +1,8 @@
 import React from 'react';
-import CaseStudyIntro from '../../components/CaseStudies/CaseStudyIntro/CaseStudyIntro';
+import CaseStudyIntro from '../../components/CaseStudyIntro/CaseStudyIntro';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
+import CaseStudyContextHOC from '../CaseStudyContextHOC/CaseStudyContextHOC';
 
 class CaseStudy extends React.Component {
   state = {
@@ -11,6 +12,7 @@ class CaseStudy extends React.Component {
 
   componentDidMount() {
     this.fetchPage(this.props);
+    window.scrollTo(0, 0);
   }
 
   componentWillReceiveProps(props) {
@@ -18,16 +20,14 @@ class CaseStudy extends React.Component {
   }
 
   fetchPage(props) {
-    if (props.prismicCtx) {
-      const { caseStudyUID } = props.match.params;
-      props.prismicCtx.api.getByUID('case_study', caseStudyUID).then((doc) => {
-        if (doc) {
-          this.setState({ doc });
-        } else {
-          this.setState({ notFound: !doc });
-        }
-      });
-    }
+    const { caseStudyUID } = props.match.params;
+    props.prismicCtx.api.getByUID('case_study', caseStudyUID).then((doc) => {
+      if (doc) {
+        this.setState({ doc });
+      } else {
+        this.setState({ notFound: !doc });
+      }
+    });
   }
 
   render() {
@@ -45,4 +45,4 @@ class CaseStudy extends React.Component {
   }
 }
 
-export default CaseStudy;
+export default CaseStudyContextHOC(CaseStudy);

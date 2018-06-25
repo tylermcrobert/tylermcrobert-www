@@ -2,8 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 import { Link } from 'react-router-dom';
+import CaseStudyContextHOC from '../../containers/CaseStudyContextHOC/CaseStudyContextHOC';
 
-export default function CaseStudyIndex(props) {
+const CaseStudyIndex = (props) => {
+  const CaseStudyIndexWrapper = styled.div`
+    padding: 0 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+  `;
+
   const csListData = props.doc.data.case_study_list;
   const list = csListData.map((caseStudies) => {
     const caseStudy = caseStudies.case_study_item;
@@ -12,6 +21,7 @@ export default function CaseStudyIndex(props) {
       color: #a5a5a5;
       cursor: pointer;
       padding: .38198em 0;
+      text-align:center;
 
       &:hover {
         color: black;
@@ -20,11 +30,8 @@ export default function CaseStudyIndex(props) {
 
     return (
       <Link to={caseStudy.uid} key={caseStudy.id}>
-        <li key={caseStudy.slug}>
-          <CaseStudyTitle
-            onMouseEnter={() => props.hoverCaseStudyHandler(caseStudy)}
-            slug={caseStudy.slug}
-          >
+        <li key={caseStudy.uid} onMouseEnter={() => props.handleHoveredCaseStudy(caseStudy.uid)}>
+          <CaseStudyTitle slug={caseStudy.uid}>
             {RichText.asText(caseStudy.data.title)}
           </CaseStudyTitle>
         </li>
@@ -32,10 +39,12 @@ export default function CaseStudyIndex(props) {
     );
   });
   return (
-    <div className="caseStudyIndex">
+    <CaseStudyIndexWrapper className="caseStudyIndex">
       <ul className="caseStudyIndex__list">
         {list}
       </ul>
-    </div>
+    </CaseStudyIndexWrapper>
   );
-}
+};
+
+export default CaseStudyContextHOC(CaseStudyIndex);

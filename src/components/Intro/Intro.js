@@ -19,7 +19,7 @@ const Intro = (props) => {
     RichText.asText(props.doc.data.intro_message);
 
   return (
-      <IntroWrapper><h1>{introText}</h1></IntroWrapper>
+    <IntroWrapper><h1>{introText}</h1></IntroWrapper>
   );
 };
 
