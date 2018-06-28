@@ -6,7 +6,7 @@ import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
 const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends Component {
   state = {
     currentUID: null,
-    doc: this.props.doc,
+    caseStudiesList: this.props.caseStudiesList,
     isFloating: false,
     activeTags: [],
     contextTags: [],
@@ -19,18 +19,19 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
     this.getCaseStudyContext(routeUid);
   }
   getCaseStudyContext = (currentUID) => {
-    const _caseStudyList = this.state.doc.data.case_study_list;
-    const indexLength = _caseStudyList.length;
+    const { caseStudiesList } = this.state;
+
+    const indexLength = caseStudiesList.length;
     const contextTags = Array
-      .from(new Set(_caseStudyList
+      .from(new Set(caseStudiesList
         .map(list => list.case_study_item.tags)
         .reduce((allTags, csTags) => allTags.concat(csTags), [])));
     const currentIndex = (currentUID)
-      ? _caseStudyList
+      ? caseStudiesList
         .map(list => list.case_study_item.uid)
         .indexOf(currentUID)
       : 0;
-    const activeTags = _caseStudyList
+    const activeTags = caseStudiesList
       .map(item => item.case_study_item)
       .filter(list => list.uid === currentUID)
       .map(csData => csData.tags)
@@ -54,32 +55,40 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
     const CaseStudyContextWrapper = styled.div`
       position: relative;
     `;
+    const {
+      currentIndex,
+      indexLength,
+      contextTags,
+      activeTags,
+      currentUID,
+      isFloating,
+    } = this.state;
 
-    if (!this.state.isFloating) {
+    if (!isFloating) {
       return (
         <CaseStudyContextWrapper
           className="CaseStudyContextWrapper"
         >
           <IndexIndicator
-            currentIndex={this.state.currentIndex}
-            indexLength={this.state.indexLength}
+            currentIndex={currentIndex}
+            indexLength={indexLength}
           />
           <Tags
-            tagList={this.state.contextTags}
-            activeTags={this.state.activeTags}
+            tagList={contextTags}
+            activeTags={activeTags}
           />
           <WrappedComponent
             {...this.props}
-            currentUID={this.state.currentUID}
+            currentUID={currentUID}
             handleHoveredCaseStudy={this.handleHoveredCaseStudy}
-            isFloating={this.state.isFloating}
+            isFloating={isFloating}
           />
         </CaseStudyContextWrapper>
       );
     }
 
     return (
-      <WrappedComponent {...this.props} />
+      <WrappedComponent {...this.props} isFloating={isFloating} />
     );
   }
 };

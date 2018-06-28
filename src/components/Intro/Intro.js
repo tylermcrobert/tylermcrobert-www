@@ -15,9 +15,7 @@ const IntroWrapper = styled.div`
 `;
 
 const Intro = (props) => {
-  const introText =
-    RichText.asText(props.doc.data.intro_message);
-
+  const introText = RichText.asText(props.doc.data.intro_message);
   return (
     <IntroWrapper><h1>{introText}</h1></IntroWrapper>
   );

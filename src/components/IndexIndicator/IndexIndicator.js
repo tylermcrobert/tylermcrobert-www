@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const IndexIndicator = (props) => {
+  const { currentIndex, indexLength } = props;
   const IndexWrapper = styled.div`
     display: inline-block;
     transform: rotate(90deg);
@@ -22,7 +23,7 @@ const IndexIndicator = (props) => {
 
   return (
     <IndexWrapper>
-      <p className="caseStudies__IndexIndicator">No. {props.currentIndex + 1} of {props.indexLength}</p>
+      <p className="caseStudies__IndexIndicator">No. {currentIndex + 1} of {indexLength}</p>
     </IndexWrapper>
   );
 };

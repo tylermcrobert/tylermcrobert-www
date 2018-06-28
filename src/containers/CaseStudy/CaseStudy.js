@@ -31,14 +31,16 @@ class CaseStudy extends React.Component {
   }
 
   render() {
-    if (this.state.doc) {
+    const { doc, notFound } = this.state;
+
+    if (doc) {
       return (
         <div className="caseStudy">
-          <CaseStudyIntro data={this.state.doc.data} />
+          <CaseStudyIntro data={doc.data} />
           <p>projects go here</p>
         </div>
       );
-    } else if (this.state.notFound) {
+    } else if (notFound) {
       return <NotFound />;
     }
     return (<Loading />);

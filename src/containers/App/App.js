@@ -44,7 +44,8 @@ export default class App extends React.Component {
         {
           fetchLinks: [
             'case_study.title',
-            // 'case_study.description'
+            'case_study.description',
+            'case_study.deliverables',
           ],
         },
       ).then((doc) => {
@@ -59,7 +60,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.doc) {
+    const { doc, notFound } = this.state;
+
+    if (doc) {
       return (
         <Router>
           <React.Fragment>
@@ -72,7 +75,7 @@ export default class App extends React.Component {
                   <CaseStudy
                     {...routeProps}
                     prismicCtx={this.props.prismicCtx}
-                    doc={this.state.doc}
+                    caseStudiesList={doc.data.case_study_list}
                   />
                 )}
               />
@@ -81,9 +84,9 @@ export default class App extends React.Component {
                 Path="/"
                 render={() => (
                   <React.Fragment>
-                    <Intro doc={this.state.doc} />
+                    <Intro doc={doc} />
                     <CaseStudyIndex
-                      doc={this.state.doc}
+                      caseStudiesList={doc.data.case_study_list}
                       prismicCtx={this.props.prismicCtx}
                     />
                   </React.Fragment>
@@ -93,7 +96,7 @@ export default class App extends React.Component {
           </React.Fragment>
         </Router>
       );
-    } else if (this.state.notFound) {
+    } else if (notFound) {
       return <NotFound />;
     }
     return <Loading />;
