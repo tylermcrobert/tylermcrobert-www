@@ -76,13 +76,14 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
               activeTags={activeTags}
             />
           </VerticalText>
-
-          <WrappedComponent
-            {...this.props}
-            currentUID={currentUID}
-            handleHoveredCaseStudy={this.handleHoveredCaseStudy}
-            isFloating={isFloating}
-          />
+          <div className="caseStudyWrapper">
+            <WrappedComponent
+              {...this.props}
+              currentUID={currentUID}
+              handleHoveredCaseStudy={this.handleHoveredCaseStudy}
+              isFloating={isFloating}
+            />
+          </div>
         </div>
       );
     }
