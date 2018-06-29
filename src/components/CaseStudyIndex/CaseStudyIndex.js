@@ -22,9 +22,11 @@ const CaseStudyIndex = (props) => {
       cursor: pointer;
       padding: .38198em 0;
       text-align:center;
+      transition: 1s color 4.50s ease;
 
       &:hover {
         color: #f6f6f6;
+        transition:  color .25s ease;
       }
     `;
 
