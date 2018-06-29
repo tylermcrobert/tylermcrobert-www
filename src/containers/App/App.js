@@ -5,7 +5,9 @@ import {
   Switch,
   // Redirect,
 } from 'react-router-dom';
-import Intro from '../../components/Intro/Intro';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+// import Intro from '../../components/Intro/Intro';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
 import CaseStudyIndex from '../../components/CaseStudyIndex/CaseStudyIndex';
@@ -16,6 +18,7 @@ import Nav from '../../components/Nav/Nav';
 import '../../styles/reset.css';
 import '../../styles/typography.css';
 import '../../styles/main.css';
+import '../../styles/animations.css';
 
 
 export default class App extends React.Component {
@@ -62,39 +65,47 @@ export default class App extends React.Component {
 
   render() {
     const { doc, notFound } = this.state;
-
     if (doc) {
       return (
         <Router>
-          <React.Fragment>
-            <Nav />
-            <Switch>
-              <Route
-                exact
-                path="/:caseStudyUID"
-                render={routeProps => (
-                  <CaseStudy
-                    {...routeProps}
-                    prismicCtx={this.props.prismicCtx}
-                    caseStudiesList={doc.data.case_study_list}
-                  />
-                )}
-              />
-              <Route
-                exact
-                Path="/"
-                render={() => (
-                  <React.Fragment>
-                    <Intro doc={doc} />
-                    <CaseStudyIndex
-                      caseStudiesList={doc.data.case_study_list}
-                      prismicCtx={this.props.prismicCtx}
-                    />
-                  </React.Fragment>
-                )}
-              />
-            </Switch>
-          </React.Fragment>
+          <Route
+            render={({ location }) => (
+              <React.Fragment>
+                <Nav />
+                <TransitionGroup className="main transitionGroup">
+                  <CSSTransition
+                    key={location.key}
+                    classNames="fade"
+                    timeout={250}
+                  >
+                    <Switch location={location}>
+                      <Route
+                        exact
+                        path="/:caseStudyUID"
+                        render={routeProps => (
+                          <CaseStudy
+                            {...routeProps}
+                            prismicCtx={this.props.prismicCtx}
+                            caseStudiesList={doc.data.case_study_list}
+                          />
+                        )}
+                      />
+                      <Route
+                        exact
+                        Path="/"
+                        render={() => (
+                          <CaseStudyIndex
+                            caseStudiesList={doc.data.case_study_list}
+                            prismicCtx={this.props.prismicCtx}
+                          />
+                        )}
+                      />
+                    </Switch>
+                  </CSSTransition>
+                </TransitionGroup>
+              </React.Fragment>
+            )}
+          />
         </Router>
       );
     } else if (notFound) {

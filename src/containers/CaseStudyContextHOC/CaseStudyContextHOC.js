@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import Tags from '../../components/Tags/Tags';
 import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
 import VerticalText from '../../components/VerticalText/VerticalText';
@@ -53,9 +52,6 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
   }
 
   render() {
-    const CaseStudyContextWrapper = styled.div`
-      position: relative;
-    `;
     const {
       currentIndex,
       indexLength,
@@ -67,9 +63,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
 
     if (!isFloating) {
       return (
-        <CaseStudyContextWrapper
-          className="CaseStudyContextWrapper"
-        >
+        <div className="CsCtxWrapper">
           <VerticalText right>
             <IndexIndicator
               currentIndex={currentIndex}
@@ -89,7 +83,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
             handleHoveredCaseStudy={this.handleHoveredCaseStudy}
             isFloating={isFloating}
           />
-        </CaseStudyContextWrapper>
+        </div>
       );
     }
 

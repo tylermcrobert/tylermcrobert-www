@@ -1,0 +1,48 @@
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translate3d(0, .5em, 0)
+  }
+  to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0)
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+      opacity: 0;
+      transform: translate3d(0, -.5em, 0)
+  }
+  to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0)
+  }
+}
+
+.fade-enter.fade-enter-active {
+  display:none;
+}
+
+.fade-exit-active .caseStudyIndex__list, .fade-exit-active .caseStudy{
+  opacity: 0;
+  transform: scale(.95) translate3d(0, .5em, 0);
+  transition: all 250ms cubic-bezier(0,.75,.25,1);
+}
+
+/* Fade enter done */
+
+.fade-enter-done .caseStudyIndex__list{
+  opacity: 1;
+  transition: all 3750ms cubic-bezier(0,.75,.25,1);
+}
+
+.fade-enter-active .caseStudyIntro__title{
+  opacity: 0;
+}
+.fade-enter-done .caseStudyIntro__title{
+  animation: fadeInUp .75s cubic-bezier(0,.75,.25,1);
+}
+.fade-enter-done .caseStudyIntro__info{
+  animation: fadeInDown .75s cubic-bezier(0,.75,.25,1);
+}

@@ -5,7 +5,7 @@ const IndexIndicator = (props) => {
   const { currentIndex, indexLength } = props;
   const Index = styled.p`
       margin auto 10px;
-      color: black;
+      color: #f6f6f6;
   `;
 
   return (

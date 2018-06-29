@@ -1,6 +1,6 @@
 body {
-  background: #FFF;
-  color: black;
+  background: #111;
+  color: #f6f6f6;
   font-family: helvetica, arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -28,12 +28,12 @@ body {
 }
 
 a {
-  color: black;
+  color: #f6f6f6;
   text-decoration: none;
 }
 
 p {
-  color: #a5a5a5;
+  color: #6a6a6a;
   font-size: 1em;
   line-height: 1.5;
   margin: 1em 0;
@@ -44,20 +44,20 @@ p.small {
 }
 
 h3 {
-  color: #a5a5a5;
+  color: #f6f6f6;
   font-size: 1.25em;
   line-height: 1.25;
 }
 
 h2 {
-  color: #000;
+  color: #f6f6f6;
   font-size: 1.618em;
   font-weight: 400;
   line-height: 1.25;
 }
 
 h1 {
-  color: #000;
+  color: #f6f6f6;
   font-size: 2.023em;
   font-weight: 400;
   line-height: 1.25;

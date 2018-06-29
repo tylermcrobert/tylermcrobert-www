@@ -18,13 +18,13 @@ const CaseStudyIndex = (props) => {
     const { uid, data: { title } } = caseStudies.case_study_item;
 
     const CaseStudyTitle = styled.h2`
-      color: #a5a5a5;
+      color: #6a6a6a;
       cursor: pointer;
       padding: .38198em 0;
       text-align:center;
 
       &:hover {
-        color: black;
+        color: #f6f6f6;
       }
     `;
 

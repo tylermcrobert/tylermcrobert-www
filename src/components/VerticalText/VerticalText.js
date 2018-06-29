@@ -24,6 +24,7 @@ const VerticalText = styled.div`
 
   p, li {
     line-height: .81em;
+    font-size: .81em;
   }
 `;
 

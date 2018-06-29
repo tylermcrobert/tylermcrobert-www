@@ -9,7 +9,7 @@ const Tags = (props) => {
       display: inline-block;
       margin: auto 1em;
       font-size: .81em;
-      color: ${_tagShouldHighlight ? 'black' : '#a5a5a5'}
+      color: ${_tagShouldHighlight ? '#f6f6f6' : '#6a6a6a'}
     `;
 
     return (
