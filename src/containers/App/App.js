@@ -15,6 +15,7 @@ import Nav from '../../components/Nav/Nav';
 
 import '../../styles/reset.css';
 import '../../styles/typography.css';
+import '../../styles/main.css';
 
 
 export default class App extends React.Component {
