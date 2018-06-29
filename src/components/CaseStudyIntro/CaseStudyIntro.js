@@ -1,9 +1,41 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const CaseStudyIntro = (props) => {
   const { title, deliverables, description } = props.data;
+  const fadeInUp = keyframes`
+    from {
+        opacity: 0;
+        transform: translate3d(0, .5em, 0)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+  `;
+  const fadeInDown = keyframes`
+    from {
+        opacity: 0;
+        transform: translate3d(0, -.5em, 0)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+  `;
+
+  const grow = keyframes`
+    from {
+        transform: scale(.95);
+    }
+
+    to {
+        transform: scale(1);
+    }
+  `;
 
   const CaseStudyIntroWrapper = styled.div`
     min-height: 100vh;
@@ -11,6 +43,7 @@ const CaseStudyIntro = (props) => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    animation: ${grow} .75s cubic-bezier(0,.75,.25,1);
 
     .caseStudyIntro__title{
       flex:1;
@@ -19,12 +52,16 @@ const CaseStudyIntro = (props) => {
       align-items: center;
       text-align: center;
       font-size: calc(2.023em + 1vw);
+      animation: ${fadeInUp} .75s cubic-bezier(0,.75,.25,1);
     }
 
     .caseStudyIntro__info {
+      flex: 0;
+      margin-bottom: 4em;
       display: flex;
-      text-align: left;
+      margin: 0 -1em 2.61792em;
       max-width: 48em;
+      animation: ${fadeInDown} 1s ease;
 
       &__deliverables, &__description {
         margin: 0 1em;
