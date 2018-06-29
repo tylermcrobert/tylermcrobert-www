@@ -3,16 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Tags = (props) => {
-  const TagWrapper = styled.ul`
-    position: absolute;
-    left: calc(-50vh + 1.5em);
-    top: calc(50vh - 1em);
-    display: inline-block;
-    transform: rotate(270deg);
-    width: 100vh;
-    text-align: center;
-  `;
-
   const tagList = props.tagList.map((tagName) => {
     const _tagShouldHighlight = props.activeTags.indexOf(tagName) !== -1;
     const Tag = styled.li`
@@ -28,9 +18,7 @@ const Tags = (props) => {
   });
 
   return (
-    <TagWrapper className="tagIndicator">
-      {tagList}
-    </TagWrapper>
+    <ul>{ tagList }</ul>
   );
 };
 

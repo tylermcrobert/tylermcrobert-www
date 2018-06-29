@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Tags from '../../components/Tags/Tags';
 import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
+import VerticalText from '../../components/VerticalText/VerticalText';
 
 const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends Component {
   state = {
@@ -69,14 +70,19 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
         <CaseStudyContextWrapper
           className="CaseStudyContextWrapper"
         >
-          <IndexIndicator
-            currentIndex={currentIndex}
-            indexLength={indexLength}
-          />
-          <Tags
-            tagList={contextTags}
-            activeTags={activeTags}
-          />
+          <VerticalText right>
+            <IndexIndicator
+              currentIndex={currentIndex}
+              indexLength={indexLength}
+            />
+          </VerticalText>
+          <VerticalText >
+            <Tags
+              tagList={contextTags}
+              activeTags={activeTags}
+            />
+          </VerticalText>
+
           <WrappedComponent
             {...this.props}
             currentUID={currentUID}
