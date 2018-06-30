@@ -1,5 +1,6 @@
 import React from 'react';
 import CaseStudyIntro from '../../components/CaseStudyIntro/CaseStudyIntro';
+import CaseStudyBody from '../../components/CaseStudyBody/CaseStudyBody';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
 import CaseStudyContextHOC from '../CaseStudyContextHOC/CaseStudyContextHOC';
@@ -37,7 +38,7 @@ class CaseStudy extends React.Component {
       return (
         <div className="caseStudy">
           <CaseStudyIntro data={doc.data} />
-          <p>projects go here</p>
+          <CaseStudyBody blocks={doc.data.cs_content} />
         </div>
       );
     } else if (notFound) {
