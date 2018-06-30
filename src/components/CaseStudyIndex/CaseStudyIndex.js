@@ -3,16 +3,9 @@ import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 import { Link } from 'react-router-dom';
 import CaseStudyContextHOC from '../../containers/CaseStudyContextHOC/CaseStudyContextHOC';
+import './CaseStudyIndex.css';
 
 const CaseStudyIndex = (props) => {
-  const CaseStudyIndexWrapper = styled.div`
-    padding: 0 3em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
-  `;
-
   const csListData = props.caseStudiesList;
   const list = csListData.map((caseStudies) => {
     const { uid, data: { title } } = caseStudies.case_study_item;
@@ -30,7 +23,6 @@ const CaseStudyIndex = (props) => {
       }
     `;
 
-
     return (
       <Link to={uid} key={uid}>
         <li key={uid} onMouseEnter={() => props.handleHoveredCaseStudy(uid)}>
@@ -42,11 +34,11 @@ const CaseStudyIndex = (props) => {
     );
   });
   return (
-    <CaseStudyIndexWrapper className="caseStudyIndex">
+    <div className="caseStudyIndex">
       <ul className="caseStudyIndex__list">
         {list}
       </ul>
-    </CaseStudyIndexWrapper>
+    </div>
   );
 };
 

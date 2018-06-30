@@ -1,0 +1,67 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1em, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -1em, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(.97);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+
+$ease: cubic-bezier(0, .75, .25, 1);
+
+.fade-enter-active {
+  display: none;
+}
+
+.fade-enter-done {
+
+  .caseStudyIndex__list{
+    animation: scaleUp, fadeInUp 1.75s $ease;
+  }
+
+  .caseStudyIntro {
+    animation: scaleUp, fadeInUp 1.75s $ease;
+
+    &__title {
+      animation: fadeInUp 1.75s $ease;
+    }
+
+    &__info {
+      animation: fadeInDown 1.75s $ease;
+    }
+  }
+}
+
+.fade-exit-active {
+  .caseStudy,
+  .caseStudyIndex__list {
+    opacity: 0;
+    transform: translate3d(0, 1em, 0);
+    transition: all .25s $ease;
+  }
+}
