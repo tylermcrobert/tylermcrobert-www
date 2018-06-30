@@ -6,12 +6,19 @@ import Col from '../Col/Col';
 
 const WebsiteWrapper = styled.div`
   margin: 10%;
-  background: blue;
+`;
+const Video = styled.video`
+  width: 100%;
+  display:block;
 `;
 
 const Website = (props) => {
   const image = props.data.primary.browser_image;
-  const websiteContent = <Image src={image.url} alt={image.alt} />;
+  const media = props.data.primary.browser_media;
+
+  const websiteContent = (!media.url)
+    ? <Image src={image.url} alt={image.alt} />
+    : <Video autoPlay muted ><source src={media.url} type="video/mp4" /></Video>;
 
   return (
     <Row>
@@ -24,17 +31,3 @@ const Website = (props) => {
 };
 
 export default Website;
-
-/*
-
-const image = block.primary.browser_image;
-
-if (image.url) {
-  return (
-    <Row key={key}>
-      <Image src={image.url} alt={image.alt} key={image.url} />
-    </Row>
-  );
-}
-
-*/
