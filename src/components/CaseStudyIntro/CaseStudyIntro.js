@@ -11,6 +11,7 @@ const CaseStudyIntro = (props) => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0 3em;
 
     .caseStudyIntro__title{
       flex:1;
@@ -25,7 +26,7 @@ const CaseStudyIntro = (props) => {
       flex: 0;
       margin-bottom: 4em;
       display: flex;
-      margin: 0 -1em 2.61792em;
+      margin: 0 0 2.61792em;
       max-width: 48em;
 
       &__deliverables, &__description {
