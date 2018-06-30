@@ -50,7 +50,7 @@
   opacity: 0;
 }
 
-.fade-enter-done .caseStudy{
+.fade-enter-done .caseStudyIntro{
   animation: scaleUp 1.75s cubic-bezier(0,.75,.25,1);
 }
 .fade-enter-done .caseStudyIntro__title{
