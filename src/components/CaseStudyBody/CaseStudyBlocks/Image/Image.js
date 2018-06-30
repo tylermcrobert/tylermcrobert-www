@@ -7,8 +7,8 @@ const Img = styled.img`
   display: block;
   align-self: flex-start;
 `;
-const SingleImage = props => (
+const Image = props => (
   <Img src={props.src} alt={props.alt} />
 );
 
-export default SingleImage;
+export default Image;
