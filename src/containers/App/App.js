@@ -76,7 +76,7 @@ export default class App extends React.Component {
                   <CSSTransition
                     key={location.key}
                     classNames="fade"
-                    timeout={300}
+                    timeout={400}
                   >
                     <Switch location={location}>
                       <Route

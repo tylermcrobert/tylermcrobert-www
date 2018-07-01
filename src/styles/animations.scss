@@ -9,10 +9,60 @@
     transform: translate3d(0, 0, 0);
   }
 }
+
+
+@keyframes indexList {
+  from {
+    opacity: 0;
+    transform:  scale(.93);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes indexListOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    transform:  scale(.97);
+  }
+
+  100% {
+    opacity: 0;
+    transform:  scale(.97);
+  }
+}
+
+@keyframes caseStudyOut {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0em, 0);
+
+  }
+
+  50% {
+    transform: translate3d(0, 1em, 0);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 1em, 0);
+
+  }
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translate3d(0, -1em, 0);
+    transform: translate3d(0, -1.5em, 0);
   }
 
   to {
@@ -33,6 +83,7 @@
 
 
 $ease: cubic-bezier(0, .75, .25, 1);
+$ease-rev: cubic-bezier(.5, 0, 1, .5);
 
 .fade-enter-active {
   display: none;
@@ -41,27 +92,28 @@ $ease: cubic-bezier(0, .75, .25, 1);
 .fade-enter-done {
 
   .caseStudyIndex__list{
-    animation: scaleUp, fadeInUp 1.75s $ease;
+    animation: indexList 1000ms $ease;
   }
 
   .caseStudyIntro {
-    animation: scaleUp, fadeInUp 1.75s $ease;
+    animation: scaleUp 1000ms $ease;
 
     &__title {
-      animation: fadeInUp 1.75s $ease;
+      animation: fadeInUp 1000ms $ease;
     }
 
     &__info {
-      animation: fadeInDown 1.75s $ease;
+      animation: fadeInDown 1000ms $ease;
     }
   }
 }
 
 .fade-exit-active {
-  .caseStudy,
-  .caseStudyIndex__list {
-    opacity: 0;
-    transform: translate3d(0, 1em, 0);
-    transition: all .25s $ease;
+
+  .caseStudyIndex__list{
+    animation: indexListOut 400ms $ease-rev;
+  }
+  .caseStudy {
+    animation: caseStudyOut 400ms $ease-rev;
   }
 }
