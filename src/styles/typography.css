@@ -17,11 +17,11 @@ body {
 
 @media (min-width: 1200px) {
   body {
-    font-size: 21px;
+    font-size: 19px;
   }
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 1680px) {
   body {
     font-size: 22px;
   }
