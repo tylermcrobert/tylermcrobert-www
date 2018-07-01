@@ -57,7 +57,7 @@
   animation: indexList 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
 
 .fade-enter-done .caseStudyIntro {
-  animation: scaleUp 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
+  animation: scaleUp 10000ms cubic-bezier(0, 0.75, 0.25, 1); }
   .fade-enter-done .caseStudyIntro__title {
     animation: fadeInUp 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
   .fade-enter-done .caseStudyIntro__info {

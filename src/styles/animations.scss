@@ -96,7 +96,7 @@ $ease-rev: cubic-bezier(.5, 0, 1, .5);
   }
 
   .caseStudyIntro {
-    animation: scaleUp 1000ms $ease;
+    animation: scaleUp 10000ms $ease;
 
     &__title {
       animation: fadeInUp 1000ms $ease;
