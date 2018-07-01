@@ -1,7 +1,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 1em, 0); }
+    transform: translate3d(0, 0.5em, 0); }
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0); } }
@@ -30,11 +30,11 @@
     opacity: 1;
     transform: translate3d(0, 0em, 0); }
   50% {
-    transform: translate3d(0, 1em, 0);
+    transform: translate3d(0, 0.5em, 0);
     opacity: 0; }
   100% {
     opacity: 0;
-    transform: translate3d(0, 1em, 0); } }
+    transform: translate3d(0, 0.5em, 0); } }
 
 @keyframes fadeInDown {
   from {
