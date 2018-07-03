@@ -43,18 +43,18 @@ const CaseStudyIndex = (props) => {
         <Trail
           native
           impl={TimingAnimation}
-          config={{ duration: 1200, easing: Easing.bezier(0, 0.75, 0.25, 1) }}
-          from={{ opacity: 0, x: 0.9 }}
-          to={{ opacity: 1, x: 1 }}
+          config={{ duration: 900, easing: Easing.bezier(0, 0.75, 0.25, 1) }}
+          from={{ opacity: 0, scale: 0.9 }}
+          to={{ opacity: 1, scale: 1 }}
           keys={list}
         >
-          {list.map(item => ({ x, opacity }) => (
+          {list.map(item => ({ scale, opacity }) => (
             <animated.div
               className="box"
               onClick={this.toggle}
               style={{
                 opacity,
-                transform: x.interpolate(x => `scale(${x})`),
+                transform: scale.interpolate(s => `scale(${s})`),
               }}
             >
               {item}
