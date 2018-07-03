@@ -89,7 +89,7 @@ $ease-rev: cubic-bezier(.5, 0, 1, .5);
   display: none;
 }
 
-.fade-enter-done {
+.CsCtxWrapper:not(.fade-exit) {
 
   .caseStudyIndex__list{
     animation: indexList 1000ms $ease;

@@ -14,6 +14,14 @@
     opacity: 1;
     transform: scale(1); } }
 
+@keyframes indexListItem {
+  from {
+    transform: scale(0.57);
+    opacity: 0; }
+  to {
+    transform: scale(1);
+    opacity: 1; } }
+
 @keyframes indexListOut {
   0% {
     transform: scale(1);
@@ -53,14 +61,18 @@
 .fade-enter-active {
   display: none; }
 
-.fade-enter-done .caseStudyIndex__list {
+.CsCtxWrapper:not(.fade-exit) .caseStudyIndex__list {
   animation: indexList 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
 
-.fade-enter-done .caseStudyIntro {
+.CsCtxWrapper:not(.fade-exit) .caseStudyIndex__list__item {
+  color: blue;
+  transition: all 4s; }
+
+.CsCtxWrapper:not(.fade-exit) .caseStudyIntro {
   animation: scaleUp 10000ms cubic-bezier(0, 0.75, 0.25, 1); }
-  .fade-enter-done .caseStudyIntro__title {
+  .CsCtxWrapper:not(.fade-exit) .caseStudyIntro__title {
     animation: fadeInUp 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
-  .fade-enter-done .caseStudyIntro__info {
+  .CsCtxWrapper:not(.fade-exit) .caseStudyIntro__info {
     animation: fadeInDown 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
 
 .fade-exit-active .caseStudyIndex__list {
