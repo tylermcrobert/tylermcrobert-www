@@ -43,12 +43,18 @@ const CaseStudyTitle = styled.h2`
   cursor: pointer;
   padding: .38198em 0;
   text-align:center;
-  transition: 1s color 4.50s ease;
+  transition: color .8s ease;
+
+  &:hover{
+    transition: color .3s ease;
+    color:#f6f6f6!important;
+  }
 `;
 
 const config = {
   ease: easing.circOut,
   duration: 1200,
+  get delay() { return this.duration * 0.15; },
 };
 
 const IndexAnimation = {
