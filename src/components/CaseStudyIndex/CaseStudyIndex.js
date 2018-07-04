@@ -54,7 +54,7 @@ const config = {
 const IndexAnimation = {
   enter: {
     scale: 0.9999,
-    staggerChildren: (config.duration / 25),
+    staggerChildren: (config.duration / 20),
     opacity: 1,
     transition: {
       ...config,
