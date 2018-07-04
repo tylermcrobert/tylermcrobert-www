@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 import { Link } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
+import { easing } from 'popmotion';
 import CaseStudyContextHOC from '../../containers/CaseStudyContextHOC/CaseStudyContextHOC';
 
 const CaseStudyIndex = (props) => {
@@ -45,34 +46,44 @@ const CaseStudyTitle = styled.h2`
   transition: 1s color 4.50s ease;
 `;
 
-const PosedIndexConfig = {
+const config = {
+  ease: easing.circOut,
+  duration: 1200,
+};
+
+const IndexAnimation = {
   enter: {
-    scale: 1,
+    scale: 0.9999,
+    staggerChildren: (config.duration / 25),
     opacity: 1,
-    staggerChildren: 75,
-    transition: { delay: 150, duration: 600 },
+    transition: {
+      ...config,
+    },
   },
   exit: {
-    scale: 0.97,
     opacity: 0,
-    staggerChildren: 100,
-    transition: { delay: 300, duration: 600 },
+    scale: 0.9,
+    staggerChildren: 0,
   },
 };
 
 const PosedListItemConfig = {
   enter: {
-    ...PosedIndexConfig.enter,
     scale: 0.9999,
-    transition: { delay: 0, duration: 1000 },
-
+    opacity: 1,
+    transition: {
+      ...config,
+      duration: config.duration * 0.75,
+    },
   },
   exit: {
-    ...PosedIndexConfig.exit,
+    opacity: 0,
     scale: 0.8,
   },
 };
 
+console.log(PosedListItemConfig);
+
 export default CaseStudyContextHOC(CaseStudyIndex);
-const PosedIndex = posed(CaseStudyIndexWrapper)(PosedIndexConfig);
+const PosedIndex = posed(CaseStudyIndexWrapper)(IndexAnimation);
 const PosedListItem = posed.li(PosedListItemConfig);
