@@ -1,11 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import songData from './songData.json';
+
+const NowPlayingWrapper = styled.div`
+  display: flex;
+`;
 
 export default class NowPlaying extends React.Component {
   state = {
     loaded: false,
   }
   componentDidMount() {
+    this.setNowPlaying();
+  }
+
+  setNowPlaying = () => {
     const api = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=${process.env.REACT_APP_LAST_FM_KEY}&format=json`;
     window.fetch(api)
       .then(data => data.json())
@@ -19,7 +28,7 @@ export default class NowPlaying extends React.Component {
           if (artistMatch) {
             const albumMatch = (artistMatch.albums) // returns album object or null
               ? artistMatch.albums.find(item => (
-                !item.exact // handle remasters / anniversaries / deluxe
+                (!item.exact) // handle remasters / anniversaries / deluxe
                   ? album.startsWith(item.title)
                   : item.title === album
               ))
@@ -32,21 +41,45 @@ export default class NowPlaying extends React.Component {
         this.setState({
           artist, song, emoji, loaded: true,
         });
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.error(err); // eslint-disable-line no-console
         this.setState({ notFound: true });
       });
   }
+
+  handleCollapse = () => {
+    this.setState({ collapsed: !this.state.collapsed });
+  }
+
   render() {
     const {
-      loaded, emoji, song, artist, notFound,
+      loaded,
+      emoji,
+      song,
+      artist,
+      notFound,
     } = this.state;
 
     if (loaded) {
-      return <span>{emoji} {song} — {artist}</span>;
+      return (
+        <NowPlayingWrapper onClick={this.handleCollapse} className="NowPlaying">
+          <div
+            className="nowPlaying__icon"
+          >
+            {emoji}
+          </div>
+          <div
+            className="nowPlaying__content"
+            ref={this.songInfo}
+          >
+            {song} — {artist}
+          </div>
+        </NowPlayingWrapper>
+      );
     }
-    if (notFound !== true) {
-      return 'loading';
+    if (!notFound) {
+      return <div>{emoji}</div>;
     }
     return null;
   }
