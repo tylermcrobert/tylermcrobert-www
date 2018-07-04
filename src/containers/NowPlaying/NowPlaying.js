@@ -1,7 +1,6 @@
 import React from 'react';
 import songData from './songData.json';
 
-
 export default class NowPlaying extends React.Component {
   state = {
     loaded: false,
@@ -18,11 +17,13 @@ export default class NowPlaying extends React.Component {
         const emoji = (() => {
           const artistMatch = songData.artists.find(item => item.name === artist);
           if (artistMatch) {
-            const albumMatch = artistMatch.albums.find(item => (
-              !item.exact // handle remasters / anniversaries / deluxe
-                ? album.startsWith(item.title)
-                : item.title === album
-            ));
+            const albumMatch = (artistMatch.albums) // returns album object or null
+              ? artistMatch.albums.find(item => (
+                !item.exact // handle remasters / anniversaries / deluxe
+                  ? album.startsWith(item.title)
+                  : item.title === album
+              ))
+              : null;
             return albumMatch ? albumMatch.emoji : artistMatch.emoji;
           }
           return null;
@@ -31,7 +32,8 @@ export default class NowPlaying extends React.Component {
         this.setState({
           artist, song, emoji, loaded: true,
         });
-      }).catch(() => {
+      }).catch((err) => {
+        console.error(err); // eslint-disable-line no-console
         this.setState({ notFound: true });
       });
   }
@@ -41,7 +43,7 @@ export default class NowPlaying extends React.Component {
     } = this.state;
 
     if (loaded) {
-      return `${emoji} ${song} — ${artist}`;
+      return <span>{emoji} {song} — {artist}</span>;
     }
     if (notFound !== true) {
       return 'loading';
