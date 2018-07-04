@@ -37,6 +37,7 @@ const CaseStudyIndex = (props) => {
       </li>
     );
   });
+
   return (
     <div className="caseStudyIndex">
       <ul className="caseStudyIndex__list">
@@ -46,7 +47,7 @@ const CaseStudyIndex = (props) => {
           config={{ duration: 900, easing: Easing.bezier(0, 0.75, 0.25, 1) }}
           from={{ opacity: 0, scale: 0.9 }}
           to={{ opacity: 1, scale: 1 }}
-          keys={list}
+          keys={list.map(listItem => listItem.props.children.key)}
         >
           {list.map(item => ({ scale, opacity }) => (
             <animated.div
