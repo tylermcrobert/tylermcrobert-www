@@ -3,6 +3,8 @@ import Tags from '../../components/Tags/Tags';
 import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
 import VerticalText from '../../components/VerticalText/VerticalText';
 
+const MOBILE_WIDTH = 414;
+
 const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends Component {
   state = {
     currentUID: null,
@@ -48,7 +50,10 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
   }
 
   handleHoveredCaseStudy = (hoveredCaseStudyUID) => {
-    this.getCaseStudyContext(hoveredCaseStudyUID);
+    const isMobile = window.matchMedia(`(min-width:${MOBILE_WIDTH})`).matches === true;
+    if (isMobile) {
+      this.getCaseStudyContext(hoveredCaseStudyUID);
+    }
   }
 
   render() {
@@ -64,13 +69,13 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
     if (!isFloating) {
       return (
         <div className="CsCtxWrapper">
-          <VerticalText right>
+          <VerticalText right maxWidth={MOBILE_WIDTH}>
             <IndexIndicator
               currentIndex={currentIndex}
               indexLength={indexLength}
             />
           </VerticalText>
-          <VerticalText >
+          <VerticalText maxWidth={MOBILE_WIDTH} >
             <Tags
               tagList={contextTags}
               activeTags={activeTags}

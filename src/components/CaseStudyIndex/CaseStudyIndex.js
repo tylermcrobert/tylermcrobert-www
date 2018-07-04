@@ -10,8 +10,8 @@ const CaseStudyIndex = (props) => {
   const list = props.caseStudiesList.map((caseStudies) => {
     const { uid, data: { title } } = caseStudies.case_study_item;
     return (
-      <PosedListItem onMouseEnter={() => props.handleHoveredCaseStudy(uid)} key={uid}>
-        <Link to={uid}>
+      <PosedListItem key={uid}>
+        <Link to={uid} onMouseEnter={() => props.handleHoveredCaseStudy(uid)}>
           <CaseStudyTitle slug={uid}>
             {RichText.asText(title)}
           </CaseStudyTitle>
@@ -52,9 +52,9 @@ const CaseStudyTitle = styled.h2`
 `;
 
 const config = {
-  ease: easing.circOut,
-  duration: 1200,
-  get delay() { return this.duration * 0.15; },
+  ease: easing.cubicBezier(0, 0.75, 0.5, 1),
+  duration: 1000,
+  get delay() { return this.duration * 0.25; },
 };
 
 const IndexAnimation = {
@@ -79,7 +79,7 @@ const PosedListItemConfig = {
     opacity: 1,
     transition: {
       ...config,
-      duration: config.duration * 0.75,
+      duration: config.duration * 0.9,
     },
   },
   exit: {
@@ -87,8 +87,6 @@ const PosedListItemConfig = {
     scale: 0.8,
   },
 };
-
-console.log(PosedListItemConfig);
 
 export default CaseStudyContextHOC(CaseStudyIndex);
 const PosedIndex = posed(CaseStudyIndexWrapper)(IndexAnimation);

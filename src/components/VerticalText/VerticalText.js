@@ -10,6 +10,10 @@ const VerticalText = styled.div`
   height: .81em;
   line-height: .81em;
 
+  @media (max-width: ${props => props.maxWidth}px){
+    display:none;
+  }
+
   ${props => (props.right
     ? `
       right: -50vh;
