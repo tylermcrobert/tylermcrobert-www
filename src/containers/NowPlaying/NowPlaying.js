@@ -14,6 +14,12 @@ export default class NowPlaying extends React.Component {
     this.setNowPlaying();
   }
 
+  componentDidUpdate() {
+    window.setTimeout(() => {
+      this.setNowPlaying();
+    }, 15000);
+  }
+
   setNowPlaying = () => {
     const api = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=${process.env.REACT_APP_LAST_FM_KEY}&format=json`;
     window.fetch(api)
