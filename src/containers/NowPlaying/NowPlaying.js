@@ -21,7 +21,7 @@ export default class NowPlaying extends React.Component {
   }
 
   setNowPlaying = () => {
-    const api = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=${process.env.REACT_APP_LAST_FM_KEY}&format=json`;
+    const api = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=1e87695de290cd017718696f211e84a4&format=json';
     window.fetch(api)
       .then(data => data.json())
       .then((json) => {
