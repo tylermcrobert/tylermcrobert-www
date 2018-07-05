@@ -51,7 +51,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
 
   handleHoveredCaseStudy = (hoveredCaseStudyUID) => {
     const isMobile = window.matchMedia(`(min-width:${MOBILE_WIDTH})`).matches === true;
-    if (isMobile) {
+    if (!isMobile) {
       this.getCaseStudyContext(hoveredCaseStudyUID);
     }
   }
