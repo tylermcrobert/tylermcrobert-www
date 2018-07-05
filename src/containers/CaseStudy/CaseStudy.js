@@ -16,10 +16,6 @@ class CaseStudy extends React.Component {
     window.scrollTo(0, 0);
   }
 
-  componentWillReceiveProps(props) {
-    this.fetchPage(props);
-  }
-
   fetchPage(props) {
     const { caseStudyUID } = props.match.params;
     props.prismicCtx.api.getByUID('case_study', caseStudyUID).then((doc) => {

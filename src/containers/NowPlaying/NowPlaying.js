@@ -4,13 +4,10 @@ import posed from 'react-pose';
 import songData from './songData.json';
 import VinylIcon from './VinylIcon';
 
-const MOBILE_WIDTH = 599;
-
 export default class NowPlaying extends React.Component {
   constructor(props) {
     super(props);
     this.songInfo = React.createRef();
-    this.setState({ isMobile: window.matchMedia(`(min-width:${MOBILE_WIDTH})`).matches === true });
   }
 
   state = {
