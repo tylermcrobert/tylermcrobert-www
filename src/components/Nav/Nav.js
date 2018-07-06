@@ -40,7 +40,7 @@ export default class Nav extends React.Component {
 
 
 const NavWrapper = styled.nav`
-  transition: all 400ms ease;
+  transition: all 500ms ease;
   position:fixed;
   z-index: 10;
   display: flex;
@@ -59,13 +59,20 @@ const NavWrapper = styled.nav`
 `;
 
 const NavItem = styled.div`
-  transition: 400ms all ease;
+  transition: 500ms all ease;
   margin: .61805em .5em;
   white-space: nowrap;
-  opacity: ${params => (params.nowPlayingIsOpen ? 0 : 1)};
+
+  @media (max-width: 500px) {
+    opacity: ${params => (params.nowPlayingIsOpen ? 0 : 1)};
+  }
 
   &.logo{
     flex:1;
+
+    @media (max-width: 500px) {
+      transform: translateX(${params => (params.nowPlayingIsOpen ? 'calc( 100% - 1em )' : 0)});
+    }
   }
 
   &.nowPlaying{
