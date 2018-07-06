@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import posed from 'react-pose';
 import songData from './songData.json';
 import VinylIcon from './VinylIcon';
 
@@ -12,9 +11,6 @@ export default class NowPlaying extends React.Component {
 
   state = {
     loaded: false,
-    wordWidth: 0,
-    isCollapsed: true,
-    isMobile: false,
   }
   componentDidMount() {
     this.setNowPlaying();
@@ -59,37 +55,32 @@ export default class NowPlaying extends React.Component {
     });
   }
 
-
-  handleCollapse = () => {
-    this.setState({
-      isCollapsed: !this.state.isCollapsed,
-      wordWidth: this.songInfo.current.getBoundingClientRect().width,
-    });
-  }
-
   render() {
     const {
-      loaded, emoji, song, artist, notFound, isCollapsed, wordWidth, isMobile,
+      loaded,
+      emoji,
+      song,
+      artist,
+      notFound,
     } = this.state;
+    const { nowPlayingIsOpen } = this.props;
 
     if (loaded) {
       return (
-        <NowPlayingWrapper onClick={this.handleCollapse} className="NowPlaying">
+        <NowPlayingWrapper
+          onClick={this.props.handleCollapse}
+          className="NowPlaying"
+        >
           <div className="nowPlaying__icon">
             { emoji || <VinylIcon /> }
           </div>
-          <PosedSongInfo
-            isCollapsed={isCollapsed}
-            isMobile={isMobile}
-            wordWidth={wordWidth}
-            pose={isCollapsed ? 'closed' : 'open'}
-          >
+          <SongInfo nowPlayingIsOpen={nowPlayingIsOpen}>
             <span ref={this.songInfo}>
               {song}
                 —
               {artist}
             </span>
-          </PosedSongInfo>
+          </SongInfo>
         </NowPlayingWrapper>);
     }
     if (!notFound) {
@@ -102,31 +93,14 @@ const NowPlayingWrapper = styled.div`display: flex;`;
 
 const SongInfo = styled.div`
   overflow:hidden;
-  padding-left: ${props => (props.isCollapsed ? '0em' : '1em')};
+  transition: 400ms all linear;
+
+
 
   span {
     overflow: hidden;
     text-overflow: ellipsis;
-    display ${props => (props.isCollapsed ? 'auto' : 'block')};
+    display: block;
+    padding-left: 0.61805em;
   }
 `;
-
-const slideOpenAnimation = {
-  open: {
-    opacity: 1,
-    width: ({ wordWidth, isMobile }) => {
-      const MAX_WIDTH = 500;
-      const containerWidth = wordWidth > MAX_WIDTH ? MAX_WIDTH : wordWidth;
-      if (!isMobile) {
-        return ((containerWidth < 0) ? 0 : containerWidth);
-      }
-      return window.innerWidth;
-    },
-  },
-  closed: {
-    opacity: 0,
-    width: 0,
-  },
-};
-
-const PosedSongInfo = posed(SongInfo)(slideOpenAnimation);
