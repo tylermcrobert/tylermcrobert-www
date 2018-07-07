@@ -11,6 +11,7 @@ export default class NowPlaying extends React.Component {
 
   state = {
     loaded: false,
+    containerWidth: 330,
   }
   componentDidMount() {
     this.setNowPlaying();
@@ -63,18 +64,21 @@ export default class NowPlaying extends React.Component {
       artist,
       notFound,
     } = this.state;
-    const { nowPlayingIsOpen } = this.props;
+    const { nowPlayingIsOpen, containerWidth } = this.props;
 
     if (loaded) {
       return (
         <NowPlayingWrapper
           onClick={this.props.handleCollapse}
-          className="NowPlaying"
+          nowPlayingIsOpen={nowPlayingIsOpen}
         >
           <div className="nowPlaying__icon">
             { emoji || <VinylIcon /> }
           </div>
-          <SongInfo nowPlayingIsOpen={nowPlayingIsOpen}>
+          <SongInfo
+            nowPlayingIsOpen={nowPlayingIsOpen}
+            containerWidth={containerWidth}
+          >
             <span ref={this.songInfo}>
               {song}
                 —
@@ -89,12 +93,16 @@ export default class NowPlaying extends React.Component {
     return null;
   }
 }
-const NowPlayingWrapper = styled.div`display: flex;`;
+const NowPlayingWrapper = styled.div`
+  display: flex;
+  transition: 400ms all ease;
+  `;
 
 const SongInfo = styled.div`
   overflow:hidden;
-  transition: 400ms all linear;
-
+  transition: 400ms all ease;
+  /* Hide song info when collapsed */
+  opacity: ${props => (props.nowPlayingIsOpen ? '1' : '0')}
 
 
   span {
@@ -102,5 +110,10 @@ const SongInfo = styled.div`
     text-overflow: ellipsis;
     display: block;
     padding-left: 0.61805em;
+    width: calc(100vh - 2em);
+
+    @media (min-width: 599px) {
+      width: ${props => (props.containerWidth)};
+    }
   }
 `;

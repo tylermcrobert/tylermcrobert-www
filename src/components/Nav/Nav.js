@@ -40,7 +40,7 @@ export default class Nav extends React.Component {
 
 
 const NavWrapper = styled.nav`
-  transition: all 500ms ease;
+  transition: width 500ms ease, transform 500ms ease;
   position:fixed;
   z-index: 10;
   display: flex;
@@ -48,12 +48,12 @@ const NavWrapper = styled.nav`
   box-sizing: border-box;
   margin: 0 .5em;
 
-  @media (max-width: 500px) {
-    transform: translateX(${params => (params.nowPlayingIsOpen ? 'calc( -100% - 1em )' : 0)});
+  @media (max-width: 599px) {
+    transform: translateX(${params => (params.nowPlayingIsOpen ? 'calc( -100%)' : 0)});
   }
 
-  @media (min-width: 500px) {
-    width: ${params => (params.nowPlayingIsOpen ? 'calc( 100% - 15em)' : 'calc( 100% - 3em)')};
+  @media (min-width: 599px) {
+    width: ${params => (params.nowPlayingIsOpen ? 'calc( 100% - 20em)' : 'calc( 100% - 3em)')};
   }
 
 `;
@@ -63,7 +63,8 @@ const NavItem = styled.div`
   margin: .61805em .5em;
   white-space: nowrap;
 
-  @media (max-width: 500px) {
+  @media (max-width: 599px) {
+    /* fade out all other items on mobile */
     opacity: ${params => (params.nowPlayingIsOpen ? 0 : 1)};
   }
 
@@ -71,7 +72,8 @@ const NavItem = styled.div`
     flex:1;
 
     @media (max-width: 500px) {
-      transform: translateX(${params => (params.nowPlayingIsOpen ? 'calc( 100% - 1em )' : 0)});
+      /* depth effect for logo */
+      transform: translateX(${params => (params.nowPlayingIsOpen ? '50%' : 0)});
     }
   }
 
