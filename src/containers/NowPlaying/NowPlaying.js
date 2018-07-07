@@ -11,7 +11,6 @@ export default class NowPlaying extends React.Component {
 
   state = {
     loaded: false,
-    containerWidth: 330,
   }
   componentDidMount() {
     this.setNowPlaying();
@@ -68,10 +67,7 @@ export default class NowPlaying extends React.Component {
 
     if (loaded) {
       return (
-        <NowPlayingWrapper
-          onClick={this.props.handleCollapse}
-          nowPlayingIsOpen={nowPlayingIsOpen}
-        >
+        <React.Fragment >
           <div className="nowPlaying__icon">
             { emoji || <VinylIcon /> }
           </div>
@@ -85,7 +81,7 @@ export default class NowPlaying extends React.Component {
               {artist}
             </span>
           </SongInfo>
-        </NowPlayingWrapper>);
+        </React.Fragment>);
     }
     if (!notFound) {
       return <div><VinylIcon /></div>;
@@ -93,27 +89,24 @@ export default class NowPlaying extends React.Component {
     return null;
   }
 }
-const NowPlayingWrapper = styled.div`
-  display: flex;
-  transition: 400ms all ease;
-  `;
 
 const SongInfo = styled.div`
-  overflow:hidden;
-  transition: 400ms all ease;
-  /* Hide song info when collapsed */
-  opacity: ${props => (props.nowPlayingIsOpen ? '1' : '0')}
-
-
   span {
+    transition-duration: 500ms;
+    transition-property: opacity, margin-left, max-width;
+    transition-timing-function: ease;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    padding-left: 0.61805em;
-    width: calc(100vh - 2em);
+    margin-left: ${props => (props.nowPlayingIsOpen ? '1em' : '0')};
+    opacity: ${props => (props.nowPlayingIsOpen ? '1' : '0')};
 
     @media (min-width: 599px) {
-      width: ${props => (props.containerWidth)};
+      max-width: ${props => (props.nowPlayingIsOpen ? '300px' : '0')};
+    }
+
+    @media (max-width: 599px) {
+      max-width: calc( 100vw - 4.5em )
     }
   }
 `;

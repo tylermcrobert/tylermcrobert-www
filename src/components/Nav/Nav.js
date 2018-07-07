@@ -17,16 +17,20 @@ export default class Nav extends React.Component {
   render() {
     const { nowPlayingIsOpen, mobile } = this.state;
     return (
-      <NavWrapper nowPlayingIsOpen={nowPlayingIsOpen}>
+      <NavWrapper className="navWrapper" nowPlayingIsOpen={nowPlayingIsOpen}>
         <NavItem
           nowPlayingIsOpen={nowPlayingIsOpen}
           className="logo"
         ><Link to="/">Tyler McRobert</Link>
         </NavItem>
-        <NavItem nowPlayingIsOpen={nowPlayingIsOpen}>
+        <NavItem className="contact" nowPlayingIsOpen={nowPlayingIsOpen}>
           <a href="mailto:hello@tylermcrobert.com">Contact</a>
         </NavItem>
-        <NavItem className="nowPlaying">
+        <NavItem
+          className="nowPlaying"
+          onClick={this.handleCollapse}
+          nowPlayingIsOpen={nowPlayingIsOpen}
+        >
           <NowPlaying
             nowPlayingIsOpen={nowPlayingIsOpen}
             mobile={mobile}
@@ -44,42 +48,38 @@ const NavWrapper = styled.nav`
   position:fixed;
   z-index: 10;
   display: flex;
-  width: calc( 100% - 3em);
+  width: 100vw;
   box-sizing: border-box;
-  margin: 0 .5em;
 
   @media (max-width: 599px) {
-    transform: translateX(${params => (params.nowPlayingIsOpen ? 'calc( -100%)' : 0)});
+    width: 200vw;
+    transform: ${props => (props.nowPlayingIsOpen ? 'translateX(-100vw)' : '0')}
   }
-
-  @media (min-width: 599px) {
-    width: ${params => (params.nowPlayingIsOpen ? 'calc( 100% - 20em)' : 'calc( 100% - 3em)')};
-  }
-
 `;
 
 const NavItem = styled.div`
-  transition: 500ms all ease;
+  transition: 500ms opacity ease, 500ms width ease;
   margin: .61805em .5em;
   white-space: nowrap;
 
-  @media (max-width: 599px) {
-    /* fade out all other items on mobile */
-    opacity: ${params => (params.nowPlayingIsOpen ? 0 : 1)};
-  }
+  &:first-child{ margin-left: 1em;}
+  &:last-child{ margin-right: 1em;}
 
   &.logo{
     flex:1;
+  }
 
-    @media (max-width: 500px) {
-      /* depth effect for logo */
-      transform: translateX(${params => (params.nowPlayingIsOpen ? '50%' : 0)});
+  @media (max-width: 599px) {
+    :not(.nowPlaying) {
+      opacity: ${props => (props.nowPlayingIsOpen ? '0' : '1')};
     }
   }
 
   &.nowPlaying{
-    position:absolute;
-    right: -1em;
-    transform: translateX(100%);
+    display: flex;
+
+    @media (max-width: 599px) {
+      width: ${props => (props.nowPlayingIsOpen ? 'calc( 100vw - 2em )' : 'calc( 100vw + 1em )')};
+    }
   }
 `;
