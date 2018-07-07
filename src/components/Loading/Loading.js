@@ -23,11 +23,6 @@ const rotate360 = keyframes`
   }
 `;
 
-const Indicator = styled.h3`
-  font-weight: bold;
-  animation: ${rotate360} 0.75s linear infinite;
-`;
-
 const Loader = styled.div`
   display: flex;
   justify-content: center;
@@ -64,5 +59,9 @@ const Loader = styled.div`
       }
     }
   }
-
 `;
+
+// const Indicator = styled.h3`
+//   font-weight: bold;
+//   animation: ${rotate360} 0.75s linear infinite;
+// `;
