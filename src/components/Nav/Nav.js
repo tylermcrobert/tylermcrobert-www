@@ -44,7 +44,7 @@ export default class Nav extends React.Component {
 
 
 const NavWrapper = styled.nav`
-  transition: width 500ms ease, transform 500ms ease;
+  transition: transform 500ms ease;
   position:fixed;
   z-index: 10;
   display: flex;
