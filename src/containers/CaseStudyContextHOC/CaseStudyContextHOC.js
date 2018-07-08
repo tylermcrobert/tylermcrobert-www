@@ -8,6 +8,7 @@ const MOBILE_WIDTH = 599;
 const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends Component {
   state = {
     currentUID: null,
+    nextCaseStudy: null,
     caseStudiesList: this.props.caseStudiesList,
     isFloating: false,
     activeTags: [],
@@ -38,6 +39,9 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
       .filter(list => list.uid === currentUID)
       .map(csData => csData.tags)
       .reduce((fullArray, newArray) => fullArray.concat(newArray), []);
+    const nextCaseStudy = (currentIndex >= 0 && currentIndex < indexLength - 1)
+      ? caseStudiesList[currentIndex + 1].case_study_item
+      : caseStudiesList[0].case_study_item;
 
     this.setState({
       isFloating: currentIndex === -1,
@@ -45,6 +49,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
       contextTags,
       indexLength,
       currentUID,
+      nextCaseStudy,
       currentIndex,
     });
   }
@@ -63,6 +68,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
       contextTags,
       activeTags,
       currentUID,
+      nextCaseStudy,
       isFloating,
     } = this.state;
 
@@ -87,6 +93,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
               currentUID={currentUID}
               handleHoveredCaseStudy={this.handleHoveredCaseStudy}
               isFloating={isFloating}
+              nextCaseStudy={nextCaseStudy}
             />
           </div>
         </div>
@@ -94,7 +101,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
     }
 
     return (
-      <WrappedComponent {...this.props} isFloating={isFloating} />
+      <WrappedComponent {...this.props} nextCaseStudy={nextCaseStudy} isFloating={isFloating} />
     );
   }
 };
