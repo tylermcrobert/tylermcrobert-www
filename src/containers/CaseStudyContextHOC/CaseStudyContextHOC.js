@@ -3,7 +3,7 @@ import Tags from '../../components/Tags/Tags';
 import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
 import VerticalText from '../../components/VerticalText/VerticalText';
 
-const MOBILE_WIDTH = 414;
+const MOBILE_WIDTH = 599;
 
 const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends Component {
   state = {

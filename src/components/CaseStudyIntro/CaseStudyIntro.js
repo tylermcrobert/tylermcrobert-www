@@ -13,6 +13,10 @@ const CaseStudyIntro = (props) => {
     justify-content: center;
     padding: 0 3em;
 
+    @media (max-width: 599px) {
+      padding: 0 1em;
+    }
+
     .caseStudyIntro__title{
       flex:1;
       min-height: 400px;
@@ -29,6 +33,10 @@ const CaseStudyIntro = (props) => {
       margin: 0 0 2.61792em;
       max-width: 48em;
 
+      @media (max-width: 599px) {
+        flex-direction: column;
+      }
+
       &__deliverables, &__description {
         margin: 0 1em;
       }
@@ -40,6 +48,7 @@ const CaseStudyIntro = (props) => {
       &__deliverables {
         font-size: .81em;
         flex-basis: 30%;
+        margin-bottom:1em;
       }
     }
   `;
