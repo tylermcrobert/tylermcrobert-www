@@ -13,13 +13,21 @@ const CaseStudyIntro = (props) => {
     justify-content: center;
     padding: 0 3em;
 
-    .caseStudyIntro__title{
+    @media (max-width: 599px) {
+      padding: 0 1em;
+    }
+
+    .caseStudyIntro__title {
       flex:1;
       min-height: 400px;
       display: flex;
       align-items: center;
       text-align: center;
-      font-size: calc(2.023em + 1vw);
+      margin: 0 1em;
+
+      h1 {
+        font-size: calc(2.023em + 1vw);
+      }
     }
 
     .caseStudyIntro__info {
@@ -29,8 +37,16 @@ const CaseStudyIntro = (props) => {
       margin: 0 0 2.61792em;
       max-width: 48em;
 
+      @media (max-width: 599px) {
+        flex-direction: column;
+      }
+
       &__deliverables, &__description {
         margin: 0 1em;
+
+        p{
+          margin: 0;
+        }
       }
 
       &__description {
@@ -38,18 +54,22 @@ const CaseStudyIntro = (props) => {
       }
 
       &__deliverables {
-        font-size: .81em;
         flex-basis: 30%;
+        margin-bottom:1em;
+
+        p {
+          font-size: .81em;
+        }
       }
     }
   `;
 
   return (
     <CaseStudyIntroWrapper className="caseStudyIntro">
-      <h1 className="caseStudyIntro__title">{RichText.asText(title)}</h1>
+      <div className="caseStudyIntro__title"><h1>{RichText.asText(title)}</h1></div>
       <div className="caseStudyIntro__info">
-        <p className="caseStudyIntro__info__deliverables">{deliverables}</p>
-        <p className="caseStudyIntro__info__description">{RichText.asText(description)}</p>
+        <div className="caseStudyIntro__info__deliverables"><p>{deliverables}</p></div>
+        <div className="caseStudyIntro__info__description"><p>{RichText.asText(description)}</p></div>
       </div>
     </CaseStudyIntroWrapper>
   );

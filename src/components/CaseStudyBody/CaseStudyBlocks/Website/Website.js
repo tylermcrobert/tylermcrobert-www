@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import Image from '../Image/Image';
 import Row from '../Row/Row';
 import Col from '../Col/Col';
+import BrowserFrame from './BrowserFrame';
 
 const WebsiteWrapper = styled.div`
   margin: 10%;
+  border-radius: .25em;
+  overflow: hidden;
 `;
 const Video = styled.video`
   width: 100%;
@@ -18,12 +21,21 @@ const Website = (props) => {
 
   const websiteContent = (!media.url)
     ? <Image src={image.url} alt={image.alt} />
-    : <Video autoPlay muted ><source src={media.url} type="video/mp4" /></Video>;
-
+    : (
+      <Video playsinline autoPlay loop muted>
+        <source src={media.url} type="video/mp4" />
+      </Video>
+    );
+  const {
+    browser_frame_color: frameColor,
+    background_color: background,
+    button_color: buttonColor,
+  } = props.data.primary;
   return (
     <Row>
-      <Col>
+      <Col background={background}>
         <WebsiteWrapper>
+          <BrowserFrame frameColor={frameColor} buttonColor={buttonColor} />
           {websiteContent}
         </WebsiteWrapper>
       </Col>

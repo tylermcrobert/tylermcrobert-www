@@ -1,6 +1,7 @@
 import React from 'react';
 import CaseStudyIntro from '../../components/CaseStudyIntro/CaseStudyIntro';
 import CaseStudyBody from '../../components/CaseStudyBody/CaseStudyBody';
+import NextCaseStudy from '../../components/NextCaseStudy/NextCaseStudy';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
 import CaseStudyContextHOC from '../CaseStudyContextHOC/CaseStudyContextHOC';
@@ -14,10 +15,6 @@ class CaseStudy extends React.Component {
   componentDidMount() {
     this.fetchPage(this.props);
     window.scrollTo(0, 0);
-  }
-
-  componentWillReceiveProps(props) {
-    this.fetchPage(props);
   }
 
   fetchPage(props) {
@@ -39,6 +36,7 @@ class CaseStudy extends React.Component {
         <div className="caseStudy">
           <CaseStudyIntro data={doc.data} />
           <CaseStudyBody blocks={doc.data.cs_content} />
+          <NextCaseStudy nextCaseStudy={this.props.nextCaseStudy} />
         </div>
       );
     } else if (notFound) {

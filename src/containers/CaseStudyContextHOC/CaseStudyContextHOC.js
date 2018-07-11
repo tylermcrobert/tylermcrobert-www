@@ -3,9 +3,12 @@ import Tags from '../../components/Tags/Tags';
 import IndexIndicator from '../../components/IndexIndicator/IndexIndicator';
 import VerticalText from '../../components/VerticalText/VerticalText';
 
+const MOBILE_WIDTH = 599;
+
 const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends Component {
   state = {
     currentUID: null,
+    nextCaseStudy: null,
     caseStudiesList: this.props.caseStudiesList,
     isFloating: false,
     activeTags: [],
@@ -36,6 +39,9 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
       .filter(list => list.uid === currentUID)
       .map(csData => csData.tags)
       .reduce((fullArray, newArray) => fullArray.concat(newArray), []);
+    const nextCaseStudy = (currentIndex >= 0 && currentIndex < indexLength - 1)
+      ? caseStudiesList[currentIndex + 1].case_study_item
+      : caseStudiesList[0].case_study_item;
 
     this.setState({
       isFloating: currentIndex === -1,
@@ -43,12 +49,16 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
       contextTags,
       indexLength,
       currentUID,
+      nextCaseStudy,
       currentIndex,
     });
   }
 
   handleHoveredCaseStudy = (hoveredCaseStudyUID) => {
-    this.getCaseStudyContext(hoveredCaseStudyUID);
+    const isMobile = window.matchMedia(`(min-width:${MOBILE_WIDTH})`).matches === true;
+    if (!isMobile) {
+      this.getCaseStudyContext(hoveredCaseStudyUID);
+    }
   }
 
   render() {
@@ -58,19 +68,20 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
       contextTags,
       activeTags,
       currentUID,
+      nextCaseStudy,
       isFloating,
     } = this.state;
 
     if (!isFloating) {
       return (
         <div className="CsCtxWrapper">
-          <VerticalText right>
+          <VerticalText right maxWidth={MOBILE_WIDTH}>
             <IndexIndicator
               currentIndex={currentIndex}
               indexLength={indexLength}
             />
           </VerticalText>
-          <VerticalText >
+          <VerticalText maxWidth={MOBILE_WIDTH} >
             <Tags
               tagList={contextTags}
               activeTags={activeTags}
@@ -82,6 +93,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
               currentUID={currentUID}
               handleHoveredCaseStudy={this.handleHoveredCaseStudy}
               isFloating={isFloating}
+              nextCaseStudy={nextCaseStudy}
             />
           </div>
         </div>
@@ -89,7 +101,7 @@ const CaseStudyContextHOC = WrappedComponent => class CaseStudyContext extends C
     }
 
     return (
-      <WrappedComponent {...this.props} isFloating={isFloating} />
+      <WrappedComponent {...this.props} nextCaseStudy={nextCaseStudy} isFloating={isFloating} />
     );
   }
 };
