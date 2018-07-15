@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  // Redirect,
+  Redirect,
 } from 'react-router-dom';
 
 import Preview from '../Preview/Preview';
@@ -16,6 +16,12 @@ const PreviewRouter = props => (
         exact
         path="/preview"
         render={routeProps => <Preview {...routeProps} prismicCtx={props.prismicCtx} />}
+      />
+      <Route
+        path="/@:ctx"
+        render={({ match }) => (
+          <Redirect to={`/?=${match.params.ctx}`} />
+        )}
       />
       <Route
         path="/"
