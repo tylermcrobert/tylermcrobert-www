@@ -11,7 +11,10 @@ const CaseStudyIndex = (props) => {
     const { uid, data: { title } } = caseStudies.case_study_item;
     return (
       <PosedListItem key={uid}>
-        <Link to={uid} onMouseEnter={() => props.handleHoveredCaseStudy(uid)}>
+        <Link
+          to={{ pathname: uid, search: props.location.search }}
+          onMouseEnter={() => props.handleHoveredCaseStudy(uid)}
+        >
           <CaseStudyTitle slug={uid}>
             {RichText.asText(title)}
           </CaseStudyTitle>

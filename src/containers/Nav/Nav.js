@@ -18,10 +18,10 @@ export default class Nav extends React.Component {
     const { nowPlayingIsOpen, mobile } = this.state;
     return (
       <NavWrapper className="navWrapper" nowPlayingIsOpen={nowPlayingIsOpen}>
-        <NavItem
-          nowPlayingIsOpen={nowPlayingIsOpen}
-          className="logo"
-        ><Link to="/">Tyler McRobert</Link>
+        <NavItem nowPlayingIsOpen={nowPlayingIsOpen} className="logo" >
+          <Link to={{ pathname: '/', search: this.props.location.search }} >
+            Tyler McRobert
+          </Link>
         </NavItem>
         <NavItem className="contact" nowPlayingIsOpen={nowPlayingIsOpen}>
           <a href="mailto:hello@tylermcrobert.com">Contact</a>

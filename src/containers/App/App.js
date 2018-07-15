@@ -6,20 +6,18 @@ import {
   // Redirect,
 } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import qs from 'qs';
 
-// import Intro from '../../components/Intro/Intro';
 import Loading from '../../components/Loading/Loading';
 import NotFound from '../../components/NotFound/NotFound';
 import CaseStudyIndex from '../../components/CaseStudyIndex/CaseStudyIndex';
 import CaseStudy from '../CaseStudy/CaseStudy';
-import Nav from '../../components/Nav/Nav';
-
+import Nav from '../Nav/Nav';
 
 import '../../styles/reset.css';
 import '../../styles/typography.css';
 import '../../styles/main.css';
 import '../../styles/animations.css';
-
 
 export default class App extends React.Component {
   state = {
@@ -30,10 +28,10 @@ export default class App extends React.Component {
 
   componentWillMount() {
     this.fetchPage(this.props);
+    this.setContext();
   }
 
   componentWillReceiveProps(props) {
-    // this.parseURL();
     this.fetchPage(props);
   }
 
@@ -41,9 +39,17 @@ export default class App extends React.Component {
     this.props.prismicCtx.toolbar();
   }
 
+  setContext = () => {
+    const context = qs.parse(this.props.location.search)['?'];
+    if (context) {
+      this.setState({ context });
+    }
+  }
+
   fetchPage(props) {
     if (props.prismicCtx) {
-      return props.prismicCtx.api.getSingle(
+      return props.prismicCtx.api.getByUID(
+        'context',
         this.state.context,
         {
           fetchLinks: [
@@ -56,7 +62,8 @@ export default class App extends React.Component {
         if (doc) {
           this.setState({ doc });
         } else {
-          this.setState({ notFound: !doc });
+          this.setState({ context: 'homepage' });
+          this.fetchPage(props);
         }
       });
     }
@@ -71,7 +78,7 @@ export default class App extends React.Component {
           <Route
             render={({ location }) => (
               <React.Fragment>
-                <Nav />
+                <Nav location={location} />
                 <TransitionGroup className="main transitionGroup">
                   <CSSTransition
                     key={location.key}
@@ -93,8 +100,9 @@ export default class App extends React.Component {
                       <Route
                         exact
                         Path="/"
-                        render={() => (
+                        render={routeProps => (
                           <CaseStudyIndex
+                            {...routeProps}
                             caseStudiesList={doc.data.case_study_list}
                             prismicCtx={this.props.prismicCtx}
                           />
