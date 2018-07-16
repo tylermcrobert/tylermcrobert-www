@@ -68,9 +68,9 @@ export default class NowPlaying extends React.Component {
     if (loaded) {
       return (
         <React.Fragment >
-          <div className="nowPlaying__icon">
+          <NowPlayingIconContainer className="nowPlaying__icon">
             { emoji || <VinylIcon /> }
-          </div>
+          </NowPlayingIconContainer>
           <SongInfo
             nowPlayingIsOpen={nowPlayingIsOpen}
             containerWidth={containerWidth}
@@ -89,6 +89,12 @@ export default class NowPlaying extends React.Component {
     return null;
   }
 }
+
+const NowPlayingIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const SongInfo = styled.div`
   span {
