@@ -1,24 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import './tags.css';
 
 const Tags = (props) => {
   const tagList = props.tagList.map((tagName) => {
     const _tagShouldHighlight = props.activeTags.indexOf(tagName) !== -1;
-    const Tag = styled.li`
-      display: inline-block;
-      margin: auto 1em;
-      font-size: .81em;
-      color: ${_tagShouldHighlight ? '#f6f6f6' : '#6a6a6a'}
-    `;
+    const highlighted = { color: '#f6f6f6' };
 
     return (
-      <Tag className="tagIndicator__tag" key={tagName}>{tagName}</Tag>
+      <li
+        className="tagIndicator__tag"
+        style={_tagShouldHighlight ? highlighted : null}
+        key={tagName}
+      >{tagName}
+      </li>
     );
   });
 
   return (
-    <ul>{ tagList }</ul>
+    <ul className="tagList__ul">{ tagList }</ul>
   );
 };
 

@@ -1,0 +1,7 @@
+.tagList__ul li{
+  transition: all 400ms ease;
+  display: inline-block;
+  margin: auto 1em;
+  font-size: .81em;
+  color: #6a6a6a;
+}
