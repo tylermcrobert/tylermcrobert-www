@@ -1,10 +1,14 @@
+@font-face {
+  font-family: untitledSans;
+  src: url('https://prismic-io.s3.amazonaws.com/tylermcrobert%2F19206687-b715-4225-a0d6-6e388954aba6_untitledsans-regular.woff');
+}
 body {
-  background: #111;
+  background: hsl(0, 0%, 5.5%);
   color: #f6f6f6;
-  font-family: helvetica, arial, sans-serif;
+  font-family: untitledSans, helvetica, arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
-  letter-spacing: .025em;
+  letter-spacing: -.015em;
   line-height: 1.7;
 }
 
