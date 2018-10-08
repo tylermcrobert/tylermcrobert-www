@@ -91,12 +91,20 @@ $ease-rev: cubic-bezier(.5, 0, 1, .5);
   }
 }
 
+.info:not(.fade-exit) {
+  animation: fadeInUp 1000ms $ease;
+}
+
 .fade-exit-active {
 
   .caseStudyIndex__list{
     animation: indexListOut 400ms $ease-rev;
   }
   .caseStudy {
+    animation: caseStudyOut 400ms $ease-rev;
+  }
+
+  &.info {
     animation: caseStudyOut 400ms $ease-rev;
   }
 }

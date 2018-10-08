@@ -52,8 +52,14 @@
   .CsCtxWrapper:not(.fade-exit) .caseStudyIntro__info {
     animation: fadeInDown 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
 
+.info:not(.fade-exit) {
+  animation: fadeInUp 1000ms cubic-bezier(0, 0.75, 0.25, 1); }
+
 .fade-exit-active .caseStudyIndex__list {
   animation: indexListOut 400ms cubic-bezier(0.5, 0, 1, 0.5); }
 
 .fade-exit-active .caseStudy {
+  animation: caseStudyOut 400ms cubic-bezier(0.5, 0, 1, 0.5); }
+
+.fade-exit-active.info {
   animation: caseStudyOut 400ms cubic-bezier(0.5, 0, 1, 0.5); }
