@@ -13,6 +13,7 @@ import NotFound from '../../components/NotFound/NotFound';
 import CaseStudyIndex from '../../components/CaseStudyIndex/CaseStudyIndex';
 import CaseStudy from '../CaseStudy/CaseStudy';
 import Nav from '../Nav/Nav';
+import Info from '../../components/Info/Info';
 
 import '../../styles/reset.css';
 import '../../styles/typography.css';
@@ -88,6 +89,16 @@ export default class App extends React.Component {
                     <Switch location={location}>
                       <Route
                         exact
+                        path="/info"
+                        render={routeProps => (
+                          <Info
+                            {...routeProps}
+                            bio={doc.data.bio}
+                          />
+                        )}
+                      />
+                      <Route
+                        exact
                         path="/:caseStudyUID"
                         render={routeProps => (
                           <CaseStudy
@@ -99,7 +110,7 @@ export default class App extends React.Component {
                       />
                       <Route
                         exact
-                        Path="/"
+                        path="/"
                         render={routeProps => (
                           <CaseStudyIndex
                             {...routeProps}

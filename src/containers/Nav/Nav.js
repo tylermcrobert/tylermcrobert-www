@@ -24,7 +24,7 @@ export default class Nav extends React.Component {
           </Link>
         </NavItem>
         <NavItem className="contact" nowPlayingIsOpen={nowPlayingIsOpen}>
-          <a href="mailto:hello@tylermcrobert.com">Contact</a>
+          <Link to={{ pathname: '/info' }}>Info</Link>
         </NavItem>
         <NavItem
           className="nowPlaying"
