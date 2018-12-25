@@ -22,10 +22,12 @@ export default class Context extends React.Component {
   render() {
     const { render, index, caseStudies } = this.props;
     const { hoverTags, hoverIndex } = this.state;
-    const projectTags = index && caseStudies[index].tags;
+    const projectTags = index !== null && caseStudies[index].tags;
 
     const Sideways = ({ children, right }) => (
-      <div className={`${style.sideways} ${right ? style.right : style.left}`}>{children}</div>
+      <div className={`${style.sideways} ${right ? style.right : style.left}`}>
+        {children}
+      </div>
     );
 
     return (
