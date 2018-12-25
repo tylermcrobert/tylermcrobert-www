@@ -42,12 +42,20 @@ class App extends React.Component {
     .then(a => a.data.case_study_list
       .map(cs => cs.case_study_item.id))
 
+  getIndex = () => this.state.caseStudies
+    .map(cs => cs.uid)
+    .indexOf(this.props.caseStudyUid)
+
   render() {
     const { notFound, caseStudies } = this.state;
 
     if (caseStudies) {
       return (
-        <Layout caseStudies={caseStudies} view={this.props.view} />
+        <Layout
+          caseStudies={caseStudies}
+          view={this.props.view}
+          index={this.getIndex() !== -1 ? this.getIndex() : null}
+        />
       );
     } else if (notFound) {
       return (<div>Not Found</div>);

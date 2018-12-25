@@ -1,10 +1,12 @@
 import React from 'react';
 
-const CaseStudy = ({ data }) => (
-  <div>MyComponent</div>
-);
+const CaseStudy = ({ data }) => {
+  console.log(data);
 
-// CaseStudy.propTypes = {
-// };
+  return (
+    <div>MyComponent</div>
+  );
+};
+
 
 export default CaseStudy;

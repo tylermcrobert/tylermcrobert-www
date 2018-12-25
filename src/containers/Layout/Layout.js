@@ -5,15 +5,17 @@ import CaseStudy from 'containers/CaseStudy/CaseStudy';
 import CaseStudyNav from 'containers/CaseStudyNav/CaseStudyNav';
 import Nav from 'components/Nav/Nav';
 
-const Layout = ({ caseStudies, view }) => (
+const Layout = ({ caseStudies, view, index }) => (
   <div>
     <Nav />
+    {index}
     <Context
       caseStudies={caseStudies}
+      index={index}
       render={({ handleHover }) => (
         <>
           {view === 'home' && <CaseStudyNav handleHover={handleHover} caseStudies={caseStudies} />}
-          {view === 'caseStudy' && <CaseStudy />}
+          {view === 'caseStudy' && <CaseStudy data={caseStudies[index]} />}
         </>
       )}
     />
