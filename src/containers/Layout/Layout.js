@@ -1,31 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichText } from 'prismic-reactjs';
-import { Link } from 'react-router-dom';
+import Directory from 'containers/Directory/Directory';
+import CaseStudy from 'containers/CaseStudy/CaseStudy';
+import Nav from 'components/Nav/Nav';
 
-const Layout = ({ caseStudies }) => {
-  const Links = () => (
-    <ul>
-      {caseStudies.map((cs) => {
-        const { id, uid, data } = cs;
-        return (
-          <li key={id}>
-            <Link to={`/${uid}`}>
-              {RichText.asText(data.title)}
-            </Link>
-          </li>
-      );
-    })}
-    </ul>
-  );
-
-  return (
-    <div>
-      Tyler McRobert
-      <Links />
-    </div>
-  );
-};
+const Layout = ({ caseStudies, view }) => (
+  <div>
+    <Nav />
+    {view === 'home' && <Directory caseStudies={caseStudies} />}
+    {view === 'caseStudy' && <CaseStudy />}
+  </div>
+);
 
 Layout.propTypes = {
   caseStudies: PropTypes.arrayOf(PropTypes.object).isRequired,
