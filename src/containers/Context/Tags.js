@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Tags = ({ tags, currentTags }) => (
+const Tags = ({ tags, activeTags }) => (
   tags.map((tag) => {
-    const isActive = currentTags.indexOf(tag) !== -1;
+    const isActive = activeTags.indexOf(tag) !== -1;
     return (
       <li key={tag}>
         {tag} {isActive && 'x'}

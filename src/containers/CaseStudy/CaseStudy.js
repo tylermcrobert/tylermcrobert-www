@@ -1,12 +1,11 @@
 import React from 'react';
+import { RichText } from 'prismic-reactjs';
 
-const CaseStudy = ({ data }) => {
-  console.log(data);
-
-  return (
-    <div>MyComponent</div>
-  );
-};
-
+const CaseStudy = ({ data }) => (
+  <div>
+    <div>{RichText.asText(data.data.title)}</div>
+    <div>{RichText.asText(data.data.description)}</div>
+  </div>
+);
 
 export default CaseStudy;

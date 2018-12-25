@@ -8,7 +8,6 @@ import Nav from 'components/Nav/Nav';
 const Layout = ({ caseStudies, view, index }) => (
   <div>
     <Nav />
-    {index}
     <Context
       caseStudies={caseStudies}
       index={index}
