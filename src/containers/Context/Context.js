@@ -1,6 +1,7 @@
 import React from 'react';
-import Tags from './Tags';
-import Index from './Index';
+import Tags from './_Tags';
+import Index from './_Index';
+import style from './Context.module.css';
 
 export default class Context extends React.Component {
   state = {
@@ -23,17 +24,25 @@ export default class Context extends React.Component {
     const { hoverTags, hoverIndex } = this.state;
     const projectTags = index && caseStudies[index].tags;
 
+    const Sideways = ({ children, right }) => (
+      <div className={`${style.sideways} ${right ? style.right : style.left}`}>{children}</div>
+    );
+
     return (
       <div>
-        <Tags
-          tags={this.getUniqueTags()}
-          activeTags={projectTags || hoverTags}
-          index={index}
-        />
-        <Index
-          index={(index || hoverIndex) + 1}
-          length={caseStudies.length}
-        />
+        <Sideways>
+          <Tags
+            tags={this.getUniqueTags()}
+            activeTags={projectTags || hoverTags}
+            index={index}
+          />
+        </Sideways>
+        <Sideways right>
+          <Index
+            index={(index || hoverIndex) + 1}
+            length={caseStudies.length}
+          />
+        </Sideways>
         {
           render({ handleHover: this.handleHover })
         }
