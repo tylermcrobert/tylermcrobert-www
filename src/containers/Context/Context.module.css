@@ -13,11 +13,11 @@
   top:0;
   width: 100vh;
   text-align: center;
-  line-height: 3em;
+  line-height: 3rem;
 }
 
 .left {
-  /* border: 1px solid orange; */
+  border: 1px solid orange;
   transform-origin: 0% 0%;
   transform-origin: 100 100;
   transform: rotate(-90deg) translate3d(-100%, 0, 0);
@@ -25,7 +25,7 @@
 }
 
 .right {
-  /* border: 1px solid blue; */
+  border: 1px solid blue;
   transform: rotate(90deg) translate3d(calc(100%), 0, 0);
   transform-origin: right 0;
   right:0;
