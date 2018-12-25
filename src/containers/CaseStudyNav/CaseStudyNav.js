@@ -11,8 +11,8 @@ const DirectoryLinks = ({ caseStudies, handleHover }) => {
         {caseStudies.map(({
         id, uid, data, tags,
       }, i) => (
-        <li key={id} onMouseEnter={() => handleHover(tags, i)}>
-          <Link className={style.listItem} to={`/${uid}`}>{RichText.asText(data.title)}</Link>
+        <li className={style.listItem} key={id} onMouseEnter={() => handleHover(tags, i)}>
+          <Link className={style.link} to={`/${uid}`}>{RichText.asText(data.title)}</Link>
         </li>
       ))}
       </ul>
