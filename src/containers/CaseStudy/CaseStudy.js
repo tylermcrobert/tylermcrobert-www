@@ -2,20 +2,7 @@ import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import ContextFrame from 'components/ContextFrame/ContextFrame';
 import style from './CaseStudy.module.css';
-import SingleImage from './slices/SingleImage/SingleImage';
-
-const Slices = ({ modules, title }) => modules.map((module) => {
-  switch (module.slice_type) {
-    case 'single_image':
-      return (<SingleImage.Wrapper />);
-    default:
-      return <p>something else</p>;
-  }
-}).map((el, i) => React.cloneElement(el, {
-  key: i,
-  data: modules[i],
-  alt: `${title} — Tyler McRobert`,
-}));
+import Slices from './slices/Slices';
 
 const CaseStudy = ({ data }) => (
   <div>

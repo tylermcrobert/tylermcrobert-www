@@ -1,7 +1,8 @@
 import React from 'react';
+import style from './SingleImage.module.css';
 
 const SingleImage = ({ imgUrl, alt }) => (
-  <div>
+  <div className={style.singleImage}>
     <img src={imgUrl} alt={alt} />
   </div>
 );
