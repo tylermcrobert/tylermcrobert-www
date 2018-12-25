@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Directory from 'containers/Directory/Directory';
+import Context from 'containers/Context/Context';
 import CaseStudy from 'containers/CaseStudy/CaseStudy';
+import CaseStudyNav from 'containers/CaseStudyNav/CaseStudyNav';
 import Nav from 'components/Nav/Nav';
 
 const Layout = ({ caseStudies, view }) => (
   <div>
     <Nav />
-    {view === 'home' && <Directory caseStudies={caseStudies} />}
-    {view === 'caseStudy' && <CaseStudy />}
+    <Context
+      caseStudies={caseStudies}
+      render={({ handleHover }) => (
+        <>
+          {view === 'home' && <CaseStudyNav handleHover={handleHover} caseStudies={caseStudies} />}
+          {view === 'caseStudy' && <CaseStudy />}
+        </>
+      )}
+    />
   </div>
 );
 

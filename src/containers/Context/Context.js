@@ -1,8 +1,7 @@
 import React from 'react';
-import DirectoryLinks from './DirectoryLinks';
 import Tags from './Tags';
 
-export default class Directory extends React.Component {
+export default class Context extends React.Component {
   state = {
     currentTags: [],
     index: null,
@@ -19,16 +18,16 @@ export default class Directory extends React.Component {
   }
 
   render() {
-    const { caseStudies } = this.props;
+    const { render } = this.props;
     const { currentTags, index } = this.state;
     return (
       <div>
         <Tags tags={this.getUniqueTags()} currentTags={currentTags} index={index} />
-        <DirectoryLinks handleHover={this.handleHover} caseStudies={caseStudies} />
+        {render({ handleHover: this.handleHover })}
       </div>
     );
   }
 }
 
-Directory.propTypes = {
+Context.propTypes = {
 };
