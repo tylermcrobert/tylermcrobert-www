@@ -4,6 +4,8 @@ import Context from 'containers/Context/Context';
 import CaseStudy from 'containers/CaseStudy/CaseStudy';
 import CaseStudyNav from 'containers/CaseStudyNav/CaseStudyNav';
 import Nav from 'components/Nav/Nav';
+import 'styles/reset.css';
+import 'styles/layout.css';
 
 const Layout = ({ caseStudies, view, index }) => (
   <div>
@@ -13,8 +15,13 @@ const Layout = ({ caseStudies, view, index }) => (
       index={index}
       render={({ handleHover }) => (
         <>
-          {view === 'home' && <CaseStudyNav handleHover={handleHover} caseStudies={caseStudies} />}
-          {view === 'caseStudy' && <CaseStudy data={caseStudies[index]} />}
+          {
+            view === 'home' &&
+            <CaseStudyNav handleHover={handleHover} caseStudies={caseStudies} />
+          }{
+            view === 'caseStudy' &&
+            <CaseStudy data={caseStudies[index]} />
+          }
         </>
       )}
     />

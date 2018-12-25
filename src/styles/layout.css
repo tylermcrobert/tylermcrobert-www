@@ -1,0 +1,29 @@
+@font-face {
+  font-family: untitledSans;
+  src: url('https://prismic-io.s3.amazonaws.com/tylermcrobert%2F19206687-b715-4225-a0d6-6e388954aba6_untitledsans-regular.woff');
+}
+
+body {
+  background: #0f0f0f;
+  color: #f6f6f6;
+  font-family: untitledSans,helvetica,arial,sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+a {
+  color: #f6f6f6;
+  text-decoration: none;
+}
+
+p {
+  color: #6a6a6a;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+h1, h2 {
+    color: #f6f6f6;
+    line-height: 1.25;
+}

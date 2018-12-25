@@ -1,0 +1,9 @@
+.item {
+  display: inline;
+  padding: 0.5rem;
+  composes: small from '../../styles/variables.module.css';
+}
+
+.item:not(.active) {
+  color: #6a6a6a;
+}

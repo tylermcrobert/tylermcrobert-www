@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import App from 'containers/App/App';
-import 'styles/reset.css';
 
 const Router = () => (
   <BrowserRouter>
