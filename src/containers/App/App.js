@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Prismic from 'prismic-javascript';
 import Layout from 'containers/Layout/Layout';
 import { apiEndpoint } from 'config';
+import ContextFrame from 'components/ContextFrame/ContextFrame';
 
 class App extends React.Component {
   state = {
@@ -58,9 +59,9 @@ class App extends React.Component {
         />
       );
     } else if (notFound) {
-      return (<div>Not Found</div>);
+      return (<ContextFrame>Not Found</ContextFrame>);
     }
-    return (<div>Loading...</div>);
+    return (<ContextFrame>Loading</ContextFrame>);
   }
 }
 
