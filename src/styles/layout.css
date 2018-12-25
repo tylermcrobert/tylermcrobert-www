@@ -3,6 +3,10 @@
   src: url('https://prismic-io.s3.amazonaws.com/tylermcrobert%2F19206687-b715-4225-a0d6-6e388954aba6_untitledsans-regular.woff');
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: #0f0f0f;
   color: #f6f6f6;
@@ -24,6 +28,5 @@ p {
 }
 
 h1, h2 {
-    color: #f6f6f6;
     line-height: 1.25;
 }
