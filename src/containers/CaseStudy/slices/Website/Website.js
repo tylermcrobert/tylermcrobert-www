@@ -1,19 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import RoundCorner from 'components/RoundCorner/RoundCorner';
-import style from './Website.module.css';
-
-const Frame = ({ dotColor, frameColor }) => (
-  <svg
-    className={style.browserFrame}
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 850 22"
-  >
-    <path fill={frameColor || '#4a4a4a'} d="M0 0h850v22H0V0z" />
-    <circle cx="11" cy="11" r="3" fill={dotColor || '#ff5f58'} />
-    <circle cx="22" cy="11" r="3" fill={dotColor || '#ffc130'} />
-    <circle cx="33" cy="11" r="3" fill={dotColor || '#29ca41'} />
-  </svg>
-);
+import Frame from './_Frame';
 
 const Website = ({
   imgUrl, alt, dotColor, frameColor, backgroundColor, videoUrl,
@@ -26,32 +14,30 @@ const Website = ({
     ) : <img src={imgUrl} alt={alt} />);
 
   return (
-    <div className={style.websiteWrapper} style={{ backgroundColor }} >
-      <RoundCorner radius={0.4} className={style.website} >
-        <Frame dotColor={dotColor} frameColor={frameColor} />
+    <WebsiteWrapper backgroundColor={backgroundColor} >
+      <Window radius={0.5}>
+        <StyledFrame dotColor={dotColor} frameColor={frameColor} />
         {(videoUrl || imgUrl) && <Media />}
-      </RoundCorner>
-    </div>
+      </Window>
+    </WebsiteWrapper>
   );
 };
 
-Website.Wrapper = ({ data, alt }) => {
-  const {
-    browser_frame_color: frameColor,
-    background_color: backgroundColor,
-    browser_image: image,
-    browser_media: video,
-  } = data.primary;
+const StyledFrame = styled(Frame)`
+  display: block;
+`;
 
-  return (
-    <Website
-      alt={alt}
-      imgUrl={image.url}
-      backgroundColor={backgroundColor}
-      frameColor={frameColor}
-      videoUrl={video.url}
-    />
-  );
-};
+const WebsiteWrapper = styled.div`
+  padding: 7vh 10vw;
+  background: ${({ backgroundColor }) => backgroundColor && backgroundColor}
+`;
+
+const Window = styled(RoundCorner)`
+  img,
+  video {
+    width: 100%;
+    display: block;
+  }
+`;
 
 export default Website;

@@ -6,16 +6,19 @@ import CaseStudyNav from 'containers/CaseStudyNav/CaseStudyNav';
 import Nav from 'containers/Nav/Nav';
 import 'styles/reset.css';
 import 'styles/layout.css';
+import { ThemeProvider } from 'styled-components';
 
 const Layout = ({ caseStudies, view, index }) => (
-  <>
-    <Nav />
-    <Context caseStudies={caseStudies} index={index}>
-      {({ handleHover }) => (view === 'home'
+  <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
+    <>
+      <Nav />
+      <Context caseStudies={caseStudies} index={index}>
+        {({ handleHover }) => (view === 'home'
         ? <CaseStudyNav handleHover={handleHover} caseStudies={caseStudies} />
         : <CaseStudy data={caseStudies[index]} />) }
-    </Context>
-  </>
+      </Context>
+    </>
+  </ThemeProvider>
 );
 
 Layout.propTypes = {

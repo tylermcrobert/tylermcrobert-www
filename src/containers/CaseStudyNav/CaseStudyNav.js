@@ -1,8 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 import ContextFrame from 'components/ContextFrame/ContextFrame';
 import { Link } from 'react-router-dom';
-import style from './CaseStudyNav.module.css';
+
 
 const DirectoryLinks = ({ caseStudies, handleHover }) => {
   const Links = () => (
@@ -11,9 +12,9 @@ const DirectoryLinks = ({ caseStudies, handleHover }) => {
         {caseStudies.map(({
         id, uid, data, tags,
       }, i) => (
-        <li className={style.listItem} key={id} onMouseEnter={() => handleHover(tags, i)}>
-          <Link className={style.link} to={`/${uid}`}>{RichText.asText(data.title)}</Link>
-        </li>
+        <ListItem key={id} onMouseEnter={() => handleHover(tags, i)}>
+          <ListLink to={`/${uid}`}>{RichText.asText(data.title)}</ListLink>
+        </ListItem>
       ))}
       </ul>
     </ContextFrame>
@@ -21,6 +22,23 @@ const DirectoryLinks = ({ caseStudies, handleHover }) => {
   );
   return <Links />;
 };
+
+const ListItem = styled.li`
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.8s ease 0s;
+  font-size: 1.618em;
+`;
+
+const ListLink = styled(Link)`
+  transition: color 125ms linear;
+  color: ${({ theme }) => theme.color.light};
+  line-height:2;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.main};
+  }
+`;
 
 DirectoryLinks.propTypes = {
 };

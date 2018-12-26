@@ -44,6 +44,7 @@ const Sideways = styled.div`
   width: 100vh;
   text-align: center;
   line-height: 3em;
+  font-size: .81em;
 `;
 
 const Right = styled(Sideways)`

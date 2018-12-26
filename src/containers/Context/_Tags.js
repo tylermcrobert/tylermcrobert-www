@@ -19,7 +19,7 @@ const Tag = styled.ul`
   display: inline;
   padding: 0 1rem;
   transition: color 125ms linear;
-  color: ${props => (!props.isActive && '#6a6a6a')}
+  color: ${({ isActive, theme }) => !isActive && theme.color.light}
 `;
 
 Tags.propTypes = {
