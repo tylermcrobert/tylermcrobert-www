@@ -25,7 +25,7 @@ export default class Context extends React.Component {
     const projectTags = index !== null && caseStudies[index].tags;
 
     return (
-      <div>
+      <Wrapper>
         <Left>
           <Tags tags={this.getUniqueTags()} activeTags={projectTags || hoverTags} index={index} />
         </Left>
@@ -33,10 +33,15 @@ export default class Context extends React.Component {
           <Index index={(index || hoverIndex) + 1} length={caseStudies.length} />
         </Right>
         { this.props.children({ handleHover: this.handleHover }) }
-      </div>
+      </Wrapper>
     );
   }
 }
+
+
+const Wrapper = styled.div`
+  transform: translateZ(0);
+`;
 
 const Sideways = styled.div`
   position: absolute;
