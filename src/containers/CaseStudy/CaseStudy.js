@@ -2,7 +2,7 @@ import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import ContextFrame from 'components/ContextFrame/ContextFrame';
 import style from './CaseStudy.module.css';
-import Slices from './slices/Slices';
+import Slices from './slices/slices';
 
 const CaseStudy = ({ data }) => (
   <div>
