@@ -1,0 +1,11 @@
+.doubleImage {
+  display: flex;
+}
+
+.doubleImage img {
+  width:100%;
+}
+
+.partition {
+  width: 50%;
+}
