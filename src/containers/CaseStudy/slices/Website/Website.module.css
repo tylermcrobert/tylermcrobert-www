@@ -1,0 +1,18 @@
+.websiteWrapper {
+  padding: 7vh 10vw;
+}
+
+.website {
+  width: 100%;
+}
+
+
+
+.website img, .website video {
+  width: 100%;
+  display: block;
+}
+
+.browserFrame {
+  display: block;
+}
