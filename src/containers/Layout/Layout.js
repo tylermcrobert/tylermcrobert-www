@@ -8,24 +8,14 @@ import 'styles/reset.css';
 import 'styles/layout.css';
 
 const Layout = ({ caseStudies, view, index }) => (
-  <div>
+  <>
     <Nav />
-    <Context
-      caseStudies={caseStudies}
-      index={index}
-      render={({ handleHover }) => (
-        <>
-          {
-            view === 'home' &&
-            <CaseStudyNav handleHover={handleHover} caseStudies={caseStudies} />
-          }{
-            view === 'caseStudy' &&
-            <CaseStudy data={caseStudies[index]} />
-          }
-        </>
-      )}
-    />
-  </div>
+    <Context caseStudies={caseStudies} index={index}>
+      {({ handleHover }) => (view === 'home'
+        ? <CaseStudyNav handleHover={handleHover} caseStudies={caseStudies} />
+        : <CaseStudy data={caseStudies[index]} />) }
+    </Context>
+  </>
 );
 
 Layout.propTypes = {

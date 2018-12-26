@@ -20,7 +20,7 @@ export default class Context extends React.Component {
   }
 
   render() {
-    const { render, index, caseStudies } = this.props;
+    const { index, caseStudies } = this.props;
     const { hoverTags, hoverIndex } = this.state;
     const projectTags = index !== null && caseStudies[index].tags;
 
@@ -46,7 +46,7 @@ export default class Context extends React.Component {
           />
         </Sideways>
         {
-          render({ handleHover: this.handleHover })
+          this.props.children({ handleHover: this.handleHover })
         }
       </div>
     );
