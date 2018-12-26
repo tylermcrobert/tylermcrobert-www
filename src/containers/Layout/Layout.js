@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Context from 'containers/Context/Context';
 import CaseStudy from 'containers/CaseStudy/CaseStudy';
 import CaseStudyNav from 'containers/CaseStudyNav/CaseStudyNav';
-import Nav from 'components/Nav/Nav';
+import Nav from 'containers/Nav/Nav';
 import 'styles/reset.css';
 import 'styles/layout.css';
 

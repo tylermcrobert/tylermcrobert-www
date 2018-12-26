@@ -1,6 +1,5 @@
 import React from 'react';
 import songData from './songData.json';
-import VinylIcon from './VinylIcon';
 
 export default class NowPlaying extends React.Component {
   constructor(props) {
@@ -50,40 +49,13 @@ export default class NowPlaying extends React.Component {
       });
     }).catch((err) => {
       console.error(err); // eslint-disable-line no-console
-      this.setState({ notFound: true });
     });
   }
 
   render() {
-    const {
-      loaded,
-      emoji,
-      song,
-      artist,
-      notFound,
-    } = this.state;
-    const { nowPlayingIsOpen, containerWidth } = this.props;
-
-    if (loaded) {
-      return (
-        <React.Fragment >
-          <div className="nowPlaying__icon">
-            { emoji || <VinylIcon /> }
-          </div>
-          <div
-            nowPlayingIsOpen={nowPlayingIsOpen}
-            containerWidth={containerWidth}
-          >
-            <span ref={this.songInfo}>
-              {song}
-                —
-              {artist}
-            </span>
-          </div>
-        </React.Fragment>);
-    }
-    if (!notFound) {
-      return <div><VinylIcon /></div>;
+    const { render } = this.props;
+    if (render) {
+      return render(this.state);
     }
     return null;
   }
