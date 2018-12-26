@@ -1,6 +1,7 @@
 import React from 'react';
 import SingleImage from './SingleImage/SingleImage';
 import DoubleImage from './DoubleImage/DoubleImage';
+import TripleImage from './TripleImage/TripleImage';
 import Website from './Website/WebsiteWrapper';
 
 const Slices = ({ modules, title }) => modules.map((module) => {
@@ -9,6 +10,8 @@ const Slices = ({ modules, title }) => modules.map((module) => {
       return (<SingleImage.Wrapper />);
     case 'double_image_block':
       return (<DoubleImage.Wrapper />);
+    case 'triple_image_block':
+      return (<TripleImage.Wrapper />);
     case 'website':
       return (<Website.Wrapper />);
     default:

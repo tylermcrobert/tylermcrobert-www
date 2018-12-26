@@ -1,16 +1,16 @@
 import React from 'react';
-import style from './DoubleImage.module.css';
+import { Img, Partition, FlexContainer } from './../_partials';
 
 const DoubleImage = ({ imgUrls, alt }) => (
-  <div className={style.doubleImage}>
+  <FlexContainer>
     {
       imgUrls.map(url => (
-        <div key={url} className={style.partition}>
-          <img src={url} key={url} alt={alt} />
-        </div>
+        <Partition key={url}>
+          <Img src={url} key={url} alt={alt} />
+        </Partition>
       ))
     }
-  </div>
+  </FlexContainer>
 );
 
 DoubleImage.Wrapper = ({ data, alt }) => {

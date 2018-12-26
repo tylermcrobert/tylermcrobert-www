@@ -25,6 +25,7 @@ const Website = ({
 
 const StyledFrame = styled(Frame)`
   display: block;
+  width: 100%;
 `;
 
 const WebsiteWrapper = styled.div`
