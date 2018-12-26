@@ -4,9 +4,12 @@
   width: 100%;
   position: fixed;
   z-index: 100;
-  padding: .5em 1em;
+  padding: .25em .5em;
 }
 
+.nav > * {
+  margin: .25em .5em;
+}
 .logo {
   flex: 1;
 }

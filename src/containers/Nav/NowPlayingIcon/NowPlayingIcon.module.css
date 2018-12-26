@@ -1,6 +1,6 @@
 .nowPlaying {
   display: flex;
-  margin-right: 1em;
+  cursor: pointer;
 }
 
 .songInfo {
@@ -8,9 +8,9 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  margin-right:-1em;
+  transform: translateZ(0);
 }
 
 .emoji {
-  width: 1.7em;
+
 }

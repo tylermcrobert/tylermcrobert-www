@@ -27,18 +27,31 @@ const Drawer = ({
 }) => {
   if (loaded) {
     return (
-      <SongInfo onClick={toggleDrawer} className={style.nowPlaying} pose={drawerOpened ? 'open' : 'close'}>
+      <div className={style.nowPlaying} onClick={toggleDrawer}>
         <div className={style.emoji}>{emoji}</div>
-        <div className={style.songInfo}>
+        <SongInfo
+          pose={drawerOpened ? 'open' : 'close'}
+          className={style.songInfo}
+        >
           {artist} — {song}
-        </div>
-      </SongInfo>
+        </SongInfo>
+      </div>
     );
   }
   return null;
 };
 
 const SongInfo = posed.div({
-  open: { x: '0%' },
-  close: { x: '100%' },
+  open: {
+    width: 'auto',
+    opacity: 1,
+    marginLeft: '1em',
+    transition: { ease: [0.4, 0.0, 0.2, 1] },
+  },
+  close: {
+    width: '0',
+    opacity: 0,
+    marginLeft: '0em',
+    transition: { ease: [0.4, 0.0, 0.2, 1] },
+  },
 });
