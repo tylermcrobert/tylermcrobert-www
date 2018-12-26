@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import Tags from './_Tags';
 import Index from './_Index';
-import style from './Context.module.css';
 
 export default class Context extends React.Component {
   state = {
@@ -24,34 +24,41 @@ export default class Context extends React.Component {
     const { hoverTags, hoverIndex } = this.state;
     const projectTags = index !== null && caseStudies[index].tags;
 
-    const Sideways = ({ children, right }) => (
-      <div className={`${style.sideways} ${right ? style.right : style.left}`}>
-        {children}
-      </div>
-    );
-
     return (
       <div>
-        <Sideways>
-          <Tags
-            tags={this.getUniqueTags()}
-            activeTags={projectTags || hoverTags}
-            index={index}
-          />
-        </Sideways>
-        <Sideways right>
-          <Index
-            index={(index || hoverIndex) + 1}
-            length={caseStudies.length}
-          />
-        </Sideways>
-        {
-          this.props.children({ handleHover: this.handleHover })
-        }
+        <Left>
+          <Tags tags={this.getUniqueTags()} activeTags={projectTags || hoverTags} index={index} />
+        </Left>
+        <Right>
+          <Index index={(index || hoverIndex) + 1} length={caseStudies.length} />
+        </Right>
+        { this.props.children({ handleHover: this.handleHover }) }
       </div>
     );
   }
 }
+
+const Sideways = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100vh;
+  text-align: center;
+  line-height: 3em;
+`;
+
+const Right = styled(Sideways)`
+  transform: rotate(90deg) translate3d(calc(100%), 0, 0);
+  transform-origin: right 0;
+  right: 0;
+`;
+
+const Left = styled(Sideways)`
+  transform-origin: 0% 0%;
+  transform-origin: 100 100;
+  transform: rotate(-90deg) translate3d(-100%, 0, 0);
+  left: 0
+`;
+
 
 Context.propTypes = {
 };
