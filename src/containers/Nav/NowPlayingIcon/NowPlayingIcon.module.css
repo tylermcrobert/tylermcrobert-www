@@ -1,0 +1,16 @@
+.nowPlaying {
+  display: flex;
+  margin-right: 1em;
+}
+
+.songInfo {
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right:-1em;
+}
+
+.emoji {
+  width: 1.7em;
+}
