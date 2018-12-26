@@ -5,7 +5,7 @@ import ContextFrame from 'components/ContextFrame/ContextFrame';
 import Slices from './slices/slices';
 
 const CaseStudy = ({ data }) => (
-  <div>
+  <>
     <ContextFrame>
       <Cover>
         <TitleWrapper>
@@ -22,7 +22,7 @@ const CaseStudy = ({ data }) => (
       </Cover>
     </ContextFrame>
     <Slices modules={data.data.cs_content} title={RichText.asText(data.data.title)} />
-  </div>
+  </>
 );
 
 const InfoItem = styled.p`
