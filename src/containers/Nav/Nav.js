@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NowPlaying from 'containers/NowPlaying/NowPlaying';
-import styles from './Nav.module.css';
+import NowPlayingIcon from './NowPlayingIcon/NowPlayingIcon';
+import style from './Nav.module.css';
 
 const Nav = () => (
-  <div className={styles.nav}>
-    <Link to="/">Tyler McRobert</Link>
-    <NowPlaying />
+  <div className={style.nav}>
+    <Link className={style.logo} to="/">Tyler McRobert</Link>
+    <NowPlayingIcon />
   </div>
 );
 

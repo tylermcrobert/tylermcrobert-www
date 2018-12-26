@@ -1,3 +1,9 @@
 .nav {
   position: fixed;
+  display: flex;
+  width: 100%;
+}
+
+.logo {
+  flex: 1;
 }
