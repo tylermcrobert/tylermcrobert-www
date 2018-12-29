@@ -53,11 +53,12 @@ const ListItem = styled(AnimateIn)`
 `;
 
 const ListLink = styled(Link)`
-  transition: color 125ms linear;
+  transition: color 900ms ease;
   color: ${({ theme }) => theme.color.light};
   line-height:2;
 
   &:hover {
+    transition: color 100ms ease;
     color: ${({ theme }) => theme.color.main};
   }
 `;
