@@ -28,17 +28,17 @@ const CaseStudy = ({ data }) => (
 
 
 const TitleIn = posed.div(() => {
-  const transition = { duration: 400 };
+  const transition = { duration: 400, delay: 200 };
   return ({
-    exit: { y: '1rem', opacity: 0, ...{ transition } },
+    exit: { y: '1.25rem', opacity: 0, ...{ transition } },
     enter: { y: 0, opacity: 1, ...{ transition } },
   });
 });
 
 const InfoIn = posed.div(() => {
-  const transition = { duration: 400 };
+  const transition = { duration: 400, delay: 200 };
   return ({
-    exit: { y: '-1rem', opacity: 0, ...{ transition } },
+    exit: { y: '-1.25rem', opacity: 0, ...{ transition } },
     enter: { y: 0, opacity: 1, ...{ transition } },
   });
 });
