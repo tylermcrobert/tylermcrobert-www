@@ -4,6 +4,7 @@ import Prismic from 'prismic-javascript';
 import Layout from 'containers/Layout/Layout';
 import { apiEndpoint } from 'config';
 import ContextFrame from 'components/ContextFrame/ContextFrame';
+import Loading from 'components/Loading/Loading';
 
 class App extends React.Component {
   state = {
@@ -61,7 +62,7 @@ class App extends React.Component {
     } else if (notFound) {
       return (<ContextFrame>Not Found</ContextFrame>);
     }
-    return (<ContextFrame>Loading</ContextFrame>);
+    return (<ContextFrame><Loading /></ContextFrame>);
   }
 }
 
