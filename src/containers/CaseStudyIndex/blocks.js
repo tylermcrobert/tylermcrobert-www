@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
 
+const Styled = {};
+const Posed = {};
 
-export const AnimateIn = posed.li(({ i }) => {
+Posed.AnimateIn = posed.li(({ i }) => {
   const delay = i * 60;
   const transition = {
     duration: 700,
@@ -19,14 +21,14 @@ export const AnimateIn = posed.li(({ i }) => {
   });
 });
 
-export const ListItem = styled(AnimateIn)`
+Styled.ListItem = styled(Posed.AnimateIn)`
   cursor: pointer;
   text-align: center;
   transition: color 0.8s ease 0s;
   font-size: 1.618em;
 `;
 
-export const ListLink = styled(Link)`
+Styled.ListLink = styled(Link)`
   transition: color 900ms ease;
   color: ${({ theme }) => theme.color.light};
   line-height:2;
@@ -36,3 +38,5 @@ export const ListLink = styled(Link)`
     color: ${({ theme }) => theme.color.main};
   }
 `;
+
+export default Styled;

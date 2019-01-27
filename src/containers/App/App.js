@@ -66,8 +66,13 @@ class App extends React.Component {
   }
 }
 
+App.defaultProps = {
+  caseStudyUid: null,
+};
+
 App.propTypes = {
   view: PropTypes.string.isRequired,
+  caseStudyUid: PropTypes.string,
 };
 
 export default App;

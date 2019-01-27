@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Tags from './_Tags';
 import Index from './_Index';
+import Styled from './blocks';
 
 export default class Context extends React.Component {
   state = {
@@ -25,46 +26,24 @@ export default class Context extends React.Component {
     const projectTags = index !== null && caseStudies[index].tags;
 
     return (
-      <Wrapper>
-        <Left>
+      <Styled.Wrapper>
+        <Styled.Left>
           <Tags tags={this.getUniqueTags()} activeTags={projectTags || hoverTags} index={index} />
-        </Left>
-        <Right>
+        </Styled.Left>
+        <Styled.Right>
           <Index index={(index || hoverIndex) + 1} length={caseStudies.length} />
-        </Right>
+        </Styled.Right>
         { this.props.children({ handleHover: this.handleHover }) }
-      </Wrapper>
+      </Styled.Wrapper>
     );
   }
 }
-
-
-const Wrapper = styled.div`
-  transform: translateZ(0);
-`;
-
-const Sideways = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100vh;
-  text-align: center;
-  line-height: 3em;
-  font-size: .81em;
-`;
-
-const Right = styled(Sideways)`
-  transform: rotate(90deg) translate3d(calc(100%), 0, 0);
-  transform-origin: right 0;
-  right: 0;
-`;
-
-const Left = styled(Sideways)`
-  transform-origin: 0% 0%;
-  transform-origin: 100 100;
-  transform: rotate(-90deg) translate3d(-100%, 0, 0);
-  left: 0
-`;
-
+Context.defaultProps = {
+  index: 0,
+};
 
 Context.propTypes = {
+  caseStudies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  index: PropTypes.number,
+  children: PropTypes.func.isRequired,
 };

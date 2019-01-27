@@ -2,24 +2,24 @@ import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import ContextFrame from 'components/ContextFrame/ContextFrame';
 import Slices from './slices/slices';
-import { Deliverables, Description, Info, Cover, TitleWrapper } from './style';
+import Styled from './style';
 
 const CaseStudy = ({ data }) => (
   <>
     <ContextFrame>
-      <Cover>
-        <TitleWrapper pose="enter" initialPose="exit">
+      <Styled.Cover>
+        <Styled.TitleWrapper pose="enter" initialPose="exit">
           <h1>{RichText.asText(data.data.title)}</h1>
-        </TitleWrapper>
-        <Info pose="enter" initialPose="exit">
-          <Deliverables>
+        </Styled.TitleWrapper>
+        <Styled.Info pose="enter" initialPose="exit">
+          <Styled.Deliverables>
             {data.data.deliverables}
-          </Deliverables>
-          <Description>
+          </Styled.Deliverables>
+          <Styled.Description>
             {RichText.asText(data.data.description)}
-          </Description>
-        </Info>
-      </Cover>
+          </Styled.Description>
+        </Styled.Info>
+      </Styled.Cover>
     </ContextFrame>
     <Slices modules={data.data.cs_content} title={RichText.asText(data.data.title)} />
   </>

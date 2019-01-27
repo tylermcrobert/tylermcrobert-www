@@ -1,7 +1,7 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import ContextFrame from 'components/ContextFrame/ContextFrame';
-import { ListItem, ListLink } from './style';
+import Styled from './blocks';
 
 const DirectoryLinks = ({ caseStudies, handleHover }) => {
   const Links = () => (
@@ -10,15 +10,15 @@ const DirectoryLinks = ({ caseStudies, handleHover }) => {
         {caseStudies.map(({
         id, uid, data, tags,
       }, i) => (
-        <ListItem
+        <Styled.ListItem
           initialPose="out"
           pose="in"
           i={i}
           key={id}
           onMouseEnter={() => handleHover(tags, i)}
         >
-          <ListLink to={`/${uid}`}>{RichText.asText(data.title)}</ListLink>
-        </ListItem>
+          <Styled.ListLink to={`/${uid}`}>{RichText.asText(data.title)}</Styled.ListLink>
+        </Styled.ListItem>
       ))}
       </ul>
     </ContextFrame>

@@ -21,8 +21,14 @@ const Layout = ({ caseStudies, view, index }) => (
   </ThemeProvider>
 );
 
+Layout.defaultProps = {
+  index: 1,
+};
+
 Layout.propTypes = {
   caseStudies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  view: PropTypes.string.isRequired,
+  index: PropTypes.number,
 };
 
 export default Layout;
