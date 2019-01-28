@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import RoundCorner from 'components/RoundCorner/RoundCorner';
 import Frame from './_Frame';
 
