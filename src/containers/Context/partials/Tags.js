@@ -24,6 +24,7 @@ const Tag = styled.ul`
 
 Tags.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeTags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Tags;

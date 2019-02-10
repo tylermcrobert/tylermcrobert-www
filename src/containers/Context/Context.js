@@ -1,50 +1,47 @@
-import React from 'react';
+import React, { useContext, createContext } from 'react';
 import PropTypes from 'prop-types';
-import Tags from './_Tags';
-import Index from './_Index';
+import { AppContext } from 'containers/App/App';
+import useCsContext from './hooks/useCsContext';
+import Tags from './partials/Tags';
+import Index from './partials/Index';
 import Styled from './blocks';
 
-export default class Context extends React.Component {
-  state = {
-    hoverTags: [],
-    hoverIndex: null,
-  }
+const getUniqueTags = array =>
+  Array.from(new Set(array
+    .map(cs => cs.tags)
+    .reduce((a, b) => a
+      .concat(b), [])));
 
-  getUniqueTags = () => Array.from(new Set(this.props.caseStudies.map(cs => cs.tags)
-    .reduce((a, b) => a.concat(b), [])))
+export const ContextFrameContext = createContext();
 
-  handleHover = (tags, i) => {
-    this.setState({
-      hoverTags: tags,
-      hoverIndex: i,
-    });
-  }
+function ContextFrame({ children }) {
+  const { caseStudies } = useContext(AppContext);
+  const { tags, index, handleHover } = useCsContext();
+  const uniqueTags = getUniqueTags(caseStudies);
 
-  render() {
-    const { index, caseStudies } = this.props;
-    const { hoverTags, hoverIndex } = this.state;
-    console.log(caseStudies);
-    const projectTags = index !== null && caseStudies[index].tags;
-
-    return (
+  return (
+    <ContextFrameContext.Provider value={handleHover}>
       <Styled.Wrapper>
         <Styled.Left>
-          <Tags tags={this.getUniqueTags()} activeTags={projectTags || hoverTags} index={index} />
+          <Tags
+            tags={uniqueTags}
+            activeTags={tags}
+            index={index}
+          />
         </Styled.Left>
         <Styled.Right>
-          <Index index={(index || hoverIndex) + 1} length={caseStudies.length} />
+          <Index index={index} length={caseStudies.length} />
         </Styled.Right>
-        { this.props.children({ handleHover: this.handleHover }) }
+        <Styled.Frame>
+          {children}
+        </Styled.Frame>
       </Styled.Wrapper>
-    );
-  }
+    </ContextFrameContext.Provider>
+  );
 }
-Context.defaultProps = {
-  index: 0,
-};
 
-Context.propTypes = {
-  caseStudies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  index: PropTypes.number,
-  children: PropTypes.func.isRequired,
+export default ContextFrame;
+
+ContextFrame.propTypes = {
+  children: PropTypes.element.isRequired,
 };

@@ -1,12 +1,12 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
-import ContextFrame from 'components/ContextFrame/ContextFrame';
+import FullFrame from 'components/FullFrame/FullFrame';
 import Slices from './slices/slices';
 import Styled from './style';
 
 const CaseStudy = ({ data }) => (
   <>
-    <ContextFrame>
+    <FullFrame>
       <Styled.Cover>
         <Styled.TitleWrapper pose="enter" initialPose="exit">
           <h1>{RichText.asText(data.data.title)}</h1>
@@ -20,7 +20,7 @@ const CaseStudy = ({ data }) => (
           </Styled.Description>
         </Styled.Info>
       </Styled.Cover>
-    </ContextFrame>
+    </FullFrame>
     <Slices modules={data.data.cs_content} title={RichText.asText(data.data.title)} />
   </>
 );

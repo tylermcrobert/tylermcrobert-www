@@ -15,9 +15,9 @@ const Layout = () => {
     <>
       <Nav />
       <Context caseStudies={caseStudies} index={index}>
-        {({ handleHover }) => (view === 'home'
-        ? <CaseStudyIndex handleHover={handleHover} caseStudies={caseStudies} />
-        : <CaseStudy data={caseStudies[index]} />) }
+        { view === 'home'
+          ? <CaseStudyIndex caseStudies={caseStudies} />
+          : <CaseStudy data={caseStudies[index]} /> }
       </Context>
     </>
     </ThemeProvider>

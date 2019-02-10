@@ -6,7 +6,7 @@ const Styled = {};
 const Posed = {};
 
 Posed.AnimateIn = posed.li(({ i }) => {
-  const delay = i * 60;
+  const delay = (i * 60) + 200;
   const transition = {
     duration: 700,
     ease: 'circOut',
