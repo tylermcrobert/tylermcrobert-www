@@ -23,6 +23,7 @@ export default class Context extends React.Component {
   render() {
     const { index, caseStudies } = this.props;
     const { hoverTags, hoverIndex } = this.state;
+    console.log(caseStudies);
     const projectTags = index !== null && caseStudies[index].tags;
 
     return (
