@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 
 import NowPlayingIcon from './NowPlayingIcon/NowPlayingIcon';
 
 const Nav = () => (
   <Styled.Nav>
     <Styled.Logo to="/">Tyler McRobert</Styled.Logo>
-    <div>info</div>
-    <NowPlayingIcon />
+    <Styled.NavItem>info</Styled.NavItem>
+    <Styled.NavItem>
+      <NowPlayingIcon />
+    </Styled.NavItem>
   </Styled.Nav>
 );
 
@@ -21,15 +23,18 @@ Styled.Nav = styled.nav`
   position: fixed;
   z-index: 100;
   padding: .25em .5em;
+`;
 
-  * {
-    margin: .25em .5em;
-  }
-
+const margin = css`
+  margin: .25em .5em;
+`;
+Styled.NavItem = styled.div`
+  ${margin}
 `;
 
 Styled.Logo = styled(Link)`
   flex: 1;
+  ${margin}
 `;
 
 export default Nav;

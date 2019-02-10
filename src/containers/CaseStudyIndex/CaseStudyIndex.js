@@ -19,7 +19,9 @@ const DirectoryLinks = ({ caseStudies }) => {
             key={id}
             onMouseEnter={() => handleHover(tags, i)}
           >
-            <Styled.ListLink to={`/${uid}`}>{RichText.asText(data.title)}</Styled.ListLink>
+            <Styled.ListLink to={`/${uid}`}>
+              {RichText.asText(data.title)}
+            </Styled.ListLink>
           </Styled.ListItem>
         ))}
       </ul>
