@@ -28,7 +28,4 @@ Styled.Left = styled(Styled.Sideways)`
   left: 0
 `;
 
-Styled.Frame = styled.div`
-  padding: 0 3rem;
-`;
 export default Styled;

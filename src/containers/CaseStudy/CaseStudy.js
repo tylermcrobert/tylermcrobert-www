@@ -6,7 +6,7 @@ import Styled from './style';
 
 const CaseStudy = ({ data }) => (
   <>
-    <FullFrame>
+    <FullFrame context>
       <Styled.Cover>
         <Styled.TitleWrapper pose="enter" initialPose="exit">
           <h1>{RichText.asText(data.data.title)}</h1>

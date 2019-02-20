@@ -7,7 +7,7 @@ import Styled from './blocks';
 const DirectoryLinks = ({ caseStudies }) => {
   const handleHover = useContext(ContextFrameContext);
   return (
-    <FullFrame>
+    <FullFrame context>
       <ul>
         {caseStudies.map(({
           id, uid, data, tags,

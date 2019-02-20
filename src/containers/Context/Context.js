@@ -32,9 +32,7 @@ function ContextFrame({ children }) {
         <Styled.Right>
           <Index index={index} length={caseStudies.length} />
         </Styled.Right>
-        <Styled.Frame>
-          {children}
-        </Styled.Frame>
+        {children}
       </Styled.Wrapper>
     </ContextFrameContext.Provider>
   );
