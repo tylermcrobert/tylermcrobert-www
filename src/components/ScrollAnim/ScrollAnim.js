@@ -14,7 +14,7 @@ export default function ScrollAnim({ children }) {
 
 const Animated = styled.div`
   opacity: 0;
-  transition: 1600ms opacity cubic-bezier(.4,.6,.6,1);
+  transition: 1200ms opacity cubic-bezier(.4,.6,.6,1);
 
   ${props => props.active && css`
     opacity: 1;
