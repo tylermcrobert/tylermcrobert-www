@@ -21,8 +21,6 @@ function ContextFrame({ children }) {
   const uniqueTags = getUniqueTags(caseStudies);
   const isMobile = useMedia('(max-width: 576px)');
 
-  console.log(tags);
-
   return (
     <ContextFrameContext.Provider value={handleHover}>
       <Styled.Wrapper>
