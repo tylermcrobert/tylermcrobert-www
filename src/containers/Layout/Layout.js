@@ -4,15 +4,15 @@ import Context from 'containers/Context/Context';
 import CaseStudy from 'containers/CaseStudy/CaseStudy';
 import CaseStudyIndex from 'containers/CaseStudyIndex/CaseStudyIndex';
 import Nav from 'containers/Nav/Nav';
-import 'styles/reset.css';
-import 'styles/layout.css';
 import { ThemeProvider } from 'styled-components/macro';
+import GlobalStyle from './styled';
 
 const Layout = () => {
   const { view, caseStudies, index } = useContext(AppContext);
   return (
     <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
     <>
+      <GlobalStyle />
       <Nav />
       <Context caseStudies={caseStudies} index={index}>
         { view === 'home'
