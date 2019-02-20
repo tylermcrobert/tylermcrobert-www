@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import posed from 'react-pose';
+import { media } from 'containers/App/styled';
 
 const Styled = {};
 
@@ -40,6 +41,11 @@ Styled.Description = styled(Styled.InfoItem)`
 `;
 
 Styled.Info = styled(InfoIn)`
+
+  ${media.phone`
+    display: block;
+  `}
+
   display: flex;
   max-width: 48em;
   flex: 0 1 0%;

@@ -4,6 +4,7 @@ import Layout from 'containers/Layout/Layout';
 import Loading from 'components/Loading/Loading';
 import usePrismicData from './hooks/usePrismicData';
 import getIndex from './util/getIndex';
+import GlobalStyle from './styled';
 
 export const AppContext = createContext();
 
@@ -21,6 +22,7 @@ function App({ view, caseStudyUid }) {
         api,
       }}
     >
+      <GlobalStyle />
       {loaded ? <Layout /> : <Loading />}
     </AppContext.Provider>
   );
