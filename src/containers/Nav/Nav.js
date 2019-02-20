@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
 
 import NowPlayingIcon from './NowPlayingIcon/NowPlayingIcon';
 
-const Nav = () => (
+const Nav = ({ location }) => (
   <Styled.Nav>
-    <Styled.Logo to="/">Tyler McRobert</Styled.Logo>
+    <Styled.Logo to={{ pathname: '/', search: location.search }}>Tyler McRobert</Styled.Logo>
     <Styled.NavItem>info</Styled.NavItem>
     <Styled.NavItem>
       <NowPlayingIcon />
@@ -37,4 +37,4 @@ Styled.Logo = styled(Link)`
   ${margin}
 `;
 
-export default Nav;
+export default withRouter(Nav);

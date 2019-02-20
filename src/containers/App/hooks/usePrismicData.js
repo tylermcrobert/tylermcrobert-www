@@ -4,7 +4,7 @@ import { apiEndpoint } from 'config';
 
 import getCaseStudies from '../util/getCaseStudies';
 
-export default function usePrismicData() {
+export default function usePrismicData({ ctx }) {
   const [caseStudies, setCaseStudies] = useState(null);
   const [api, setApi] = useState(null);
 
@@ -14,7 +14,7 @@ export default function usePrismicData() {
     }));
   }, []);
 
-  getCaseStudies({ api, setCaseStudies });
+  getCaseStudies({ api, setCaseStudies, ctx });
 
   return {
     caseStudies,

@@ -1,9 +1,12 @@
-export default async function getCaseStudies({ api, setCaseStudies }) {
+export default async function getCaseStudies({ api, setCaseStudies, ctx }) {
   if (api) {
-    const getContext = () => api.getByUID('context', 'homepage').then(doc => doc);
+    const getContext = ctxId => api.getByUID('context', ctxId).then((doc) => {
+      if (doc) return doc;
+      return getContext('homepage');
+    });
 
     const getIds = async () => {
-      const context = await getContext();
+      const context = await getContext(ctx || 'homepage');
       return context.data.case_study_list.map(item => item.case_study_item.id);
     };
 

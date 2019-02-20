@@ -1,5 +1,7 @@
 import React, { createContext, memo } from 'react';
 import PropTypes from 'prop-types';
+import qs from 'qs';
+import { withRouter } from 'react-router-dom';
 import Layout from 'containers/Layout/Layout';
 import Loading from 'components/Loading/Loading';
 import usePrismicData from './hooks/usePrismicData';
@@ -8,8 +10,9 @@ import GlobalStyle from './styled';
 
 export const AppContext = createContext();
 
-function App({ view, caseStudyUid }) {
-  const { caseStudies, api } = usePrismicData();
+function App({ caseStudyUid, view, location }) {
+  const ctx = qs.parse(location.search)['?'];
+  const { caseStudies, api } = usePrismicData({ ctx });
   const loaded = !!(api && caseStudies);
   const index = getIndex({ caseStudies, caseStudyUid });
 
@@ -28,7 +31,7 @@ function App({ view, caseStudyUid }) {
   );
 }
 
-export default memo(App);
+export default memo(withRouter(App));
 
 App.defaultProps = {
   caseStudyUid: null,
@@ -37,4 +40,5 @@ App.defaultProps = {
 App.propTypes = {
   view: PropTypes.string.isRequired,
   caseStudyUid: PropTypes.string,
+  location: PropTypes.object.isRequired, //eslint-disable-line
 };
