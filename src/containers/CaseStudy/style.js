@@ -21,7 +21,6 @@ const InfoIn = posed.div(() => {
 });
 
 Styled.Cover = styled.div`
-  padding: 2em 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -32,8 +31,9 @@ Styled.InfoItem = styled.p`
 `;
 
 Styled.Deliverables = styled(Styled.InfoItem)`
-  flex-basis: 30%
-  font-size: .81em;
+  flex-basis: 30%;
+  font-size: .81rem;
+  margin-bottom: 1em;
 `;
 
 Styled.Description = styled(Styled.InfoItem)`

@@ -1,5 +1,6 @@
 import React, { useContext, createContext } from 'react';
 import PropTypes from 'prop-types';
+import { useMedia } from 'react-use';
 import { AppContext } from 'containers/App/App';
 import useCsContext from './hooks/useCsContext';
 import Tags from './partials/Tags';
@@ -18,20 +19,26 @@ function ContextFrame({ children }) {
   const { caseStudies } = useContext(AppContext);
   const { tags, index, handleHover } = useCsContext();
   const uniqueTags = getUniqueTags(caseStudies);
+  const isMobile = useMedia('(max-width: 576px)');
+
 
   return (
     <ContextFrameContext.Provider value={handleHover}>
       <Styled.Wrapper>
-        <Styled.Left>
-          <Tags
-            tags={uniqueTags}
-            activeTags={tags}
-            index={index}
-          />
-        </Styled.Left>
-        <Styled.Right>
-          <Index index={index} length={caseStudies.length} />
-        </Styled.Right>
+        {!isMobile &&
+          <>
+            <Styled.Left>
+              <Tags
+                tags={uniqueTags}
+                activeTags={tags}
+                index={index}
+              />
+            </Styled.Left>
+            <Styled.Right>
+              <Index index={index} length={caseStudies.length} />
+            </Styled.Right>
+        </>
+        }
         {children}
       </Styled.Wrapper>
     </ContextFrameContext.Provider>
