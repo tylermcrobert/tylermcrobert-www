@@ -15,8 +15,9 @@ export default function useCsContext() {
   const [hoverTags, setHoverTags] = useState([]);
   const [hoverIndex, setHoverIndex] = useState(0);
 
-  const { index, view } = useContext(AppContext);
+  const { index, view, caseStudies } = useContext(AppContext);
   const previousView = usePrevious(view);
+  const caseStudyTags = index && caseStudies[index].tags;
 
   const handleHover = (hoveredTag, i) => {
     setHoverTags(hoveredTag);
@@ -32,7 +33,7 @@ export default function useCsContext() {
 
 
   return {
-    tags: hoverTags,
+    tags: caseStudyTags || hoverTags,
     index: (index || hoverIndex) + 1,
     handleHover,
   };
