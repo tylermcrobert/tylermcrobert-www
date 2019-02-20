@@ -1,21 +1,26 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
+import styled, { css } from 'styled-components/macro';
 import PropTypes from 'prop-types';
-import ScrollAnimController from './lib/ScrollController';
+import { useInView } from 'react-intersection-observer';
 
-export default function FadeIn({ children }) {
-  const ref = useRef();
-
-  useEffect(() => {
-    const controller = new ScrollAnimController(ref.current);
-    controller.on('enter', () => console.log('asdf'));
-
-    return (() => {
-      controller.destroy(ref.current);
-    });
-  }, []);
-  return <div className="adsf" ref={ref}>{children}</div>;
+export default function ScrollAnim({ children }) {
+  const [ref, isInView] = useInView({ threshold: [0.2, 0] });
+  return (
+    <Animated ref={ref} active={isInView} >
+      {children}
+    </Animated>
+  );
 }
 
-FadeIn.propTypes = {
+const Animated = styled.div`
+  opacity: 0;
+  transition: 1600ms opacity cubic-bezier(.4,.6,.6,1);
+
+  ${props => props.active && css`
+    opacity: 1;
+  `}
+`;
+
+ScrollAnim.propTypes = {
   children: PropTypes.element.isRequired,
 };
