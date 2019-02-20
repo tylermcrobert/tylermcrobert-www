@@ -8,7 +8,7 @@ const Website = ({
 }) => {
   const Media = () => (
     videoUrl ? (
-      <video autoPlay muted playsinline loop>
+      <video autoPlay muted playsInline loop>
         <source src={videoUrl} />
       </video>
     ) : <img src={imgUrl} alt={alt} />);
