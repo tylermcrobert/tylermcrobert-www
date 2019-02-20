@@ -1,8 +1,10 @@
 import React from 'react';
+import ScrollAnim from 'components/ScrollAnim/ScrollAnim';
 import SingleImage from './SingleImage/SingleImage';
 import DoubleImage from './DoubleImage/DoubleImage';
 import TripleImage from './TripleImage/TripleImage';
 import Website from './Website/WebsiteWrapper';
+
 
 const Slices = ({ modules, title }) => modules.map((module) => {
   switch (module.slice_type) {
@@ -21,6 +23,10 @@ const Slices = ({ modules, title }) => modules.map((module) => {
   key: i,
   data: modules[i],
   alt: `${title} — Tyler McRobert`,
-}));
+})).map((slice, i) => (
+  <ScrollAnim key={i}>
+    {slice}
+  </ScrollAnim>
+));
 
 export default Slices;
