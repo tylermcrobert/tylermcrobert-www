@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useSize } from 'react-use';
 import styled from 'styled-components/macro';
 import RoundCorner from 'components/RoundCorner/RoundCorner';
 import Frame from './_Frame';
@@ -13,19 +15,40 @@ const Website = ({
       </video>
     ) : <img src={imgUrl} alt={alt} />);
 
+  const [browserWindow] = useSize(({ width }) => (
+    <Window radius={0.6}>
+      <StyledFrame dotColor={dotColor} width={width} frameColor={frameColor} />
+      {(videoUrl || imgUrl) && <Media />}
+    </Window>
+  ));
+
   return (
     <WebsiteWrapper backgroundColor={backgroundColor} >
-      <Window radius={0.5}>
-        <StyledFrame dotColor={dotColor} frameColor={frameColor} />
-        {(videoUrl || imgUrl) && <Media />}
-      </Window>
+      {browserWindow}
     </WebsiteWrapper>
   );
 };
 
+Website.defaultProps = {
+  videoUrl: undefined,
+  dotColor: undefined,
+  frameColor: undefined,
+  backgroundColor: undefined,
+  imgUrl: undefined,
+};
+
+Website.propTypes = {
+  imgUrl: PropTypes.string,
+  alt: PropTypes.string.isRequired,
+  dotColor: PropTypes.string,
+  frameColor: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  videoUrl: PropTypes.string,
+};
+
 const StyledFrame = styled(Frame)`
   display: block;
-  width: 100%;
+  width: ${props => props.width}px;
 `;
 
 const WebsiteWrapper = styled.div`
