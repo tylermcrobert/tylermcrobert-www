@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSize } from 'react-use';
+import useSize from 'hooks/useSize';
 import styled from 'styled-components/macro';
-import RoundCorner from 'components/RoundCorner/RoundCorner';
-import Frame from './_Frame';
 
 const Website = ({
   imgUrl, alt, dotColor, frameColor, backgroundColor, videoUrl,
@@ -15,16 +13,22 @@ const Website = ({
       </video>
     ) : <img src={imgUrl} alt={alt} />);
 
-  const [browserWindow] = useSize(({ width }) => (
-    <Window radius={0.6}>
-      <StyledFrame dotColor={dotColor} width={width} frameColor={frameColor} />
-      {(videoUrl || imgUrl) && <Media />}
-    </Window>
-  ));
+  const [ref, { width }] = useSize();
 
   return (
     <WebsiteWrapper backgroundColor={backgroundColor} >
-      {browserWindow}
+      <StyledWindow radius={0.5} width={width} ref={ref}>
+        <StyledFrame dotColor={dotColor} frameColor={frameColor}>
+          <svg viewBox="0 0 52 12" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fillRule="evenodd">
+              <circle fill={dotColor || '#FF6158'} cx="6" cy="6" r="6" />
+              <circle fill={dotColor || '#FFBE2D'} cx="26" cy="6" r="6" />
+              <circle fill={dotColor || '#27C93F'} cx="46" cy="6" r="6" />
+            </g>
+          </svg>
+        </StyledFrame>
+        {(videoUrl || imgUrl) && <Media />}
+      </StyledWindow>
     </WebsiteWrapper>
   );
 };
@@ -46,9 +50,20 @@ Website.propTypes = {
   videoUrl: PropTypes.string,
 };
 
-const StyledFrame = styled(Frame)`
+const StyledFrame = styled.div`
+  width: 100%;
+  background: ${props => (props.frameColor ? props.frameColor : '#4a4a4a')};
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 1%;
   display: block;
-  width: ${props => props.width}px;
+  width: 100%;
+  font-size: 0;
+
+  svg {
+    width: 4%;
+    fill: blue;
+  }
 `;
 
 const WebsiteWrapper = styled.div`
@@ -56,12 +71,19 @@ const WebsiteWrapper = styled.div`
   background: ${({ backgroundColor }) => backgroundColor && backgroundColor}
 `;
 
-const Window = styled(RoundCorner)`
+const StyledWindow = styled.div`
+  overflow: hidden;
+  border-radius: ${props => props.width / 200}px;
+  max-width: 1200px;
+  margin: 0px auto;
+
   img,
   video {
     width: 100%;
     display: block;
   }
+
+
 `;
 
 export default Website;
