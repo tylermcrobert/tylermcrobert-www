@@ -30,7 +30,7 @@ const Layout = () => {
 
 const RouteContainer = posed.div({
   enter: {
-    opacity: 1, delay: 200, beforeChildren: true,
+    opacity: 1, delay: 300, beforeChildren: true,
   },
   exit: { opacity: 0 },
 });

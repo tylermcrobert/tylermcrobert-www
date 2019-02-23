@@ -7,14 +7,14 @@ const Styled = {};
 const Posed = {};
 
 Posed.AnimateIn = posed.li(({ i }) => {
-  const delay = (i * 60) + 200;
+  const delay = (i * (durations.slow / 15));
   const transition = { ease: eases.standard, duration: durations.slow };
   return ({
     enter: {
       opacity: 1, scale: 1, y: 0, delay, transition,
     },
     exit: {
-      opacity: 0, scale: 0.75, y: '1em', transition, delay: delay - 200,
+      opacity: 0, scale: 0.75, y: '1em', transition, delay,
     },
 
   });
