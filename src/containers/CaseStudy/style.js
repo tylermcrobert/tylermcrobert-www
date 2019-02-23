@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 import posed from 'react-pose';
-import { media } from 'containers/App/styled';
+import { media, eases, durations } from 'containers/App/styled';
 
 const Styled = {};
 
 const transition = {
-  ease: [0, 0.75, 0.2, 0.99],
-  duration: 1200,
+  ease: eases.standard,
+  duration: durations.slow,
 };
 
 const TitleIn = posed.div({

@@ -1,6 +1,7 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import posed from 'react-pose';
+import { eases, durations } from 'containers/App/styled';
 import PropTypes from 'prop-types';
 import FullFrame from 'components/FullFrame/FullFrame';
 import Slices from './slices/slices';
@@ -11,14 +12,19 @@ const CaseStudy = ({ data }) => {
   const title = RichText.asText(data.data.title);
   const description = RichText.asText(data.data.description);
   return (
-    <PosedFuck>
+    <Fade>
       <CaseStudy.Cover {...{ title, description, deliverables }} />
       <Slices modules={data.data.cs_content} title={RichText.asText(data.data.title)} />
-    </PosedFuck>
+    </Fade>
   );
 };
 
-const PosedFuck = posed.div({
+// const transition = {
+//   ease: eases.standard,
+//   durations: 900,
+// };
+
+const Fade = posed.div({
   enter: { opacity: 1 },
   exit: { opacity: 0 },
 });

@@ -8,6 +8,14 @@ const sizes = {
   phone: 576,
 };
 
+const durations = {
+  slow: 400,
+};
+
+const eases = {
+  standard: [0.33, 0.73, 0.56, 1],
+};
+
 const media = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
     @media (max-width: ${sizes[label]}px) {
@@ -68,6 +76,8 @@ const GlobalStyle = createGlobalStyle`
 export {
   sizes,
   media,
+  durations,
+  eases,
 };
 
 export default GlobalStyle;

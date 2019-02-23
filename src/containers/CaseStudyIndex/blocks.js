@@ -1,13 +1,14 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
+import { eases, durations } from 'containers/App/styled';
 
 const Styled = {};
 const Posed = {};
 
 Posed.AnimateIn = posed.li(({ i }) => {
   const delay = (i * 60) + 200;
-  const transition = { ease: [0, 0.75, 0.2, 0.99], duration: 1200 };
+  const transition = { ease: eases.standard, duration: durations.slow };
   return ({
     enter: {
       opacity: 1, scale: 1, y: 0, delay, transition,
