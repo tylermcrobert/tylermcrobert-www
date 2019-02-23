@@ -7,12 +7,13 @@ const Posed = {};
 
 Posed.AnimateIn = posed.li(({ i }) => {
   const delay = (i * 60) + 200;
+  const transition = { ease: [0, 0.75, 0.2, 0.99], duration: 1200 };
   return ({
     enter: {
-      opacity: 1, scale: 1, y: 0, delay,
+      opacity: 1, scale: 1, y: 0, delay, transition,
     },
     exit: {
-      opacity: 0, scale: 0.75, y: '1em', delay: delay - 200,
+      opacity: 0, scale: 0.75, y: '1em', transition, delay: delay - 200,
     },
 
   });

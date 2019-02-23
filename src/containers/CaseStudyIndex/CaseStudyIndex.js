@@ -7,11 +7,13 @@ import Styled from './blocks';
 
 const DirectoryLinks = ({ caseStudies, location }) => {
   const handleHover = useContext(ContextFrameContext);
+
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 400);
   }, []);
+
   return (
     <FullFrame context>
       <ul>
