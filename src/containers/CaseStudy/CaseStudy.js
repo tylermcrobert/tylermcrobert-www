@@ -19,14 +19,14 @@ const CaseStudy = ({ data }) => {
   );
 };
 
-// const transition = {
-//   ease: eases.standard,
-//   durations: 900,
-// };
+const transition = {
+  ease: eases.standard,
+  durations: durations.slow,
+};
 
 const Fade = posed.div({
-  enter: { opacity: 1 },
-  exit: { opacity: 0 },
+  enter: { opacity: 1, transition },
+  exit: { opacity: 0, transition },
 });
 
 CaseStudy.Cover = ({ description, deliverables, title }) => (

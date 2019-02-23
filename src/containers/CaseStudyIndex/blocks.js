@@ -6,19 +6,28 @@ import { eases, durations } from 'containers/App/styled';
 const Styled = {};
 const Posed = {};
 
+const transition = { ease: eases.standard, duration: durations.slow };
+
+
 Posed.AnimateIn = posed.li(({ i }) => {
-  const delay = (i * (durations.slow / 15));
-  const transition = { ease: eases.standard, duration: durations.slow };
+  const delay = (i * (durations.slow / 10));
   return ({
     enter: {
       opacity: 1, scale: 1, y: 0, delay, transition,
     },
     exit: {
-      opacity: 0, scale: 0.75, y: '1em', transition, delay,
+      opacity: 0, scale: 0.7, y: '1em', transition, delay,
     },
 
   });
 });
+
+
+export const ZoomIn = posed.div({
+  enter: { scale: 1, transition },
+  exit: { scale: 0.97, transition },
+});
+
 
 Styled.ListItem = styled(Posed.AnimateIn)`
   cursor: pointer;

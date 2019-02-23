@@ -3,7 +3,7 @@ import { RichText } from 'prismic-reactjs';
 import { withRouter } from 'react-router-dom';
 import FullFrame from 'components/FullFrame/FullFrame';
 import { ContextFrameContext } from 'containers/Context/Context';
-import Styled from './blocks';
+import Styled, { ZoomIn } from './blocks';
 
 const DirectoryLinks = ({ caseStudies, location }) => {
   const handleHover = useContext(ContextFrameContext);
@@ -16,8 +16,9 @@ const DirectoryLinks = ({ caseStudies, location }) => {
 
   return (
     <FullFrame context>
-      <ul>
-        {caseStudies.map(({
+      <ZoomIn>
+        <ul>
+          {caseStudies.map(({
           id, uid, data, tags,
         }, i) => (
           <Styled.ListItem
@@ -30,7 +31,8 @@ const DirectoryLinks = ({ caseStudies, location }) => {
             </Styled.ListLink>
           </Styled.ListItem>
         ))}
-      </ul>
+        </ul>
+      </ZoomIn>
     </FullFrame>
   );
 };
