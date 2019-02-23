@@ -4,20 +4,19 @@ import { media } from 'containers/App/styled';
 
 const Styled = {};
 
-const TitleIn = posed.div(() => {
-  const transition = { duration: 400, delay: 200 };
-  return ({
-    exit: { y: '1.25rem', opacity: 0, ...{ transition } },
-    enter: { y: 0, opacity: 1, ...{ transition } },
-  });
+const transition = {
+  ease: [0, 0.75, 0.2, 0.99],
+  duration: 1200,
+};
+
+const TitleIn = posed.div({
+  enter: { y: 0, opacity: 1, transition },
+  exit: { y: '1.25rem', opacity: 0, transition },
 });
 
-const InfoIn = posed.div(() => {
-  const transition = { duration: 400, delay: 200 };
-  return ({
-    exit: { y: '-1.25rem', opacity: 0, ...{ transition } },
-    enter: { y: 0, opacity: 1, ...{ transition } },
-  });
+const InfoIn = posed.div({
+  enter: { y: 0, opacity: 1, transition },
+  exit: { y: '-1.25rem', opacity: 0, transition },
 });
 
 Styled.Cover = styled.div`

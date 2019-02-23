@@ -14,8 +14,6 @@ const DirectoryLinks = ({ caseStudies, location }) => {
           id, uid, data, tags,
         }, i) => (
           <Styled.ListItem
-            initialPose="out"
-            pose="in"
             i={i}
             key={id}
             onMouseEnter={() => handleHover(tags, i)}
