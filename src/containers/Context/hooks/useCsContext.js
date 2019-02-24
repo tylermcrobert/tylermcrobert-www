@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 import { AppContext } from 'containers/App/App';
-
+import isMobile from 'is-mobile';
 
 function usePrevious(value) {
   const ref = useRef();
@@ -20,8 +20,10 @@ export default function useCsContext() {
   const caseStudyTags = index && caseStudies[index].tags;
 
   const handleHover = (hoveredTag, i) => {
-    setHoverTags(hoveredTag);
-    setHoverIndex(i);
+    if (!isMobile) {
+      setHoverTags(hoveredTag);
+      setHoverIndex(i);
+    }
   };
 
   useEffect(() => {
