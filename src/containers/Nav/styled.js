@@ -63,7 +63,6 @@ S.HideOnOpen = styled.div`
   `}
 `;
 
-
 S.MobileNavWrapper = styled.div`
   width: calc(50% - .5em);
   display:flex
@@ -79,18 +78,19 @@ S.MobileSongInfoWrapper = styled.div`
   `}
 `;
 
-
 S.Logo = styled(Link)`
   flex: 1;
   ${margin}
 `;
-
 
 S.Emoji = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  ${props => props.theme.hasEmoji && css`
+    margin-top: .1em;
+  `}
 `;
 
 S.SongInfo = styled(NavItem)`
@@ -102,6 +102,5 @@ S.SongInfo = styled(NavItem)`
 S.DesktopDrawer = styled(PosedSongInfo)`
   max-width: 300px;
 `;
-
 
 export default S;

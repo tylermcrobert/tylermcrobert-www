@@ -20,7 +20,7 @@ function Nav({ location }) {
      open, setOpen, isPhone, emoji, loaded, song, artist, toggleOpen,
     }}
     >
-      <ThemeProvider theme={{ open }}>
+      <ThemeProvider theme={{ open, hasEmoji: !(!emoji) }}>
         <ResponsiveNav>
           <S.Logo to={{ pathname: '/', search: location.search }}>Tyler McRobert</S.Logo>
           <NavItem>info</NavItem>
