@@ -27,10 +27,9 @@ const Layout = () => {
   );
 };
 
-
 const RouteContainer = posed.div({
   enter: {
-    opacity: 1, delay: 400, beforeChildren: true, transition: { duration: 0 },
+    opacity: 1, delay: 350, beforeChildren: true, transition: { duration: 0 },
   },
   exit: { opacity: 0 },
 });
