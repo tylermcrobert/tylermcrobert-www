@@ -46,6 +46,24 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 18px;
+
+    @media (max-width: 599px) {
+      body {
+        font-size: 16px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      body {
+        font-size: 19px;
+      }
+    }
+
+    @media (min-width: 1680px) {
+      body {
+        font-size: 22px;
+      }
+    }
   }
 
   body {
