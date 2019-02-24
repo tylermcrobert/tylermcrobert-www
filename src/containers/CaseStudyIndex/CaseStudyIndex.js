@@ -7,7 +7,6 @@ import Styled, { ZoomIn } from './blocks';
 
 const DirectoryLinks = ({ caseStudies, location }) => {
   const handleHover = useContext(ContextFrameContext);
-
   return (
     <FullFrame context>
       <ZoomIn>

@@ -20,7 +20,7 @@ export default function useCsContext() {
   const caseStudyTags = index && caseStudies[index].tags;
 
   const handleHover = (hoveredTag, i) => {
-    if (!isMobile) {
+    if (!isMobile()) {
       setHoverTags(hoveredTag);
       setHoverIndex(i);
     }
