@@ -2,14 +2,14 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
 
-import NowPlayingIcon from './NowPlayingIcon/NowPlayingIcon';
+import NowPlaying from './NowPlaying/NowPlaying';
 
 const Nav = ({ location }) => (
   <Styled.Nav>
     <Styled.Logo to={{ pathname: '/', search: location.search }}>Tyler McRobert</Styled.Logo>
     <Styled.NavItem>info</Styled.NavItem>
     <Styled.NavItem>
-      <NowPlayingIcon />
+      <NowPlaying />
     </Styled.NavItem>
   </Styled.Nav>
 );
