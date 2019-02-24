@@ -9,7 +9,7 @@ const sizes = {
 };
 
 const durations = {
-  slow: 300,
+  slow: 400,
 };
 
 const eases = {
