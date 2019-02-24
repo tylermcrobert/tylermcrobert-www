@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
-import useNowPlaying from 'hooks/useNowPlaying';
+import React, { useContext } from 'react';
 import VinylIcon from './VinylIcon';
+import { NavContext } from '../Nav';
 import S from './style';
+import { NavItem } from '../styled';
 
 const NowPlaying = () => {
-  const [open, setOpen] = useState(false);
   const {
-    emoji, loaded, song, artist,
-  } = useNowPlaying();
+    open, setOpen, isPhone, emoji, loaded, song, artist,
+  } = useContext(NavContext);
 
   if (loaded) {
     return (
       <S.NowPlaying onClick={() => setOpen(!open)}>
-        <S.Emoji>{emoji || <VinylIcon />}</S.Emoji>
-        <S.SongInfo
-          pose={open ? 'open' : 'close'}
-        >
-          {artist} — {song}
-        </S.SongInfo>
+        <NavItem>
+          <S.Emoji>{emoji || <VinylIcon />}</S.Emoji>
+        </NavItem>
+        {!isPhone ?
+          <S.SongInfo pose={open ? 'open' : 'close'} >
+            <div>{artist} — {song}</div>
+          </S.SongInfo>
+          :
+          <S.MobileSongInfo open={open}>
+            <NavItem>
+              {artist} — {song}
+            </NavItem>
+          </S.MobileSongInfo>
+        }
       </S.NowPlaying>
     );
   }
