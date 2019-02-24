@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 import { withRouter } from 'react-router-dom';
 import FullFrame from 'components/FullFrame/FullFrame';
