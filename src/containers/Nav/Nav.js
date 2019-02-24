@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { ThemeProvider } from 'styled-components/macro';
 import { withRouter } from 'react-router-dom';
 import useNowPlaying from 'hooks/useNowPlaying';
+import useClickAway from './hooks/useClickAway';
 import useIsPhone from './hooks/useIsPhone';
 import S, { NavItem } from './styled';
 
@@ -9,11 +10,13 @@ export const NavContext = React.createContext();
 
 function Nav({ location }) {
   const [open, setOpen] = useState(false);
+
   const toggleOpen = () => setOpen(!open);
   const isPhone = useIsPhone();
   const {
     emoji, loaded, song, artist,
   } = useNowPlaying();
+  useClickAway({ open, setOpen });
 
   return (
     <NavContext.Provider value={{
