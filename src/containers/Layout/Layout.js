@@ -13,8 +13,8 @@ const Layout = () => {
     <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
     <>
       <Nav />
-      <Context caseStudies={caseStudies} index={index}>
-        <PoseGroup>
+      <Context caseStudies={caseStudies} index={index} >
+        <PoseGroup animateOnMount preEnterPose={view === 'home' ? 'preEnter' : 'exit'}>
           <RouteContainer key={view}>
             { view === 'home'
             ? <CaseStudyIndex caseStudies={caseStudies} />

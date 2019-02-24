@@ -9,14 +9,15 @@ const Posed = {};
 const transition = { ease: eases.standard, duration: durations.slow };
 
 Posed.AnimateIn = posed.li(({ i }) => {
-  const delay = (i * (durations.slow / 10));
+  const delay = (i * (durations.slow / 20));
   return ({
     enter: {
       opacity: 1, scale: 1, y: 0, delay, transition,
     },
-    exit: {
+    preEnter: {
       opacity: 0, scale: 0.8, y: '1em', transition, delay,
     },
+    exit: { opacity: 0 },
   });
 });
 

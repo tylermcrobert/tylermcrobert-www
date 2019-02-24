@@ -9,11 +9,11 @@ const sizes = {
 };
 
 const durations = {
-  slow: 400,
+  slow: 900,
 };
 
 const eases = {
-  standard: [0.39, 0.575, 0.565, 1],
+  standard: [0, 0.75, 0.25, 1],
 };
 
 const media = Object.keys(sizes).reduce((acc, label) => {

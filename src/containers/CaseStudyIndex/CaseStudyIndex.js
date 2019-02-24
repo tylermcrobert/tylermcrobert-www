@@ -11,23 +11,25 @@ const DirectoryLinks = ({ caseStudies, location }) => {
     <FullFrame context>
       <ZoomIn>
         <ul>
-          {caseStudies.map(({
-          id, uid, data, tags,
-        }, i) => (
-          <Styled.ListItem
-            i={i}
-            key={id}
-            onMouseEnter={() => handleHover(tags, i)}
-          >
-            <Styled.ListLink to={{ pathname: `/${uid}`, search: location.search }}>
-              {RichText.asText(data.title)}
-            </Styled.ListLink>
-          </Styled.ListItem>
-        ))}
+          <ListItems {...{ caseStudies, handleHover, location }} />
         </ul>
       </ZoomIn>
     </FullFrame>
   );
 };
+
+const ListItems = ({ caseStudies, handleHover, location }) =>
+  caseStudies.map(({
+    id,
+    uid,
+    data,
+    tags,
+  }, i) => (
+    <Styled.ListItem i={i} key={id} onMouseEnter={() => handleHover(tags, i)} >
+      <Styled.ListLink to={{ pathname: `/${uid}`, search: location.search }}>
+        {RichText.asText(data.title)}
+      </Styled.ListLink>
+    </Styled.ListItem>
+  ));
 
 export default withRouter(React.memo(DirectoryLinks));
