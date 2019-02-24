@@ -9,6 +9,7 @@ const sizes = {
 };
 
 const durations = {
+  medium: 600,
   slow: 900,
 };
 

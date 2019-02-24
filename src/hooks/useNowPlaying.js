@@ -34,17 +34,29 @@ function parseData(data) {
 }
 
 
-export default function useNowPlaying() {
+export default function useNowPlaying(interval = 15000) {
   const [data, setData] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
+  const fetchData = () => {
     window.fetch(api).then(res => res.json()).then((json) => {
       setData(parseData(json));
       setLoaded(true);
     }).catch((err) => {
       console.error(err); // eslint-disable-line no-console
     });
+  };
+
+  useEffect(() => {
+    fetchData();
+
+    const repeat = setInterval(() => {
+      fetchData();
+    }, interval);
+
+    return () => {
+      clearInterval(repeat);
+    };
   }, []);
 
   return { loaded, ...data };
