@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from 'react';
+import React, { useContext, createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useMedia } from 'react-use';
 import { AppContext } from 'containers/App/App';
@@ -16,13 +16,14 @@ const getUniqueTags = array =>
 export const ContextFrameContext = createContext();
 
 function ContextFrame({ children }) {
+  const [hoveredTag, setHoveredTag] = useState(null);
   const { caseStudies } = useContext(AppContext);
   const { tags, index, handleHover } = useCsContext();
   const uniqueTags = getUniqueTags(caseStudies);
   const isMobile = useMedia('(max-width: 576px)');
 
   return (
-    <ContextFrameContext.Provider value={handleHover}>
+    <ContextFrameContext.Provider value={{ handleHover, hoveredTag }}>
       <Styled.Wrapper>
         {!isMobile &&
           <>
@@ -31,6 +32,9 @@ function ContextFrame({ children }) {
                 tags={uniqueTags}
                 activeTags={tags}
                 index={index}
+                handleHover={handleHover}
+                setHoveredTag={setHoveredTag}
+                hoveredTag={hoveredTag}
               />
             </Styled.Left>
             <Styled.Right>

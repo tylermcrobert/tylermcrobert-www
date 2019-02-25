@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
 import { eases, durations } from 'containers/App/styled';
@@ -27,23 +27,33 @@ export const ZoomIn = posed.div({
   exit: { scale: 0.95, transition },
 });
 
+const active = css`
+  color: ${({ theme }) => theme.color.main};
+`;
 
 Styled.ListItem = styled(Posed.AnimateIn)`
   cursor: pointer;
   text-align: center;
   transition: color 0.8s ease 0s;
   font-size: 1.618em;
+
+  a {
+    transition: color 900ms ease;
+    color: ${({ theme }) => theme.color.light};
+    ${props => props.active && css`
+      ${active}
+    `}
+
+    &:hover {
+      transition: color 100ms ease;
+      ${active}
+    }
+  }
 `;
 
-Styled.ListLink = styled(Link)`
-  transition: color 900ms ease;
-  color: ${({ theme }) => theme.color.light};
-  line-height:2;
 
-  &:hover {
-    transition: color 100ms ease;
-    color: ${({ theme }) => theme.color.main};
-  }
+Styled.ListLink = styled(Link)`
+  line-height:2;
 `;
 
 export default Styled;
