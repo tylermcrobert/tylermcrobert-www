@@ -17,7 +17,7 @@ export default function useCsContext() {
 
   const { index, view, caseStudies } = useContext(AppContext);
   const previousView = usePrevious(view);
-  const caseStudyTags = index && caseStudies[index].tags;
+  const caseStudyTags = index !== null && caseStudies[index].tags;
 
   const handleHover = (hoveredTag, i) => {
     if (!isMobile()) {
