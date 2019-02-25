@@ -1,6 +1,7 @@
 import React, { useContext, memo } from 'react';
 import { AppContext } from 'containers/App/App';
 import Context from 'containers/Context/Context';
+import { Switch, Route } from 'react-router-dom';
 import CaseStudy from 'containers/CaseStudy/CaseStudy';
 import posed, { PoseGroup } from 'react-pose';
 import CaseStudyIndex from 'containers/CaseStudyIndex/CaseStudyIndex';
@@ -14,13 +15,10 @@ const Layout = () => {
     <>
       <Nav />
       <Context caseStudies={caseStudies} index={index} >
-        <PoseGroup animateOnMount preEnterPose={view === 'home' ? 'preEnter' : 'exit'}>
-          <RouteContainer key={view}>
-            { view === 'home'
-            ? <CaseStudyIndex caseStudies={caseStudies} />
-            : <CaseStudy data={caseStudies[index]} /> }
-          </RouteContainer>
-        </PoseGroup>
+        <Switch key="adf">
+          <Route path="/:uid" render={({ match }) => match.params.uid} key="a" />
+          <Route path="/" render={() => 'HOme'} key="a" />
+        </Switch>
       </Context>
     </>
     </ThemeProvider>
@@ -29,7 +27,7 @@ const Layout = () => {
 
 const RouteContainer = posed.div({
   enter: {
-    opacity: 1, delay: 400, beforeChildren: true, transition: { duration: 0 },
+    opacity: 1, delay: 400, beforeChildren: true, transition: { duration: 200 },
   },
   exit: { opacity: 0 },
 });

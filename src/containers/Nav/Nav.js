@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { ThemeProvider } from 'styled-components/macro';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import useNowPlaying from 'hooks/useNowPlaying';
 import useClickAway from './hooks/useClickAway';
 import useIsPhone from './hooks/useIsPhone';
@@ -26,7 +26,7 @@ function Nav({ location }) {
       <ThemeProvider theme={{ open, hasEmoji: !(!emoji) }}>
         <ResponsiveNav>
           <S.Logo to={{ pathname: '/', search: location.search }}>Tyler McRobert</S.Logo>
-          <NavItem>info</NavItem>
+          <NavItem><Link to="/info">info</Link></NavItem>
         </ResponsiveNav>
       </ThemeProvider>
     </NavContext.Provider>

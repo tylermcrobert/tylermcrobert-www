@@ -5,7 +5,6 @@ import App from 'containers/App/App';
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/info" render={() => <App view="info" />} />
       <Route
         path="/@:ctx"
         render={({ match }) => <Redirect to={`/?=${match.params.ctx}`} />
@@ -14,10 +13,10 @@ const Router = () => (
       <Route
         exact
         path="/:uid"
-        render={({ match }) => <App caseStudyUid={match.params.uid} view="caseStudy" />}
+        render={({ match }) => <App caseStudyUid={match.params.uid} />}
       />
 
-      <Route path="/" render={() => <App view="home" />} />
+      <Route path="/" render={() => <App />} />
     </Switch>
   </BrowserRouter>
 );
