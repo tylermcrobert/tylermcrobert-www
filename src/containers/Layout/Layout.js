@@ -3,21 +3,21 @@ import { AppContext } from 'containers/App/App';
 import Context from 'containers/Context/Context';
 import { Switch, Route } from 'react-router-dom';
 import CaseStudy from 'containers/CaseStudy/CaseStudy';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
 import CaseStudyIndex from 'containers/CaseStudyIndex/CaseStudyIndex';
 import Nav from 'containers/Nav/Nav';
 import { ThemeProvider } from 'styled-components/macro';
 
 const Layout = () => {
-  const { view, caseStudies, index } = useContext(AppContext);
+  const { caseStudies, index } = useContext(AppContext);
   return (
     <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
     <>
       <Nav />
       <Context caseStudies={caseStudies} index={index} >
-        <Switch key="adf">
-          <Route path="/:uid" render={({ match }) => match.params.uid} key="a" />
-          <Route path="/" render={() => 'HOme'} key="a" />
+        <Switch key="Switch">
+          <Route path="/:uid" render={() => <CaseStudy data={caseStudies[index]} />} />
+          <Route path="/" render={() => <CaseStudyIndex />} />
         </Switch>
       </Context>
     </>

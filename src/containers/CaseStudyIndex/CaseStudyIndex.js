@@ -1,5 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { RichText } from 'prismic-reactjs';
+import { AppContext } from 'containers/App/App';
+
+
 import includes from 'array-includes';
 import { withRouter } from 'react-router-dom';
 import FullFrame from 'components/FullFrame/FullFrame';
@@ -14,7 +17,8 @@ function useScrollRest() {
   }, []);
 }
 
-const DirectoryLinks = ({ caseStudies }) => {
+const DirectoryLinks = () => {
+  const { caseStudies } = useContext(AppContext);
   useScrollRest();
   return (
     <FullFrame context>
