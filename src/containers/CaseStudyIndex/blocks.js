@@ -1,30 +1,34 @@
 import styled, { css } from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
-import { eases, durations } from 'containers/App/styled';
+import { eases, durations, transitions } from 'containers/App/styled';
 
 const Styled = {};
 const Posed = {};
 
-const transition = { ease: eases.standard, duration: durations.slow };
+
+const { standard, exitFast } = transitions;
 
 Posed.AnimateIn = posed.li(({ i }) => {
   const delay = (i * (durations.slow / 20));
   return ({
     enter: {
-      opacity: 1, scale: 1, y: 0, delay, transition,
+      opacity: 1, scale: 1, y: 0, delay, transition: standard,
     },
     preEnter: {
-      opacity: 0, scale: 0.8, y: '1em', transition, delay,
+      opacity: 0, scale: 0.8, y: '1em', transition: standard, delay,
     },
-    exit: { opacity: 0, transition },
+    exit: { opacity: 0, transition: exitFast },
   });
 });
 
-
 export const ZoomIn = posed.div({
-  enter: { scale: 1, transition },
-  exit: { scale: 0.95, transition },
+  enter: {
+    scale: 1, transition: exitFast,
+  },
+  exit: {
+    scale: 0.95, transition: exitFast,
+  },
 });
 
 const active = css`
