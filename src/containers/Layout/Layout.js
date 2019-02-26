@@ -26,7 +26,7 @@ const Layout = withRouter(({ location }) => {
       <Nav />
       <Context caseStudies={caseStudies} index={index}>
         <PoseGroup preEnterPose={preEnterPose} animateOnMount>
-          <RouteContainer key={location.key}>
+          <RouteContainer key={location.pathname}>
             <Switch location={location}>
               <Route exact path="/info" render={() => <Info />} key="info" />
               <Route
