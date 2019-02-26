@@ -11,7 +11,7 @@ import Info from 'containers/Info/Info';
 
 const RouteContainer = posed.div({
   enter: {
-    opacity: 1, beforeChildren: true, delay: 500, transition: { duration: 0 },
+    opacity: 1, beforeChildren: true, delay: 400, transition: { duration: 0 },
   },
   exit: { opacity: 1, transition: { duration: 0 } },
 });
