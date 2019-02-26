@@ -10,17 +10,16 @@ import FullFrame from 'components/FullFrame/FullFrame';
 import Slices from './slices/slices';
 import Styled from './style';
 
-const CaseStudy = ({ uid }) => {
-  const { caseStudies } = useContext(AppContext);
-  const getDataByUid = () => {
-    const index = caseStudies.map(data => data.uid).indexOf(uid);
-    if (index === -1) {
-      console.log('not found');
-    }
-    return caseStudies[index];
-  };
 
-  const data = getDataByUid();
+const getDataByUid = (uid) => {
+  const { caseStudies } = useContext(AppContext);
+  const index = caseStudies.map(data => data.uid).indexOf(uid);
+  return caseStudies[index];
+};
+
+const CaseStudy = ({ uid }) => {
+  const data = getDataByUid(uid);
+
   const { deliverables } = data.data;
   const title = RichText.asText(data.data.title);
   const description = RichText.asText(data.data.description);
@@ -31,6 +30,7 @@ const CaseStudy = ({ uid }) => {
     </Fade>
   );
 };
+
 
 const { standard, exitFast } = transitions;
 

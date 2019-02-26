@@ -1,6 +1,7 @@
 import React, { createContext, memo } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
+import { ThemeProvider } from 'styled-components/macro';
 import { withRouter } from 'react-router-dom';
 import Layout from 'containers/Layout/Layout';
 import Loading from 'components/Loading/Loading';
@@ -17,17 +18,19 @@ function App({ caseStudyUid, location, context }) {
   const index = getIndex({ caseStudies, caseStudyUid });
 
   return (
-    <AppContext.Provider value={{
+    <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
+      <AppContext.Provider value={{
         caseStudyUid,
         caseStudies,
         index,
         api,
         context,
       }}
-    >
-      <GlobalStyle />
-      {loaded ? <Layout /> : <Loading />}
-    </AppContext.Provider>
+      >
+        <GlobalStyle />
+        {loaded ? <Layout /> : <Loading />}
+      </AppContext.Provider>
+    </ThemeProvider>
   );
 }
 

@@ -17,6 +17,7 @@ const Router = () => (
         render={({ match }) => <App context caseStudyUid={match.params.uid} />}
       />
       <Route exact path="/" render={() => <App context />} />
+      <Route exact path="/*" render={() => <App context />} />
     </Switch>
   </BrowserRouter>
 );

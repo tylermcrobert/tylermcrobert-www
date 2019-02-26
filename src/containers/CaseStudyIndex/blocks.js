@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
-import { eases, durations, transitions } from 'containers/App/styled';
+import { durations, transitions } from 'containers/App/styled';
 
 const Styled = {};
 const Posed = {};
-
 
 const { standard, exitFast } = transitions;
 
@@ -54,7 +53,6 @@ Styled.ListItem = styled(Posed.AnimateIn)`
     }
   }
 `;
-
 
 Styled.ListLink = styled(Link)`
   line-height:2;

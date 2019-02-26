@@ -6,8 +6,8 @@ import CaseStudy from 'containers/CaseStudy/CaseStudy';
 import posed, { PoseGroup } from 'react-pose';
 import CaseStudyIndex from 'containers/CaseStudyIndex/CaseStudyIndex';
 import Nav from 'containers/Nav/Nav';
-import { ThemeProvider } from 'styled-components/macro';
 import Info from 'containers/Info/Info';
+import FullFrame from 'components/FullFrame/FullFrame';
 
 const RouteContainer = posed.div({
   enter: {
@@ -17,11 +17,17 @@ const RouteContainer = posed.div({
 });
 
 const Layout = withRouter(({ location }) => {
-  const { caseStudies, index, context } = useContext(AppContext);
+  const {
+    caseStudies,
+    index,
+    context,
+    notFound,
+  } = useContext(AppContext);
   const preEnterPose = location.pathname === '/' ? 'preEnter' : 'exit';
 
-  return (
-    <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
+
+  if (!notFound) {
+    return (
     <>
       <Nav />
       <Context caseStudies={caseStudies} index={index} enabled={context}>
@@ -29,20 +35,21 @@ const Layout = withRouter(({ location }) => {
           <RouteContainer key={location.pathname}>
             <Switch location={location}>
               <Route exact path="/info" render={() => <Info />} key="info" />
-              <Route
-                path="/:uid"
-                render={({ match }) =>
-                  <CaseStudy uid={match.params.uid} />}
-                key="casestudy"
-              />
+              {caseStudies.map(cs => cs.uid).map(uid => (
+                <Route
+                  path={`/${uid}`}
+                  render={() => <CaseStudy uid={uid} />}
+                  key="casestudy"
+                />))}
               <Route path="/" render={() => <CaseStudyIndex />} key="index" />
             </Switch>
           </RouteContainer>
         </PoseGroup>
       </Context>
     </>
-    </ThemeProvider>
-  );
+    );
+  }
+  return <><Nav /><FullFrame><div>Not Found</div></FullFrame></>;
 });
 
 export default memo(Layout);
