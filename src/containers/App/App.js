@@ -7,7 +7,7 @@ import Layout from 'containers/Layout/Layout';
 import Loading from 'components/Loading/Loading';
 import usePrismicData from './hooks/usePrismicData';
 import getIndex from './util/getIndex';
-import GlobalStyle from './styled';
+import GlobalStyle, { theme } from './styled';
 
 export const AppContext = createContext();
 
@@ -18,7 +18,7 @@ function App({ caseStudyUid, location, context }) {
   const index = getIndex({ caseStudies, caseStudyUid });
 
   return (
-    <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
+    <ThemeProvider theme={theme}>
       <AppContext.Provider value={{
         caseStudyUid,
         caseStudies,
