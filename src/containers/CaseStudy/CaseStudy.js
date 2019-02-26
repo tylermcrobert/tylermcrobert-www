@@ -4,7 +4,7 @@ import { AppContext } from 'containers/App/App';
 
 
 import posed from 'react-pose';
-import { eases, durations } from 'containers/App/styled';
+import { eases, durations, transitions } from 'containers/App/styled';
 import PropTypes from 'prop-types';
 import FullFrame from 'components/FullFrame/FullFrame';
 import Slices from './slices/slices';
@@ -32,14 +32,11 @@ const CaseStudy = ({ uid }) => {
   );
 };
 
-const transition = {
-  ease: eases.standard,
-  durations: durations.slow,
-};
+const { standard, exitFast } = transitions;
 
 const Fade = posed.div({
-  enter: { opacity: 1, transition },
-  exit: { opacity: 0, transition },
+  enter: { opacity: 1, transition: standard },
+  exit: { opacity: 0, transition: exitFast },
 });
 
 CaseStudy.Cover = ({ description, deliverables, title }) => (

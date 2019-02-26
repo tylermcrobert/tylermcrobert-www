@@ -10,13 +10,16 @@ import { ThemeProvider } from 'styled-components/macro';
 import Info from 'containers/Info/Info';
 
 const RouteContainer = posed.div({
-  enter: { opacity: 1, beforeChildren: true, delay: 300 },
-  exit: { opacity: 0 },
+  enter: {
+    opacity: 1, beforeChildren: true, delay: 500, transition: { duration: 0 },
+  },
+  exit: { opacity: 1, transition: { duration: 0 } },
 });
 
 const Layout = withRouter(({ location }) => {
   const { caseStudies, index } = useContext(AppContext);
   const preEnterPose = location.pathname === '/' ? 'preEnter' : 'exit';
+
   return (
     <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
     <>
