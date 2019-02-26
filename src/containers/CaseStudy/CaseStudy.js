@@ -11,13 +11,21 @@ import Slices from './slices/slices';
 import Styled from './style';
 
 
+const handleIndexByUid = (uid) => {
+  const { caseStudies, setIndex } = useContext(AppContext);
+  const index = caseStudies.map(data => data.uid).indexOf(uid);
+  setIndex(index);
+  return index;
+};
+
 const getDataByUid = (uid) => {
   const { caseStudies } = useContext(AppContext);
-  const index = caseStudies.map(data => data.uid).indexOf(uid);
+  const index = handleIndexByUid(uid);
   return caseStudies[index];
 };
 
 const CaseStudy = ({ uid }) => {
+  console.log('rendered');
   const data = getDataByUid(uid);
   return (
     <Fade>
