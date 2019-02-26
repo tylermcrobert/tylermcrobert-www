@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
+import { AppContext } from 'containers/App/App';
+
+
 import posed from 'react-pose';
 import { eases, durations } from 'containers/App/styled';
 import PropTypes from 'prop-types';
@@ -7,7 +10,17 @@ import FullFrame from 'components/FullFrame/FullFrame';
 import Slices from './slices/slices';
 import Styled from './style';
 
-const CaseStudy = ({ data }) => {
+const CaseStudy = ({ uid }) => {
+  const { caseStudies } = useContext(AppContext);
+  const getDataByUid = () => {
+    const index = caseStudies.map(data => data.uid).indexOf(uid);
+    if (index === -1) {
+      console.log('not found');
+    }
+    return caseStudies[index];
+  };
+
+  const data = getDataByUid();
   const { deliverables } = data.data;
   const title = RichText.asText(data.data.title);
   const description = RichText.asText(data.data.description);

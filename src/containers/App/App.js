@@ -10,7 +10,7 @@ import GlobalStyle from './styled';
 
 export const AppContext = createContext();
 
-function App({ caseStudyUid, view, location }) {
+function App({ caseStudyUid, location }) {
   const ctx = qs.parse(location.search)['?'];
   const { caseStudies, api } = usePrismicData({ ctx });
   const loaded = !!(api && caseStudies);
@@ -18,7 +18,6 @@ function App({ caseStudyUid, view, location }) {
 
   return (
     <AppContext.Provider value={{
-        view,
         caseStudyUid,
         caseStudies,
         index,
@@ -38,7 +37,6 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  view: PropTypes.string.isRequired,
   caseStudyUid: PropTypes.string,
   location: PropTypes.object.isRequired, //eslint-disable-line
 };
