@@ -48,7 +48,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: untitledSans,helvetica,arial,sans-serif;
     font-weight: 400;
     line-height: 1.7;
-    transform: translateZ(0);
   }
 
   a {
