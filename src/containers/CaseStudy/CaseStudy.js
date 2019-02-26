@@ -1,32 +1,26 @@
 import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
+
 import { AppContext } from 'containers/App/App';
-
-
 import posed from 'react-pose';
 import { transitions } from 'containers/App/styled';
 import PropTypes from 'prop-types';
 import FullFrame from 'components/FullFrame/FullFrame';
+
 import Slices from './slices/slices';
 import Styled from './style';
 
 
-const handleIndexByUid = (uid) => {
-  const { caseStudies, setIndex } = useContext(AppContext);
+const getIndexByUid = ({ uid, caseStudies }) => {
   const index = caseStudies.map(data => data.uid).indexOf(uid);
-  setIndex(index);
   return index;
 };
 
-const getDataByUid = (uid) => {
-  const { caseStudies } = useContext(AppContext);
-  const index = handleIndexByUid(uid);
-  return caseStudies[index];
-};
-
 const CaseStudy = ({ uid }) => {
-  console.log('rendered');
-  const data = getDataByUid(uid);
+  const { caseStudies, setIndex } = useContext(AppContext);
+  const index = getIndexByUid({ uid, caseStudies });
+  const data = caseStudies[index];
+  setIndex(index);
   return (
     <Fade>
       <CaseStudy.Cover
@@ -63,6 +57,10 @@ CaseStudy.Cover = ({ description, deliverables, title }) => (
     </Styled.Cover>
   </FullFrame>
 );
+
+CaseStudy.propTypes = {
+  uid: PropTypes.string.isRequired,
+};
 
 CaseStudy.Cover.propTypes = {
   description: PropTypes.string.isRequired,
