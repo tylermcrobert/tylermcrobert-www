@@ -10,23 +10,29 @@ import { ThemeProvider } from 'styled-components/macro';
 import Info from 'containers/Info/Info';
 
 const RouteContainer = posed.div({
-  enter: { opacity: 1, beforeChildren: true, delay: 0 },
+  enter: { opacity: 1, beforeChildren: true, delay: 300 },
   exit: { opacity: 0 },
 });
 
 const Layout = withRouter(({ location }) => {
   const { caseStudies, index } = useContext(AppContext);
+  const preEnterPose = location.pathname === '/' ? 'preEnter' : 'exit';
   return (
     <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
     <>
       <Nav />
-      <Context caseStudies={caseStudies} index={index} >
-        <PoseGroup animateOnMount>
+      <Context caseStudies={caseStudies} index={index}>
+        <PoseGroup preEnterPose={preEnterPose} animateOnMount>
           <RouteContainer key={location.key}>
-            <Switch>
-              <Route exact path="/info" render={() => <Info />} />
-              <Route path="/:uid" render={({ match }) => <CaseStudy uid={match.params.uid} />} />
-              <Route path="/" render={() => <CaseStudyIndex />} />
+            <Switch location={location}>
+              <Route exact path="/info" render={() => <Info />} key="info" />
+              <Route
+                path="/:uid"
+                render={({ match }) =>
+                  <CaseStudy uid={match.params.uid} />}
+                key="casestudy"
+              />
+              <Route path="/" render={() => <CaseStudyIndex />} key="index" />
             </Switch>
           </RouteContainer>
         </PoseGroup>
@@ -35,6 +41,5 @@ const Layout = withRouter(({ location }) => {
     </ThemeProvider>
   );
 });
-
 
 export default memo(Layout);
