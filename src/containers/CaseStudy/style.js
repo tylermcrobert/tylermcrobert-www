@@ -1,23 +1,12 @@
 import styled from 'styled-components/macro';
 import posed from 'react-pose';
-import { media, eases, durations } from 'containers/App/styled';
+import { media, poses } from 'containers/App/styled';
 
 const Styled = {};
 
-const transition = {
-  ease: eases.standard,
-  duration: durations.slow,
-};
 
-const TitleIn = posed.div({
-  enter: { y: 0, opacity: 1, transition },
-  exit: { y: '1.25rem', opacity: 0, transition },
-});
-
-const InfoIn = posed.div({
-  enter: { y: 0, opacity: 1, transition },
-  exit: { y: '-1.25rem', opacity: 0, transition },
-});
+const TitleIn = posed.div(poses.fadeUp);
+const InfoIn = posed.div(poses.fadeDown);
 
 Styled.Cover = styled.div`
   display: flex;

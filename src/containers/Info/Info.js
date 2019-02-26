@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import posed from 'react-pose';
-import { eases, durations } from 'containers/App/styled';
+import { poses } from 'containers/App/styled';
 
 function Info() {
   return (
@@ -15,15 +15,7 @@ function Info() {
 
 const Styled = {};
 
-const transition = {
-  ease: eases.standard,
-  duration: durations.slow,
-};
-
-const TitleIn = posed.div({
-  enter: { y: 0, opacity: 1, transition },
-  exit: { y: '1.25rem', opacity: 0, transition },
-});
+const TitleIn = posed.div(poses.fadeUp);
 
 
 Styled.PageContainer = styled(TitleIn)`
