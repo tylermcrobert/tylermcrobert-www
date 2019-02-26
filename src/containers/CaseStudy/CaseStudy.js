@@ -19,18 +19,17 @@ const getDataByUid = (uid) => {
 
 const CaseStudy = ({ uid }) => {
   const data = getDataByUid(uid);
-
-  const { deliverables } = data.data;
-  const title = RichText.asText(data.data.title);
-  const description = RichText.asText(data.data.description);
   return (
     <Fade>
-      <CaseStudy.Cover {...{ title, description, deliverables }} />
+      <CaseStudy.Cover
+        deliverables={data.data.deliverables}
+        title={RichText.asText(data.data.title)}
+        description={RichText.asText(data.data.description)}
+      />
       <Slices modules={data.data.cs_content} title={RichText.asText(data.data.title)} />
     </Fade>
   );
 };
-
 
 const { standard, exitFast } = transitions;
 
