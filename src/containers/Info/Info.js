@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import posed from 'react-pose';
+import { eases, durations } from 'containers/App/styled';
 
 function Info() {
   return (
@@ -14,12 +15,18 @@ function Info() {
 
 const Styled = {};
 
+const transition = {
+  ease: eases.standard,
+  duration: durations.slow,
+};
 
-const posedContainer = posed.div({
-  enter: { opacity: 1 },
-  exit: { opacity: 0 },
+const TitleIn = posed.div({
+  enter: { y: 0, opacity: 1, transition },
+  exit: { y: '1.25rem', opacity: 0, transition },
 });
-Styled.PageContainer = styled(posedContainer)`
+
+
+Styled.PageContainer = styled(TitleIn)`
   padding: 1rem;
 `;
 

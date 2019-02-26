@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components/macro';
 import Info from 'containers/Info/Info';
 
 const RouteContainer = posed.div({
-  enter: { opacity: 1, beforeChildren: true, delay: 300 },
+  enter: { opacity: 1, beforeChildren: true, delay: 0 },
   exit: { opacity: 0 },
 });
 
@@ -21,7 +21,7 @@ const Layout = withRouter(({ location }) => {
     <>
       <Nav />
       <Context caseStudies={caseStudies} index={index} >
-        <PoseGroup>
+        <PoseGroup animateOnMount>
           <RouteContainer key={location.key}>
             <Switch>
               <Route exact path="/info" render={() => <Info />} />
