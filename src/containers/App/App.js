@@ -10,7 +10,7 @@ import GlobalStyle from './styled';
 
 export const AppContext = createContext();
 
-function App({ caseStudyUid, location }) {
+function App({ caseStudyUid, location, context }) {
   const ctx = qs.parse(location.search)['?'];
   const { caseStudies, api } = usePrismicData({ ctx });
   const loaded = !!(api && caseStudies);
@@ -22,6 +22,7 @@ function App({ caseStudyUid, location }) {
         caseStudies,
         index,
         api,
+        context,
       }}
     >
       <GlobalStyle />
@@ -34,9 +35,11 @@ export default memo(withRouter(App));
 
 App.defaultProps = {
   caseStudyUid: null,
+  context: false,
 };
 
 App.propTypes = {
   caseStudyUid: PropTypes.string,
   location: PropTypes.object.isRequired, //eslint-disable-line
+  context: PropTypes.bool,
 };

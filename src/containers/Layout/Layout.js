@@ -17,14 +17,14 @@ const RouteContainer = posed.div({
 });
 
 const Layout = withRouter(({ location }) => {
-  const { caseStudies, index } = useContext(AppContext);
+  const { caseStudies, index, context } = useContext(AppContext);
   const preEnterPose = location.pathname === '/' ? 'preEnter' : 'exit';
 
   return (
     <ThemeProvider theme={{ color: { light: '#6a6a6a', main: '#f6f6f6' } }}>
     <>
       <Nav />
-      <Context caseStudies={caseStudies} index={index}>
+      <Context caseStudies={caseStudies} index={index} enabled={context}>
         <PoseGroup preEnterPose={preEnterPose} animateOnMount>
           <RouteContainer key={location.pathname}>
             <Switch location={location}>

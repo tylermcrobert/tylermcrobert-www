@@ -10,13 +10,13 @@ const Router = () => (
         render={({ match }) => <Redirect to={`/?=${match.params.ctx}`} />
         }
       />
+      <Route exact path="/info" render={() => <App />} />
       <Route
         exact
         path="/:uid"
-        render={({ match }) => <App caseStudyUid={match.params.uid} />}
+        render={({ match }) => <App context caseStudyUid={match.params.uid} />}
       />
-
-      <Route path="/" render={() => <App />} />
+      <Route exact path="/" render={() => <App context />} />
     </Switch>
   </BrowserRouter>
 );

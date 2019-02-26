@@ -1,4 +1,6 @@
 import styled from 'styled-components/macro';
+import posed from 'react-pose';
+import { transitions, durations } from 'containers/App/styled';
 
 const Styled = {};
 
@@ -15,6 +17,12 @@ Styled.Sideways = styled.div`
   font-size: .81em;
 `;
 
+const { exitFast, standard } = transitions;
+const PosedSideways = posed.div({
+  disabled: { opacity: 0, y: '-1em', transition: exitFast },
+  enabled: { opacity: 1, y: '0em', transition: { ...standard, duration: durations.medium } },
+});
+
 Styled.Right = styled(Styled.Sideways)`
   transform: rotate(90deg) translate3d(calc(100%), 0, 0);
   transform-origin: right 0;
@@ -28,4 +36,5 @@ Styled.Left = styled(Styled.Sideways)`
   left: 0
 `;
 
+export { PosedSideways };
 export default Styled;

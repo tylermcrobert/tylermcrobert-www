@@ -24,15 +24,16 @@ const transitions = {
   },
 };
 
+const { standard, exitFast } = transitions;
 
 const poses = {
   fadeUp: {
-    enter: { y: 0, opacity: 1, transition: transitions.standard },
-    exit: { y: '.5rem', opacity: 0, transition: transitions.exitFast },
+    enter: { y: 0, opacity: 1, transition: standard },
+    exit: { y: '.5rem', opacity: 0, transition: exitFast },
   },
   fadeDown: {
-    enter: { y: 0, opacity: 1, transition: transitions.standard },
-    exit: { y: '-.5rem', opacity: 0, transition: transitions.exitFast },
+    enter: { y: 0, opacity: 1, transition: standard },
+    exit: { y: '-.5rem', opacity: 0, transition: exitFast },
   },
 };
 
