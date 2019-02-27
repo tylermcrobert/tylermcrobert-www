@@ -27,7 +27,11 @@ function ContextFrame({ children }) {
 
   return (
     <ContextFrameContext.Provider value={{
-     handleHover, hoveredTag, setTags, setIndex, setEnabled,
+      handleHover,
+      hoveredTag,
+      setTags,
+      setIndex,
+      setEnabled,
     }}
     >
       <Styled.Wrapper>
@@ -50,8 +54,7 @@ function ContextFrame({ children }) {
                 <Index index={index} length={caseStudies.length} />
               </PosedSideways>
             </Styled.Right>
-        </>
-        }
+        </> }
         {children}
       </Styled.Wrapper>
     </ContextFrameContext.Provider>
@@ -60,11 +63,6 @@ function ContextFrame({ children }) {
 
 export default ContextFrame;
 
-ContextFrame.defaultProps = {
-  enabled: false,
-};
-
 ContextFrame.propTypes = {
   children: PropTypes.element.isRequired,
-  enabled: PropTypes.bool,
 };

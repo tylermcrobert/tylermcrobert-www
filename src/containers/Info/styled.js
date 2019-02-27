@@ -1,14 +1,6 @@
 import styled from 'styled-components/macro';
-import posed from 'react-pose';
-import { poses } from 'containers/App/styled';
 
 const Styled = {};
-
-const TitleIn = posed.div(poses.fadeUp);
-
-Styled.PageContainer = styled(TitleIn)`
-  padding: 1rem;
-`;
 
 const fontSize = 'calc(.75em + 2vw)';
 
