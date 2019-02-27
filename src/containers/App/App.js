@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
 import { ThemeProvider } from 'styled-components/macro';
@@ -15,14 +15,11 @@ function App({ location }) {
   const { caseStudies, api } = usePrismicData({ ctx });
   const loaded = !!(api && caseStudies);
 
-  const context = true; // CHANGEEE
-
   return (
     <ThemeProvider theme={theme}>
       <AppContext.Provider value={{
         caseStudies,
         api,
-        context,
       }}
       >
         <GlobalStyle />

@@ -15,8 +15,9 @@ const getUniqueTags = array =>
 
 export const ContextFrameContext = createContext();
 
-function ContextFrame({ children, enabled }) {
+function ContextFrame({ children }) {
   const [hoveredTag, setHoveredTag] = useState(null);
+  const [enabled, setEnabled] = useState(true);
   const { caseStudies } = useContext(AppContext);
   const {
     tags, index, handleHover, setTags, setIndex,
@@ -26,7 +27,7 @@ function ContextFrame({ children, enabled }) {
 
   return (
     <ContextFrameContext.Provider value={{
-     handleHover, hoveredTag, setTags, setIndex,
+     handleHover, hoveredTag, setTags, setIndex, setEnabled,
     }}
     >
       <Styled.Wrapper>
@@ -59,6 +60,11 @@ function ContextFrame({ children, enabled }) {
 
 export default ContextFrame;
 
+ContextFrame.defaultProps = {
+  enabled: false,
+};
+
 ContextFrame.propTypes = {
   children: PropTypes.element.isRequired,
+  enabled: PropTypes.bool,
 };
