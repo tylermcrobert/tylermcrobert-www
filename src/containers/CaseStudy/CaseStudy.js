@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { RichText } from 'prismic-reactjs';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +12,7 @@ import { ContextFrameContext } from 'containers/Context/Context';
 import Slices from './slices/slices';
 import Styled from './style';
 
+const { standard, exitFast } = transitions;
 
 const getIndexByUid = ({ uid, caseStudies }) => {
   const index = caseStudies.map(data => data.uid).indexOf(uid);
@@ -25,6 +26,12 @@ const CaseStudy = ({ uid }) => {
   const data = caseStudies[index];
   const nextIndex = (index + 1) % caseStudies.length;
   setIndex(index);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, exitFast.duration);
+  }, []);
 
   return (
     <Fade>
@@ -46,7 +53,6 @@ const CaseStudy = ({ uid }) => {
   );
 };
 
-const { standard, exitFast } = transitions;
 
 const Fade = posed.div({
   enter: { opacity: 1, transition: standard },
@@ -80,4 +86,5 @@ CaseStudy.Cover.propTypes = {
   deliverables: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
+
 export default React.memo(CaseStudy);
