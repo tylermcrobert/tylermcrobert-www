@@ -18,12 +18,17 @@ export const ContextFrameContext = createContext();
 function ContextFrame({ children, enabled }) {
   const [hoveredTag, setHoveredTag] = useState(null);
   const { caseStudies } = useContext(AppContext);
-  const { tags, index, handleHover } = useCsContext();
+  const {
+    tags, index, handleHover, setTags, setIndex,
+  } = useCsContext();
   const uniqueTags = getUniqueTags(caseStudies);
   const isMobile = useMedia('(max-width: 576px)');
 
   return (
-    <ContextFrameContext.Provider value={{ handleHover, hoveredTag }}>
+    <ContextFrameContext.Provider value={{
+     handleHover, hoveredTag, setTags, setIndex,
+    }}
+    >
       <Styled.Wrapper>
         {!isMobile &&
           <>

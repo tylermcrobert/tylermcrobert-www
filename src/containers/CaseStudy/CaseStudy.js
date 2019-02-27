@@ -6,6 +6,7 @@ import posed from 'react-pose';
 import { transitions } from 'containers/App/styled';
 import PropTypes from 'prop-types';
 import FullFrame from 'components/FullFrame/FullFrame';
+import { ContextFrameContext } from 'containers/Context/Context';
 
 import Slices from './slices/slices';
 import Styled from './style';
@@ -17,7 +18,8 @@ const getIndexByUid = ({ uid, caseStudies }) => {
 };
 
 const CaseStudy = ({ uid }) => {
-  const { caseStudies, setIndex } = useContext(AppContext);
+  const { caseStudies } = useContext(AppContext);
+  const { setIndex } = useContext(ContextFrameContext);
   const index = getIndexByUid({ uid, caseStudies });
   const data = caseStudies[index];
   setIndex(index);

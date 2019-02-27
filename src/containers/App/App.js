@@ -15,15 +15,12 @@ function App({ location }) {
   const { caseStudies, api } = usePrismicData({ ctx });
   const loaded = !!(api && caseStudies);
 
-  const [index, setIndex] = useState(null); // CHANGE
   const context = true; // CHANGEEE
 
   return (
     <ThemeProvider theme={theme}>
       <AppContext.Provider value={{
         caseStudies,
-        index,
-        setIndex,
         api,
         context,
       }}

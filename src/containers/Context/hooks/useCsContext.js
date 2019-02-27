@@ -1,42 +1,29 @@
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AppContext } from 'containers/App/App';
 import isMobile from 'is-mobile';
 
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
-
-
 export default function useCsContext() {
-  const [hoverTags, setHoverTags] = useState([]);
-  const [hoverIndex, setHoverIndex] = useState(0);
+  const [tags, setTags] = useState([]);
+  const [index, setIndex] = useState(0);
 
-  const { index, view, caseStudies } = useContext(AppContext);
-  const previousView = usePrevious(view);
-  const caseStudyTags = index !== null && caseStudies[index].tags;
+  const { caseStudies } = useContext(AppContext);
 
   const handleHover = (hoveredTag, i) => {
     if (!isMobile()) {
-      setHoverTags(hoveredTag);
-      setHoverIndex(i);
+      setTags(hoveredTag);
+      setIndex(i);
     }
   };
 
   useEffect(() => {
-    if (previousView !== 'home') {
-      setHoverIndex(0);
-      setHoverTags([]);
-    }
-  }, [view]);
-
+    setTags(caseStudies[index].tags);
+  }, []);
 
   return {
-    tags: caseStudyTags || hoverTags,
-    index: (index || hoverIndex) + 1,
+    tags,
+    index: index + 1,
     handleHover,
+    setTags,
+    setIndex,
   };
 }
