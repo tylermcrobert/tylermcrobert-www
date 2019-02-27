@@ -4,7 +4,7 @@ import isMobile from 'is-mobile';
 
 export default function useCsContext() {
   const [tags, setTags] = useState([]);
-  const [index, setIndex] = useState(null);
+  const [index, setIndex] = useState(-1);
 
   const { caseStudies } = useContext(AppContext);
 
@@ -16,7 +16,7 @@ export default function useCsContext() {
   };
 
   useEffect(() => {
-    if (index !== null && index !== -1) {
+    if (index !== -1) {
       setTags(caseStudies[index].tags);
     }
   }, [index]);
