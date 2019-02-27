@@ -49,4 +49,10 @@ Styled.TitleWrapper = styled(TitleIn)`
   justify-content: center;
 `;
 
+Styled.NextProject = styled.div`
+  text-align: center;
+  font-size: 2rem;
+  padding: 5rem 1rem;
+`;
+
 export default Styled;

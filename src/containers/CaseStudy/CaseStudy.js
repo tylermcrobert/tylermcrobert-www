@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
+import { Link } from 'react-router-dom';
 
 import { AppContext } from 'containers/App/App';
 import posed from 'react-pose';
@@ -22,7 +23,9 @@ const CaseStudy = ({ uid }) => {
   const { setIndex } = useContext(ContextFrameContext);
   const index = getIndexByUid({ uid, caseStudies });
   const data = caseStudies[index];
+  const nextIndex = (index + 1) % caseStudies.length;
   setIndex(index);
+
   return (
     <Fade>
       <CaseStudy.Cover
@@ -30,7 +33,15 @@ const CaseStudy = ({ uid }) => {
         title={RichText.asText(data.data.title)}
         description={RichText.asText(data.data.description)}
       />
-      <Slices modules={data.data.cs_content} title={RichText.asText(data.data.title)} />
+      <Slices
+        modules={data.data.cs_content}
+        title={RichText.asText(data.data.title)}
+      />
+      <Link to={caseStudies[nextIndex].uid}>
+        <Styled.NextProject>
+          {RichText.asText(caseStudies[nextIndex].data.title)}
+        </Styled.NextProject>
+      </Link>
     </Fade>
   );
 };
