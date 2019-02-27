@@ -86,4 +86,4 @@ const StyledWindow = styled.div`
 
 `;
 
-export default Website;
+export default React.memo(Website);
