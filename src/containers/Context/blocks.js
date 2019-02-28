@@ -6,6 +6,7 @@ const Styled = {};
 
 Styled.Wrapper = styled.div`
   transform: translateZ(0);
+  overflow: hidden;
 `;
 
 Styled.Sideways = styled.div`

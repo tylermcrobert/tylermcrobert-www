@@ -10,7 +10,3 @@ export default function Page({ children }) {
     </Styled.PageContainer>
   );
 }
-
-Page.propTypes = {
-  children: PropTypes.element.isRequired,
-};
