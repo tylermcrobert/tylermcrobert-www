@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { media } from 'containers/App/styled';
 
 const Styled = {};
 
@@ -13,6 +14,12 @@ Styled.Heading = styled.div`
 
   display: flex;
   align-items: center;
+
+  ${media.phone`
+    br {
+      display: none;
+    }
+  `}
 
   a {
     position: relative;
