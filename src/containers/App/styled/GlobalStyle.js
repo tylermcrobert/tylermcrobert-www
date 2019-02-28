@@ -20,6 +20,11 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
+  body {
+    overflow-x: hidden;
+
+  }
+
   html {
     font-size: 18px;
 
