@@ -1,7 +1,10 @@
 import React, { useContext, createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useMedia } from 'react-use';
+import { Route } from 'react-router-dom';
+
 import { AppContext } from 'containers/App/App';
+
 import useCsContext from './hooks/useCsContext';
 import Tags from './partials/Tags';
 import Index from './partials/Index';
@@ -17,7 +20,7 @@ export const ContextFrameContext = createContext();
 
 function ContextFrame({ children }) {
   const [hoveredTag, setHoveredTag] = useState(null);
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(null);
   const { caseStudies } = useContext(AppContext);
   const {
     tags, index, handleHover, setTags, setIndex,
@@ -60,6 +63,15 @@ function ContextFrame({ children }) {
     </ContextFrameContext.Provider>
   );
 }
+
+export const ContextRoute = (props) => {
+  const { setEnabled } = useContext(ContextFrameContext);
+  setEnabled(props.context);
+  return (
+    <Route {...props} />
+  );
+};
+
 
 export default ContextFrame;
 
