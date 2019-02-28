@@ -46,7 +46,12 @@ const CaseStudy = ({ uid }) => {
       />
       <Link to={caseStudies[nextIndex].uid}>
         <Styled.NextProject>
-          {RichText.asText(caseStudies[nextIndex].data.title)}
+          <Styled.NextText>
+            next
+          </Styled.NextText>
+          <h1>
+            {RichText.asText(caseStudies[nextIndex].data.title)}
+          </h1>
         </Styled.NextProject>
       </Link>
     </Fade>

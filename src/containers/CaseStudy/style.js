@@ -51,8 +51,19 @@ Styled.TitleWrapper = styled(TitleIn)`
 
 Styled.NextProject = styled.div`
   text-align: center;
-  font-size: 2rem;
   padding: 5rem 1rem;
+
+  h1 {
+    font-size: 2rem;
+    ${media.phone`
+      font-size: 1rem;
+    `}
+  }
+`;
+
+Styled.NextText = styled.span`
+  font-size: .8rem;
+  color: ${props => props.theme.color.light};
 `;
 
 export default Styled;
