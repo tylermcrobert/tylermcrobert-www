@@ -14,13 +14,11 @@ function App({ location }) {
   const urlCtxId = qs.parse(location.search.split('?')[1]).v;
   const data = parsePrismicData(fetchedData, urlCtxId);
 
-  console.log(data);
   return (
     <ThemeProvider theme={theme}>
       <AppContext.Provider
         value={{
-          caseStudies: fetchedData.caseStudies,
-          // ctx,
+          caseStudies: data.caseStudies.context,
         }}
       >
         <GlobalStyle />
