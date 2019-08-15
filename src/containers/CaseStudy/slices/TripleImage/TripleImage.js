@@ -1,23 +1,19 @@
 import React from 'react';
 import { Img, Partition, FlexContainer } from './../_partials';
 
-const TripleImage = ({
-  imgUrls, alt, mainImageUrl, left,
-}) => {
+const TripleImage = ({ imgUrls, alt, mainImageUrl, left }) => {
   const partitions = [
     <Partition key="1">
       <Img src={mainImageUrl} alt={alt} />
     </Partition>,
-    <Partition key="2" >
+    <Partition key="2">
       {imgUrls.map(url => (
         <Img src={url} key={url} alt={alt} />
-        ))}
+      ))}
     </Partition>,
   ];
   return (
-    <FlexContainer>
-      {left ? partitions : partitions.reverse()}
-    </FlexContainer>
+    <FlexContainer>{left ? partitions : partitions.reverse()}</FlexContainer>
   );
 };
 

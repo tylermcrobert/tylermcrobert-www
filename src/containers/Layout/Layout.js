@@ -11,11 +11,13 @@ import Info from 'containers/Info/Info';
 
 const RouteContainer = posed.div({
   enter: {
-    opacity: 1, beforeChildren: true, delay: 400, transition: { duration: 0 },
+    opacity: 1,
+    beforeChildren: true,
+    delay: 400,
+    transition: { duration: 0 },
   },
   exit: { opacity: 1, transition: { duration: 0 } },
 });
-
 
 const Layout = withRouter(({ location }) => {
   const { caseStudies, index } = useContext(AppContext);
@@ -28,15 +30,28 @@ const Layout = withRouter(({ location }) => {
         <PoseGroup preEnterPose={preEnterPose} animateOnMount>
           <RouteContainer key={location.pathname}>
             <Switch location={location}>
-              <ContextRoute exact path="/info" render={() => <Info />} key="info" />
-              {caseStudies.map(cs => cs.uid).map(uid => (
-                <ContextRoute
-                  path={`/${uid}`}
-                  render={() => <CaseStudy uid={uid} />}
-                  key="casestudy"
-                  context
-                />))}
-              <ContextRoute path="/" render={() => <CaseStudyIndex />} key="index" context />
+              <ContextRoute
+                exact
+                path="/info"
+                render={() => <Info />}
+                key="info"
+              />
+              {caseStudies
+                .map(cs => cs.uid)
+                .map(uid => (
+                  <ContextRoute
+                    path={`/${uid}`}
+                    render={() => <CaseStudy uid={uid} />}
+                    key="casestudy"
+                    context
+                  />
+                ))}
+              <ContextRoute
+                path="/"
+                render={() => <CaseStudyIndex />}
+                key="index"
+                context
+              />
             </Switch>
           </RouteContainer>
         </PoseGroup>

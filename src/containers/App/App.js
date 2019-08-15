@@ -17,10 +17,11 @@ function App({ location }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppContext.Provider value={{
-        caseStudies,
-        api,
-      }}
+      <AppContext.Provider
+        value={{
+          caseStudies,
+          api,
+        }}
       >
         <GlobalStyle />
         {loaded ? <Layout /> : <Loading />}

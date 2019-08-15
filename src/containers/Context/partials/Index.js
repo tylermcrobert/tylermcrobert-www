@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Index = ({ index, length }) => (
-  <div>{index} of {length}</div>
+  <div>
+    {index} of {length}
+  </div>
 );
 
 Index.propTypes = {

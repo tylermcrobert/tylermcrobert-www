@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { RichText } from 'prismic-reactjs';
 import { AppContext } from 'containers/App/App';
 
-
 import includes from 'array-includes';
 import { withRouter } from 'react-router-dom';
 import FullFrame from 'components/FullFrame/FullFrame';
@@ -33,25 +32,18 @@ const DirectoryLinks = () => {
 
 const ListItems = withRouter(({ caseStudies, location }) => {
   const { handleHover, hoveredTag } = useContext(ContextFrameContext);
-  return (
-    caseStudies.map(({
-      id,
-      uid,
-      data,
-      tags,
-    }, i) => (
-      <Styled.ListItem
-        i={i}
-        key={id}
-        onMouseEnter={() => handleHover(tags, i)}
-        active={includes(tags, hoveredTag)}
-      >
-        <Styled.ListLink to={{ pathname: `/${uid}`, search: location.search }} >
-          {RichText.asText(data.title)}
-        </Styled.ListLink>
-      </Styled.ListItem>
-    ))
-  );
+  return caseStudies.map(({ id, uid, data, tags }, i) => (
+    <Styled.ListItem
+      i={i}
+      key={id}
+      onMouseEnter={() => handleHover(tags, i)}
+      active={includes(tags, hoveredTag)}
+    >
+      <Styled.ListLink to={{ pathname: `/${uid}`, search: location.search }}>
+        {RichText.asText(data.title)}
+      </Styled.ListLink>
+    </Styled.ListItem>
+  ));
 });
 
 export default React.memo(DirectoryLinks);

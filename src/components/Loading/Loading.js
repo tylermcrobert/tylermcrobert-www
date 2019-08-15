@@ -38,22 +38,22 @@ const Loader = styled.div`
     width: 4em;
 
     span {
-      width:100%;
+      width: 100%;
       height: 0px;
       border-bottom: 1.75px solid #f6f6f6;
-      display:block;
+      display: block;
       position: absolute;
       top: 0;
 
-      &:nth-child(1){
+      &:nth-child(1) {
         animation: ${rotate360} 0.75s linear infinite;
       }
 
-      &:nth-child(2){
+      &:nth-child(2) {
         animation: ${rotate360} 1.5s linear infinite;
       }
 
-      &:nth-child(3){
+      &:nth-child(3) {
         animation: ${rotate360} 3s linear infinite;
       }
     }

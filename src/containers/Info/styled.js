@@ -10,7 +10,7 @@ Styled.Heading = styled.div`
   font-size: ${fontSize};
   line-height: 1.4;
   padding: ${fontSize};
-  text-indent: calc((.375rem + 1vw) * -1);
+  text-indent: calc((0.375rem + 1vw) * -1);
 
   display: flex;
   align-items: center;
@@ -24,21 +24,21 @@ Styled.Heading = styled.div`
   a {
     position: relative;
 
-    &:after{
-      content: " ";
+    &:after {
+      content: ' ';
       bottom: 0;
-      left: .1em;
+      left: 0.1em;
       width: 100%;
-      height: .05em;
+      height: 0.05em;
       background: url('data:image/svg+xml;utf8,<svg height="4" viewBox="0 0 13 4" width="13" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" fill="%23fff" fill-rule="evenodd" r="2"/></svg>');
       background-size: contain;
-      background-repeat:repeat-x;
+      background-repeat: repeat-x;
       position: absolute;
     }
   }
 `;
 
 Styled.Item = styled.div`
-  padding-left: calc(.75rem + 2vw);
+  padding-left: calc(0.75rem + 2vw);
 `;
 export default Styled;

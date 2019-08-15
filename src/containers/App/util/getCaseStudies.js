@@ -1,9 +1,10 @@
 export default async function getCaseStudies({ api, setCaseStudies, ctx }) {
   if (api) {
-    const getContext = ctxId => api.getByUID('context', ctxId).then((doc) => {
-      if (doc) return doc;
-      return getContext('homepage');
-    });
+    const getContext = ctxId =>
+      api.getByUID('context', ctxId).then(doc => {
+        if (doc) return doc;
+        return getContext('homepage');
+      });
 
     const getIds = async () => {
       const context = await getContext(ctx || 'homepage');
@@ -11,8 +12,11 @@ export default async function getCaseStudies({ api, setCaseStudies, ctx }) {
     };
 
     const ids = await getIds();
-    api.getByIDs(ids).then(docs => docs.results).then((val) => {
-      setCaseStudies(val);
-    });
+    api
+      .getByIDs(ids)
+      .then(docs => docs.results)
+      .then(val => {
+        setCaseStudies(val);
+      });
   }
 }

@@ -4,9 +4,7 @@ import styled from 'styled-components/macro';
 import { media } from 'containers/App/styled';
 
 const FullFrame = ({ children, context }) => (
-  <Styled.FullFrame context={context}>
-    {children}
-  </Styled.FullFrame>
+  <Styled.FullFrame context={context}>{children}</Styled.FullFrame>
 );
 
 FullFrame.defaultProps = {
@@ -28,8 +26,8 @@ Styled.FullFrame = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: ${props => props.context && '0 3rem'} ;
+  padding: ${props => props.context && '0 3rem'};
   ${media.phone`
     padding: 0;
-  `}
+  `};
 `;

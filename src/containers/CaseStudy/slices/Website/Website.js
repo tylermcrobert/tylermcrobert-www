@@ -4,19 +4,26 @@ import useSize from 'hooks/useSize';
 import styled from 'styled-components/macro';
 
 const Website = ({
-  imgUrl, alt, dotColor, frameColor, backgroundColor, videoUrl,
+  imgUrl,
+  alt,
+  dotColor,
+  frameColor,
+  backgroundColor,
+  videoUrl,
 }) => {
-  const Media = () => (
+  const Media = () =>
     videoUrl ? (
       <video autoPlay muted playsInline loop>
         <source src={videoUrl} />
       </video>
-    ) : <img src={imgUrl} alt={alt} />);
+    ) : (
+      <img src={imgUrl} alt={alt} />
+    );
 
   const [ref, { width }] = useSize();
 
   return (
-    <WebsiteWrapper backgroundColor={backgroundColor} >
+    <WebsiteWrapper backgroundColor={backgroundColor}>
       <StyledWindow radius={0.5} width={width} ref={ref}>
         <StyledFrame dotColor={dotColor} frameColor={frameColor}>
           <svg viewBox="0 0 52 12" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +75,7 @@ const StyledFrame = styled.div`
 
 const WebsiteWrapper = styled.div`
   padding: 7vh 10vw;
-  background: ${({ backgroundColor }) => backgroundColor && backgroundColor}
+  background: ${({ backgroundColor }) => backgroundColor && backgroundColor};
 `;
 
 const StyledWindow = styled.div`
@@ -82,8 +89,6 @@ const StyledWindow = styled.div`
     width: 100%;
     display: block;
   }
-
-
 `;
 
 export default React.memo(Website);

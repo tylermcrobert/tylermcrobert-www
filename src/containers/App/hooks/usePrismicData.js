@@ -9,9 +9,9 @@ export default function usePrismicData({ ctx }) {
   const [api, setApi] = useState(null);
 
   useEffect(() => {
-    Prismic.api(apiEndpoint).then(((response) => {
+    Prismic.api(apiEndpoint).then(response => {
       setApi(response);
-    }));
+    });
   }, []);
 
   getCaseStudies({ api, setCaseStudies, ctx });

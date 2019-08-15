@@ -9,8 +9,8 @@ export default function useClickAway({ open, setOpen }) {
     };
 
     document.addEventListener('click', close);
-    return (() => {
+    return () => {
       document.removeEventListener('click', close);
-    });
+    };
   }, [open]);
 }

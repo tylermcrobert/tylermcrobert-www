@@ -3,17 +3,15 @@ import styled from 'styled-components/macro';
 import PropTypes from 'prop-types';
 import includes from 'array-includes';
 
-const Tags = ({
-  tags, activeTags, handleHover, setHoveredTag, hoveredTag,
-}) => {
-  const handleTagHover = (tag) => {
+const Tags = ({ tags, activeTags, handleHover, setHoveredTag, hoveredTag }) => {
+  const handleTagHover = tag => {
     setHoveredTag(tag);
     handleHover([], -1);
   };
 
   return (
     <ul>
-      {tags.map((tag) => {
+      {tags.map(tag => {
         const isActive = includes(activeTags, tag) || tag === hoveredTag;
         return (
           <Tag

@@ -46,18 +46,13 @@ const CaseStudy = ({ uid }) => {
       />
       <Link to={caseStudies[nextIndex].uid}>
         <Styled.NextProject>
-          <Styled.NextText>
-            next
-          </Styled.NextText>
-          <h1>
-            {RichText.asText(caseStudies[nextIndex].data.title)}
-          </h1>
+          <Styled.NextText>next</Styled.NextText>
+          <h1>{RichText.asText(caseStudies[nextIndex].data.title)}</h1>
         </Styled.NextProject>
       </Link>
     </Fade>
   );
 };
-
 
 const Fade = posed.div({
   enter: { opacity: 1, transition: standard },
@@ -71,12 +66,8 @@ CaseStudy.Cover = ({ description, deliverables, title }) => (
         <h1>{title}</h1>
       </Styled.TitleWrapper>
       <Styled.Info>
-        <Styled.Deliverables>
-          {deliverables}
-        </Styled.Deliverables>
-        <Styled.Description>
-          {description}
-        </Styled.Description>
+        <Styled.Deliverables>{deliverables}</Styled.Deliverables>
+        <Styled.Description>{description}</Styled.Description>
       </Styled.Info>
     </Styled.Cover>
   </FullFrame>

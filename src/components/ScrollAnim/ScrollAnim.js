@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 export default function ScrollAnim({ children }) {
   const [ref, isInView] = useInView({ threshold: [0.2, 0] });
   return (
-    <Animated ref={ref} active={isInView} >
+    <Animated ref={ref} active={isInView}>
       {children}
     </Animated>
   );
@@ -14,11 +14,13 @@ export default function ScrollAnim({ children }) {
 
 const Animated = styled.div`
   opacity: 0;
-  transition: 1200ms opacity cubic-bezier(.4,.6,.6,1);
+  transition: 1200ms opacity cubic-bezier(0.4, 0.6, 0.6, 1);
 
-  ${props => props.active && css`
-    opacity: 1;
-  `}
+  ${props =>
+    props.active &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 ScrollAnim.propTypes = {

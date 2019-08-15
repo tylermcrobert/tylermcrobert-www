@@ -4,7 +4,6 @@ import { media, poses } from 'containers/App/styled';
 
 const Styled = {};
 
-
 const TitleIn = posed.div(poses.fadeUp);
 const InfoIn = posed.div(poses.fadeDown);
 
@@ -20,7 +19,7 @@ Styled.InfoItem = styled.p`
 
 Styled.Deliverables = styled(Styled.InfoItem)`
   flex-basis: 30%;
-  font-size: .81rem;
+  font-size: 0.81rem;
   margin-bottom: 1em;
 `;
 
@@ -29,7 +28,6 @@ Styled.Description = styled(Styled.InfoItem)`
 `;
 
 Styled.Info = styled(InfoIn)`
-
   ${media.phone`
     display: block;
   `}
@@ -62,7 +60,7 @@ Styled.NextProject = styled.div`
 `;
 
 Styled.NextText = styled.span`
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: ${props => props.theme.color.light};
 `;
 

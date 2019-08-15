@@ -13,20 +13,30 @@ function Nav({ location }) {
 
   const toggleOpen = () => setOpen(!open);
   const isPhone = useIsPhone();
-  const {
-    emoji, loaded, song, artist,
-  } = useNowPlaying();
+  const { emoji, loaded, song, artist } = useNowPlaying();
   useClickAway({ open, setOpen });
 
   return (
-    <NavContext.Provider value={{
-     open, setOpen, isPhone, emoji, loaded, song, artist, toggleOpen,
-    }}
+    <NavContext.Provider
+      value={{
+        open,
+        setOpen,
+        isPhone,
+        emoji,
+        loaded,
+        song,
+        artist,
+        toggleOpen,
+      }}
     >
-      <ThemeProvider theme={{ open, hasEmoji: !(!emoji) }}>
+      <ThemeProvider theme={{ open, hasEmoji: !!emoji }}>
         <ResponsiveNav>
-          <S.Logo to={{ pathname: '/', search: location.search }}>Tyler McRobert</S.Logo>
-          <NavItem><Link to="/info">info</Link></NavItem>
+          <S.Logo to={{ pathname: '/', search: location.search }}>
+            Tyler McRobert
+          </S.Logo>
+          <NavItem>
+            <Link to="/info">info</Link>
+          </NavItem>
         </ResponsiveNav>
       </ThemeProvider>
     </NavContext.Provider>
@@ -34,9 +44,7 @@ function Nav({ location }) {
 }
 
 function ResponsiveNav({ children }) {
-  const {
-    open, isPhone,
-  } = useContext(NavContext);
+  const { open, isPhone } = useContext(NavContext);
   if (!isPhone) {
     return (
       <S.DesktopNav>
@@ -51,9 +59,7 @@ function ResponsiveNav({ children }) {
   return (
     <S.MobileNav open={open}>
       <S.MobileNavWrapper>
-        <S.HideOnOpen>
-          {children}
-        </S.HideOnOpen>
+        <S.HideOnOpen>{children}</S.HideOnOpen>
         <Emoji />
       </S.MobileNavWrapper>
       <S.MobileSongInfoWrapper>
@@ -82,7 +88,14 @@ function SongInfo() {
 }
 
 const VinylIcon = () => (
-  <svg width="27" height="27" xmlns="http://www.w3.org/2000/svg" strokeWidth="1.5" fill="none" stroke="white" >
+  <svg
+    width="27"
+    height="27"
+    xmlns="http://www.w3.org/2000/svg"
+    strokeWidth="1.5"
+    fill="none"
+    stroke="white"
+  >
     <circle cx="14" cy="14" r="11.5" />
     <circle cx="14" cy="14" r="4" />
     <circle cx="14" cy="14" r=".2" />

@@ -6,7 +6,7 @@ import { durations } from 'containers/App/styled';
 const S = {};
 
 const margin = css`
-  padding: .25em .5em;
+  padding: 0.25em 0.5em;
 `;
 
 export const NavItem = styled.div`
@@ -35,7 +35,7 @@ const nav = css`
   display: flex;
   position: fixed;
   z-index: 100;
-  padding: .25em .5em;
+  padding: 0.25em 0.5em;
 `;
 
 S.DesktopNav = styled.nav`
@@ -47,25 +47,28 @@ S.MobileNav = styled.nav`
   ${nav}
   width: 200%;
   transition: ${durations.medium}ms transform ease;
-  ${props => props.theme.open && css`
-    transform: translate3d(calc(-50% + 3.5em), 0%, 0);
-  `}
+  ${props =>
+    props.theme.open &&
+    css`
+      transform: translate3d(calc(-50% + 3.5em), 0%, 0);
+    `}
 `;
-
 
 S.HideOnOpen = styled.div`
   display: flex;
   width: 100%;
   transition: ${durations.medium}ms opacity ease;
 
-  ${props => props.theme.open && css`
-    opacity: 0
-  `}
+  ${props =>
+    props.theme.open &&
+    css`
+      opacity: 0;
+    `}
 `;
 
 S.MobileNavWrapper = styled.div`
-  width: calc(50% - .5em);
-  display:flex
+  width: calc(50% - 0.5em);
+  display: flex;
 `;
 
 S.MobileSongInfoWrapper = styled.div`
@@ -73,9 +76,11 @@ S.MobileSongInfoWrapper = styled.div`
   transition: 300ms opacity ease;
 
   opacity: 0;
-  ${props => props.theme.open && css`
-    opacity: 1
-  `}
+  ${props =>
+    props.theme.open &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 S.Logo = styled(Link)`
@@ -88,9 +93,11 @@ S.Emoji = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  ${props => props.theme.hasEmoji && css`
-    margin-top: .1em;
-  `}
+  ${props =>
+    props.theme.hasEmoji &&
+    css`
+      margin-top: 0.1em;
+    `}
 `;
 
 S.SongInfo = styled(NavItem)`
