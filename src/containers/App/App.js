@@ -1,23 +1,26 @@
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
-import { data } from 'app-data.json';
+import { data as fetchedData } from 'app-data.json';
 import { ThemeProvider } from 'styled-components/macro';
 import { withRouter } from 'react-router-dom';
 import Layout from 'containers/Layout/Layout';
 import GlobalStyle, { theme } from './styled';
+import parsePrismicData from './util/parsePrismicData';
 
 export const AppContext = createContext();
 
 function App({ location }) {
-  const ctx = qs.parse(location.search)['?'];
+  const urlCtxId = qs.parse(location.search.split('?')[1]).v;
+  const data = parsePrismicData(fetchedData, urlCtxId);
 
+  console.log(data);
   return (
     <ThemeProvider theme={theme}>
       <AppContext.Provider
         value={{
-          caseStudies: data.caseStudies,
-          ctx,
+          caseStudies: fetchedData.caseStudies,
+          // ctx,
         }}
       >
         <GlobalStyle />
