@@ -3,20 +3,20 @@ import styled, { css } from 'styled-components/macro';
 import posed from 'react-pose';
 import { durations } from 'containers/App/styled';
 
-const S = {};
-
 const margin = css`
-  padding: 0.25em 0.5em;
+  padding: 0.25em;
 `;
 
 export const NavItem = styled.div`
-  ${margin}
+  ${margin};
+  ${'' /* border: 1px solid blue; */};
 `;
 
 const transition = {
   ease: [0.4, 0.0, 0.2, 1],
   duration: durations.medium,
 };
+
 const PosedSongInfo = posed.div({
   close: {
     width: '0',
@@ -38,23 +38,21 @@ const nav = css`
   padding: 0.25em 0.5em;
 `;
 
-S.DesktopNav = styled.nav`
-  ${nav}
-  width: 100%;
+const DesktopNav = styled.nav`
+  ${nav} width: 100%;
 `;
 
-S.MobileNav = styled.nav`
-  ${nav}
-  width: 200%;
+const MobileNav = styled.nav`
+  ${nav} width: 200%;
   transition: ${durations.medium}ms transform ease;
   ${props =>
     props.theme.open &&
     css`
       transform: translate3d(calc(-50% + 3.5em), 0%, 0);
-    `}
+    `};
 `;
 
-S.HideOnOpen = styled.div`
+const HideOnOpen = styled.div`
   display: flex;
   width: 100%;
   transition: ${durations.medium}ms opacity ease;
@@ -63,15 +61,15 @@ S.HideOnOpen = styled.div`
     props.theme.open &&
     css`
       opacity: 0;
-    `}
+    `};
 `;
 
-S.MobileNavWrapper = styled.div`
+const MobileNavWrapper = styled.div`
   width: calc(50% - 0.5em);
   display: flex;
 `;
 
-S.MobileSongInfoWrapper = styled.div`
+const MobileSongInfoWrapper = styled.div`
   width: calc(50% - 3em);
   transition: 300ms opacity ease;
 
@@ -80,34 +78,45 @@ S.MobileSongInfoWrapper = styled.div`
     props.theme.open &&
     css`
       opacity: 1;
-    `}
+    `};
 `;
 
-S.Logo = styled(Link)`
+const Logo = styled(Link)`
   flex: 1;
-  ${margin}
+  ${margin};
 `;
 
-S.Emoji = styled.div`
+const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  ${props =>
-    props.theme.hasEmoji &&
-    css`
-      margin-top: 0.1em;
-    `}
+  width: 1.75em;
 `;
 
-S.SongInfo = styled(NavItem)`
+const EmojiWrapper = styled.div`
+  transform: translate3d(0, 7%, 0);
+`;
+
+const SongInfo = styled(NavItem)`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
 
-S.DesktopDrawer = styled(PosedSongInfo)`
+const DesktopDrawer = styled(PosedSongInfo)`
   max-width: 300px;
 `;
 
-export default S;
+export default {
+  DesktopNav,
+  MobileNav,
+  HideOnOpen,
+  MobileNavWrapper,
+  MobileSongInfoWrapper,
+  Logo,
+  IconWrapper,
+  SongInfo,
+  DesktopDrawer,
+  EmojiWrapper,
+};

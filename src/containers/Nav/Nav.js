@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import useNowPlaying from 'hooks/useNowPlaying';
 import useClickAway from './hooks/useClickAway';
 import useIsPhone from './hooks/useIsPhone';
-import S, { NavItem } from './styled';
+import Styled, { NavItem } from './styled';
 
 export const NavContext = React.createContext();
 
@@ -29,11 +29,11 @@ function Nav({ location }) {
         toggleOpen,
       }}
     >
-      <ThemeProvider theme={{ open, hasEmoji: !!emoji }}>
+      <ThemeProvider theme={{ open }}>
         <ResponsiveNav>
-          <S.Logo to={{ pathname: '/', search: location.search }}>
+          <Styled.Logo to={{ pathname: '/', search: location.search }}>
             Tyler McRobert
-          </S.Logo>
+          </Styled.Logo>
           <NavItem>
             <Link to="/info">info</Link>
           </NavItem>
@@ -47,33 +47,40 @@ function ResponsiveNav({ children }) {
   const { open, isPhone } = useContext(NavContext);
   if (!isPhone) {
     return (
-      <S.DesktopNav>
+      <Styled.DesktopNav>
         {children}
         <Emoji />
-        <S.DesktopDrawer pose={open ? 'open' : 'close'}>
+        <Styled.DesktopDrawer pose={open ? 'open' : 'close'}>
           <SongInfo />
-        </S.DesktopDrawer>
-      </S.DesktopNav>
+        </Styled.DesktopDrawer>
+      </Styled.DesktopNav>
     );
   }
   return (
-    <S.MobileNav open={open}>
-      <S.MobileNavWrapper>
-        <S.HideOnOpen>{children}</S.HideOnOpen>
+    <Styled.MobileNav open={open}>
+      <Styled.MobileNavWrapper>
+        <Styled.HideOnOpen>{children}</Styled.HideOnOpen>
         <Emoji />
-      </S.MobileNavWrapper>
-      <S.MobileSongInfoWrapper>
+      </Styled.MobileNavWrapper>
+      <Styled.MobileSongInfoWrapper>
         <SongInfo />
-      </S.MobileSongInfoWrapper>
-    </S.MobileNav>
+      </Styled.MobileSongInfoWrapper>
+    </Styled.MobileNav>
   );
 }
 
 function Emoji() {
   const { emoji, toggleOpen } = useContext(NavContext);
+  console.log(emoji !== undefined);
   return (
     <NavItem onClick={toggleOpen}>
-      <S.Emoji>{emoji || <VinylIcon />}</S.Emoji>
+      <Styled.IconWrapper>
+        {emoji ? (
+          <Styled.EmojiWrapper>{emoji}</Styled.EmojiWrapper>
+        ) : (
+          <VinylIcon />
+        )}
+      </Styled.IconWrapper>
     </NavItem>
   );
 }
@@ -81,9 +88,9 @@ function Emoji() {
 function SongInfo() {
   const { artist, song, toggleOpen } = useContext(NavContext);
   return (
-    <S.SongInfo onClick={toggleOpen}>
+    <Styled.SongInfo onClick={toggleOpen}>
       {artist} — {song}
-    </S.SongInfo>
+    </Styled.SongInfo>
   );
 }
 
