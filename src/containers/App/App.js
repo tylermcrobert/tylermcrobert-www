@@ -1,5 +1,6 @@
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
+import cookie from 'js-cookie';
 import qs from 'qs';
 import { data as cachedData } from 'app-data.json';
 import { ThemeProvider } from 'styled-components/macro';
@@ -12,13 +13,12 @@ import useFetchedData from './hooks/useFetchedData';
 
 export const AppContext = createContext();
 
-const IS_STATIC = false;
-
 function App({ location }) {
+  const isPreview = typeof cookie.get('io.prismic.preview') === 'string';
   const urlCtxId = qs.parse(location.search.split('?')[1]).v;
 
   const liveData = useFetchedData();
-  const data = IS_STATIC ? cachedData : liveData;
+  const data = isPreview ? liveData : cachedData;
   const parsedData = data ? parsePrismicData(data, urlCtxId) : null;
 
   return (
