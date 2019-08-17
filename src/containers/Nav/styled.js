@@ -4,11 +4,12 @@ import posed from 'react-pose';
 import { durations } from 'containers/App/styled';
 
 const margin = css`
-  padding: 0.25em 0.5em;
+  padding: 0.25em;
 `;
 
 export const NavItem = styled.div`
   ${margin};
+  ${'' /* border: 1px solid blue; */};
 `;
 
 const transition = {
@@ -85,16 +86,16 @@ const Logo = styled(Link)`
   ${margin};
 `;
 
-const Emoji = styled.div`
+const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  ${props =>
-    props.theme.hasEmoji &&
-    css`
-      margin-top: 0.1em;
-    `};
+  width: 1.75em;
+`;
+
+const EmojiWrapper = styled.div`
+  transform: translate3d(0, 7%, 0);
 `;
 
 const SongInfo = styled(NavItem)`
@@ -114,7 +115,8 @@ export default {
   MobileNavWrapper,
   MobileSongInfoWrapper,
   Logo,
-  Emoji,
+  IconWrapper,
   SongInfo,
   DesktopDrawer,
+  EmojiWrapper,
 };

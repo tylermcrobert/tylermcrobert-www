@@ -29,7 +29,7 @@ function Nav({ location }) {
         toggleOpen,
       }}
     >
-      <ThemeProvider theme={{ open, hasEmoji: !!emoji }}>
+      <ThemeProvider theme={{ open }}>
         <ResponsiveNav>
           <Styled.Logo to={{ pathname: '/', search: location.search }}>
             Tyler McRobert
@@ -71,9 +71,16 @@ function ResponsiveNav({ children }) {
 
 function Emoji() {
   const { emoji, toggleOpen } = useContext(NavContext);
+  console.log(emoji !== undefined);
   return (
     <NavItem onClick={toggleOpen}>
-      <Styled.Emoji>{emoji || <VinylIcon />}</Styled.Emoji>
+      <Styled.IconWrapper>
+        {emoji ? (
+          <Styled.EmojiWrapper>{emoji}</Styled.EmojiWrapper>
+        ) : (
+          <VinylIcon />
+        )}
+      </Styled.IconWrapper>
     </NavItem>
   );
 }
