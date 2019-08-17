@@ -22,4 +22,4 @@ async function fetchSiteData() {
   };
 }
 
-module.exports = fetchSiteData;
+export default fetchSiteData;

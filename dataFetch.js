@@ -1,6 +1,7 @@
 const fs = require('fs');
-const fetchSiteData = require('./src/util/fetchSiteData');
-// const getContext = async () => api.getByUID('context', 'homepage');
+const esm = require('esm')(module);
+
+const fetchSiteData = esm('./src/util/fetchSiteData').default;
 
 async function getData() {
   console.log('FETCHING API...');

@@ -6,6 +6,7 @@
     "array-includes": "^3.0.3",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "esm": "^3.2.25",
     "fs": "0.0.1-security",
     "intersection-observer": "^0.5.1",
     "is-mobile": "^2.0.0",

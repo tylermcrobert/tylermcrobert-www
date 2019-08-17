@@ -1,29 +1,42 @@
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
-import { data as fetchedData } from 'app-data.json';
+import { data as cachedData } from 'app-data.json';
 import { ThemeProvider } from 'styled-components/macro';
 import { withRouter } from 'react-router-dom';
 import Layout from 'containers/Layout/Layout';
+import Loading from 'components/Loading/Loading';
 import GlobalStyle, { theme } from './styled';
 import parsePrismicData from './util/parsePrismicData';
+import useFetchedData from './hooks/useFetchedData';
 
 export const AppContext = createContext();
 
+const IS_STATIC = false;
+
 function App({ location }) {
   const urlCtxId = qs.parse(location.search.split('?')[1]).v;
-  const data = parsePrismicData(fetchedData, urlCtxId);
+
+  const liveData = useFetchedData();
+  const data = IS_STATIC ? cachedData : liveData;
+  const parsedData = data ? parsePrismicData(data, urlCtxId) : null;
 
   return (
     <ThemeProvider theme={theme}>
-      <AppContext.Provider
-        value={{
-          caseStudies: data.caseStudies.context,
-        }}
-      >
+      <>
         <GlobalStyle />
-        <Layout />
-      </AppContext.Provider>
+        {parsedData ? (
+          <AppContext.Provider
+            value={{
+              caseStudies: parsedData.caseStudies.context,
+            }}
+          >
+            <Layout />
+          </AppContext.Provider>
+        ) : (
+          <Loading />
+        )}
+      </>
     </ThemeProvider>
   );
 }
