@@ -35,7 +35,7 @@ function Nav({ location }) {
             Tyler McRobert
           </Styled.Logo>
           <NavItem>
-            <Link to="/info">profile</Link>
+            <Link to="/info">info</Link>
           </NavItem>
         </ResponsiveNav>
       </ThemeProvider>
