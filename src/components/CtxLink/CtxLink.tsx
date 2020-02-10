@@ -4,7 +4,8 @@ import { useClientCtx } from "components/ClientContextProvider"
 
 const CtxLink: React.FC<{ to: string }> = ({ to, ...props }) => {
   const { currentCtx } = useClientCtx()
-  const destination = currentCtx !== "homepage" ? `${to}?c=${currentCtx}` : to
+  const destination =
+    currentCtx.uid !== "homepage" ? `${to}?c=${currentCtx.uid}` : to
   return <Link to={destination} {...props} />
 }
 

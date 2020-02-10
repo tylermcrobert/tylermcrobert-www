@@ -2,18 +2,31 @@ import React from "react"
 import { Html } from "components"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "templates/casestudy"
+import { useClientCtx } from "components/ClientContextProvider"
 
 interface IProps {
   csData: CaseStudyData
 }
 
-const CaseStudy: React.FC<IProps> = ({ csData }) => {
+const useIndex = (uid: string): number => {
+  const { currentCtx } = useClientCtx()
+  const index = currentCtx.caseStudies.indexOf(uid)
+  return index === -1 ? 0 : index
+}
+
+const useParsed = (csData: CaseStudyData) => {
+  const { uid, data } = csData.prismicCaseStudy
   const {
     title: { text: title },
     description: { html: description },
-  } = csData.prismicCaseStudy.data
+  } = data
 
-  const index = 4
+  return { title, description, uid }
+}
+
+const CaseStudy: React.FC<IProps> = ({ csData }) => {
+  const { title, description, uid } = useParsed(csData)
+  const index = useIndex(uid)
 
   return (
     <>

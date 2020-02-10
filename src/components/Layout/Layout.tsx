@@ -19,10 +19,10 @@ const Layout: React.FC<IProps> = ({ children, ctx }) => {
 
 const Nav = () => {
   const { currentCtx } = useClientCtx()
-  const linkDest = currentCtx === "homepage" ? "/" : `/${currentCtx}`
+  const linkDest = currentCtx.uid === "homepage" ? "/" : `/${currentCtx.uid}`
   return (
     <>
-      <Link to={linkDest}>Tyler McRobert </Link>/ ctx: {currentCtx}
+      <Link to={linkDest}>Tyler McRobert </Link>/ ctx: {currentCtx.uid}
     </>
   )
 }

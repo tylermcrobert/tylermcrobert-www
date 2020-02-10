@@ -48,23 +48,15 @@ type CtxItem = { uid: string; caseStudies: string[] }
 
 interface ICtx {
   contexts: CtxItem[]
-  currentCtx: string
+  currentCtx: CtxItem
 }
-
-/**
- * Context stuff
- */
 
 const ClientCtx = createContext<ICtx>({
   contexts: [],
-  currentCtx: DEFAULT_CTX,
+  currentCtx: { uid: "", caseStudies: [] },
 })
 
 export const useClientCtx = () => useContext(ClientCtx)
-
-/**
- * Main component
- */
 
 interface IProps {
   ctx: string
@@ -83,7 +75,8 @@ const ClientContextProvider: React.FC<IProps> = ({ children, ctx }) => {
   // returns only valid ctx
   const currentCtx = (() => {
     const isValid = contexts.map(c => c.uid).indexOf(ctx) !== -1
-    return isValid ? ctx : DEFAULT_CTX
+    const ctxId = isValid ? ctx : DEFAULT_CTX
+    return contexts.filter(context => context.uid === ctxId)[0]
   })()
 
   return (
