@@ -14,26 +14,23 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
     description: { html: description },
   } = csData.prismicCaseStudy.data
 
+  const { getCsIndex } = useClientCtx()
+  const index = getCsIndex(csData.prismicCaseStudy.uid)
+
   return (
     <Layout>
-      <h1>{title}</h1>
+      <h1>
+        ({index + 1}){title}
+      </h1>
       <Html>{description}</Html>
-      <Footer />
+      <Footer index={index} />
     </Layout>
   )
 }
 
-const Footer = () => {
-  const { getByUid, currentCtx } = useClientCtx()
-  const ctx = getByUid(currentCtx)
+const Footer: React.FC<{ index: number }> = ({ index }) => {
+  const { currentCtx, getByUid } = useClientCtx()
 
-  if (!ctx) {
-    return null
-  }
-
-  const index = ctx.caseStudies.indexOf("den-neuen-stil")
-  console.log(index)
-
-  return <div>index: {index}</div>
+  return <div>index:</div>
 }
 export default CaseStudy

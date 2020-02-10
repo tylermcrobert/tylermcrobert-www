@@ -23,19 +23,47 @@ const query = graphql`
   }
 `
 
+/**
+ * Types
+ */
+
+type CtxProviderData = {
+  allPrismicContext: {
+    edges: {
+      node: {
+        data: {
+          case_study_list: {
+            case_study_item: {
+              uid: string
+            }
+          }[]
+        }
+        uid: string
+      }
+    }[]
+  }
+}
+
 type CtxItem = { uid: string; caseStudies: string[] }
+
 type GetByUidHelper = (uid: string) => CtxItem | void
 
 interface ICtx {
   contexts: CtxItem[]
   getByUid: GetByUidHelper
   currentCtx: string
+  getCsIndex: (uid: string) => number
 }
+
+/**
+ * Context stuff
+ */
 
 const ClientCtx = createContext<ICtx>({
   contexts: [],
   getByUid: () => undefined,
   currentCtx: DEFAULT_CTX,
+  getCsIndex: () => -1,
 })
 
 export const useClientCtx = () => useContext(ClientCtx)
@@ -76,33 +104,26 @@ const ClientContextProvider: React.FC<IProps> = ({ children, search }) => {
 
   // helper function
   const getByUid = (uid: string) => contexts.filter(ctx => ctx.uid === uid)[0]
+
+  // gets current uid from the 'search' object
   const currentCtx = useCurrentCtx(search, getByUid)
 
+  // gets index of a specified uid
+  const getCsIndex = (caseStudyUid: string) => {
+    const ctx = getByUid(currentCtx)
+
+    if (!ctx) {
+      return -1
+    }
+
+    return ctx.caseStudies.indexOf(caseStudyUid)
+  }
+
   return (
-    <ClientCtx.Provider value={{ contexts, getByUid, currentCtx }}>
+    <ClientCtx.Provider value={{ contexts, getByUid, currentCtx, getCsIndex }}>
       {children}
     </ClientCtx.Provider>
   )
 }
 
-/**
- * Types
- */
-
-type CtxProviderData = {
-  allPrismicContext: {
-    edges: {
-      node: {
-        data: {
-          case_study_list: {
-            case_study_item: {
-              uid: string
-            }
-          }[]
-        }
-        uid: string
-      }
-    }[]
-  }
-}
 export default ClientContextProvider
