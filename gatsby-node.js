@@ -42,7 +42,8 @@ exports.createPages = async function createPages({
 
     // ctx landing page
     createPage({
-      path: `/${uid}`,
+      // if uid is 'homepage', use it for root
+      path: uid === "homepage" ? "/" : `/${uid}`,
       component: path.resolve("src/templates/homepage.tsx"),
       context: {
         uid,
