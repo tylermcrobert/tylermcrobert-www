@@ -5,5 +5,14 @@
  */
 
 module.exports = {
-  plugins: [`gatsby-plugin-typescript`],
+  plugins: [
+    `gatsby-plugin-typescript`,
+    {
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: `tylermcrobert`,
+        // linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
+      },
+    },
+  ],
 }
