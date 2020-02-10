@@ -1,13 +1,19 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { ClientContextProvider } from "components"
 import { CaseStudy as CaseStudyTemplate } from "../pageTemplates"
 
 interface IProps {
   data: CaseStudyData
+  location: { search: string }
 }
 
-const CaseStudy: React.FC<IProps> = ({ data }) => {
-  return <CaseStudyTemplate csData={data} />
+const CaseStudy: React.FC<IProps> = ({ data, location }) => {
+  return (
+    <ClientContextProvider search={location.search}>
+      <CaseStudyTemplate csData={data} />
+    </ClientContextProvider>
+  )
 }
 
 export type CaseStudyData = {
