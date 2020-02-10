@@ -1,25 +1,39 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { CaseStudy as CaseStudyTemplate } from "../pageTemplates"
 
 interface IProps {
-  data: CaseStudy
+  data: CaseStudyData
 }
+
 const CaseStudy: React.FC<IProps> = ({ data }) => {
-  console.log(data)
-
-  return <div />
+  return <CaseStudyTemplate data={data} />
 }
 
-type CaseStudy = {
+export type CaseStudyData = {
   prismicCaseStudy: {
-    id: string
+    data: {
+      description: {
+        html: string
+      }
+      title: {
+        text: string
+      }
+    }
   }
 }
 
 export const query = graphql`
   query CaseStudy($uid: String) {
     prismicCaseStudy(uid: { eq: $uid }) {
-      id
+      data {
+        description {
+          html
+        }
+        title {
+          text
+        }
+      }
     }
   }
 `

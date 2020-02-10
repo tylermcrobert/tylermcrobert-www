@@ -1,6 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path")
 
+// Absolute imports
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.join("src"), path.join(__dirname, "node_modules")],
+    },
+  })
+}
+
+// Create pages
 exports.createPages = async function createPages({
   actions: { createPage },
   graphql,
