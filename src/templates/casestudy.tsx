@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const CaseStudy: React.FC<IProps> = ({ data }) => {
-  return <CaseStudyTemplate data={data} />
+  return <CaseStudyTemplate csData={data} />
 }
 
 export type CaseStudyData = {

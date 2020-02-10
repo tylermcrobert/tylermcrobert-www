@@ -3,13 +3,14 @@ import React from "react"
 import { CaseStudyData } from "../../templates/casestudy"
 
 interface IProps {
-  data: CaseStudyData
+  csData: CaseStudyData
 }
-const CaseStudy: React.FC<IProps> = ({ data }) => {
+
+const CaseStudy: React.FC<IProps> = ({ csData }) => {
   const {
     title: { text: title },
     description: { html: description },
-  } = data.prismicCaseStudy.data
+  } = csData.prismicCaseStudy.data
 
   return (
     <div>
