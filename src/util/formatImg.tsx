@@ -1,20 +1,22 @@
 import queryString from "query-string"
 
+export type FmType =
+  | "gif"
+  | "jp2"
+  | "jpg"
+  | "json"
+  | "jxr"
+  | "pjpg"
+  | "mp4"
+  | "png"
+  | "png8"
+  | "png32"
+  | "webm"
+  | "webp"
+
 interface SettingsProps {
   w?: string | number
-  fm?:
-    | "gif"
-    | "jp2"
-    | "jpg"
-    | "json"
-    | "jxr"
-    | "pjpg"
-    | "mp4"
-    | "png"
-    | "png8"
-    | "png32"
-    | "webm"
-    | "webp"
+  fm?: FmType
   q?: number
   ar?: number
   fit?:

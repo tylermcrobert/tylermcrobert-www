@@ -10,7 +10,7 @@ const ImageWrapper = styled.div<IImageWrapperProps>`
   flex-direction: ${props => (props.invert ? "row-reverse" : "row")};
 
   img {
-    max-width: 100%;
+    width: 100%;
   }
 `
 

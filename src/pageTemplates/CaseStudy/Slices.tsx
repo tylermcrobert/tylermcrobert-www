@@ -8,7 +8,11 @@ import {
   DoubleImageType,
   TripleImageType,
 } from "templates/casestudy"
+import formatImg, { FmType } from "util/formatImg"
 import Styled from "./Styled"
+
+const FULL_SIZE = { w: 1920, fm: "webp" as FmType }
+const HALF_SIZE = { w: 1200, fm: "webp" as FmType }
 
 interface IProps {
   data: CsContentType
@@ -49,7 +53,7 @@ const SingleImage: React.FC<ISingleImageProps> = ({ data }) => {
   const { url } = data.primary.image
   return (
     <Styled.ImageWrapper>
-      <img src={url} alt="" />
+      <img src={formatImg(url, FULL_SIZE)} alt="" />
     </Styled.ImageWrapper>
   )
 }
@@ -69,8 +73,8 @@ const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
 
   return (
     <Styled.DoubleImageWrapper>
-      <img src={leftUrl} alt="" />
-      <img src={rightUrl} alt="" />
+      <img src={formatImg(leftUrl, HALF_SIZE)} alt="" />
+      <img src={formatImg(rightUrl, HALF_SIZE)} alt="" />
     </Styled.DoubleImageWrapper>
   )
 }
@@ -92,11 +96,11 @@ const TripleImage: React.FC<ITripleImageProps> = ({ data }) => {
   return (
     <Styled.TripleImageWrapper invert={isMainOnRight}>
       <div>
-        <img src={secondaryImage1} alt="" />
-        <img src={secondaryImage2} alt="" />
+        <img src={formatImg(secondaryImage1, HALF_SIZE)} alt="" />
+        <img src={formatImg(secondaryImage2, HALF_SIZE)} alt="" />
       </div>
       <div>
-        <img src={mainImageUrl} alt="" />
+        <img src={formatImg(mainImageUrl, HALF_SIZE)} alt="" />
       </div>
     </Styled.TripleImageWrapper>
   )
