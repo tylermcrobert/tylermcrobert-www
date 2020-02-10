@@ -1,6 +1,7 @@
 import React from "react"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "../../templates/casestudy"
+import { Layout } from "../../components"
 
 interface IProps {
   csData: CaseStudyData
@@ -13,10 +14,10 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
   } = csData.prismicCaseStudy.data
 
   return (
-    <div>
+    <Layout>
       <h1>{title}</h1>
       {description}
-    </div>
+    </Layout>
   )
 }
 

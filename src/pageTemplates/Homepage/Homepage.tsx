@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 // eslint-disable-next-line no-unused-vars
 import { HomepageData } from "../../templates/homepage"
+import { Layout } from "../../components"
 
 interface IProps {
   ctx: string
@@ -17,7 +18,7 @@ const Homepage: React.FC<IProps> = ({ ctx, data }) => {
     }))
 
   return (
-    <div>
+    <Layout>
       homepage, ctx: {ctx}
       <ul>
         {items.map(({ title, uid }) => (
@@ -26,7 +27,7 @@ const Homepage: React.FC<IProps> = ({ ctx, data }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </Layout>
   )
 }
 
