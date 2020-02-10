@@ -1,7 +1,7 @@
 import React from "react"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "../../templates/casestudy"
-import { Layout } from "../../components"
+import { Layout, Html } from "../../components"
 
 interface IProps {
   csData: CaseStudyData
@@ -16,7 +16,7 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
   return (
     <Layout>
       <h1>{title}</h1>
-      {description}
+      <Html>{description}</Html>
     </Layout>
   )
 }
