@@ -1,5 +1,5 @@
 import React from "react"
-import { Html } from "components"
+import { Html, CtxLink } from "components"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "templates/casestudy"
 import { useClientCtx } from "components/ClientContextProvider"
@@ -39,7 +39,15 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
   )
 }
 
-const Footer: React.FC<{ index: number }> = () => {
-  return <div>index:</div>
+const Footer: React.FC<{ index: number }> = ({ index }) => {
+  const { currentCtx } = useClientCtx()
+  const nextIndex = (index + 1) % currentCtx.caseStudies.length
+  const nextCs = currentCtx.caseStudies[nextIndex]
+
+  return (
+    <div>
+      Next: <CtxLink to={`/${nextCs}`}> {nextCs}</CtxLink>
+    </div>
+  )
 }
 export default CaseStudy

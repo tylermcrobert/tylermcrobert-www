@@ -1,15 +1,21 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Layout } from "components"
+import { parseSearch } from "components/ClientContextProvider"
 import { Homepage } from "../pageTemplates"
 
 interface IProps {
   pageContext: { uid: string }
+  location: { search: string }
   data: HomepageData
 }
-const HomepageContainer: React.FC<IProps> = ({ pageContext, data }) => {
+const HomepageContainer: React.FC<IProps> = ({
+  pageContext,
+  data,
+  location,
+}) => {
   return (
-    <Layout ctx={pageContext.uid}>
+    <Layout ctx={pageContext.uid || parseSearch(location.search)}>
       <Homepage data={data} />
     </Layout>
   )
