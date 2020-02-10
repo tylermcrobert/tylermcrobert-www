@@ -18,6 +18,7 @@ const CaseStudy: React.FC<IProps> = ({ data, location }) => {
 
 export type CaseStudyData = {
   prismicCaseStudy: {
+    uid: string
     data: {
       description: {
         html: string
@@ -32,6 +33,7 @@ export type CaseStudyData = {
 export const query = graphql`
   query CaseStudy($uid: String) {
     prismicCaseStudy(uid: { eq: $uid }) {
+      uid
       data {
         description {
           html
