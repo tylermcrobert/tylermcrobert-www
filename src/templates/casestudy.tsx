@@ -38,7 +38,25 @@ export type DoubleImageType = {
   }
 }
 
-export type CsContentType = Array<SingleImageType | DoubleImageType>
+export type TripleImageType = {
+  __typename: string
+  primary: {
+    main_image_position: string
+    main_image: {
+      url: string
+    }
+    secondary_image_1: {
+      url: string
+    }
+    secondary_image_2: {
+      url: string
+    }
+  }
+}
+
+export type CsContentType = Array<
+  SingleImageType | DoubleImageType | TripleImageType
+>
 
 export type CaseStudyData = {
   prismicCaseStudy: {
@@ -85,7 +103,6 @@ export const query = graphql`
             }
           }
           ... on PrismicCaseStudyCsContentTripleImageBlock {
-            id
             primary {
               main_image_position
               main_image {

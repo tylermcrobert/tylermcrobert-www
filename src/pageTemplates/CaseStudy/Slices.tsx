@@ -6,6 +6,7 @@ import {
   CsContentType,
   SingleImageType,
   DoubleImageType,
+  TripleImageType,
 } from "templates/casestudy"
 import Styled from "./Styled"
 
@@ -22,6 +23,8 @@ const Slices: React.FC<IProps> = ({ data }) => {
               return <SingleImage data={item as SingleImageType} />
             case "PrismicCaseStudyCsContentDoubleImageBlock":
               return <DoubleImage data={item as DoubleImageType} />
+            case "PrismicCaseStudyCsContentTripleImageBlock":
+              return <TripleImage data={item as TripleImageType} />
             default:
               return <div>asdf</div>
           }
@@ -45,7 +48,7 @@ interface ISingleImageProps {
 const SingleImage: React.FC<ISingleImageProps> = ({ data }) => {
   const { url } = data.primary.image
   return (
-    <Styled.ImageWrapper number={1}>
+    <Styled.ImageWrapper>
       <img src={url} alt="" />
     </Styled.ImageWrapper>
   )
@@ -65,10 +68,37 @@ const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
   } = data.primary
 
   return (
-    <Styled.ImageWrapper number={2}>
+    <Styled.DoubleImageWrapper>
       <img src={leftUrl} alt="" />
       <img src={rightUrl} alt="" />
-    </Styled.ImageWrapper>
+    </Styled.DoubleImageWrapper>
+  )
+}
+
+interface ITripleImageProps {
+  data: TripleImageType
+}
+
+const TripleImage: React.FC<ITripleImageProps> = ({ data }) => {
+  const {
+    main_image: { url: mainImageUrl },
+    secondary_image_1: { url: secondaryImage1 },
+    secondary_image_2: { url: secondaryImage2 },
+    main_image_position: position,
+  } = data.primary
+
+  const isMainOnRight = position === "Right"
+
+  return (
+    <Styled.TripleImageWrapper invert={isMainOnRight}>
+      <div>
+        <img src={secondaryImage1} alt="" />
+        <img src={secondaryImage2} alt="" />
+      </div>
+      <div>
+        <img src={mainImageUrl} alt="" />
+      </div>
+    </Styled.TripleImageWrapper>
   )
 }
 

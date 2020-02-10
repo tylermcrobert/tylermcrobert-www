@@ -1,23 +1,35 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-const ImageWrapper = styled.div<{ number: number }>`
+interface IImageWrapperProps {
+  invert?: boolean
+}
+
+const ImageWrapper = styled.div<IImageWrapperProps>`
   display: flex;
   flex-wrap: wrap;
+  flex-direction: ${props => (props.invert ? "row-reverse" : "row")};
 
   img {
     max-width: 100%;
   }
+`
 
-  ${props =>
-    props.number === 2 &&
-    css`
-      img {
-        width: 50%;
-        flex-basis: 50%;
-      }
-    `}
+const DoubleImageWrapper = styled(ImageWrapper)`
+  img {
+    width: 50%;
+    flex-basis: 50%;
+  }
+`
+
+const TripleImageWrapper = styled(ImageWrapper)`
+  > div {
+    width: 50%;
+    flex-basis: 50%;
+  }
 `
 
 export default {
   ImageWrapper,
+  DoubleImageWrapper,
+  TripleImageWrapper,
 }
