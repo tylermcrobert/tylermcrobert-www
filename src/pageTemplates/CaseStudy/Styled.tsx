@@ -17,7 +17,6 @@ const ImageWrapper = styled.div<IImageWrapperProps>`
 const DoubleImageWrapper = styled(ImageWrapper)`
   img {
     width: 50%;
-    flex-basis: 50%;
   }
 `
 
