@@ -14,7 +14,7 @@ interface SettingsProps {
     | "png8"
     | "png32"
     | "webm"
-    | "web"
+    | "webp"
   q?: number
   ar?: number
   fit?:
