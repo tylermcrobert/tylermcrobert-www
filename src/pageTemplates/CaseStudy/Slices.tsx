@@ -7,6 +7,7 @@ import {
   SingleImageType,
   DoubleImageType,
 } from "templates/casestudy"
+import Styled from "./Styled"
 
 interface IProps {
   data: CsContentType
@@ -43,7 +44,11 @@ interface ISingleImageProps {
 
 const SingleImage: React.FC<ISingleImageProps> = ({ data }) => {
   const { url } = data.primary.image
-  return <img src={url} alt="" />
+  return (
+    <Styled.ImageWrapper number={1}>
+      <img src={url} alt="" />
+    </Styled.ImageWrapper>
+  )
 }
 
 /**
@@ -60,10 +65,10 @@ const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
   } = data.primary
 
   return (
-    <div>
+    <Styled.ImageWrapper number={2}>
       <img src={leftUrl} alt="" />
       <img src={rightUrl} alt="" />
-    </div>
+    </Styled.ImageWrapper>
   )
 }
 
