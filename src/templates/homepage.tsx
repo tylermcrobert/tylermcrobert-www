@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Layout } from "components"
 import { Homepage } from "../pageTemplates"
 
 interface IProps {
@@ -7,7 +8,11 @@ interface IProps {
   data: HomepageData
 }
 const HomepageContainer: React.FC<IProps> = ({ pageContext, data }) => {
-  return <Homepage ctx={pageContext.uid} data={data} />
+  return (
+    <Layout ctx={pageContext.uid}>
+      <Homepage data={data} />
+    </Layout>
+  )
 }
 
 export type HomepageData = {

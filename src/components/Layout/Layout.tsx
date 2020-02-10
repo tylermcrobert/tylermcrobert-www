@@ -1,13 +1,29 @@
 import React from "react"
 import { Link } from "gatsby"
+import { useClientCtx } from "components/ClientContextProvider"
+import { ClientContextProvider } from "components"
 
-const Layout: React.FC = ({ children }) => {
+interface IProps {
+  ctx: string
+}
+
+const Layout: React.FC<IProps> = ({ children, ctx }) => {
   return (
-    <div>
-      <Link to="/">Tyler McRobert</Link>
+    <ClientContextProvider ctx={ctx}>
+      <Nav />
       <hr />
       <main>{children}</main>
-    </div>
+    </ClientContextProvider>
+  )
+}
+
+const Nav = () => {
+  const { currentCtx } = useClientCtx()
+  const linkDest = currentCtx === "homepage" ? "/" : `/${currentCtx}`
+  return (
+    <>
+      <Link to={linkDest}>Tyler McRobert </Link>/ ctx: {currentCtx}
+    </>
   )
 }
 

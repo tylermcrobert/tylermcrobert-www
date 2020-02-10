@@ -1,14 +1,13 @@
 import React from "react"
-import { Layout, CtxLink } from "components"
+import { CtxLink } from "components"
 // eslint-disable-next-line no-unused-vars
 import { HomepageData } from "templates/homepage"
 
 interface IProps {
-  ctx: string
   data: HomepageData
 }
 
-const Homepage: React.FC<IProps> = ({ ctx, data }) => {
+const Homepage: React.FC<IProps> = ({ data }) => {
   const items = data.prismicContext.data.case_study_list
     .map(item => item.case_study_item)
     .map(item => ({
@@ -17,8 +16,7 @@ const Homepage: React.FC<IProps> = ({ ctx, data }) => {
     }))
 
   return (
-    <Layout>
-      homepage, ctx: {ctx}
+    <>
       <ul>
         {items.map(({ title, uid }) => (
           <li key={title}>
@@ -26,7 +24,7 @@ const Homepage: React.FC<IProps> = ({ ctx, data }) => {
           </li>
         ))}
       </ul>
-    </Layout>
+    </>
   )
 }
 

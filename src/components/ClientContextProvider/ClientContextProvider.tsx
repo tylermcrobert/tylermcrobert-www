@@ -46,8 +46,6 @@ type CtxProviderData = {
 
 type CtxItem = { uid: string; caseStudies: string[] }
 
-type GetByUidHelper = (uid: string) => CtxItem | void
-
 interface ICtx {
   contexts: CtxItem[]
   currentCtx: string
@@ -81,8 +79,6 @@ const ClientContextProvider: React.FC<IProps> = ({ children, ctx }) => {
       uid: item.uid,
       caseStudies: item.data.case_study_list.map(cs => cs.case_study_item.uid),
     }))
-
-  // helper function
 
   // returns only valid ctx
   const currentCtx = (() => {
