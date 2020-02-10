@@ -17,6 +17,29 @@ const CaseStudy: React.FC<IProps> = ({ data, location }) => {
   )
 }
 
+export type SingleImageType = {
+  __typename: string
+  primary: {
+    image: {
+      url: string
+    }
+  }
+}
+
+export type DoubleImageType = {
+  __typename: string
+  primary: {
+    left_image: {
+      url: string
+    }
+    right_image: {
+      url: string
+    }
+  }
+}
+
+export type CsContentType = Array<SingleImageType | DoubleImageType>
+
 export type CaseStudyData = {
   prismicCaseStudy: {
     uid: string
@@ -27,6 +50,7 @@ export type CaseStudyData = {
       title: {
         text: string
       }
+      cs_content: CsContentType
     }
   }
 }
@@ -41,6 +65,54 @@ export const query = graphql`
         }
         title {
           text
+        }
+        cs_content {
+          ... on PrismicCaseStudyCsContentDoubleImageBlock {
+            primary {
+              left_image {
+                url
+              }
+              right_image {
+                url
+              }
+            }
+          }
+          ... on PrismicCaseStudyCsContentSingleImage {
+            primary {
+              image {
+                url
+              }
+            }
+          }
+          ... on PrismicCaseStudyCsContentTripleImageBlock {
+            id
+            primary {
+              main_image_position
+              main_image {
+                url
+              }
+              secondary_image_1 {
+                url
+              }
+              secondary_image_2 {
+                url
+              }
+            }
+          }
+          ... on PrismicCaseStudyCsContentWebsite {
+            id
+            primary {
+              browser_theme
+              browser_media {
+                url
+              }
+              browser_image {
+                url
+              }
+              browser_frame_color
+              background_color
+            }
+          }
         }
       }
     }

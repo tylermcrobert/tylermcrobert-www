@@ -3,6 +3,7 @@ import { Html, CtxLink } from "components"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "templates/casestudy"
 import { useClientCtx } from "components/ClientContextProvider"
+import Slices from "./Slices"
 
 interface IProps {
   csData: CaseStudyData
@@ -21,11 +22,11 @@ const useParsed = (csData: CaseStudyData) => {
     description: { html: description },
   } = data
 
-  return { title, description, uid }
+  return { title, description, uid, data }
 }
 
 const CaseStudy: React.FC<IProps> = ({ csData }) => {
-  const { title, description, uid } = useParsed(csData)
+  const { title, description, uid, data } = useParsed(csData)
   const index = useIndex(uid)
 
   return (
@@ -34,6 +35,7 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
         ({index + 1}){title}
       </h1>
       <Html>{description}</Html>
+      <Slices data={data.cs_content} />
       <Footer index={index} />
     </>
   )
