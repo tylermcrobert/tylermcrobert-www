@@ -50,9 +50,7 @@ type GetByUidHelper = (uid: string) => CtxItem | void
 
 interface ICtx {
   contexts: CtxItem[]
-  getByUid: GetByUidHelper
   currentCtx: string
-  getCsIndex: (uid: string) => number
 }
 
 /**
@@ -61,38 +59,20 @@ interface ICtx {
 
 const ClientCtx = createContext<ICtx>({
   contexts: [],
-  getByUid: () => undefined,
   currentCtx: DEFAULT_CTX,
-  getCsIndex: () => -1,
 })
 
 export const useClientCtx = () => useContext(ClientCtx)
-
-/**
- * Hook
- * returns valid ctx uid
- */
-
-const useCurrentCtx = (search: string, getByUid: GetByUidHelper) => {
-  const queryString = search !== "" ? parseQs(search).c : DEFAULT_CTX
-  const match = getByUid(queryString)
-
-  if (match) {
-    return match.uid
-  }
-
-  return DEFAULT_CTX
-}
 
 /**
  * Main component
  */
 
 interface IProps {
-  search: string
+  ctx: string
 }
 
-const ClientContextProvider: React.FC<IProps> = ({ children, search }) => {
+const ClientContextProvider: React.FC<IProps> = ({ children, ctx }) => {
   // data
   const response: CtxProviderData = useStaticQuery(query)
   const contexts = response.allPrismicContext.edges
@@ -103,27 +83,25 @@ const ClientContextProvider: React.FC<IProps> = ({ children, search }) => {
     }))
 
   // helper function
-  const getByUid = (uid: string) => contexts.filter(ctx => ctx.uid === uid)[0]
 
-  // gets current uid from the 'search' object
-  const currentCtx = useCurrentCtx(search, getByUid)
-
-  // gets index of a specified uid
-  const getCsIndex = (caseStudyUid: string) => {
-    const ctx = getByUid(currentCtx)
-
-    if (!ctx) {
-      return -1
-    }
-
-    return ctx.caseStudies.indexOf(caseStudyUid)
-  }
+  // returns only valid ctx
+  const currentCtx = (() => {
+    const isValid = contexts.map(c => c.uid).indexOf(ctx) !== -1
+    return isValid ? ctx : DEFAULT_CTX
+  })()
 
   return (
-    <ClientCtx.Provider value={{ contexts, getByUid, currentCtx, getCsIndex }}>
+    <ClientCtx.Provider value={{ contexts, currentCtx }}>
       {children}
     </ClientCtx.Provider>
   )
 }
+
+/**
+ * Helpers
+ */
+
+export const parseSearch = (search: string) =>
+  search !== "" ? parseQs(search).c : DEFAULT_CTX
 
 export default ClientContextProvider

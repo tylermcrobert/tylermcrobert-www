@@ -1,8 +1,7 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Layout, CtxLink } from "components"
 // eslint-disable-next-line no-unused-vars
-import { HomepageData } from "../../templates/homepage"
-import { Layout } from "../../components"
+import { HomepageData } from "templates/homepage"
 
 interface IProps {
   ctx: string
@@ -23,7 +22,7 @@ const Homepage: React.FC<IProps> = ({ ctx, data }) => {
       <ul>
         {items.map(({ title, uid }) => (
           <li key={title}>
-            <Link to={`/${uid}`}>{title}</Link>
+            <CtxLink to={`/${uid}`}>{title}</CtxLink>
           </li>
         ))}
       </ul>

@@ -1,5 +1,5 @@
 import React from "react"
-import { useClientCtx } from "components/ClientContextProvider"
+// import { useClientCtx } from "components/ClientContextProvider"
 import { Layout, Html } from "components"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "templates/casestudy"
@@ -14,8 +14,8 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
     description: { html: description },
   } = csData.prismicCaseStudy.data
 
-  const { getCsIndex } = useClientCtx()
-  const index = getCsIndex(csData.prismicCaseStudy.uid)
+  // const index = getCsIndex(csData.prismicCaseStudy.uid)
+  const index = 4
 
   return (
     <Layout>
@@ -28,9 +28,7 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
   )
 }
 
-const Footer: React.FC<{ index: number }> = ({ index }) => {
-  const { currentCtx, getByUid } = useClientCtx()
-
+const Footer: React.FC<{ index: number }> = () => {
   return <div>index:</div>
 }
 export default CaseStudy

@@ -1,4 +1,4 @@
-import { useClientCtx } from "./ClientContextProvider"
+import { useClientCtx, parseSearch } from "./ClientContextProvider"
 
 export { default } from "./ClientContextProvider"
-export { useClientCtx }
+export { useClientCtx, parseSearch }
