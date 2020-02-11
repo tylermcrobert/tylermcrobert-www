@@ -61,6 +61,8 @@ export type CsContentType = Array<
 export type CaseStudyData = {
   prismicCaseStudy: {
     uid: string
+    tags: string[]
+    first_publication_date: string
     data: {
       description: {
         html: string
@@ -77,6 +79,8 @@ export const query = graphql`
   query CaseStudy($uid: String) {
     prismicCaseStudy(uid: { eq: $uid }) {
       uid
+      tags
+      first_publication_date
       data {
         description {
           html
