@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 const Section = styled.div<{ bg?: string }>`
   background-color: ${props => props.bg};
-  padding: 2rem 0;
+  padding: 3rem 0;
   border-bottom: 1px solid black;
 `
 
