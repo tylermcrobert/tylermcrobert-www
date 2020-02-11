@@ -15,6 +15,11 @@ const style = css`
     letter-spacing: 0.02em;
   }
 
+  a {
+    color: ${props => props.theme.colors.primary};
+    text-decoration: none;
+  }
+
   h1,
   h2,
   h3,
