@@ -1,5 +1,5 @@
 import React from "react"
-import { Html, CtxLink } from "components"
+import { Html, CtxLink, LargeHead, MediumHead } from "components"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "templates/casestudy"
 import { useClientCtx } from "components/ClientContextProvider"
@@ -31,10 +31,10 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
 
   return (
     <>
-      <h1>
-        ({index + 1}){title}
-      </h1>
-      <Html>{description}</Html>
+      <LargeHead>{title}</LargeHead>
+      <MediumHead>
+        <Html>{description}</Html>
+      </MediumHead>
       <Slices data={data.cs_content} />
       <Footer index={index} />
     </>
