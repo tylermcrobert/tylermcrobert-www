@@ -12,6 +12,7 @@ const style = css`
     font-size: 23px;
     line-height: ${props => props.theme.lineHeights.body};
     font-family: ${props => props.theme.fontFamilies.sansSerif};
+    letter-spacing: 0.02em;
   }
 
   h1,

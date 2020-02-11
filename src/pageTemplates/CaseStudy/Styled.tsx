@@ -18,11 +18,15 @@ const Indent = styled.div`
   text-indent: 2em;
 `
 const Span = styled.div`
-  grid-column: 2 / span 3;
+  grid-column: 3 / span 3;
 `
 
 const Text = styled.div`
   grid-column: 2 / span 2;
+`
+
+const Left = styled.div`
+  grid-column: span 2;
 `
 
 export default {
@@ -31,4 +35,5 @@ export default {
   Indent,
   Span,
   Text,
+  Left,
 }

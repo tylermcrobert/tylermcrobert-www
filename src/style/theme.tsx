@@ -29,7 +29,7 @@ const theme: DefaultTheme = {
   },
 
   lineHeights: {
-    body: 1.3,
+    body: 1.35,
     heading: 1.15,
   },
 

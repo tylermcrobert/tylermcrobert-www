@@ -1,5 +1,5 @@
 import React from "react"
-import { Html, CtxLink, LargeHead, MediumHead } from "components"
+import { Html, CtxLink, LargeHead, MediumHead, Grid } from "components"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "templates/casestudy"
 import { useClientCtx } from "components/ClientContextProvider"
@@ -32,9 +32,9 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
 
   return (
     <>
-      <Styled.ColorBlock background="#F9AA1C">
-        <Styled.Grid>
-          <div>
+      <Styled.ColorBlock background="#fff">
+        <Grid>
+          <Styled.Left>
             <p>Published</p>
 
             <p>2018-06-30T02:19:59</p>
@@ -45,28 +45,26 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
             <p>● Graphic Design </p>
             <p>● Web Development</p>
             <p>● Creative Direction</p>
-          </div>
+          </Styled.Left>
           <Styled.Span>
             <LargeHead>{title}</LargeHead>
           </Styled.Span>
-        </Styled.Grid>
+        </Grid>
       </Styled.ColorBlock>
-      <Styled.ColorBlock background="#E7E2D8">
-        <Styled.Grid>
+      <Styled.ColorBlock background="#fff">
+        <Grid>
           <Styled.Span>
             <MediumHead>
-              <Styled.Indent>
-                <Html>{description}</Html>
-              </Styled.Indent>
+              <Html>{description}</Html>
             </MediumHead>
           </Styled.Span>
-        </Styled.Grid>
+        </Grid>
       </Styled.ColorBlock>
-      <Styled.Grid>
+      <Grid>
         <Styled.Text>
           <Html>{description}</Html>
         </Styled.Text>
-      </Styled.Grid>
+      </Grid>
       <Slices data={data.cs_content} />
       <Footer index={index} />
     </>
