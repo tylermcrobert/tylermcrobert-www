@@ -5,6 +5,7 @@ import { ClientContextProvider, Grid } from "components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { ThemeProvider } from "styled-components"
+import Styled from "./Styled"
 
 interface IProps {
   ctx: string
@@ -26,12 +27,15 @@ const Nav = () => {
   const { currentCtx } = useClientCtx()
   const linkDest = currentCtx.uid === "homepage" ? "/" : `/${currentCtx.uid}`
   return (
-    <Grid>
-      <Link to={linkDest}>Tyler McRobert </Link>
-      <div />
-      <div>Info</div>
-      <div>Work</div>
-    </Grid>
+    <Styled.Nav>
+      <Grid>
+        <Styled.LogoArea>
+          <Link to={linkDest}>Tyler McRobert </Link>
+        </Styled.LogoArea>
+        <Styled.Link>Info</Styled.Link>
+        <Styled.Link>Work</Styled.Link>
+      </Grid>
+    </Styled.Nav>
   )
 }
 
