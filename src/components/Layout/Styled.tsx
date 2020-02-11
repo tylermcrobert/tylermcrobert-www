@@ -17,7 +17,20 @@ const Link = styled.div`
   text-align: right;
 `
 
+const LogoWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1.1rem auto;
+  align-items: center;
+  grid-gap: 0.2rem;
+
+  * {
+    stroke-width: 10;
+    color: black;
+  }
+`
+
 export default {
+  LogoWrapper,
   LogoArea,
   Nav,
   Link,
