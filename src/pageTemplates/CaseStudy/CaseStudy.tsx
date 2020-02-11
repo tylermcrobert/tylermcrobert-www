@@ -4,6 +4,7 @@ import { Html, CtxLink, LargeHead, MediumHead } from "components"
 import { CaseStudyData } from "templates/casestudy"
 import { useClientCtx } from "components/ClientContextProvider"
 import Slices from "./Slices"
+import Styled from "./Styled"
 
 interface IProps {
   csData: CaseStudyData
@@ -31,11 +32,41 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
 
   return (
     <>
-      <LargeHead>{title}</LargeHead>
-      <MediumHead>
-        <Html>{description}</Html>
-      </MediumHead>
-      <Html>{description}</Html>
+      <Styled.ColorBlock background="#F9AA1C">
+        <Styled.Grid>
+          <div>
+            <p>Published</p>
+
+            <p>2018-06-30T02:19:59</p>
+
+            <br />
+            <p>Tagged</p>
+
+            <p>● Graphic Design </p>
+            <p>● Web Development</p>
+            <p>● Creative Direction</p>
+          </div>
+          <Styled.Span>
+            <LargeHead>{title}</LargeHead>
+          </Styled.Span>
+        </Styled.Grid>
+      </Styled.ColorBlock>
+      <Styled.ColorBlock background="#E7E2D8">
+        <Styled.Grid>
+          <Styled.Span>
+            <MediumHead>
+              <Styled.Indent>
+                <Html>{description}</Html>
+              </Styled.Indent>
+            </MediumHead>
+          </Styled.Span>
+        </Styled.Grid>
+      </Styled.ColorBlock>
+      <Styled.Grid>
+        <Styled.Text>
+          <Html>{description}</Html>
+        </Styled.Text>
+      </Styled.Grid>
       <Slices data={data.cs_content} />
       <Footer index={index} />
     </>

@@ -2,6 +2,11 @@ import { createGlobalStyle, css } from "styled-components"
 import reset from "styled-reset"
 
 const style = css`
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body,
   html {
     font-size: 23px;
