@@ -37,7 +37,12 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
 
   return (
     <>
-      <Header title={title} date={date} description={description} />
+      <Header
+        title={title}
+        date={date}
+        description={description}
+        index={index}
+      />
       <Slices data={data.cs_content} />
       <Footer index={index} />
     </>
@@ -52,14 +57,21 @@ interface IHeaderProps {
   date: string
   title: string
   description: string
+  index: number
 }
 
-const Header: React.FC<IHeaderProps> = ({ date, title, description }) => {
+const Header: React.FC<IHeaderProps> = ({
+  date,
+  title,
+  description,
+  // index,
+}) => {
   const tags = ["lorem", "ipsum dolor", "sit amet", " lorem"]
   return (
     <>
       <Styled.Section>
         <Styled.Title>
+          <span>CS&#9316;</span>
           <h1>{title}</h1>
         </Styled.Title>
       </Styled.Section>
