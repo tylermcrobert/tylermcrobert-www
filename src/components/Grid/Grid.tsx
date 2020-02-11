@@ -6,5 +6,5 @@ export const Grid = styled.div`
   grid-gap: ${props => props.theme.margins.standard};
   padding: 0 ${props => props.theme.margins.standard};
   margin: 0 auto;
-  max-width: 70rem;
+  max-width: 60rem;
 `

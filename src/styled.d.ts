@@ -11,8 +11,10 @@ declare module "styled-components" {
   export interface DefaultTheme {
     scale: number[]
     remScale: string[]
+
     fontFamilies: {
       sansSerif: string
+      serif: string
     }
 
     colors: {

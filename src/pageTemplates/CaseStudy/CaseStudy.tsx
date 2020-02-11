@@ -63,7 +63,7 @@ const Header: React.FC<IHeaderProps> = ({ date, title, description }) => {
           <h1>{title}</h1>
         </Styled.Title>
       </Styled.Section>
-      <Styled.Section>
+      <Styled.LgSection>
         <Grid>
           <Styled.Sidebar>
             <p>{date.replace("+0000", "")}</p>
@@ -71,14 +71,18 @@ const Header: React.FC<IHeaderProps> = ({ date, title, description }) => {
           </Styled.Sidebar>
           <Styled.Main>
             <LargeHead>
-              Cum sociis natoque penatibus et magnis dis parturient montes,
-              nascetur ridiculus mus.
+              The rebirth of the imaging and photography brand Fujifilm–Fuji
+              Imaging. The rejuvenation of this brand is aimed at reflecting the
+              robust creativity.
             </LargeHead>
           </Styled.Main>
         </Grid>
-      </Styled.Section>
-
-      <Html>{description}</Html>
+      </Styled.LgSection>
+      <Grid>
+        <Styled.Body>
+          <Html>{description}</Html>
+        </Styled.Body>
+      </Grid>
     </>
   )
 }

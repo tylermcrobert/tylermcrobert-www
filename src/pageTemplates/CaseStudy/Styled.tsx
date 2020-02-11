@@ -6,21 +6,34 @@ const Section = styled.div<{ bg?: string }>`
   border-bottom: 1px solid black;
 `
 
+const LgSection = styled(Section)`
+  padding: 6rem 0;
+`
+
 const Sidebar = styled.div`
   grid-column: span 2;
+  max-width: 13rem;
 `
 
 const Main = styled.div`
   grid-column: span 4;
+  font-family: ${props => props.theme.fontFamilies.serif};
 `
 
 const Title = styled.div`
   text-align: center;
 `
 
+const Body = styled.div`
+  padding: 3rem 0;
+  grid-column: 4 / span 3;
+`
+
 export default {
+  LgSection,
   Section,
   Sidebar,
   Main,
   Title,
+  Body,
 }
