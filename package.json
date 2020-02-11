@@ -20,7 +20,8 @@
     "query-string": "^6.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "styled-reset": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^13.1.2",
