@@ -35,6 +35,7 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
       <MediumHead>
         <Html>{description}</Html>
       </MediumHead>
+      <Html>{description}</Html>
       <Slices data={data.cs_content} />
       <Footer index={index} />
     </>
