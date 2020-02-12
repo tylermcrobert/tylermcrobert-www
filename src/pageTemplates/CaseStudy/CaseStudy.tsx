@@ -60,18 +60,32 @@ interface IHeaderProps {
   index: number
 }
 
+const NUMBERS = [
+  "&#9312;", // 1
+  "&#9313;",
+  "&#9314;",
+  "&#9315;",
+  "&#9316;",
+  "&#9317;",
+  "&#9318;",
+  "&#9319;",
+  "&#9320;", // 9
+]
+
 const Header: React.FC<IHeaderProps> = ({
   date,
   title,
   description,
-  // index,
+  index,
 }) => {
   const tags = ["lorem", "ipsum dolor", "sit amet", " lorem"]
   return (
     <>
       <Styled.Section>
         <Styled.Title>
-          <span>CS&#9316;</span>
+          <span>
+            CS<Html>{NUMBERS[index]}</Html>
+          </span>
           <h1>{title}</h1>
         </Styled.Title>
       </Styled.Section>

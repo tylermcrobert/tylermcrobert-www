@@ -8,7 +8,10 @@ interface IProps {
 
 const Html: React.FC<IProps> = ({ children, className }) => {
   return (
-    <div className={className} dangerouslySetInnerHTML={{ __html: children }} />
+    <span
+      className={className}
+      dangerouslySetInnerHTML={{ __html: children }}
+    />
   )
 }
 
