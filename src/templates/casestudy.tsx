@@ -54,6 +54,21 @@ export type TripleImageType = {
   }
 }
 
+export type WebsiteType = {
+  __typename: string
+  primary: {
+    browser_theme: string
+    browser_media: {
+      url: string | null
+    }
+    browser_image: {
+      url: string | null
+    }
+    browser_frame_color: string
+    background_color: string
+  }
+}
+
 export type CsContentType = Array<
   SingleImageType | DoubleImageType | TripleImageType
 >
@@ -121,7 +136,6 @@ export const query = graphql`
             }
           }
           ... on PrismicCaseStudyCsContentWebsite {
-            id
             primary {
               browser_theme
               browser_media {

@@ -41,9 +41,20 @@ const TripleImageSideLarge = styled(TripleImageSide)<{ isRight?: boolean }>`
   }
 `
 
+const BrowserBackground = styled.div<{ backgroundColor?: string }>`
+  background: ${props => props.backgroundColor || props.theme.colors.primary};
+  grid-column: span 6;
+`
+
+const Browser = styled.div`
+  margin: 10%;
+`
+
 export default {
   ImageWrapper,
   DoubleImage,
   TripleImageSide,
   TripleImageSideLarge,
+  BrowserBackground,
+  Browser,
 }

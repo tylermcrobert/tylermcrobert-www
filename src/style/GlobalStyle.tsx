@@ -28,6 +28,12 @@ const style = css`
   h6 {
     line-height: ${props => props.theme.lineHeights.heading};
   }
+
+  img,
+  video {
+    display: block;
+    width: 100%;
+  }
 `
 const GlobalStyle = createGlobalStyle`
   ${reset}

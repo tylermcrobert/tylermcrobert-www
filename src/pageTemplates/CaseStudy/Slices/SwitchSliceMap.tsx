@@ -6,11 +6,13 @@ import {
   SingleImageType,
   DoubleImageType,
   TripleImageType,
+  WebsiteType,
 } from "templates/casestudy"
 
 import SingleImage from "./SliceSingleImage"
 import DoubleImage from "./SliceDoubleImage"
 import TripleImage from "./SliceTripleImage"
+import Website from "./SliceWebsite"
 
 interface IProps {
   data: CsContentType
@@ -27,8 +29,12 @@ const Slices: React.FC<IProps> = ({ data }) => {
               return <DoubleImage data={item as DoubleImageType} />
             case "PrismicCaseStudyCsContentTripleImageBlock":
               return <TripleImage data={item as TripleImageType} />
+            case "PrismicCaseStudyCsContentWebsite":
+              return <Website data={(item as unknown) as WebsiteType} />
             default:
-              return <div>asdf</div>
+              console.log(item.__typename)
+
+              return null
           }
         })
         .map((item, i) => (
