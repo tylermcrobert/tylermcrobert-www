@@ -13,6 +13,9 @@ const TYPESCRIPT_RULES = {
   "@typescript-eslint/no-unused-vars": 0,
   // 'no-unused-vars': 0,
 
+  // getting in the way
+  "@typescript-eslint/no-var-requires": 0,
+
   // No commas or semi in interfaces
   "@typescript-eslint/member-delimiter-style": [
     1,
