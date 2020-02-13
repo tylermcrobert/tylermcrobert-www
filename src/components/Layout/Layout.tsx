@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { useClientCtx } from "components/ClientContextProvider"
-import { ClientContextProvider, Grid, Logomark } from "components"
+import { ClientContextProvider, Grid } from "components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { ThemeProvider } from "styled-components"
@@ -30,10 +30,7 @@ const Nav = () => {
     <Styled.Nav>
       <Grid>
         <Styled.LogoArea>
-          <Styled.LogoWrapper>
-            <Logomark />
-            <Link to={linkDest}>Tyler McRobert </Link>
-          </Styled.LogoWrapper>
+          <Link to={linkDest}>Tyler McRobert </Link>
         </Styled.LogoArea>
         <Styled.Link>Info</Styled.Link>
         <Styled.Link>Work</Styled.Link>
