@@ -1,1 +1,1 @@
-export { default } from "./Slices"
+export { default } from "./SwitchSliceMap"
