@@ -49,7 +49,6 @@ const Logo = () => {
         style={{ width: "100%" }}
         d="M62 26l100 174M25 163L199 63M62 200L162 26"
         stroke="#231F20"
-        strokeWidth="3"
         fill="none"
         fillRule="evenodd"
       />

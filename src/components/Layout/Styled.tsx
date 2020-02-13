@@ -24,7 +24,7 @@ const LogoWrapper = styled.div`
   grid-gap: 0.2rem;
 
   * {
-    stroke-width: 10;
+    stroke-width: 15;
     color: black;
   }
 `
