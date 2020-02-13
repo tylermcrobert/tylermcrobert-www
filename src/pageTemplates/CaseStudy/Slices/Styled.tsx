@@ -19,15 +19,31 @@ const DoubleImage = styled(ImageWrapper)`
   grid-column: span 3;
 `
 
-const TripleImageWrapper = styled(ImageWrapper)`
-  > div {
-    width: 50%;
-    flex-basis: 50%;
+const TripleImageSide = styled.div`
+  grid-column: span 3;
+  grid-row: 1;
+
+  display: grid;
+  grid-gap: ${props => props.theme.margins.gutter};
+
+  img {
+    display: block;
+    width: 100%;
+  }
+`
+
+const TripleImageSideLarge = styled(TripleImageSide)<{ isRight?: boolean }>`
+  grid-column: ${props => (props.isRight ? "1 / " : "")} span 3;
+
+  img {
+    height: 100%;
+    object-fit: cover;
   }
 `
 
 export default {
   ImageWrapper,
   DoubleImage,
-  TripleImageWrapper,
+  TripleImageSide,
+  TripleImageSideLarge,
 }

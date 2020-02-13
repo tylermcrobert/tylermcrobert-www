@@ -9,7 +9,7 @@ import {
   TripleImageType,
 } from "templates/casestudy"
 import formatImg, { FmType } from "util/formatImg"
-import { Grid, Section } from "components"
+import { Grid, Section, SmallSection } from "components"
 import Styled from "./Styled"
 
 const FULL_SIZE = { w: 1920, fm: "webp" as FmType }
@@ -53,13 +53,13 @@ interface ISingleImageProps {
 const SingleImage: React.FC<ISingleImageProps> = ({ data }) => {
   const { url } = data.primary.image
   return (
-    <Section>
+    <SmallSection>
       <Grid>
         <Styled.ImageWrapper>
           <img src={formatImg(url, FULL_SIZE)} alt="" />
         </Styled.ImageWrapper>
       </Grid>
-    </Section>
+    </SmallSection>
   )
 }
 
@@ -78,7 +78,7 @@ const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
   } = data.primary
 
   return (
-    <Section>
+    <SmallSection>
       <Grid>
         <Styled.DoubleImage>
           <img src={formatImg(leftUrl, HALF_SIZE)} alt="" />
@@ -87,7 +87,7 @@ const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
           <img src={formatImg(rightUrl, HALF_SIZE)} alt="" />
         </Styled.DoubleImage>
       </Grid>
-    </Section>
+    </SmallSection>
   )
 }
 
@@ -107,18 +107,18 @@ const TripleImage: React.FC<ITripleImageProps> = ({ data }) => {
     main_image_position: position,
   } = data.primary
 
-  const isMainOnRight = position === "Right"
+  const isLargeOnRight = position === "Right"
 
   return (
-    <Styled.TripleImageWrapper invert={isMainOnRight}>
-      <div>
+    <Grid>
+      <Styled.TripleImageSide>
         <img src={formatImg(secondaryImage1, HALF_SIZE)} alt="" />
         <img src={formatImg(secondaryImage2, HALF_SIZE)} alt="" />
-      </div>
-      <div>
+      </Styled.TripleImageSide>
+      <Styled.TripleImageSideLarge isRight={isLargeOnRight}>
         <img src={formatImg(mainImageUrl, HALF_SIZE)} alt="" />
-      </div>
-    </Styled.TripleImageWrapper>
+      </Styled.TripleImageSideLarge>
+    </Grid>
   )
 }
 

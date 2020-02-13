@@ -4,7 +4,7 @@ import ClientContextProvider from "./ClientContextProvider"
 import CtxLink from "./CtxLink"
 import { LargeHead, MediumHead } from "./Heading"
 import { Grid } from "./Grid"
-import { Section } from "./Section"
+import { Section, SmallSection } from "./Section"
 
 export {
   MediumHead,
@@ -15,4 +15,5 @@ export {
   CtxLink,
   Grid,
   Section,
+  SmallSection,
 }

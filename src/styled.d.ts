@@ -24,6 +24,7 @@ declare module "styled-components" {
 
     margins: {
       standard: string
+      gutter: string
     }
 
     lineHeights: {
