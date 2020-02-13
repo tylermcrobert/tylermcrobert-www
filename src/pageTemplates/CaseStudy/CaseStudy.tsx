@@ -97,9 +97,9 @@ const Header: React.FC<IHeaderProps> = ({
           </Styled.Sidebar>
           <Styled.Main>
             <LargeHead>
-              The rebirth of the imaging and photography brand Fujifilm–Fuji
-              Imaging. The rejuvenation of this brand is aimed at reflecting the
-              robust creativity.
+              Donec id elit non mi porta gravida at eget metus. Etiam porta sem
+              malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque
+              ornare sem lacinia
             </LargeHead>
           </Styled.Main>
         </Grid>
