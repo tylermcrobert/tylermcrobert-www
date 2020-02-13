@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { useClientCtx } from "components/ClientContextProvider"
-import { ClientContextProvider, Grid } from "components"
+import { ClientContextProvider, Grid, Logomark } from "components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { ThemeProvider } from "styled-components"
@@ -31,7 +31,7 @@ const Nav = () => {
       <Grid>
         <Styled.LogoArea>
           <Styled.LogoWrapper>
-            <Logo />
+            <Logomark />
             <Link to={linkDest}>Tyler McRobert </Link>
           </Styled.LogoWrapper>
         </Styled.LogoArea>
@@ -39,20 +39,6 @@ const Nav = () => {
         <Styled.Link>Work</Styled.Link>
       </Grid>
     </Styled.Nav>
-  )
-}
-
-const Logo = () => {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224 226">
-      <path
-        style={{ width: "100%" }}
-        d="M62 26l100 174M25 163L199 63M62 200L162 26"
-        stroke="#231F20"
-        fill="none"
-        fillRule="evenodd"
-      />
-    </svg>
   )
 }
 
