@@ -32,6 +32,8 @@ module.exports = {
     // idk
     "import/no-cycle": 0,
 
+    "no-underscore-dangle": 0,
+
     //needed in certain instances
     "react/jsx-props-no-spreading": 0,
 
