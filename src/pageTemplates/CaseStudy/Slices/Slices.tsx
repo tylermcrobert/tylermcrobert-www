@@ -9,6 +9,7 @@ import {
   TripleImageType,
 } from "templates/casestudy"
 import formatImg, { FmType } from "util/formatImg"
+import { Grid, Section } from "components"
 import Styled from "./Styled"
 
 const FULL_SIZE = { w: 1920, fm: "webp" as FmType }
@@ -52,15 +53,20 @@ interface ISingleImageProps {
 const SingleImage: React.FC<ISingleImageProps> = ({ data }) => {
   const { url } = data.primary.image
   return (
-    <Styled.ImageWrapper>
-      <img src={formatImg(url, FULL_SIZE)} alt="" />
-    </Styled.ImageWrapper>
+    <Section>
+      <Grid>
+        <Styled.ImageWrapper>
+          <img src={formatImg(url, FULL_SIZE)} alt="" />
+        </Styled.ImageWrapper>
+      </Grid>
+    </Section>
   )
 }
 
 /**
  * Double image
  */
+
 interface IDoubleImageProps {
   data: DoubleImageType
 }
@@ -72,12 +78,22 @@ const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
   } = data.primary
 
   return (
-    <Styled.DoubleImageWrapper>
-      <img src={formatImg(leftUrl, HALF_SIZE)} alt="" />
-      <img src={formatImg(rightUrl, HALF_SIZE)} alt="" />
-    </Styled.DoubleImageWrapper>
+    <Section>
+      <Grid>
+        <Styled.DoubleImage>
+          <img src={formatImg(leftUrl, HALF_SIZE)} alt="" />
+        </Styled.DoubleImage>
+        <Styled.DoubleImage>
+          <img src={formatImg(rightUrl, HALF_SIZE)} alt="" />
+        </Styled.DoubleImage>
+      </Grid>
+    </Section>
   )
 }
+
+/**
+ * Triple image
+ */
 
 interface ITripleImageProps {
   data: TripleImageType

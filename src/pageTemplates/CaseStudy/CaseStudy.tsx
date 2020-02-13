@@ -1,5 +1,5 @@
 import React from "react"
-import { Html, CtxLink, LargeHead, Grid } from "components"
+import { Html, CtxLink, LargeHead, Grid, Section } from "components"
 // eslint-disable-next-line no-unused-vars
 import { CaseStudyData } from "templates/casestudy"
 import { useClientCtx } from "components/ClientContextProvider"
@@ -97,18 +97,20 @@ const Header: React.FC<IHeaderProps> = ({
           </Styled.Sidebar>
           <Styled.Main>
             <LargeHead>
-              Donec id elit non mi porta gravida at eget metus. Etiam porta sem
-              malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque
-              ornare sem lacinia
+              The rebirth of the imaging and photography brand Fujifilm–Fuji
+              Imaging. The rejuvenation of this brand is aimed at reflecting the
+              robust creativity.
             </LargeHead>
           </Styled.Main>
         </Grid>
       </Styled.LgSection>
-      <Grid>
-        <Styled.Body>
-          <Html>{description}</Html>
-        </Styled.Body>
-      </Grid>
+      <Section>
+        <Grid>
+          <Styled.Body>
+            <Html>{description}</Html>
+          </Styled.Body>
+        </Grid>
+      </Section>
     </>
   )
 }

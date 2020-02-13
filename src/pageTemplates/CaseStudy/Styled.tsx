@@ -25,7 +25,6 @@ const Title = styled.div`
 `
 
 const Body = styled.div`
-  padding: 3rem 0;
   grid-column: 4 / span 3;
 `
 

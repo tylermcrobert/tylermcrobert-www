@@ -8,16 +8,15 @@ const ImageWrapper = styled.div<IImageWrapperProps>`
   display: flex;
   flex-wrap: wrap;
   flex-direction: ${props => (props.invert ? "row-reverse" : "row")};
+  grid-column: span 6;
 
   img {
     width: 100%;
   }
 `
 
-const DoubleImageWrapper = styled(ImageWrapper)`
-  img {
-    width: 50%;
-  }
+const DoubleImage = styled(ImageWrapper)`
+  grid-column: span 3;
 `
 
 const TripleImageWrapper = styled(ImageWrapper)`
@@ -29,6 +28,6 @@ const TripleImageWrapper = styled(ImageWrapper)`
 
 export default {
   ImageWrapper,
-  DoubleImageWrapper,
+  DoubleImage,
   TripleImageWrapper,
 }
