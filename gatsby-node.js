@@ -41,8 +41,6 @@ exports.createPages = async function createPages({
       .filter(item => !!item)
       .map(item => item.uid)
 
-    console.log(contextUids)
-
     // ctx landing page
     createPage({
       // if uid is 'homepage', use it for root

@@ -13,6 +13,13 @@ const query = graphql`
             case_study_list {
               case_study_item {
                 uid
+                document {
+                  data {
+                    title {
+                      text
+                    }
+                  }
+                }
               }
             }
           }
@@ -35,6 +42,13 @@ type CtxProviderData = {
           case_study_list: {
             case_study_item: {
               uid: string
+              document: {
+                data: {
+                  title: {
+                    text: string
+                  }
+                }
+              }[]
             }
           }[]
         }
@@ -44,7 +58,15 @@ type CtxProviderData = {
   }
 }
 
-type CtxItem = { uid: string; caseStudies: string[] }
+type CaseStudyInfo = {
+  uid: string
+  title: string
+}
+
+type CtxItem = {
+  uid: string
+  caseStudies: CaseStudyInfo[]
+}
 
 interface ICtx {
   contexts: CtxItem[]
@@ -72,7 +94,10 @@ const ClientContextProvider: React.FC<IProps> = ({ children, ctx }) => {
       caseStudies: item.data.case_study_list
         .map(cs => cs.case_study_item)
         .filter(cs => !!cs)
-        .map(cs => cs.uid),
+        .map(cs => ({
+          uid: cs.uid,
+          title: cs.document[0].data.title.text,
+        })),
     }))
 
   // returns only valid ctx

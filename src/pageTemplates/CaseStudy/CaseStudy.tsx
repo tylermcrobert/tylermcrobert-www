@@ -12,7 +12,7 @@ interface IProps {
 
 const useIndex = (uid: string): number => {
   const { currentCtx } = useClientCtx()
-  const index = currentCtx.caseStudies.indexOf(uid)
+  const index = currentCtx.caseStudies.map(item => item.uid).indexOf(uid)
   return index === -1 ? 0 : index
 }
 
@@ -122,7 +122,7 @@ const Footer: React.FC<{ index: number }> = ({ index }) => {
 
   return (
     <div>
-      Next: <CtxLink to={`/${nextCs}`}> {nextCs}</CtxLink>
+      Next: <CtxLink to={`/${nextCs.uid}`}> {nextCs.title}</CtxLink>
     </div>
   )
 }
