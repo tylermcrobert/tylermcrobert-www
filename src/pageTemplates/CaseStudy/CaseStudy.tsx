@@ -78,7 +78,7 @@ const Header: React.FC<IHeaderProps> = ({
   description,
   index,
 }) => {
-  const tags = ["lorem", "ipsum dolor", "sit amet", " lorem"]
+  const tags = ["Lorem", "Ipsum dolor", "Sit amet", " Lorem"]
   return (
     <>
       <Styled.Section>
