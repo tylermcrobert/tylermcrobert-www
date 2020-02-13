@@ -36,9 +36,12 @@ exports.createPages = async function createPages({
 
   // loop through contexts
   contexts.forEach(({ node: { uid, data } }) => {
-    const contextUids = data.case_study_list.map(
-      item => item.case_study_item.uid
-    )
+    const contextUids = data.case_study_list
+      .map(item => item.case_study_item)
+      .filter(item => !!item)
+      .map(item => item.uid)
+
+    console.log(contextUids)
 
     // ctx landing page
     createPage({

@@ -69,7 +69,10 @@ const ClientContextProvider: React.FC<IProps> = ({ children, ctx }) => {
     .map(item => item.node)
     .map(item => ({
       uid: item.uid,
-      caseStudies: item.data.case_study_list.map(cs => cs.case_study_item.uid),
+      caseStudies: item.data.case_study_list
+        .map(cs => cs.case_study_item)
+        .filter(cs => !!cs)
+        .map(cs => cs.uid),
     }))
 
   // returns only valid ctx
