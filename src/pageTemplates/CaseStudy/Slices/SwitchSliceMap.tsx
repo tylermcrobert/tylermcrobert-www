@@ -2,11 +2,11 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react"
 import {
-  CsContentType,
-  SingleImageType,
-  DoubleImageType,
-  TripleImageType,
-  WebsiteType,
+  ISlice,
+  ISingleImage,
+  IDoubleImage,
+  ITripleImage,
+  IWebsite,
 } from "templates/casestudy"
 
 import SingleImage from "./SliceSingleImage"
@@ -15,7 +15,7 @@ import TripleImage from "./SliceTripleImage"
 import Website from "./SliceWebsite"
 
 interface IProps {
-  data: CsContentType
+  data: ISlice[]
 }
 const Slices: React.FC<IProps> = ({ data }) => {
   return (
@@ -23,14 +23,14 @@ const Slices: React.FC<IProps> = ({ data }) => {
       {data
         .map(item => {
           switch (item.__typename) {
-            case "PrismicCaseStudyCsContentSingleImage":
-              return <SingleImage data={item as SingleImageType} />
-            case "PrismicCaseStudyCsContentDoubleImageBlock":
-              return <DoubleImage data={item as DoubleImageType} />
-            case "PrismicCaseStudyCsContentTripleImageBlock":
-              return <TripleImage data={item as TripleImageType} />
-            case "PrismicCaseStudyCsContentWebsite":
-              return <Website data={(item as unknown) as WebsiteType} />
+            case "PRISMIC_Case_studyCs_contentSingle_image":
+              return <SingleImage data={item as ISingleImage} />
+            case "PRISMIC_Case_studyCs_contentDouble_image_block":
+              return <DoubleImage data={item as IDoubleImage} />
+            case "PRISMIC_Case_studyCs_contentTriple_image_block":
+              return <TripleImage data={item as ITripleImage} />
+            case "PRISMIC_Case_studyCs_contentWebsite":
+              return <Website data={(item as unknown) as IWebsite} />
             default:
               console.log(item.__typename)
 

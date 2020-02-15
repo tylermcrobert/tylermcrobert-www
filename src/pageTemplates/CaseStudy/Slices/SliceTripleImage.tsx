@@ -1,13 +1,13 @@
 import React from "react"
 // eslint-disable-next-line no-unused-vars
-import { TripleImageType } from "templates/casestudy"
+import { ITripleImage } from "templates/casestudy"
 import formatImg from "util/formatImg"
 import { Grid } from "components"
 import Styled from "./Styled"
 import { HALF_SIZE } from "./constants"
 
 interface ITripleImageProps {
-  data: TripleImageType
+  data: ITripleImage
 }
 
 const TripleImage: React.FC<ITripleImageProps> = ({ data }) => {
@@ -23,11 +23,17 @@ const TripleImage: React.FC<ITripleImageProps> = ({ data }) => {
   return (
     <Grid>
       <Styled.TripleImageSide>
-        <img src={formatImg(secondaryImage1, HALF_SIZE)} alt="" />
-        <img src={formatImg(secondaryImage2, HALF_SIZE)} alt="" />
+        {secondaryImage1 && (
+          <img src={formatImg(secondaryImage1, HALF_SIZE)} alt="" />
+        )}
+        {secondaryImage2 && (
+          <img src={formatImg(secondaryImage2, HALF_SIZE)} alt="" />
+        )}
       </Styled.TripleImageSide>
       <Styled.TripleImageSideLarge isRight={isLargeOnRight}>
-        <img src={formatImg(mainImageUrl, HALF_SIZE)} alt="" />
+        {mainImageUrl && (
+          <img src={formatImg(mainImageUrl, HALF_SIZE)} alt="" />
+        )}
       </Styled.TripleImageSideLarge>
     </Grid>
   )
