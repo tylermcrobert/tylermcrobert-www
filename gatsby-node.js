@@ -17,14 +17,20 @@ exports.createPages = async function createPages({
 }) {
   const contexts = await graphql(`
     {
-      allPrismicContext {
-        edges {
-          node {
-            uid
-            data {
+      prismic {
+        allContexts {
+          edges {
+            node {
+              _meta {
+                uid
+              }
               case_study_list {
                 case_study_item {
-                  uid
+                  ... on PRISMIC_Case_study {
+                    _meta {
+                      uid
+                    }
+                  }
                 }
               }
             }
@@ -32,14 +38,16 @@ exports.createPages = async function createPages({
         }
       }
     }
-  `).then(result => result.data.allPrismicContext.edges)
+  `).then(result => result.data.prismic.allContexts.edges)
 
   // loop through contexts
-  contexts.forEach(({ node: { uid, data } }) => {
-    const contextUids = data.case_study_list
+  contexts.forEach(contextDoc => {
+    const { uid } = contextDoc.node._meta
+
+    const contextUids = contextDoc.node.case_study_list
       .map(item => item.case_study_item)
       .filter(item => !!item)
-      .map(item => item.uid)
+      .map(item => item._meta.uid)
 
     // ctx landing page
     createPage({

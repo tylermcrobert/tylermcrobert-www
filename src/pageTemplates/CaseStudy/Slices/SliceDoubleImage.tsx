@@ -1,13 +1,13 @@
 import React from "react"
 // eslint-disable-next-line no-unused-vars
-import { DoubleImageType } from "templates/casestudy"
+import { IDoubleImage } from "templates/casestudy"
 import formatImg from "util/formatImg"
 import { Grid, SmallSection } from "components"
 import Styled from "./Styled"
 import { HALF_SIZE } from "./constants"
 
 interface IDoubleImageProps {
-  data: DoubleImageType
+  data: IDoubleImage
 }
 
 const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
@@ -20,10 +20,10 @@ const DoubleImage: React.FC<IDoubleImageProps> = ({ data }) => {
     <SmallSection>
       <Grid>
         <Styled.DoubleImage>
-          <img src={formatImg(leftUrl, HALF_SIZE)} alt="" />
+          {leftUrl && <img src={formatImg(leftUrl, HALF_SIZE)} alt="" />}
         </Styled.DoubleImage>
         <Styled.DoubleImage>
-          <img src={formatImg(rightUrl, HALF_SIZE)} alt="" />
+          {rightUrl && <img src={formatImg(rightUrl, HALF_SIZE)} alt="" />}
         </Styled.DoubleImage>
       </Grid>
     </SmallSection>

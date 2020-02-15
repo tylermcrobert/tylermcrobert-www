@@ -6,24 +6,24 @@ const DEFAULT_CTX = "homepage"
 
 const query = graphql`
   {
-    allPrismicContext {
-      edges {
-        node {
-          data {
+    prismic {
+      allContexts {
+        edges {
+          node {
             case_study_list {
               case_study_item {
-                uid
-                document {
-                  data {
-                    title {
-                      text
-                    }
+                ... on PRISMIC_Case_study {
+                  title
+                  _meta {
+                    uid
                   }
                 }
               }
             }
+            _meta {
+              uid
+            }
           }
-          uid
         }
       }
     }
@@ -33,30 +33,52 @@ const query = graphql`
 /**
  * Types
  */
+export interface Title {
+  type: string
+  text: string
+  spans: any[]
+}
 
-type CtxProviderData = {
-  allPrismicContext: {
-    edges: {
-      node: {
-        data: {
-          case_study_list: {
-            case_study_item: {
-              uid: string
-              document: {
-                data: {
-                  title: {
-                    text: string
-                  }
-                }
-              }[]
-            }
-          }[]
-        }
-        uid: string
-      }
-    }[]
+export interface Meta {
+  uid: string
+}
+
+export interface CaseStudyItem {
+  __typename: string
+  title: Title[]
+  _meta: Meta
+}
+
+export interface CaseStudyList {
+  case_study_item: CaseStudyItem
+}
+
+export interface Node {
+  case_study_list: CaseStudyList[]
+  _meta: {
+    uid: string
   }
 }
+
+export interface Edge {
+  node: Node
+}
+
+export interface AllContexts {
+  edges: Edge[]
+}
+
+export interface Prismic {
+  allContexts: AllContexts
+}
+
+export interface ICtxProviderData {
+  prismic: Prismic
+}
+
+/**
+ *
+ */
 
 type CaseStudyInfo = {
   uid: string
@@ -86,17 +108,17 @@ interface IProps {
 
 const ClientContextProvider: React.FC<IProps> = ({ children, ctx }) => {
   // data
-  const response: CtxProviderData = useStaticQuery(query)
-  const contexts = response.allPrismicContext.edges
-    .map(item => item.node)
-    .map(item => ({
-      uid: item.uid,
-      caseStudies: item.data.case_study_list
+  const response: ICtxProviderData = useStaticQuery(query)
+  const contexts: CtxItem[] = response.prismic.allContexts.edges
+    .map(context => context.node)
+    .map(context => ({
+      uid: context._meta.uid,
+      caseStudies: context.case_study_list
         .map(cs => cs.case_study_item)
-        .filter(cs => !!cs)
+        .filter(cs => cs)
         .map(cs => ({
-          uid: cs.uid,
-          title: cs.document[0].data.title.text,
+          uid: cs._meta.uid,
+          title: cs.title[0].text,
         })),
     }))
 

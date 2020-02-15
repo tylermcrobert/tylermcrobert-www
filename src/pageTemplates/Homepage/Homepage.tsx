@@ -1,19 +1,19 @@
+/* eslint-disable no-underscore-dangle */
 import React from "react"
 import { CtxLink } from "components"
 // eslint-disable-next-line no-unused-vars
-import { HomepageData } from "templates/homepage"
+import { IPrismicContext } from "templates/homepage"
+
+const { RichText } = require("prismic-reactjs")
 
 interface IProps {
-  data: HomepageData
+  data: IPrismicContext
 }
 
 const Homepage: React.FC<IProps> = ({ data }) => {
-  const items = data.prismicContext.data.case_study_list
-    .map(item => item.case_study_item)
-    .map(item => ({
-      uid: item.uid,
-      title: item.document[0].data.title.text,
-    }))
+  const items = data.prismic.context.case_study_list
+    .map(cs => cs.case_study_item)
+    .map(cs => ({ uid: cs._meta.uid, title: RichText.asText(cs.title) }))
 
   return (
     <>

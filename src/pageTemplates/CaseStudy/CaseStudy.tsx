@@ -1,13 +1,15 @@
 import React from "react"
 import { Html, CtxLink, LargeHead, Grid, Section } from "components"
 // eslint-disable-next-line no-unused-vars
-import { CaseStudyData } from "templates/casestudy"
+import { ICaseStudy } from "templates/casestudy"
 import { useClientCtx } from "components/ClientContextProvider"
 import Slices from "./Slices"
 import Styled from "./Styled"
 
+const { RichText } = require("prismic-reactjs")
+
 interface IProps {
-  csData: CaseStudyData
+  csData: ICaseStudy
 }
 
 const useIndex = (uid: string): number => {
@@ -16,23 +18,12 @@ const useIndex = (uid: string): number => {
   return index === -1 ? 0 : index
 }
 
-const useParsed = (csData: CaseStudyData) => {
-  const {
-    uid,
-    data,
-    first_publication_date: date,
-    tags,
-  } = csData.prismicCaseStudy
-  const {
-    title: { text: title },
-    description: { html: description },
-  } = data
-
-  return { title, description, uid, data, date, tags }
-}
-
 const CaseStudy: React.FC<IProps> = ({ csData }) => {
-  const { title, description, uid, data, date } = useParsed(csData)
+  const title = RichText.asText(csData.title)
+  const description = RichText.asText(csData.description)
+  const { uid } = csData._meta
+  const deliverables = csData.deliverables.split(", ")
+  const date = csData._meta.firstPublicationDate
   const index = useIndex(uid)
 
   return (
@@ -41,9 +32,10 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
         title={title}
         date={date}
         description={description}
+        deliverables={deliverables}
         index={index}
       />
-      <Slices data={data.cs_content} />
+      <Slices data={csData.cs_content} />
       <Footer index={index} />
     </>
   )
@@ -58,6 +50,7 @@ interface IHeaderProps {
   title: string
   description: string
   index: number
+  deliverables: string[]
 }
 
 const NUMBERS = [
@@ -77,8 +70,8 @@ const Header: React.FC<IHeaderProps> = ({
   title,
   description,
   index,
+  deliverables,
 }) => {
-  const tags = ["Lorem", "Ipsum dolor", "Sit amet", " Lorem"]
   return (
     <>
       <Styled.Section>
@@ -93,7 +86,7 @@ const Header: React.FC<IHeaderProps> = ({
         <Grid>
           <Styled.Sidebar>
             <p>{date.replace("+0000", "")}</p>
-            <Html>{tags.join(" &#9679 ")}</Html>
+            <Html>{deliverables.join(" &#9679 ")}</Html>
           </Styled.Sidebar>
           <Styled.Main>
             <LargeHead>

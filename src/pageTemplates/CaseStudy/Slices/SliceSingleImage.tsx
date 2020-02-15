@@ -2,17 +2,17 @@ import React from "react"
 import { Grid, SmallSection } from "components"
 import formatImg from "util/formatImg"
 // eslint-disable-next-line no-unused-vars
-import { SingleImageType } from "templates/casestudy"
+import { ISingleImage } from "templates/casestudy"
 import { FULL_SIZE } from "./constants"
 import Styled from "./Styled"
 
 interface ISingleImageProps {
-  data: SingleImageType
+  data: ISingleImage
 }
 
 const SingleImage: React.FC<ISingleImageProps> = ({ data }) => {
   const { url } = data.primary.image
-  return (
+  return url ? (
     <SmallSection>
       <Grid>
         <Styled.ImageWrapper>
@@ -20,7 +20,7 @@ const SingleImage: React.FC<ISingleImageProps> = ({ data }) => {
         </Styled.ImageWrapper>
       </Grid>
     </SmallSection>
-  )
+  ) : null
 }
 
 export default SingleImage

@@ -2,152 +2,124 @@ import React from "react"
 import { graphql } from "gatsby"
 import { parseSearch } from "components/ClientContextProvider"
 import { Layout } from "components"
+// eslint-disable-next-line no-unused-vars
+import { IRichText, IPrismicImage } from "types/prismic"
 import { CaseStudy as CaseStudyTemplate } from "../pageTemplates"
 
 interface IProps {
-  data: CaseStudyData
+  data: ICaseStudyData
   location: { search: string }
 }
 
-const CaseStudy: React.FC<IProps> = ({ data, location }) => {
-  return (
-    <Layout ctx={parseSearch(location.search)}>
-      <CaseStudyTemplate csData={data} />
-    </Layout>
-  )
+const CaseStudy: React.FC<IProps> = ({ data, location }) => (
+  <Layout ctx={parseSearch(location.search)}>
+    <CaseStudyTemplate csData={data.prismic.case_study} />
+  </Layout>
+)
+
+/**
+ * Types
+ */
+
+interface ISliceBlock {
+  __typename: string
 }
 
-export type SingleImageType = {
-  __typename: string
+export interface ISingleImage extends ISliceBlock {
   primary: {
-    image: {
-      url: string
-    }
+    image: IPrismicImage
   }
 }
 
-export type DoubleImageType = {
-  __typename: string
+export interface IDoubleImage extends ISliceBlock {
   primary: {
-    left_image: {
-      url: string
-    }
-    right_image: {
-      url: string
-    }
+    left_image: IPrismicImage
+    right_image: IPrismicImage
   }
 }
 
-export type TripleImageType = {
-  __typename: string
+export interface ITripleImage extends ISliceBlock {
   primary: {
     main_image_position: string
-    main_image: {
-      url: string
-    }
-    secondary_image_1: {
-      url: string
-    }
-    secondary_image_2: {
-      url: string
-    }
+    main_image: IPrismicImage
+    secondary_image_1: IPrismicImage
+    secondary_image_2: IPrismicImage
   }
 }
 
-export type WebsiteType = {
-  __typename: string
+export interface IWebsite extends ISliceBlock {
   primary: {
     browser_theme: string
-    browser_media: {
-      url: string | null
-    }
-    browser_image: {
-      url: string | null
-    }
-    browser_frame_color: string
-    background_color: string
+    browser_media: { url: string } | null
+    browser_image: IPrismicImage | null
+    browser_frame_color: string | null
+    background_color: string | null
+  }
+}
+export type ISlice = ISingleImage | IDoubleImage | ITripleImage
+
+export interface ICaseStudy {
+  title: IRichText
+  description: IRichText
+  deliverables: string
+  cs_content: ISlice[]
+  _meta: {
+    uid: string
+    firstPublicationDate: string
   }
 }
 
-export type CsContentType = Array<
-  SingleImageType | DoubleImageType | TripleImageType
->
-
-export type CaseStudyData = {
-  prismicCaseStudy: {
-    uid: string
-    tags: string[]
-    first_publication_date: string
-    data: {
-      description: {
-        html: string
-      }
-      title: {
-        text: string
-      }
-      cs_content: CsContentType
-    }
+interface ICaseStudyData {
+  prismic: {
+    case_study: ICaseStudy
   }
 }
 
 export const query = graphql`
-  query CaseStudy($uid: String) {
-    prismicCaseStudy(uid: { eq: $uid }) {
-      uid
-      tags
-      first_publication_date
-      data {
-        description {
-          html
-        }
-        title {
-          text
-        }
+  query Query($uid: String!) {
+    prismic {
+      case_study(lang: "en-us", uid: $uid) {
         cs_content {
-          ... on PrismicCaseStudyCsContentDoubleImageBlock {
+          ... on PRISMIC_Case_studyCs_contentSingle_image {
+            label
             primary {
-              left_image {
-                url
-              }
-              right_image {
-                url
-              }
+              image
             }
           }
-          ... on PrismicCaseStudyCsContentSingleImage {
+          ... on PRISMIC_Case_studyCs_contentDouble_image_block {
             primary {
-              image {
-                url
-              }
+              left_image
+              right_image
             }
           }
-          ... on PrismicCaseStudyCsContentTripleImageBlock {
+          ... on PRISMIC_Case_studyCs_contentTriple_image_block {
             primary {
+              main_image
               main_image_position
-              main_image {
-                url
-              }
-              secondary_image_1 {
-                url
-              }
-              secondary_image_2 {
-                url
-              }
+              secondary_image_1
+              secondary_image_2
             }
           }
-          ... on PrismicCaseStudyCsContentWebsite {
+          ... on PRISMIC_Case_studyCs_contentWebsite {
             primary {
               browser_theme
               browser_media {
-                url
+                ... on PRISMIC__FileLink {
+                  url
+                }
               }
-              browser_image {
-                url
-              }
+              browser_image
               browser_frame_color
               background_color
             }
           }
+        }
+        deliverables
+        description
+        title
+        _meta {
+          uid
+          firstPublicationDate
         }
       }
     }
