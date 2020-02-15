@@ -60,6 +60,7 @@ export type ISlice = ISingleImage | IDoubleImage | ITripleImage
 
 export interface ICaseStudy {
   title: IRichText
+  intro: IRichText | null
   description: IRichText
   deliverables: string
   cs_content: ISlice[]
@@ -117,6 +118,7 @@ export const query = graphql`
         deliverables
         description
         title
+        intro
         _meta {
           uid
           firstPublicationDate

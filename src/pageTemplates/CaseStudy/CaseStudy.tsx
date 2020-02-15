@@ -2,6 +2,8 @@ import React from "react"
 import { Html, CtxLink, LargeHead, Grid, Section } from "components"
 // eslint-disable-next-line no-unused-vars
 import { ICaseStudy } from "templates/casestudy"
+// eslint-disable-next-line no-unused-vars
+import { IRichText } from "types/prismic"
 import { useClientCtx } from "components/ClientContextProvider"
 import Slices from "./Slices"
 import Styled from "./Styled"
@@ -25,6 +27,7 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
   const deliverables = csData.deliverables.split(", ")
   const date = csData._meta.firstPublicationDate
   const index = useIndex(uid)
+  const { intro } = csData
 
   return (
     <>
@@ -34,8 +37,10 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
         description={description}
         deliverables={deliverables}
         index={index}
+        intro={intro}
       />
       <Slices data={csData.cs_content} />
+
       <Footer index={index} />
     </>
   )
@@ -48,6 +53,7 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
 interface IHeaderProps {
   date: string
   title: string
+  intro: IRichText | null
   description: string
   index: number
   deliverables: string[]
@@ -71,6 +77,7 @@ const Header: React.FC<IHeaderProps> = ({
   description,
   index,
   deliverables,
+  intro,
 }) => {
   return (
     <>
@@ -90,9 +97,15 @@ const Header: React.FC<IHeaderProps> = ({
           </Styled.Sidebar>
           <Styled.Main>
             <LargeHead>
-              The rebirth of the imaging and photography brand Fujifilm–Fuji
-              Imaging. The rejuvenation of this brand is aimed at reflecting the
-              robust creativity.
+              {intro ? (
+                RichText.render(intro)
+              ) : (
+                <>
+                  Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo
+                  quam. Pellentesque ornare sem lacinia quam venenatis vesti
+                  bulum pharetra nibh.
+                </>
+              )}
             </LargeHead>
           </Styled.Main>
         </Grid>

@@ -24,15 +24,19 @@ const Slices: React.FC<IProps> = ({ data }) => {
         .map(item => {
           switch (item.__typename) {
             case "PRISMIC_Case_studyCs_contentSingle_image":
+            case "Case_studyCs_contentSingle_image":
               return <SingleImage data={item as ISingleImage} />
             case "PRISMIC_Case_studyCs_contentDouble_image_block":
+            case "Case_studyCs_contentDouble_image_block":
               return <DoubleImage data={item as IDoubleImage} />
             case "PRISMIC_Case_studyCs_contentTriple_image_block":
+            case "Case_studyCs_contentTriple_image_block":
               return <TripleImage data={item as ITripleImage} />
             case "PRISMIC_Case_studyCs_contentWebsite":
+            case "Case_studyCs_contentWebsite":
               return <Website data={(item as unknown) as IWebsite} />
             default:
-              console.log(item.__typename)
+              console.error(`No component for ${item.__typename}`)
               return null
           }
         })
