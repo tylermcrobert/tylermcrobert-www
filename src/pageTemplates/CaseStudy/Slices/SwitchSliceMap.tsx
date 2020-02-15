@@ -33,7 +33,6 @@ const Slices: React.FC<IProps> = ({ data }) => {
               return <Website data={(item as unknown) as IWebsite} />
             default:
               console.log(item.__typename)
-
               return null
           }
         })

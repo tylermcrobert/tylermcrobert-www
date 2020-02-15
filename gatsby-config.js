@@ -8,13 +8,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-typescript`,
     {
-      resolve: `gatsby-source-prismic`,
-      options: {
-        repositoryName: `tylermcrobert`,
-        // linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
-      },
-    },
-    {
       resolve: "gatsby-source-prismic-graphql",
       options: {
         repositoryName: "tylermcrobert", // (required)
