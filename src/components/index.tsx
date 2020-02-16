@@ -1,4 +1,5 @@
 import Layout from "./Layout"
+import Paragraph from "./Paragraph"
 import Html from "./Html"
 import ClientContextProvider from "./ClientContextProvider"
 import CtxLink from "./CtxLink"
@@ -18,4 +19,5 @@ export {
   Section,
   SmallSection,
   Logomark,
+  Paragraph,
 }
