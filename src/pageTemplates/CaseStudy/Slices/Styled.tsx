@@ -52,6 +52,10 @@ const Browser = styled.div`
 
 const ParagraphWrapper = styled.div`
   grid-column: 4 / span 3;
+
+  &:nth-child(odd) {
+    grid-column: 1 / span 3;
+  }
 `
 
 export default {

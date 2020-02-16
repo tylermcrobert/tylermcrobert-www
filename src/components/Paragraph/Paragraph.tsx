@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const Paragraph = styled.p`
+const Paragraph = styled.div`
   text-indent: 2em;
 `
 
