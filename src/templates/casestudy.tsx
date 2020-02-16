@@ -25,6 +25,12 @@ interface ISliceBlock {
   __typename: string
 }
 
+export interface IText extends ISliceBlock {
+  primary: {
+    paragraph: IRichText
+  }
+}
+
 export interface ISingleImage extends ISliceBlock {
   primary: {
     image: IPrismicImage
@@ -56,7 +62,8 @@ export interface IWebsite extends ISliceBlock {
     background_color: string | null
   }
 }
-export type ISlice = ISingleImage | IDoubleImage | ITripleImage
+
+export type ISlice = ISingleImage | IDoubleImage | ITripleImage | IText
 
 export interface ICaseStudy {
   title: IRichText
@@ -99,6 +106,11 @@ export const query = graphql`
               main_image_position
               secondary_image_1
               secondary_image_2
+            }
+          }
+          ... on PRISMIC_Case_studyCs_contentText {
+            primary {
+              paragraph
             }
           }
           ... on PRISMIC_Case_studyCs_contentWebsite {

@@ -50,6 +50,10 @@ const Browser = styled.div`
   margin: 10%;
 `
 
+const ParagraphWrapper = styled.div`
+  grid-column: 4 / span 3;
+`
+
 export default {
   ImageWrapper,
   DoubleImage,
@@ -57,4 +61,5 @@ export default {
   TripleImageSideLarge,
   BrowserBackground,
   Browser,
+  ParagraphWrapper,
 }

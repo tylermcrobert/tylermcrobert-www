@@ -7,12 +7,14 @@ import {
   IDoubleImage,
   ITripleImage,
   IWebsite,
+  IText,
 } from "templates/casestudy"
 
 import SingleImage from "./SliceSingleImage"
 import DoubleImage from "./SliceDoubleImage"
 import TripleImage from "./SliceTripleImage"
 import Website from "./SliceWebsite"
+import SliceText from "./SliceText"
 
 interface IProps {
   data: ISlice[]
@@ -35,6 +37,9 @@ const Slices: React.FC<IProps> = ({ data }) => {
             case "PRISMIC_Case_studyCs_contentWebsite":
             case "Case_studyCs_contentWebsite":
               return <Website data={(item as unknown) as IWebsite} />
+            case "PRISMIC_Case_studyCs_contentText":
+            case "Case_studyCs_contentText":
+              return <SliceText data={item as IText} />
             default:
               console.error(`No component for ${item.__typename}`)
               return null
