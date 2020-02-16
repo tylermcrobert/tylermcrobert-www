@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 const Nav = styled.div`
-  border-bottom: 1px solid ${props => props.theme.colors.primary};
   background: ${props => props.theme.colors.secondary};
   padding: 0.5rem 0;
 
