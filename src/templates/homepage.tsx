@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Layout } from "components"
+import { Layout, Seo } from "components"
 import { parseSearch } from "components/ClientContextProvider"
 import { Homepage } from "../pageTemplates"
 
@@ -16,6 +16,7 @@ const HomepageContainer: React.FC<IProps> = ({
 }) => {
   return (
     <Layout ctx={pageContext.uid || parseSearch(location.search)}>
+      <Seo title={null} />
       <Homepage data={data} />
     </Layout>
   )
