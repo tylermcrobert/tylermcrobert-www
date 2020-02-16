@@ -3,7 +3,7 @@ import { Grid } from "components"
 
 const Wrapper = styled(Grid)`
   margin-bottom: 4rem;
-  grid-row-gap: 0;
+  grid-row-gap: 1rem;
 `
 
 const Col = styled.div`
@@ -12,12 +12,10 @@ const Col = styled.div`
 
 const Title = styled(Col)`
   margin-top: ${props => props.theme.remScale[6]};
-  margin-bottom: ${props => props.theme.remScale[1]};
 `
 
 const Intro = styled(Col)`
   max-width: 35em;
-  margin-bottom: ${props => props.theme.remScale[6]};
 `
 const Breakdown = styled(Col)`
   grid-column: span 3;

@@ -4,8 +4,10 @@ import { NUMBERS } from "../../constants"
 import S from "./Header.Styled"
 import { CaseStudyContext } from "./CaseStudy"
 
+const { RichText } = require("prismic-reactjs")
+
 const Header = () => {
-  const { title, index, description, date, deliverables } = useContext(
+  const { title, index, description, date, intro, deliverables } = useContext(
     CaseStudyContext
   )
 
@@ -22,8 +24,14 @@ const Header = () => {
       </S.Title>
       <S.Intro>
         <LargeHead>
-          Making the case for intentional photography <br />
-          in a brand new era.
+          {intro ? (
+            RichText.render(intro)
+          ) : (
+            <div>
+              Making the case for intentional photography <br />
+              in a brand new era.
+            </div>
+          )}
         </LargeHead>
       </S.Intro>
 
