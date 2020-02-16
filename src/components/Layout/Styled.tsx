@@ -1,11 +1,16 @@
 import styled from "styled-components"
 
 const Nav = styled.div`
-  background: ${props => props.theme.colors.secondary};
   padding: 0.5rem 0;
-
   position: sticky;
   top: 0;
+  mix-blend-mode: difference;
+
+  color: ${props => props.theme.colors.secondary};
+
+  a {
+    color: ${props => props.theme.colors.secondary};
+  }
 `
 
 const LogoArea = styled.div`

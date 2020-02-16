@@ -13,6 +13,7 @@ const style = css`
     line-height: ${props => props.theme.lineHeights.body};
     font-family: ${props => props.theme.fontFamilies.sansSerif};
     letter-spacing: 0.02em;
+    background: ${props => props.theme.colors.secondary};
   }
 
   a {
