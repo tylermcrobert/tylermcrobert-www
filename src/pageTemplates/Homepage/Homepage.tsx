@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react"
-import { CtxLink } from "components"
+import { CtxLink, LargeHead, Html } from "components"
 // eslint-disable-next-line no-unused-vars
 import { IPrismicContext } from "templates/homepage"
+import { NUMBERS } from "../../constants"
+import S from "./Homepage.Styled"
 
 const { RichText } = require("prismic-reactjs")
 
@@ -16,15 +18,19 @@ const Homepage: React.FC<IProps> = ({ data }) => {
     .map(cs => ({ uid: cs._meta.uid, title: RichText.asText(cs.title) }))
 
   return (
-    <>
+    <S.Wrapper>
       <ul>
-        {items.map(({ title, uid }) => (
+        {items.map(({ title, uid }, i) => (
           <li key={title}>
-            <CtxLink to={`/${uid}`}>{title}</CtxLink>
+            <LargeHead>
+              {" "}
+              <Html>{NUMBERS[i]}</Html>&nbsp;
+              <CtxLink to={`/${uid}`}>{title}</CtxLink>
+            </LargeHead>
           </li>
         ))}
       </ul>
-    </>
+    </S.Wrapper>
   )
 }
 
