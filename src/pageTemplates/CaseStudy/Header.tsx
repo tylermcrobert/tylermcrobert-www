@@ -11,16 +11,16 @@ const Header = () => {
     CaseStudyContext
   )
 
-  const Index = () => <Html>{NUMBERS[index - 1]}</Html>
+  const Index = () => <Html>{NUMBERS[index]}</Html>
 
   return (
     <S.Wrapper>
       <S.Title>
-        <div>
+        {/* <div>
           CS
           <Index />
-        </div>
-        {title}
+        </div> */}
+        <Index /> {title}
       </S.Title>
       <S.Intro>
         <LargeHead>
@@ -29,7 +29,7 @@ const Header = () => {
           ) : (
             <div>
               Making the case for intentional photography <br />
-              in a brand new era.
+              in a new era.
             </div>
           )}
         </LargeHead>

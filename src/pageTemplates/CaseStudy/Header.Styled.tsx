@@ -11,11 +11,12 @@ const Col = styled.div`
 `
 
 const Title = styled(Col)`
-  margin-top: ${props => props.theme.remScale[6]};
+  margin-top: ${props => props.theme.remScale[7]};
 `
 
 const Intro = styled(Col)`
   max-width: 35em;
+  margin-bottom: ${props => props.theme.remScale[0]};
 `
 const Breakdown = styled(Col)`
   grid-column: span 3;
