@@ -31,7 +31,7 @@ const theme: DefaultTheme = {
 
   lineHeights: {
     body: 1.2,
-    heading: 1.2,
+    heading: 1,
   },
 
   margins: {
