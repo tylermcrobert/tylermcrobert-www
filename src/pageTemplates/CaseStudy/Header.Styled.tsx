@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { Grid } from "components"
 
 const Wrapper = styled(Grid)`
-  margin-bottom: ${props => props.theme.remScale[4]};
   grid-row-gap: 1rem;
 `
 
