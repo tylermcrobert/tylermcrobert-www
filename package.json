@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "gatsby": "^2.19.7",
+    "gatsby-plugin-react-helmet": "^3.1.22",
     "gatsby-plugin-typescript": "^2.1.27",
     "gatsby-source-prismic": "^2.3.0-alpha.3",
     "gatsby-source-prismic-graphql": "^3.3.1",
@@ -22,12 +23,14 @@
     "query-string": "^6.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
     "styled-components": "^5.0.1",
     "styled-reset": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^13.1.2",
     "@types/react": "^16.9.17",
+    "@types/react-helmet": "^5.0.15",
     "@types/styled-components": "^4.4.2",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.14.0",

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { parseSearch } from "components/ClientContextProvider"
-import { Layout } from "components"
+import { Layout, Seo } from "components"
 // eslint-disable-next-line no-unused-vars
 import { IRichText, IPrismicImage } from "types/prismic"
 import { CaseStudy as CaseStudyTemplate } from "../pageTemplates"
@@ -13,6 +13,10 @@ interface IProps {
 
 const CaseStudy: React.FC<IProps> = ({ data, location }) => (
   <Layout ctx={parseSearch(location.search)}>
+    <Seo
+      title={data.prismic.case_study.title[0].text}
+      path={data.prismic.case_study._meta.uid}
+    />
     <CaseStudyTemplate csData={data.prismic.case_study} />
   </Layout>
 )

@@ -6,6 +6,7 @@ import CtxLink from "./CtxLink"
 import { LargeHead, MediumHead } from "./Heading"
 import { Grid } from "./Grid"
 import Logomark from "./Logomark"
+import Seo from "./Seo"
 import { Section, SmallSection } from "./Section"
 
 export {
@@ -20,4 +21,5 @@ export {
   SmallSection,
   Logomark,
   Paragraph,
+  Seo,
 }
