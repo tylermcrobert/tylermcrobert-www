@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Wrapper } from "components"
+import Wrapper from "../Wrapper"
 
 export const Grid = styled(Wrapper)`
   display: grid;
