@@ -15,7 +15,9 @@ const Title = styled(Col)`
 `
 
 const Intro = styled(Col)`
-  margin-bottom: ${props => props.theme.remScale[0]};
+  @media ${mq.xs} {
+    margin-bottom: ${props => props.theme.remScale[0]};
+  }
 `
 
 const IntroWrapper = styled.div`
@@ -29,7 +31,9 @@ const Breakdown = styled(Col)`
 `
 
 const Deliverables = styled(Breakdown)`
-  max-width: 16em;
+  @media ${mq.xs} {
+    max-width: 16em;
+  }
 
   p {
     text-indent: 2em;
