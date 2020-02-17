@@ -2,10 +2,16 @@ import styled from "styled-components"
 import { mq } from "style"
 
 export const LargeHead = styled.h1`
-  font-size: ${props => props.theme.remScale[3]};
+  font-size: ${props => props.theme.remScale[4]};
+
+  br {
+    display: none;
+  }
 
   @media ${mq.xs} {
-    font-size: ${props => props.theme.remScale[4]};
+    br {
+      display: block;
+    }
   }
 
   @media ${mq.sm} {
