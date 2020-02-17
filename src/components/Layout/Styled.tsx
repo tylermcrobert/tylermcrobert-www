@@ -5,6 +5,7 @@ const Nav = styled.div`
   position: sticky;
   top: 0;
   mix-blend-mode: difference;
+  z-index: 30;
 
   color: ${props => props.theme.colors.secondary};
 

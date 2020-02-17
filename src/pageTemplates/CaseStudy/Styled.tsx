@@ -28,7 +28,12 @@ const Body = styled.div`
   grid-column: 4 / span 3;
 `
 
+const SliceWrapper = styled.div`
+  padding-bottom: 3rem;
+  border-bottom: 1px dashed black;
+`
 export default {
+  SliceWrapper,
   LgSection,
   Section,
   Sidebar,

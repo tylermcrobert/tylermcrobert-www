@@ -1,5 +1,5 @@
 import React, { createContext } from "react"
-import { CaseStudyPicker } from "components"
+import { WithPicker } from "components"
 // eslint-disable-next-line no-unused-vars
 import { ICaseStudy } from "templates/casestudy"
 // eslint-disable-next-line no-unused-vars
@@ -7,6 +7,7 @@ import { IRichText } from "types/prismic"
 import { useClientCtx } from "components/ClientContextProvider"
 import Slices from "./Slices"
 import Header from "./Header"
+import S from "./Styled"
 
 const { RichText } = require("prismic-reactjs")
 
@@ -63,10 +64,12 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
         altText,
       }}
     >
-      <Header />
-      <Slices data={csData.cs_content} />
-
-      <CaseStudyPicker />
+      <WithPicker>
+        <Header />
+        <S.SliceWrapper>
+          <Slices data={csData.cs_content} />
+        </S.SliceWrapper>
+      </WithPicker>
     </CaseStudyContext.Provider>
   )
 }
