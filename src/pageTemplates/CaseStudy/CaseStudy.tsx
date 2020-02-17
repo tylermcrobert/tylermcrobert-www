@@ -1,5 +1,5 @@
 import React, { createContext } from "react"
-import { CtxLink } from "components"
+import { CaseStudyPicker } from "components"
 // eslint-disable-next-line no-unused-vars
 import { ICaseStudy } from "templates/casestudy"
 // eslint-disable-next-line no-unused-vars
@@ -65,7 +65,8 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
     >
       <Header />
       <Slices data={csData.cs_content} />
-      <Footer index={index} />
+
+      <CaseStudyPicker />
     </CaseStudyContext.Provider>
   )
 }
@@ -74,15 +75,4 @@ const CaseStudy: React.FC<IProps> = ({ csData }) => {
  * Header
  */
 
-const Footer: React.FC<{ index: number }> = ({ index }) => {
-  const { currentCtx } = useClientCtx()
-  const nextIndex = (index + 1) % currentCtx.caseStudies.length
-  const nextCs = currentCtx.caseStudies[nextIndex]
-
-  return (
-    <div>
-      Next: <CtxLink to={`/${nextCs.uid}`}> {nextCs.title}</CtxLink>
-    </div>
-  )
-}
 export default CaseStudy

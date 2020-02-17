@@ -8,6 +8,7 @@ import { Grid } from "./Grid"
 import Logomark from "./Logomark"
 import Wrapper from "./Wrapper"
 import Seo from "./Seo"
+import CaseStudyPicker from "./CaseStudyPicker"
 import { Section, SmallSection } from "./Section"
 
 export {
@@ -24,4 +25,5 @@ export {
   Paragraph,
   Wrapper,
   Seo,
+  CaseStudyPicker,
 }
