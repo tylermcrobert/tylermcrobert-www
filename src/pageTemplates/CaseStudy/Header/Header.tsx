@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import { Html, LargeHead, Paragraph } from "components"
-import { NUMBERS } from "../../constants"
+import { NUMBERS } from "../../../constants"
 import S from "./Header.Styled"
-import { CaseStudyContext } from "./CaseStudy"
+import { CaseStudyContext } from "../CaseStudy"
 
 const { RichText } = require("prismic-reactjs")
 
