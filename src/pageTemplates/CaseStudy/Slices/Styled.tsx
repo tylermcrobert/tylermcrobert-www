@@ -5,9 +5,6 @@ interface IImageWrapperProps {
 }
 
 const ImageWrapper = styled.div<IImageWrapperProps>`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: ${props => (props.invert ? "row-reverse" : "row")};
   grid-column: span 6;
 
   img {
@@ -34,8 +31,12 @@ const TripleImageSide = styled.div`
 
 const TripleImageSideLarge = styled(TripleImageSide)<{ isRight?: boolean }>`
   grid-column: ${props => (props.isRight ? "1 / " : "")} span 3;
+  position: relative;
 
   img {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     object-fit: cover;
   }
