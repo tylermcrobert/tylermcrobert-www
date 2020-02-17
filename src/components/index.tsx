@@ -1,7 +1,6 @@
 import Layout from "./Layout"
 import Paragraph from "./Paragraph"
 import Html from "./Html"
-import ClientContextProvider from "./ClientContextProvider"
 import { CurationProvider } from "./CurationProvider"
 import CtxLink from "./CtxLink"
 import { LargeHead, MediumHead } from "./Heading"
@@ -17,7 +16,6 @@ export {
   LargeHead,
   Layout,
   Html,
-  ClientContextProvider,
   CtxLink,
   Grid,
   Section,

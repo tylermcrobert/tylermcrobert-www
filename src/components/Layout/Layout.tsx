@@ -1,30 +1,27 @@
 import React from "react"
 import { Link } from "gatsby"
-import { useClientCtx } from "components/ClientContextProvider"
-import { ClientContextProvider, Grid } from "components"
+import { CurationProvider, Grid } from "components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { ThemeProvider } from "styled-components"
+import { useCuration } from "hooks"
 import Styled from "./Styled"
 
-interface IProps {
-  ctx: string
-}
-
-const Layout: React.FC<IProps> = ({ children, ctx }) => {
+const Layout: React.FC = ({ children }) => {
   return (
-    <ClientContextProvider ctx={ctx}>
+    <CurationProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Nav />
         <main>{children}</main>
       </ThemeProvider>
-    </ClientContextProvider>
+    </CurationProvider>
   )
 }
 
 const Nav = () => {
-  const { currentCtx } = useClientCtx()
+  const { currentCtx } = useCuration()
+
   const linkDest = currentCtx.uid === "homepage" ? "/" : `/${currentCtx.uid}`
   return (
     <Styled.Nav>

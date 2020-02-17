@@ -1,6 +1,5 @@
 import React from "react"
 import { Layout, Seo } from "components"
-import { parseSearch } from "components/ClientContextProvider"
 import { Homepage } from "../pageTemplates"
 
 interface IProps {
@@ -9,7 +8,7 @@ interface IProps {
 }
 const HomepageContainer: React.FC<IProps> = ({ pageContext, location }) => {
   return (
-    <Layout ctx={pageContext.uid || parseSearch(location.search)}>
+    <Layout>
       <Seo title={null} />
       <Homepage />
     </Layout>

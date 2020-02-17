@@ -4,7 +4,7 @@ import { WithPicker } from "components"
 import { ICaseStudy } from "templates/casestudy"
 // eslint-disable-next-line no-unused-vars
 import { IRichText } from "types/prismic"
-import { useClientCtx } from "components/ClientContextProvider"
+import { useCuration } from "hooks"
 import Slices from "./Slices"
 import Header from "./Header"
 import S from "./Styled"
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const useIndex = (uid: string): number => {
-  const { currentCtx } = useClientCtx()
+  const { currentCtx } = useCuration()
   const index = currentCtx.caseStudies.map(item => item.uid).indexOf(uid)
   return index === -1 ? 0 : index
 }

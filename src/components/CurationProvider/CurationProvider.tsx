@@ -1,37 +1,44 @@
 import React, { createContext, useContext } from "react"
-import { StaticQuery } from "gatsby"
-import { withPreview } from "gatsby-source-prismic-graphql"
-import curationQuery from "./curationQuery"
-
 import { ICtxProviderData } from "./types"
+import parseData from "./parseData"
+import DataWrappedContextProvider from "./DataWrapper"
+import { DEFAULT_CTX } from "../../constants"
 
-const CurationCtx = createContext({})
-
-const DataWrappedContextProvider = ({ ...props }) => {
-  return (
-    <StaticQuery
-      query={curationQuery}
-      render={withPreview((data: ICtxProviderData) => {
-        return <ContextProvider data={data} {...props} />
-      }, curationQuery)}
-    />
-  )
+export type CaseStudyInfo = {
+  uid: string
+  title: string
 }
+
+export type CtxItem = {
+  uid: string
+  caseStudies: CaseStudyInfo[]
+}
+
+const CurationCtx = createContext<{
+  currentCtx: CtxItem
+  contexts: CtxItem[]
+}>({
+  contexts: [],
+  currentCtx: {
+    uid: "",
+    caseStudies: [],
+  },
+})
 
 interface IContextProviderProps {
   data: ICtxProviderData
+  selectedCtxUid?: string
 }
 
-const ContextProvider: React.FC<IContextProviderProps> = ({
+export const ContextProvider: React.FC<IContextProviderProps> = ({
   children,
   data,
+  selectedCtxUid = DEFAULT_CTX,
 }) => {
-  console.log(data)
+  const parsedData = parseData(data, selectedCtxUid)
 
   return (
-    <CurationCtx.Provider value={{ foo: "bar" }}>
-      {children}
-    </CurationCtx.Provider>
+    <CurationCtx.Provider value={parsedData}>{children}</CurationCtx.Provider>
   )
 }
 

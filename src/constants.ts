@@ -9,3 +9,5 @@ export const NUMBERS = [
   "&#9319;",
   "&#9320;", // 9
 ]
+
+export const DEFAULT_CTX = "homepage"
