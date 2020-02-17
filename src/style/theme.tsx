@@ -1,18 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { DefaultTheme } from "styled-components"
+import modularScale from "./modularScale"
 
-const scale: number[] = [
-  0.391,
-  0.625,
-  1,
-  1.6,
-  2.56,
-  4.096,
-  6.554,
-  10.486,
-  16.777,
-  26.844,
-]
+const scale: number[] = modularScale({ scale: 1.333, stepsDown: 2 })
+
 const remScale: string[] = scale.map(item => `${item}rem`)
 
 const theme: DefaultTheme = {
