@@ -24,14 +24,16 @@ const Header = () => {
       </S.Title>
       <S.Intro>
         <LargeHead>
-          {intro ? (
-            RichText.render(intro)
-          ) : (
-            <div>
-              Making the case for intentional photography <br />
-              in a new era.
-            </div>
-          )}
+          <S.IntroWrapper>
+            {intro ? (
+              RichText.render(intro)
+            ) : (
+              <div>
+                Making the case for intentional photography <br />
+                in a new era.
+              </div>
+            )}
+          </S.IntroWrapper>
         </LargeHead>
       </S.Intro>
 

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Grid } from "components"
+import { mq } from "style"
 
 const Wrapper = styled(Grid)`
   grid-row-gap: 1rem;
@@ -14,24 +15,36 @@ const Title = styled(Col)`
 `
 
 const Intro = styled(Col)`
-  max-width: 35em;
   margin-bottom: ${props => props.theme.remScale[0]};
 `
+
+const IntroWrapper = styled.div`
+  max-width: 13em;
+`
+
 const Breakdown = styled(Col)`
-  grid-column: span 3;
+  @media ${mq.xs} {
+    grid-column: span 3;
+  }
 `
 
 const Deliverables = styled(Breakdown)`
   max-width: 16em;
 
   p {
-    margin-bottom: ${props => props.theme.remScale[0]};
+    text-indent: 2em;
+
+    @media ${mq.xs} {
+      text-indent: 0;
+      margin-bottom: ${props => props.theme.remScale[0]};
+    }
   }
 `
 
 export default {
   Title,
   Intro,
+  IntroWrapper,
   Breakdown,
   Deliverables,
   Wrapper,
