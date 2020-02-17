@@ -10,7 +10,7 @@ const Col = styled.div`
 `
 
 const Title = styled(Col)`
-  margin-top: ${props => props.theme.remScale[6]};
+  margin-top: ${props => props.theme.margins.large};
 `
 
 const Intro = styled(Col)`
