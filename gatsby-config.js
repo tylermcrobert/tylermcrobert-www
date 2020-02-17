@@ -14,5 +14,8 @@ module.exports = {
         previews: true, // (optional, default: false)
       },
     },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+    },
   ],
 }

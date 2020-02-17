@@ -16,6 +16,7 @@
   "dependencies": {
     "gatsby": "^2.19.7",
     "gatsby-plugin-react-helmet": "^3.1.22",
+    "gatsby-plugin-styled-components": "^3.1.19",
     "gatsby-plugin-typescript": "^2.1.27",
     "gatsby-source-prismic": "^2.3.0-alpha.3",
     "gatsby-source-prismic-graphql": "^3.3.1",
