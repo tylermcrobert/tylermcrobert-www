@@ -10,7 +10,6 @@ const Wrapper = styled(GlobalWrapper)`
   position: fixed;
   top: 0;
   z-index: 0;
-  height: 100vh;
   overflow-y: scroll;
 
   display: flex;
