@@ -5,6 +5,7 @@ const Wrapper = styled(GlobalWrapper)`
   word-break: break-word;
   padding-top: ${props => props.theme.margins.large};
   padding-bottom: ${props => props.theme.margins.large};
+  background: ${props => props.theme.colors.secondary};
   min-height: 100vh;
 
   position: fixed;

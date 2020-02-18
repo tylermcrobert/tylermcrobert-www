@@ -2,7 +2,7 @@
 import { DefaultTheme } from "styled-components"
 import modularScale from "./modularScale"
 
-const scale: number[] = modularScale({ scale: 1.333, stepsDown: 2 })
+const scale: number[] = modularScale({ scale: 1.333, stepsDown: 2, length: 15 })
 
 const remScale: string[] = scale.map(item => `${item}rem`)
 
@@ -28,7 +28,7 @@ const theme: DefaultTheme = {
   margins: {
     standard: remScale[3],
     gutter: remScale[3],
-    large: remScale[7],
+    large: remScale[9],
   },
 
   sizes: {
