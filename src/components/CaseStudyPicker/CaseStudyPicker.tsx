@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react"
 import { navigate, Link } from "gatsby"
-import { LargeHead, Html } from "components"
+import { LargeHead, Html, Wrapper } from "components"
 import { useCuration } from "hooks"
 import checkMobile from "util/checkMobile"
 import S from "./CaseStudyPicker.Styled"
@@ -10,19 +10,21 @@ const CaseStudyPicker = () => {
   const curation = useCuration()
 
   return (
-    <S.Wrapper>
-      <div>
-        {curation.currentCtx.caseStudies.map(({ title, uid }, i) => (
-          <li key={title}>
-            <LargeHead>
-              {" "}
-              <Html>{NUMBERS[i]}</Html>&nbsp;
-              <Link to={`/${uid}`}>{title}</Link>
-            </LargeHead>
-          </li>
-        ))}
-      </div>
-    </S.Wrapper>
+    <Wrapper>
+      <S.Wrapper>
+        <div>
+          {curation.currentCtx.caseStudies.map(({ title, uid }, i) => (
+            <li key={title}>
+              <LargeHead>
+                {" "}
+                <Html>{NUMBERS[i]}</Html>&nbsp;
+                <Link to={`/${uid}`}>{title}</Link>
+              </LargeHead>
+            </li>
+          ))}
+        </div>
+      </S.Wrapper>
+    </Wrapper>
   )
 }
 

@@ -33,6 +33,16 @@ const style = css`
     @media ${mq.xl} {
       font-size: 23px;
     }
+
+    &:after {
+      /* for nav blend mode */
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: white;
+      position: fixed;
+      z-index: -10;
+    }
   }
 
   a {
