@@ -34,7 +34,9 @@ const Nav = () => {
           <Link to="/">Tyler McRobert</Link>
           <ContxtIndicator />
         </S.LogoArea>
-        <S.Link>Info</S.Link>
+        <S.Link>
+          <Link to="/info">Info</Link>
+        </S.Link>
       </Grid>
     </S.Nav>
   )
