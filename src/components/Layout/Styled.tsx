@@ -15,7 +15,14 @@ const Nav = styled.div`
 `
 
 const LogoArea = styled.div`
-  grid-column: span 4;
+  grid-column: span 5;
+`
+
+const ContextArea = styled.span`
+  cursor: pointer;
+  span {
+    white-space: nowrap;
+  }
 `
 
 const Link = styled.div`
@@ -25,5 +32,6 @@ const Link = styled.div`
 export default {
   LogoArea,
   Nav,
+  ContextArea,
   Link,
 }

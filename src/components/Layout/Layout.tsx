@@ -1,11 +1,18 @@
-import React from "react"
-import { Link } from "gatsby"
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+
+import React, { useState } from "react"
+import { Link, navigate } from "gatsby"
 import { CurationProvider, Grid } from "components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { ThemeProvider } from "styled-components"
 import { useCuration } from "hooks"
-import Styled from "./Styled"
+import Cookies from "js-cookie"
+import checkMobile from "util/checkMobile"
+import S from "./Styled"
+import { DEFAULT_CTX } from "../../constants"
 
 const Layout: React.FC = ({ children }) => {
   return (
@@ -20,20 +27,45 @@ const Layout: React.FC = ({ children }) => {
 }
 
 const Nav = () => {
-  const { currentCtx } = useCuration()
-
-  const linkDest = currentCtx.uid === "homepage" ? "/" : `/${currentCtx.uid}`
   return (
-    <Styled.Nav>
+    <S.Nav>
       <Grid>
-        <Styled.LogoArea>
-          <Link to={linkDest}>Tyler McRobert </Link>
-        </Styled.LogoArea>
-        <Styled.Link>Info</Styled.Link>
-        <Styled.Link>Work</Styled.Link>
+        <S.LogoArea>
+          <Link to="/">Tyler McRobert</Link>
+          <ContxtIndicator />
+        </S.LogoArea>
+        <S.Link>Info</S.Link>
       </Grid>
-    </Styled.Nav>
+    </S.Nav>
   )
 }
 
+const ContxtIndicator = () => {
+  const [isHover, setHover] = useState(false)
+  const { currentCtx } = useCuration()
+  const isDefault = currentCtx.uid === DEFAULT_CTX
+  const isMobile = checkMobile()
+
+  const handleClick = () => {
+    Cookies.remove("curation")
+    navigate("/")
+  }
+
+  return (
+    <S.ContextArea>
+      {!isDefault && (
+        <span
+          onMouseOver={() => setHover(true)}
+          onMouseOut={() => setHover(false)}
+        >
+          {" "}
+          &#215; {currentCtx.name}{" "}
+          <span onClick={handleClick}>
+            {(isMobile || isHover) && "(close)"}
+          </span>
+        </span>
+      )}
+    </S.ContextArea>
+  )
+}
 export default Layout

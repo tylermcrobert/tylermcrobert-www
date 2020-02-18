@@ -1,3 +1,5 @@
+import { IRichText } from "types/prismic"
+
 /**
  * Types
  */
@@ -23,6 +25,7 @@ export interface CaseStudyList {
 
 export interface Node {
   case_study_list: CaseStudyList[]
+  context_name: IRichText
   _meta: {
     uid: string
   }

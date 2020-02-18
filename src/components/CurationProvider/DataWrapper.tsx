@@ -9,6 +9,7 @@ const curationQuery = graphql`
       allContexts {
         edges {
           node {
+            context_name
             case_study_list {
               case_study_item {
                 ... on PRISMIC_Case_study {

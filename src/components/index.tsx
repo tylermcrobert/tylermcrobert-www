@@ -2,7 +2,6 @@ import Layout from "./Layout"
 import Paragraph from "./Paragraph"
 import Html from "./Html"
 import { CurationProvider } from "./CurationProvider"
-import CtxLink from "./CtxLink"
 import { LargeHead, MediumHead } from "./Heading"
 import { Grid } from "./Grid"
 import Logomark from "./Logomark"
@@ -16,7 +15,6 @@ export {
   LargeHead,
   Layout,
   Html,
-  CtxLink,
   Grid,
   Section,
   SmallSection,

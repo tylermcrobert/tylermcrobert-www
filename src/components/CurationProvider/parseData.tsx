@@ -2,11 +2,14 @@ import { ICtxProviderData } from "./types"
 import { CtxItem } from "./CurationProvider"
 import { DEFAULT_CTX } from "../../constants"
 
+const { RichText } = require("prismic-reactjs")
+
 const parseData = (data: ICtxProviderData, chosenCtx: string) => {
   const contexts: CtxItem[] = data.prismic.allContexts.edges
     .map(context => context.node)
     .map(context => ({
       uid: context._meta.uid,
+      name: RichText.asText(context.context_name),
       caseStudies: context.case_study_list
         .map(cs => cs.case_study_item)
         .filter(cs => cs)

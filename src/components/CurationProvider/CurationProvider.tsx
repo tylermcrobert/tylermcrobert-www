@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { createContext, useContext } from "react"
+import Cookies from "js-cookie"
+import { IRichText } from "types/prismic"
 import { ICtxProviderData } from "./types"
 import parseData from "./parseData"
 import DataWrappedContextProvider from "./DataWrapper"
@@ -11,6 +14,7 @@ export type CaseStudyInfo = {
 
 export type CtxItem = {
   uid: string
+  name: string
   caseStudies: CaseStudyInfo[]
 }
 
@@ -22,6 +26,7 @@ const CurationCtx = createContext<{
   currentCtx: {
     uid: "",
     caseStudies: [],
+    name: "null",
   },
 })
 
@@ -33,9 +38,9 @@ interface IContextProviderProps {
 export const ContextProvider: React.FC<IContextProviderProps> = ({
   children,
   data,
-  selectedCtxUid = DEFAULT_CTX,
 }) => {
-  const parsedData = parseData(data, selectedCtxUid)
+  const curationCookieVal = Cookies.get("curation") || DEFAULT_CTX
+  const parsedData = parseData(data, curationCookieVal)
 
   return (
     <CurationCtx.Provider value={parsedData}>{children}</CurationCtx.Provider>

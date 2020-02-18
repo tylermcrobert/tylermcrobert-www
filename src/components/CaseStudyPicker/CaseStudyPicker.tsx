@@ -1,12 +1,10 @@
 import React, { useEffect, useRef } from "react"
-import { navigate } from "gatsby"
-import { LargeHead, Html, CtxLink } from "components"
+import { navigate, Link } from "gatsby"
+import { LargeHead, Html } from "components"
 import { useCuration } from "hooks"
 import checkMobile from "util/checkMobile"
 import S from "./CaseStudyPicker.Styled"
 import { NUMBERS } from "../../constants"
-
-const { RichText } = require("prismic-reactjs")
 
 const CaseStudyPicker = () => {
   const curation = useCuration()
@@ -19,7 +17,7 @@ const CaseStudyPicker = () => {
             <LargeHead>
               {" "}
               <Html>{NUMBERS[i]}</Html>&nbsp;
-              <CtxLink to={`/${uid}`}>{title}</CtxLink>
+              <Link to={`/${uid}`}>{title}</Link>
             </LargeHead>
           </li>
         ))}
