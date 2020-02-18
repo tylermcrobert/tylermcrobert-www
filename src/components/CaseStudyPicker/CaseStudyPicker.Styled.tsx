@@ -34,7 +34,6 @@ const Wrapper = styled(GlobalWrapper)`
 const PickerWrapper = styled.div`
   position: relative;
   min-height: 100vh;
-  scroll-snap-align: start;
 `
 
 const FixedPicker = styled.div``

@@ -20,7 +20,6 @@ const style = css`
     background: ${props => props.theme.colors.secondary};
     font-size: 18px;
     overscroll-behavior: none;
-    scroll-snap-type: y proximity;
 
     @media ${mq.sm} {
       font-size: 19px;
