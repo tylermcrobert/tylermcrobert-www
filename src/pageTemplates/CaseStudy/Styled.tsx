@@ -31,6 +31,7 @@ const Body = styled.div`
 const SliceWrapper = styled.div`
   padding-bottom: 3rem;
   border-bottom: 1px dashed black;
+  margin-bottom: 1px;
 `
 export default {
   SliceWrapper,
