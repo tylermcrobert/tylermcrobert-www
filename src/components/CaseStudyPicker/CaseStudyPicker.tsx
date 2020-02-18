@@ -10,7 +10,7 @@ const CaseStudyPicker = () => {
   const curation = useCuration()
 
   return (
-    <Wrapper>
+    <S.Fixed>
       <S.Wrapper>
         <div>
           {curation.currentCtx.caseStudies.map(({ title, uid }, i) => (
@@ -24,7 +24,7 @@ const CaseStudyPicker = () => {
           ))}
         </div>
       </S.Wrapper>
-    </Wrapper>
+    </S.Fixed>
   )
 }
 

@@ -1,20 +1,21 @@
 import styled from "styled-components"
 import { Wrapper as GlobalWrapper } from "components"
 
-const Wrapper = styled(GlobalWrapper)`
-  word-break: break-word;
-  padding-top: ${props => props.theme.margins.large};
-  padding-bottom: ${props => props.theme.margins.large};
-  background: ${props => props.theme.colors.secondary};
-  min-height: 100vh;
-
+const Fixed = styled.div`
   position: fixed;
   top: 0;
-  z-index: 0;
+  width: 100%;
+  height: 100%;
   overflow-y: scroll;
 
-  display: flex;
+  display: grid;
   align-items: center;
+`
+
+const Wrapper = styled(GlobalWrapper)`
+  padding-top: ${props => props.theme.margins.large};
+  padding-bottom: ${props => props.theme.margins.large};
+  width: 100%;
 
   li,
   a,
@@ -45,6 +46,7 @@ const PageWrapper = styled.div`
 `
 
 export default {
+  Fixed,
   Wrapper,
   PageWrapper,
   FixedPicker,
