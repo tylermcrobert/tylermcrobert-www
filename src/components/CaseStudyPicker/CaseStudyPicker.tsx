@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react"
 import { navigate } from "gatsby"
 import { LargeHead, Html, CtxLink } from "components"
 import { useCuration } from "hooks"
-import isMobile from "util/isMobile"
+import checkMobile from "util/checkMobile"
 import S from "./CaseStudyPicker.Styled"
 import { NUMBERS } from "../../constants"
 
@@ -35,6 +35,7 @@ export const WithPicker: React.FC = ({ children }) => {
       if (pickerRef.current) {
         const { y } = pickerRef.current.getBoundingClientRect()
         const isScrolled = Math.floor(y) <= 0
+        const isMobile = checkMobile()
 
         if (isScrolled && !isMobile) {
           navigate("/")
