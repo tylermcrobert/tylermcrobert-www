@@ -39,7 +39,7 @@ const Website: React.FC<IProps> = ({ data }) => {
   )
 }
 
-const BrowserFrame: React.FC<{ color?: string }> = ({ color = "#D8D8D8" }) => (
+const BrowserFrame: React.FC<{ color?: string }> = ({ color = "#404040" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 439 13"
