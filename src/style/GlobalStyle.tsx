@@ -19,7 +19,7 @@ const style = css`
     letter-spacing: 0.02em;
     background: ${props => props.theme.colors.secondary};
     font-size: 18px;
-    overscroll-behavior: none;
+    overscroll-behavior-y: none;
 
     @media ${mq.sm} {
       font-size: 19px;
