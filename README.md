@@ -1,3 +1,4 @@
 # tylermcrobert-www
+---
 
-A gatsby site to convince you to hire me
+Play it fuckin' loud
