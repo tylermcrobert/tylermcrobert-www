@@ -49,6 +49,13 @@ const BrowserBackground = styled.div<{ backgroundColor?: string }>`
 
 const Browser = styled.div`
   margin: 10%;
+
+  svg {
+    display: block;
+    width: 100%;
+    position: relative;
+    margin-bottom: -1px;
+  }
 `
 
 const ParagraphWrapper = styled.div`
