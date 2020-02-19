@@ -1,4 +1,4 @@
-import React, { createContext } from "react"
+import React, { createContext, useContext } from "react"
 import { WithPicker } from "components"
 // eslint-disable-next-line no-unused-vars
 import { ICaseStudy } from "templates/casestudy"
@@ -40,6 +40,8 @@ export const CaseStudyContext = createContext<{
   intro: null,
   altText: "Tyler McRobert",
 })
+
+export const useCaseStudyCtx = () => useContext(CaseStudyContext)
 
 const CaseStudy: React.FC<IProps> = ({ csData }) => {
   const title = RichText.asText(csData.title)

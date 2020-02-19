@@ -3,12 +3,14 @@ import React from "react"
 // eslint-disable-next-line no-unused-vars
 import { IWebsite } from "templates/casestudy"
 import { Grid, SmallSection } from "components"
+import { useCaseStudyCtx } from "pageTemplates/CaseStudy/CaseStudy"
 import Styled from "./Styled"
 
 interface IProps {
   data: IWebsite
 }
 const Website: React.FC<IProps> = ({ data }) => {
+  const { altText } = useCaseStudyCtx()
   const {
     browser_media: media,
     browser_image: image,
@@ -23,7 +25,7 @@ const Website: React.FC<IProps> = ({ data }) => {
           <Styled.Browser>
             <div>
               <BrowserFrame color={frameColor || undefined} />
-              {image && image.url && <img src={image.url} alt="" />}
+              {image && image.url && <img src={image.url} alt={altText} />}
               {media && media.url && (
                 <video autoPlay muted playsInline loop>
                   <source src={media.url} />
