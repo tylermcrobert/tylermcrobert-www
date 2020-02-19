@@ -1,7 +1,6 @@
 import React from "react"
 import { Grid, SmallSection } from "components"
 import formatImg from "util/formatImg"
-// eslint-disable-next-line no-unused-vars
 import { ISingleImage } from "templates/casestudy"
 import { useCaseStudyCtx } from "pageTemplates/CaseStudy/CaseStudy"
 import { FULL_SIZE } from "./constants"

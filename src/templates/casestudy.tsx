@@ -1,8 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { useCuration } from "hooks"
 import { Layout, Seo } from "components"
-// eslint-disable-next-line no-unused-vars
 import { IRichText, IPrismicImage } from "types/prismic"
 import { CaseStudy as CaseStudyTemplate } from "../pageTemplates"
 

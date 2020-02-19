@@ -1,5 +1,4 @@
 import React from "react"
-// eslint-disable-next-line no-unused-vars
 import { IDoubleImage } from "templates/casestudy"
 import formatImg from "util/formatImg"
 import { Grid, SmallSection } from "components"

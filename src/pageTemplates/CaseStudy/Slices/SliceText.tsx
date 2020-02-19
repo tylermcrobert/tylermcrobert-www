@@ -1,5 +1,4 @@
 import React from "react"
-// eslint-disable-next-line no-unused-vars
 import { IText } from "templates/casestudy"
 import { Grid, Paragraph } from "components"
 import S from "./Styled"

@@ -1,8 +1,6 @@
 import React, { createContext, useContext } from "react"
 import { WithPicker } from "components"
-// eslint-disable-next-line no-unused-vars
 import { ICaseStudy } from "templates/casestudy"
-// eslint-disable-next-line no-unused-vars
 import { IRichText } from "types/prismic"
 import { useCuration } from "hooks"
 import Slices from "./Slices"
