@@ -43,7 +43,7 @@ const Header = () => {
       </S.Deliverables>
 
       <S.Breakdown>
-        <Paragraph>{description}</Paragraph>
+        <Paragraph>{RichText.render(description)}</Paragraph>
       </S.Breakdown>
     </S.Wrapper>
   )

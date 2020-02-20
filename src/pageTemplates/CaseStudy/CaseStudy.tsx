@@ -21,7 +21,7 @@ const useIndex = (uid: string): number => {
 
 export const CaseStudyContext = createContext<{
   title: string
-  description: string
+  description: IRichText | null
   uid: string
   deliverables: string[]
   date: string
@@ -30,7 +30,7 @@ export const CaseStudyContext = createContext<{
   altText: string
 }>({
   title: "",
-  description: "",
+  description: null,
   uid: "",
   deliverables: [""],
   date: "",
@@ -43,7 +43,7 @@ export const useCaseStudyCtx = () => useContext(CaseStudyContext)
 
 const CaseStudy: React.FC<IProps> = ({ csData }) => {
   const title = RichText.asText(csData.title)
-  const description = RichText.asText(csData.description)
+  const { description } = csData
   const { uid } = csData._meta
   const deliverables = csData.deliverables.split(", ")
   const date = csData._meta.firstPublicationDate

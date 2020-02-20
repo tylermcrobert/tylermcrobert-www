@@ -50,6 +50,10 @@ const style = css`
     text-decoration: none;
   }
 
+  em {
+    font-style: italic;
+  }
+
   h1,
   h2,
   h3,
