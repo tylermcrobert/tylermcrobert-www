@@ -1,21 +1,13 @@
 import React from "react"
 import { LargeHead, Grid } from "components"
+import { IPrismicRichText } from "types/prismic"
 import S from "./Info.Styled"
 
-const clients = [
-  "Nike",
-  "Adidas",
-  "Zero Motorcycles",
-  "Specialized Bicycles",
-  "Provenance Hotels",
-  "Pistils Nursery",
-  "High Tide NYC",
-  "Meijer",
-  "Chaco",
-  "Merrell",
-]
+interface IProps {
+  clients: string[]
+}
 
-const Info = () => {
+const Info: React.FC<IProps> = ({ clients }) => {
   return (
     <>
       <S.Wrapper>
