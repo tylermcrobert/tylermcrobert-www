@@ -12,8 +12,13 @@ interface ISpotifyTrack {
   duration_ms: number
 }
 
-interface ISpotifyPlaylistTrack {
+interface ISpotifyPlaylistImage {
+  url: string
+}
+
+export interface ISpotifyPlaylistTrack {
   track: ISpotifyTrack
+  added_at: string
 }
 
 export interface ISpotifyPlaylist {
@@ -24,6 +29,7 @@ export interface ISpotifyPlaylist {
   tracks: {
     items: ISpotifyPlaylistTrack[]
   }
+  images: ISpotifyPlaylistImage[]
 }
 
 interface IProps {
@@ -36,6 +42,8 @@ const Playlist: React.FC<IProps> = ({ pageContext }) => {
   return (
     <Layout>
       <Seo title={null} />
+      <PlaylistTemplate data={pageContext.data} />
+      <PlaylistTemplate data={pageContext.data} />
       <PlaylistTemplate data={pageContext.data} />
     </Layout>
   )

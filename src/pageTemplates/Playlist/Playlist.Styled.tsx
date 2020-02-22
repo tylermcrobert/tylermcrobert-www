@@ -6,15 +6,28 @@ const Playlist = styled.div`
 `
 
 const Metadata = styled(Grid)`
-  margin-bottom: ${props => props.theme.margins.gutter};
+  margin: ${props => props.theme.margins.gutter} 0;
 `
 
 const MetadataItem = styled.div`
   grid-column: span 2;
 `
 
+const TitleBlock = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    display: inline-block;
+    width: auto;
+    height: 1em;
+    margin-right: 1rem;
+  }
+`
+
 export default {
   Playlist,
   MetadataItem,
   Metadata,
+  TitleBlock,
 }

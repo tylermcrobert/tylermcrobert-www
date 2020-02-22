@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { ISpotifyPlaylist } from "templates/playlist"
 import { Wrapper, LargeHead } from "components"
-import { NUMBERS } from "../../constants"
+import { NUMBERS, UNICODE } from "../../constants"
 import S from "./Playlist.Styled"
 import useParsed from "./useParsed"
+
+const { UP, DOWN, CIRCLE, NE } = UNICODE
 
 interface IProps {
   data: ISpotifyPlaylist
@@ -15,22 +17,38 @@ export interface IParsedTrack {
   duration: string
 }
 
+const LIMIT = 10
+
 const Playlist: React.FC<IProps> = ({ data }) => {
-  const { totalDuration, tracks } = useParsed(data)
+  const { totalDuration, tracks, img, dateCreated } = useParsed(data)
+  const [isLimit, setLimit] = useState<boolean>(true)
+  const limitedTracks = isLimit ? [...tracks].slice(0, LIMIT) : tracks
 
   return (
     <div>
       <S.Playlist>
+        <Wrapper>
+          <S.TitleBlock>
+            <LargeHead>
+              <img src={img} alt="" />
+            </LargeHead>
+            <LargeHead>{data.name}</LargeHead>
+          </S.TitleBlock>
+        </Wrapper>
         <S.Metadata>
-          <S.MetadataItem>{/* <img src={img} alt="" /> */}</S.MetadataItem>
           <S.MetadataItem>
-            ● {data.name} ({totalDuration})
+            {CIRCLE} {dateCreated}
           </S.MetadataItem>
-          <S.MetadataItem>● Link ↗</S.MetadataItem>
+          <S.MetadataItem>
+            {CIRCLE} DUR {totalDuration}
+          </S.MetadataItem>
+          <S.MetadataItem>
+            {CIRCLE} Link {NE}
+          </S.MetadataItem>
         </S.Metadata>
         <Wrapper>
           <LargeHead>
-            {tracks.map(({ title, artist, duration }, i) => {
+            {limitedTracks.map(({ title, artist, duration }, i) => {
               return (
                 <Track
                   number={NUMBERS[i + 1]}
@@ -42,6 +60,19 @@ const Playlist: React.FC<IProps> = ({ data }) => {
             })}
           </LargeHead>
         </Wrapper>
+        <S.Metadata>
+          <S.MetadataItem>
+            {isLimit ? (
+              <span onClick={() => setLimit(false)}>
+                {CIRCLE} See All {DOWN}
+              </span>
+            ) : (
+              <span onClick={() => setLimit(true)}>
+                {CIRCLE} See Less {UP}
+              </span>
+            )}
+          </S.MetadataItem>
+        </S.Metadata>
       </S.Playlist>
     </div>
   )
@@ -54,7 +85,7 @@ interface ITrackProps extends IParsedTrack {
 const Track: React.FC<ITrackProps> = ({ number, title, artist, duration }) => {
   return (
     <span>
-      {number} {title} → {artist} ({duration}){" "}
+      {number} {title}—{artist} ({duration}){" "}
     </span>
   )
 }

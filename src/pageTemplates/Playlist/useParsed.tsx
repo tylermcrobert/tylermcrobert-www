@@ -1,5 +1,6 @@
 import timeFromMs from "util/timeFromMs"
-import { ISpotifyPlaylist } from "templates/playlist"
+import { ISpotifyPlaylist, ISpotifyPlaylistTrack } from "templates/playlist"
+
 import { IParsedTrack } from "./Playlist"
 
 const useParsed = (data: ISpotifyPlaylist) => {
@@ -17,7 +18,17 @@ const useParsed = (data: ISpotifyPlaylist) => {
   )
   const totalDuration = timeFromMs(totalDurationMs)
 
-  return { totalDuration, tracks }
+  const img = data.images[0].url
+
+  const dateCreated = data.tracks.items
+    .reduce((acc: Date, cur: ISpotifyPlaylistTrack) => {
+      const date = new Date(cur.added_at)
+      return acc > date ? date : acc
+    }, new Date())
+    .toISOString()
+    .split(".")[0]
+
+  return { totalDuration, tracks, img, dateCreated }
 }
 
 export default useParsed
