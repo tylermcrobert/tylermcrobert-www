@@ -34,7 +34,7 @@ export interface ISpotifyPlaylist {
 
 interface IProps {
   pageContext: {
-    data: ISpotifyPlaylist
+    data: ISpotifyPlaylist[]
   }
 }
 
@@ -42,8 +42,6 @@ const Playlist: React.FC<IProps> = ({ pageContext }) => {
   return (
     <Layout>
       <Seo title={null} />
-      <PlaylistTemplate data={pageContext.data} />
-      <PlaylistTemplate data={pageContext.data} />
       <PlaylistTemplate data={pageContext.data} />
     </Layout>
   )

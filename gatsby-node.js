@@ -121,16 +121,26 @@ exports.createPages = async function createPages({
 
   const token = await getAuthToken()
 
-  const playlist = await getPlaylist({
-    token,
-    id: "2ml6R8vbhpSQDIVYbupJPL",
-  })
+  const PLAYLISTS = [
+    "5fve4KDdKM9QMciHt779cY",
+    "2ml6R8vbhpSQDIVYbupJPL",
+    "5iibda0SvRRNw0GPyQHx01",
+  ]
+
+  const playlistData = await Promise.all(
+    PLAYLISTS.map(id =>
+      getPlaylist({
+        token,
+        id,
+      })
+    )
+  )
 
   createPage({
     path: `/playlist`,
     component: path.resolve("src/templates/playlist.tsx"),
     context: {
-      data: playlist,
+      data: playlistData,
     },
   })
 }

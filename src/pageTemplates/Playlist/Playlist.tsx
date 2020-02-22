@@ -8,7 +8,7 @@ import useParsed from "./useParsed"
 const { UP, DOWN, CIRCLE, NE } = UNICODE
 
 interface IProps {
-  data: ISpotifyPlaylist
+  data: ISpotifyPlaylist[]
 }
 
 export interface IParsedTrack {
@@ -19,7 +19,21 @@ export interface IParsedTrack {
 
 const LIMIT = 10
 
-const Playlist: React.FC<IProps> = ({ data }) => {
+const Playlists: React.FC<IProps> = ({ data }) => {
+  return (
+    <div>
+      {data.map(pl => (
+        <Playlist data={pl} />
+      ))}
+    </div>
+  )
+}
+
+interface IPlaylistProps {
+  data: ISpotifyPlaylist
+}
+
+const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
   const { totalDuration, tracks, img, dateCreated } = useParsed(data)
   const [isLimit, setLimit] = useState<boolean>(true)
   const limitedTracks = isLimit ? [...tracks].slice(0, LIMIT) : tracks
@@ -90,4 +104,4 @@ const Track: React.FC<ITrackProps> = ({ number, title, artist, duration }) => {
   )
 }
 
-export default Playlist
+export default Playlists
