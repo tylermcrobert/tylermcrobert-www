@@ -1,6 +1,5 @@
 import React from "react"
 import { LargeHead, Grid } from "components"
-import { IPrismicRichText } from "types/prismic"
 import S from "./Info.Styled"
 
 interface IProps {
