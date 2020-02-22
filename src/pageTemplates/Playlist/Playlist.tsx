@@ -1,32 +1,28 @@
 import React from "react"
 import { ISpotifyPlaylist } from "templates/playlist"
-import { Wrapper, LargeHead, Html, Grid } from "components"
-import timeFromMs from "util/timeFromMs"
+import { Wrapper, LargeHead } from "components"
 import { NUMBERS } from "../../constants"
 import S from "./Playlist.Styled"
+import useParsed from "./useParsed"
 
 interface IProps {
   data: ISpotifyPlaylist
 }
-const Playlist: React.FC<IProps> = ({ data }) => {
-  const tracks = data.tracks.items.map(item => {
-    return {
-      title: item.track.name,
-      artist: item.track.artists.map(artist => artist.name).join(" & "),
-      duration: timeFromMs(item.track.duration_ms),
-    }
-  })
 
-  const totalDurationMs = data.tracks.items.reduce(
-    (acc: number, cur) => cur.track.duration_ms + acc,
-    0
-  )
-  const totalDuration = timeFromMs(totalDurationMs)
+export interface IParsedTrack {
+  title: string
+  artist: string
+  duration: string
+}
+
+const Playlist: React.FC<IProps> = ({ data }) => {
+  const { totalDuration, tracks } = useParsed(data)
 
   return (
     <div>
       <S.Playlist>
         <S.Metadata>
+          <S.MetadataItem>{/* <img src={img} alt="" /> */}</S.MetadataItem>
           <S.MetadataItem>
             ● {data.name} ({totalDuration})
           </S.MetadataItem>
@@ -35,23 +31,31 @@ const Playlist: React.FC<IProps> = ({ data }) => {
         <Wrapper>
           <LargeHead>
             {tracks.map(({ title, artist, duration }, i) => {
-              const digits = i
-                .toString()
-                .split("")
-                .map(Number)
-
-              const number = digits.map(digit => NUMBERS[digit]).join("")
-
               return (
-                <span>
-                  <Html>{number}</Html> {title} → {artist} ({duration}){" "}
-                </span>
+                <Track
+                  number={NUMBERS[i + 1]}
+                  title={title}
+                  artist={artist}
+                  duration={duration}
+                />
               )
             })}
           </LargeHead>
         </Wrapper>
       </S.Playlist>
     </div>
+  )
+}
+
+interface ITrackProps extends IParsedTrack {
+  number: string
+}
+
+const Track: React.FC<ITrackProps> = ({ number, title, artist, duration }) => {
+  return (
+    <span>
+      {number} {title} → {artist} ({duration}){" "}
+    </span>
   )
 }
 
