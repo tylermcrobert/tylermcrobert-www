@@ -3,6 +3,11 @@ import reset from "styled-reset"
 import { mq } from "./index"
 
 const style = css`
+  @font-face {
+    font-family: "Suisse";
+    src: url("fonts/SuisseIntl-Regular.otf");
+  }
+
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

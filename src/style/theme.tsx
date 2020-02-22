@@ -15,7 +15,7 @@ const theme: DefaultTheme = {
   },
 
   fontFamilies: {
-    sansSerif: `helvetica, arial, sans-serif`,
+    sansSerif: `Suisse, helvetica, arial, sans-serif`,
     serif: `"SouvenirStd-light"`,
   },
 
