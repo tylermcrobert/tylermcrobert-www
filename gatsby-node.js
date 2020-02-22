@@ -60,13 +60,6 @@ exports.createPages = async function createPages({
   actions: { createPage },
   graphql,
 }) {
-  const token = await getAuthToken()
-
-  const playlist = await getPlaylist({
-    token,
-    id: "2ml6R8vbhpSQDIVYbupJPL",
-  })
-
   const contexts = await graphql(`
     {
       prismic {
@@ -122,5 +115,22 @@ exports.createPages = async function createPages({
         },
       })
     })
+  })
+
+  // Spotify playlists
+
+  const token = await getAuthToken()
+
+  const playlist = await getPlaylist({
+    token,
+    id: "2ml6R8vbhpSQDIVYbupJPL",
+  })
+
+  createPage({
+    path: `/playlist`,
+    component: path.resolve("src/templates/playlist.tsx"),
+    context: {
+      data: playlist,
+    },
   })
 }
