@@ -52,4 +52,11 @@ export const NUMBERS = [
   "㊿",
 ]
 
+export const UNICODE = {
+  UP: "↑",
+  DOWN: "↓",
+  NE: "↗",
+  CIRCLE: "●",
+  NUMBERS,
+}
 export const DEFAULT_CTX = "homepage"
