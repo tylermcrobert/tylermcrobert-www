@@ -55,6 +55,7 @@ export const NUMBERS = [
 export const UNICODE = {
   UP: "↑",
   DOWN: "↓",
+  RIGHT: "→",
   NE: "↗",
   CIRCLE: "●",
   NUMBERS,

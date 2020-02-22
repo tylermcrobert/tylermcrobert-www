@@ -58,7 +58,7 @@ const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
             {CIRCLE} DUR {totalDuration}
           </S.MetadataItem>
           <S.MetadataItem>
-            {CIRCLE} Link {NE}
+            {CIRCLE} LINK {NE}
           </S.MetadataItem>
         </S.Metadata>
 

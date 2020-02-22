@@ -6,7 +6,8 @@ const Playlist = styled.div`
 `
 
 const Metadata = styled(Grid)`
-  margin: ${props => props.theme.margins.gutter} auto;
+  margin-bottom: ${props => props.theme.margins.gutter};
+  margin-top: 1rem;
 `
 
 const MetadataItem = styled.div`
