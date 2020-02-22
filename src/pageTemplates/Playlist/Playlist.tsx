@@ -48,18 +48,20 @@ const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
             </LargeHead>
             <LargeHead>{data.name}</LargeHead>
           </S.TitleBlock>
-          <S.Metadata>
-            <S.MetadataItem>
-              {CIRCLE} {dateCreated}
-            </S.MetadataItem>
-            <S.MetadataItem>
-              {CIRCLE} DUR {totalDuration}
-            </S.MetadataItem>
-            <S.MetadataItem>
-              {CIRCLE} Link {NE}
-            </S.MetadataItem>
-          </S.Metadata>
         </Wrapper>
+
+        <S.Metadata>
+          <S.MetadataItem>
+            {CIRCLE} {dateCreated}
+          </S.MetadataItem>
+          <S.MetadataItem>
+            {CIRCLE} DUR {totalDuration}
+          </S.MetadataItem>
+          <S.MetadataItem>
+            {CIRCLE} Link {NE}
+          </S.MetadataItem>
+        </S.Metadata>
+
         <Wrapper>
           <LargeHead>
             {limitedTracks.map(({ title, artist, duration }, i) => {
@@ -74,6 +76,7 @@ const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
             })}
           </LargeHead>
         </Wrapper>
+
         <S.Metadata>
           <S.MetadataItem>
             {isLimit ? (
