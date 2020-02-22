@@ -17,7 +17,7 @@ export interface IParsedTrack {
   duration: string
 }
 
-const LIMIT = 10
+const LIMIT = 5
 
 const Playlists: React.FC<IProps> = ({ data }) => {
   return (
