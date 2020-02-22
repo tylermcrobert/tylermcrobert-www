@@ -1,5 +1,50 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path")
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const clientId = process.env.SPOTIFY_CLIENT_ID
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
+
+/**
+ * Fetches API token using Spotify's
+ * Client Credentials Flow
+ * https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
+ */
+
+const getAuthToken = async () => {
+  const authFormatted = `${clientId}:${clientSecret}`
+  const base64Auth = Buffer.from(authFormatted).toString("base64")
+
+  const data = await fetch(
+    "https://accounts.spotify.com/api/token?grant_type=client_credentials",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${base64Auth}`,
+      },
+    }
+  )
+    .then(res => res.json())
+    .catch(err => console.log(err))
+
+  return data.access_token
+}
+
+/**
+ * Get Spotify Playlist
+ */
+const getPlaylist = async ({ id, token }) => {
+  const data = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => res.json())
+
+  return data
+}
 
 // Absolute imports
 exports.onCreateWebpackConfig = ({ actions }) => {
@@ -15,6 +60,13 @@ exports.createPages = async function createPages({
   actions: { createPage },
   graphql,
 }) {
+  const token = await getAuthToken()
+
+  const playlist = await getPlaylist({
+    token,
+    id: "2ml6R8vbhpSQDIVYbupJPL",
+  })
+
   const contexts = await graphql(`
     {
       prismic {
