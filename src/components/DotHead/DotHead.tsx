@@ -12,6 +12,8 @@ const DotHead: React.FC = ({ children }) => {
 
 const StyledDotHead = styled.span`
   text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 1rem;
 `
 
 export default DotHead
