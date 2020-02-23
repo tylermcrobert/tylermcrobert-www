@@ -4,7 +4,7 @@ import { LargeHead, Grid, DotHead, Wrapper, Section } from "components"
 import { useNowPlaying } from "hooks"
 import { IParsedPlaylist } from "types/spotify"
 import S from "./Info.Styled"
-import { UNICODE } from "../../constants"
+import { UNICODE, NUMBERS } from "../../constants"
 
 const { RIGHT } = UNICODE
 
@@ -103,16 +103,25 @@ const Music: React.FC<IMusicProps> = ({ playlists }) => {
         <br />
         <br />
 
-        <DotHead>Playlists</DotHead>
+        <DotHead>Featured Playlists</DotHead>
       </Wrapper>
 
-      {playlists.map(({ totalDuration, dateCreated, name }) => (
-        <S.PlaylistWrapper key={totalDuration}>
-          <div>{name}</div>
-          <div>{dateCreated}</div>
-          <div>{totalDuration}</div>
-          <div>{RIGHT}</div>
-        </S.PlaylistWrapper>
+      {playlists.map(({ totalDuration, dateCreated, name, link }, i) => (
+        <a
+          href={link}
+          rel="noopner noreferrer"
+          target="blank"
+          style={{ textDecoration: "none" }}
+        >
+          <S.PlaylistWrapper key={totalDuration}>
+            <div>
+              {NUMBERS[i + 1]} {name}
+            </div>
+            <div>{dateCreated}</div>
+            <div>{totalDuration}</div>
+            <div>{RIGHT}</div>
+          </S.PlaylistWrapper>
+        </a>
       ))}
 
       <br />
