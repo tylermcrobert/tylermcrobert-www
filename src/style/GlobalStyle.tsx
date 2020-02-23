@@ -33,7 +33,7 @@ const style = css`
       font-size: 20px;
     }
     @media ${mq.md} {
-      font-size: 10px;
+      font-size: 21px;
     }
     @media ${mq.lg} {
       font-size: 1.3vw;
