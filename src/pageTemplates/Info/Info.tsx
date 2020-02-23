@@ -73,34 +73,6 @@ const Contact = () => (
   </S.Copy>
 )
 
-const PLAYLIST_INFO = [
-  {
-    totalDuration: "0:57:20",
-    dateCreated: "2019-06-05T03:42:39",
-    name: "Size Twelve",
-  },
-  {
-    totalDuration: "2:00:09",
-    dateCreated: "2017-02-05T18:23:32",
-    name: "C₂₀H₂₅N₃O",
-  },
-  {
-    totalDuration: "0:36:45",
-    dateCreated: "2019-06-01T22:18:11",
-    name: "poppy field",
-  },
-  {
-    totalDuration: "0:53:37",
-    dateCreated: "2019-07-10T02:06:45",
-    name: "Domino",
-  },
-  {
-    totalDuration: "0:87:39",
-    dateCreated: "2019-01-05T04:16:56",
-    name: "Collarbones",
-  },
-]
-
 interface IMusicProps {
   playlists: IParsedPlaylist[]
 }
@@ -128,8 +100,8 @@ const Music: React.FC<IMusicProps> = ({ playlists }) => {
         <DotHead>Playlists</DotHead>
       </Wrapper>
 
-      {PLAYLIST_INFO.map(({ totalDuration, dateCreated, name }) => (
-        <S.PlaylistWrapper>
+      {playlists.map(({ totalDuration, dateCreated, name }) => (
+        <S.PlaylistWrapper key={totalDuration}>
           <div>{name}</div>
           <div>{dateCreated}</div>
           <div>{totalDuration}</div>

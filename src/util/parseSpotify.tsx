@@ -32,8 +32,9 @@ const parseSpotify = (data: ISpotifyPlaylist): IParsedPlaylist => {
     .split(".")[0]
 
   const link = data.external_urls.spotify
+  const { name } = data
 
-  return { totalDuration, tracks, img, dateCreated, link }
+  return { totalDuration, tracks, img, dateCreated, link, name }
 }
 
 export default parseSpotify

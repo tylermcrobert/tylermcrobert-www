@@ -44,4 +44,5 @@ export interface IParsedPlaylist {
   img: string
   dateCreated: string
   link: string
+  name: string
 }
