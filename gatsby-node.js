@@ -139,7 +139,7 @@ exports.createPages = async function createPages({
   )
 
   console.log("_____________________________")
-  console.log(playlistData)
+  console.log(process.env)
 
   createPage({
     path: `/playlist`,
