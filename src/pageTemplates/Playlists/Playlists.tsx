@@ -23,7 +23,7 @@ const Playlists: React.FC<IProps> = ({ data }) => {
   return (
     <div>
       {data.map(pl => (
-        <Playlist data={pl} />
+        <Playlist data={pl} key={pl.name} />
       ))}
     </div>
   )
@@ -67,6 +67,7 @@ const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
             {limitedTracks.map(({ title, artist, duration }, i) => {
               return (
                 <Track
+                  key={title}
                   number={NUMBERS[i + 1]}
                   title={title}
                   artist={artist}
