@@ -11,7 +11,7 @@ const parseSpotify = (data: ISpotifyPlaylist): IParsedPlaylist => {
     return {
       title: item.track.name,
       artist: item.track.artists.map(artist => artist.name).join(" & "),
-      duration: timeFromMs(item.track.duration_ms),
+      duration: timeFromMs(item.track.duration_ms, "mm:ss"),
     }
   })
 
