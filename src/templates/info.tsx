@@ -3,6 +3,7 @@ import { Layout, Seo } from "components"
 import { Info as InfoTemplate } from "pageTemplates"
 import { StaticQuery, graphql } from "gatsby"
 import { IRichText } from "types/prismic"
+import { ISpotifyPlaylist } from "types/spotify"
 
 const query = graphql`
   {
@@ -34,7 +35,15 @@ interface IInfoQuery {
   }
 }
 
-const Info = () => {
+interface IProps {
+  pageContext: {
+    playlists: ISpotifyPlaylist[]
+  }
+}
+
+const Info: React.FC<IProps> = ({ pageContext }) => {
+  console.log(pageContext.playlists)
+
   return (
     <Layout>
       <StaticQuery
@@ -46,7 +55,10 @@ const Info = () => {
           return (
             <>
               <Seo title="Info" />
-              <InfoTemplate clients={clients} />
+              <InfoTemplate
+                clients={clients}
+                playlists={pageContext.playlists}
+              />
             </>
           )
         }}

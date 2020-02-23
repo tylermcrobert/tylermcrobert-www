@@ -145,4 +145,12 @@ exports.createPages = async function createPages({
       data: playlistData,
     },
   })
+
+  createPage({
+    path: `/info`,
+    component: path.resolve("src/templates/info.tsx"),
+    context: {
+      playlists: playlistData,
+    },
+  })
 }

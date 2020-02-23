@@ -12,12 +12,6 @@ interface ILastFMRes {
   }
 }
 
-interface IOutput {
-  loading: boolean
-  trackName: string
-  artist: string
-}
-
 const ENDPOINT =
   "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=1e87695de290cd017718696f211e84a4&format=json"
 
@@ -29,8 +23,8 @@ const useNowPlaying = () => {
       .then(res => res.json())
       .then((data: ILastFMRes) => {
         setData(data)
-        console.log(data)
       })
+      // eslint-disable-next-line no-console
       .catch(err => console.error(err))
   }, [])
 

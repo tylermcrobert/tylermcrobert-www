@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { ISpotifyPlaylist } from "templates/playlists"
+import { ISpotifyPlaylist } from "types/spotify"
 import { Wrapper, LargeHead } from "components"
 import { NUMBERS, UNICODE } from "../../constants"
 import S from "./Playlists.Styled"

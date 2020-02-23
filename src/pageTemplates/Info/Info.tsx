@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { LargeHead, Grid, DotHead, Wrapper, Section } from "components"
 import { useNowPlaying } from "hooks"
+import { ISpotifyPlaylist } from "types/spotify"
 import S from "./Info.Styled"
 import { UNICODE } from "../../constants"
 
@@ -9,9 +10,10 @@ const { RIGHT } = UNICODE
 
 interface IProps {
   clients: string[]
+  playlists: ISpotifyPlaylist[]
 }
 
-const Info: React.FC<IProps> = ({ clients }) => {
+const Info: React.FC<IProps> = ({ clients, playlists }) => {
   return (
     <>
       <S.Info>
@@ -35,7 +37,7 @@ const Info: React.FC<IProps> = ({ clients }) => {
 
       <S.Info>
         <Section>
-          <Music />
+          <Music playlists={playlists} />
         </Section>
       </S.Info>
     </>
@@ -99,8 +101,14 @@ const PLAYLIST_INFO = [
   },
 ]
 
-const Music = () => {
+interface IMusicProps {
+  playlists: ISpotifyPlaylist[]
+}
+
+const Music: React.FC<IMusicProps> = ({ playlists }) => {
   const { loading, artist, trackName } = useNowPlaying()
+
+  console.log(playlists)
 
   return (
     <>
