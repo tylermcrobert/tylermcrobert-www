@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { ISpotifyPlaylist } from "templates/playlist"
+import { ISpotifyPlaylist } from "templates/playlists"
 import { Wrapper, LargeHead } from "components"
 import { NUMBERS, UNICODE } from "../../constants"
-import S from "./Playlist.Styled"
+import S from "./Playlists.Styled"
 import useParsed from "./useParsed"
 
 const { UP, DOWN, CIRCLE, NE } = UNICODE

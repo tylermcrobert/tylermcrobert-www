@@ -1,5 +1,5 @@
 import React from "react"
-import PlaylistTemplate from "pageTemplates/Playlist/Playlist"
+import PlaylistTemplate from "pageTemplates/Playlists/Playlists"
 import { Layout, Seo } from "components"
 
 interface ISpotifyArtist {

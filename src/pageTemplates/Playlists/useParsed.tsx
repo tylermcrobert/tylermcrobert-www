@@ -1,7 +1,7 @@
 import timeFromMs from "util/timeFromMs"
-import { ISpotifyPlaylist, ISpotifyPlaylistTrack } from "templates/playlist"
+import { ISpotifyPlaylist, ISpotifyPlaylistTrack } from "templates/playlists"
 
-import { IParsedTrack } from "./Playlist"
+import { IParsedTrack } from "./Playlists"
 
 const useParsed = (data: ISpotifyPlaylist) => {
   const tracks: IParsedTrack[] = data.tracks.items.map(item => {
