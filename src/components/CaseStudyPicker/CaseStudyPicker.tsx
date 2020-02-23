@@ -17,7 +17,7 @@ const CaseStudyPicker = () => {
             <li key={title}>
               <LargeHead>
                 {" "}
-                <Html>{NUMBERS[i]}</Html>&nbsp;
+                <Html>{NUMBERS[i + 1]}</Html>&nbsp;
                 <Link to={`/${uid}`}>{title}</Link>
               </LargeHead>
             </li>

@@ -11,7 +11,7 @@ const Header = () => {
     CaseStudyContext
   )
 
-  const Index = () => <Html>{NUMBERS[index]}</Html>
+  const Index = () => <Html>{NUMBERS[index + 1]}</Html>
 
   return (
     <S.Wrapper>
