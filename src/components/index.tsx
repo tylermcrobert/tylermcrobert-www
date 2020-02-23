@@ -7,6 +7,7 @@ import { Grid } from "./Grid"
 import Logomark from "./Logomark"
 import Wrapper from "./Wrapper"
 import Seo from "./Seo"
+import DotHead from "./DotHead"
 import CaseStudyPicker, { WithPicker } from "./CaseStudyPicker"
 import { Section, SmallSection } from "./Section"
 
@@ -25,4 +26,5 @@ export {
   CaseStudyPicker,
   WithPicker,
   CurationProvider,
+  DotHead,
 }
