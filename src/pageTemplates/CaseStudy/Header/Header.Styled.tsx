@@ -21,7 +21,7 @@ const Intro = styled(Col)`
 `
 
 const IntroWrapper = styled.div`
-  max-width: 11em;
+  max-width: 12em;
 `
 
 const Breakdown = styled(Col)`

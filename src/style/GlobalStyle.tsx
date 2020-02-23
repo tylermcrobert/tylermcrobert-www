@@ -26,17 +26,20 @@ const style = css`
     font-size: 18px;
     overscroll-behavior-y: none;
 
-    @media ${mq.sm} {
+    @media ${mq.xs} {
       font-size: 19px;
     }
-    @media ${mq.md} {
+    @media ${mq.sm} {
       font-size: 20px;
     }
-    @media ${mq.lg} {
+    @media ${mq.md} {
       font-size: 22px;
     }
+    @media ${mq.lg} {
+      font-size: 24px;
+    }
     @media ${mq.xl} {
-      font-size: 23px;
+      font-size: 26px;
     }
 
     &:after {
