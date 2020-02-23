@@ -16,10 +16,6 @@ const Header = () => {
   return (
     <S.Wrapper>
       <S.Title>
-        {/* <div>
-          CS
-          <Index />
-        </div> */}
         <Index /> {title}
       </S.Title>
       <S.Intro>

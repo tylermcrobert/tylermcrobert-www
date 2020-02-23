@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Section = styled.div`
-  margin: 3rem auto;
+  margin: ${props => props.theme.remScale[6]} auto;
 `
 
 export const SmallSection = styled.div`

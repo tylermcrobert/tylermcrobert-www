@@ -1,11 +1,11 @@
 import React from "react"
 import { Link } from "gatsby"
-import { LargeHead, Grid, DotHead } from "components"
+import { LargeHead, Grid, DotHead, Wrapper, Section } from "components"
 import { useNowPlaying } from "hooks"
 import S from "./Info.Styled"
 import { UNICODE } from "../../constants"
 
-const { CIRCLE, RIGHT } = UNICODE
+const { RIGHT } = UNICODE
 
 interface IProps {
   clients: string[]
@@ -14,36 +14,47 @@ interface IProps {
 const Info: React.FC<IProps> = ({ clients }) => {
   return (
     <>
-      <S.Wrapper>
-        <Grid>
-          <Intro />
+      <S.Info>
+        <Intro />
+        <Section>
+          <Grid>
+            <Contact />
+            <S.Copy>
+              <DotHead>Clients</DotHead>
+              <S.TwoCol>
+                {clients.map(client => (
+                  <div key={client}>{client}</div>
+                ))}
+              </S.TwoCol>
+            </S.Copy>
+          </Grid>
+        </Section>
+      </S.Info>
 
-          <Contact />
-          <S.Copy>
-            <DotHead>Clients</DotHead>
-            <S.TwoCol>
-              {clients.map(client => (
-                <div key={client}>{client}</div>
-              ))}
-            </S.TwoCol>
-          </S.Copy>
+      <S.Hr />
+
+      <S.Info>
+        <Section>
           <Music />
-        </Grid>
-      </S.Wrapper>
+        </Section>
+      </S.Info>
     </>
   )
 }
 
 const Intro = () => {
   return (
-    <S.Intro>
-      <DotHead>Bio</DotHead>
-      <LargeHead>
-        I&apos;m Tyler McRobert, a Midwest–born Designer &amp; Web Developer
-        living in Portland, Oregon. Currently taking over the world at{" "}
-        <a href="http://this.design">This.</a>
-      </LargeHead>
-    </S.Intro>
+    <Section>
+      <Wrapper>
+        <DotHead>Bio</DotHead>
+        <LargeHead>
+          I&apos;m Tyler McRobert, a Midwest–born designer &amp; web developer
+          living in Portland, Oregon. I work hard to create beautiful, impactful
+          work with meaning. I&apos;m currently taking over the world at{" "}
+          <a href="http://this.design">This.</a>
+        </LargeHead>
+      </Wrapper>
+    </Section>
   )
 }
 
@@ -60,22 +71,72 @@ const Contact = () => (
   </S.Copy>
 )
 
+const PLAYLIST_INFO = [
+  {
+    totalDuration: "0:57:20",
+    dateCreated: "2019-06-05T03:42:39",
+    name: "Size Twelve",
+  },
+  {
+    totalDuration: "2:00:09",
+    dateCreated: "2017-02-05T18:23:32",
+    name: "C₂₀H₂₅N₃O",
+  },
+  {
+    totalDuration: "0:36:45",
+    dateCreated: "2019-06-01T22:18:11",
+    name: "poppy field",
+  },
+  {
+    totalDuration: "0:53:37",
+    dateCreated: "2019-07-10T02:06:45",
+    name: "Domino",
+  },
+  {
+    totalDuration: "0:87:39",
+    dateCreated: "2019-01-05T04:16:56",
+    name: "Collarbones",
+  },
+]
+
 const Music = () => {
   const { loading, artist, trackName } = useNowPlaying()
 
   return (
-    <S.Intro>
-      <DotHead>Music</DotHead>
-      <LargeHead>
-        {!loading && (
-          <>
-            I&apos;m currently listening to: “{trackName}” by {artist} on
-            Spotify.
-          </>
-        )}{" "}
-        Check out some <Link to="/playlist">playlists</Link>&nbsp;{RIGHT}.
-      </LargeHead>
-    </S.Intro>
+    <>
+      <Wrapper>
+        <DotHead>Now Playing</DotHead>
+
+        <LargeHead>
+          {!loading && (
+            <>
+              Right now I&apos;m listening to:&nbsp;“{trackName}” by {artist} on
+              Spotify.
+            </>
+          )}
+        </LargeHead>
+
+        <br />
+        <br />
+
+        <DotHead>Playlists</DotHead>
+      </Wrapper>
+
+      {PLAYLIST_INFO.map(({ totalDuration, dateCreated, name }) => (
+        <S.PlaylistWrapper>
+          <div>{name}</div>
+          <div>{dateCreated}</div>
+          <div>{totalDuration}</div>
+          <div>{RIGHT}</div>
+        </S.PlaylistWrapper>
+      ))}
+
+      <br />
+
+      <Wrapper>
+        <Link to="/playlist">See All Playlists</Link> {RIGHT}
+      </Wrapper>
+    </>
   )
 }
 

@@ -1,20 +1,13 @@
 import styled from "styled-components"
 import { mq } from "style"
+import { Grid } from "components"
 
-const Wrapper = styled.div`
-  padding: ${props => props.theme.margins.large} 0;
-
+const Info = styled.div`
   a {
     text-decoration: underline;
   }
 
-  * {
-    grid-row-gap: ${props => props.theme.remScale[7]};
-  }
-`
-
-const Intro = styled.div`
-  grid-column: span 6;
+  margin: ${props => props.theme.margins.large} 0;
 `
 
 const Copy = styled.div`
@@ -36,9 +29,28 @@ const TwoCol = styled.div`
   max-width: 30em;
 `
 
+const Hr = styled.hr`
+  border: 0;
+  border-bottom: 1px dashed black;
+`
+
+const PlaylistWrapper = styled(Grid)`
+  > div {
+    &:nth-child(1),
+    &:nth-child(2) {
+      grid-column: span 2;
+    }
+
+    &:nth-child(4) {
+      text-align: right;
+    }
+  }
+`
+
 export default {
-  Wrapper,
+  Info,
   Copy,
-  Intro,
   TwoCol,
+  Hr,
+  PlaylistWrapper,
 }
