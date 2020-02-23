@@ -8,7 +8,10 @@ const Wrapper = styled.div`
 
 const Intro = styled.div`
   grid-column: span 6;
-  max-width: 45em;
+
+  a {
+    text-decoration: underline;
+  }
 `
 
 const Copy = styled.div`

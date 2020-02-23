@@ -1,32 +1,38 @@
 import React from "react"
 import { LargeHead, Grid } from "components"
+import { useNowPlaying } from "hooks"
 import S from "./Info.Styled"
+import { UNICODE } from "../../constants"
+
+const { CIRCLE } = UNICODE
 
 interface IProps {
   clients: string[]
 }
 
 const Info: React.FC<IProps> = ({ clients }) => {
+  const { loading, artist, trackName } = useNowPlaying()
+
   return (
     <>
       <S.Wrapper>
         <Grid>
           <S.Intro>
+            {CIRCLE} BIO
+            <br />
+            <br />
             <LargeHead>
-              <em>Bio</em>&rarr;I&apos;m Tyler McRobert, a midwest–born designer
-              living in Portland, OR. Currently taking over the world at{" "}
-              <a href="http://this.design">This.</a>
+              I&apos;m Tyler McRobert, a Midwest–born designer living in
+              Portland, Oregon. Currently taking over the world at{" "}
+              <a href="http://this.design">This.</a>{" "}
+              {!loading && (
+                <>
+                  I am currently listening to “{trackName}” by {artist} on
+                  Spotify.
+                </>
+              )}
             </LargeHead>
           </S.Intro>
-
-          <S.IndentedCopy>
-            <p>
-              Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-              nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor
-              sit amet, consectetur adipiscing elit. Curabitur blandit tempus
-              porttitor.
-            </p>
-          </S.IndentedCopy>
 
           <S.Copy>
             &#9679; CLIENTS
