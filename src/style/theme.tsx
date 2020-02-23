@@ -27,7 +27,7 @@ const theme: DefaultTheme = {
   margins: {
     standard: remScale[3],
     gutter: remScale[3],
-    large: remScale[9],
+    large: remScale[8],
   },
 
   sizes: {

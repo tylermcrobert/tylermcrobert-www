@@ -65,7 +65,7 @@ const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
         </S.Metadata>
 
         <Wrapper>
-          <LargeHead>
+          <S.TracksWrapper>
             {limitedTracks.map(({ title, artist, duration }, i) => {
               return (
                 <Track
@@ -77,7 +77,7 @@ const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
                 />
               )
             })}
-          </LargeHead>
+          </S.TracksWrapper>
         </Wrapper>
 
         <S.Metadata>
