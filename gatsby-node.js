@@ -138,9 +138,6 @@ exports.createPages = async function createPages({
     )
   )
 
-  console.log("_____________________________")
-  console.log(process.env)
-
   createPage({
     path: `/playlist`,
     component: path.resolve("src/templates/playlists.tsx"),
