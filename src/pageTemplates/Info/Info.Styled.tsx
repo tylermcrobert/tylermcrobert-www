@@ -1,32 +1,28 @@
 import styled from "styled-components"
-import { Paragraph } from "components"
+import { DotHead } from "components"
 import { mq } from "style"
 
 const Wrapper = styled.div`
   padding: ${props => props.theme.margins.large} 0;
-`
-
-const Intro = styled.div`
-  grid-column: span 6;
 
   a {
     text-decoration: underline;
   }
+
+  * {
+    grid-row-gap: ${props => props.theme.remScale[7]};
+  }
+`
+
+const Intro = styled.div`
+  grid-column: span 6;
 `
 
 const Copy = styled.div`
   grid-column: span 6;
 
   @media ${mq.sm} {
-    grid-column: 1 / span 3;
-  }
-`
-
-const IndentedCopy = styled(Paragraph)`
-  grid-column: span 6;
-
-  @media ${mq.sm} {
-    grid-column: 1 / span 3;
+    grid-column: span 3;
   }
 `
 
@@ -38,7 +34,6 @@ const TwoCol = styled.div`
 export default {
   Wrapper,
   Copy,
-  IndentedCopy,
   Intro,
   TwoCol,
 }
