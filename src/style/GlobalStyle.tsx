@@ -50,6 +50,10 @@ const style = css`
     }
   }
 
+  body {
+    padding-top: ${props => props.theme.remScale[5]};
+  }
+
   a {
     color: ${props => props.theme.colors.primary};
     text-decoration: none;
