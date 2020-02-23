@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path")
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 })
 
 const clientId = process.env.SPOTIFY_CLIENT_ID
@@ -137,6 +137,9 @@ exports.createPages = async function createPages({
       })
     )
   )
+
+  console.log("_____________________________")
+  console.log(playlistData)
 
   createPage({
     path: `/playlist`,
