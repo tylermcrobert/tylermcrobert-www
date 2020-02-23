@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { LargeHead, Grid, DotHead, Wrapper, Section } from "components"
 import { useNowPlaying } from "hooks"
-import { ISpotifyPlaylist } from "types/spotify"
+import { IParsedPlaylist } from "types/spotify"
 import S from "./Info.Styled"
 import { UNICODE } from "../../constants"
 
@@ -10,7 +10,7 @@ const { RIGHT } = UNICODE
 
 interface IProps {
   clients: string[]
-  playlists: ISpotifyPlaylist[]
+  playlists: IParsedPlaylist[]
 }
 
 const Info: React.FC<IProps> = ({ clients, playlists }) => {
@@ -102,13 +102,11 @@ const PLAYLIST_INFO = [
 ]
 
 interface IMusicProps {
-  playlists: ISpotifyPlaylist[]
+  playlists: IParsedPlaylist[]
 }
 
 const Music: React.FC<IMusicProps> = ({ playlists }) => {
   const { loading, artist, trackName } = useNowPlaying()
-
-  console.log(playlists)
 
   return (
     <>

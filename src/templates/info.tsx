@@ -4,6 +4,7 @@ import { Info as InfoTemplate } from "pageTemplates"
 import { StaticQuery, graphql } from "gatsby"
 import { IRichText } from "types/prismic"
 import { ISpotifyPlaylist } from "types/spotify"
+import parseSpotify from "util/parseSpotify"
 
 const query = graphql`
   {
@@ -42,7 +43,7 @@ interface IProps {
 }
 
 const Info: React.FC<IProps> = ({ pageContext }) => {
-  console.log(pageContext.playlists)
+  const parsedPlaylists = pageContext.playlists.map(pl => parseSpotify(pl))
 
   return (
     <Layout>
@@ -55,10 +56,7 @@ const Info: React.FC<IProps> = ({ pageContext }) => {
           return (
             <>
               <Seo title="Info" />
-              <InfoTemplate
-                clients={clients}
-                playlists={pageContext.playlists}
-              />
+              <InfoTemplate clients={clients} playlists={parsedPlaylists} />
             </>
           )
         }}

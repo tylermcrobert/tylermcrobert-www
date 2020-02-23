@@ -1,20 +1,14 @@
 import React, { useState } from "react"
-import { ISpotifyPlaylist } from "types/spotify"
+import { ISpotifyPlaylist, IParsedTrack } from "types/spotify"
 import { Wrapper, LargeHead } from "components"
+import parseSpotify from "util/parseSpotify"
 import { NUMBERS, UNICODE } from "../../constants"
 import S from "./Playlists.Styled"
-import useParsed from "./useParsed"
 
 const { UP, DOWN, CIRCLE, NE } = UNICODE
 
 interface IProps {
   data: ISpotifyPlaylist[]
-}
-
-export interface IParsedTrack {
-  title: string
-  artist: string
-  duration: string
 }
 
 const LIMIT = 5
@@ -34,7 +28,7 @@ interface IPlaylistProps {
 }
 
 const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
-  const { totalDuration, tracks, img, dateCreated, link } = useParsed(data)
+  const { totalDuration, tracks, img, dateCreated, link } = parseSpotify(data)
   const [isLimit, setLimit] = useState<boolean>(true)
   const limitedTracks = isLimit ? [...tracks].slice(0, LIMIT) : tracks
 

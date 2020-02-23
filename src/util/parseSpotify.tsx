@@ -1,9 +1,12 @@
-import timeFromMs from "util/timeFromMs"
-import { ISpotifyPlaylist, ISpotifyPlaylistTrack } from "templates/playlists"
+import {
+  ISpotifyPlaylist,
+  ISpotifyPlaylistTrack,
+  IParsedTrack,
+  IParsedPlaylist,
+} from "types/spotify"
+import timeFromMs from "./timeFromMs"
 
-import { IParsedTrack } from "./Playlists"
-
-const useParsed = (data: ISpotifyPlaylist) => {
+const parseSpotify = (data: ISpotifyPlaylist): IParsedPlaylist => {
   const tracks: IParsedTrack[] = data.tracks.items.map(item => {
     return {
       title: item.track.name,
@@ -33,4 +36,4 @@ const useParsed = (data: ISpotifyPlaylist) => {
   return { totalDuration, tracks, img, dateCreated, link }
 }
 
-export default useParsed
+export default parseSpotify
