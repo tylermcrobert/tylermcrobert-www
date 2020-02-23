@@ -12,57 +12,70 @@ interface IProps {
 }
 
 const Info: React.FC<IProps> = ({ clients }) => {
-  const { loading, artist, trackName } = useNowPlaying()
-
   return (
     <>
       <S.Wrapper>
         <Grid>
-          <S.Intro>
-            <DotHead>Bio</DotHead>
-            <LargeHead>
-              I&apos;m Tyler McRobert, a Midwest–born Designer &amp; Web
-              Developer living in Portland, Oregon. Currently taking over the
-              world at <a href="http://this.design">This.</a>
-            </LargeHead>
-          </S.Intro>
+          <Intro />
 
+          <Contact />
           <S.Copy>
             <DotHead>Clients</DotHead>
             <S.TwoCol>
               {clients.map(client => (
-                <p key={client}>{client}</p>
+                <div key={client}>{client}</div>
               ))}
             </S.TwoCol>
           </S.Copy>
-
-          <S.Copy>
-            <p>
-              &#9679; E-M→{" "}
-              <a href="mailto:hello@tylermcrobert.com">
-                hello@tylermcrobert.com
-              </a>
-            </p>
-            <p>
-              &#9679; IG→{" "}
-              <a href="http://instagram.com/tylermcrobert">@tylermcrobert</a>{" "}
-            </p>
-          </S.Copy>
-
-          <S.Intro>
-            <LargeHead>
-              {!loading && (
-                <>
-                  I&apos;m currently listening to “{trackName}” by {artist} on
-                  Spotify.
-                </>
-              )}{" "}
-              Check out some <Link to="/playlist">playlists</Link>&nbsp;{RIGHT}.
-            </LargeHead>
-          </S.Intro>
+          <Music />
         </Grid>
       </S.Wrapper>
     </>
+  )
+}
+
+const Intro = () => {
+  return (
+    <S.Intro>
+      <DotHead>Bio</DotHead>
+      <LargeHead>
+        I&apos;m Tyler McRobert, a Midwest–born Designer &amp; Web Developer
+        living in Portland, Oregon. Currently taking over the world at{" "}
+        <a href="http://this.design">This.</a>
+      </LargeHead>
+    </S.Intro>
+  )
+}
+
+const Contact = () => (
+  <S.Copy>
+    <div>
+      &#9679; E-M→{" "}
+      <a href="mailto:hello@tylermcrobert.com">hello@tylermcrobert.com</a>
+    </div>
+    <div>
+      &#9679; IG→{" "}
+      <a href="http://instagram.com/tylermcrobert">@tylermcrobert</a>{" "}
+    </div>
+  </S.Copy>
+)
+
+const Music = () => {
+  const { loading, artist, trackName } = useNowPlaying()
+
+  return (
+    <S.Intro>
+      <DotHead>Music</DotHead>
+      <LargeHead>
+        {!loading && (
+          <>
+            I&apos;m currently listening to: “{trackName}” by {artist} on
+            Spotify.
+          </>
+        )}{" "}
+        Check out some <Link to="/playlist">playlists</Link>&nbsp;{RIGHT}.
+      </LargeHead>
+    </S.Intro>
   )
 }
 

@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { DotHead } from "components"
 import { mq } from "style"
 
 const Wrapper = styled.div`
@@ -23,6 +22,12 @@ const Copy = styled.div`
 
   @media ${mq.sm} {
     grid-column: span 3;
+  }
+
+  p {
+    max-width: 25em;
+    margin-bottom: 1rem;
+    text-indent: 2rem;
   }
 `
 
