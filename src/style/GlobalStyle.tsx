@@ -5,7 +5,7 @@ import { mq } from "./index"
 const style = css`
   @font-face {
     font-family: "Suisse";
-    src: url("fonts/SuisseIntl-Regular.otf");
+    src: url("/fonts/SuisseIntl-Regular.otf");
   }
 
   * {
