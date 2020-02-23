@@ -5,6 +5,11 @@ interface ITrack {
     ["#text"]: string
   }
   name: string
+  ["@attr"]:
+    | {
+        nowplaying: boolean
+      }
+    | undefined
 }
 interface ILastFMRes {
   recenttracks: {
@@ -35,6 +40,7 @@ const useNowPlaying = () => {
       loading: false,
       trackName: track.name,
       artist: track.artist["#text"],
+      nowPlaying: track["@attr"]?.nowplaying || false,
     }
   }
   return { loading: true }

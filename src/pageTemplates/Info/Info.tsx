@@ -78,20 +78,26 @@ interface IMusicProps {
 }
 
 const Music: React.FC<IMusicProps> = ({ playlists }) => {
-  const { loading, artist, trackName } = useNowPlaying()
+  const { loading, artist, trackName, nowPlaying } = useNowPlaying()
 
   return (
     <>
       <Wrapper>
-        <DotHead>Now Playing</DotHead>
+        <DotHead>{nowPlaying ? "Now Playing" : "Recently Played"}</DotHead>
 
         <LargeHead>
-          {!loading && (
-            <>
-              Right now I&apos;m listening to:&nbsp;“{trackName}” by {artist} on
-              Spotify.
-            </>
-          )}
+          {!loading &&
+            (nowPlaying ? (
+              <>
+                Right now I&apos;m listening to:&nbsp;“{trackName}” by {artist}{" "}
+                on Spotify.
+              </>
+            ) : (
+              <>
+                The last song I listened to on Spotify was &nbsp;“{trackName}”
+                by {artist}.
+              </>
+            ))}
         </LargeHead>
 
         <br />
