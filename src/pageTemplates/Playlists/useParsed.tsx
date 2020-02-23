@@ -28,7 +28,9 @@ const useParsed = (data: ISpotifyPlaylist) => {
     .toISOString()
     .split(".")[0]
 
-  return { totalDuration, tracks, img, dateCreated }
+  const link = data.external_urls.spotify
+
+  return { totalDuration, tracks, img, dateCreated, link }
 }
 
 export default useParsed

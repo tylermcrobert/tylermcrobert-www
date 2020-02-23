@@ -34,7 +34,7 @@ interface IPlaylistProps {
 }
 
 const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
-  const { totalDuration, tracks, img, dateCreated } = useParsed(data)
+  const { totalDuration, tracks, img, dateCreated, link } = useParsed(data)
   const [isLimit, setLimit] = useState<boolean>(true)
   const limitedTracks = isLimit ? [...tracks].slice(0, LIMIT) : tracks
 
@@ -58,7 +58,9 @@ const Playlist: React.FC<IPlaylistProps> = ({ data }) => {
             {CIRCLE} DUR {totalDuration}
           </S.MetadataItem>
           <S.MetadataItem>
-            {CIRCLE} LINK {NE}
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              {CIRCLE} LINK {NE}
+            </a>
           </S.MetadataItem>
         </S.Metadata>
 
