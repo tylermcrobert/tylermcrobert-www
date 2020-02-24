@@ -139,7 +139,7 @@ exports.createPages = async function createPages({
   )
 
   createPage({
-    path: `/playlist`,
+    path: `/playlists`,
     component: path.resolve("src/templates/playlists.tsx"),
     context: {
       data: playlistData,

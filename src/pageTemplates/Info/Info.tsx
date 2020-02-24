@@ -131,7 +131,7 @@ const Music: React.FC<IMusicProps> = ({ playlists }) => {
       <br />
 
       <Wrapper>
-        <Link to="/playlist">See All Playlists</Link> {RIGHT}
+        <Link to="/playlists">See All Playlists</Link> {RIGHT}
       </Wrapper>
     </>
   )
