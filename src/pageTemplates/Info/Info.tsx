@@ -83,12 +83,10 @@ const Music: React.FC<IMusicProps> = ({ playlists }) => {
   return (
     <>
       <Wrapper>
-        <LargeHead>
-          {!loading && !!artist && (
-            <>
-              <DotHead>
-                {nowPlaying ? "Now Playing" : "Recently Played"}
-              </DotHead>
+        {!loading && !!artist && (
+          <>
+            <DotHead>{nowPlaying ? "Now Playing" : "Recently Played"}</DotHead>
+            <LargeHead>
               {nowPlaying ? (
                 <>
                   Right now I&apos;m listening to:&nbsp;“{trackName}” by{" "}
@@ -100,9 +98,9 @@ const Music: React.FC<IMusicProps> = ({ playlists }) => {
                   by {artist}.
                 </>
               )}
-            </>
-          )}
-        </LargeHead>
+            </LargeHead>
+          </>
+        )}
 
         <br />
         <br />
