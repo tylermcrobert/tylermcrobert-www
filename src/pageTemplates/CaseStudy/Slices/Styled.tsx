@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { mq } from "style"
 
 interface IImageWrapperProps {
   invert?: boolean
@@ -59,10 +60,14 @@ const Browser = styled.div`
 `
 
 const ParagraphWrapper = styled.div`
-  grid-column: 4 / span 3;
+  grid-column: span 6;
 
-  &:nth-child(odd) {
-    grid-column: 1 / span 3;
+  @media ${mq.sm} {
+    grid-column: 4 / span 3;
+
+    &:nth-child(odd) {
+      grid-column: 1 / span 3;
+    }
   }
 `
 
