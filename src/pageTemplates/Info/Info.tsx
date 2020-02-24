@@ -89,17 +89,17 @@ const Music: React.FC<IMusicProps> = ({ playlists }) => {
               <DotHead>
                 {nowPlaying ? "Now Playing" : "Recently Played"}
               </DotHead>
-              (nowPlaying ? (
-              <>
-                Right now I&apos;m listening to:&nbsp;“{trackName}” by {artist}{" "}
-                on Spotify.
-              </>
+              {nowPlaying ? (
+                <>
+                  Right now I&apos;m listening to:&nbsp;“{trackName}” by{" "}
+                  {artist} on Spotify.
+                </>
               ) : (
-              <>
-                The last song I listened to on Spotify was &nbsp;“{trackName}”
-                by {artist}.
-              </>
-              ))
+                <>
+                  The last song I listened to on Spotify was &nbsp;“{trackName}”
+                  by {artist}.
+                </>
+              )}
             </>
           )}
         </LargeHead>
