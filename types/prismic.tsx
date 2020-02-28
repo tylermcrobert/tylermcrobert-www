@@ -6,7 +6,7 @@ type RichTextItem = {
 
 export type IPrismicRichText = RichTextItem[] | []
 
-export type IPrismicRenderedText = IPrismicRichText
+export type IPrismicRenderedText = () => JSX.Element
 
 export type IPrismicKeyText = string | null
 

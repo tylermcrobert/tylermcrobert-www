@@ -6,11 +6,12 @@ const formatCaseStudy = (csRaw: ICaseStudyRaw): ICaseStudy => {
   return {
     uid: csRaw.uid,
     title: asText(csRaw.data.title),
-    intro: RichText(csRaw.data.intro),
-    description: RichText(csRaw.data.description),
     deliverables: csRaw.data.deliverables
       ? csRaw.data.deliverables.split(", ")
       : [""],
+
+    Intro: () => <RichText>{csRaw.data.intro}</RichText>,
+    Description: () => <RichText>{csRaw.data.description}</RichText>,
   }
 }
 

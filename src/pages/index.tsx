@@ -14,12 +14,15 @@ const Home: NextPage<IProps> = ({ caseStudiesRes }) => {
 
   return (
     <div>
-      {formatted.map(({ uid, title, deliverables, description, intro }) => {
+      {formatted.map(({ uid, title, deliverables, Description, Intro }) => {
         return (
           <div key={uid}>
             <h1>{title}</h1>
-            <h2>{intro}</h2>
-            {description}
+            <h2>
+              <Intro />
+            </h2>
+            <Description />
+
             <p>{deliverables.join(", ")}</p>
             <hr />
           </div>

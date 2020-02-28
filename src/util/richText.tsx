@@ -5,5 +5,10 @@ import { IPrismicRichText, IPrismicRenderedText } from "../../types/prismic"
 export const asText = (text: IPrismicRichText): string =>
   PrismicRichText.asText(text)
 
-export const RichText = (children: IPrismicRichText): IPrismicRenderedText =>
-  PrismicRichText.render(children)
+interface IRichTextProps {
+  children: IPrismicRichText
+}
+
+export const RichText: React.FC<IRichTextProps> = ({ children }) => (
+  <>{PrismicRichText.render(children)}</>
+)
