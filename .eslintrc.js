@@ -13,6 +13,7 @@ const TYPESCRIPT_RULES = {
   "@typescript-eslint/no-unused-vars": 0,
   // 'no-unused-vars': 0,
 
+  "@typescript-eslint/camelcase": 0,
   // getting in the way
   "@typescript-eslint/no-var-requires": 0,
 

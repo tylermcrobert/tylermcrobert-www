@@ -9,6 +9,10 @@ import {
 } from "types/api/PrismicApiCaseStudy"
 import { asText, RichText } from "util/richText"
 
+import SingleImage from "./SingleImage/SingleImage"
+import DoubleImage from "./DoubleImage/DoubleImage"
+import TripleImage from "./TripleImage/TripleImage"
+
 const CaseStudy: React.FC<{ data: ICaseStudy }> = ({ data: { data } }) => {
   const title = asText(data.title)
   const { deliverables, intro, description, cs_content: slices } = data
@@ -41,7 +45,7 @@ const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
           const data = sliceData as unknown
 
           if (type === "single_image") {
-            return <Image data={data as ISingleImage} />
+            return <SingleImage data={data as ISingleImage} />
           }
           if (type === "double_image_block") {
             return <DoubleImage data={data as IDoubleImage} />
@@ -61,36 +65,9 @@ const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
           return null
         })
         .map((item, i) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Fragment key={i}>{item}</Fragment>
         ))}
-    </>
-  )
-}
-
-const Image: React.FC<{ data: ISingleImage }> = ({ data }) => {
-  return (
-    <>
-      <img src={data.primary.image.url} />
-    </>
-  )
-}
-
-const DoubleImage: React.FC<{ data: IDoubleImage }> = ({ data }) => {
-  return (
-    <>
-      <img src={data.primary.left_image.url} />
-      <img src={data.primary.right_image.url} />
-    </>
-  )
-}
-
-const TripleImage: React.FC<{ data: ITripleImage }> = ({ data }) => {
-  const { main_image, secondary_image_1, secondary_image_2 } = data.primary
-  return (
-    <>
-      <img src={main_image.url} />
-      <img src={secondary_image_1.url} />
-      <img src={secondary_image_2.url} />
     </>
   )
 }
