@@ -22,17 +22,26 @@ export interface ICaseStudy extends Document {
   }
 }
 
-export type Slice = ISingleImage | IDoubleImage
+export type Slice = ISingleImage | IDoubleImage | ITripleImage
 
-interface ISingleImage extends IPrismicSlice {
+export interface ISingleImage extends IPrismicSlice {
   primary: {
     image: IPrismicImage
   }
 }
 
-interface IDoubleImage extends IPrismicSlice {
+export interface IDoubleImage extends IPrismicSlice {
   primary: {
     left_image: IPrismicImage
     right_image: IPrismicImage
+  }
+}
+
+export interface ITripleImage extends IPrismicSlice {
+  primary: {
+    main_image_position: "Left" | "Right"
+    main_image: IPrismicImage
+    secondary_image_1: IPrismicImage
+    secondary_image_2: IPrismicImage
   }
 }
