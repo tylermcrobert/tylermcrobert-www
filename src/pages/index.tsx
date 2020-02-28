@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 import Prismic from "prismic-javascript"
 import { NextPage } from "next"
 import { Client } from "util/prismic"
@@ -26,8 +27,6 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({ data: { data } }) => {
   const title = asText(data.title)
   const { deliverables, intro, description, cs_content: slices } = data
 
-  console.log(slices)
-
   return (
     <div>
       <h1>{title}</h1>
@@ -50,29 +49,32 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({ data: { data } }) => {
 const Slices: React.FC<{ data: Slice[] }> = ({ data }) => {
   return (
     <>
-      {data.map(item => {
-        const type = item.slice_type
-        if (type === "single_image") {
-          return <div>IMAGE HERE!!!!!!!!!!</div>
-        }
-        if (type === "website") {
-          return <div>WEBSITE HERE!!!!!!!!!!</div>
-        }
-        if (type === "text") {
-          return <div>TEXT HERE!!!!!!!!!!</div>
-        }
-        if (type === "double_image_block") {
-          return <div>DOUBLE IMAGE BLOCK HERE!!!!!!!!!!</div>
-        }
-        if (type === "triple_image_block") {
-          return <div>TRIPLE IMAGE BLOCK HERE!!!!!!!!!!!!!!!!!!!!!</div>
-        }
-        if (type === "text") {
-          return <div>TEXT HERE!!!!!!!!!!</div>
-        }
-
-        return null
-      })}
+      {data
+        .map(item => {
+          const type = item.slice_type
+          if (type === "single_image") {
+            return <div>IMAGE HERE!!!!!!!!!!</div>
+          }
+          if (type === "website") {
+            return <div>WEBSITE HERE!!!!!!!!!!</div>
+          }
+          if (type === "text") {
+            return <div>TEXT HERE!!!!!!!!!!</div>
+          }
+          if (type === "double_image_block") {
+            return <div>DOUBLE IMAGE BLOCK HERE!!!!!!!!!!</div>
+          }
+          if (type === "triple_image_block") {
+            return <div>TRIPLE IMAGE BLOCK HERE!!!!!!!!!!!!!!!!!!!!!</div>
+          }
+          if (type === "text") {
+            return <div>TEXT HERE!!!!!!!!!!</div>
+          }
+          return null
+        })
+        .map((item, i) => (
+          <Fragment key={i}>{item}</Fragment>
+        ))}
     </>
   )
 }
