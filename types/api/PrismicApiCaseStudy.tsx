@@ -12,12 +12,13 @@ export interface IPrismicCaseStudyRes extends ApiSearchResponse {
   results: ICaseStudy[]
 }
 
-interface ICaseStudy extends Document {
+export interface ICaseStudy extends Document {
   data: {
     title: IPrismicRichText
     intro: IPrismicRichText
-    description: IPrismicKeyText
+    description: IPrismicRichText
     cs_content: Slice[]
+    deliverables: IPrismicKeyText
   }
 }
 

@@ -3,19 +3,29 @@ import { NextPage } from "next"
 import { IPrismicCaseStudyRes } from "../../types/api/PrismicApiCaseStudy"
 
 import { Client } from "../util/prismic"
+import formatCaseStudy from "../middleware/caseStudy"
 
 interface IProps {
   caseStudiesRes: IPrismicCaseStudyRes
 }
 
 const Home: NextPage<IProps> = ({ caseStudiesRes }) => {
-  console.log(
-    caseStudiesRes.results.map(res =>
-      res.data.cs_content.map(item => item.primary)
-    )
-  )
+  const formatted = caseStudiesRes.results.map(csRes => formatCaseStudy(csRes))
 
-  return <div>hello world</div>
+  return (
+    <div>
+      {formatted.map(({ uid, title, deliverables, description, intro }) => {
+        return (
+          <div key={uid}>
+            <h1>{title}</h1>
+            <h2>{intro}</h2>
+            {description}
+            <p>{deliverables.join(", ")}</p>
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 Home.getInitialProps = async ctx => {
