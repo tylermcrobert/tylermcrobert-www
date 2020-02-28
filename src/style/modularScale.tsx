@@ -19,7 +19,7 @@ const modularScale = (options: IModularscale = {}): number[] => {
     return result
   })()
 
-  return Array.from({ length })
+  return (Array.from({ length }) as [])
     .reduce(
       (acc: number[], _: any, i: number) => [
         ...acc,
