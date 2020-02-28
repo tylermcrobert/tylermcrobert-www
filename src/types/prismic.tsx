@@ -10,10 +10,8 @@ export type IPrismicRenderedText = () => JSX.Element
 
 export type IPrismicKeyText = string | null
 
-type SliceType = string
-
 export interface IPrismicSlice {
-  slice_type: SliceType
+  slice_type: string
   primary: any
   items: any[]
 }
@@ -25,4 +23,4 @@ export interface IPrismicImageFillled {
   url: "string"
 }
 
-export type IPrismicImage = IPrismicImageFillled | {}
+export type IPrismicImage = IPrismicImageFillled | null
