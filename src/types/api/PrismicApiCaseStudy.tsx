@@ -22,7 +22,7 @@ export interface ICaseStudy extends Document {
   }
 }
 
-type Slice = ISingleImage | IDoubleImage
+export type Slice = ISingleImage | IDoubleImage
 
 interface ISingleImage extends IPrismicSlice {
   primary: {
