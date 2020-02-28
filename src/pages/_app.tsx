@@ -1,11 +1,17 @@
 // import App from 'next/app'
+import { ThemeProvider } from "styled-components"
+import GlobalStyle from "../style/GlobalStyle"
+import theme from "../style/theme"
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
-      tyler mcrobert
-      <Component {...pageProps} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <GlobalStyle />
+        tyler mcrobert
+        <Component {...pageProps} />
+      </div>
+    </ThemeProvider>
   )
 }
 
