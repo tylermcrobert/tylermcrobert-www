@@ -1,7 +1,7 @@
 import Prismic from "prismic-javascript"
 import { NextPage } from "next"
-import { IPrismicCaseStudyRes } from "../types/api/PrismicApiCaseStudy"
-import { Client } from "../util/prismic"
+import { Client } from "util/prismic"
+import { IPrismicCaseStudyRes } from "types/api/PrismicApiCaseStudy"
 
 interface IProps {
   caseStudiesRes: IPrismicCaseStudyRes
