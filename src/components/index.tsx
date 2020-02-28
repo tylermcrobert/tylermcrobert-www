@@ -7,6 +7,7 @@ import Seo from "./Seo"
 import DotHead from "./DotHead"
 import { Section, SmallSection } from "./Section"
 import Nav from "./Nav"
+import CaseStudy from "./CaseStudy"
 
 export {
   Nav,
@@ -20,4 +21,5 @@ export {
   Wrapper,
   Seo,
   DotHead,
+  CaseStudy,
 }
