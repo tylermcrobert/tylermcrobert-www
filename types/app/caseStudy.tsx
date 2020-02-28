@@ -1,4 +1,4 @@
-import { IPrismicRichText, IPrismicRenderedText } from "../prismic"
+import { IPrismicRenderedText } from "../prismic"
 
 export interface ICaseStudy {
   uid: string
