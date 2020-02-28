@@ -1,5 +1,5 @@
-import { ICaseStudy } from "../../types/app/caseStudy"
-import { ICaseStudy as ICaseStudyRaw } from "../../types/api/PrismicApiCaseStudy"
+import { ICaseStudy } from "../types/app/caseStudy"
+import { ICaseStudy as ICaseStudyRaw } from "../types/api/PrismicApiCaseStudy"
 import { asText, RichText } from "../util/richText"
 
 const formatCaseStudy = (csRaw: ICaseStudyRaw): ICaseStudy => {

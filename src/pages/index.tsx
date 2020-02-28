@@ -1,6 +1,6 @@
 import Prismic from "prismic-javascript"
 import { NextPage } from "next"
-import { IPrismicCaseStudyRes } from "../../types/api/PrismicApiCaseStudy"
+import { IPrismicCaseStudyRes } from "../types/api/PrismicApiCaseStudy"
 
 import { Client } from "../util/prismic"
 import formatCaseStudy from "../middleware/caseStudy"
