@@ -21,6 +21,7 @@ const Home: NextPage<IProps> = ({ caseStudiesRes }) => {
             <h2>{intro}</h2>
             {description}
             <p>{deliverables.join(", ")}</p>
+            <hr />
           </div>
         )
       })}

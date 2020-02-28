@@ -1,9 +1,9 @@
-import { IPrismicRichText } from "../prismic"
+import { IPrismicRichText, IPrismicRenderedText } from "../prismic"
 
 export interface ICaseStudy {
   uid: string
   title: string
-  intro: React.FC
+  intro: IPrismicRenderedText
   deliverables: string[]
-  description: IPrismicRichText
+  description: IPrismicRenderedText
 }

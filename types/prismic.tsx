@@ -6,6 +6,8 @@ type RichTextItem = {
 
 export type IPrismicRichText = RichTextItem[] | []
 
+export type IPrismicRenderedText = IPrismicRichText
+
 export type IPrismicKeyText = string | null
 
 type SliceType = string
