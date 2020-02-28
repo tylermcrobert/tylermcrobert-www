@@ -2,13 +2,15 @@
 import { ThemeProvider } from "styled-components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
+import { Nav, LargeHead } from "components"
 
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <div>
         <GlobalStyle />
-        tyler mcrobert
+        <Nav />
+
         <Component {...pageProps} />
       </div>
     </ThemeProvider>

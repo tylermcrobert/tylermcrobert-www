@@ -6,8 +6,10 @@ import Wrapper from "./Wrapper"
 import Seo from "./Seo"
 import DotHead from "./DotHead"
 import { Section, SmallSection } from "./Section"
+import Nav from "./Nav"
 
 export {
+  Nav,
   MediumHead,
   LargeHead,
   Html,
