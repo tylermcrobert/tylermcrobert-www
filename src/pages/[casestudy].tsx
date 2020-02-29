@@ -21,7 +21,7 @@ const CaseStudyPage: NextPage<IProps> = ({ uid }) => {
 }
 
 CaseStudyPage.getInitialProps = async ctx => {
-  const uid = typeof ctx.query.casestudy === "string" ? ctx.query.casestudy : ""
+  const uid = typeof ctx.query.uid === "string" ? ctx.query.uid : ""
   return { uid }
 }
 
