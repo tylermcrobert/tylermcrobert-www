@@ -1,13 +1,15 @@
 import { ICaseStudy } from "types/Prismic"
 import { asText, RichText } from "util/richText"
 import { LargeHead, Html } from "components"
+import { useIndexFromUid } from "hooks/useCurrentCuration"
 import Slices from "./Slices/Slices"
 import S from "./CaseStudy.Styled"
 import { UNICODE, NUMBERS } from "../../constants"
 
 const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
-  data: { data, ...res },
+  data: { data, uid, ...res },
 }) => {
+  const index = useIndexFromUid(uid)
   const { deliverables, intro, description, cs_content: slices } = data
   const title = asText(data.title)
   const dotDeliverables = deliverables
@@ -18,7 +20,7 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
   return (
     <S.Intro>
       <h1>
-        {NUMBERS[7]} {title}
+        {NUMBERS[index + 1]} {title}
       </h1>
 
       <LargeHead as="h2">
