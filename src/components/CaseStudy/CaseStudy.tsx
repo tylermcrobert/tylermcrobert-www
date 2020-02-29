@@ -1,4 +1,4 @@
-import { ICaseStudy } from "types/api/PrismicApiCaseStudy"
+import { ICaseStudy } from "types/Prismic"
 import { asText, RichText } from "util/richText"
 import { LargeHead, Html } from "components"
 import Slices from "./Slices/Slices"

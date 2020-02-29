@@ -1,4 +1,4 @@
-import { IDoubleImage } from "types/api/PrismicApiCaseStudy"
+import { IDoubleImage } from "types/Prismic"
 
 const DoubleImage: React.FC<{ data: IDoubleImage }> = ({ data }) => {
   return (

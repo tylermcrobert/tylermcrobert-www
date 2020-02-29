@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { ITripleImage } from "types/api/PrismicApiCaseStudy"
+import { ITripleImage } from "types/Prismic"
 
 const TripleImage: React.FC<{ data: ITripleImage }> = ({ data }) => {
   const { main_image, secondary_image_1, secondary_image_2 } = data.primary

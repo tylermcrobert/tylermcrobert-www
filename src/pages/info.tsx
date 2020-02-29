@@ -1,5 +1,5 @@
 import { NextPage } from "next"
-import { IPrismicCaseStudyRes } from "types/api/PrismicApiCaseStudy"
+import { IPrismicCaseStudyRes } from "types/Prismic"
 
 interface IProps {
   caseStudiesRes: IPrismicCaseStudyRes

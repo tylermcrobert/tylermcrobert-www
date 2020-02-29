@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { Fragment } from "react"
-import {
-  Slice,
-  ISingleImage,
-  IDoubleImage,
-  ITripleImage,
-} from "types/api/PrismicApiCaseStudy"
+import { Slice, ISingleImage, IDoubleImage, ITripleImage } from "types/Prismic"
 
 import SingleImage from "../SingleImage/SingleImage"
 import DoubleImage from "../DoubleImage/DoubleImage"

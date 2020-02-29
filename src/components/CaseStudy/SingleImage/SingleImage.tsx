@@ -1,4 +1,4 @@
-import { ISingleImage } from "types/api/PrismicApiCaseStudy"
+import { ISingleImage } from "types/Prismic"
 
 const SingleImage: React.FC<{ data: ISingleImage }> = ({ data }) => {
   return (
