@@ -1,4 +1,4 @@
-import { createContext } from "react"
+import { useRef, useEffect, createContext } from "react"
 import App from "next/app"
 import { ThemeProvider } from "styled-components"
 import GlobalStyle from "style/GlobalStyle"
@@ -23,8 +23,18 @@ const MyApp = ({
   caseStudiesRes: IPrismicCaseStudyRes
   ctxRes: any
 }) => {
+  const caseStudiesResRef = useRef<IPrismicCaseStudyRes | null>(null)
+
+  if (!caseStudiesResRef.current) {
+    caseStudiesResRef.current = caseStudiesRes
+  }
+
   return (
-    <DataCtx.Provider value={{ caseStudiesRes }}>
+    <DataCtx.Provider
+      value={{
+        caseStudiesRes: caseStudiesResRef.current,
+      }}
+    >
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyle />
@@ -41,13 +51,20 @@ const MyApp = ({
 MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext) // keep this
 
-  const caseStudiesRes: IPrismicCaseStudyRes = await Client(appContext.ctx.req) //
-    .query(Prismic.Predicates.at("document.type", "case_study"), {})
+  if (!process.browser) {
+    const caseStudiesRes: IPrismicCaseStudyRes = await Client(
+      appContext.ctx.req
+    ).query(Prismic.Predicates.at("document.type", "case_study"), {})
 
-  const ctxRes = await Client(appContext.ctx.req) //
-    .query(Prismic.Predicates.at("document.type", "context"), {})
+    const ctxRes = await Client(appContext.ctx.req).query(
+      Prismic.Predicates.at("document.type", "context"),
+      {}
+    )
 
-  return { ...appProps, caseStudiesRes, ctxRes }
+    return { ...appProps, caseStudiesRes, ctxRes }
+  }
+
+  return {}
 }
 
 export default MyApp
