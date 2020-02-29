@@ -6,7 +6,6 @@ import theme from "style/theme"
 import { Nav } from "components"
 import { IPrismicCaseStudyRes, IContextRes } from "types/Prismic"
 import Prismic from "prismic-javascript"
-import { useRouter } from "next/router"
 import { Client } from "util/prismic"
 
 export const DataCtx = createContext<{

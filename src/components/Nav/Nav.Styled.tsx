@@ -15,6 +15,10 @@ const Nav = styled.nav`
   a {
     color: ${props => props.theme.colors.secondary};
   }
+
+  span {
+    cursor: pointer;
+  }
 `
 
 const Content = styled.div`

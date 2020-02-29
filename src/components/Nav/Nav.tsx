@@ -4,6 +4,8 @@ import { DataCtx } from "pages/_app"
 import { Wrapper } from "components"
 import Link from "next/link"
 import Cookies from "js-cookie"
+import Router from "next/router"
+import { UNICODE } from "../../constants"
 import S from "./Nav.Styled"
 
 const Nav = () => {
@@ -29,6 +31,10 @@ const Nav = () => {
 const CurationNav = () => {
   const curationUid = Cookies.get("curation")
   const [isHover, setHover] = useState<boolean>(false)
+  const clearCookie = () => {
+    Cookies.remove("curation")
+    Router.push("/")
+  }
 
   if (curationUid) {
     const { ctxRes } = useContext(DataCtx)
@@ -38,10 +44,11 @@ const CurationNav = () => {
     return (
       <span
         onMouseOver={() => setHover(true)}
-        onMouseOut={() => setHover(false)}
+        onMouseLeave={() => setHover(false)}
+        onClick={clearCookie}
       >
         {" "}
-        x {name}
+        {UNICODE.X} {name} {isHover && <span>(close)</span>}
       </span>
     )
   }
