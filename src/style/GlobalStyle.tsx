@@ -42,6 +42,16 @@ const style = css`
 
   body {
     padding-top: ${props => props.theme.remScale[5]};
+
+    &:before {
+      content: "";
+      position: fixed;
+      top: -10rem;
+      left: 0;
+      background: ${props => props.theme.colors.secondary};
+      width: 100vw;
+      height: calc(10rem + 100vh);
+    }
   }
 
   a {
