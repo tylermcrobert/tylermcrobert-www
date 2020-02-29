@@ -6,7 +6,7 @@ interface IProps {
 }
 
 const Home: NextPage<IProps> = () => {
-  return <div>INFO</div>
+  return <div>Ia;flkjasd;flkjNFO</div>
 }
 
 export default Home
