@@ -15,6 +15,11 @@ import { UNICODE, NUMBERS } from "../../constants"
  *
  */
 
+/**
+ *
+ * @todo test test test
+ */
+
 const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
   data: { data, uid, ...res },
 }) => {
