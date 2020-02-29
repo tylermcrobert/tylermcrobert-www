@@ -36,9 +36,7 @@ const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
         })
         .map((item, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <SmallSection key={i}>
-            <Grid>{item}</Grid>
-          </SmallSection>
+          <Grid key={i}>{item}</Grid>
         ))}
     </>
   )
