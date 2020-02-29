@@ -3,6 +3,7 @@ import { Grid, Paragraph } from "components"
 
 const Intro = styled(Grid)`
   margin-top: ${props => props.theme.margins.large};
+  margin-bottom: ${props => props.theme.margins.gutter};
 
   h2 {
     max-width: 11.5em;

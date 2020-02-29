@@ -1,6 +1,6 @@
 import { ICaseStudy } from "types/Prismic"
 import { asText, RichText } from "util/richText"
-import { LargeHead, Html } from "components"
+import { LargeHead, Html, Grid } from "components"
 import { useIndexFromUid } from "hooks/useCurrentCuration"
 import Slices from "./Slices/Slices"
 import S from "./CaseStudy.Styled"
@@ -18,28 +18,32 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
   const date = res.first_publication_date.replace("+0000", "")
 
   return (
-    <S.Intro>
-      <h1>
-        {NUMBERS[index + 1]} {title}
-      </h1>
+    <>
+      <S.Intro>
+        <h1>
+          {NUMBERS[index + 1]} {title}
+        </h1>
 
-      <LargeHead as="h2">
-        <RichText>{intro}</RichText>
-      </LargeHead>
+        <LargeHead as="h2">
+          <RichText>{intro}</RichText>
+        </LargeHead>
 
-      <S.Deliverables>
-        <p>{date}</p>
-        <p>
-          <Html>{dotDeliverables}</Html>
-        </p>
-      </S.Deliverables>
+        <S.Deliverables>
+          <p>{date}</p>
+          <p>
+            <Html>{dotDeliverables}</Html>
+          </p>
+        </S.Deliverables>
 
-      <S.Desc>
-        <RichText>{description}</RichText>
-      </S.Desc>
+        <S.Desc>
+          <RichText>{description}</RichText>
+        </S.Desc>
+      </S.Intro>
 
-      <Slices data={slices} />
-    </S.Intro>
+      <Grid>
+        <Slices data={slices} />
+      </Grid>
+    </>
   )
 }
 
