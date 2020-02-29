@@ -1,6 +1,9 @@
-import React from "react"
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+import React, { useContext, useState } from "react"
+import { DataCtx } from "pages/_app"
 import { Wrapper } from "components"
 import Link from "next/link"
+import Cookies from "js-cookie"
 import S from "./Nav.Styled"
 
 const Nav = () => {
@@ -8,9 +11,12 @@ const Nav = () => {
     <S.Nav>
       <Wrapper>
         <S.Content>
-          <Link href="/">
-            <a>Tyler McRobert</a>
-          </Link>
+          <div>
+            <Link href="/">
+              <a>Tyler McRobert</a>
+            </Link>
+            <CurationNav />
+          </div>
           <Link href="/info">
             <a>Info</a>
           </Link>
@@ -18,6 +24,28 @@ const Nav = () => {
       </Wrapper>
     </S.Nav>
   )
+}
+
+const CurationNav = () => {
+  const curationUid = Cookies.get("curation")
+  const [isHover, setHover] = useState<boolean>(false)
+
+  if (curationUid) {
+    const { ctxRes } = useContext(DataCtx)
+    const name = ctxRes.results.filter(item => item.uid === curationUid)[0].data
+      .context_name[0].text
+
+    return (
+      <span
+        onMouseOver={() => setHover(true)}
+        onMouseOut={() => setHover(false)}
+      >
+        {" "}
+        x {name}
+      </span>
+    )
+  }
+  return null
 }
 
 export default Nav
