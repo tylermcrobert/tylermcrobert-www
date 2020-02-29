@@ -4,19 +4,30 @@ import { mq } from "style"
 
 const Intro = styled(Grid)`
   padding-top: ${props => props.theme.margins.large};
+  margin-top: 0;
 
   h2 {
     max-width: 11.5em;
-    margin-bottom: ${props => props.theme.remScale[0]};
+
+    @media ${mq.sm} {
+      margin-bottom: ${props => props.theme.remScale[0]};
+    }
   }
 `
 
 const Deliverables = styled.div`
-  grid-column: span 3;
-  max-width: 16em;
+  @media ${mq.sm} {
+    grid-column: span 3;
+    max-width: 16em;
+
+    p:first-child {
+      text-indent: none;
+      margin-bottom: ${props => props.theme.remScale[0]};
+    }
+  }
 
   p:first-child {
-    margin-bottom: ${props => props.theme.remScale[0]};
+    text-indent: 2rem;
   }
 `
 
