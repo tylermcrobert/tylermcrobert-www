@@ -17,21 +17,23 @@ const MyApp = ({
   Component,
   pageProps,
   caseStudiesRes,
+  ctxRes,
 }: {
   Component: any
   pageProps: any
   caseStudiesRes: IPrismicCaseStudyRes
+  ctxRes: any
 }) => {
   return (
     <DataCtx.Provider value={{ caseStudiesRes }}>
       <ThemeProvider theme={theme}>
-        <div>
+        <>
           <GlobalStyle />
           <Nav />
           <main>
             <Component {...pageProps} />
           </main>
-        </div>
+        </>
       </ThemeProvider>
     </DataCtx.Provider>
   )
@@ -40,15 +42,13 @@ const MyApp = ({
 MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext) // keep this
 
-  if (process.browser) {
-    return (window as any).__NEXT_DATA__.props.pageProps
-  }
+  const caseStudiesRes: IPrismicCaseStudyRes = await Client(appContext.ctx.req) //
+    .query(Prismic.Predicates.at("document.type", "case_study"), {})
 
-  const caseStudiesRes: IPrismicCaseStudyRes = await Client(
-    appContext.ctx.req
-  ).query(Prismic.Predicates.at("document.type", "case_study"), {})
+  const ctxRes = await Client(appContext.ctx.req) //
+    .query(Prismic.Predicates.at("document.type", "context"), {})
 
-  return { ...appProps, caseStudiesRes }
+  return { ...appProps, caseStudiesRes, ctxRes }
 }
 
 export default MyApp

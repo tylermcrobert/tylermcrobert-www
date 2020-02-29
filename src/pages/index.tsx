@@ -1,7 +1,8 @@
 import { useContext } from "react"
 import { NextPage } from "next"
+import Link from "next/link"
+import { asText } from "util/richText"
 import { IPrismicCaseStudyRes } from "types/api/PrismicApiCaseStudy"
-import { CaseStudy } from "components"
 import { DataCtx } from "./_app"
 
 interface IProps {
@@ -14,7 +15,11 @@ const Home: NextPage<IProps> = () => {
   return (
     <div>
       {caseStudiesRes.results.map(item => (
-        <CaseStudy data={item} key={item.id} />
+        <div key={item.id}>
+          <Link href="/[casestudy]" as={`/${item.uid}`}>
+            <a>{asText(item.data.title)}</a>
+          </Link>
+        </div>
       ))}
     </div>
   )
