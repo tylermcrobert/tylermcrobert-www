@@ -8,8 +8,14 @@ import { IPrismicCaseStudyRes, IContextRes } from "types/Prismic"
 import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
 
-export const DataCtx = createContext<{ caseStudiesRes: IPrismicCaseStudyRes }>({
+export const DataCtx = createContext<{
+  caseStudiesRes: IPrismicCaseStudyRes
+  ctxRes: IContextRes
+  currentCtxUid: string
+}>({
   caseStudiesRes: null,
+  ctxRes: null,
+  currentCtxUid: "homepage",
 })
 
 const MyApp = ({
@@ -24,15 +30,19 @@ const MyApp = ({
   ctxRes: IContextRes
 }) => {
   const caseStudiesResRef = useRef<IPrismicCaseStudyRes | null>(null)
+  const ctxResRef = useRef<IContextRes | null>(null)
 
   if (!caseStudiesResRef.current) {
     caseStudiesResRef.current = caseStudiesRes
+    ctxResRef.current = ctxRes
   }
 
   return (
     <DataCtx.Provider
       value={{
         caseStudiesRes: caseStudiesResRef.current,
+        ctxRes: ctxResRef.current,
+        currentCtxUid: "homepage",
       }}
     >
       <ThemeProvider theme={theme}>
