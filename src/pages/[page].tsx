@@ -30,8 +30,9 @@ const CaseStudyPage: NextPage = () => {
   const [isCuration, curationIndex] = useCheck(curationUids)
 
   if (isCuration) {
-    Cookies.set("curation", curationUids[curationIndex])
-    return <CaseStudyPicker />
+    const uid = curationUids[curationIndex]
+    Cookies.set("curation", uid)
+    return <CaseStudyPicker ctxUid={uid} />
   }
 
   return <ErrorPage statusCode={404} />

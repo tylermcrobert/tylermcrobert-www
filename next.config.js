@@ -9,7 +9,7 @@ async function getUids(type, api) {
 const createPaths = (input, page) =>
   input.reduce(
     (acc, cur) => ({
-      [`/${cur}`]: { page, query: { csUid: cur } },
+      [`/${cur}`]: { page, query: { page: cur } },
       ...acc,
     }),
     {}

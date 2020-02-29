@@ -7,8 +7,12 @@ import { useCurationUids } from "hooks/useCurrentCuration"
 import { NUMBERS } from "../../constants"
 import S from "./CaseStudyPicker.Styled"
 
-const CaseStudyPicker: React.FC = () => {
-  const curationUids = useCurationUids()
+interface IProps {
+  ctxUid?: string
+}
+
+const CaseStudyPicker: React.FC<IProps> = ({ ctxUid }) => {
+  const curationUids = useCurationUids(ctxUid)
   const { caseStudiesRes } = useContext(DataCtx)
 
   const getTitle = (uid: string) =>
