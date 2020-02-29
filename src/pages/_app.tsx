@@ -5,7 +5,6 @@ import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { Nav } from "components"
 import { IPrismicCaseStudyRes } from "types/api/PrismicApiCaseStudy"
-
 import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
 
