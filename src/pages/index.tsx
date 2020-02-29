@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import Prismic from "prismic-javascript"
+import { useContext } from "react"
 import { NextPage } from "next"
-import { Client } from "util/prismic"
 import { IPrismicCaseStudyRes } from "types/api/PrismicApiCaseStudy"
 import { CaseStudy } from "components"
+import { DataCtx } from "./_app"
 
 interface IProps {
   caseStudiesRes: IPrismicCaseStudyRes
 }
 
-const Home: NextPage<IProps> = ({ caseStudiesRes }) => {
+const Home: NextPage<IProps> = () => {
+  const { caseStudiesRes } = useContext(DataCtx)
+
   return (
     <div>
       {caseStudiesRes.results.map(item => (
@@ -17,15 +19,6 @@ const Home: NextPage<IProps> = ({ caseStudiesRes }) => {
       ))}
     </div>
   )
-}
-
-Home.getInitialProps = async ctx => {
-  const caseStudiesRes = await Client(ctx.req).query(
-    Prismic.Predicates.at("document.type", "case_study"),
-    {}
-  )
-
-  return { caseStudiesRes }
 }
 
 export default Home
