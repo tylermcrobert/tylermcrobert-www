@@ -56,6 +56,12 @@ export interface IWebsite extends IPrismicSlice {
   }
 }
 
+export interface IText extends IPrismicSlice {
+  primary: {
+    paragraph: IPrismicRichText
+  }
+}
+
 /**
  *
  * Context Res

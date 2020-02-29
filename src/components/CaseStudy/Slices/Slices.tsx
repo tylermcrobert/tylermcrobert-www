@@ -5,12 +5,14 @@ import {
   IDoubleImage,
   ITripleImage,
   IWebsite,
+  IText,
 } from "types/Prismic"
 import { Grid } from "components"
 
 import SingleImage from "../SingleImage/SingleImage"
 import DoubleImage from "../DoubleImage/DoubleImage"
 import TripleImage from "../TripleImage/TripleImage"
+import Text from "../Text/Text"
 import Website from "../Website/Website"
 
 const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
@@ -34,11 +36,9 @@ const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
             return <Website data={data as IWebsite} />
           }
           if (type === "text") {
-            return <div>TEXT HERE!!!!!!!!!!</div>
+            return <Text data={data as IText} />
           }
-          if (type === "text") {
-            return <div>TEXT HERE!!!!!!!!!!</div>
-          }
+
           return null
         })
         .map((item, i) => (
