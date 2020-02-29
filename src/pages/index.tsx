@@ -13,7 +13,7 @@ const Home: NextPage<IProps> = ({ caseStudiesRes }) => {
   return (
     <div>
       {caseStudiesRes.results.map(item => (
-        <CaseStudy data={item} />
+        <CaseStudy data={item} key={item.id} />
       ))}
     </div>
   )
