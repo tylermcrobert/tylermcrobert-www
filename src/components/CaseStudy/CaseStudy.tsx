@@ -1,5 +1,6 @@
 import { ICaseStudy } from "types/api/PrismicApiCaseStudy"
 import { asText, RichText } from "util/richText"
+import { LargeHead } from "components"
 import Slices from "./Slices/Slices"
 
 const CaseStudy: React.FC<{ data: ICaseStudy }> = ({ data: { data } }) => {
@@ -8,7 +9,7 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({ data: { data } }) => {
 
   return (
     <>
-      <h1>{title}</h1>
+      <LargeHead>{title}</LargeHead>
       <h2>
         <RichText>{intro}</RichText>
       </h2>

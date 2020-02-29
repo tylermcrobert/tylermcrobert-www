@@ -1,7 +1,8 @@
 import styled from "styled-components"
-import { Wrapper as GlobalWrapper } from "components"
 
-const Fixed = styled.div`
+const Wrapper = styled.div`
+  width: 100%;
+
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,12 +11,6 @@ const Fixed = styled.div`
 
   display: grid;
   align-items: center;
-`
-
-const Wrapper = styled(GlobalWrapper)`
-  padding-top: ${props => props.theme.margins.large};
-  padding-bottom: ${props => props.theme.margins.large};
-  width: 100%;
 
   li,
   a,
@@ -23,32 +18,19 @@ const Wrapper = styled(GlobalWrapper)`
     display: inline;
   }
 
-  > div {
-    max-width: 60rem;
-  }
-
   a:hover {
     text-decoration: line-through;
   }
 `
 
-const PickerWrapper = styled.div`
-  position: relative;
-  min-height: 100vh;
-`
+const Content = styled.div`
+  padding-top: ${props => props.theme.margins.large};
+  padding-bottom: ${props => props.theme.margins.large};
 
-const FixedPicker = styled.div``
-
-const PageWrapper = styled.div`
-  position: relative;
-  z-index: 20;
-  background: ${props => props.theme.colors.secondary};
+  max-width: 60rem;
 `
 
 export default {
-  Fixed,
   Wrapper,
-  PageWrapper,
-  FixedPicker,
-  PickerWrapper,
+  Content,
 }
