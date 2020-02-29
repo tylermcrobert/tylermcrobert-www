@@ -1,10 +1,17 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { Slice, ISingleImage, IDoubleImage, ITripleImage } from "types/Prismic"
-import { Grid, SmallSection } from "components"
+import {
+  Slice,
+  ISingleImage,
+  IDoubleImage,
+  ITripleImage,
+  IWebsite,
+} from "types/Prismic"
+import { Grid } from "components"
 
 import SingleImage from "../SingleImage/SingleImage"
 import DoubleImage from "../DoubleImage/DoubleImage"
 import TripleImage from "../TripleImage/TripleImage"
+import Website from "../Website/Website"
 
 const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
   return (
@@ -24,7 +31,7 @@ const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
             return <TripleImage data={data as ITripleImage} />
           }
           if (type === "website") {
-            return <div>WEBSITE HERE!!!!!!!!!!</div>
+            return <Website data={data as IWebsite} />
           }
           if (type === "text") {
             return <div>TEXT HERE!!!!!!!!!!</div>

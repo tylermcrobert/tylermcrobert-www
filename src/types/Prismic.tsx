@@ -46,6 +46,16 @@ export interface ITripleImage extends IPrismicSlice {
   }
 }
 
+export interface IWebsite extends IPrismicSlice {
+  primary: {
+    browser_theme: string
+    browser_media: { url: string } | null
+    browser_image: IPrismicImage | null
+    browser_frame_color: string | null
+    background_color: string | null
+  }
+}
+
 /**
  *
  * Context Res
