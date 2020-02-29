@@ -5,13 +5,13 @@ import S from "./Nav.Styled"
 
 const Nav = () => {
   return (
-    <Wrapper>
-      <S.Nav>
+    <S.Nav>
+      <Wrapper>
         <Link href="/">
           <a>Tyler McRobert</a>
         </Link>
-      </S.Nav>
-    </Wrapper>
+      </Wrapper>
+    </S.Nav>
   )
 }
 

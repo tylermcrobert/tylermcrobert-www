@@ -10,8 +10,6 @@ const Nav = styled.nav`
   z-index: 30;
   width: 100%;
 
-  border: 1px solid blue;
-
   color: ${props => props.theme.colors.secondary};
 
   a {

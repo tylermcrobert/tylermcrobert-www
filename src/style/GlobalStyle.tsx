@@ -38,16 +38,6 @@ const style = css`
     @media ${mq.lg} {
       font-size: 1.3vw;
     }
-
-    &:after {
-      /* for nav blend mode */
-      content: "";
-      width: 100%;
-      height: 100%;
-      background: white;
-      position: fixed;
-      z-index: -10;
-    }
   }
 
   body {
