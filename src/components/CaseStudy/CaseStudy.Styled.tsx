@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Grid, Paragraph } from "components"
+import { mq } from "style"
 
 const Intro = styled(Grid)`
   padding-top: ${props => props.theme.margins.large};
@@ -20,7 +21,9 @@ const Deliverables = styled.div`
 `
 
 const Desc = styled(Paragraph)`
-  grid-column: span 3;
+  @media ${mq.sm} {
+    grid-column: span 3;
+  }
 `
 
 const SliceWrap = styled.div`

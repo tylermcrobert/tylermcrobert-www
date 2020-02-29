@@ -1,7 +1,10 @@
 import styled from "styled-components"
+import { mq } from "style"
 
 const Img = styled.img`
-  grid-column: span 3;
+  @media ${mq.sm} {
+    grid-column: span 3;
+  }
 `
 
 export default {
