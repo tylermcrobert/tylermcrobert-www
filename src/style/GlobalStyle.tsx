@@ -51,6 +51,7 @@ const style = css`
       background: ${props => props.theme.colors.secondary};
       width: 100vw;
       height: calc(10rem + 100vh);
+      z-index: -1;
     }
   }
 
