@@ -5,13 +5,13 @@ import ErrorPage from "next/error"
 import { DataCtx } from "./_app"
 
 interface IProps {
-  uid: string
+  csUid: string
 }
 
-const CaseStudyPage: NextPage<IProps> = ({ uid }) => {
+const CaseStudyPage: NextPage<IProps> = ({ csUid }) => {
   const { caseStudiesRes } = useContext(DataCtx)
   const uids = caseStudiesRes.results.map(res => res.uid)
-  const index = uids.indexOf(uid)
+  const index = uids.indexOf(csUid)
   const isMatch = index !== -1
 
   if (isMatch) {
@@ -21,8 +21,8 @@ const CaseStudyPage: NextPage<IProps> = ({ uid }) => {
 }
 
 CaseStudyPage.getInitialProps = async ctx => {
-  const uid = typeof ctx.query.uid === "string" ? ctx.query.uid : ""
-  return { uid }
+  const csUid = typeof ctx.query.csUid === "string" ? ctx.query.csUid : ""
+  return { csUid }
 }
 
 export default CaseStudyPage

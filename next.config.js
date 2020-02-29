@@ -9,7 +9,7 @@ async function getUids(type, api) {
 const createPaths = (input, page) =>
   input.reduce(
     (acc, cur) => ({
-      [`/${cur}`]: { page, query: { uid: cur } },
+      [`/${cur}`]: { page, query: { csUid: cur } },
       ...acc,
     }),
     {}
@@ -33,7 +33,7 @@ module.exports = {
     const accessToken = ""
     const api = await Prismic.getApi(apiEndpoint, { accessToken })
     const csUids = await getUids("case_study", api)
-    const csPaths = createPaths(csUids, "/[casestudy]")
+    const csPaths = createPaths(csUids, "/[csUid]")
 
     return {
       "/": { page: "/" },

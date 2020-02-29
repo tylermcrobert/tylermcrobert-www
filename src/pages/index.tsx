@@ -16,7 +16,7 @@ const Home: NextPage<IProps> = () => {
     <div>
       {caseStudiesRes.results.map(item => (
         <div key={item.id}>
-          <Link href="/[casestudy]" as={`/${item.uid}`}>
+          <Link href="/[csUid]" as={`/${item.uid}`}>
             <a>{asText(item.data.title)}</a>
           </Link>
         </div>
