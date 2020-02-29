@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { useContext } from "react"
 import { NextPage } from "next"
 import { CaseStudy } from "components"
