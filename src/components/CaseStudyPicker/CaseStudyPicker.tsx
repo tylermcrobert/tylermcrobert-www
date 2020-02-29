@@ -22,7 +22,7 @@ const CaseStudyPicker: React.FC = () => {
             <LargeHead key={uid}>
               {" "}
               {NUMBERS[i + 1]}&nbsp;
-              <Link href="/[csUid]" as={`/${uid}`}>
+              <Link href="/[page]" as={`/${uid}`}>
                 <a>{asText(getTitle(uid))}</a>
               </Link>
             </LargeHead>

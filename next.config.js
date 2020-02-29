@@ -33,7 +33,7 @@ module.exports = {
     const accessToken = ""
     const api = await Prismic.getApi(apiEndpoint, { accessToken })
     const csUids = await getUids("case_study", api)
-    const csPaths = createPaths(csUids, "/[csUid]")
+    const csPaths = createPaths(csUids, "/[page]")
 
     return {
       "/": { page: "/" },

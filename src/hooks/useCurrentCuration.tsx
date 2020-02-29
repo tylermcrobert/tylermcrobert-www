@@ -1,12 +1,11 @@
 import { useContext } from "react"
 import { DataCtx } from "pages/_app"
+import Cookies from "js-cookie"
 
 const useCurrentCuration = () => {
-  const { ctxRes, currentCtxUid } = useContext(DataCtx)
-
-  const currentCtx = ctxRes.results.filter(
-    item => item.uid === currentCtxUid
-  )[0]
+  const { ctxRes } = useContext(DataCtx)
+  const curationUid = Cookies.get("curation") || "homepage"
+  const currentCtx = ctxRes.results.filter(item => item.uid === curationUid)[0]
 
   return currentCtx
 }

@@ -1,4 +1,4 @@
-import { useRef, createContext } from "react"
+import { useRef, createContext, useEffect } from "react"
 import App from "next/app"
 import { ThemeProvider } from "styled-components"
 import GlobalStyle from "style/GlobalStyle"
@@ -6,16 +6,15 @@ import theme from "style/theme"
 import { Nav } from "components"
 import { IPrismicCaseStudyRes, IContextRes } from "types/Prismic"
 import Prismic from "prismic-javascript"
+import { useRouter } from "next/router"
 import { Client } from "util/prismic"
 
 export const DataCtx = createContext<{
   caseStudiesRes: IPrismicCaseStudyRes
   ctxRes: IContextRes
-  currentCtxUid: string
 }>({
   caseStudiesRes: null,
   ctxRes: null,
-  currentCtxUid: "homepage",
 })
 
 const MyApp = ({
@@ -42,7 +41,6 @@ const MyApp = ({
       value={{
         caseStudiesRes: caseStudiesResRef.current,
         ctxRes: ctxResRef.current,
-        currentCtxUid: "homepage",
       }}
     >
       <ThemeProvider theme={theme}>
