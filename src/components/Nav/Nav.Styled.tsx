@@ -17,6 +17,12 @@ const Nav = styled.nav`
   }
 `
 
+const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 export default {
+  Content,
   Nav,
 }

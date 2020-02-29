@@ -7,9 +7,14 @@ const Nav = () => {
   return (
     <S.Nav>
       <Wrapper>
-        <Link href="/">
-          <a>Tyler McRobert</a>
-        </Link>
+        <S.Content>
+          <Link href="/">
+            <a>Tyler McRobert</a>
+          </Link>
+          <Link href="/info">
+            <a>Info</a>
+          </Link>
+        </S.Content>
       </Wrapper>
     </S.Nav>
   )
