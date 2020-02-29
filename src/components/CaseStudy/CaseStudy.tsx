@@ -12,6 +12,7 @@ import { UNICODE, NUMBERS } from "../../constants"
  * @todo Add `Text` to case study
  *
  * @todo Add `website` to case study
+ *
  */
 
 const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
