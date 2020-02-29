@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { Fragment } from "react"
 import { Slice, ISingleImage, IDoubleImage, ITripleImage } from "types/Prismic"
+import { Grid, SmallSection } from "components"
 
 import SingleImage from "../SingleImage/SingleImage"
 import DoubleImage from "../DoubleImage/DoubleImage"
@@ -36,7 +36,9 @@ const Slices: React.FC<{ data: Slice[] }> = ({ data: slices }) => {
         })
         .map((item, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <Fragment key={i}>{item}</Fragment>
+          <SmallSection key={i}>
+            <Grid>{item}</Grid>
+          </SmallSection>
         ))}
     </>
   )

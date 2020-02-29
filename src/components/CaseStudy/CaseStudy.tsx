@@ -1,6 +1,6 @@
 import { ICaseStudy } from "types/Prismic"
 import { asText, RichText } from "util/richText"
-import { LargeHead, Html, Grid } from "components"
+import { LargeHead, Html } from "components"
 import { useIndexFromUid } from "hooks/useCurrentCuration"
 import Slices from "./Slices/Slices"
 import S from "./CaseStudy.Styled"
@@ -40,9 +40,7 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
         </S.Desc>
       </S.Intro>
 
-      <Grid>
-        <Slices data={slices} />
-      </Grid>
+      <Slices data={slices} />
     </>
   )
 }
