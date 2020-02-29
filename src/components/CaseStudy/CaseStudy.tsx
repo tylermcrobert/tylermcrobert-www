@@ -1,6 +1,6 @@
 import { ICaseStudy } from "types/Prismic"
 import { asText, RichText } from "util/richText"
-import { LargeHead, Html } from "components"
+import { LargeHead, Html, PickerWrapper } from "components"
 import { useIndexFromUid } from "hooks/useCurrentCuration"
 import Slices from "./Slices/Slices"
 import S from "./CaseStudy.Styled"
@@ -18,7 +18,7 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
   const date = res.first_publication_date.replace("+0000", "")
 
   return (
-    <>
+    <PickerWrapper>
       <S.Intro>
         <h1>
           {NUMBERS[index + 1]} {title}
@@ -41,7 +41,7 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
       </S.Intro>
 
       <Slices data={slices} />
-    </>
+    </PickerWrapper>
   )
 }
 
