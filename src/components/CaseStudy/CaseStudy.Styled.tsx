@@ -23,8 +23,12 @@ const Desc = styled(Paragraph)`
   grid-column: span 3;
 `
 
+const SliceWrap = styled.div`
+  margin-bottom: ${props => props.theme.margins.large};
+`
 export default {
   Intro,
   Deliverables,
+  SliceWrap,
   Desc,
 }

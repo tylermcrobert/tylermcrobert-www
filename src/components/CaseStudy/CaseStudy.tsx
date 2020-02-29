@@ -40,7 +40,9 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
         </S.Desc>
       </S.Intro>
 
-      <Slices data={slices} />
+      <S.SliceWrap>
+        <Slices data={slices} />
+      </S.SliceWrap>
     </PickerWrapper>
   )
 }
