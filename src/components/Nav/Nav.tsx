@@ -3,6 +3,11 @@ import { Wrapper } from "components"
 import Link from "next/link"
 import S from "./Nav.Styled"
 
+/**
+ * @todo add curation preview:
+ * @body Tyler McRobert X Client Name
+ */
+
 const Nav = () => {
   return (
     <S.Nav>

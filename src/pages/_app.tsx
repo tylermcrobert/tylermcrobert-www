@@ -8,6 +8,11 @@ import { IPrismicCaseStudyRes, IContextRes } from "types/Prismic"
 import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
 
+/**
+ * @todo add curation route
+ * @body catch routes like /client-name/
+ */
+
 export const DataCtx = createContext<{
   caseStudiesRes: IPrismicCaseStudyRes
   ctxRes: IContextRes

@@ -6,6 +6,14 @@ import Slices from "./Slices/Slices"
 import S from "./CaseStudy.Styled"
 import { UNICODE, NUMBERS } from "../../constants"
 
+/**
+ * @todo Add context for alt text
+ *
+ * @todo Add `Text` to case study
+ *
+ * @todo Add `website` to case study
+ */
+
 const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
   data: { data, uid, ...res },
 }) => {
