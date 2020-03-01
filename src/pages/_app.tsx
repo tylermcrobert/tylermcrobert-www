@@ -12,9 +12,11 @@ import useInitial from "hooks/useInitial"
 export const DataCtx = createContext<{
   caseStudiesRes: IPrismicCaseStudyRes
   ctxRes: IContextRes
+  curationId?: string
 }>({
   caseStudiesRes: null,
   ctxRes: null,
+  curationId: null,
 })
 
 const MyApp = ({
@@ -22,11 +24,13 @@ const MyApp = ({
   pageProps,
   caseStudiesRes,
   ctxRes,
+  curationId,
 }: {
   Component: any
   pageProps: any
   caseStudiesRes: IPrismicCaseStudyRes
   ctxRes: IContextRes
+  curationId?: string
 }) => {
   const ctxData: IContextRes = useInitial(ctxRes)
   const caseStudiesData: IPrismicCaseStudyRes = useInitial(caseStudiesRes)
@@ -36,6 +40,7 @@ const MyApp = ({
       value={{
         caseStudiesRes: caseStudiesData,
         ctxRes: ctxData,
+        curationId,
       }}
     >
       <ThemeProvider theme={theme}>
@@ -51,8 +56,17 @@ const MyApp = ({
   )
 }
 
+const parseCookie = cookieStr =>
+  Object.fromEntries(
+    cookieStr.split("; ").map(c => {
+      const [key, ...v] = c.split("=")
+      return [key, v.join("=")]
+    })
+  )
+
 MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext) // keep this
+  const { curation } = parseCookie(appContext.ctx.req.headers.cookie)
 
   if (!process.browser) {
     const caseStudiesRes: IPrismicCaseStudyRes = await Client(
@@ -64,10 +78,10 @@ MyApp.getInitialProps = async appContext => {
       {}
     )
 
-    return { ...appProps, caseStudiesRes, ctxRes }
+    return { ...appProps, caseStudiesRes, ctxRes, curationId: curation }
   }
 
-  return { ...appProps }
+  return { ...appProps, curationId: curation }
 }
 
 export default MyApp
