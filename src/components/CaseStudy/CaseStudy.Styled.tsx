@@ -16,18 +16,18 @@ const Intro = styled(Grid)`
 `
 
 const Deliverables = styled.div`
+  p:first-child {
+    text-indent: 2rem;
+  }
+
   @media ${mq.sm} {
     grid-column: span 3;
     max-width: 16em;
 
     p:first-child {
-      text-indent: none;
+      text-indent: 0;
       margin-bottom: ${props => props.theme.remScale[0]};
     }
-  }
-
-  p:first-child {
-    text-indent: 2rem;
   }
 `
 
