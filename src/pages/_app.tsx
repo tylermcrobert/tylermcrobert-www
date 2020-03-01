@@ -1,4 +1,4 @@
-import { useRef, createContext } from "react"
+import { createContext } from "react"
 import App from "next/app"
 import { ThemeProvider } from "styled-components"
 import GlobalStyle from "style/GlobalStyle"
@@ -7,6 +7,7 @@ import { Nav } from "components"
 import { IPrismicCaseStudyRes, IContextRes } from "types/Prismic"
 import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
+import useInitial from "hooks/useInitial"
 
 export const DataCtx = createContext<{
   caseStudiesRes: IPrismicCaseStudyRes
@@ -27,19 +28,14 @@ const MyApp = ({
   caseStudiesRes: IPrismicCaseStudyRes
   ctxRes: IContextRes
 }) => {
-  const caseStudiesResRef = useRef<IPrismicCaseStudyRes | null>(null)
-  const ctxResRef = useRef<IContextRes | null>(null)
-
-  if (!caseStudiesResRef.current) {
-    caseStudiesResRef.current = caseStudiesRes
-    ctxResRef.current = ctxRes
-  }
+  const ctxData: IContextRes = useInitial(ctxRes)
+  const caseStudiesData: IPrismicCaseStudyRes = useInitial(caseStudiesRes)
 
   return (
     <DataCtx.Provider
       value={{
-        caseStudiesRes: caseStudiesResRef.current,
-        ctxRes: ctxResRef.current,
+        caseStudiesRes: caseStudiesData,
+        ctxRes: ctxData,
       }}
     >
       <ThemeProvider theme={theme}>
@@ -71,7 +67,7 @@ MyApp.getInitialProps = async appContext => {
     return { ...appProps, caseStudiesRes, ctxRes }
   }
 
-  return {}
+  return { ...appProps }
 }
 
 export default MyApp
