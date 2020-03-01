@@ -4,9 +4,12 @@ import Cookies from "js-cookie"
 import { DEFAULT_CTX } from "../constants"
 
 const useCurrentCuration = (uid: string = DEFAULT_CTX) => {
-  const { ctxRes } = useContext(DataCtx)
-  const curationUid = Cookies.get("curation") || uid
-  const currentCtx = ctxRes.results.filter(item => item.uid === curationUid)[0]
+  const { ctxRes, curationId } = useContext(DataCtx)
+  const selectedCuration = curationId || uid
+
+  const currentCtx = ctxRes.results.filter(
+    item => item.uid === selectedCuration
+  )[0]
 
   return currentCtx
 }

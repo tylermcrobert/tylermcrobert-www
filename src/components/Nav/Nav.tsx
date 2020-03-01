@@ -29,16 +29,16 @@ const Nav = () => {
 }
 
 const CurationNav = () => {
-  const curationUid = Cookies.get("curation")
+  const { curationId } = useContext(DataCtx)
   const [isHover, setHover] = useState<boolean>(false)
   const clearCookie = () => {
-    Cookies.remove("curation")
+    Cookies.remove("curationId")
     Router.push("/")
   }
 
-  if (curationUid) {
+  if (curationId) {
     const { ctxRes } = useContext(DataCtx)
-    const name = ctxRes.results.filter(item => item.uid === curationUid)[0].data
+    const name = ctxRes.results.filter(item => item.uid === curationId)[0].data
       .context_name[0].text
 
     return (

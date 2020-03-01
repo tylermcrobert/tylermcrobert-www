@@ -37,7 +37,7 @@ const CaseStudyPage: NextPage = () => {
 
   if (isCuration) {
     const uid = curationUids[curationIndex]
-    Cookies.set("curation", uid)
+    Cookies.set("curationId", uid)
     return (
       <>
         <Seo title={null} />

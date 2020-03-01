@@ -8,6 +8,7 @@ import { IPrismicCaseStudyRes, IContextRes } from "types/Prismic"
 import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
 import useInitial from "hooks/useInitial"
+import Cookies from "js-cookie"
 
 export const DataCtx = createContext<{
   caseStudiesRes: IPrismicCaseStudyRes
@@ -66,9 +67,9 @@ const parseCookie = cookieStr =>
 
 MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext) // keep this
-  const { curation } = parseCookie(appContext.ctx.req.headers.cookie)
 
   if (!process.browser) {
+    const { curationId } = parseCookie(appContext.ctx.req.headers.cookie)
     const caseStudiesRes: IPrismicCaseStudyRes = await Client(
       appContext.ctx.req
     ).query(Prismic.Predicates.at("document.type", "case_study"), {})
@@ -78,10 +79,12 @@ MyApp.getInitialProps = async appContext => {
       {}
     )
 
-    return { ...appProps, caseStudiesRes, ctxRes, curationId: curation }
+    return { ...appProps, caseStudiesRes, ctxRes, curationId }
   }
 
-  return { ...appProps, curationId: curation }
+  const curationId = Cookies.get("curationId")
+
+  return { ...appProps, curationId }
 }
 
 export default MyApp
