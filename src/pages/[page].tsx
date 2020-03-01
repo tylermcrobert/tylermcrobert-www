@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { CaseStudy, CaseStudyPicker, Seo } from "components"
 import ErrorPage from "next/error"
 import Cookies from "js-cookie"
+import { asText } from "util/richText"
 import { DataCtx } from "./_app"
 
 const useCheck = (uids: string[]): [boolean, number] => {
@@ -24,7 +25,7 @@ const CaseStudyPage: NextPage = () => {
   if (isCaseStudy) {
     return (
       <>
-        <Seo title={caseStudiesRes.results[csIndex].data.title[0].text} />
+        <Seo title={asText(caseStudiesRes.results[csIndex].data.title)} />
         <CaseStudy data={caseStudiesRes.results[csIndex]} />
       </>
     )
