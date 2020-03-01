@@ -1,8 +1,13 @@
 import { NextPage } from "next"
-import { CaseStudyPicker } from "components"
+import { CaseStudyPicker, Seo } from "components"
 
 const Home: NextPage = () => {
-  return <CaseStudyPicker />
+  return (
+    <>
+      <Seo title={null} />
+      <CaseStudyPicker />
+    </>
+  )
 }
 
 export default Home

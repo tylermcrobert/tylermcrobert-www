@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
-import { CaseStudy, CaseStudyPicker } from "components"
+import { CaseStudy, CaseStudyPicker, Seo } from "components"
 import ErrorPage from "next/error"
 import Cookies from "js-cookie"
 import { DataCtx } from "./_app"
@@ -22,7 +22,12 @@ const CaseStudyPage: NextPage = () => {
   const [isCaseStudy, csIndex] = useCheck(csUids)
 
   if (isCaseStudy) {
-    return <CaseStudy data={caseStudiesRes.results[csIndex]} />
+    return (
+      <>
+        <Seo title={caseStudiesRes.results[csIndex].data.title[0].text} />
+        <CaseStudy data={caseStudiesRes.results[csIndex]} />
+      </>
+    )
   }
 
   // if not a case study, check curation
@@ -32,7 +37,12 @@ const CaseStudyPage: NextPage = () => {
   if (isCuration) {
     const uid = curationUids[curationIndex]
     Cookies.set("curation", uid)
-    return <CaseStudyPicker ctxUid={uid} />
+    return (
+      <>
+        <Seo title={null} />
+        <CaseStudyPicker ctxUid={uid} />
+      </>
+    )
   }
 
   return <ErrorPage statusCode={404} />
