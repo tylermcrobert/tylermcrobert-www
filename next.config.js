@@ -41,6 +41,7 @@ module.exports = {
 
     return {
       "/": { page: "/" },
+      "/info": { page: "/info" },
       ...csPaths,
       ...curationPaths,
     }
