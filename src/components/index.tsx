@@ -8,6 +8,7 @@ import DotHead from "./DotHead"
 import { Section, SmallSection } from "./Section"
 import Nav from "./Nav"
 import CaseStudy from "./CaseStudy"
+import Info from "./Info"
 import CaseStudyPicker, { PickerWrapper } from "./CaseStudyPicker"
 
 export {
@@ -25,4 +26,5 @@ export {
   CaseStudy,
   CaseStudyPicker,
   PickerWrapper,
+  Info,
 }

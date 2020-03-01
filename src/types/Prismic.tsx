@@ -94,3 +94,21 @@ interface IPrismicCtxLink {
   link_type: string
   isBroken: boolean
 }
+
+/**
+ *
+ * Info
+ *
+ */
+
+export interface IInfoRes extends ApiSearchResponse {
+  results: IInfo[]
+}
+
+interface IInfo extends Document {
+  data: {
+    introduction: IPrismicRichText
+    support: IPrismicRichText
+    clients: "string"
+  }
+}

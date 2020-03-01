@@ -1,4 +1,4 @@
-import { useRef, createContext, useEffect } from "react"
+import { useRef, createContext } from "react"
 import App from "next/app"
 import { ThemeProvider } from "styled-components"
 import GlobalStyle from "style/GlobalStyle"

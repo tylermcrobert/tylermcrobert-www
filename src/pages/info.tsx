@@ -1,12 +1,28 @@
+import Prismic from "prismic-javascript"
+import { Client } from "util/prismic"
 import { NextPage } from "next"
-import { IPrismicCaseStudyRes } from "types/Prismic"
+import { IInfoRes } from "types/Prismic"
+import { Info } from "components"
 
 interface IProps {
-  caseStudiesRes: IPrismicCaseStudyRes
+  infoRes?: IInfoRes
 }
 
-const Home: NextPage<IProps> = () => {
-  return <div>Ia;flkjasd;flkjNFO</div>
+const InfoPage: NextPage<IProps> = ({ infoRes }) => {
+  return <Info data={infoRes} />
 }
 
-export default Home
+InfoPage.getInitialProps = async ({ req }) => {
+  if (!process.browser) {
+    const infoRes: IInfoRes = await Client(req).query(
+      Prismic.Predicates.at("document.type", "info"),
+      {}
+    )
+
+    return { infoRes }
+  }
+
+  return {}
+}
+
+export default InfoPage
