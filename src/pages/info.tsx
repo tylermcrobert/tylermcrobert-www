@@ -9,17 +9,18 @@ interface IProps {
   infoRes?: IInfoRes
 }
 
-const InfoPage: NextPage<IProps> = ({ infoRes }) => {
+const InfoPage: NextPage<IProps> = ({ infoRes, ...props }) => {
   return <Info data={infoRes} />
 }
 
-InfoPage.getInitialProps = async ({ req }) => {
+export async function getStaticProps({ req }) {
   const infoRes: IInfoRes = await Client(req).query(
     Prismic.Predicates.at("document.type", "info"),
     {}
   )
 
-  return { infoRes }
+  return {
+    props: { infoRes },
+  }
 }
-
 export default InfoPage

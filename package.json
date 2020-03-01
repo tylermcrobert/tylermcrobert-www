@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "js-cookie": "^2.2.1",
-    "next": "^9.2.3-canary.13",
+    "next": "^9.2.3-canary.18",
     "prismic-javascript": "^2.1.5",
     "prismic-reactjs": "^1.2.0",
     "react": "16.13.0",

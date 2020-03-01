@@ -988,10 +988,10 @@
   resolved "https://registry.yarnpkg.com/@next/polyfill-nomodule/-/polyfill-nomodule-9.2.2.tgz#2687d5b64ba053b247700f057f083dfd392ee52e"
   integrity sha512-J51QpynN0AxQ0saWkxgpr0JxWqSJFCBOOeQpbyn5hlgxjrcXR9dQ59tN677vbq2wJ8idLn898vZFaRmQsLq13A==
 
-"@next/polyfill-nomodule@9.2.3-canary.13":
-  version "9.2.3-canary.13"
-  resolved "https://registry.yarnpkg.com/@next/polyfill-nomodule/-/polyfill-nomodule-9.2.3-canary.13.tgz#87d7af3d1bfd8ae3bd43785e170b9d35d6272e47"
-  integrity sha512-iUd+1FAXIn2uv/Q3WahpzfRKihEu5H4RJdt0uG6RiD1GHztnYkTxpzDXpZiL6t+UAxyHXU+FYHuGifTMjcJrxQ==
+"@next/polyfill-nomodule@9.2.3-canary.18":
+  version "9.2.3-canary.18"
+  resolved "https://registry.yarnpkg.com/@next/polyfill-nomodule/-/polyfill-nomodule-9.2.3-canary.18.tgz#3c0c2da131b2e0ff88e4d2e6d7ce84091059fcaa"
+  integrity sha512-oNRDewPSeaaOuYgRgxnHqkWmv2+1b5S5RF4yR+AYQZmwhPETQLvaKhrD1S9SrSfTgQNQRyqgP3/JnNHqhqy8fg==
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
@@ -4519,6 +4519,13 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+native-url@0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/native-url/-/native-url-0.2.6.tgz#ca1258f5ace169c716ff44eccbddb674e10399ae"
+  integrity sha512-k4bDC87WtgrdD362gZz6zoiXQrl40kYlBmpfmSjwRO1VU0V5ccwJTlxuE72F6m3V0vc1xOf6n3UCP9QyerRqmA==
+  dependencies:
+    querystring "^0.2.0"
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -4637,10 +4644,10 @@ next@*:
     webpack-sources "1.4.3"
     whatwg-fetch "3.0.0"
 
-next@^9.2.3-canary.13:
-  version "9.2.3-canary.13"
-  resolved "https://registry.yarnpkg.com/next/-/next-9.2.3-canary.13.tgz#aeb322d842b2436d8d9a93054a1038d9162ab832"
-  integrity sha512-Gh2mSoQplzNfQaWk+XDPaUQPTI9rTUNS42EBUDXCFebHu1m4IZJE+MyDNLf3Oz4iibhUTOav61ZqOcn6PxumXw==
+next@^9.2.3-canary.18:
+  version "9.2.3-canary.18"
+  resolved "https://registry.yarnpkg.com/next/-/next-9.2.3-canary.18.tgz#6943f9e48f0047f781d5b0f8d6782a67d1f1384e"
+  integrity sha512-MAkfIoszkp6MkT5jOZMycdME8JkIMWzDtbBOQ+C2h45AfqGSamGR/giBFDP+1ExxQdtIfUsr21U7Z0CIiKurnA==
   dependencies:
     "@ampproject/toolbox-optimizer" "2.0.0"
     "@babel/core" "7.7.2"
@@ -4658,7 +4665,7 @@ next@^9.2.3-canary.13:
     "@babel/preset-typescript" "7.7.2"
     "@babel/runtime" "7.7.2"
     "@babel/types" "7.7.4"
-    "@next/polyfill-nomodule" "9.2.3-canary.13"
+    "@next/polyfill-nomodule" "9.2.3-canary.18"
     amphtml-validator "1.0.30"
     async-retry "1.2.3"
     async-sema "3.0.0"
@@ -4700,6 +4707,7 @@ next@^9.2.3-canary.13:
     lru-cache "5.1.1"
     mini-css-extract-plugin "0.8.0"
     mkdirp "0.5.1"
+    native-url "0.2.6"
     node-fetch "2.6.0"
     ora "3.4.0"
     path-to-regexp "6.1.0"
@@ -4725,7 +4733,6 @@ next@^9.2.3-canary.13:
     thread-loader "2.1.3"
     unfetch "4.1.0"
     url "0.11.0"
-    url-polyfill "1.1.7"
     use-subscription "1.1.1"
     watchpack "2.0.0-beta.13"
     webpack "4.41.2"
