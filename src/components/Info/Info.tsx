@@ -2,6 +2,7 @@ import React from "react"
 import { DotHead, Grid, LargeHead } from "components"
 import { IInfoRes } from "types/Prismic"
 import { RichText } from "util/richText"
+import useNowPlaying from "hooks/useNowPlaying"
 import S from "./Info.Styled"
 
 const Info: React.FC<{ data: IInfoRes }> = ({ data: res }) => {
@@ -26,7 +27,7 @@ const Info: React.FC<{ data: IInfoRes }> = ({ data: res }) => {
             <DotHead>Clients</DotHead>
             <ul>
               {clients.split(/\n/).map(item => (
-                <li>{item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </S.TwoCol>
@@ -36,20 +37,52 @@ const Info: React.FC<{ data: IInfoRes }> = ({ data: res }) => {
       <S.Hr />
 
       <S.LgSection>
-        <S.Section>
-          <div>
-            <DotHead>Recently played</DotHead>
-            <LargeHead>
-              The last song I listened to on Spotify was “NAGA” by $ilkMoney.
-            </LargeHead>
-          </div>
-        </S.Section>
-
-        <S.Section>
-          <DotHead>Featured Playlists</DotHead>
-        </S.Section>
+        <Music />
+        <FeaturedPlaylists />
       </S.LgSection>
     </>
+  )
+}
+
+const Music = () => {
+  const { loading, artist, trackName, nowPlaying } = useNowPlaying()
+
+  return (
+    <S.Section>
+      <div>
+        {!loading && !!artist && (
+          <>
+            <DotHead>{nowPlaying ? "Now Playing" : "Recently Played"}</DotHead>
+            <LargeHead>
+              {nowPlaying ? (
+                <>
+                  Right now I&apos;m listening to:&nbsp;“{trackName}” by{" "}
+                  {artist} on Spotify.
+                </>
+              ) : (
+                <>
+                  The last song I listened to on Spotify was &nbsp;“{trackName}”
+                  by {artist}.
+                </>
+              )}
+            </LargeHead>
+          </>
+        )}
+      </div>
+    </S.Section>
+  )
+}
+
+const FeaturedPlaylists = () => {
+  return (
+    <S.Section>
+      <div>
+        <div>
+          <DotHead>Featured Playlists</DotHead>
+        </div>
+        playlists
+      </div>
+    </S.Section>
   )
 }
 
