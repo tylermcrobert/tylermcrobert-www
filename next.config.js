@@ -1,5 +1,6 @@
 const Prismic = require("prismic-javascript")
 const path = require("path")
+require("dotenv").config()
 
 async function getUids(type, api) {
   const res = await api.query(Prismic.Predicates.at("document.type", type))
@@ -45,5 +46,10 @@ module.exports = {
       ...csPaths,
       ...curationPaths,
     }
+  },
+
+  env: {
+    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
   },
 }
