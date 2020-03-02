@@ -1,7 +1,7 @@
 import React from "react"
 import { Client, linkResolver } from "util/prismic"
 
-export const Preview = () => {
+const Preview = () => {
   return <div>Loading preview...</div>
 }
 
@@ -21,3 +21,5 @@ Preview.getInitialProps = async ({ req, res }) => {
     res.status(400).send("Missing token from preview request")
   }
 }
+
+export default Preview
