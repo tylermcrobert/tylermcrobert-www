@@ -1,25 +1,27 @@
 import React from "react"
 import { Client, linkResolver } from "util/prismic"
+import Router from "next/router"
 
 const Preview = () => {
   return <div>Loading preview...</div>
 }
 
-Preview.getInitialProps = async ({ req, res }) => {
-  const { token } = req.query
-  if (token) {
-    try {
-      const url = await Client(req).previewSession(token, linkResolver, "/")
+Preview.getInitialProps = async context => {
+  try {
+    const { token } = context.query
+    const { res, req } = context
+
+    const url = await Client(req).previewSession(token, linkResolver, "/")
+    if (res) {
       res.writeHead(302, { Location: url })
       res.end()
-    } catch {
-      res
-        .status(400)
-        .send("Something went wrong with the previewSession request")
+    } else {
+      Router.push(url)
     }
-  } else {
-    res.status(400).send("Missing token from preview request")
+  } catch (e) {
+    console.error(e)
   }
+  return {}
 }
 
 export default Preview
