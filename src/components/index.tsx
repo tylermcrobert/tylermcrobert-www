@@ -9,6 +9,7 @@ import { Section, SmallSection } from "./Section"
 import Nav from "./Nav"
 import CaseStudy from "./CaseStudy"
 import Info from "./Info"
+import Playlists from "./Playlists"
 import CaseStudyPicker, { PickerWrapper } from "./CaseStudyPicker"
 
 export {
@@ -27,4 +28,5 @@ export {
   CaseStudyPicker,
   PickerWrapper,
   Info,
+  Playlists,
 }
