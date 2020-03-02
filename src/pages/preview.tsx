@@ -1,6 +1,11 @@
+import React from "react"
 import { Client, linkResolver } from "util/prismic"
 
-export default async (req, res) => {
+export const Preview = () => {
+  return <div>Loading preview...</div>
+}
+
+Preview.getInitialProps = async ({ req, res }) => {
   const { token } = req.query
   if (token) {
     try {
