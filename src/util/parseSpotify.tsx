@@ -3,7 +3,7 @@ import {
   ISpotifyPlaylistTrack,
   IParsedTrack,
   IParsedPlaylist,
-} from "types/spotify"
+} from "types/SpotifyPlaylist"
 import timeFromMs from "./timeFromMs"
 
 const parseSpotify = (data: ISpotifyPlaylist): IParsedPlaylist => {

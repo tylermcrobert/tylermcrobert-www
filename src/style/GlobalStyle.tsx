@@ -38,20 +38,21 @@ const style = css`
     @media ${mq.lg} {
       font-size: 1.3vw;
     }
-
-    &:after {
-      /* for nav blend mode */
-      content: "";
-      width: 100%;
-      height: 100%;
-      background: white;
-      position: fixed;
-      z-index: -10;
-    }
   }
 
   body {
     padding-top: ${props => props.theme.remScale[5]};
+
+    &:before {
+      content: "";
+      position: fixed;
+      top: -10rem;
+      left: 0;
+      background: ${props => props.theme.colors.secondary};
+      width: 100vw;
+      height: calc(10rem + 100vh);
+      z-index: -1;
+    }
   }
 
   a {

@@ -1,21 +1,5 @@
 import { useEffect, useState } from "react"
-
-interface ITrack {
-  artist: {
-    ["#text"]: string
-  }
-  name: string
-  ["@attr"]:
-    | {
-        nowplaying: boolean
-      }
-    | undefined
-}
-interface ILastFMRes {
-  recenttracks: {
-    track: ITrack[]
-  }
-}
+import { ILastFMRes } from "types/LastFm"
 
 const ENDPOINT =
   "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=1e87695de290cd017718696f211e84a4&format=json"

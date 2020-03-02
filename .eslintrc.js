@@ -13,6 +13,7 @@ const TYPESCRIPT_RULES = {
   "@typescript-eslint/no-unused-vars": 0,
   // 'no-unused-vars': 0,
 
+  "@typescript-eslint/camelcase": 0,
   // getting in the way
   "@typescript-eslint/no-var-requires": 0,
 
@@ -27,6 +28,13 @@ const TYPESCRIPT_RULES = {
       },
     },
   ],
+}
+
+const NEXTJS_RULES = {
+  // NextJs doesn't require React to be in scope
+  "react/react-in-jsx-scope": 0,
+  // <a> is required in <Link/> without herf
+  "jsx-a11y/anchor-is-valid": 0,
 }
 
 module.exports = {
@@ -57,6 +65,7 @@ module.exports = {
     "jsx-a11y/no-static-element-interactions": 0,
     "jsx-a11y/click-events-have-key-events": 0,
 
+    ...NEXTJS_RULES,
     ...TYPESCRIPT_RULES,
   },
 

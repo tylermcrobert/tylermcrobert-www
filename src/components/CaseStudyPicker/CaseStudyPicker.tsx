@@ -1,63 +1,39 @@
-import React, { useEffect, useRef } from "react"
-import { navigate, Link } from "gatsby"
-import { LargeHead, Html, Wrapper } from "components"
-import { useCuration } from "hooks"
-import checkMobile from "util/checkMobile"
-import S from "./CaseStudyPicker.Styled"
+import { useContext } from "react"
+import { DataCtx } from "pages/_app"
+import Link from "next/link"
+import { asText } from "util/richText"
+import { LargeHead, Wrapper } from "components"
+import { useCurationUids } from "hooks/useCurrentCuration"
 import { NUMBERS } from "../../constants"
+import S from "./CaseStudyPicker.Styled"
 
-const CaseStudyPicker = () => {
-  const curation = useCuration()
-
-  return (
-    <S.Fixed>
-      <S.Wrapper>
-        <div>
-          {curation.currentCtx.caseStudies.map(({ title, uid }, i) => (
-            <li key={title}>
-              <LargeHead>
-                {" "}
-                <Html>{NUMBERS[i + 1]}</Html>&nbsp;
-                <Link to={`/${uid}`}>{title}</Link>
-              </LargeHead>
-            </li>
-          ))}
-        </div>
-      </S.Wrapper>
-    </S.Fixed>
-  )
+interface IProps {
+  ctxUid?: string
 }
 
-export const WithPicker: React.FC = ({ children }) => {
-  const pickerRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const handleScroll = () => {
-      if (pickerRef.current) {
-        const { y } = pickerRef.current.getBoundingClientRect()
-        const isScrolled = Math.floor(y) <= 0
-        const isMobile = checkMobile()
+const CaseStudyPicker: React.FC<IProps> = ({ ctxUid }) => {
+  const curationUids = useCurationUids(ctxUid)
+  const { caseStudiesRes } = useContext(DataCtx)
 
-        if (isScrolled && !isMobile) {
-          navigate("/")
-        }
-      }
-    }
+  const getTitle = (uid: string) =>
+    caseStudiesRes.results.filter(item => item.uid === uid)[0].data.title
 
-    document.addEventListener("scroll", handleScroll)
-
-    return () => {
-      document.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
   return (
-    <>
-      <S.PageWrapper>{children}</S.PageWrapper>
-      <S.PickerWrapper ref={pickerRef}>
-        <S.FixedPicker>
-          <CaseStudyPicker />
-        </S.FixedPicker>
-      </S.PickerWrapper>
-    </>
+    <S.Wrapper>
+      <Wrapper>
+        <S.Content>
+          {curationUids.map((uid, i) => (
+            <LargeHead key={uid}>
+              {" "}
+              {NUMBERS[i + 1]}&nbsp;
+              <Link href="/[page]" as={`/${uid}`}>
+                <a>{asText(getTitle(uid))}</a>
+              </Link>
+            </LargeHead>
+          ))}
+        </S.Content>
+      </Wrapper>
+    </S.Wrapper>
   )
 }
 

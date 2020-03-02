@@ -59,5 +59,6 @@ export const UNICODE = {
   NE: "↗",
   CIRCLE: "●",
   NUMBERS,
+  X: "×",
 }
 export const DEFAULT_CTX = "homepage"

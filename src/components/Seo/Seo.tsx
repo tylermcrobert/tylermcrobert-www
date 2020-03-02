@@ -1,5 +1,5 @@
 import React from "react"
-import Helmet from "react-helmet"
+import Head from "next/head"
 
 interface IProps {
   title: null | string
@@ -8,11 +8,10 @@ interface IProps {
 
 const Seo: React.FC<IProps> = ({ title, path = "" }) => {
   return (
-    <Helmet>
-      <html lang="en" />
+    <Head>
       <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        content="width=device-width, initial-scale=1.0, user-scalable=no"
       />
       <link rel="canonical" href={`http://tylermcrobert.com/${path}`} />
       <title>{title ? `${title} - Tyler McRobert` : "Tyler McRobert"}</title>
@@ -37,7 +36,7 @@ const Seo: React.FC<IProps> = ({ title, path = "" }) => {
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff" />
-    </Helmet>
+    </Head>
   )
 }
 
