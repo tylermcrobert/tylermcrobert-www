@@ -16,3 +16,11 @@ const createClientOptions = (req = null, prismicAccessToken = null) => {
 
 export const Client = (req = null) =>
   Prismic.client(apiEndpoint, createClientOptions(req, accessToken))
+
+export const linkResolver = doc => {
+  if (doc.type === "case_study") return `/${doc.uid}`
+  if (doc.type === "info") return `/info`
+
+  // Fallback for other types, in case new custom types get created
+  return `/${doc.uid}`
+}

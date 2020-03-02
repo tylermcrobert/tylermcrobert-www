@@ -15,7 +15,10 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
   const dotDeliverables = deliverables
     ? deliverables.split(", ").join(` ${UNICODE.CIRCLE}&nbsp;`)
     : ""
-  const date = res.first_publication_date.replace("+0000", "")
+
+  const date = res.first_publication_date
+    ? res.first_publication_date.replace("+0000", "")
+    : null
 
   return (
     <PickerWrapper>
@@ -29,7 +32,7 @@ const CaseStudy: React.FC<{ data: ICaseStudy }> = ({
         </LargeHead>
 
         <S.Deliverables>
-          <p>{date}</p>
+          {date && <p>{date}</p>}
           <p>
             <Html>{dotDeliverables}</Html>
           </p>

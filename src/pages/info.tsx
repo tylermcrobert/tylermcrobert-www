@@ -3,13 +3,12 @@ import { Client } from "util/prismic"
 import { NextPage } from "next"
 import { IInfoRes } from "types/Prismic"
 import { Info } from "components"
-import useInitial from "hooks/useInitial"
 
 interface IProps {
   infoRes?: IInfoRes
 }
 
-const InfoPage: NextPage<IProps> = ({ infoRes, ...props }) => {
+const InfoPage: NextPage<IProps> = ({ infoRes }) => {
   return <Info data={infoRes} />
 }
 
@@ -23,4 +22,5 @@ export async function getStaticProps({ req }) {
     props: { infoRes },
   }
 }
+
 export default InfoPage
