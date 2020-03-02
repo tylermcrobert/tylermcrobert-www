@@ -5,6 +5,7 @@ import { IInfoRes } from "types/Prismic"
 import { ISpotifyPlaylist } from "types/SpotifyPlaylist"
 import { Info, Seo } from "components"
 import getPlaylists from "util/getPlaylists"
+import parseSpotify from "util/parseSpotify"
 
 interface IProps {
   infoRes: IInfoRes
@@ -12,12 +13,13 @@ interface IProps {
 }
 
 const InfoPage: NextPage<IProps> = ({ infoRes, playlistData }) => {
-  console.log(playlistData.map(item => item.name))
-
   return (
     <>
       <Seo title={null} />
-      <Info data={infoRes} playlistData={playlistData} />
+      <Info
+        data={infoRes}
+        playlistData={playlistData.map(item => parseSpotify(item))}
+      />
     </>
   )
 }

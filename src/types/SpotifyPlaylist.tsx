@@ -28,21 +28,21 @@ export interface ISpotifyPlaylist {
   images: ISpotifyPlaylistImage[]
 }
 
-// /**
-//  * Parsed
-//  */
+/**
+ * Parsed
+ */
 
-// export interface IParsedTrack {
-//   title: string
-//   artist: string
-//   duration: string
-// }
+export interface IParsedTrack {
+  title: string
+  artist: string
+  duration: string
+}
 
-// export interface IParsedPlaylist {
-//   totalDuration: string
-//   tracks: IParsedTrack[]
-//   img: string
-//   dateCreated: string
-//   link: string
-//   name: string
-// }
+export interface IParsedPlaylist {
+  totalDuration: string
+  tracks: IParsedTrack[]
+  img: string
+  dateCreated: string
+  link: string
+  name: string
+}

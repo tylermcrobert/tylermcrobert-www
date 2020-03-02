@@ -3,12 +3,13 @@ import { DotHead, Grid, LargeHead } from "components"
 import { IInfoRes } from "types/Prismic"
 import { RichText } from "util/richText"
 import useNowPlaying from "hooks/useNowPlaying"
-import { ISpotifyPlaylist } from "types/SpotifyPlaylist"
+import { IParsedPlaylist } from "types/SpotifyPlaylist"
 import S from "./Info.Styled"
+import { NUMBERS, UNICODE } from "../../constants"
 
 const Info: React.FC<{
   data: IInfoRes
-  playlistData: ISpotifyPlaylist[]
+  playlistData: IParsedPlaylist[]
 }> = ({ data: res, playlistData }) => {
   const { clients, introduction } = res.results[0].data
 
@@ -23,10 +24,8 @@ const Info: React.FC<{
             </LargeHead>
           </div>
         </S.Section>
-
         <S.Section>
           <Contact />
-
           <S.TwoCol>
             <DotHead>Clients</DotHead>
             <ul>
@@ -37,9 +36,7 @@ const Info: React.FC<{
           </S.TwoCol>
         </S.Section>
       </S.LgSection>
-
       <S.Hr />
-
       <S.LgSection>
         <Music />
         <FeaturedPlaylists data={playlistData} />
@@ -47,6 +44,19 @@ const Info: React.FC<{
     </>
   )
 }
+
+const Contact = () => (
+  <S.TwoCol>
+    <div>
+      &#9679; E-M→{" "}
+      <a href="mailto:hello@tylermcrobert.com">hello@tylermcrobert.com</a>
+    </div>
+    <div>
+      &#9679; IG→{" "}
+      <a href="http://instagram.com/tylermcrobert">@tylermcrobert</a>{" "}
+    </div>
+  </S.TwoCol>
+)
 
 const Music = () => {
   const { loading, artist, trackName, nowPlaying } = useNowPlaying()
@@ -77,34 +87,28 @@ const Music = () => {
   )
 }
 
-const FeaturedPlaylists: React.FC<{ data: ISpotifyPlaylist[] }> = ({
-  data,
-}) => {
+const FeaturedPlaylists: React.FC<{
+  data: IParsedPlaylist[]
+}> = ({ data }) => {
   return (
     <S.Section>
       <div>
         <div>
           <DotHead>Featured Playlists</DotHead>
         </div>
-        {data.map(item => (
-          <div key={item.name}>{item.name}</div>
+        {data.map((item, i) => (
+          <div key={item.name}>
+            <p>
+              {NUMBERS[i + 1]} {item.name}
+            </p>
+            <p>{item.totalDuration}</p>
+            <p>{item.dateCreated}</p>
+            <p> {UNICODE.RIGHT}</p>
+          </div>
         ))}
       </div>
     </S.Section>
   )
 }
-
-const Contact = () => (
-  <S.TwoCol>
-    <div>
-      &#9679; E-M→{" "}
-      <a href="mailto:hello@tylermcrobert.com">hello@tylermcrobert.com</a>
-    </div>
-    <div>
-      &#9679; IG→{" "}
-      <a href="http://instagram.com/tylermcrobert">@tylermcrobert</a>{" "}
-    </div>
-  </S.TwoCol>
-)
 
 export default Info
