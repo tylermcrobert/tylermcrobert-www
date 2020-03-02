@@ -99,7 +99,12 @@ const FeaturedPlaylists: React.FC<{
         </div>
 
         {data.map((item, i) => (
-          <S.PlaylistWrapper key={item.name}>
+          <S.PlaylistWrapper
+            key={item.name}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <p>
               {NUMBERS[i + 1]} {item.name}
             </p>

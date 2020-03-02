@@ -39,9 +39,10 @@ const Hr = styled.hr`
   border-bottom: 1px dashed ${props => props.theme.colors.primary};
 `
 
-const PlaylistWrapper = styled.div`
+const PlaylistWrapper = styled.a`
   display: grid;
   grid-template-columns: 1fr auto;
+  text-decoration: none !important;
 
   @media (max-width: ${theme.sizes.sm - 1}px) {
     &:not(:last-child) {
