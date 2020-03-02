@@ -4,6 +4,7 @@ import { IInfoRes } from "types/Prismic"
 import { RichText } from "util/richText"
 import useNowPlaying from "hooks/useNowPlaying"
 import { IParsedPlaylist } from "types/SpotifyPlaylist"
+import Link from "next/link"
 import S from "./Info.Styled"
 import { NUMBERS, UNICODE } from "../../constants"
 
@@ -96,17 +97,21 @@ const FeaturedPlaylists: React.FC<{
         <div>
           <DotHead>Featured Playlists</DotHead>
         </div>
+
         {data.map((item, i) => (
-          <div key={item.name}>
+          <S.PlaylistWrapper key={item.name}>
             <p>
               {NUMBERS[i + 1]} {item.name}
             </p>
-            <p>{item.totalDuration}</p>
             <p>{item.dateCreated}</p>
+            <p>{item.totalDuration}</p>
             <p> {UNICODE.RIGHT}</p>
-          </div>
+          </S.PlaylistWrapper>
         ))}
       </div>
+      <Link href="/playlists">
+        <a>See all playlists {UNICODE.RIGHT}</a>
+      </Link>
     </S.Section>
   )
 }
