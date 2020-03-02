@@ -43,6 +43,7 @@ module.exports = {
     return {
       "/": { page: "/" },
       "/info": { page: "/info" },
+      "/preview": { page: "/preview" },
       ...csPaths,
       ...curationPaths,
     }
