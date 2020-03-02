@@ -3,9 +3,13 @@ import { DotHead, Grid, LargeHead } from "components"
 import { IInfoRes } from "types/Prismic"
 import { RichText } from "util/richText"
 import useNowPlaying from "hooks/useNowPlaying"
+import { ISpotifyPlaylist } from "types/SpotifyPlaylist"
 import S from "./Info.Styled"
 
-const Info: React.FC<{ data: IInfoRes }> = ({ data: res }) => {
+const Info: React.FC<{
+  data: IInfoRes
+  playlistData: ISpotifyPlaylist[]
+}> = ({ data: res, playlistData }) => {
   const { clients, introduction } = res.results[0].data
 
   return (
@@ -38,7 +42,7 @@ const Info: React.FC<{ data: IInfoRes }> = ({ data: res }) => {
 
       <S.LgSection>
         <Music />
-        <FeaturedPlaylists />
+        <FeaturedPlaylists data={playlistData} />
       </S.LgSection>
     </>
   )
@@ -73,14 +77,18 @@ const Music = () => {
   )
 }
 
-const FeaturedPlaylists = () => {
+const FeaturedPlaylists: React.FC<{ data: ISpotifyPlaylist[] }> = ({
+  data,
+}) => {
   return (
     <S.Section>
       <div>
         <div>
           <DotHead>Featured Playlists</DotHead>
         </div>
-        playlists
+        {data.map(item => (
+          <div key={item.name}>{item.name}</div>
+        ))}
       </div>
     </S.Section>
   )
