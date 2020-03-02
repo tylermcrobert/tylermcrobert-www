@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Grid } from "components"
+import { mq } from "style"
 
 const LgSection = styled.div`
   margin: 5rem auto;
@@ -20,10 +21,16 @@ const Section = styled(Grid)`
     column-count: 2;
     column-gap: ${props => props.theme.margins.standard};
   }
+
+  a {
+    text-decoration: underline;
+  }
 `
 
 const TwoCol = styled.div`
-  grid-column: span 3;
+  @media ${mq.sm} {
+    grid-column: span 3;
+  }
 `
 
 const Hr = styled.hr`
