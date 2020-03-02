@@ -3,7 +3,7 @@ import { Client } from "util/prismic"
 import { NextPage } from "next"
 import { IInfoRes } from "types/Prismic"
 import { Info } from "components"
-import { getAuthToken, getPlaylist } from "util/getPlaylist"
+import getPlaylists from "util/getPlaylists"
 
 interface IProps {
   infoRes?: IInfoRes
@@ -19,10 +19,7 @@ export async function getStaticProps({ req }) {
     {}
   )
 
-  const id = "5iibda0SvRRNw0GPyQHx01"
-  const token = await getAuthToken()
-  const playlistData = await getPlaylist({ id, token })
-
+  const playlistData = await getPlaylists()
   console.log(playlistData)
 
   return {
