@@ -2,7 +2,7 @@ import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
 import { NextPage } from "next"
 import { IInfoRes } from "types/Prismic"
-import { Info } from "components"
+import { Info, Seo } from "components"
 import getPlaylists from "util/getPlaylists"
 
 interface IProps {
@@ -10,7 +10,12 @@ interface IProps {
 }
 
 const InfoPage: NextPage<IProps> = ({ infoRes }) => {
-  return <Info data={infoRes} />
+  return (
+    <>
+      <Seo title={null} />
+      <Info data={infoRes} />
+    </>
+  )
 }
 
 export async function getStaticProps({ req }) {
