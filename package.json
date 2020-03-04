@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "9.2.2",
+    "next": "^9.2.3-canary.21",
     "prismic-javascript": "^2.1.5",
     "react": "16.13.0",
     "react-dom": "16.13.0"
