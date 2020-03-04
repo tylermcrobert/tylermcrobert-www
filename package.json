@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "serve ./out"
+    "start": "serve ./out",
+    "start:staging": "next start"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
