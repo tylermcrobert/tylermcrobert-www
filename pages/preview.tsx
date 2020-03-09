@@ -1,6 +1,6 @@
 import React from "react"
 import Router from "next/router"
-import { Client, linkResolver } from "../util/prismic"
+import { client, linkResolver } from "../util/prismic"
 
 const Preview = () => {
   return <div>Loading preview...</div>
@@ -11,7 +11,7 @@ Preview.getInitialProps = async context => {
     const { token } = context.query
     const { res, req } = context
 
-    const url = await Client(req).previewSession(token, linkResolver, "/")
+    const url = await client.previewSession(token, linkResolver, "/")
     if (res) {
       res.writeHead(302, { Location: url })
       res.end()

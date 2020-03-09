@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "next": "^9.2.3-canary.21",
     "prismic-javascript": "^2.1.5",
     "react": "16.13.0",
