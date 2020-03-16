@@ -13,15 +13,20 @@ const CaseStudyPage: NextPage<{ csData: ICaseStudy }> = ({ csData }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async ctx => {
-  const uid = ctx.params.page
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  previewData,
+}) => {
+  const uid = params.page
+
+  console.log(previewData)
 
   // TODO: conditionally fetch preview data here instaed
   const csData = await Client().getByUID("case_study", uid.toString(), {})
 
   return {
     props: {
-      csData: csData || ctx.previewData || null,
+      csData: csData || null,
     },
   }
 }
