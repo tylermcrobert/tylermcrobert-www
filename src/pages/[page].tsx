@@ -15,6 +15,8 @@ const CaseStudyPage: NextPage<{ csData: ICaseStudy }> = ({ csData }) => {
 
 export const getStaticProps: GetStaticProps = async ctx => {
   const uid = ctx.params.page
+
+  // TODO: conditionally fetch preview data here instaed
   const csData = await Client().getByUID("case_study", uid.toString(), {})
 
   return {
@@ -30,7 +32,7 @@ export const getStaticPaths = async () => {
     .then(data => data.results.map(({ uid }) => uid))
 
   return {
-    fallback: false,
+    fallback: true,
     paths: uids.map(uid => ({ params: { page: uid } })),
   }
 }
