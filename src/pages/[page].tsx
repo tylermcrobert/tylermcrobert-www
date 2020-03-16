@@ -5,6 +5,7 @@ import { ICaseStudy } from "types/Prismic"
 import { CaseStudy } from "components"
 
 const CaseStudyPage: NextPage<{ csData: ICaseStudy }> = ({ csData }) => {
+  if (!csData) return <div>not foundddddd</div>
   return (
     <div>
       <CaseStudy data={csData} />
@@ -12,10 +13,15 @@ const CaseStudyPage: NextPage<{ csData: ICaseStudy }> = ({ csData }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const uid = params.page
+export const getStaticProps: GetStaticProps = async ctx => {
+  const uid = ctx.params.page
   const csData = await Client().getByUID("case_study", uid.toString(), {})
-  return { props: { csData } }
+
+  return {
+    props: {
+      csData: csData || ctx.previewData || null,
+    },
+  }
 }
 
 export const getStaticPaths = async () => {
