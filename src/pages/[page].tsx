@@ -1,52 +1,32 @@
-import { useContext } from "react"
-import { NextPage } from "next"
-import { useRouter } from "next/router"
-import { CaseStudy, CaseStudyPicker, Seo } from "components"
-import ErrorPage from "next/error"
-import Cookies from "js-cookie"
-import { asText } from "util/richText"
-import { DataCtx } from "./_app"
+import { NextPage, GetStaticProps } from "next"
+import { Client } from "util/prismic"
+import Prismic from "prismic-javascript"
+import { ICaseStudy } from "types/Prismic"
+import { CaseStudy } from "components"
 
-const useCheck = (uids: string[]): [boolean, number] => {
-  const router = useRouter()
-  const route = router.query.page.toString()
-
-  const index = uids.indexOf(route)
-  const isMatch = index !== -1
-
-  return [isMatch, index]
+const CaseStudyPage: NextPage<{ csData: ICaseStudy }> = ({ csData }) => {
+  return (
+    <div>
+      <CaseStudy data={csData} />
+    </div>
+  )
 }
 
-const CaseStudyPage: NextPage = () => {
-  const { caseStudiesRes, ctxRes } = useContext(DataCtx)
-  const csUids = caseStudiesRes.results.map(res => res.uid)
-  const [isCaseStudy, csIndex] = useCheck(csUids)
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const uid = params.page
+  const csData = await Client().getByUID("case_study", uid.toString(), {})
+  return { props: { csData } }
+}
 
-  if (isCaseStudy) {
-    return (
-      <>
-        <Seo title={asText(caseStudiesRes.results[csIndex].data.title)} />
-        <CaseStudy data={caseStudiesRes.results[csIndex]} />
-      </>
-    )
+export const getStaticPaths = async () => {
+  const uids = await Client()
+    .query(Prismic.Predicates.at("document.type", "case_study"), {})
+    .then(data => data.results.map(({ uid }) => uid))
+
+  return {
+    fallback: false,
+    paths: uids.map(uid => ({ params: { page: uid } })),
   }
-
-  // if not a case study, check curation
-  const curationUids = ctxRes.results.map(item => item.uid)
-  const [isCuration, curationIndex] = useCheck(curationUids)
-
-  if (isCuration) {
-    const uid = curationUids[curationIndex]
-    Cookies.set("curation", uid)
-    return (
-      <>
-        <Seo title={null} />
-        <CaseStudyPicker ctxUid={uid} />
-      </>
-    )
-  }
-
-  return <ErrorPage statusCode={404} />
 }
 
 export default CaseStudyPage
