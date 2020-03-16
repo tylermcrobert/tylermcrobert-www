@@ -12,7 +12,7 @@
     "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "js-cookie": "^2.2.1",
-    "next": "^9.2.3-canary.18",
+    "next": "^9.3.1-canary.5",
     "prismic-javascript": "^2.1.5",
     "prismic-reactjs": "^1.2.0",
     "react": "16.13.0",
