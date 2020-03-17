@@ -72,7 +72,7 @@ export interface IContextRes extends ApiSearchResponse {
   results: IContext[]
 }
 
-interface IContext extends Document {
+export interface IContext extends Document {
   data: {
     context_name: IPrismicRichText
     bio: IPrismicRichText

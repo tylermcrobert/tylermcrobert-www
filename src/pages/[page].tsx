@@ -1,13 +1,14 @@
 import { NextPage, GetStaticProps } from "next"
 import { Client, getApi } from "util/prismic"
 import Prismic from "prismic-javascript"
-import { ICaseStudy, IContextRes } from "types/Prismic"
+import { ICaseStudy, IContext } from "types/Prismic"
 import { CaseStudy } from "components"
 import Error from "next/error"
+import Cookies from "js-cookie"
 
 const CaseStudyPage: NextPage<{
   csData: ICaseStudy
-  curationData: IContextRes
+  curationData: IContext
 }> = ({ csData, curationData }) => {
   if (csData) {
     return (
@@ -18,6 +19,8 @@ const CaseStudyPage: NextPage<{
   }
 
   if (curationData) {
+    Cookies.set("curationId", curationData.uid)
+
     return <div>curation</div>
   }
 
