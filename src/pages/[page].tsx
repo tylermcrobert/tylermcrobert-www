@@ -48,13 +48,17 @@ export const getStaticProps: GetStaticProps = async ({
 }
 
 export const getStaticPaths = async () => {
-  const uids = await Client()
-    .query(Prismic.Predicates.at("document.type", "case_study"), {})
-    .then(data => data.results.map(({ uid }) => uid))
+  const getByType = async (type: string) =>
+    Client()
+      .query(Prismic.Predicates.at("document.type", type), {})
+      .then(data => data.results.map(({ uid }) => uid))
 
   return {
     fallback: true,
-    paths: uids.map(uid => ({ params: { page: uid } })),
+    paths: [
+      ...(await getByType("case_study")),
+      ...(await getByType("context")),
+    ].map(uid => ({ params: { page: uid } })),
   }
 }
 
