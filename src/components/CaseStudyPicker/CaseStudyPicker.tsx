@@ -1,36 +1,30 @@
-import { useContext } from "react"
-import { DataCtx } from "pages/_app"
 import Link from "next/link"
-import { asText } from "util/richText"
 import { LargeHead, Wrapper } from "components"
-import { useCurationUids } from "hooks/useCurrentCuration"
+import { IContext } from "types/Prismic"
+import { asText } from "util/richText"
 import { NUMBERS } from "../../constants"
 import S from "./CaseStudyPicker.Styled"
 
 interface IProps {
-  ctxUid?: string
+  curationData: IContext
 }
 
-const CaseStudyPicker: React.FC<IProps> = ({ ctxUid }) => {
-  const curationUids = useCurationUids(ctxUid)
-  const { caseStudiesRes } = useContext(DataCtx)
-
-  const getTitle = (uid: string) =>
-    caseStudiesRes.results.filter(item => item.uid === uid)[0].data.title
-
+const CaseStudyPicker: React.FC<IProps> = ({ curationData }) => {
   return (
     <S.Wrapper>
       <Wrapper>
         <S.Content>
-          {curationUids.map((uid, i) => (
-            <LargeHead key={uid}>
-              {" "}
-              {NUMBERS[i + 1]}&nbsp;
-              <Link href="/[page]" as={`/${uid}`}>
-                <a>{asText(getTitle(uid))}</a>
-              </Link>
-            </LargeHead>
-          ))}
+          {curationData.data.case_study_list.map(
+            ({ case_study_item: item }, i) => (
+              <LargeHead key={item.id}>
+                {" "}
+                {NUMBERS[i + 1]}&nbsp;
+                <Link href="/[page]" as={`/${item.uid}`}>
+                  <a>{asText(item.data.title)}</a>
+                </Link>
+              </LargeHead>
+            )
+          )}
         </S.Content>
       </Wrapper>
     </S.Wrapper>

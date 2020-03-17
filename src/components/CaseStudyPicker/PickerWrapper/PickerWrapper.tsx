@@ -32,7 +32,7 @@ const PickerWrapper: React.FC = ({ children }) => {
         <div>{children}</div>
         <div ref={pickerRef} />
       </S.Wrapper>
-      <CaseStudyPicker />
+      {/* <CaseStudyPicker /> */}
     </>
   )
 }

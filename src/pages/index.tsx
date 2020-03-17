@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Seo title={null} />
-      <CaseStudyPicker />
+      {/* <CaseStudyPicker /> */}
     </>
   )
 }

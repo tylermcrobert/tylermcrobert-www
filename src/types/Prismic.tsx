@@ -93,6 +93,7 @@ interface IPrismicCtxLink {
   uid: string
   link_type: string
   isBroken: boolean
+  data: any
 }
 
 /**

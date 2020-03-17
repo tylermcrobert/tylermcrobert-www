@@ -29,7 +29,7 @@ const CaseStudyPage: NextPage<{
     return (
       <>
         <Seo title={title} />
-        <CaseStudyPicker ctxUid={curationData.uid} />
+        <CaseStudyPicker curationData={curationData} />
       </>
     )
   }
@@ -50,6 +50,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   const curationData = await Client().getByUID("context", uid, {
     ref,
+    fetchLinks: "case_study.title",
   })
 
   return {
