@@ -2,9 +2,11 @@ import { NextPage, GetStaticProps } from "next"
 import { Client, getApi } from "util/prismic"
 import Prismic from "prismic-javascript"
 import { ICaseStudy, IContext } from "types/Prismic"
-import { CaseStudy } from "components"
+import { CaseStudy, CaseStudyPicker, Seo } from "components"
 import Error from "next/error"
 import Cookies from "js-cookie"
+import { asText } from "util/richText"
+import { UNICODE } from "../constants"
 
 const CaseStudyPage: NextPage<{
   csData: ICaseStudy
@@ -20,8 +22,16 @@ const CaseStudyPage: NextPage<{
 
   if (curationData) {
     Cookies.set("curationId", curationData.uid)
+    const title = `${asText(curationData.data.context_name)} ${
+      UNICODE.X
+    } Tyler McRobert`
 
-    return <div>curation</div>
+    return (
+      <>
+        <Seo title={title} />
+        <CaseStudyPicker ctxUid={curationData.uid} />
+      </>
+    )
   }
 
   return <Error statusCode={404} />
