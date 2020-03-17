@@ -17,6 +17,8 @@ const createClientOptions = (req = null, prismicAccessToken = null) => {
 export const Client = (req = null) =>
   Prismic.client(apiEndpoint, createClientOptions(req, accessToken))
 
+export const getApi = () => Prismic.api(apiEndpoint)
+
 export const linkResolver = doc => {
   if (doc.type === "case_study") return `/${doc.uid}`
   if (doc.type === "info") return `/info`

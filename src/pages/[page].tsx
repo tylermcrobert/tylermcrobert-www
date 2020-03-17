@@ -1,27 +1,48 @@
 import { NextPage, GetStaticProps } from "next"
-import { Client } from "util/prismic"
+import { Client, getApi } from "util/prismic"
 import Prismic from "prismic-javascript"
-import { ICaseStudy } from "types/Prismic"
+import { ICaseStudy, IContextRes } from "types/Prismic"
 import { CaseStudy } from "components"
+import Error from "next/error"
 
-const CaseStudyPage: NextPage<{ csData: ICaseStudy }> = ({ csData }) => {
-  if (!csData) return <div>not foundddddd</div>
-  return (
-    <div>
-      <CaseStudy data={csData} />
-    </div>
-  )
+const CaseStudyPage: NextPage<{
+  csData: ICaseStudy
+  curationData: IContextRes
+}> = ({ csData, curationData }) => {
+  if (csData) {
+    return (
+      <>
+        <CaseStudy data={csData} />
+      </>
+    )
+  }
+
+  if (curationData) {
+    return <div>curation</div>
+  }
+
+  return <Error statusCode={404} />
 }
 
-export const getStaticProps: GetStaticProps = async ctx => {
-  const uid = ctx.params.page
+export const getStaticProps: GetStaticProps = async ({
+  previewData,
+  params,
+}) => {
+  const uid = params.page.toString()
+  const ref = previewData ? previewData.previewCookie : null
 
-  // TODO: conditionally fetch preview data here instaed
-  const csData = await Client().getByUID("case_study", uid.toString(), {})
+  const csData = await Client().getByUID("case_study", uid, {
+    ref,
+  })
+
+  const curationData = await Client().getByUID("context", uid, {
+    ref,
+  })
 
   return {
     props: {
-      csData: csData || ctx.previewData || null,
+      csData: csData || null,
+      curationData: curationData || null,
     },
   }
 }
