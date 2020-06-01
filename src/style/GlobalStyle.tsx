@@ -19,10 +19,10 @@ const style = css`
 
   body,
   html {
-    line-height: ${props => props.theme.lineHeights.body};
-    font-family: ${props => props.theme.fontFamilies.sansSerif};
+    line-height: ${(props) => props.theme.lineHeights.body};
+    font-family: ${(props) => props.theme.fontFamilies.sansSerif};
     letter-spacing: 0.02em;
-    background: ${props => props.theme.colors.secondary};
+    background: ${(props) => props.theme.colors.secondary};
     font-size: 18px;
     overscroll-behavior-y: none;
 
@@ -41,22 +41,10 @@ const style = css`
   }
 
   body {
-    padding-top: ${props => props.theme.remScale[5]};
-
-    &:before {
-      content: "";
-      position: fixed;
-      top: -10rem;
-      left: 0;
-      background: ${props => props.theme.colors.secondary};
-      width: 100vw;
-      height: calc(10rem + 100vh);
-      z-index: -1;
-    }
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     text-decoration: none;
   }
 
@@ -70,7 +58,7 @@ const style = css`
   h4,
   h5,
   h6 {
-    line-height: ${props => props.theme.lineHeights.heading};
+    line-height: ${(props) => props.theme.lineHeights.heading};
   }
 
   img,

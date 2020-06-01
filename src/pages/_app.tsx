@@ -41,7 +41,7 @@ const MyApp = ({
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyle />
-          <Nav />
+          {/* <Nav /> */}
           <main>
             <Component {...pageProps} />
           </main>
@@ -51,7 +51,7 @@ const MyApp = ({
   )
 }
 
-MyApp.getInitialProps = async appContext => {
+MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext) // keep this
 
   if (!process.browser) {
