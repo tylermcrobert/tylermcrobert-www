@@ -3,7 +3,7 @@ import modularScale from "./modularScale"
 
 const scale: number[] = modularScale({ scale: 1.333, stepsDown: 2, length: 15 })
 
-const remScale: string[] = scale.map(item => `${item}rem`)
+const remScale: string[] = scale.map((item) => `${item}rem`)
 
 const theme: DefaultTheme = {
   scale,
