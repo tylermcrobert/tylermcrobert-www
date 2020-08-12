@@ -4,7 +4,7 @@ type RichTextItem = {
   spans: []
 }
 
-export type IPrismicRichText = RichTextItem[] | []
+export type IPrismicRichText = RichTextItem[]
 
 export type IPrismicRenderedText = () => JSX.Element
 

@@ -18,7 +18,18 @@ export default {
     {
       name: "intro",
       type: "text",
-      // of: [{ type: "block" }],
+      rows: 2,
+    },
+
+    {
+      name: "description",
+      type: "array",
+      of: [{ type: "block" }],
+    },
+    {
+      name: "deliverables",
+      type: "array",
+      of: [{ type: "string" }],
     },
     {
       name: "modules",

@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { Nav } from "components"
-import { IPrismicCaseStudyRes, IContextRes } from "types/Prismic"
+import { IPrismicCaseStudyRes, IContextRes, ISingleImage } from "types/Prismic"
 import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
 import useInitial from "hooks/useInitial"
@@ -28,6 +28,15 @@ export const DataCtx = createContext<{
   ctxRes: null,
 })
 
+const EXAMPLE = {
+  spans: [
+    { start: 264, end: 265, type: "em" },
+    { start: 362, end: 363, type: "em" },
+  ],
+  text:
+    "Modern camera makers have an obvious problem: everyone has a fantastic camera in their pocket. A successful camera brand in the digital age is one that accepts this. This brand refresh of Fujifilm positions Fujifilm as the tool you bring for the important moments. The rebrand works with the evolution of the digital camera by preparing the photographer for that moment: the moment that needs to be captured right. The camera in your pocket is for everything else in between.",
+}
+
 const MyApp = ({
   Component,
   pageProps,
@@ -43,8 +52,21 @@ const MyApp = ({
   const caseStudiesData: IPrismicCaseStudyRes = useInitial(caseStudiesRes)
 
   caseStudiesData.results
-    .filter((result) => result.data.title)
+    .filter((result) => result.uid !== "blank")
     .forEach((result) => {
+      // console.log(
+      //   result.data.cs_content
+      //     .map((item) => {
+      //       if (item.slice_type === "single_image") {
+      //         const data = (item as unknown) as ISingleImage
+      //         console.log(data.primary.image.url)
+      //         return "single image"
+      //       }
+      //       return null
+      //     })
+      //     .filter((item) => item)
+      // )
+
       const converted = {
         date: new Date(result.first_publication_date),
         publishedAt: undefined,
@@ -53,14 +75,32 @@ const MyApp = ({
         title: `${asText(result.data.title)}`,
         slug: { current: result.uid },
         intro: (result.data.intro as any[]).map((item) => item.text)[0],
+        deliverables: result.data.deliverables.split(", "),
+        description: [
+          {
+            _key: "6db6b82f848f",
+            _type: "block",
+            children: [
+              {
+                _key: "6db6b82f848f0",
+                _type: "span",
+                marks: [],
+                text: result.data?.description[0]?.text,
+              },
+            ],
+            markDefs: [],
+            style: "normal",
+          },
+        ],
       }
-      client
-        .transaction()
-        .createOrReplace(converted)
-        .commit()
-        .then((res) => {
-          console.log(res, converted)
-        })
+
+      // client
+      //   .transaction()
+      //   .createOrReplace(converted)
+      //   .commit()
+      //   .then((res) => {
+      //     console.log(res, converted)
+      //   })
     })
 
   return (
