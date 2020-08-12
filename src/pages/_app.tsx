@@ -10,13 +10,14 @@ import { Client } from "util/prismic"
 import useInitial from "hooks/useInitial"
 
 import sanityClient from "@sanity/client"
+import { asText } from "util/richText"
 
 const client = sanityClient({
   projectId: "n1wxk3oc",
   dataset: "production",
   token:
-    "sk1FVAGjsEGz1l0egzr4gY4SD6ZSEQ8wCPqrFJelnZvS27jNryBkavrUyon6iRYEN9IlzypYrLt0Ipqi8EAM3CeEaWIXxW60PvMNR4D5iJMyCd6ECeLKXfG6kGosmWV4I0uqEWbZxSdWA47WooqjjD5PuiLxyFdYMFbVGNSiS3BKYFAF1vBl", // or leave blank to be anonymous user
-  useCdn: true, // `false` if you want to ensure fresh data
+    "skZJNiayOonXZzxeIImk0M4oQ74v4HkSJXy4wcyY7LoqyA7z0tFcl5aGKNrWzpVv397WI4WWmiXWUEn6EKNTtFfsATj4bTntBNMM9VsLEvVe29j9TGT4rVowDbqcdAx4807K3DbVbT10DFA1nQEOCeLGo2SmbBcyXiAJ6e2YY2kcfuVLtelN", // or leave blank to be anonymous user
+  useCdn: false, // `false` if you want to ensure fresh data
 })
 
 export const DataCtx = createContext<{
@@ -44,10 +45,18 @@ const MyApp = ({
   console.log(
     caseStudiesData.results.forEach((result) => {
       console.log(result)
-      // client.transaction().createOrReplace({
-      //   _id: result.id,
-      //   _type: "caseStudy",
-      // })
+      client
+        .transaction()
+        .createOrReplace({
+          _id: result.id,
+          _type: "caseStudy",
+          title: asText(result.data.title),
+          slug: { current: result.uid },
+        })
+        .commit()
+        .then((res) => {
+          console.log(res)
+        })
     })
   )
 
