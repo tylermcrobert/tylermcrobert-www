@@ -45,17 +45,21 @@ const MyApp = ({
   console.log(
     caseStudiesData.results.forEach((result) => {
       console.log(result)
+
+      const converted = {
+        _createdAt: new Date(result.first_publication_date),
+        _updatedAt: new Date(result.last_publication_date),
+        _id: result.id,
+        _type: "caseStudy",
+        title: asText(result.data.title),
+        slug: { current: result.uid },
+      }
       client
         .transaction()
-        .createOrReplace({
-          _id: result.id,
-          _type: "caseStudy",
-          title: asText(result.data.title),
-          slug: { current: result.uid },
-        })
+        .createOrReplace(converted)
         .commit()
         .then((res) => {
-          console.log(res)
+          console.log(res, converted)
         })
     })
   )
@@ -69,11 +73,11 @@ const MyApp = ({
     >
       <ThemeProvider theme={theme}>
         <>
-          <GlobalStyle />
+          {/* <GlobalStyle />
           <Nav />
           <main>
             <Component {...pageProps} />
-          </main>
+          </main> */}
         </>
       </ThemeProvider>
     </DataCtx.Provider>
