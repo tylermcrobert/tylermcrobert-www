@@ -42,17 +42,17 @@ const MyApp = ({
   const ctxData: IContextRes = useInitial(ctxRes)
   const caseStudiesData: IPrismicCaseStudyRes = useInitial(caseStudiesRes)
 
-  console.log(
-    caseStudiesData.results.forEach((result) => {
-      console.log(result)
-
+  caseStudiesData.results
+    .filter((result) => result.data.title)
+    .forEach((result) => {
       const converted = {
-        _createdAt: new Date(result.first_publication_date),
-        _updatedAt: new Date(result.last_publication_date),
+        date: new Date(result.first_publication_date),
+        publishedAt: undefined,
         _id: result.id,
         _type: "caseStudy",
-        title: asText(result.data.title),
+        title: `${asText(result.data.title)}`,
         slug: { current: result.uid },
+        intro: (result.data.intro as any[]).map((item) => item.text)[0],
       }
       client
         .transaction()
@@ -62,7 +62,6 @@ const MyApp = ({
           console.log(res, converted)
         })
     })
-  )
 
   return (
     <DataCtx.Provider

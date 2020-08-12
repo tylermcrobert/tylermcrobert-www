@@ -11,6 +11,16 @@ export default {
       type: "string",
     },
     {
+      name: "date",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "intro",
+      type: "text",
+      // of: [{ type: "block" }],
+    },
+    {
       name: "modules",
       type: "array",
       of: [
@@ -59,4 +69,7 @@ export default {
       ],
     },
   ],
+  initialValue: {
+    date: new Date(),
+  },
 }
