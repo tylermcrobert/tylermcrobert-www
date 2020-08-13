@@ -14,13 +14,19 @@ function usePreview<T>(query: string, inputData: T, isPreview: boolean) {
   const [previewData, setPreviewData] = useState<T>(inputData)
 
   useEffect(() => {
-    getClient(isPreview)
-      .listen(query)
-      .subscribe(event => {
-        if (event.result && event.result._id.startsWith('drafts.')) {
-          setPreviewData(event.result as T)
-        }
-      })
+    if (isPreview) {
+      const subscription = getClient(isPreview)
+        .listen(query)
+        .subscribe(event => {
+          if (event.result && event.result._id.startsWith('drafts.')) {
+            setPreviewData(event.result as T)
+          }
+        })
+
+      return () => {
+        subscription.unsubscribe()
+      }
+    }
   }, [query, isPreview])
 
   return previewData
