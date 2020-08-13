@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-param-reassign */
 
-const path = require("path");
-require("dotenv").config();
+const path = require('path')
+require('dotenv').config()
 
 module.exports = {
   /**
@@ -13,9 +13,13 @@ module.exports = {
       ...config,
       resolve: {
         ...config.resolve,
-        modules: [path.join("src"), path.join(__dirname, "node_modules"), "./"],
-        extensions: [".tsx", ".ts", ".js"],
+        modules: [path.join('src'), path.join(__dirname, 'node_modules'), './'],
+        extensions: ['.tsx', '.ts', '.js'],
       },
-    };
+    }
   },
-};
+
+  env: {
+    SANITY_TOKEN: process.env.SANITY_TOKEN,
+  },
+}
