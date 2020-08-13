@@ -1,2 +1,2 @@
 export * from './useCaseStudy'
-export * from './useSanityPreview'
+export { default as useSanityPreview } from './useSanityPreview'

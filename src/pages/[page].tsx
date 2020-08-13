@@ -4,12 +4,20 @@ import { getCaseStudies, CaseStudyRequest } from 'lib/api'
 import { CaseStudyType } from 'types'
 import Error from 'next/error'
 import { CaseStudyProvider } from 'providers'
+import { useSanityPreview } from 'hooks'
 
-type PageProps = { caseStudyData: CaseStudyType }
+type PageProps = {
+  caseStudyData: CaseStudyType
+  query: string
+  isPreview: boolean
+}
 
-const Page: React.FC<{ caseStudyData: CaseStudyType }> = ({
-  caseStudyData,
+const Page: React.FC<PageProps> = ({
+  caseStudyData: staleCaseStudyData,
+  query,
+  isPreview,
 }) => {
+  const caseStudyData = useSanityPreview(query, staleCaseStudyData, isPreview)
   if (!caseStudyData) {
     return <Error statusCode={404} />
   }
@@ -31,8 +39,9 @@ export const getStaticProps: GetStaticProps = async ({
   })
 
   const caseStudyData = await caseStudyReq.fetch()
+  const query = caseStudyReq.query
 
-  const props: PageProps = { caseStudyData }
+  const props: PageProps = { caseStudyData, query, isPreview }
 
   return { props }
 }
