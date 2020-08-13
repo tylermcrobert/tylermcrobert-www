@@ -6,8 +6,10 @@ import Grid from './Grid/Grid'
 import { LargeHead } from './Heading/Heading'
 import Paragraph from './Paragraph/Paragraph'
 import SanityBlockContent from './SanityBlockContent/SanityBlockContent'
+import PreviewIndicator from './PreviewIndicator/PreviewIndicator'
 
 export {
+  PreviewIndicator,
   SanityBlockContent,
   Paragraph,
   LargeHead,

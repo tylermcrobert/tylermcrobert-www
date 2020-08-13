@@ -1,16 +1,30 @@
 import React from 'react'
 import { GlobalStyle } from 'style'
-import { AppProps } from 'next/app'
+import { PreviewIndicator } from 'components'
+import App, { AppProps, AppContext } from 'next/app'
 
-type MyAppProps = AppProps & {}
+type MyAppProps = AppProps & { isPreview: boolean }
 
-function MyApp({ Component, pageProps }: MyAppProps) {
+function MyApp({ Component, pageProps, isPreview }: MyAppProps) {
   return (
-    <div>
+    <>
+      {isPreview && <PreviewIndicator />}
       <GlobalStyle />
       <Component {...pageProps} />
-    </div>
+    </>
   )
+}
+
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext)
+  const isPreview =
+    appContext.ctx.req?.headers.cookie?.includes('__next_preview_data') || false
+
+  return {
+    ...appProps,
+    isPreview,
+  }
 }
 
 export default MyApp
