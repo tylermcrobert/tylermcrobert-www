@@ -18,6 +18,7 @@ const Page: React.FC<PageProps> = ({
   isPreview,
 }) => {
   const caseStudyData = useSanityPreview(query, staleCaseStudyData, isPreview)
+
   if (!caseStudyData) {
     return <Error statusCode={404} />
   }
