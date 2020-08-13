@@ -3,15 +3,16 @@ import { LargeHead, Wrapper } from 'components'
 import { NUMBERS } from '../../constants'
 import S from './CaseStudyPicker.styled'
 import { useApp } from 'hooks'
+import { CsContext } from 'types'
 
-const CaseStudyPicker: React.FC = () => {
-  const { context } = useApp()
+const CaseStudyPicker: React.FC<{ context?: CsContext }> = ({ context }) => {
+  const { context: defaultContext } = useApp()
 
   return (
     <S.Wrapper>
       <Wrapper>
         <S.Content>
-          {context.caseStudies.map((item, i) => (
+          {(context || defaultContext).caseStudies.map((item, i) => (
             <LargeHead key={item.slug.current}>
               {' '}
               {NUMBERS[i + 1]}&nbsp;

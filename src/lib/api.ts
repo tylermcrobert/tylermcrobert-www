@@ -69,6 +69,22 @@ export class CaseStudyRequest extends _HandleRequest<CaseStudyType> {
   }
 }
 
+/**
+ * Fetch a context by handle
+ */
+
+export class CtxRequest extends _HandleRequest<CsContext> {
+  constructor(props: ApiRequestInput) {
+    super(props)
+    this.query = `
+      *[slug.current == '${props.handle}' && _type == "context"]{
+        ...,
+        caseStudies[] -> { title, slug }
+      }
+    `
+  }
+}
+
 export const getCaseStudies = async (): Promise<CaseStudyType[]> => {
   return getClient(true).fetch(`*[_type == 'caseStudy']`)
 }
