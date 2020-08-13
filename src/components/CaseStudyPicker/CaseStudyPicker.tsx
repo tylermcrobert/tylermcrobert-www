@@ -4,9 +4,19 @@ import { NUMBERS } from '../../constants'
 import S from './CaseStudyPicker.styled'
 import { useApp } from 'hooks'
 import { CsContext } from 'types'
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+import Router from 'next/router'
 
 const CaseStudyPicker: React.FC<{ context?: CsContext }> = ({ context }) => {
   const { context: defaultContext } = useApp()
+
+  useEffect(() => {
+    if (context) {
+      Cookies.set('ctx-id', context.slug.current)
+      Router.replace('/')
+    }
+  }, [context])
 
   return (
     <S.Wrapper>
