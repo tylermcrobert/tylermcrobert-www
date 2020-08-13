@@ -1,4 +1,4 @@
-import { CaseStudy } from 'components'
+import { CaseStudy, Layout } from 'components'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getCaseStudies, CaseStudyRequest } from 'lib/api'
 import { CaseStudyType } from 'types'
@@ -23,9 +23,11 @@ const Page: React.FC<PageProps> = ({
   }
 
   return (
-    <CaseStudyProvider data={caseStudyData}>
-      <CaseStudy />
-    </CaseStudyProvider>
+    <Layout>
+      <CaseStudyProvider data={caseStudyData}>
+        <CaseStudy />
+      </CaseStudyProvider>
+    </Layout>
   )
 }
 

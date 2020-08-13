@@ -1,8 +1,12 @@
 import React from 'react'
-import { CaseStudyPicker } from 'components'
+import { CaseStudyPicker, Layout } from 'components'
 
 const Home = () => {
-  return <CaseStudyPicker />
+  return (
+    <Layout>
+      <CaseStudyPicker />
+    </Layout>
+  )
 }
 
 export default Home

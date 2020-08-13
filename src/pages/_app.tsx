@@ -1,5 +1,4 @@
 import React from 'react'
-import { GlobalStyle } from 'style'
 import { PreviewIndicator } from 'components'
 import App, { AppProps, AppContext } from 'next/app'
 
@@ -9,7 +8,6 @@ function MyApp({ Component, pageProps, isPreview }: MyAppProps) {
   return (
     <>
       {isPreview && <PreviewIndicator />}
-      <GlobalStyle />
       <Component {...pageProps} />
     </>
   )
