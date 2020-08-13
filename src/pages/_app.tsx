@@ -2,6 +2,7 @@ import React from 'react'
 import { GlobalStyle } from 'style'
 import { PreviewIndicator } from 'components'
 import App, { AppProps, AppContext } from 'next/app'
+import CaseStudyPicker from 'components/CaseStudyPicker/CaseStudyPicker'
 
 type MyAppProps = AppProps & { isPreview: boolean }
 
@@ -10,6 +11,7 @@ function MyApp({ Component, pageProps, isPreview }: MyAppProps) {
     <>
       {isPreview && <PreviewIndicator />}
       <GlobalStyle />
+      <CaseStudyPicker />
       <Component {...pageProps} />
     </>
   )
