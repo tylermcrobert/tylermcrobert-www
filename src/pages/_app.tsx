@@ -4,7 +4,14 @@ import { ThemeProvider } from "styled-components"
 import GlobalStyle from "style/GlobalStyle"
 import theme from "style/theme"
 import { Nav } from "components"
-import { IPrismicCaseStudyRes, IContextRes, ISingleImage } from "types/Prismic"
+import {
+  IPrismicCaseStudyRes,
+  IContextRes,
+  ISingleImage,
+  IDoubleImage,
+  ITripleImage,
+  IWebsite,
+} from "types/Prismic"
 import Prismic from "prismic-javascript"
 import { Client } from "util/prismic"
 import useInitial from "hooks/useInitial"
@@ -37,6 +44,12 @@ const EXAMPLE = {
     "Modern camera makers have an obvious problem: everyone has a fantastic camera in their pocket. A successful camera brand in the digital age is one that accepts this. This brand refresh of Fujifilm positions Fujifilm as the tool you bring for the important moments. The rebrand works with the evolution of the digital camera by preparing the photographer for that moment: the moment that needs to be captured right. The camera in your pocket is for everything else in between.",
 }
 
+const uploadImgUrl = (url: any) =>
+  fetch(url)
+    .then((res) => res.body)
+    .then((buffer) => {
+      client.assets.upload("image", buffer)
+    })
 const MyApp = ({
   Component,
   pageProps,
@@ -51,22 +64,23 @@ const MyApp = ({
   const ctxData: IContextRes = useInitial(ctxRes)
   const caseStudiesData: IPrismicCaseStudyRes = useInitial(caseStudiesRes)
 
+  console.log(
+    caseStudiesData.results
+      .map((result) =>
+        result.data.cs_content
+          .filter((content) => content.slice_type)
+          .map(
+            (website) =>
+              ((website as unknown) as IWebsite).primary.browser_image?.url
+          )
+          .filter((url) => url)
+      )
+      .flat()
+      .forEach((url) => uploadImgUrl(url))
+  )
   caseStudiesData.results
     .filter((result) => result.uid !== "blank")
     .forEach((result) => {
-      // console.log(
-      //   result.data.cs_content
-      //     .map((item) => {
-      //       if (item.slice_type === "single_image") {
-      //         const data = (item as unknown) as ISingleImage
-      //         console.log(data.primary.image.url)
-      //         return "single image"
-      //       }
-      //       return null
-      //     })
-      //     .filter((item) => item)
-      // )
-
       const converted = {
         date: new Date(result.first_publication_date),
         publishedAt: undefined,
