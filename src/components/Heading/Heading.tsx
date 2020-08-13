@@ -14,7 +14,7 @@ export const LargeHead = styled.h1`
     }
   }
   @media ${mq.sm} {
-    font-size: ${size[5]};
+    font-size: ${size[3]};
   }
   @media ${mq.md} {
     font-size: ${size[4]};
