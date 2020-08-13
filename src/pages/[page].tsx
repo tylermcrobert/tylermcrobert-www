@@ -25,10 +25,12 @@ export const getStaticProps: GetStaticProps = async ({
   preview: isPreview = false,
   params,
 }) => {
-  const caseStudyData = await new CaseStudyRequest({
+  const caseStudyReq = new CaseStudyRequest({
     handle: params?.page?.toString() || '',
     isPreview,
-  }).fetch()
+  })
+
+  const caseStudyData = await caseStudyReq.fetch()
 
   const props: PageProps = { caseStudyData }
 
