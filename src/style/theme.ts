@@ -33,9 +33,9 @@ export const lineHeights = {
 }
 
 export const size = {
-  // standard: remScale[3],
-  // gutter: remScale[3],
-  // large: remScale[8],
+  standard: remScale[3],
+  gutter: remScale[3],
+  large: remScale[8],
   '-2': _msVar(-2),
   '-1': _msVar(-1),
   '0': _msVar(0),
