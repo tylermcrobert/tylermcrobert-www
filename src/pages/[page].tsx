@@ -23,7 +23,7 @@ const Page: React.FC<PageProps> = ({
   }
 
   return (
-    <Layout>
+    <Layout title={caseStudyData.title}>
       <CaseStudyProvider data={caseStudyData}>
         <CaseStudy />
       </CaseStudyProvider>

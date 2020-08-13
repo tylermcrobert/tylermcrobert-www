@@ -3,7 +3,7 @@ import { CaseStudyPicker, Layout } from 'components'
 
 const Home = () => {
   return (
-    <Layout>
+    <Layout title={null}>
       <CaseStudyPicker />
     </Layout>
   )
