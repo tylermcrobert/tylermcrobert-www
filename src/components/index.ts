@@ -1,5 +1,4 @@
 import CaseStudy from './CaseStudy/CaseStudy'
-import CaseStudyBody from './CaseStudyBody/CaseStudyBody'
 import CaseStudyHead from './CaseStudyHead/CaseStudyHead'
 import Wrapper from './Wrapper/Wrapper'
 import Grid from './Grid/Grid'
@@ -7,8 +6,10 @@ import { LargeHead } from './Heading/Heading'
 import Paragraph from './Paragraph/Paragraph'
 import SanityBlockContent from './SanityBlockContent/SanityBlockContent'
 import PreviewIndicator from './PreviewIndicator/PreviewIndicator'
+import CaseStudyPicker from './CaseStudyPicker/CaseStudyPicker'
 
 export {
+  CaseStudyPicker,
   PreviewIndicator,
   SanityBlockContent,
   Paragraph,
@@ -16,6 +17,5 @@ export {
   Wrapper,
   Grid,
   CaseStudy,
-  CaseStudyBody,
   CaseStudyHead,
 }

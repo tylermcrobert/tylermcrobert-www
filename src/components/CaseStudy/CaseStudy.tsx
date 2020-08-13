@@ -1,11 +1,10 @@
 import React from 'react'
-import { CaseStudyHead, CaseStudyBody } from 'components'
+import { CaseStudyHead } from 'components'
 
 const CaseStudy = () => {
   return (
     <>
       <CaseStudyHead />
-      <CaseStudyBody />
     </>
   )
 }

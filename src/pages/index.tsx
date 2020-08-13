@@ -1,7 +1,8 @@
 import React from 'react'
+import { CaseStudyPicker } from 'components'
 
 const Home = () => {
-  return <div>Hello World</div>
+  return <CaseStudyPicker />
 }
 
 export default Home
