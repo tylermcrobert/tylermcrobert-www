@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { getCaseStudies, CaseStudyRequest } from 'lib/api'
 import { CaseStudyType } from 'types'
 import Error from 'next/error'
+import { CaseStudyProvider } from 'providers'
 
 type PageProps = { caseStudyData: CaseStudyType }
 
@@ -14,10 +15,9 @@ const Page: React.FC<{ caseStudyData: CaseStudyType }> = ({
   }
 
   return (
-    <>
-      {caseStudyData.slug.current}
+    <CaseStudyProvider data={caseStudyData}>
       <CaseStudy />
-    </>
+    </CaseStudyProvider>
   )
 }
 

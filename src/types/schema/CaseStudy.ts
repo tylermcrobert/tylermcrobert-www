@@ -11,4 +11,5 @@ export type CaseStudyType = {
   description: SanityBlockContent
   slug: { current: string }
   title: string
+  intro: string
 }
