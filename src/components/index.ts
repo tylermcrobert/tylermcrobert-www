@@ -7,9 +7,11 @@ import Paragraph from './Paragraph/Paragraph'
 import SanityBlockContent from './SanityBlockContent/SanityBlockContent'
 import PreviewIndicator from './PreviewIndicator/PreviewIndicator'
 import CaseStudyPicker from './CaseStudyPicker/CaseStudyPicker'
+import WithCaseStudyPicker from './CaseStudyPicker/WithCaseStudyPicker'
 import Layout from './Layout/Layout'
 
 export {
+  WithCaseStudyPicker,
   Layout,
   CaseStudyPicker,
   PreviewIndicator,
