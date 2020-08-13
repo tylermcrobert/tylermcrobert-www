@@ -49,6 +49,30 @@ const style = css`
   h6 {
     white-space: pre-line;
   }
+
+  a {
+    color: ${colors.primary};
+    text-decoration: none;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: ${lineHeights.heading};
+  }
+
+  img,
+  video {
+    display: block;
+    width: 100%;
+  }
 `
 
 export const GlobalStyle = createGlobalStyle`
