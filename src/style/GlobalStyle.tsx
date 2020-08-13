@@ -39,6 +39,16 @@ const style = css`
       font-size: 1.3vw;
     }
   }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    white-space: pre-line;
+  }
 `
 
 export const GlobalStyle = createGlobalStyle`
