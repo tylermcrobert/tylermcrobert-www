@@ -29,7 +29,7 @@ function usePreview<T>(query: string, inputData: T, isPreview: boolean) {
     }
   }, [query, isPreview])
 
-  return previewData
+  return isPreview ? previewData : inputData
 }
 
 export default usePreview
