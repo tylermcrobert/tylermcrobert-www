@@ -1,15 +1,18 @@
 import React from 'react'
 import { PreviewIndicator } from 'components'
 import App, { AppProps, AppContext } from 'next/app'
+import { getContexts } from 'lib/api'
+import { AppProvider } from 'providers'
+import { CsContext } from 'types'
 
-type MyAppProps = AppProps & { isPreview: boolean }
+type MyAppProps = AppProps & { isPreview: boolean; contexts: CsContext[] }
 
-function MyApp({ Component, pageProps, isPreview }: MyAppProps) {
+function MyApp({ Component, pageProps, isPreview, contexts }: MyAppProps) {
   return (
-    <>
+    <AppProvider contexts={contexts}>
       {isPreview && <PreviewIndicator />}
       <Component {...pageProps} />
-    </>
+    </AppProvider>
   )
 }
 
@@ -19,8 +22,11 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const isPreview =
     appContext.ctx.req?.headers.cookie?.includes('__next_preview_data') || false
 
+  const contexts = await getContexts(true)
+
   return {
     ...appProps,
+    contexts,
     isPreview,
   }
 }

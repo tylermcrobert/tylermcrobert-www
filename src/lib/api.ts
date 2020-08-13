@@ -1,5 +1,5 @@
 import { client, previewClient } from 'lib/sanity'
-import { CaseStudyType } from 'types'
+import { CaseStudyType, CsContext } from 'types'
 
 export const getClient = (isPreview: boolean) =>
   isPreview ? previewClient : client
@@ -71,4 +71,17 @@ export class CaseStudyRequest extends _HandleRequest<CaseStudyType> {
 
 export const getCaseStudies = async (): Promise<CaseStudyType[]> => {
   return getClient(true).fetch(`*[_type == 'caseStudy']`)
+}
+
+/**
+ * Gets a list of CS Contexts
+ * @param isPreview Should drafts be used?
+ */
+export const getContexts = async (isPreview: boolean): Promise<CsContext[]> => {
+  return getClient(isPreview).fetch(`
+    *[_type == 'context']{
+      ...,
+      caseStudies[] -> { title, slug }
+    }
+  `)
 }
