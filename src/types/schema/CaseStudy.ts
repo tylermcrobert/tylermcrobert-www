@@ -1,4 +1,4 @@
-import { SanityBlockContent, SanityImage } from 'types/sanityTypes'
+import { SanityBlockContent, SanityImage, SanityColor } from 'types/sanityTypes'
 
 export type CaseStudyType = {
   _createdAt: string
@@ -19,6 +19,8 @@ export type CaseStudyModule =
   | ModuleSingleImage
   | ModuleDoubleImage
   | ModuleTripleImage
+  | ModuleWebsite
+  | ModuleText
 
 export type ModuleSingleImage = {
   _key: string
@@ -43,5 +45,22 @@ export type ModuleTripleImage = {
   secondaryImage2: SanityImage
 }
 
-export type ModuleWebsite = {}
-export type ModuleText = {}
+export type ModuleWebsite = {
+  _key: '6996e601d103'
+  _type: 'website'
+  backgroundColor: {
+    _ref: 'ce45323a-b11d-43ae-bcf4-af66f7b99c50'
+    _type: 'reference'
+  }
+  media: SanityImage[]
+  theme: {
+    background: SanityColor
+    dots?: SanityColor
+    frame: SanityColor
+  }
+}
+
+export type ModuleText = {
+  _type: 'text'
+  _key: string
+}

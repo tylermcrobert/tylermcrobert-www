@@ -52,6 +52,9 @@ export default {
       name: 'modules',
       type: 'array',
       of: [
+        /**
+         * Single Image
+         */
         {
           name: 'singleImage',
           type: 'object',
@@ -59,9 +62,13 @@ export default {
             {
               name: 'image',
               type: 'image',
+              validation: Rule => Rule.required(),
             },
           ],
         },
+        /**
+         * Double Image
+         */
         {
           name: 'doubleImage',
           type: 'object',
@@ -69,10 +76,12 @@ export default {
             {
               name: 'leftImage',
               type: 'image',
+              validation: Rule => Rule.required(),
             },
             {
               name: 'rightImage',
               type: 'image',
+              validation: Rule => Rule.required(),
             },
             {
               name: 'aspect',
@@ -86,6 +95,9 @@ export default {
             },
           ],
         },
+        /**
+         * Triple Image
+         */
         {
           name: 'tripleImage',
           type: 'object',
@@ -93,19 +105,49 @@ export default {
             {
               name: 'mainImage',
               type: 'image',
+              validation: Rule => Rule.required(),
             },
             {
               name: 'secondaryImage1',
               type: 'image',
+              validation: Rule => Rule.required(),
             },
             {
               name: 'secondaryImage2',
               type: 'image',
+              validation: Rule => Rule.required(),
             },
             {
               name: 'imageRight',
               title: 'Put main image on left',
               type: 'boolean',
+            },
+          ],
+        },
+        /**
+         * Website
+         */
+
+        {
+          name: 'website',
+          type: 'object',
+          fields: [
+            {
+              name: 'media',
+              type: 'array',
+              of: [
+                {
+                  name: 'image',
+                  type: 'image',
+                },
+              ],
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'theme',
+              type: 'reference',
+              to: [{ type: 'webFrameTheme' }],
+              validation: Rule => Rule.required(),
             },
           ],
         },

@@ -64,7 +64,14 @@ export class CaseStudyRequest extends _HandleRequest<CaseStudyType> {
   constructor(props: ApiRequestInput) {
     super(props)
     this.query = `
-      *[slug.current == '${props.handle}' && _type == "caseStudy"]
+      *[slug.current == 'test' && _type == "caseStudy"]{
+        ...,
+        modules[] {
+          ...,
+          'theme': theme -> { background, dots, frame }
+        }
+      }
+
     `
   }
 }
