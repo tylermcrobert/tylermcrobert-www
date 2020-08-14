@@ -6,6 +6,7 @@ import {
   ModuleTripleImage,
   Grid,
   ModuleWebsite,
+  ModuleText,
 } from 'components'
 
 const Modules = () => {
@@ -23,6 +24,8 @@ const Modules = () => {
             return <ModuleTripleImage key={module._key} data={module} />
           case 'website':
             return <ModuleWebsite key={module._key} data={module} />
+          case 'textBlock':
+            return <ModuleText key={module._key} data={module} />
           default:
             return null
         }

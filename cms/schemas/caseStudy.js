@@ -1,3 +1,5 @@
+import { string } from 'prop-types'
+
 const ASPECT = [
   [4, 3],
   [3, 2],
@@ -198,6 +200,14 @@ export default {
               name: 'content',
               type: 'array',
               of: [{ type: 'block' }],
+            },
+            {
+              name: 'position',
+              type: 'string',
+              options: {
+                layout: 'radio',
+                list: ['left', 'right'],
+              },
             },
           ],
           preview: {

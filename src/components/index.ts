@@ -14,10 +14,10 @@ import ModuleSingleImage from './ModuleSingleImage/ModuleSingleImage'
 import ModuleDoubleImage from './ModuleDoubleImage/ModuleDoubleImage'
 import ModuleTripleImage from './ModuleTripleImage/ModuleTripleImage'
 import ModuleWebsite from './ModuleWebsite/ModuleWebsite'
-import Text from './ModuleText/ModuleText'
+import ModuleText from './ModuleText/ModuleText'
 
 export {
-  Text,
+  ModuleText,
   ModuleSingleImage,
   ModuleDoubleImage,
   ModuleTripleImage,

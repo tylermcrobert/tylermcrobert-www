@@ -61,6 +61,8 @@ export type ModuleWebsite = {
 }
 
 export type ModuleText = {
-  _type: 'text'
   _key: string
+  _type: 'textBlock'
+  content?: SanityBlockContent
+  position?: 'left' | 'right'
 }
