@@ -10,8 +10,18 @@ import CaseStudyPicker from './CaseStudyPicker/CaseStudyPicker'
 import WithCaseStudyPicker from './CaseStudyPicker/WithCaseStudyPicker'
 import Layout from './Layout/Layout'
 import Modules from './Modules/Modules'
+import ModuleSingleImage from './ModuleSingleImage/ModuleSingleImage'
+import ModuleDoubleImage from './ModuleDoubleImage/ModuleDoubleImage'
+import ModuleTripleImage from './ModuleTripleImage/ModuleTripleImage'
+import ModuleWebsite from './ModuleWebsite/ModuleWebsite'
+import Text from './ModuleText/ModuleText'
 
 export {
+  Text,
+  ModuleSingleImage,
+  ModuleDoubleImage,
+  ModuleTripleImage,
+  ModuleWebsite,
   Modules,
   WithCaseStudyPicker,
   Layout,

@@ -1,4 +1,4 @@
-import { SanityBlockContent } from 'types/sanityTypes'
+import { SanityBlockContent, SanityImage } from 'types/sanityTypes'
 
 export type CaseStudyType = {
   _createdAt: string
@@ -12,9 +12,36 @@ export type CaseStudyType = {
   slug: { current: string }
   title: string
   intro: string
-  modules: CaseStudyModule | CaseStudyModule
+  modules: CaseStudyModule[]
 }
 
-type CaseStudyModule = ModuleSingleImage
+export type CaseStudyModule =
+  | ModuleSingleImage
+  | ModuleDoubleImage
+  | ModuleTripleImage
 
-type ModuleSingleImage = { src: string }
+export type ModuleSingleImage = {
+  _key: string
+  _type: 'singleImage'
+  image: SanityImage
+}
+
+export type ModuleDoubleImage = {
+  _key: string
+  _type: 'doubleImage'
+  leftImage: SanityImage
+  rightImage: SanityImage
+  aspect?: number
+}
+
+export type ModuleTripleImage = {
+  _key: string
+  _type: 'tripleImage'
+  imageRight: false
+  mainImage: SanityImage
+  secondaryImage1: SanityImage
+  secondaryImage2: SanityImage
+}
+
+export type ModuleWebsite = {}
+export type ModuleText = {}

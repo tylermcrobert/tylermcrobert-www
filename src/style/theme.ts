@@ -1,4 +1,5 @@
 import modularScale from './modularScale'
+import { ResponsiveSizes, ResponsiveImgSizeBlock } from 'types'
 
 /**
  * Utils
@@ -56,7 +57,8 @@ export const size = {
   '15': _msVar(15),
 }
 
-export const responsiveSizes = {
+export const responsiveSizes: ResponsiveSizes = {
+  xxs: 0,
   xl: 1900,
   lg: 1440,
   md: 1024,

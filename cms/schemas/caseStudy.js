@@ -1,3 +1,20 @@
+const ASPECT = [
+  [4, 3],
+  [3, 2],
+  [16, 10],
+  [16, 9],
+]
+  .reduce(
+    (acc, [one, two]) => [
+      ...acc,
+      { num: one / two, aspect: `Portrait - ${one}:${two}` },
+      { num: two / one, aspect: `Landscape – ${two}:${one}` },
+    ],
+    []
+  )
+  .map(crop => ({ ...crop, num: Math.round(crop.num * 100) / 100 }))
+  .sort((a, b) => a.num - b.num)
+
 export default {
   type: 'document',
   name: 'caseStudy',
@@ -58,8 +75,14 @@ export default {
               type: 'image',
             },
             {
-              name: 'strictCrop',
-              type: 'boolean',
+              name: 'aspect',
+              type: 'number',
+              options: {
+                list: ASPECT.map(({ num, aspect }) => ({
+                  value: num,
+                  title: aspect,
+                })),
+              },
             },
           ],
         },
