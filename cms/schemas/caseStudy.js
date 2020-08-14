@@ -206,6 +206,9 @@ export default {
                 {
                   name: 'image',
                   type: 'image',
+                  options: {
+                    hotspot: true,
+                  },
                 },
               ],
               validation: Rule => Rule.required(),
