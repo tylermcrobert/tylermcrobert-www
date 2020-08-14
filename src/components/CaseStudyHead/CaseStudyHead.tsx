@@ -1,18 +1,22 @@
 import React from 'react'
-import { useCaseStudy } from 'hooks'
+import { useCaseStudy, useApp } from 'hooks'
 import { LargeHead, SanityBlockContent } from 'components'
 import { NUMBERS, UNICODE } from '../../constants'
 import S from './CaseStudyHead.Styled'
 
-const CS_INDEX = 0
 const CaseStudyHead = () => {
-  const { title, intro, date, deliverables, description } = useCaseStudy()
-  const index = CS_INDEX
+  const appData = useApp()
+  const { title, intro, date, deliverables, description, slug } = useCaseStudy()
+
+  const number =
+    appData.context.caseStudies.findIndex(
+      cs => cs.slug.current === slug.current
+    ) + 1
 
   return (
     <S.Intro>
       <h1>
-        {NUMBERS[index + 1]} {title}
+        {NUMBERS[number]} {title}
       </h1>
       <LargeHead as="h2">{intro}</LargeHead>
       <S.Deliverables>
