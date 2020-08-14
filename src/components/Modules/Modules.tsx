@@ -7,6 +7,8 @@ import {
   Grid,
   ModuleWebsite,
   ModuleText,
+  ModuleDynamicImage,
+  ModuleSpacer,
 } from 'components'
 
 const Modules = () => {
@@ -26,6 +28,10 @@ const Modules = () => {
             return <ModuleWebsite key={module._key} data={module} />
           case 'textBlock':
             return <ModuleText key={module._key} data={module} />
+          case 'dynamicImage':
+            return <ModuleDynamicImage key={module._key} data={module} />
+          case 'spacer':
+            return <ModuleSpacer key={module._key} data={module} />
           default:
             return null
         }

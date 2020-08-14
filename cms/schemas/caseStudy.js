@@ -58,6 +58,44 @@ export default {
         /**
          * Single Image
          */
+
+        {
+          name: 'dynamicImage',
+          type: 'object',
+          fields: [
+            {
+              name: 'image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            },
+
+            {
+              name: 'aspect',
+              type: 'number',
+              options: {
+                list: ASPECT.map(({ num, aspect }) => ({
+                  value: num,
+                  title: aspect,
+                })),
+              },
+            },
+
+            {
+              name: 'span',
+              type: 'string',
+              options: {
+                layout: 'radio',
+                list: ['full', 'half'],
+              },
+            },
+          ],
+        },
+
+        /**
+         * Single Image
+         */
         {
           name: 'singleImage',
           type: 'object',
@@ -200,19 +238,29 @@ export default {
               type: 'array',
               of: [{ type: 'block' }],
             },
-            {
-              name: 'position',
-              type: 'string',
-              options: {
-                layout: 'radio',
-                list: ['left', 'right'],
-              },
-            },
           ],
           preview: {
             select: {
               title: 'content',
             },
+          },
+        },
+
+        /**
+         * Text
+         */
+
+        {
+          name: 'spacer',
+          type: 'object',
+          fields: [
+            {
+              name: 'uselessInput',
+              type: 'string',
+            },
+          ],
+          preview: {
+            prepare: prev => ({ ...prev, title: 'Spacer' }),
           },
         },
       ],

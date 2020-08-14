@@ -15,8 +15,12 @@ import ModuleDoubleImage from './ModuleDoubleImage/ModuleDoubleImage'
 import ModuleTripleImage from './ModuleTripleImage/ModuleTripleImage'
 import ModuleWebsite from './ModuleWebsite/ModuleWebsite'
 import ModuleText from './ModuleText/ModuleText'
+import ModuleDynamicImage from './ModuleDynamicImage/ModuleDynamicImage'
+import ModuleSpacer from './ModuleSpacer/ModuleSpacer'
 
 export {
+  ModuleSpacer,
+  ModuleDynamicImage,
   ModuleText,
   ModuleSingleImage,
   ModuleDoubleImage,

@@ -21,6 +21,8 @@ export type CaseStudyModule =
   | ModuleTripleImage
   | ModuleWebsite
   | ModuleText
+  | ModuleDynamicImage
+  | ModuleSpacer
 
 export type ModuleSingleImage = {
   _key: string
@@ -64,5 +66,17 @@ export type ModuleText = {
   _key: string
   _type: 'textBlock'
   content?: SanityBlockContent
-  position?: 'left' | 'right'
+}
+
+export type ModuleDynamicImage = {
+  _key: string
+  _type: 'dynamicImage'
+  image?: SanityImage
+  span?: 'full' | 'half'
+  aspect?: number
+}
+
+export type ModuleSpacer = {
+  _key: string
+  _type: 'spacer'
 }

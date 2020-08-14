@@ -8,14 +8,11 @@ interface IProps {
 }
 
 const Text: React.FC<IProps> = ({ data }) => {
-  const contents = [
-    <S.Text key="1">
+  return (
+    <S.Text>
       {data.content && <SanityBlockContent blocks={data.content} />}
-    </S.Text>,
-    <S.Ghost key="2" />,
-  ]
-
-  return <>{data.position === 'right' ? [...contents].reverse() : contents}</>
+    </S.Text>
+  )
 }
 
 export default Text
