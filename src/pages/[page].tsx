@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async ({
     isPreview,
   })
 
-  const caseStudyData = await caseStudyReq.fetch()
+  const caseStudyData = (await caseStudyReq.fetch()) || null
   const query = caseStudyReq.query
 
   const props: PageProps = { caseStudyData, query, isPreview }
