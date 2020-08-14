@@ -47,6 +47,16 @@ export type ModuleTripleImage = {
   secondaryImage2: SanityImage
 }
 
+type Media =
+  | {
+      _key: string
+      _type: 'video'
+      video?: {
+        url?: string
+      }
+    }
+  | (SanityImage & { _type: 'image' })
+
 export type ModuleWebsite = {
   _key: '6996e601d103'
   _type: 'website'
@@ -54,7 +64,7 @@ export type ModuleWebsite = {
     _ref: 'ce45323a-b11d-43ae-bcf4-af66f7b99c50'
     _type: 'reference'
   }
-  media?: SanityImage[]
+  media?: Media[]
   theme?: {
     background?: SanityColor
     dots?: SanityColor

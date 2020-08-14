@@ -10,7 +10,9 @@ interface IProps {
 
 const Website: React.FC<IProps> = ({ data }) => {
   const { media: mediaArr, theme } = data
-  const media = (mediaArr || [])[0]
+  const media = mediaArr && mediaArr[0]
+
+  const videoUrl = (media?._type === 'video' && media.video?.url) || null
 
   return (
     <S.BrowserBackground backgroundColor={theme?.background?.hex}>
@@ -23,11 +25,7 @@ const Website: React.FC<IProps> = ({ data }) => {
               alt=""
             />
           )}
-          {/* {media && media.url && (
-            <video autoPlay muted playsInline loop>
-              <source src={media.url} />
-            </video>
-          )} */}
+          {videoUrl && <video autoPlay muted playsInline loop src={videoUrl} />}
         </div>
       </S.Browser>
     </S.BrowserBackground>

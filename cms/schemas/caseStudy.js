@@ -210,9 +210,20 @@ export default {
                     hotspot: true,
                   },
                 },
+                {
+                  name: 'video',
+                  type: 'object',
+                  fields: [
+                    {
+                      name: 'videoFile',
+                      type: 'file',
+                    },
+                  ],
+                },
               ],
               validation: Rule => Rule.required(),
             },
+
             {
               name: 'theme',
               type: 'reference',

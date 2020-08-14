@@ -68,7 +68,11 @@ export class CaseStudyRequest extends _HandleRequest<CaseStudyType> {
         ...,
         modules[] {
           ...,
-          'theme': theme -> { background, dots, frame }
+          'theme': theme -> { background, dots, frame },
+          media[]{
+            ...,
+            'video': videoFile.asset-> { url }
+          }
         }
       }
     `
