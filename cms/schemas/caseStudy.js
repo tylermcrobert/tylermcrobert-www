@@ -18,6 +18,8 @@ const ASPECT = [
   .map(crop => ({ ...crop, num: Math.round(crop.num * 100) / 100 }))
   .sort((a, b) => a.num - b.num)
 
+const toUppercase = s => s.charAt(0).toUpperCase() + s.substring(1)
+
 export default {
   type: 'document',
   name: 'caseStudy',
@@ -60,6 +62,7 @@ export default {
          */
 
         {
+          title: 'Image',
           name: 'dynamicImage',
           type: 'object',
           fields: [
@@ -91,105 +94,117 @@ export default {
               },
             },
           ],
-        },
-
-        /**
-         * Single Image
-         */
-        {
-          name: 'singleImage',
-          type: 'object',
-          fields: [
-            {
-              name: 'image',
-              type: 'image',
-              validation: Rule => Rule.required(),
-              options: {
-                hotspot: true,
-              },
-            },
-          ],
           preview: {
             select: {
               media: 'image',
+              layout: 'span',
             },
-            prepare: prev => ({ ...prev, title: 'Single Image' }),
+            prepare: prev => {
+              return {
+                ...prev,
+                title: `${prev.layout ? toUppercase(prev.layout) : ''} Image`,
+              }
+            },
           },
         },
-        /**
-         * Double Image
-         */
-        {
-          name: 'doubleImage',
-          type: 'object',
-          fields: [
-            {
-              name: 'leftImage',
-              type: 'image',
-              options: {
-                hotspot: true,
-              },
-            },
-            {
-              name: 'rightImage',
-              type: 'image',
-              options: {
-                hotspot: true,
-              },
-            },
-            {
-              name: 'aspect',
-              type: 'number',
-              options: {
-                list: ASPECT.map(({ num, aspect }) => ({
-                  value: num,
-                  title: aspect,
-                })),
-              },
-            },
-          ],
-          preview: {
-            select: {
-              media: 'leftImage',
-            },
-            prepare: prev => ({ ...prev, title: 'Double Image' }),
-          },
-        },
-        /**
-         * Triple Image
-         */
-        {
-          name: 'tripleImage',
-          type: 'object',
-          fields: [
-            {
-              name: 'mainImage',
-              type: 'image',
-              validation: Rule => Rule.required(),
-            },
-            {
-              name: 'secondaryImage1',
-              type: 'image',
-              validation: Rule => Rule.required(),
-            },
-            {
-              name: 'secondaryImage2',
-              type: 'image',
-              validation: Rule => Rule.required(),
-            },
-            {
-              name: 'imageRight',
-              title: 'Put main image on left',
-              type: 'boolean',
-            },
-          ],
-          preview: {
-            select: {
-              media: 'mainImage',
-            },
-            prepare: prev => ({ ...prev, title: 'Triple Image' }),
-          },
-        },
+
+        // /**
+        //  * Single Image
+        //  */
+        // {
+        //   name: 'singleImage',
+        //   type: 'object',
+        //   fields: [
+        //     {
+        //       name: 'image',
+        //       type: 'image',
+        //       validation: Rule => Rule.required(),
+        //       options: {
+        //         hotspot: true,
+        //       },
+        //     },
+        //   ],
+        //   preview: {
+        //     select: {
+        //       media: 'image',
+        //     },
+        //     prepare: prev => ({ ...prev, title: 'Single Image' }),
+        //   },
+        // },
+        // /**
+        //  * Double Image
+        //  */
+        // {
+        //   name: 'doubleImage',
+        //   type: 'object',
+        //   fields: [
+        //     {
+        //       name: 'leftImage',
+        //       type: 'image',
+        //       options: {
+        //         hotspot: true,
+        //       },
+        //     },
+        //     {
+        //       name: 'rightImage',
+        //       type: 'image',
+        //       options: {
+        //         hotspot: true,
+        //       },
+        //     },
+        //     {
+        //       name: 'aspect',
+        //       type: 'number',
+        //       options: {
+        //         list: ASPECT.map(({ num, aspect }) => ({
+        //           value: num,
+        //           title: aspect,
+        //         })),
+        //       },
+        //     },
+        //   ],
+        //   preview: {
+        //     select: {
+        //       media: 'leftImage',
+        //     },
+        //     prepare: prev => ({ ...prev, title: 'Double Image' }),
+        //   },
+        // },
+        // /**
+        //  * Triple Image
+        //  */
+        // {
+        //   name: 'tripleImage',
+        //   type: 'object',
+        //   fields: [
+        //     {
+        //       name: 'mainImage',
+        //       type: 'image',
+        //       validation: Rule => Rule.required(),
+        //     },
+        //     {
+        //       name: 'secondaryImage1',
+        //       type: 'image',
+        //       validation: Rule => Rule.required(),
+        //     },
+        //     {
+        //       name: 'secondaryImage2',
+        //       type: 'image',
+        //       validation: Rule => Rule.required(),
+        //     },
+        //     {
+        //       name: 'imageRight',
+        //       title: 'Put main image on left',
+        //       type: 'boolean',
+        //     },
+        //   ],
+        //   preview: {
+        //     select: {
+        //       media: 'mainImage',
+        //     },
+        //     prepare: prev => ({ ...prev, title: 'Triple Image' }),
+        //   },
+        // },
 
         /**
          * Website
