@@ -17,8 +17,10 @@ import ModuleWebsite from './ModuleWebsite/ModuleWebsite'
 import ModuleText from './ModuleText/ModuleText'
 import ModuleDynamicImage from './ModuleDynamicImage/ModuleDynamicImage'
 import ModuleSpacer from './ModuleSpacer/ModuleSpacer'
+import Nav from './Nav/Nav'
 
 export {
+  Nav,
   ModuleSpacer,
   ModuleDynamicImage,
   ModuleText,
