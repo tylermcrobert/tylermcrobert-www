@@ -10,7 +10,7 @@ const CaseStudyHead = () => {
 
   const number =
     appData.context.caseStudies.findIndex(
-      cs => cs.slug.current === slug.current
+      cs => cs.slug.current === slug?.current
     ) + 1
 
   return (
@@ -20,11 +20,11 @@ const CaseStudyHead = () => {
       </h1>
       <LargeHead as="h2">{intro}</LargeHead>
       <S.Deliverables>
-        <p>{date.split('.')[0]}</p>
-        <p>{deliverables.join(` ${UNICODE.CIRCLE}${UNICODE.NBSP}`)}</p>
+        <p>{date?.split('.')[0]}</p>
+        <p>{deliverables?.join(` ${UNICODE.CIRCLE}${UNICODE.NBSP}`)}</p>
       </S.Deliverables>
       <S.Desc>
-        <SanityBlockContent blocks={description} />
+        {description && <SanityBlockContent blocks={description} />}
       </S.Desc>
     </S.Intro>
   )

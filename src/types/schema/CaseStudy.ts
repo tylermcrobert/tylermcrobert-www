@@ -6,12 +6,12 @@ export type CaseStudyType = {
   _rev: string
   _type: string
   _updatedAt: string
-  date: string
-  deliverables: string[]
-  description: SanityBlockContent
-  slug: { current: string }
-  title: string
-  intro: string
+  date?: string
+  deliverables?: string[]
+  description?: SanityBlockContent
+  slug?: { current: string }
+  title?: string
+  intro?: string
   modules: CaseStudyModule[]
 }
 
