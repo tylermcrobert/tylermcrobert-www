@@ -1,7 +1,7 @@
-import styled from "styled-components"
-import { mq } from "style"
+import styled from 'styled-components'
+import { mq } from 'style'
 
-const Img = styled.img`
+const Img = styled.div`
   @media ${mq.sm} {
     grid-column: span 3;
   }

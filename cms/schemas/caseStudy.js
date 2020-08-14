@@ -1,6 +1,7 @@
 import { string } from 'prop-types'
 
 const ASPECT = [
+  [5, 4],
   [4, 3],
   [3, 2],
   [16, 10],
@@ -87,7 +88,6 @@ export default {
             {
               name: 'leftImage',
               type: 'image',
-              validation: Rule => Rule.required(),
               options: {
                 hotspot: true,
               },
@@ -95,7 +95,6 @@ export default {
             {
               name: 'rightImage',
               type: 'image',
-              validation: Rule => Rule.required(),
               options: {
                 hotspot: true,
               },

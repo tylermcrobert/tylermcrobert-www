@@ -13,8 +13,12 @@ const DoubleImage: React.FC<{ data: ModuleDoubleImage }> = ({ data }) => {
     })
   return (
     <>
-      <S.Img {...img(data.leftImage)} alt={alt} />
-      <S.Img {...img(data.rightImage)} alt={alt} />
+      <S.Img>
+        {data.leftImage && <img {...img(data.leftImage)} alt={alt} />}
+      </S.Img>
+      <S.Img>
+        {data.rightImage && <img {...img(data.rightImage)} alt={alt} />}
+      </S.Img>
     </>
   )
 }

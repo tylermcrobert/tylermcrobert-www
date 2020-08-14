@@ -31,8 +31,8 @@ export type ModuleSingleImage = {
 export type ModuleDoubleImage = {
   _key: string
   _type: 'doubleImage'
-  leftImage: SanityImage
-  rightImage: SanityImage
+  leftImage?: SanityImage
+  rightImage?: SanityImage
   aspect?: number
 }
 
