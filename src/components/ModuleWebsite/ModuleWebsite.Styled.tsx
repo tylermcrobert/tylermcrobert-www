@@ -1,7 +1,8 @@
-import styled from "styled-components"
+import styled from 'styled-components'
+import { colors } from 'style'
 
 const BrowserBackground = styled.div<{ backgroundColor?: string }>`
-  background: ${props => props.backgroundColor || props.theme.colors.primary};
+  background: ${props => props.backgroundColor || colors.primary};
   grid-column: span 6;
 `
 

@@ -32,6 +32,8 @@ class ApiRequest<T> {
       .then(res => {
         return (
           res.filter((item: any) => {
+            console.log(item)
+
             const isDraft = item._id.startsWith('drafts.')
             return this.isPreview ? isDraft : !isDraft
           })[0] || res[0]

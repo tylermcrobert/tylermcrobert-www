@@ -65,6 +65,12 @@ export default {
               validation: Rule => Rule.required(),
             },
           ],
+          preview: {
+            select: {
+              media: 'image',
+            },
+            prepare: prev => ({ ...prev, title: 'Single Image' }),
+          },
         },
         /**
          * Double Image
@@ -94,6 +100,12 @@ export default {
               },
             },
           ],
+          preview: {
+            select: {
+              media: 'leftImage',
+            },
+            prepare: prev => ({ ...prev, title: 'Double Image' }),
+          },
         },
         /**
          * Triple Image
@@ -123,6 +135,12 @@ export default {
               type: 'boolean',
             },
           ],
+          preview: {
+            select: {
+              media: 'mainImage',
+            },
+            prepare: prev => ({ ...prev, title: 'Triple Image' }),
+          },
         },
         /**
          * Website
@@ -150,6 +168,12 @@ export default {
               validation: Rule => Rule.required(),
             },
           ],
+          preview: {
+            select: {
+              media: 'media.0',
+            },
+            prepare: prev => ({ ...prev, title: 'Website' }),
+          },
         },
       ],
     },

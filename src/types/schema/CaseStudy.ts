@@ -52,11 +52,11 @@ export type ModuleWebsite = {
     _ref: 'ce45323a-b11d-43ae-bcf4-af66f7b99c50'
     _type: 'reference'
   }
-  media: SanityImage[]
-  theme: {
-    background: SanityColor
+  media?: SanityImage[]
+  theme?: {
+    background?: SanityColor
     dots?: SanityColor
-    frame: SanityColor
+    frame?: SanityColor
   }
 }
 

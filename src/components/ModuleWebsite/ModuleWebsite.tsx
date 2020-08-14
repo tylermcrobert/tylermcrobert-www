@@ -9,19 +9,15 @@ interface IProps {
 }
 
 const Website: React.FC<IProps> = ({ data }) => {
-  const {
-    media: mediaArr,
-    theme: { frame, background, dots },
-  } = data
-
-  const media = mediaArr[0]
+  const { media: mediaArr, theme } = data
+  const media = (mediaArr || [])[0]
 
   return (
-    <S.BrowserBackground backgroundColor={background.hex}>
+    <S.BrowserBackground backgroundColor={theme?.background?.hex}>
       <S.Browser>
         <div>
-          <BrowserFrame color={frame.hex} dots={dots?.hex} />
-          {media._type === 'image' && (
+          <BrowserFrame color={theme?.frame?.hex} dots={theme?.dots?.hex} />
+          {media?._type === 'image' && (
             <img
               {...getResponsiveImgProps({ img: media, sizes: { xxs: '90vw' } })}
               alt=""
