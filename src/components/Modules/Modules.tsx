@@ -12,7 +12,7 @@ const Modules = () => {
 
   return (
     <Grid>
-      {modules.map(module => {
+      {(modules || []).map(module => {
         switch (module._type) {
           case 'singleImage':
             return <ModuleSingleImage key={module._key} data={module} />
