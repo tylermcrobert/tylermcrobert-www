@@ -63,6 +63,9 @@ export default {
               name: 'image',
               type: 'image',
               validation: Rule => Rule.required(),
+              options: {
+                hotspot: true,
+              },
             },
           ],
           preview: {
@@ -83,11 +86,17 @@ export default {
               name: 'leftImage',
               type: 'image',
               validation: Rule => Rule.required(),
+              options: {
+                hotspot: true,
+              },
             },
             {
               name: 'rightImage',
               type: 'image',
               validation: Rule => Rule.required(),
+              options: {
+                hotspot: true,
+              },
             },
             {
               name: 'aspect',
@@ -142,6 +151,7 @@ export default {
             prepare: prev => ({ ...prev, title: 'Triple Image' }),
           },
         },
+
         /**
          * Website
          */
@@ -173,6 +183,27 @@ export default {
               media: 'media.0',
             },
             prepare: prev => ({ ...prev, title: 'Website' }),
+          },
+        },
+
+        /**
+         * Text
+         */
+
+        {
+          name: 'textBlock',
+          type: 'object',
+          fields: [
+            {
+              name: 'content',
+              type: 'array',
+              of: [{ type: 'block' }],
+            },
+          ],
+          preview: {
+            select: {
+              title: 'content',
+            },
           },
         },
       ],
