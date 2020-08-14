@@ -57,6 +57,10 @@ export default {
               name: 'rightImage',
               type: 'image',
             },
+            {
+              name: 'strictCrop',
+              type: 'boolean',
+            },
           ],
         },
         {
@@ -74,6 +78,11 @@ export default {
             {
               name: 'secondaryImage2',
               type: 'image',
+            },
+            {
+              name: 'imageRight',
+              title: 'Put main image on left',
+              type: 'boolean',
             },
           ],
         },
