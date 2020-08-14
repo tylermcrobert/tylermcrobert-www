@@ -24,7 +24,7 @@ const Page: React.FC<PageProps> = ({
   }
 
   return (
-    <Layout title={caseStudyData.title}>
+    <Layout title={caseStudyData?.title || null}>
       <CaseStudyProvider data={caseStudyData}>
         <CaseStudy />
       </CaseStudyProvider>
@@ -53,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: caseStudies.map(cs => ({
-      params: { page: cs.slug.current },
+      params: { page: cs.slug?.current },
     })),
 
     fallback: true,
