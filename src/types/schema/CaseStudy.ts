@@ -12,4 +12,9 @@ export type CaseStudyType = {
   slug: { current: string }
   title: string
   intro: string
+  modules: CaseStudyModule | CaseStudyModule
 }
+
+type CaseStudyModule = ModuleSingleImage
+
+type ModuleSingleImage = { src: string }

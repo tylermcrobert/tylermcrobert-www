@@ -1,10 +1,14 @@
 import React from 'react'
-import { CaseStudyHead, WithCaseStudyPicker } from 'components'
+import { CaseStudyHead, WithCaseStudyPicker, Modules } from 'components'
+import S from './CaseStudy.Styled'
 
 const CaseStudy = () => {
   return (
     <WithCaseStudyPicker>
-      <CaseStudyHead />
+      <S.Wrapper>
+        <CaseStudyHead />
+        <Modules />
+      </S.Wrapper>
     </WithCaseStudyPicker>
   )
 }

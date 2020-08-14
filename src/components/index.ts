@@ -9,8 +9,10 @@ import PreviewIndicator from './PreviewIndicator/PreviewIndicator'
 import CaseStudyPicker from './CaseStudyPicker/CaseStudyPicker'
 import WithCaseStudyPicker from './CaseStudyPicker/WithCaseStudyPicker'
 import Layout from './Layout/Layout'
+import Modules from './Modules/Modules'
 
 export {
+  Modules,
   WithCaseStudyPicker,
   Layout,
   CaseStudyPicker,
