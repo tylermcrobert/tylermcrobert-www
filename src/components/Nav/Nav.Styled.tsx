@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from 'style'
+import { colors, zIndex } from 'style'
 
 const Nav = styled.nav`
   padding: 0.5rem 0;
@@ -8,7 +8,7 @@ const Nav = styled.nav`
   left: 0;
 
   mix-blend-mode: difference;
-  z-index: 30;
+  z-index: ${zIndex.previewIndicator};
   width: 100%;
 
   color: ${colors.secondary};

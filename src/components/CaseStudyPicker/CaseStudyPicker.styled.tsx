@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { size } from 'style'
+import { size, colors } from 'style'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   overflow-y: scroll;
   display: grid;
   align-items: center;
+  background: ${colors.secondary};
+
   li,
   a,
   h1 {
