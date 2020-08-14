@@ -65,3 +65,8 @@ export const responsiveSizes: ResponsiveSizes = {
   sm: 768,
   xs: 576,
 }
+
+export const zIndex = {
+  previewIndicator: 100,
+  caseStudyOverlay: 20,
+}

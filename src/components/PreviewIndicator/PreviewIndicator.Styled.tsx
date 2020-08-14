@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { size } from 'style'
+import { size, zIndex } from 'style'
 
 const Wrapper = styled.div<{ enabled: boolean }>`
   background: orange;
@@ -22,6 +22,7 @@ const Wrapper = styled.div<{ enabled: boolean }>`
   transform: scale(${p => (p.enabled ? 1 : 0.5)});
   transition: 200ms width ease, 200ms transform ease;
   transform-origin: bottom left;
+  z-index: ${zIndex.previewIndicator};
 
   > div {
     opacity: ${p => (p.enabled ? 1 : 0)};
