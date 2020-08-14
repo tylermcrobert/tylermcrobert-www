@@ -36,7 +36,7 @@ const style = css`
       font-size: 21px;
     }
     @media ${mq.lg} {
-      font-size: 1.3vw;
+      font-size: calc(8px + 1vw);
     }
   }
 
