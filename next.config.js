@@ -21,5 +21,7 @@ module.exports = {
 
   env: {
     SANITY_TOKEN: process.env.SANITY_TOKEN,
+    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
   },
 }

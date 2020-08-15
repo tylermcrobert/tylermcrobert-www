@@ -1,5 +1,6 @@
 export * from './sanityTypes'
 export * from './schema'
+export * from './spotify'
 
 export type SizeKey = 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'xxs'
 export type ResponsiveSizes = { [key in SizeKey]: number }
