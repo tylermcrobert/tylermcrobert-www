@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { size } from 'style'
 
 const Wrapper = styled.div`
-  padding-bottom: ${size.large};
+  padding-bottom: calc(${size.large} - ${size.gutter});
 `
 
 export default {
