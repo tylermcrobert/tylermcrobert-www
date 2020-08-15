@@ -6,7 +6,7 @@ export const Grid = styled(Wrapper)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: ${size.gutter};
-  margin: ${size.gutter} auto;
+
   > * {
     grid-column: span 6;
   }
