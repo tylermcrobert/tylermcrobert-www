@@ -18,8 +18,10 @@ import ModuleText from './ModuleText/ModuleText'
 import ModuleDynamicImage from './ModuleDynamicImage/ModuleDynamicImage'
 import ModuleSpacer from './ModuleSpacer/ModuleSpacer'
 import Nav from './Nav/Nav'
+import Seo from './Seo/Seo'
 
 export {
+  Seo,
   Nav,
   ModuleSpacer,
   ModuleDynamicImage,
