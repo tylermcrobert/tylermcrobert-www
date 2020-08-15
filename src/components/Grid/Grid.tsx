@@ -12,6 +12,5 @@ export const Grid = styled(Wrapper)`
     grid-column: span 6;
   }
 `
-//
 
 export default Grid
