@@ -19,8 +19,12 @@ import ModuleDynamicImage from './ModuleDynamicImage/ModuleDynamicImage'
 import ModuleSpacer from './ModuleSpacer/ModuleSpacer'
 import Nav from './Nav/Nav'
 import Seo from './Seo/Seo'
+import Info from './Info/Info'
+import DotHead from './DotHead/DotHead'
 
 export {
+  DotHead,
+  Info,
   Seo,
   Nav,
   ModuleSpacer,

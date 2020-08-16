@@ -17,25 +17,23 @@ export class SpotifyReq {
     this.clientId = clientId
     this.clientSecret = clientSecret
     this.authToken = null
-
-    this.getAuthToken()
   }
 
   /**
    * Get Auth token from Spotify
    */
   private async getAuthToken(): Promise<string> {
-    console.log('____________GETTING TOKEN')
-
     if (this.authToken) return this.authToken
 
+    // handle errors
     if (!this.clientId) throw Error('Client ID missing')
     if (!this.clientSecret) throw Error('Client ID missing')
 
+    // build formatting headers
     const authFormatted = `${this.clientId}:${this.clientSecret}`
-
     const base64Auth = Buffer.from(authFormatted).toString('base64')
 
+    // fetch from spotify
     const data = await fetch(
       'https://accounts.spotify.com/api/token?grant_type=client_credentials',
       {
@@ -46,6 +44,9 @@ export class SpotifyReq {
         },
       }
     ).then(res => handleFetchRes(res, 'Cannot get access token'))
+
+    //  Set access token
+    this.authToken = data.access
 
     return data.access_token
   }
@@ -68,6 +69,16 @@ export class SpotifyReq {
     ).then(res => handleFetchRes(res, 'Error fetching Playlist'))
 
     return data
+  }
+
+  /**
+   * Fetches data on multiple Playlists given a string of IDs
+   * @param id Id of Spotify Playlist
+   */
+
+  async getPlaylistsByIds(ids: string[]) {
+    this.getAuthToken()
+    return Promise.all(ids.map(id => this.getPlaylistById(id)))
   }
 }
 

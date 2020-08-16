@@ -1,6 +1,6 @@
 import { createGlobalStyle, css } from 'styled-components'
 import reset from 'styled-reset'
-import { lineHeights, fontFamilies, colors, sizeVars } from 'style/theme'
+import { lineHeights, fontFamilies, colors, sizeVars, size } from 'style/theme'
 import mq from './mq'
 
 const style = css`
@@ -14,6 +14,21 @@ const style = css`
     box-sizing: border-box;
     ::-webkit-scrollbar {
       display: none;
+    }
+  }
+
+  body {
+    padding-top: ${size[3]};
+
+    &:before {
+      content: '';
+      position: fixed;
+      top: -10rem;
+      left: 0;
+      background: ${colors.secondary};
+      width: 100vw;
+      height: calc(10rem + 100vh);
+      z-index: -1;
     }
   }
 
