@@ -1,7 +1,7 @@
 import React from 'react'
 import { DotHead, LargeHead } from 'components'
 
-// import useNowPlaying from 'hooks/useNowPlaying'
+import useNowPlaying from 'hooks/useNowPlaying'
 // import { IParsedPlaylist } from 'types/SpotifyPlaylist'
 import Link from 'next/link'
 import S from './Info.Styled'
@@ -77,11 +77,11 @@ const Contact = () => (
 )
 
 const Music = () => {
-  // const { loading, artist, trackName, nowPlaying } = useNowPlaying()
+  const { loading, artist, trackName, nowPlaying } = useNowPlaying()
 
   return (
     <S.Section>
-      {/* <div>
+      <div>
         {!loading && !!artist && (
           <>
             <DotHead>{nowPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
@@ -100,7 +100,7 @@ const Music = () => {
             </LargeHead>
           </>
         )}
-      </div> */}
+      </div>
     </S.Section>
   )
 }
