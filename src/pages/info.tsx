@@ -1,11 +1,14 @@
 import { NextPage, GetStaticProps } from 'next'
 import { spotifyController } from 'lib/spotify'
 import { Info, Layout } from 'components'
+import { ISpotifyPlaylist } from 'types'
 
-const InfoPage: NextPage = () => {
+const InfoPage: NextPage<{ playlists: ISpotifyPlaylist[] }> = ({
+  playlists,
+}) => {
   return (
     <Layout title="Info">
-      <Info />
+      <Info playlists={playlists} />
     </Layout>
   )
 }

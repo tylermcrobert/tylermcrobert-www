@@ -3,14 +3,16 @@ import { DotHead, LargeHead } from 'components'
 
 // import useNowPlaying from 'hooks/useNowPlaying'
 // import { IParsedPlaylist } from 'types/SpotifyPlaylist'
-// import Link from 'next/link'
+import Link from 'next/link'
 import S from './Info.Styled'
-// import { NUMBERS, UNICODE } from '../../constants'
+import { ISpotifyPlaylist, IParsedPlaylist } from 'types'
+import { NUMBERS, UNICODE } from '../../constants'
+import { parseSpotifyPlaylist } from '../../util'
 
 const Info: React.FC<{
   // data: IInfoRes
-  // playlistData: IParsedPlaylist[]
-}> = ({}) => {
+  playlists: ISpotifyPlaylist[]
+}> = ({ playlists }) => {
   // const { clients, introduction } = res.results[0].data
 
   return (
@@ -22,8 +24,7 @@ const Info: React.FC<{
             <LargeHead>
               I&apos;m Tyler McRobert, a Midwest–born designer &amp; web
               developer living in Portland, Oregon. I work hard to create
-              beautiful, impactful work with meaning. I&apos;m currently taking
-              over the world at This.
+              beautiful, impactful work with meaning.
             </LargeHead>
           </div>
         </S.Section>
@@ -31,18 +32,32 @@ const Info: React.FC<{
           <Contact />
           <S.TwoCol>
             <DotHead>Clients</DotHead>
-            {/* <ul>
-              {clients.split(/\n/).map(item => (
+            <ul>
+              {[
+                'Nike',
+                'Adidas',
+                'Visibility Office',
+                'High Tide NYC',
+                'Zero Motorcycles',
+                'Specialized Bicycles',
+                'Marriott Hotels',
+                'Provenance Hotels',
+                'Meijer',
+                'Chaco',
+                'Merrell',
+              ].map(item => (
                 <li key={item}>{item}</li>
               ))}
-            </ul> */}
+            </ul>
           </S.TwoCol>
         </S.Section>
       </S.LgSection>
       <S.Hr />
       <S.LgSection>
         <Music />
-        {/* <FeaturedPlaylists data={playlistData} /> */}
+        <FeaturedPlaylists
+          data={playlists.map(playlist => parseSpotifyPlaylist(playlist))}
+        />
       </S.LgSection>
     </>
   )
@@ -90,37 +105,37 @@ const Music = () => {
   )
 }
 
-// const FeaturedPlaylists: React.FC<{
-//   data: IParsedPlaylist[]
-// }> = ({ data }) => {
-//   return (
-//     <S.Section>
-//       <div>
-//         <div>
-//           <DotHead>Featured Playlists</DotHead>
-//         </div>
+const FeaturedPlaylists: React.FC<{
+  data: IParsedPlaylist[]
+}> = ({ data }) => {
+  return (
+    <S.Section>
+      <div>
+        <div>
+          <DotHead>Featured Playlists</DotHead>
+        </div>
 
-//         {data.map((item, i) => (
-//           <S.PlaylistWrapper
-//             key={item.name}
-//             href={item.link}
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             <p>
-//               {NUMBERS[i + 1]} {item.name}
-//             </p>
-//             <p>{item.dateCreated}</p>
-//             <p>{item.totalDuration}</p>
-//             <p> {UNICODE.RIGHT}</p>
-//           </S.PlaylistWrapper>
-//         ))}
-//       </div>
-//       <Link href="/playlists">
-//         <a>See all playlists {UNICODE.RIGHT}</a>
-//       </Link>
-//     </S.Section>
-//   )
-// }
+        {data.map((item, i) => (
+          <S.PlaylistWrapper
+            key={item.name}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <p>
+              {NUMBERS[i + 1]} {item.name}
+            </p>
+            <p>{item.dateCreated}</p>
+            <p>{item.totalDuration}</p>
+            <p> {UNICODE.RIGHT}</p>
+          </S.PlaylistWrapper>
+        ))}
+      </div>
+      <Link href="/playlists">
+        <a>See all playlists {UNICODE.RIGHT}</a>
+      </Link>
+    </S.Section>
+  )
+}
 
 export default Info
