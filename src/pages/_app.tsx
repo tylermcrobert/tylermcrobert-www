@@ -10,6 +10,12 @@ type MyAppProps = AppProps & { isPreview: boolean; contexts: CsContext[] }
 function MyApp({ Component, pageProps, isPreview, contexts }: MyAppProps) {
   return (
     <AppProvider contexts={contexts}>
+      <style global jsx>{`
+        @font-face {
+          font-family: 'Suisse';
+          src: url('/fonts/SuisseIntl-Regular.otf');
+        }
+      `}</style>
       {isPreview && <PreviewIndicator />}
       <Component {...pageProps} />
     </AppProvider>
