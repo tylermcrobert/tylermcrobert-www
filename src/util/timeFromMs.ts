@@ -9,10 +9,9 @@ const timeFromMs = (ms: number, format: format = 'hh:mm:ss'): string => {
   const mm = pad(Math.floor((ms / 1000 / 60) % 60))
   const hh = pad(Math.floor(ms / 1000 / 60 / 60))
 
-  return format
-    .split(':')
-    .map(code => ({ ss, mm, hh }[code]))
-    .join(':')
+  if (format === 'hh:mm:ss') return `${hh}:${mm}:${ss}`
+  if (format === 'hh:mm') return `${hh}:${mm}`
+  return `${mm}:${ss}`
 }
 
 export default timeFromMs
