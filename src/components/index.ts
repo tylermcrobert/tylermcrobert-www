@@ -21,8 +21,10 @@ import Nav from './Nav/Nav'
 import Seo from './Seo/Seo'
 import Info from './Info/Info'
 import DotHead from './DotHead/DotHead'
+import Playlists from './Playlists/Playlists'
 
 export {
+  Playlists,
   DotHead,
   Info,
   Seo,
