@@ -170,41 +170,41 @@ export default {
         //     prepare: prev => ({ ...prev, title: 'Double Image' }),
         //   },
         // },
-        // /**
-        //  * Triple Image
-        //  */
-        // {
-        //   name: 'tripleImage',
-        //   type: 'object',
-        //   fields: [
-        //     {
-        //       name: 'mainImage',
-        //       type: 'image',
-        //       validation: Rule => Rule.required(),
-        //     },
-        //     {
-        //       name: 'secondaryImage1',
-        //       type: 'image',
-        //       validation: Rule => Rule.required(),
-        //     },
-        //     {
-        //       name: 'secondaryImage2',
-        //       type: 'image',
-        //       validation: Rule => Rule.required(),
-        //     },
-        //     {
-        //       name: 'imageRight',
-        //       title: 'Put main image on left',
-        //       type: 'boolean',
-        //     },
-        //   ],
-        //   preview: {
-        //     select: {
-        //       media: 'mainImage',
-        //     },
-        //     prepare: prev => ({ ...prev, title: 'Triple Image' }),
-        //   },
-        // },
+        /**
+         * Triple Image
+         */
+        {
+          name: 'tripleImage',
+          type: 'object',
+          fields: [
+            {
+              name: 'mainImage',
+              type: 'image',
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'secondaryImage1',
+              type: 'image',
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'secondaryImage2',
+              type: 'image',
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'imageRight',
+              title: 'Put main image on left',
+              type: 'boolean',
+            },
+          ],
+          preview: {
+            select: {
+              media: 'mainImage',
+            },
+            prepare: prev => ({ ...prev, title: 'Triple Image' }),
+          },
+        },
 
         /**
          * Website
