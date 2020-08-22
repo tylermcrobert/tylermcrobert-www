@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   h1 {
     display: inline;
   }
+
   a:hover {
     text-decoration: line-through;
   }
