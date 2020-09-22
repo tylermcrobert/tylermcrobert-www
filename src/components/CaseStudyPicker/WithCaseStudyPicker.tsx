@@ -14,7 +14,9 @@ const PickerWrapper: React.FC = ({ children }) => {
         const isScrolled = Math.floor(y) <= 0
 
         if (isScrolled && !isMobile) {
-          Router.push('/')
+          Router.push('/').then(() => {
+            window.scrollTo(0, 0)
+          })
         }
       }
     }
