@@ -3,6 +3,7 @@ import S from './ModuleWebsite.Styled'
 import BrowserFrame from './Browserframe'
 import { ModuleWebsite, WebsiteMedia } from 'types'
 import getResponsiveImgProps from 'util/getResponsiveImgProps'
+import { ViewportVideo } from 'components'
 
 interface IProps {
   data: ModuleWebsite
@@ -38,7 +39,7 @@ export const Media: React.FC<{ data: WebsiteMedia }> = ({ data: media }) => {
           alt=""
         />
       )}
-      {videoUrl && <video autoPlay muted playsInline loop src={videoUrl} />}
+      {videoUrl && <ViewportVideo src={videoUrl} />}
     </>
   )
 }

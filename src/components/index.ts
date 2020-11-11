@@ -23,8 +23,10 @@ import Seo from './Seo/Seo'
 import Info from './Info/Info'
 import DotHead from './DotHead/DotHead'
 import Playlists from './Playlists/Playlists'
+import ViewportVideo from './ViewportVideo/ViewportVideo'
 
 export {
+  ViewportVideo,
   ModuleMobileWebsite,
   Playlists,
   DotHead,
