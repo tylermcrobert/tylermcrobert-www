@@ -21,6 +21,8 @@ const Video: React.FC<{ src: string }> = ({ src }) => {
       setInView(isInViewport($vid))
     }
 
+    calc()
+
     document.addEventListener('scroll', calc)
 
     return () => {
