@@ -13,6 +13,7 @@ import Modules from './Modules/Modules'
 import ModuleSingleImage from './ModuleSingleImage/ModuleSingleImage'
 import ModuleDoubleImage from './ModuleDoubleImage/ModuleDoubleImage'
 import ModuleTripleImage from './ModuleTripleImage/ModuleTripleImage'
+import ModuleMobileWebsite from './ModuleMobileWebsite/ModuleMobileWebsite'
 import ModuleWebsite from './ModuleWebsite/ModuleWebsite'
 import ModuleText from './ModuleText/ModuleText'
 import ModuleDynamicImage from './ModuleDynamicImage/ModuleDynamicImage'
@@ -24,6 +25,7 @@ import DotHead from './DotHead/DotHead'
 import Playlists from './Playlists/Playlists'
 
 export {
+  ModuleMobileWebsite,
   Playlists,
   DotHead,
   Info,

@@ -23,6 +23,7 @@ export type CaseStudyModule =
   | ModuleText
   | ModuleDynamicImage
   | ModuleSpacer
+  | ModuleMobileWebsite
 
 export type ModuleSingleImage = {
   _key: string
@@ -47,7 +48,7 @@ export type ModuleTripleImage = {
   secondaryImage2: SanityImage
 }
 
-type Media =
+export type WebsiteMedia =
   | {
       _key: string
       _type: 'video'
@@ -58,18 +59,24 @@ type Media =
   | (SanityImage & { _type: 'image' })
 
 export type ModuleWebsite = {
-  _key: '6996e601d103'
+  _key: string
   _type: 'website'
   backgroundColor: {
     _ref: 'ce45323a-b11d-43ae-bcf4-af66f7b99c50'
     _type: 'reference'
   }
-  media?: Media[]
+  media?: WebsiteMedia[]
   theme?: {
     background?: SanityColor
     dots?: SanityColor
     frame?: SanityColor
   }
+}
+
+export type ModuleMobileWebsite = {
+  _key: string
+  _type: 'mobileWebsite'
+  frames: (WebsiteMedia & { _key: string })[]
 }
 
 export type ModuleText = {

@@ -1,4 +1,4 @@
-import { string } from 'prop-types'
+import { website, websiteFields, websiteMedia } from './website'
 
 const ASPECT = [
   [5, 4],
@@ -210,48 +210,18 @@ export default {
          * Website
          */
 
+        website,
+
         {
-          name: 'website',
+          name: 'mobileWebsite',
           type: 'object',
           fields: [
             {
-              name: 'media',
               type: 'array',
-              of: [
-                {
-                  name: 'image',
-                  type: 'image',
-                  options: {
-                    hotspot: true,
-                  },
-                },
-                {
-                  name: 'video',
-                  type: 'object',
-                  fields: [
-                    {
-                      name: 'videoFile',
-                      type: 'file',
-                    },
-                  ],
-                },
-              ],
-              validation: Rule => Rule.required(),
-            },
-
-            {
-              name: 'theme',
-              type: 'reference',
-              to: [{ type: 'webFrameTheme' }],
-              validation: Rule => Rule.required(),
+              name: 'frames',
+              of: [...websiteMedia],
             },
           ],
-          preview: {
-            select: {
-              media: 'media.0',
-            },
-            prepare: prev => ({ ...prev, title: 'Website' }),
-          },
         },
 
         /**

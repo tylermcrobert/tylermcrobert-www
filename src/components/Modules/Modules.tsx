@@ -9,6 +9,7 @@ import {
   ModuleText,
   ModuleDynamicImage,
   ModuleSpacer,
+  ModuleMobileWebsite,
 } from 'components'
 
 const Modules = () => {
@@ -32,6 +33,8 @@ const Modules = () => {
             return <ModuleDynamicImage key={module._key} data={module} />
           case 'spacer':
             return <ModuleSpacer key={module._key} data={module} />
+          case 'mobileWebsite':
+            return <ModuleMobileWebsite key={module._key} data={module} />
           default:
             return null
         }

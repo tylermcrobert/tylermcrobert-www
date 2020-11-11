@@ -72,6 +72,10 @@ export class CaseStudyRequest extends _HandleRequest<CaseStudyType> {
           media[]{
             ...,
             'video': videoFile.asset-> { url }
+          },
+          frames[]{
+            ...,
+            'video': videoFile.asset-> { url }
           }
         }
       }
