@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   background: black;
   padding: 7%;
@@ -11,6 +11,7 @@ const Wrapper = styled.div`
     margin: 7%;
     flex: 1;
     overflow: hidden;
+    max-width: 15rem;
   }
 `
 
