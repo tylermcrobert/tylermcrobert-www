@@ -1,13 +1,16 @@
-import styled from "styled-components"
-import Wrapper from "../Wrapper"
+import styled from 'styled-components'
+import Wrapper from 'components/Wrapper/Wrapper'
+import { size } from 'style'
 
 export const Grid = styled(Wrapper)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-gap: ${props => props.theme.margins.gutter};
-  margin: ${props => props.theme.margins.gutter} auto;
+  grid-gap: ${size.gutter};
+  margin: ${size.gutter} auto;
 
   > * {
     grid-column: span 6;
   }
 `
+
+export default Grid

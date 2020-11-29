@@ -1,52 +1,63 @@
-import { useContext } from "react"
-import { NextPage } from "next"
-import { useRouter } from "next/router"
-import { CaseStudy, CaseStudyPicker, Seo } from "components"
-import ErrorPage from "next/error"
-import Cookies from "js-cookie"
-import { asText } from "util/richText"
-import { DataCtx } from "./_app"
+import { CaseStudy, Layout } from 'components'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { getCaseStudies, CaseStudyRequest } from 'lib/api'
+import { CaseStudyType } from 'types'
+import Error from 'next/error'
+import { CaseStudyProvider } from 'providers'
+import { useSanityPreview } from 'hooks'
 
-const useCheck = (uids: string[]): [boolean, number] => {
-  const router = useRouter()
-  const route = router.query.page.toString()
-
-  const index = uids.indexOf(route)
-  const isMatch = index !== -1
-
-  return [isMatch, index]
+type PageProps = {
+  caseStudyData: CaseStudyType
+  query: string
+  isPreview: boolean
 }
 
-const CaseStudyPage: NextPage = () => {
-  const { caseStudiesRes, ctxRes } = useContext(DataCtx)
-  const csUids = caseStudiesRes.results.map(res => res.uid)
-  const [isCaseStudy, csIndex] = useCheck(csUids)
+const Page: React.FC<PageProps> = ({
+  caseStudyData: staleCaseStudyData,
+  query,
+  isPreview,
+}) => {
+  const caseStudyData = useSanityPreview(query, staleCaseStudyData, isPreview)
 
-  if (isCaseStudy) {
-    return (
-      <>
-        <Seo title={asText(caseStudiesRes.results[csIndex].data.title)} />
-        <CaseStudy data={caseStudiesRes.results[csIndex]} />
-      </>
-    )
+  if (!caseStudyData) {
+    return <Error statusCode={404} />
   }
 
-  // if not a case study, check curation
-  const curationUids = ctxRes.results.map(item => item.uid)
-  const [isCuration, curationIndex] = useCheck(curationUids)
-
-  if (isCuration) {
-    const uid = curationUids[curationIndex]
-    Cookies.set("curation", uid)
-    return (
-      <>
-        <Seo title={null} />
-        <CaseStudyPicker ctxUid={uid} />
-      </>
-    )
-  }
-
-  return <ErrorPage statusCode={404} />
+  return (
+    <Layout title={caseStudyData?.title || null}>
+      <CaseStudyProvider data={caseStudyData}>
+        <CaseStudy />
+      </CaseStudyProvider>
+    </Layout>
+  )
 }
 
-export default CaseStudyPage
+export const getStaticProps: GetStaticProps = async ({
+  preview: isPreview = false,
+  params,
+}) => {
+  const caseStudyReq = new CaseStudyRequest({
+    handle: params?.page?.toString() || '',
+    isPreview,
+  })
+
+  const caseStudyData = (await caseStudyReq.fetch()) || null
+  const query = caseStudyReq.query
+
+  const props: PageProps = { caseStudyData, query, isPreview }
+
+  return { props }
+}
+export const getStaticPaths: GetStaticPaths = async () => {
+  const caseStudies = await getCaseStudies()
+
+  return {
+    paths: caseStudies.map(cs => ({
+      params: { page: cs.slug?.current },
+    })),
+
+    fallback: true,
+  }
+}
+
+export default Page

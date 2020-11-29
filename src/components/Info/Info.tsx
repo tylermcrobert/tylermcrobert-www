@@ -1,18 +1,19 @@
-import React from "react"
-import { DotHead, Grid, LargeHead } from "components"
-import { IInfoRes } from "types/Prismic"
-import { RichText } from "util/richText"
-import useNowPlaying from "hooks/useNowPlaying"
-import { IParsedPlaylist } from "types/SpotifyPlaylist"
-import Link from "next/link"
-import S from "./Info.Styled"
-import { NUMBERS, UNICODE } from "../../constants"
+import React from 'react'
+import { DotHead, LargeHead } from 'components'
+
+import useNowPlaying from 'hooks/useNowPlaying'
+// import { IParsedPlaylist } from 'types/SpotifyPlaylist'
+import Link from 'next/link'
+import S from './Info.Styled'
+import { ISpotifyPlaylist, IParsedPlaylist } from 'types'
+import { NUMBERS, UNICODE } from '../../constants'
+import { parseSpotifyPlaylist } from '../../util'
 
 const Info: React.FC<{
-  data: IInfoRes
-  playlistData: IParsedPlaylist[]
-}> = ({ data: res, playlistData }) => {
-  const { clients, introduction } = res.results[0].data
+  // data: IInfoRes
+  playlists: ISpotifyPlaylist[]
+}> = ({ playlists }) => {
+  // const { clients, introduction } = res.results[0].data
 
   return (
     <>
@@ -21,7 +22,9 @@ const Info: React.FC<{
           <div>
             <DotHead>Bio</DotHead>
             <LargeHead>
-              <RichText>{introduction}</RichText>
+              I&apos;m Tyler McRobert, a Midwest–born designer &amp; web
+              developer living in Portland, Oregon. I work hard to create
+              beautiful, impactful work with meaning.
             </LargeHead>
           </div>
         </S.Section>
@@ -30,7 +33,19 @@ const Info: React.FC<{
           <S.TwoCol>
             <DotHead>Clients</DotHead>
             <ul>
-              {clients.split(/\n/).map(item => (
+              {[
+                'Nike',
+                'Adidas',
+                'Visibility Office',
+                'High Tide NYC',
+                'Zero Motorcycles',
+                'Specialized Bicycles',
+                'Marriott Hotels',
+                'Provenance Hotels',
+                'Meijer',
+                'Chaco',
+                'Merrell',
+              ].map(item => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -40,7 +55,9 @@ const Info: React.FC<{
       <S.Hr />
       <S.LgSection>
         <Music />
-        <FeaturedPlaylists data={playlistData} />
+        <FeaturedPlaylists
+          data={playlists.map(playlist => parseSpotifyPlaylist(playlist))}
+        />
       </S.LgSection>
     </>
   )
@@ -49,12 +66,12 @@ const Info: React.FC<{
 const Contact = () => (
   <S.TwoCol>
     <div>
-      &#9679; E-M→{" "}
+      &#9679; E-M→{' '}
       <a href="mailto:hello@tylermcrobert.com">hello@tylermcrobert.com</a>
     </div>
     <div>
-      &#9679; IG→{" "}
-      <a href="http://instagram.com/tylermcrobert">@tylermcrobert</a>{" "}
+      &#9679; IG→{' '}
+      <a href="http://instagram.com/tylermcrobert">@tylermcrobert</a>{' '}
     </div>
   </S.TwoCol>
 )
@@ -67,11 +84,11 @@ const Music = () => {
       <div>
         {!loading && !!artist && (
           <>
-            <DotHead>{nowPlaying ? "Now Playing" : "Recently Played"}</DotHead>
+            <DotHead>{nowPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
             <LargeHead>
               {nowPlaying ? (
                 <>
-                  Right now I&apos;m listening to:&nbsp;“{trackName}” by{" "}
+                  Right now I&apos;m listening to:&nbsp;“{trackName}” by{' '}
                   {artist} on Spotify.
                 </>
               ) : (

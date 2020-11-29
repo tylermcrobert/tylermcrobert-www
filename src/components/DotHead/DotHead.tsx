@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-import { UNICODE } from "../../constants"
+import React from 'react'
+import styled from 'styled-components'
+import { UNICODE } from '../../constants'
 
 const DotHead: React.FC = ({ children }) => {
   return (

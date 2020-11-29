@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import { IParsedPlaylist, IParsedTrack } from "types/SpotifyPlaylist"
-import { Wrapper, LargeHead } from "components"
-import { UNICODE } from "../../constants"
-import S from "./Playlists.Styled"
+import React, { useState } from 'react'
+import { IParsedPlaylist, IParsedTrack } from 'types'
+import { Wrapper, LargeHead } from 'components'
+import { UNICODE } from '../../constants'
+import S from './Playlists.Styled'
 
 interface IProps {
   data: IParsedPlaylist[]
@@ -12,7 +12,7 @@ const Playlists: React.FC<IProps> = ({ data }) => {
   return (
     <div>
       {data.map(pl => (
-        <Playlist data={pl} />
+        <Playlist data={pl} key={pl.name} />
       ))}
     </div>
   )
@@ -97,7 +97,7 @@ interface ITrackProps extends IParsedTrack {
 const Track: React.FC<ITrackProps> = ({ number, title, artist, duration }) => {
   return (
     <span>
-      {number} {title}—{artist} ({duration}){" "}
+      {number} {title}—{artist} ({duration}){' '}
     </span>
   )
 }

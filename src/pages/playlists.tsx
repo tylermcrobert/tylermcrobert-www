@@ -1,8 +1,9 @@
-import { NextPage } from "next"
-import { IParsedPlaylist } from "types/SpotifyPlaylist"
-import { Seo, Playlists } from "components"
-import getPlaylists from "util/getPlaylists"
-import parseSpotify from "util/parseSpotify"
+import { NextPage } from 'next'
+import { IParsedPlaylist } from 'types'
+import { Playlists, Layout } from 'components'
+import { spotifyController } from 'lib/spotify'
+import { PLAYLISTS } from '../constants'
+import { parseSpotifyPlaylist } from '../util'
 
 interface IProps {
   playlists: IParsedPlaylist[]
@@ -11,18 +12,19 @@ interface IProps {
 const InfoPage: NextPage<IProps> = ({ playlists }) => {
   return (
     <>
-      <Seo title="Playlists" />
-      <Playlists data={playlists} />
+      <Layout title="playlists">
+        <Playlists data={playlists} />
+      </Layout>
     </>
   )
 }
 
-export async function getStaticProps({ req }) {
-  const playlistData = await getPlaylists()
-  const playlists = playlistData.map(pl => parseSpotify(pl))
+export async function getStaticProps() {
+  const playlists = await spotifyController.getPlaylistsByIds(PLAYLISTS)
+  const parsedPlaylists = playlists.map(pl => parseSpotifyPlaylist(pl))
 
   return {
-    props: { playlists },
+    props: { playlists: parsedPlaylists },
   }
 }
 

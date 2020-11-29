@@ -1,39 +1,26 @@
-import Prismic from "prismic-javascript"
-import { Client } from "util/prismic"
-import { NextPage } from "next"
-import { IInfoRes } from "types/Prismic"
-import { ISpotifyPlaylist } from "types/SpotifyPlaylist"
-import { Info, Seo } from "components"
-import getPlaylists from "util/getPlaylists"
-import parseSpotify from "util/parseSpotify"
+import { NextPage, GetStaticProps } from 'next'
+import { spotifyController } from 'lib/spotify'
+import { Info, Layout } from 'components'
+import { ISpotifyPlaylist } from 'types'
+import { PLAYLISTS } from '../constants'
 
-interface IProps {
-  infoRes: IInfoRes
-  playlistData: ISpotifyPlaylist[]
-}
-
-const InfoPage: NextPage<IProps> = ({ infoRes, playlistData }) => {
+const InfoPage: NextPage<{ playlists: ISpotifyPlaylist[] }> = ({
+  playlists,
+}) => {
   return (
-    <>
-      <Seo title={null} />
-      <Info
-        data={infoRes}
-        playlistData={playlistData.map(item => parseSpotify(item))}
-      />
-    </>
+    <Layout title="Info">
+      <Info playlists={playlists} />
+    </Layout>
   )
 }
 
-export async function getStaticProps({ req }) {
-  const infoRes: IInfoRes = await Client(req).query(
-    Prismic.Predicates.at("document.type", "info"),
-    {}
-  )
+export const getStaticProps: GetStaticProps = async () => {
+  const infoRes = null
 
-  const playlistData = await getPlaylists()
+  const playlists = await spotifyController.getPlaylistsByIds(PLAYLISTS)
 
   return {
-    props: { infoRes, playlistData },
+    props: { playlists, infoRes },
   }
 }
 

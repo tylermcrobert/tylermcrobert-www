@@ -1,33 +1,33 @@
-import { useContext } from "react"
-import { DataCtx } from "pages/_app"
-import Link from "next/link"
-import { asText } from "util/richText"
-import { LargeHead, Wrapper } from "components"
-import { useCurationUids } from "hooks/useCurrentCuration"
-import { NUMBERS } from "../../constants"
-import S from "./CaseStudyPicker.Styled"
+import Link from 'next/link'
+import { LargeHead, Wrapper } from 'components'
+import { NUMBERS } from '../../constants'
+import S from './CaseStudyPicker.styled'
+import { useApp } from 'hooks'
+import { CsContext } from 'types'
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+import Router from 'next/router'
 
-interface IProps {
-  ctxUid?: string
-}
+const CaseStudyPicker: React.FC<{ context?: CsContext }> = ({ context }) => {
+  const { context: defaultContext } = useApp()
 
-const CaseStudyPicker: React.FC<IProps> = ({ ctxUid }) => {
-  const curationUids = useCurationUids(ctxUid)
-  const { caseStudiesRes } = useContext(DataCtx)
-
-  const getTitle = (uid: string) =>
-    caseStudiesRes.results.filter(item => item.uid === uid)[0].data.title
+  useEffect(() => {
+    if (context) {
+      Cookies.set('ctx-id', context.slug.current)
+      Router.replace('/')
+    }
+  }, [context])
 
   return (
     <S.Wrapper>
       <Wrapper>
         <S.Content>
-          {curationUids.map((uid, i) => (
-            <LargeHead key={uid}>
-              {" "}
+          {(context || defaultContext).caseStudies.map((item, i) => (
+            <LargeHead key={item.slug.current}>
+              {' '}
               {NUMBERS[i + 1]}&nbsp;
-              <Link href="/[page]" as={`/${uid}`}>
-                <a>{asText(getTitle(uid))}</a>
+              <Link href="/[page]" as={`/${item.slug.current}`}>
+                <a>{item.title}</a>
               </Link>
             </LargeHead>
           ))}

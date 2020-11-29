@@ -1,12 +1,11 @@
-import { NextPage } from "next"
-import { CaseStudyPicker, Seo } from "components"
+import React from 'react'
+import { CaseStudyPicker, Layout } from 'components'
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
-    <>
-      <Seo title={null} />
+    <Layout title={null}>
       <CaseStudyPicker />
-    </>
+    </Layout>
   )
 }
 

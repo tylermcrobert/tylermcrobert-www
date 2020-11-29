@@ -1,14 +1,13 @@
-import styled from "styled-components"
-import { Grid } from "components"
-import { mq } from "style"
-import theme from "style/theme"
+import styled from 'styled-components'
+import { Grid } from 'components'
+import { mq, size, colors, responsiveSizes } from 'style'
 
 const LgSection = styled.div`
   margin: 5rem auto;
 `
 
 const Section = styled(Grid)`
-  margin: ${props => props.theme.remScale[6]} auto;
+  margin: ${size[4]} auto;
 
   &:first-child {
     margin-top: 0;
@@ -20,7 +19,7 @@ const Section = styled(Grid)`
 
   ul {
     column-count: 2;
-    column-gap: ${props => props.theme.margins.standard};
+    column-gap: ${size.standard};
   }
 
   a {
@@ -36,7 +35,7 @@ const TwoCol = styled.div`
 
 const Hr = styled.hr`
   border: 0;
-  border-bottom: 1px dashed ${props => props.theme.colors.primary};
+  border-bottom: 1px dashed ${colors.primary};
 `
 
 const PlaylistWrapper = styled.a`
@@ -44,7 +43,7 @@ const PlaylistWrapper = styled.a`
   grid-template-columns: 1fr auto;
   text-decoration: none !important;
 
-  @media (max-width: ${theme.sizes.sm - 1}px) {
+  @media (max-width: ${responsiveSizes.sm - 1}px) {
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }

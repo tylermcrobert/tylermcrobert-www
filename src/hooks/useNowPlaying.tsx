@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
-import { ILastFMRes } from "types/LastFm"
+import { useEffect, useState } from 'react'
+import { ILastFMRes } from 'types'
 
 const ENDPOINT =
-  "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=1e87695de290cd017718696f211e84a4&format=json"
+  'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=tyler-mcrobert&api_key=1e87695de290cd017718696f211e84a4&format=json'
 
 const useNowPlaying = () => {
   const [lastFmData, setData] = useState<ILastFMRes | null>(null)
@@ -23,8 +23,8 @@ const useNowPlaying = () => {
     return {
       loading: false,
       trackName: track.name,
-      artist: track.artist["#text"],
-      nowPlaying: track["@attr"]?.nowplaying || false,
+      artist: track.artist['#text'],
+      nowPlaying: track['@attr']?.nowplaying || false,
     }
   }
   return { loading: true }

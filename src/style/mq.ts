@@ -1,8 +1,6 @@
-import theme from "./theme"
+import { responsiveSizes } from 'style/theme'
 
-const { sizes } = theme
-
-export type Size = "xs" | "sm" | "md" | "lg" | "xl"
+export type Size = keyof typeof responsiveSizes
 
 export type Sizes = {
   [item in Size]: number
@@ -12,12 +10,15 @@ export type MediaQuery = {
   [item in Size]: string
 }
 
-const mq: MediaQuery = Object.keys(sizes).reduce(
+const mq = Object.keys(responsiveSizes).reduce(
   (acc, current) => ({
     ...acc,
-    [current as Size]: `(min-width: ${Reflect.get(sizes, current)}px)`,
+    [current as Size]: `(min-width: ${Reflect.get(
+      responsiveSizes,
+      current
+    )}px)`,
   }),
-  { xs: "", sm: "", md: "", lg: "", xl: "" }
-)
+  {}
+) as MediaQuery
 
 export default mq

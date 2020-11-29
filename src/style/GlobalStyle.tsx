@@ -1,11 +1,11 @@
-import { createGlobalStyle, css } from "styled-components"
-import reset from "styled-reset"
-import { mq } from "./index"
+import { createGlobalStyle, css } from 'styled-components'
+import reset from 'styled-reset'
+import { lineHeights, fontFamilies, colors, sizeVars, size } from 'style/theme'
+import mq from './mq'
 
 const style = css`
-  @font-face {
-    font-family: "Suisse";
-    src: url("/fonts/SuisseIntl-Regular.otf");
+  :root {
+    ${sizeVars};
   }
 
   * {
@@ -17,12 +17,27 @@ const style = css`
     }
   }
 
-  body,
-  html {
-    line-height: ${props => props.theme.lineHeights.body};
-    font-family: ${props => props.theme.fontFamilies.sansSerif};
+  body {
+    padding-top: ${size[3]};
+
+    &:before {
+      content: '';
+      position: fixed;
+      top: -10rem;
+      left: 0;
+      background: ${colors.secondary};
+      width: 100vw;
+      height: calc(10rem + 100vh);
+      z-index: -1;
+    }
+  }
+
+  html,
+  body {
+    line-height: ${lineHeights.body};
+    font-family: ${fontFamilies.sansSerif};
     letter-spacing: 0.02em;
-    background: ${props => props.theme.colors.secondary};
+    background: ${colors.secondary};
     font-size: 18px;
     overscroll-behavior-y: none;
 
@@ -36,27 +51,22 @@ const style = css`
       font-size: 21px;
     }
     @media ${mq.lg} {
-      font-size: 1.3vw;
+      font-size: calc(8px + 1vw);
     }
   }
 
-  body {
-    padding-top: ${props => props.theme.remScale[5]};
-
-    &:before {
-      content: "";
-      position: fixed;
-      top: -10rem;
-      left: 0;
-      background: ${props => props.theme.colors.secondary};
-      width: 100vw;
-      height: calc(10rem + 100vh);
-      z-index: -1;
-    }
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    white-space: pre-line;
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${colors.primary};
     text-decoration: none;
   }
 
@@ -70,7 +80,7 @@ const style = css`
   h4,
   h5,
   h6 {
-    line-height: ${props => props.theme.lineHeights.heading};
+    line-height: ${lineHeights.heading};
   }
 
   img,
@@ -79,9 +89,8 @@ const style = css`
     width: 100%;
   }
 `
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-  ${style}
-`
 
-export default GlobalStyle
+export const GlobalStyle = createGlobalStyle`
+  ${reset};
+  ${style};
+  `

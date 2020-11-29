@@ -1,12 +1,11 @@
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-import React, { useContext, useState } from "react"
-import { DataCtx } from "pages/_app"
-import { Wrapper } from "components"
-import Link from "next/link"
-import Cookies from "js-cookie"
-import Router from "next/router"
-import { UNICODE } from "../../constants"
-import S from "./Nav.Styled"
+import React, { useState } from 'react'
+import { Wrapper } from 'components'
+import Link from 'next/link'
+import Cookies from 'js-cookie'
+import Router from 'next/router'
+import { UNICODE } from '../../constants'
+import S from './Nav.Styled'
+import { useApp } from 'hooks'
 
 const Nav = () => {
   return (
@@ -29,17 +28,17 @@ const Nav = () => {
 }
 
 const CurationNav = () => {
-  const curationUid = Cookies.get("curation")
+  const app = useApp()
+  const ctxId = Cookies.get('ctx-id')
+
   const [isHover, setHover] = useState<boolean>(false)
   const clearCookie = () => {
-    Cookies.remove("curation")
-    Router.push("/")
+    Cookies.remove('ctx-id')
+    Router.push('/')
   }
 
-  if (curationUid) {
-    const { ctxRes } = useContext(DataCtx)
-    const name = ctxRes.results.filter(item => item.uid === curationUid)[0].data
-      .context_name[0].text
+  if (ctxId) {
+    const name = app.context.title
 
     return (
       <span
@@ -47,7 +46,7 @@ const CurationNav = () => {
         onMouseLeave={() => setHover(false)}
         onClick={clearCookie}
       >
-        {" "}
+        {' '}
         {UNICODE.X} {name} {isHover && <span>(close)</span>}
       </span>
     )

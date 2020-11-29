@@ -1,28 +1,22 @@
-import styled from "styled-components"
-import { mq } from "style"
+import styled from 'styled-components'
+import { mq, size, lineHeights } from 'style'
 
 export const LargeHead = styled.h1`
-  font-size: ${props => props.theme.remScale[4]};
+  font-size: ${size[2]};
+  line-height: ${lineHeights.heading};
 
   br {
     display: none;
   }
-
   @media ${mq.xs} {
     br {
       display: block;
     }
   }
-
   @media ${mq.sm} {
-    font-size: ${props => props.theme.remScale[5]};
+    font-size: ${size[3]};
   }
-
   @media ${mq.md} {
-    font-size: ${props => props.theme.remScale[6]};
+    font-size: ${size[4]};
   }
-`
-
-export const MediumHead = styled.h2`
-  font-size: ${props => props.theme.remScale[3]};
 `

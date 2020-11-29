@@ -1,20 +1,21 @@
-import React from "react"
-import Head from "next/head"
+import React from 'react'
+import Head from 'next/head'
 
-interface IProps {
-  title: null | string
-  path?: string
+export type SeoProps = {
+  title: string | null
+  // TODO: Require desc + img
 }
 
-const Seo: React.FC<IProps> = ({ title, path = "" }) => {
+const Seo: React.FC<SeoProps> = ({ title: titleProp }) => {
   return (
     <Head>
+      <title>
+        {titleProp ? `${titleProp} – Tyler McRobert` : 'Tyler McRobert'}
+      </title>
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no"
       />
-      <link rel="canonical" href={`http://tylermcrobert.com/${path}`} />
-      <title>{title ? `${title} - Tyler McRobert` : "Tyler McRobert"}</title>
       <link
         rel="apple-touch-icon"
         sizes="180x180"

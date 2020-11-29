@@ -1,6 +1,6 @@
-import Document, { Html, Head, Main, NextScript } from "next/document"
-// Import styled components ServerStyleSheet
-import { ServerStyleSheet } from "styled-components"
+import { ServerStyleSheet } from 'styled-components'
+import Document, { Head, Main, NextScript } from 'next/document'
+import NextHead from 'next/head'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -30,18 +30,13 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
-        <Head>{this.props.styleTags}</Head>
+      <html lang="en">
+        <Head />
         <body>
           <Main />
           <NextScript />
-          <script
-            async
-            defer
-            src="//static.cdn.prismic.io/prismic.js?repo=tylermcrobert&new=true"
-          />
         </body>
-      </Html>
+      </html>
     )
   }
 }

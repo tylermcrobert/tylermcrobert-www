@@ -1,2 +1,3 @@
-export { default as modularScale } from "./modularScale"
-export { default as mq } from "./mq"
+export * from './GlobalStyle'
+export * from './theme'
+export { default as mq } from './mq'

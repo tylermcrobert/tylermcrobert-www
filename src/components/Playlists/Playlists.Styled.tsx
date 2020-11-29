@@ -1,22 +1,19 @@
-import styled from "styled-components"
-import { Grid, LargeHead } from "components"
-import { mq } from "style"
-import theme from "style/theme"
-
-const { sizes } = theme
+import styled from 'styled-components'
+import { Grid, LargeHead } from 'components'
+import { mq, size, responsiveSizes } from 'style'
 
 const Playlist = styled.div`
-  margin-top: ${props => props.theme.margins.gutter};
+  margin-top: ${size.gutter};
   @media ${mq.xs} {
-    margin-top: ${props => props.theme.remScale[6]};
+    margin-top: ${size[4]};
   }
   @media ${mq.md} {
-    margin-top: ${props => props.theme.margins.large};
+    margin-top: ${size.large};
   }
 `
 
 const Metadata = styled(Grid)`
-  margin-bottom: ${props => props.theme.margins.gutter};
+  margin-bottom: ${size.gutter};
   margin-top: 1rem;
   grid-gap: 0;
 `
@@ -40,8 +37,8 @@ const TitleBlock = styled.div`
 `
 
 const TracksWrapper = styled(LargeHead)`
-  @media (max-width: ${sizes.xs}px) {
-    font-size: ${props => props.theme.remScale[3]};
+  @media (max-width: ${responsiveSizes.xs}px) {
+    font-size: ${size[1]};
   }
 `
 
