@@ -7,7 +7,7 @@ import S from './ModuleTimedSlides.Styled'
 export const inc = (index: number, length: number) => (index + 1) % length
 
 const ModuleTimedSlides: React.FC<{ data: TimedSlides }> = ({ data }) => {
-  const { time, start } = useTimer({ interval: 1000 })
+  const { time, start } = useTimer({ interval: data.seconds || 1000 })
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
