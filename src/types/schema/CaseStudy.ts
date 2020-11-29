@@ -105,5 +105,5 @@ export type TimedSlides = {
   aspect?: number
   images?: SanityImage[]
   seconds?: number
-  theme?: SanityColor
+  theme?: { background?: SanityColor }
 }

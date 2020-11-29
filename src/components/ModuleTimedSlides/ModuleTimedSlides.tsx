@@ -22,8 +22,7 @@ const ModuleTimedSlides: React.FC<{ data: TimedSlides }> = ({ data }) => {
 
   if (!data.images?.length) return null
   return (
-    <S.Wrapper>
-      {index}
+    <S.Wrapper color={data.theme?.background?.hex || 'black'}>
       {data.images.map(
         (item, i) =>
           item.asset && (
