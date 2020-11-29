@@ -24,6 +24,7 @@ export type CaseStudyModule =
   | ModuleDynamicImage
   | ModuleSpacer
   | ModuleMobileWebsite
+  | TimedSlides
 
 export type ModuleSingleImage = {
   _key: string
@@ -96,4 +97,13 @@ export type ModuleDynamicImage = {
 export type ModuleSpacer = {
   _key: string
   _type: 'spacer'
+}
+
+export type TimedSlides = {
+  _key: string
+  _type: 'timedSlides'
+  aspect?: number
+  images?: SanityImage[]
+  seconds?: number
+  theme?: SanityColor
 }

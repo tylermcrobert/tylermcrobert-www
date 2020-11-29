@@ -18,6 +18,13 @@ export const websiteMedia = [
   },
 ]
 
+export const theme = {
+  name: 'theme',
+  type: 'reference',
+  to: [{ type: 'webFrameTheme' }],
+  validation: Rule => Rule.required(),
+}
+
 export const websiteFields = [
   {
     name: 'media',
@@ -25,12 +32,7 @@ export const websiteFields = [
     of: [...websiteMedia],
     validation: Rule => Rule.required(),
   },
-  {
-    name: 'theme',
-    type: 'reference',
-    to: [{ type: 'webFrameTheme' }],
-    validation: Rule => Rule.required(),
-  },
+  theme,
 ]
 
 export const website = {

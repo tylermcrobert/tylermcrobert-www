@@ -1,4 +1,4 @@
-import { website, websiteFields, websiteMedia } from './website'
+import { theme, website, websiteFields, websiteMedia } from './website'
 
 const ASPECT = [
   [5, 4],
@@ -19,6 +19,17 @@ const ASPECT = [
   .sort((a, b) => a.num - b.num)
 
 const toUppercase = s => s.charAt(0).toUpperCase() + s.substring(1)
+
+const aspect = {
+  name: 'aspect',
+  type: 'number',
+  options: {
+    list: ASPECT.map(({ num, aspect }) => ({
+      value: num,
+      title: aspect,
+    })),
+  },
+}
 
 export default {
   type: 'document',
@@ -74,16 +85,7 @@ export default {
               },
             },
 
-            {
-              name: 'aspect',
-              type: 'number',
-              options: {
-                list: ASPECT.map(({ num, aspect }) => ({
-                  value: num,
-                  title: aspect,
-                })),
-              },
-            },
+            aspect,
 
             {
               name: 'span',
@@ -206,6 +208,35 @@ export default {
           },
         },
 
+        /**
+         * TimedSlides
+         */
+
+        {
+          type: 'object',
+          name: 'timedSlides',
+          fields: [
+            aspect,
+            theme,
+            {
+              name: 'seconds',
+              type: 'number',
+            },
+            {
+              name: 'images',
+              type: 'array',
+              of: [
+                {
+                  name: 'image',
+                  type: 'image',
+                  options: {
+                    hotspot: true,
+                  },
+                },
+              ],
+            },
+          ],
+        },
         /**
          * Website
          */

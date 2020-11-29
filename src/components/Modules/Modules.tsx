@@ -10,6 +10,7 @@ import {
   ModuleDynamicImage,
   ModuleSpacer,
   ModuleMobileWebsite,
+  ModuleTimedSlides,
 } from 'components'
 
 const Modules = () => {
@@ -35,6 +36,8 @@ const Modules = () => {
             return <ModuleSpacer key={module._key} data={module} />
           case 'mobileWebsite':
             return <ModuleMobileWebsite key={module._key} data={module} />
+          case 'timedSlides':
+            return <ModuleTimedSlides key={module._key} data={module} />
           default:
             return null
         }

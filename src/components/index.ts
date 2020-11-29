@@ -24,8 +24,10 @@ import Info from './Info/Info'
 import DotHead from './DotHead/DotHead'
 import Playlists from './Playlists/Playlists'
 import ViewportVideo from './ViewportVideo/ViewportVideo'
+import ModuleTimedSlides from './ModuleTimedSlides/ModuleTimedSlides'
 
 export {
+  ModuleTimedSlides,
   ViewportVideo,
   ModuleMobileWebsite,
   Playlists,
