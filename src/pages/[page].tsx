@@ -1,20 +1,45 @@
 import { CaseStudy, Layout } from 'components'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { getCaseStudies, CaseStudyRequest } from 'lib/api'
 import { CaseStudyType } from 'types'
 import Error from 'next/error'
 import { CaseStudyProvider } from 'providers'
+import { getClient, usePreviewSubscription } from 'lib/sanity'
+
+const caseStudyQuery = `
+      *[_type == "caseStudy" && slug.current == $slug][0]{
+        ...,
+        modules[] {
+          ...,
+          'theme': theme -> { background, dots, frame },
+          media[]{
+            ...,
+            'video': videoFile.asset-> { url }
+          },
+          frames[]{
+            ...,
+            'video': videoFile.asset-> { url }
+          }
+        }
+      }
+    `
 
 type PageProps = {
   caseStudyData: CaseStudyType
-  query: string
   isPreview: boolean
+  slug: string
 }
 
 const Page: React.FC<PageProps> = ({
-  caseStudyData,
-  //  query, isPreview
+  caseStudyData: initialCmsData,
+  isPreview,
+  slug,
 }) => {
+  const { data: caseStudyData } = usePreviewSubscription(caseStudyQuery, {
+    params: { slug },
+    initialData: initialCmsData,
+    enabled: isPreview,
+  })
+
   if (!caseStudyData) {
     return <Error statusCode={404} />
   }
@@ -29,26 +54,22 @@ const Page: React.FC<PageProps> = ({
 }
 
 export const getStaticProps: GetStaticProps = async ({
-  preview: isPreview = false,
+  preview = false,
   params,
 }) => {
-  const caseStudyReq = new CaseStudyRequest({
-    handle: params?.page?.toString() || '',
-    isPreview,
+  const slug = params?.page?.toString() || ''
+  const caseStudyData = await getClient(preview).fetch(caseStudyQuery, {
+    slug,
   })
 
-  const caseStudyData = (await caseStudyReq.fetch()) || null
-  const query = caseStudyReq.query
-
-  const props: PageProps = { caseStudyData, query, isPreview }
+  const props: PageProps = { caseStudyData, isPreview: preview, slug }
 
   return { props }
 }
 export const getStaticPaths: GetStaticPaths = async () => {
-  const caseStudies = await getCaseStudies()
-
+  const caseStudies = await getClient(true).fetch(`*[_type == 'caseStudy']`)
   return {
-    paths: caseStudies.map(cs => ({
+    paths: caseStudies.map((cs: any) => ({
       params: { page: cs.slug?.current },
     })),
 
