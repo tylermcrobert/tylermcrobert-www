@@ -3,7 +3,6 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { CtxRequest, getContexts } from 'lib/api'
 import { CsContext } from 'types'
 import Error from 'next/error'
-import { useSanityPreview } from 'hooks'
 
 type PageProps = {
   ctxData: CsContext
@@ -12,19 +11,16 @@ type PageProps = {
 }
 
 const Page: React.FC<PageProps> = ({
-  ctxData: stalecCsContextData,
-  query,
-  isPreview,
+  ctxData,
+  // query, isPreview
 }) => {
-  const csContextData = useSanityPreview(query, stalecCsContextData, isPreview)
-
-  if (!csContextData) {
+  if (!ctxData) {
     return <Error statusCode={404} />
   }
 
   return (
-    <Layout title={csContextData.title}>
-      <CaseStudyPicker context={csContextData} />
+    <Layout title={ctxData.title}>
+      <CaseStudyPicker context={ctxData} />
     </Layout>
   )
 }

@@ -4,7 +4,6 @@ import { getCaseStudies, CaseStudyRequest } from 'lib/api'
 import { CaseStudyType } from 'types'
 import Error from 'next/error'
 import { CaseStudyProvider } from 'providers'
-import { useSanityPreview } from 'hooks'
 
 type PageProps = {
   caseStudyData: CaseStudyType
@@ -13,12 +12,9 @@ type PageProps = {
 }
 
 const Page: React.FC<PageProps> = ({
-  caseStudyData: staleCaseStudyData,
-  query,
-  isPreview,
+  caseStudyData,
+  //  query, isPreview
 }) => {
-  const caseStudyData = useSanityPreview(query, staleCaseStudyData, isPreview)
-
   if (!caseStudyData) {
     return <Error statusCode={404} />
   }
