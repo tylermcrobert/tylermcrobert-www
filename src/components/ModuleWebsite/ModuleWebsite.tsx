@@ -23,6 +23,7 @@ const Website: React.FC<IProps> = ({ data }) => {
             {...getResponsiveImgProps({
               img: data.backgroundImg,
               sizes: { xxs: '100vw' },
+              aspect: 2 / 3,
             })}
           />
         )}
