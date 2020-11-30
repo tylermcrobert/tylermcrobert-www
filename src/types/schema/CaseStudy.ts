@@ -72,6 +72,8 @@ export type ModuleWebsite = {
     dots?: SanityColor
     frame?: SanityColor
   }
+  backgroundImg?: SanityImage
+  showFrame?: boolean
 }
 
 export type ModuleMobileWebsite = {

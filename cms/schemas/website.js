@@ -33,6 +33,16 @@ export const websiteFields = [
     validation: Rule => Rule.required(),
   },
   theme,
+  {
+    name: 'backgroundImg',
+    type: 'image',
+    options: { hotspot: 'true' },
+  },
+  {
+    name: 'showFrame',
+    title: 'Show Browser Frame',
+    type: 'boolean',
+  },
 ]
 
 export const website = {

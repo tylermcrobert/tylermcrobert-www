@@ -12,14 +12,26 @@ interface IProps {
 const Website: React.FC<IProps> = ({ data }) => {
   const { media: mediaArr, theme } = data
   const media = mediaArr && mediaArr[0]
+  const isFrameVisible = data.showFrame === undefined ? true : data.showFrame
 
   return (
     <S.BrowserBackground backgroundColor={theme?.background?.hex}>
       <S.Browser>
-        <div>
-          <BrowserFrame color={theme?.frame?.hex} dots={theme?.dots?.hex} />
+        {data.backgroundImg && (
+          <S.BackgroundImage
+            alt="background image"
+            {...getResponsiveImgProps({
+              img: data.backgroundImg,
+              sizes: { xxs: '100vw' },
+            })}
+          />
+        )}
+        <S.Content>
+          {isFrameVisible && (
+            <BrowserFrame color={theme?.frame?.hex} dots={theme?.dots?.hex} />
+          )}
           {media && <Media data={media} />}
-        </div>
+        </S.Content>
       </S.Browser>
     </S.BrowserBackground>
   )
