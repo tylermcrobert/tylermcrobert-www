@@ -39,16 +39,17 @@ const Seo: React.FC<SeoProps> = ({ title: titleProp }) => {
       <meta name="theme-color" content="#ffffff" />
 
       <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-XN74KTMBQ5"
+      ></script>
+      <script
         dangerouslySetInnerHTML={{
           __html: `
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN74KTMBQ5"></script>
-            <script>      
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
               gtag('config', 'G-XN74KTMBQ5');
-            </script>
           `,
         }}
       />
