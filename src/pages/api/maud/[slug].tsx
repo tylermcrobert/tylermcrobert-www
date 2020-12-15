@@ -19,6 +19,25 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     textHtml: $('#project-description .text-item.default').html(),
     text: $('#project-description .text-item.default').text(),
   }
+
+  const getMedia = (root: string) => {
+    const coverImg = $(`${root} img`).attr('src')
+    const coverVideo = $(`${root} source`).attr('src')
+
+    return {
+      type: coverImg ? 'image' : 'video',
+      src: coverVideo || coverImg,
+    }
+  }
+
+  const coverMedia = getMedia('#project-cover')
+  const nextProjectMedia = getMedia('#related-cover')
+  const nextProjectTitle = $('#related-header h3').text()
+  const nextProjectId = $('#related-project')
+    .attr('href')
+    ?.split('projects/')[1]
+    .split('/')[0]
+
   const modules = $('#project-layout-modules > * ').toArray()
 
   const classNames = modules.map(module => $(module).attr('class') || '')
@@ -64,5 +83,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   })
 
-  res.json({ title, intro, modules: moduleData })
+  res.json({
+    title,
+    coverMedia,
+    nextProjectTitle,
+    nextProjectId,
+    nextProjectMedia,
+    intro,
+    modules: moduleData,
+  })
 }
