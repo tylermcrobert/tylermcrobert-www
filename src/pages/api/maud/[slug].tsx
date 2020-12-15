@@ -10,6 +10,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const $ = cheerio.load(docText)
 
+  const title = $('title')
+    .text()
+    .split(' — ')[0]
+
+  const intro = {
+    heading: $('#project-description .text-item.large').text(),
+    textHtml: $('#project-description .text-item.default').html(),
+    text: $('#project-description .text-item.default').text(),
+  }
   const modules = $('#project-layout-modules > * ').toArray()
 
   const classNames = modules.map(module => $(module).attr('class') || '')
@@ -55,5 +64,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   })
 
-  res.json({ data: moduleData })
+  res.json({ title, intro, modules: moduleData })
 }
