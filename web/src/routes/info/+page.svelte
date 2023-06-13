@@ -35,9 +35,9 @@
 <section>
 	<h2>Playlists</h2>
 	<ul>
-		{#each data.playlists as { slug, title }, i}
+		{#each data.playlists as { link, title }, i}
 			<li>
-				<a href={`/playlists/${slug}`}>
+				<a href={link} target="_blank">
 					{NUMS[i]}
 					<p>{title}</p>
 					<span>&rarr;</span>
