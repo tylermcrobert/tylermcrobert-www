@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { CaseStudyQuery } from '$lib/sanity/queries';
+	import { PortableText } from '@portabletext/svelte';
 
 	export let data: CaseStudyQuery;
 </script>
@@ -14,4 +15,7 @@
 			<li>{deliverable}</li>
 		{/each}
 	</ul>
+	<div>
+		<PortableText value={data.description} />
+	</div>
 </header>
