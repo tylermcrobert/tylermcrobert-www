@@ -19,7 +19,7 @@
       builder = builder.height(size * aspect);
     }
 
-    return `${builder.url()} ${size / RESOLUTION}w`;
+    return `${builder.url()} ${Math.round(size / RESOLUTION)}w`;
   }).join(', ');
 </script>
 
