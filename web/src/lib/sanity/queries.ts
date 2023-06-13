@@ -54,8 +54,12 @@ export const caseStudyQuery = groq`
     date,
     modules[]{
       _type == 'dynamicImage' => {
-        ...
+        _type,
+        "image": image.asset,
+        aspect,
+        span,
       },
+
       _type == 'website' => {
         _type,
         showFrame,
@@ -104,7 +108,12 @@ type WebsiteImage = { _type: 'image'; image: SanityImageSource };
  * Dynamic Image
  */
 
-export type ModuleDynamicImage = { _type: 'dynamicImage' };
+export type ModuleDynamicImage = {
+  _type: 'dynamicImage';
+  span: 'half' | 'full' | null;
+  image: SanityImageSource;
+  aspect: number;
+};
 
 /**
  * Utils
