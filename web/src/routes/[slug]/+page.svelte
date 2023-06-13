@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Modules from '$lib/PortfolioModules/Modules.svelte';
 	import type { CaseStudyQuery } from '$lib/sanity/queries';
 	import { PortableText } from '@portabletext/svelte';
 
@@ -19,3 +20,7 @@
 		<PortableText value={data.description} />
 	</div>
 </header>
+
+<div>
+	<Modules modules={data.modules} />
+</div>
