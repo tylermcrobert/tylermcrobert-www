@@ -3,10 +3,10 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 const options = {
-	dataset: 'production',
-	projectId: 'n1wxk3oc',
-	useCdn: process.env.NODE_ENV === 'production',
-	apiVersion: '2023-06-02'
+  dataset: 'production',
+  projectId: 'n1wxk3oc',
+  useCdn: process.env.NODE_ENV === 'production',
+  apiVersion: '2023-06-02'
 };
 
 export const client = createClient(options);
@@ -14,5 +14,5 @@ export const client = createClient(options);
 const builder = imageUrlBuilder(client);
 
 export const urlFor = (source: SanityImageSource) => {
-	return builder.image(source);
+  return builder.image(source);
 };
