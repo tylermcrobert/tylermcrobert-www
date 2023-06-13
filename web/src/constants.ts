@@ -70,6 +70,8 @@ export const CLIENTS = [
   'Tonal'
 ];
 
+export const IMG_DEVICE_SIZES = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
+
 export const EMAIL = 'hello@tylermcrobert.com';
 export const LINK_EMAIL = 'mailto:hello@tylermcrobert.com';
 export const IG = '@tylermcrobert';
