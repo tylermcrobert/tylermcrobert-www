@@ -14,14 +14,14 @@ export const infoQuery = groq`
 `;
 
 export type InfoPlaylist = {
-	link: string;
-	title: string;
-	slug: string;
+  link: string;
+  title: string;
+  slug: string;
 };
 
 export type InfoQuery = {
-	bio: string;
-	playlists: InfoPlaylist[];
+  bio: string;
+  playlists: InfoPlaylist[];
 };
 
 export const homeQuery = groq`
@@ -34,12 +34,12 @@ export const homeQuery = groq`
 `;
 
 export type HomeQuery = {
-	caseStudies: HomeCaseStudy[];
+  caseStudies: HomeCaseStudy[];
 };
 
 export type HomeCaseStudy = {
-	title: string;
-	slug: string;
+  title: string;
+  slug: string;
 };
 
 /**
@@ -53,6 +53,9 @@ export const caseStudyQuery = groq`
     intro,
     date,
     modules[]{
+      _type == 'dynamicImage' => {
+        ...
+      },
       _type == 'website' => {
         _type,
         showFrame,
@@ -72,12 +75,12 @@ export const caseStudyQuery = groq`
 `;
 
 export type CaseStudyQuery = {
-	title: string;
-	deliverables: string[];
-	intro: string;
-	date: string;
-	description: PortableText;
-	modules: PortfolioModule[];
+  title: string;
+  deliverables: string[];
+  intro: string;
+  date: string;
+  description: PortableText;
+  modules: PortfolioModule[];
 };
 
 export type PortfolioModule = ModuleWebsite | ModuleDynamicImage;
@@ -87,11 +90,11 @@ export type PortfolioModule = ModuleWebsite | ModuleDynamicImage;
  */
 
 export type ModuleWebsite = {
-	_type: 'website';
-	media: WebsiteVideo | WebsiteImage;
-	theme: { background: string; frame: string };
-	background: SanityImageSource | null;
-	showFrame: boolean | null;
+  _type: 'website';
+  media: WebsiteVideo | WebsiteImage;
+  theme: { background: string; frame: string };
+  background: SanityImageSource | null;
+  showFrame: boolean | null;
 };
 
 type WebsiteVideo = { _type: 'video'; video: string };
