@@ -55,12 +55,17 @@ export const caseStudyQuery = groq`
     modules[]{
       _type == 'website' => {
         _type,
+        showFrame,
+        "background": backgroundImg.asset,
+        theme-> {
+          "background": background.hex,
+          "frame": frame.hex,
+        },
         "media":media[0]{
           _type,
           "image": asset,
-          "video": videoFile.asset->url
+          "video": videoFile.asset->url,
         },
-
       },
     }
   }
@@ -84,6 +89,9 @@ export type PortfolioModule = ModuleWebsite | ModuleDynamicImage;
 export type ModuleWebsite = {
 	_type: 'website';
 	media: WebsiteVideo | WebsiteImage;
+	theme: { background: string; frame: string };
+	background: SanityImageSource | null;
+	showFrame: boolean | null;
 };
 
 type WebsiteVideo = { _type: 'video'; video: string };
