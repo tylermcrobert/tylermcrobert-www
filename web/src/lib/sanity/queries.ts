@@ -21,3 +21,21 @@ export type InfoQuery = {
 	bio: string;
 	playlists: InfoPlaylist[];
 };
+
+export const homeQuery = groq`
+  *[_type == 'context' && slug.current == 'default'][0]{
+    caseStudies[]-> { 
+      title,
+      'slug': slug.current
+    }
+  }
+`;
+
+export type HomeQuery = {
+	caseStudies: HomeCaseStudy[];
+};
+
+export type HomeCaseStudy = {
+	title: string;
+	slug: string;
+};
