@@ -39,3 +39,19 @@ export type HomeCaseStudy = {
 	title: string;
 	slug: string;
 };
+
+export const caseStudyQuery = groq`
+  *[_type == 'caseStudy' && slug.current == $slug][0]{
+    title,
+    deliverables,
+    intro,
+    date,
+  }
+`;
+
+export type CaseStudyQuery = {
+	title: string;
+	deliverables: string[];
+	intro: string;
+	date: string;
+};
