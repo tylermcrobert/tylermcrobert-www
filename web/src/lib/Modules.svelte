@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ModuleDynamicImage from './ModuleDynamicImage.svelte';
-  import ModuleWebsite from './ModuleWebsite.svelte';
+  import ModuleDynamicImage from './PortfolioModules/ModuleDynamicImage.svelte';
+  import ModuleWebsite from './PortfolioModules//ModuleWebsite.svelte';
   import type { PortfolioModule } from '$lib/sanity/queries';
 
   export let modules: PortfolioModule[];

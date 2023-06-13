@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Modules from '$lib/PortfolioModules/Modules.svelte';
+  import Modules from '$lib/Modules.svelte';
   import type { CaseStudyQuery } from '$lib/sanity/queries';
   import { PortableText } from '@portabletext/svelte';
 
