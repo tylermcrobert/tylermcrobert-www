@@ -28,9 +28,14 @@
       <BrowserFrame color={theme.frame} />
     {/if}
 
-    {#if media._type === 'image'}
-      <ResponsiveImage image={media.image} alt="" sizes="80vw" />
-    {:else if media._type === 'video'}
+    {#if media.image}
+      <ResponsiveImage
+        image={media.image}
+        aspect={media.image.aspect}
+        alt=""
+        sizes="80vw"
+      />
+    {:else if media.video}
       <video src={media.video} muted playsinline loop autoplay />
     {/if}
   </div>
@@ -40,6 +45,7 @@
   .wrapper {
     padding: 10%;
     position: relative;
+    width: 100%;
 
     grid-column: span 6;
   }

@@ -12,7 +12,7 @@
     image={data.image}
     alt=""
     sizes={half ? '50vw' : '100vw'}
-    aspect={data.aspect}
+    aspect={data.image.aspect}
   />
 </div>
 

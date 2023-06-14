@@ -14,7 +14,7 @@ export const caseStudyQuery = groq`
     modules[]{
       _type == 'dynamicImage' => {
         _type,
-        "image": image.asset,
+        "image": image.asset-> { _id, "aspect": metadata.dimensions.aspectRatio },
         aspect,
         span,
       },
@@ -29,7 +29,7 @@ export const caseStudyQuery = groq`
         },
         "media":media[0]{
           _type,
-          "image": asset,
+          "image": asset-> { _id, "aspect": metadata.dimensions.aspectRatio },
           "video": videoFile.asset->url,
         },
       },
@@ -54,14 +54,14 @@ export type PortfolioModule = ModuleWebsite | ModuleDynamicImage;
 
 export type ModuleWebsite = {
   _type: 'website';
-  media: WebsiteVideo | WebsiteImage;
+  media: {
+    video: string;
+    image: ImageWithMetadata;
+  };
   theme: { background: string; frame: string };
   background: SanityImageSource | null;
   showFrame: boolean | null;
 };
-
-type WebsiteVideo = { _type: 'video'; video: string };
-type WebsiteImage = { _type: 'image'; image: SanityImageSource };
 
 /**
  * Dynamic Image
@@ -70,7 +70,7 @@ type WebsiteImage = { _type: 'image'; image: SanityImageSource };
 export type ModuleDynamicImage = {
   _type: 'dynamicImage';
   span: 'half' | 'full' | null;
-  image: SanityImageSource;
+  image: ImageWithMetadata;
   aspect: number;
 };
 
@@ -79,3 +79,7 @@ export type ModuleDynamicImage = {
  */
 
 export type PortableText = InputValue;
+export type ImageWithMetadata = SanityImageSource & {
+  _id: string;
+  aspect: number;
+};
