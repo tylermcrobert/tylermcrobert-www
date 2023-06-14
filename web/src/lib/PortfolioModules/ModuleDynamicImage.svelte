@@ -17,10 +17,6 @@
 </div>
 
 <style>
-  .img :global(img) {
-    max-width: 100%;
-  }
-
   .half {
     grid-column: span 3;
   }

@@ -21,6 +21,18 @@
 
     return `${builder.url()} ${Math.round(size / RESOLUTION)}w`;
   }).join(', ');
+
+  function getAspectStyle() {
+    if (!aspect) return '';
+    const convertedAspect = Math.round((1 / aspect) * 100) / 100;
+    return `aspect-ratio: ${convertedAspect}`;
+  }
 </script>
 
-<img {alt} src={urlFor(image).url()} {srcset} {sizes} />
+<img
+  src={urlFor(image).url()}
+  {alt}
+  {srcset}
+  {sizes}
+  style={getAspectStyle()}
+/>
