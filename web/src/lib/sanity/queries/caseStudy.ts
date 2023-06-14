@@ -17,6 +17,11 @@ export const caseStudyQuery = groq`
     date,
     description,
     modules[]{
+      _type == 'textBlock' => {
+        ...,
+        _type,
+      },
+      
       _type == 'dynamicImage' => {
         _type,
         "image": image.asset-> ${imgProjection},
@@ -51,7 +56,10 @@ export type CaseStudyQuery = {
   modules: PortfolioModule[];
 };
 
-export type PortfolioModule = ModuleWebsite | ModuleDynamicImage;
+export type PortfolioModule =
+  | ModuleWebsite
+  | ModuleDynamicImage
+  | ModuleTextBlock;
 
 /**
  * Website
@@ -77,6 +85,15 @@ export type ModuleDynamicImage = {
   span: 'half' | 'full' | null;
   image: ImageWithMetadata;
   aspect: number;
+};
+
+/**
+ * Dynamic Image
+ */
+
+export type ModuleTextBlock = {
+  _type: 'textBlock';
+  content: PortableText;
 };
 
 /**

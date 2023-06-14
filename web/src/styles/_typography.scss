@@ -49,3 +49,11 @@ html {
 .indent {
   text-indent: 2em;
 }
+
+br {
+  display: none;
+}
+
+p:not(:last-child) {
+  margin-bottom: 1em;
+}
