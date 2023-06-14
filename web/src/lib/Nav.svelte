@@ -7,5 +7,9 @@
   .nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    padding: var(--space-small) var(--space-standard);
+    height: var(--nav-height);
   }
 </style>
