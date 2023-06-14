@@ -2,7 +2,7 @@ import type { InputValue } from '@portabletext/svelte/ptTypes';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import groq from 'groq';
 
-// TODO: Include mobileWebsite textBlock timedSlides tripleImage
+// TODO: Include mobileWebsite timedSlides tripleImage
 
 const imgProjection = groq`{
   _id, 
