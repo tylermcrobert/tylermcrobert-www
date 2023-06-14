@@ -22,3 +22,30 @@ html {
     font-size: calc(8px + 1vw);
   }
 }
+
+.h1 {
+  font-size: 1.78rem;
+  line-height: 1.05;
+
+  br {
+    display: none;
+  }
+
+  @include min-width('mobile-lg') {
+    br {
+      display: block;
+    }
+  }
+
+  @include min-width('tablet') {
+    font-size: 2.37rem;
+  }
+
+  @include min-width('laptop') {
+    font-size: 3.16rem;
+  }
+}
+
+.indent {
+  text-indent: 2em;
+}
