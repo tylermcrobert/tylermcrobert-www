@@ -1,9 +1,13 @@
+.wrapper {
+  max-width: var(--wrap-width);
+  padding: 0 var(--space-standard);
+  margin: 0 auto;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: var(--space-standard);
 
-  padding: var(--space-standard);
-  max-width: var(--wrap-width);
-  margin: 0 auto;
+  @extend .wrapper;
 }
