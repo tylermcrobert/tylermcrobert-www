@@ -47,11 +47,7 @@ export default {
   ],
 
   preview: {
-    select: {
-      media: 'media',
-    },
-    prepare: (prev: any) => {
-      return {title: 'website', media: prev.media[0]}
-    },
+    select: {media: 'media'},
+    prepare: (prev: any) => ({title: 'website', media: prev.media[0]}),
   },
 }
