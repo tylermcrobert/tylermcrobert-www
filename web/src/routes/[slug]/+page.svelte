@@ -2,14 +2,14 @@
   import Modules from '$lib/Modules.svelte';
   import type { CaseStudyQuery } from '$lib/sanity/queries';
   import { PortableText } from '@portabletext/svelte';
-  import { DOT } from '../../constants';
+  import { DOT, NUMS } from '../../constants';
 
   export let data: CaseStudyQuery;
 </script>
 
 <header class="grid intro">
-  <h1 class="title">{data.title}</h1>
-  <h2 class="intro h1">{data.intro}</h2>
+  <h1 class="title">{NUMS[0]} {data.title}</h1>
+  <h2 class="overview h1">{data.intro}</h2>
 
   <div class="details">
     <p class="date indent">{data.date.split('.')[0]}</p>
@@ -49,7 +49,7 @@
     grid-column: span 6;
   }
 
-  h2 {
+  .overview {
     max-width: 11.5em;
   }
 
@@ -62,17 +62,26 @@
   }
 
   @include min-width('tablet') {
+    /* 50/50 */
     .details,
     .description {
       grid-column: span 3;
     }
 
+    /* Tighten details */
     .details {
       max-width: 16em;
     }
 
+    /* little nudge for some extra space */
+    .overview {
+      margin-bottom: var(--space-small);
+    }
+
+    /* Separate date from deliverables */
     .date {
-      text-indent: none;
+      margin-bottom: var(--space-small);
+      text-indent: 0;
     }
   }
 </style>
