@@ -1,0 +1,23 @@
+@import 'mixins.scss';
+
+html {
+  line-height: 1.2;
+  font-family: Suisse, helvetica, arial, sans-serif;
+  font-size: 18px;
+
+  @include min-width('mobile-lg') {
+    font-size: 19px;
+  }
+
+  @include min-width('tablet') {
+    font-size: 20px;
+  }
+
+  @include min-width('laptop') {
+    font-size: 21px;
+  }
+
+  @include min-width('desktop') {
+    font-size: calc(8px + 1vw);
+  }
+}
