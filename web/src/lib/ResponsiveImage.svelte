@@ -16,7 +16,7 @@
     let builder = urlFor(image).width(size).auto('format').quality(quality);
 
     if (aspect) {
-      builder = builder.height(size * aspect);
+      builder = builder.height(Math.round(size * aspect));
     }
 
     return `${builder.url()} ${Math.round(size / RESOLUTION)}w`;
