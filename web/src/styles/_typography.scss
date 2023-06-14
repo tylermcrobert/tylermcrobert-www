@@ -3,6 +3,7 @@
 html {
   line-height: 1.2;
   font-family: Suisse, helvetica, arial, sans-serif;
+  letter-spacing: 0.02em;
   font-size: 18px;
 
   @include min-width('mobile-lg') {
