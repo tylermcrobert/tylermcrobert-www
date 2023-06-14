@@ -1,3 +1,15 @@
+// Pages
 import webFrameTheme from './webFrameTheme'
+import caseStudy from './caseStudy'
 
-export const schemaTypes = [webFrameTheme]
+// Modules
+import moduleWebsite from './caseStudyModules/website'
+
+export const schemaTypes = [
+  // Pages
+  caseStudy,
+  webFrameTheme,
+
+  // Modules
+  moduleWebsite,
+]
