@@ -10,6 +10,7 @@ export const caseStudyQuery = groq`
     deliverables,
     intro,
     date,
+    description,
     modules[]{
       _type == 'dynamicImage' => {
         _type,
