@@ -47,7 +47,7 @@ export default {
     defineField({
       name: 'modules',
       type: 'array',
-      of: [{type: 'website'}],
+      of: [{type: 'website'}, {type: 'dynamicImage'}],
     }),
   ],
 }
