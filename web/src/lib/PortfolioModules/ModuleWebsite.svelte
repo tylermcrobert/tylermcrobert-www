@@ -12,7 +12,7 @@
       <ResponsiveImage
         image={background}
         alt="Website background image"
-        sizes="80vw"
+        sizes="90vw"
         aspect={1.5}
       />
     </div>
@@ -29,7 +29,7 @@
         image={media.image}
         aspect={media.image.aspect}
         alt=""
-        sizes="80vw"
+        sizes="70vw"
       />
     {:else if media.video}
       <video src={media.video} muted playsinline loop autoplay />
