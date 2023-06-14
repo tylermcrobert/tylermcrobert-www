@@ -1,3 +1,4 @@
+export const DOT = '●';
 export const NUMS = [
   '⓪',
   '①',
