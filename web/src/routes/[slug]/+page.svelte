@@ -9,10 +9,10 @@
 
 <header class="grid">
   <h1>{data.title}</h1>
-  <h2>{data.intro}</h2>
+  <h2 class="h1">{data.intro}</h2>
 
   <div class="details">
-    <p class="date">{data.date.split('.')[0]}</p>
+    <p class="date indent">{data.date.split('.')[0]}</p>
     <ul class="deliverables">
       {#each data.deliverables as deliverable, i}
         <li class="deliverable">
@@ -25,8 +25,7 @@
       {/each}
     </ul>
   </div>
-
-  <div class="description">
+  <div class="description indent">
     <PortableText value={data.description} />
   </div>
 </header>
@@ -36,16 +35,45 @@
 </div>
 
 <style lang="scss">
+  @import '../../styles/mixins';
+
   header {
-    h1,
-    h2,
+    padding-top: var(--space-large);
+  }
+
+  h1,
+  h2,
+  .details,
+  .description {
+    grid-column: span 6;
+  }
+
+  h2 {
+    max-width: 11.5em;
+  }
+
+  .deliverable {
+    display: inline;
+  }
+
+  @include min-width('tablet') {
     .details,
     .description {
-      grid-column: span 6;
+      grid-column: span 3;
     }
 
-    .deliverable {
-      display: inline;
+    .details {
+      max-width: 16em;
+    }
+
+    .date {
+      text-indent: none;
     }
   }
+  /* 
+  @include min-width('laptop') {
+    .details {
+      grid-column: span 2;
+    }
+  } */
 </style>
