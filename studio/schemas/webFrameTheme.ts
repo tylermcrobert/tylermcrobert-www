@@ -3,6 +3,7 @@ import {defineField} from 'sanity'
 export default {
   name: 'webFrameTheme',
   type: 'document',
+  title: 'Browser Frame Theme',
   fields: [
     defineField({
       name: 'title',
