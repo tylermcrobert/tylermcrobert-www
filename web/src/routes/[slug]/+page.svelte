@@ -8,8 +8,8 @@
 </script>
 
 <header class="grid intro">
-  <h1>{data.title}</h1>
-  <h2 class="h1">{data.intro}</h2>
+  <h1 class="title">{data.title}</h1>
+  <h2 class="intro h1">{data.intro}</h2>
 
   <div class="details">
     <p class="date indent">{data.date.split('.')[0]}</p>
