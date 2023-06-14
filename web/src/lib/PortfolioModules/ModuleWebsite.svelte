@@ -1,11 +1,5 @@
 <script lang="ts">
   import ResponsiveImage from '$lib/ResponsiveImage.svelte';
-  // TODO: make background image responsive
-  // TODO: try to get img width and height correct to avoid layout shift
-  // TODO: Confirm everything with existing site
-  // TODO: Confirm desktop/mobile is correct
-
-  import { urlFor } from '$lib/sanity/client';
   import type { ModuleWebsite } from '$lib/sanity/queries';
   import BrowserFrame from '$lib/util/BrowserFrame.svelte';
   export let data: ModuleWebsite;
@@ -14,13 +8,14 @@
 
 <div class="wrapper" style={`background:${theme.background}`}>
   {#if background}
-    <img
-      src={urlFor(background).width(100).auto('format').url()}
-      width="10px"
-      height="10px"
-      class="backgroundImg"
-      alt=""
-    />
+    <div class="backgroundImg">
+      <ResponsiveImage
+        image={background}
+        alt="Website background image"
+        sizes="80vw"
+        aspect={1.5}
+      />
+    </div>
   {/if}
 
   <div class="browser">
@@ -30,6 +25,7 @@
 
     {#if media.image}
       <ResponsiveImage
+        color="#ffffff"
         image={media.image}
         aspect={media.image.aspect}
         alt=""
@@ -50,7 +46,7 @@
     grid-column: span 6;
   }
 
-  .backgroundImg {
+  .backgroundImg :global(img) {
     position: absolute;
     top: 0;
     left: 0;
@@ -63,11 +59,5 @@
   .browser {
     position: relative;
     z-index: 1;
-  }
-
-  img,
-  video {
-    width: 100%;
-    max-width: 100%;
   }
 </style>

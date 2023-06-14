@@ -14,6 +14,7 @@
   export let aspect: number | undefined = undefined;
   export let sizes: string;
   export let quality = 75;
+  export let color: string | undefined = undefined;
 
   /**
    * Take aspect ratio and invert the numerator and denominater
@@ -35,9 +36,11 @@
    * Add inline style for img
    */
 
-  function getAspectStyle() {
-    if (!aspect) return '';
-    return `aspect-ratio: ${aspect}`;
+  function getStyle() {
+    let styles = [];
+    if (aspect) styles.push(`aspect-ratio: ${aspect}`);
+    if (color) styles.push(`background-color: ${color}`);
+    return styles.join('; ');
   }
 </script>
 
@@ -47,11 +50,12 @@
   {alt}
   {srcset}
   {sizes}
-  style={getAspectStyle()}
+  style={getStyle()}
 />
 
 <style>
   .responsiveImage {
     object-fit: cover;
+    background-color: var(--color-img-preload-background);
   }
 </style>
