@@ -1,4 +1,5 @@
 <script lang="ts">
+  // TODO: Add dots
   export let color: string;
 </script>
 
