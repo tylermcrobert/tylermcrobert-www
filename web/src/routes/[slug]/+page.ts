@@ -1,4 +1,4 @@
-import { client } from '$lib/sanity/client.js';
+import { client } from '$lib/sanity/client';
 import { caseStudyQuery } from '$lib/sanity/queries';
 
 export async function load({ params }) {
