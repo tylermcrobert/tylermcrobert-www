@@ -4,6 +4,11 @@ import groq from 'groq';
 
 // TODO: Include mobileWebsite textBlock timedSlides tripleImage
 
+const imgProjection = groq`{
+  _id, 
+  "aspect": metadata.dimensions.aspectRatio,
+}`;
+
 export const caseStudyQuery = groq`
   *[_type == 'caseStudy' && slug.current == $slug][0]{
     title,
@@ -14,7 +19,7 @@ export const caseStudyQuery = groq`
     modules[]{
       _type == 'dynamicImage' => {
         _type,
-        "image": image.asset-> { _id, "aspect": metadata.dimensions.aspectRatio },
+        "image": image.asset-> ${imgProjection},
         aspect,
         span,
       },
@@ -22,14 +27,14 @@ export const caseStudyQuery = groq`
       _type == 'website' => {
         _type,
         showFrame,
-        "background": backgroundImg.asset,
+        "background": backgroundImg.asset->${imgProjection},
         theme-> {
           "background": background.hex,
           "frame": frame.hex,
         },
         "media":media[0]{
           _type,
-          "image": asset-> { _id, "aspect": metadata.dimensions.aspectRatio },
+          "image": asset-> ${imgProjection},
           "video": videoFile.asset->url,
         },
       },
@@ -59,7 +64,7 @@ export type ModuleWebsite = {
     image: ImageWithMetadata;
   };
   theme: { background: string; frame: string };
-  background: SanityImageSource | null;
+  background: ImageWithMetadata | null;
   showFrame: boolean | null;
 };
 
