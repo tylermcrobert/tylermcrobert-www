@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   // TODO: make background image responsive
   // TODO: try to get img width and height correct to avoid layout shift
   // TODO: Confirm everything with existing site
@@ -28,7 +29,7 @@
     {/if}
 
     {#if media._type === 'image'}
-      <img src={urlFor(media.image).width(100).auto('format').url()} alt="" />
+      <ResponsiveImage image={media.image} alt="" sizes="80vw" />
     {:else if media._type === 'video'}
       <video src={media.video} muted playsinline loop autoplay />
     {/if}
