@@ -1,13 +1,5 @@
-<script lang="ts">
-  import { NUMS } from '../constants';
-  import { page } from '$app/stores';
+<script>
+  import HomeIndex from '$lib/HomeIndex.svelte';
 </script>
 
-<ul>
-  {#each $page.data.caseStudies as { title, slug }, i}
-    <li>
-      {NUMS[i + 1]}
-      <a href={`/${slug}`}>{title}</a>
-    </li>
-  {/each}
-</ul>
+<HomeIndex />

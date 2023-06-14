@@ -3,39 +3,50 @@
   import type { CaseStudyQuery } from '$lib/sanity/queries';
   import { PortableText } from '@portabletext/svelte';
   import { DOT, NUMS } from '../../constants';
+  import HomeIndex from '$lib/HomeIndex.svelte';
 
   export let data: CaseStudyQuery;
 </script>
 
-<header class="grid intro">
-  <h1 class="title">{NUMS[0]} {data.title}</h1>
-  <h2 class="overview h1">{data.intro}</h2>
+<div class="projectPage">
+  <header class="grid intro">
+    <h1 class="title">{NUMS[0]} {data.title}</h1>
+    <h2 class="overview h1">{data.intro}</h2>
 
-  <div class="details">
-    <p class="date indent">{data.date.split('.')[0]}</p>
-    <ul class="deliverables">
-      {#each data.deliverables as deliverable, i}
-        <li class="deliverable">
-          {#if i >= 1}
-            {DOT}&nbsp;{deliverable}
-          {:else}
-            {deliverable}
-          {/if}
-        </li>
-      {/each}
-    </ul>
-  </div>
-  <div class="description indent">
-    <PortableText value={data.description} />
-  </div>
-</header>
+    <div class="details">
+      <p class="date indent">{data.date.split('.')[0]}</p>
+      <ul class="deliverables">
+        {#each data.deliverables as deliverable, i}
+          <li class="deliverable">
+            {#if i >= 1}
+              {DOT}&nbsp;{deliverable}
+            {:else}
+              {deliverable}
+            {/if}
+          </li>
+        {/each}
+      </ul>
+    </div>
+    <div class="description indent">
+      <PortableText value={data.description} />
+    </div>
+  </header>
 
-<div class="grid modules">
-  <Modules modules={data.modules} />
+  <div class="grid modules">
+    <Modules modules={data.modules} />
+  </div>
 </div>
+
+<HomeIndex projectPage />
 
 <style lang="scss">
   @import '../../styles/mixins';
+
+  .projectPage {
+    position: relative;
+    z-index: var(--z-project-page);
+    background: white;
+  }
 
   .intro {
     margin-top: var(--space-large);
@@ -59,6 +70,7 @@
 
   .modules {
     padding-bottom: var(--space-large);
+    border-bottom: 1px dashed black;
   }
 
   @include min-width('tablet') {
