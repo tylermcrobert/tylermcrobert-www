@@ -89,10 +89,6 @@
     margin-bottom: 1rem;
   }
 
-  /* h1 {
-    margin-bottom: var(--space-medium);
-  } */
-
   .contact h3 {
     display: inline;
   }
