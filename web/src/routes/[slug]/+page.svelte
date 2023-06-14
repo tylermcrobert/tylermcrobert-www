@@ -31,7 +31,7 @@
   </div>
 </header>
 
-<div>
+<div class="grid">
   <Modules modules={data.modules} />
 </div>
 

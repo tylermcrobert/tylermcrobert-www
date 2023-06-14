@@ -40,6 +40,8 @@
   .wrapper {
     padding: 10%;
     position: relative;
+
+    grid-column: span 6;
   }
 
   .backgroundImg {

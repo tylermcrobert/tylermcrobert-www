@@ -4,7 +4,7 @@
   export let data: ModuleDynamicImage;
 
   let half = data.span === 'half';
-  let full = data.span === 'full';
+  let full = !half;
 </script>
 
 <div class="img" class:half class:full>
@@ -19,5 +19,13 @@
 <style>
   .img :global(img) {
     max-width: 100%;
+  }
+
+  .half {
+    grid-column: span 3;
+  }
+
+  .full {
+    grid-column: span 6;
   }
 </style>
