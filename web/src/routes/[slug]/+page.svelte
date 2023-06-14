@@ -7,7 +7,7 @@
   export let data: CaseStudyQuery;
 </script>
 
-<header class="grid">
+<header class="grid intro">
   <h1>{data.title}</h1>
   <h2 class="h1">{data.intro}</h2>
 
@@ -30,15 +30,16 @@
   </div>
 </header>
 
-<div class="grid">
+<div class="grid modules">
   <Modules modules={data.modules} />
 </div>
 
 <style lang="scss">
   @import '../../styles/mixins';
 
-  header {
-    padding-top: var(--space-large);
+  .intro {
+    margin-top: var(--space-large);
+    margin-bottom: var(--space-standard);
   }
 
   h1,
@@ -56,6 +57,10 @@
     display: inline;
   }
 
+  .modules {
+    padding-bottom: var(--space-large);
+  }
+
   @include min-width('tablet') {
     .details,
     .description {
@@ -70,10 +75,4 @@
       text-indent: none;
     }
   }
-  /* 
-  @include min-width('laptop') {
-    .details {
-      grid-column: span 2;
-    }
-  } */
 </style>
