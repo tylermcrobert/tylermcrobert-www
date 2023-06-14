@@ -22,7 +22,7 @@ export type InfoQuery = {
   playlists: InfoPlaylist[];
 };
 
-export const homeQuery = groq`
+export const indexQuery = groq`
   *[_type == 'context' && slug.current == 'default'][0]{
     caseStudies[]-> { 
       title,
@@ -31,7 +31,7 @@ export const homeQuery = groq`
   }
 `;
 
-export type HomeQuery = {
+export type IndexQuery = {
   caseStudies: HomeCaseStudy[];
 };
 
