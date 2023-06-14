@@ -9,8 +9,10 @@ import dynamicImage from './caseStudyModules/dynamicImage'
 // Other Modules
 import imageOrVideo from './modules/imageOrVideo'
 import aspect from './modules/aspect'
+import textBlock from './modules/textBlock'
 
 export const schemaTypes = [
+  textBlock,
   aspect,
   dynamicImage,
   imageOrVideo,
