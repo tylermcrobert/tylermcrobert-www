@@ -17,6 +17,7 @@ const reversedAspect = ASPECT.map(([a, b]) => [b, a])
 const aspects = [...ASPECT.map(format), ...reversedAspect.map(format)]
 
 const aspect = defineType({
+  title: 'Aspect Ratio',
   name: 'aspect',
   type: 'number',
   options: {
