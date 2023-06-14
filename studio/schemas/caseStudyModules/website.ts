@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField} from 'sanity'
+import {defineField} from 'sanity'
 
 export default {
   name: 'website',
@@ -7,20 +7,7 @@ export default {
   fields: [
     defineField({
       name: 'media',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          name: 'image',
-          type: 'image',
-          options: {hotspot: true},
-        }),
-
-        defineArrayMember({
-          name: 'video',
-          type: 'object',
-          fields: [{name: 'videoFile', type: 'file'}],
-        }),
-      ],
+      type: 'imageOrVideo',
       validation: (Rule) => Rule.required(),
     }),
 
@@ -48,6 +35,6 @@ export default {
 
   preview: {
     select: {media: 'media'},
-    prepare: (prev: any) => ({title: 'website', media: prev.media[0]}),
+    prepare: (prev: any) => ({title: 'Website', media: prev.media[0]}),
   },
 }

@@ -5,11 +5,7 @@ import caseStudy from './caseStudy'
 // Modules
 import moduleWebsite from './caseStudyModules/website'
 
-export const schemaTypes = [
-  // Pages
-  caseStudy,
-  webFrameTheme,
+// Other Modules
+import imageOrVideo from './modules/imageOrVideo'
 
-  // Modules
-  moduleWebsite,
-]
+export const schemaTypes = [imageOrVideo, caseStudy, webFrameTheme, moduleWebsite]
