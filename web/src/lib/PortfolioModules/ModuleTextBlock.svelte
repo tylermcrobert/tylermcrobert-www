@@ -10,7 +10,15 @@
 </div>
 
 <style lang="scss">
+  @import '../../styles/mixins';
+
   .textBlock {
-    grid-column: span 3;
+    grid-column: span 6;
+  }
+
+  @include min-width('tablet') {
+    .textBlock {
+      grid-column: span 3;
+    }
   }
 </style>

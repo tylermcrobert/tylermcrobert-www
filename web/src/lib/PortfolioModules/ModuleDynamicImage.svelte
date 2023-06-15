@@ -16,12 +16,17 @@
   />
 </div>
 
-<style>
+<style lang="scss">
+  @import '../../styles/mixins';
+
+  .full,
   .half {
-    grid-column: span 3;
+    grid-column: span 6;
   }
 
-  .full {
-    grid-column: span 6;
+  @include min-width('tablet') {
+    .half {
+      grid-column: span 3;
+    }
   }
 </style>
