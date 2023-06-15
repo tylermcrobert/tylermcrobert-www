@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
   import { urlFor } from './sanity/client';
   import { IMG_DEVICE_SIZES } from '../constants';
+  import type { SanityImage } from './sanity/queries';
 
   /**
    * Halfway through standard and retna
    */
   const RESOLUTION = 1.5;
 
-  export let image: SanityImageSource;
+  export let image: SanityImage;
   export let alt: string;
 
   export let aspect: number | undefined = undefined;

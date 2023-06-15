@@ -9,10 +9,9 @@
 
 <div class="img" class:half class:full>
   <ResponsiveImage
-    image={data.image}
+    image={data.image.asset}
     alt=""
     sizes={half ? '50vw' : '100vw'}
-    aspect={data.image.aspect}
   />
 </div>
 

@@ -4,13 +4,14 @@
   import BrowserFrame from '$lib/util/BrowserFrame.svelte';
   export let data: ModuleWebsite;
   const { media, theme, showFrame, background } = data;
+  console.log(data);
 </script>
 
 <div class="wrapper" style={`background:${theme.background}`}>
   {#if background}
     <div class="backgroundImg">
       <ResponsiveImage
-        image={background}
+        image={background.asset}
         alt="Website background image"
         sizes="90vw"
         aspect={1.5}
@@ -26,8 +27,7 @@
     {#if media.image}
       <ResponsiveImage
         color="#ffffff"
-        image={media.image}
-        aspect={media.image.aspect}
+        image={media.image.asset}
         alt=""
         sizes="70vw"
       />

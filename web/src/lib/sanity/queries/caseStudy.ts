@@ -1,17 +1,16 @@
 import type { InputValue } from '@portabletext/svelte/ptTypes';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import groq from 'groq';
 
 // TODO: Include mobileWebsite timedSlides tripleImage
 
-const imgProjection = groq`{
-  _id, 
-  "aspect": metadata.dimensions.aspectRatio,
+const imgWithAspect = groq`{
+    "asset": image,
+    "preCropAspect": image.asset->.metadata.dimensions.aspectRatio
 }`;
 
 const mobileWebsiteMediaProjection = groq`{
   _type,
-  "image": asset-> ${imgProjection},
+  "image": asset-> ${imgWithAspect},
   "video": videoFile.asset->url,
 }    
 `;
@@ -37,7 +36,7 @@ export const caseStudyQuery = groq`
       
       _type == 'dynamicImage' => {
         _type,
-        "image": image.asset-> ${imgProjection},
+        "image": ${imgWithAspect},
         aspect,
         span,
       },
@@ -45,7 +44,7 @@ export const caseStudyQuery = groq`
       _type == 'website' => {
         _type,
         showFrame,
-        "background": backgroundImg.asset->${imgProjection},
+        "background": ${imgWithAspect},
         theme-> ${themeProjection},
         "media":media[0]${mobileWebsiteMediaProjection},
       },
@@ -83,7 +82,7 @@ export type ModuleWebsite = {
   _type: 'website';
   media: WebsiteModuleMedia;
   theme: WebsiteFrameTheme;
-  background: ImageWithMetadata | null;
+  background: ImageWithAspect | null;
   showFrame: boolean | null;
 };
 
@@ -94,7 +93,7 @@ export type ModuleWebsite = {
 export type ModuleDynamicImage = {
   _type: 'dynamicImage';
   span: 'half' | 'full' | null;
-  image: ImageWithMetadata;
+  image: ImageWithAspect;
   aspect: number;
 };
 
@@ -120,10 +119,12 @@ export type ModuleMobileWebsite = {
  * Utils
  */
 
-export type WebsiteModuleMedia = { video: string; image: ImageWithMetadata };
+export type WebsiteModuleMedia = { video: string; image: ImageWithAspect };
 export type PortableText = InputValue;
-export type ImageWithMetadata = SanityImageSource & {
-  _id: string;
-  aspect: number;
+export type SanityImage = { _type: 'image' };
+export type ImageWithAspect = {
+  asset: SanityImage;
+  preCropAspect: number;
 };
+
 export type WebsiteFrameTheme = { background: string; frame: string };

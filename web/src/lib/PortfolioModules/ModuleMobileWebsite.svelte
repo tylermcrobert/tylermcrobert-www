@@ -9,10 +9,9 @@
   {#each data.frames as frame}
     {#if frame.image}
       <ResponsiveImage
-        image={frame.image}
+        image={frame.image.asset}
         alt="Mobile Website"
         sizes="25vw"
-        aspect={frame.image.aspect}
       />
     {/if}
 
