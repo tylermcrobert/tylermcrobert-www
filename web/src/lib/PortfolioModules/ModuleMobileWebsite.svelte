@@ -1,12 +1,21 @@
 <script lang="ts">
+  import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   import type { ModuleMobileWebsite } from '$lib/sanity/queries';
 
   export let data: ModuleMobileWebsite;
-  console.log(data.frames);
 </script>
 
-<div class="mobileWebsite">
+<div class="mobileWebsite" style={`background: ${data.theme.background}`}>
   {#each data.frames as frame}
+    {#if frame.image}
+      <ResponsiveImage
+        image={frame.image}
+        alt="Mobile Website"
+        sizes="25vw"
+        aspect={frame.image.aspect}
+      />
+    {/if}
+
     {#if frame.video}
       <video
         class="websiteItem"
@@ -30,10 +39,10 @@
 
     background: black;
     padding: 7%;
+    gap: 7%;
   }
 
   .websiteItem {
-    margin: 7%;
     overflow: hidden;
     max-width: 15rem;
   }

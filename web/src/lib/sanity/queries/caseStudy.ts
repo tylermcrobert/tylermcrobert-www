@@ -16,6 +16,11 @@ const mobileWebsiteMediaProjection = groq`{
 }    
 `;
 
+const themeProjection = groq`{
+  "background": background.hex,
+  "frame": frame.hex,
+}`;
+
 export const caseStudyQuery = groq`
   *[_type == 'caseStudy' && slug.current == $slug][0]{
     "slug": slug.current,
@@ -41,16 +46,14 @@ export const caseStudyQuery = groq`
         _type,
         showFrame,
         "background": backgroundImg.asset->${imgProjection},
-        theme-> {
-          "background": background.hex,
-          "frame": frame.hex,
-        },
+        theme-> ${themeProjection},
         "media":media[0]${mobileWebsiteMediaProjection},
       },
 
       _type == 'mobileWebsite' => {
         _type,
-        "frames": frames[]${mobileWebsiteMediaProjection}
+        "frames": frames[]${mobileWebsiteMediaProjection},
+        theme-> ${themeProjection},
       }
     }
   }
@@ -79,7 +82,7 @@ export type PortfolioModule =
 export type ModuleWebsite = {
   _type: 'website';
   media: WebsiteModuleMedia;
-  theme: { background: string; frame: string };
+  theme: WebsiteFrameTheme;
   background: ImageWithMetadata | null;
   showFrame: boolean | null;
 };
@@ -110,19 +113,17 @@ export type ModuleTextBlock = {
 export type ModuleMobileWebsite = {
   _type: 'mobileWebsite';
   frames: WebsiteModuleMedia[];
+  theme: WebsiteFrameTheme;
 };
 
 /**
  * Utils
  */
 
-export type WebsiteModuleMedia = {
-  video: string;
-  image: ImageWithMetadata;
-};
-
+export type WebsiteModuleMedia = { video: string; image: ImageWithMetadata };
 export type PortableText = InputValue;
 export type ImageWithMetadata = SanityImageSource & {
   _id: string;
   aspect: number;
 };
+export type WebsiteFrameTheme = { background: string; frame: string };
