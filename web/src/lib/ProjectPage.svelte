@@ -63,7 +63,7 @@
   }
 
   .intro {
-    margin-top: var(--space-large);
+    padding-top: var(--space-large);
     margin-bottom: var(--space-standard);
   }
 
