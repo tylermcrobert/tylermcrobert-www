@@ -14,6 +14,10 @@
 
   .textBlock {
     grid-column: span 6;
+
+    :global(:not(:last-child)) {
+      margin-bottom: 1em;
+    }
   }
 
   @include min-width('tablet') {
