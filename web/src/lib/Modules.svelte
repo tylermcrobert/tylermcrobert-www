@@ -3,6 +3,7 @@
   import ModuleWebsite from './PortfolioModules//ModuleWebsite.svelte';
   import type { PortfolioModule } from '$lib/sanity/queries';
   import ModuleTextBlock from './PortfolioModules/ModuleTextBlock.svelte';
+  import ModuleMobileWebsite from './PortfolioModules/ModuleMobileWebsite.svelte';
 
   export let modules: PortfolioModule[];
 </script>
@@ -14,5 +15,7 @@
     <ModuleDynamicImage data={module} />
   {:else if module._type === 'textBlock'}
     <ModuleTextBlock data={module} />
+  {:else if module._type === 'mobileWebsite'}
+    <ModuleMobileWebsite data={module} />
   {/if}
 {/each}

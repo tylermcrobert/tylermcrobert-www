@@ -9,6 +9,13 @@ const imgProjection = groq`{
   "aspect": metadata.dimensions.aspectRatio,
 }`;
 
+const mobileWebsiteMediaProjection = groq`{
+  _type,
+  "image": asset-> ${imgProjection},
+  "video": videoFile.asset->url,
+}    
+`;
+
 export const caseStudyQuery = groq`
   *[_type == 'caseStudy' && slug.current == $slug][0]{
     "slug": slug.current,
@@ -38,12 +45,13 @@ export const caseStudyQuery = groq`
           "background": background.hex,
           "frame": frame.hex,
         },
-        "media":media[0]{
-          _type,
-          "image": asset-> ${imgProjection},
-          "video": videoFile.asset->url,
-        },
+        "media":media[0]${mobileWebsiteMediaProjection},
       },
+
+      _type == 'mobileWebsite' => {
+        _type,
+        "frames": frames[]${mobileWebsiteMediaProjection}
+      }
     }
   }
 `;
@@ -61,7 +69,8 @@ export type CaseStudyQuery = {
 export type PortfolioModule =
   | ModuleWebsite
   | ModuleDynamicImage
-  | ModuleTextBlock;
+  | ModuleTextBlock
+  | ModuleMobileWebsite;
 
 /**
  * Website
@@ -69,10 +78,7 @@ export type PortfolioModule =
 
 export type ModuleWebsite = {
   _type: 'website';
-  media: {
-    video: string;
-    image: ImageWithMetadata;
-  };
+  media: WebsiteModuleMedia;
   theme: { background: string; frame: string };
   background: ImageWithMetadata | null;
   showFrame: boolean | null;
@@ -97,10 +103,23 @@ export type ModuleTextBlock = {
   _type: 'textBlock';
   content: PortableText;
 };
+/**
+ * Mobile Website
+ */
+
+export type ModuleMobileWebsite = {
+  _type: 'mobileWebsite';
+  frames: WebsiteModuleMedia[];
+};
 
 /**
  * Utils
  */
+
+export type WebsiteModuleMedia = {
+  video: string;
+  image: ImageWithMetadata;
+};
 
 export type PortableText = InputValue;
 export type ImageWithMetadata = SanityImageSource & {
