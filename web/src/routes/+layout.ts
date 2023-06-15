@@ -5,3 +5,5 @@ export async function load() {
   const data = await client.fetch(indexQuery);
   return data;
 }
+
+export const prerender = true;

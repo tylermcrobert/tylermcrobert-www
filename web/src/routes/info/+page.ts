@@ -5,3 +5,5 @@ export async function load() {
   const info = await client.fetch(infoQuery);
   return info;
 }
+
+export const prerender = true;
