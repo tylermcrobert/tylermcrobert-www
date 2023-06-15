@@ -4,13 +4,17 @@
   import { PortableText } from '@portabletext/svelte';
   import { DOT, NUMS } from '../constants';
   import HomeIndex from '$lib/HomeIndex.svelte';
+  import { page } from '$app/stores';
 
   export let data: CaseStudyQuery;
+
+  const caseStudies = $page.data.caseStudies;
+  const index = caseStudies.findIndex((cs) => cs.slug === data.slug);
 </script>
 
 <div class="projectPage">
   <header class="grid intro">
-    <h1 class="title">{NUMS[0]} {data.title}</h1>
+    <h1 class="title">{NUMS[index + 1]} {data.title}</h1>
     <h2 class="overview h1">{data.intro}</h2>
 
     <div class="details">
@@ -37,7 +41,9 @@
   </div>
 </div>
 
-<HomeIndex projectPage />
+<div class="shim" />
+
+<HomeIndex />
 
 <style lang="scss">
   @import '../styles/mixins';
@@ -46,6 +52,14 @@
     position: relative;
     z-index: var(--z-project-page);
     background: white;
+
+    padding-bottom: var(--space-large);
+    border-bottom: 1px dashed black;
+  }
+
+  .shim {
+    height: 100vh;
+    pointer-events: none;
   }
 
   .intro {
@@ -66,11 +80,6 @@
 
   .deliverable {
     display: inline;
-  }
-
-  .modules {
-    padding-bottom: var(--space-large);
-    border-bottom: 1px dashed black;
   }
 
   @include min-width('tablet') {

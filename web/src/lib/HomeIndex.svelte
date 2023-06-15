@@ -1,12 +1,10 @@
 <script lang="ts">
   import { NUMS } from '../constants';
   import { page } from '$app/stores';
-
-  export let projectPage = false;
 </script>
 
-<div class="indexWrapper" class:homepage={!projectPage}>
-  <ul class="index h1">
+<div class="indexWrapper">
+  <ul class="index h1 wrapper">
     {#each $page.data.caseStudies as { title, slug }, i}
       <li class="indexItem">
         {NUMS[i + 1]}&nbsp;<a href={`/${slug}`} class="indexLink">{title}</a>
@@ -18,21 +16,20 @@
 <style lang="scss">
   div.indexWrapper {
     height: 100vh;
+    width: 100vw;
+
     display: flex;
     align-items: center;
+    justify-content: center;
 
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    top: 0;
     z-index: 0;
-
-    &.homepage {
-      margin-top: calc(var(--nav-height) * -1);
-    }
   }
 
   ul.index {
-    max-width: 60rem;
-    margin: var(--space-large) var(--space-standard);
+    max-width: var(--wrap-width);
+    margin: var(--space-large) 0;
   }
 
   li.indexItem,

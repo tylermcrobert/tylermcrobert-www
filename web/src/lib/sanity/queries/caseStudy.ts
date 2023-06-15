@@ -11,6 +11,7 @@ const imgProjection = groq`{
 
 export const caseStudyQuery = groq`
   *[_type == 'caseStudy' && slug.current == $slug][0]{
+    "slug": slug.current,
     title,
     deliverables,
     intro,
@@ -48,6 +49,7 @@ export const caseStudyQuery = groq`
 `;
 
 export type CaseStudyQuery = {
+  slug: string;
   title: string;
   deliverables: string[];
   intro: string;
