@@ -3,7 +3,7 @@ import {defineField, defineType} from 'sanity'
 export default defineType({
   name: 'mobileWebsite',
   type: 'object',
-  title: 'Mobile Image',
+  title: 'Mobile Website',
   fields: [
     defineType({
       name: 'frames',
