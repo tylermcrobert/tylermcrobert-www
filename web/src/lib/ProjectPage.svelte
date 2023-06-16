@@ -12,37 +12,38 @@
   const index = caseStudies.findIndex((cs) => cs.slug === data.slug);
 </script>
 
-<div class="projectPage">
-  <header class="grid intro">
-    <h1 class="title">{NUMS[index + 1]} {data.title}</h1>
-    <h2 class="overview h1">{data.intro}</h2>
+{#key data.slug}
+  <div class="projectPage">
+    <header class="grid intro">
+      <h1 class="title">{NUMS[index + 1]} {data.title}</h1>
+      <h2 class="overview h1">{data.intro}</h2>
 
-    <div class="details">
-      <p class="date indent">{data.date.split('.')[0]}</p>
-      <ul class="deliverables">
-        {#each data.deliverables as deliverable, i}
-          <li class="deliverable">
-            {#if i >= 1}
-              {DOT}&nbsp;{deliverable}
-            {:else}
-              {deliverable}
-            {/if}
-          </li>
-        {/each}
-      </ul>
-    </div>
-    <div class="description indent">
-      <PortableText value={data.description} />
-    </div>
-  </header>
+      <div class="details">
+        <p class="date indent">{data.date.split('.')[0]}</p>
+        <ul class="deliverables">
+          {#each data.deliverables as deliverable, i}
+            <li class="deliverable">
+              {#if i >= 1}
+                {DOT}&nbsp;{deliverable}
+              {:else}
+                {deliverable}
+              {/if}
+            </li>
+          {/each}
+        </ul>
+      </div>
+      <div class="description indent">
+        <PortableText value={data.description} />
+      </div>
+    </header>
 
-  <div class="grid modules">
-    <Modules modules={data.modules} />
+    <div class="grid modules">
+      <Modules modules={data.modules} />
+    </div>
   </div>
-</div>
+{/key}
 
 <div class="shim" />
-
 <HomeIndex />
 
 <style lang="scss">
