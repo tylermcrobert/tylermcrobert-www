@@ -58,8 +58,6 @@ export const caseStudyQuery = groq`
   }
 `;
 
-console.log(caseStudyQuery);
-
 export type CaseStudyQuery = {
   slug: string;
   title: string;
