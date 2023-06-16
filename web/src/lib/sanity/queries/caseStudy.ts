@@ -2,7 +2,7 @@ import type { InputValue } from '@portabletext/svelte/ptTypes';
 import groq from 'groq';
 import type { SanityImage } from '../types';
 
-// TODO: Include mobileWebsite timedSlides tripleImage
+// TODO: Include tripleImage
 
 const websiteMedia = groq`{
   _type,
@@ -49,6 +49,13 @@ export const caseStudyQuery = groq`
         _type,
         "frames": frames[]${websiteMedia},
         theme-> ${themeProjection},
+      },
+     
+      _type == 'timedSlides' => {
+        _type,
+        images,
+        seconds,
+        theme-> ${themeProjection},
       }
     }
   }
@@ -68,7 +75,8 @@ export type PortfolioModule =
   | ModuleWebsite
   | ModuleDynamicImage
   | ModuleTextBlock
-  | ModuleMobileWebsite;
+  | ModuleMobileWebsite
+  | ModuleTimedSlides;
 
 /**
  * Website
@@ -101,6 +109,7 @@ export type ModuleTextBlock = {
   _type: 'textBlock';
   content: PortableText;
 };
+
 /**
  * Mobile Website
  */
@@ -109,6 +118,17 @@ export type ModuleMobileWebsite = {
   _type: 'mobileWebsite';
   frames: WebsiteModuleMedia[];
   theme: WebsiteFrameTheme | null;
+};
+
+/**
+ * Timed Slides
+ */
+
+export type ModuleTimedSlides = {
+  _type: 'timedSlides';
+  images: SanityImage[];
+  theme?: WebsiteFrameTheme;
+  seconds: number;
 };
 
 /**
