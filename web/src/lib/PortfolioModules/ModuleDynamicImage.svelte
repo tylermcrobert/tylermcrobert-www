@@ -12,6 +12,7 @@
     <ResponsiveImage
       image={data.image}
       alt=""
+      aspect={1 / data.aspect}
       sizes={half ? '50vw' : '100vw'}
     />
   {/if}
