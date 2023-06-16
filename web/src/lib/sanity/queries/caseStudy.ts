@@ -10,7 +10,7 @@ const imgWithAspect = groq`{
 
 const mobileWebsiteMediaProjection = groq`{
   _type,
-  "image": asset-> ${imgWithAspect},
+  "image": { asset, "preCropAspect": asset->.metadata.dimensions.aspectRatio },
   "video": videoFile.asset->url,
 }    
 `;
@@ -57,6 +57,8 @@ export const caseStudyQuery = groq`
     }
   }
 `;
+
+console.log(caseStudyQuery);
 
 export type CaseStudyQuery = {
   slug: string;
@@ -112,7 +114,7 @@ export type ModuleTextBlock = {
 export type ModuleMobileWebsite = {
   _type: 'mobileWebsite';
   frames: WebsiteModuleMedia[];
-  theme: WebsiteFrameTheme;
+  theme: WebsiteFrameTheme | null;
 };
 
 /**
@@ -123,7 +125,7 @@ export type WebsiteModuleMedia = { video: string; image: ImageWithAspect };
 export type PortableText = InputValue;
 export type SanityImage = { _type: 'image' };
 export type ImageWithAspect = {
-  asset: SanityImage;
+  asset: SanityImage | null;
   preCropAspect: number;
 };
 

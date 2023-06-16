@@ -5,9 +5,9 @@
   export let data: ModuleMobileWebsite;
 </script>
 
-<div class="mobileWebsite" style={`background: ${data.theme.background}`}>
+<div class="mobileWebsite" style={`background: ${data.theme?.background}`}>
   {#each data.frames as frame}
-    {#if frame.image}
+    {#if frame.image.asset}
       <ResponsiveImage
         image={frame.image.asset}
         alt="Mobile Website"

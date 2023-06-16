@@ -8,11 +8,13 @@
 </script>
 
 <div class="img" class:half class:full>
-  <ResponsiveImage
-    image={data.image.asset}
-    alt=""
-    sizes={half ? '50vw' : '100vw'}
-  />
+  {#if data.image.asset}
+    <ResponsiveImage
+      image={data.image.asset}
+      alt=""
+      sizes={half ? '50vw' : '100vw'}
+    />
+  {/if}
 </div>
 
 <style lang="scss">

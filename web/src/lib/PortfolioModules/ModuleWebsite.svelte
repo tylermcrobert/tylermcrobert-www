@@ -4,11 +4,10 @@
   import BrowserFrame from '$lib/util/BrowserFrame.svelte';
   export let data: ModuleWebsite;
   const { media, theme, showFrame, background } = data;
-  console.log(data);
 </script>
 
 <div class="wrapper" style={`background:${theme.background}`}>
-  {#if background}
+  {#if background?.asset}
     <div class="backgroundImg">
       <ResponsiveImage
         image={background.asset}
@@ -24,10 +23,11 @@
       <BrowserFrame color={theme.frame} />
     {/if}
 
-    {#if media.image}
+    {#if media.image.asset}
       <ResponsiveImage
         color="#ffffff"
         image={media.image.asset}
+        aspect={media.image.preCropAspect}
         alt=""
         sizes="70vw"
       />
