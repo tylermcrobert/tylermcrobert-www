@@ -1,7 +1,7 @@
 <script lang="ts">
   import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   import type { ModuleWebsite } from '$lib/sanity/queries';
-  import BrowserFrame from '$lib/util/BrowserFrame.svelte';
+  import BrowserFrame from '$lib/util/svelte/BrowserFrame.svelte';
   export let data: ModuleWebsite;
   const { media, theme, showFrame, backgroundImg } = data;
 </script>

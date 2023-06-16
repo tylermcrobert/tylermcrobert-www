@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { InfoQuery } from '$lib/sanity/queries';
-  import Arrow from '$lib/util/Arrow.svelte';
-  import DotHead from '$lib/util/DotHead.svelte';
+  import Arrow from '$lib/util/svelte/Arrow.svelte';
+  import DotHead from '$lib/util/svelte/DotHead.svelte';
   import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG, CLIENTS } from '../constants';
 
   export let data: InfoQuery;
