@@ -47,7 +47,13 @@ export default {
     defineField({
       name: 'modules',
       type: 'array',
-      of: [{type: 'website'}, {type: 'dynamicImage'}, {type: 'textBlock'}, {type: 'mobileWebsite'}],
+      of: [
+        {type: 'website'},
+        {type: 'dynamicImage'},
+        {type: 'textBlock'},
+        {type: 'mobileWebsite'},
+        {type: 'timedSlides'},
+      ],
     }),
   ],
 }

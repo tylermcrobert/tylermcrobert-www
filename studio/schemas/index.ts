@@ -6,6 +6,7 @@ import caseStudy from './caseStudy'
 import moduleWebsite from './caseStudyModules/website'
 import dynamicImage from './caseStudyModules/dynamicImage'
 import mobileWebsite from './caseStudyModules/mobileWebsite'
+import timedSlides from './caseStudyModules/timedSlides'
 
 // Other Modules
 import imageOrVideo from './modules/imageOrVideo'
@@ -13,6 +14,7 @@ import aspect from './modules/aspect'
 import textBlock from './modules/textBlock'
 
 export const schemaTypes = [
+  timedSlides,
   mobileWebsite,
   textBlock,
   aspect,

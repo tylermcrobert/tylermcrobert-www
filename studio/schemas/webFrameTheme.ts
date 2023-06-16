@@ -8,7 +8,7 @@ export default {
     defineField({
       name: 'title',
       type: 'string',
-      title: 'Song Title',
+      title: 'Theme Title',
       validation: (Rule) => Rule.required(),
     }),
 
