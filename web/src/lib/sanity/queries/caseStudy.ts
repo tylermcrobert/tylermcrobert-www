@@ -6,7 +6,7 @@ import type { SanityImage } from '../types';
 
 const websiteMedia = groq`{
   _type,
-  "image": { asset },
+  "image": { ... },
   "video": videoFile.asset->url,
 }    
 `;
