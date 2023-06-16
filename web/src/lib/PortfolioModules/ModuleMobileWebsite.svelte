@@ -3,8 +3,6 @@
   import type { ModuleMobileWebsite } from '$lib/sanity/queries';
 
   export let data: ModuleMobileWebsite;
-
-  console.log(data);
 </script>
 
 <div class="mobileWebsite" style={`background: ${data.theme?.background}`}>
