@@ -1,7 +1,8 @@
 <script lang="ts">
   import { urlFor } from './sanity/client';
   import { IMG_DEVICE_SIZES } from '../constants';
-  import type { SanityImage } from './sanity/queries';
+  import type { SanityImage } from './sanity/types';
+  import getImageDimensions from './sanity/lib/getImageDimensions';
 
   /**
    * Halfway through standard and retna
@@ -16,11 +17,8 @@
   export let quality = 75;
   export let color: string | undefined = undefined;
 
-  /**
-   * Take aspect ratio and invert the numerator and denominater
-   */
-
-  if (aspect) aspect = Math.round(aspect * 100) / 100;
+  const naturalAspect = getImageDimensions(image).aspectRatio;
+  const enforcedAspect = aspect; // rename to be more clear
 
   /**
    * Create an srcset for responsive image
@@ -28,7 +26,11 @@
 
   const srcset = IMG_DEVICE_SIZES.map((size) => {
     let builder = urlFor(image).width(size).auto('format').quality(quality);
-    if (aspect) builder = builder.height(Math.round(size / aspect));
+
+    if (enforcedAspect) {
+      builder = builder.height(Math.round(size / enforcedAspect));
+    }
+
     return `${builder.url()} ${Math.round(size / RESOLUTION)}w`;
   }).join(', ');
 
@@ -38,8 +40,8 @@
 
   function getStyle() {
     let styles = [];
-    if (aspect) styles.push(`aspect-ratio: ${aspect}`);
     if (color) styles.push(`background-color: ${color}`);
+    styles.push(`aspect-ratio: ${enforcedAspect || naturalAspect}`);
     return styles.join('; ');
   }
 </script>
