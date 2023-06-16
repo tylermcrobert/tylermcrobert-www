@@ -3,16 +3,14 @@
   import type { ModuleMobileWebsite } from '$lib/sanity/queries';
 
   export let data: ModuleMobileWebsite;
+
+  console.log(data);
 </script>
 
 <div class="mobileWebsite" style={`background: ${data.theme?.background}`}>
   {#each data.frames as frame}
-    {#if frame.image.asset}
-      <ResponsiveImage
-        image={frame.image.asset}
-        alt="Mobile Website"
-        sizes="25vw"
-      />
+    {#if frame.image?.asset}
+      <ResponsiveImage image={frame.image} alt="Mobile Website" sizes="25vw" />
     {/if}
 
     {#if frame.video}

@@ -1,16 +1,12 @@
 import type { InputValue } from '@portabletext/svelte/ptTypes';
 import groq from 'groq';
+import type { SanityImage } from '../types';
 
 // TODO: Include mobileWebsite timedSlides tripleImage
 
-const imgWithAspect = groq`{
-    "asset": image,
-    "preCropAspect": image.asset->.metadata.dimensions.aspectRatio
-}`;
-
-const mobileWebsiteMediaProjection = groq`{
+const websiteMedia = groq`{
   _type,
-  "image": { asset, "preCropAspect": asset->.metadata.dimensions.aspectRatio },
+  "image": { asset },
   "video": videoFile.asset->url,
 }    
 `;
@@ -36,7 +32,7 @@ export const caseStudyQuery = groq`
       
       _type == 'dynamicImage' => {
         _type,
-        "image": ${imgWithAspect},
+        image,
         aspect,
         span,
       },
@@ -44,14 +40,14 @@ export const caseStudyQuery = groq`
       _type == 'website' => {
         _type,
         showFrame,
-        "background": ${imgWithAspect},
+        backgroundImg,
         theme-> ${themeProjection},
-        "media":media[0]${mobileWebsiteMediaProjection},
+        "media":media[0]${websiteMedia},
       },
 
       _type == 'mobileWebsite' => {
         _type,
-        "frames": frames[]${mobileWebsiteMediaProjection},
+        "frames": frames[]${websiteMedia},
         theme-> ${themeProjection},
       }
     }
@@ -82,7 +78,7 @@ export type ModuleWebsite = {
   _type: 'website';
   media: WebsiteModuleMedia;
   theme: WebsiteFrameTheme;
-  background: ImageWithAspect | null;
+  backgroundImg: SanityImage | null;
   showFrame: boolean | null;
 };
 
@@ -93,7 +89,7 @@ export type ModuleWebsite = {
 export type ModuleDynamicImage = {
   _type: 'dynamicImage';
   span: 'half' | 'full' | null;
-  image: ImageWithAspect;
+  image: SanityImage;
   aspect: number;
 };
 
@@ -119,12 +115,10 @@ export type ModuleMobileWebsite = {
  * Utils
  */
 
-export type WebsiteModuleMedia = { video: string; image: ImageWithAspect };
-export type PortableText = InputValue;
-export type SanityImage = { _type: 'image' };
-export type ImageWithAspect = {
-  asset: SanityImage | null;
-  preCropAspect: number;
+export type WebsiteModuleMedia = {
+  video: string | null;
+  image: SanityImage | null;
 };
 
+export type PortableText = InputValue;
 export type WebsiteFrameTheme = { background: string; frame: string };

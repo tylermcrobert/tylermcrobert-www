@@ -10,7 +10,7 @@
 <div class="img" class:half class:full>
   {#if data.image.asset}
     <ResponsiveImage
-      image={data.image.asset}
+      image={data.image}
       alt=""
       sizes={half ? '50vw' : '100vw'}
     />
