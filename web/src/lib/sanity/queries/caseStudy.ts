@@ -62,13 +62,13 @@ export const caseStudyQuery = groq`
 `;
 
 export type CaseStudyQuery = {
-  slug: string;
-  title: string;
-  deliverables: string[];
-  intro: string;
-  date: string;
-  description: PortableText;
-  modules: PortfolioModule[];
+  slug: string | null;
+  title: string | null;
+  deliverables: string[] | null;
+  intro: string | null;
+  date: string | null;
+  description: PortableText | null;
+  modules: PortfolioModule[] | null;
 };
 
 export type PortfolioModule =
@@ -84,7 +84,7 @@ export type PortfolioModule =
 
 export type ModuleWebsite = {
   _type: 'website';
-  media: WebsiteModuleMedia;
+  media: WebsiteModuleMedia | null;
   theme: WebsiteFrameTheme;
   backgroundImg: SanityImage | null;
   showFrame: boolean | null;
@@ -97,8 +97,8 @@ export type ModuleWebsite = {
 export type ModuleDynamicImage = {
   _type: 'dynamicImage';
   span: 'half' | 'full' | null;
-  image: SanityImage;
-  aspect: number;
+  image: SanityImage | null;
+  aspect: number | null;
 };
 
 /**
@@ -107,7 +107,7 @@ export type ModuleDynamicImage = {
 
 export type ModuleTextBlock = {
   _type: 'textBlock';
-  content: PortableText;
+  content: PortableText | null;
 };
 
 /**
@@ -116,7 +116,7 @@ export type ModuleTextBlock = {
 
 export type ModuleMobileWebsite = {
   _type: 'mobileWebsite';
-  frames: WebsiteModuleMedia[];
+  frames: WebsiteModuleMedia[] | null;
   theme: WebsiteFrameTheme | null;
 };
 
@@ -126,9 +126,9 @@ export type ModuleMobileWebsite = {
 
 export type ModuleTimedSlides = {
   _type: 'timedSlides';
-  images: SanityImage[];
-  theme?: WebsiteFrameTheme;
-  seconds: number;
+  images: SanityImage[] | null;
+  theme?: WebsiteFrameTheme | null;
+  seconds: number | null;
 };
 
 /**

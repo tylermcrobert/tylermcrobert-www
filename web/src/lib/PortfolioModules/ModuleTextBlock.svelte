@@ -6,7 +6,7 @@
 </script>
 
 <div class="textBlock indent">
-  <PortableText value={data.content} />
+  <PortableText value={data.content || []} />
 </div>
 
 <style lang="scss">
