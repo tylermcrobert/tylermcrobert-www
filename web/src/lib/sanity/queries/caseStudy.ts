@@ -17,7 +17,7 @@ const themeProjection = groq`{
 }`;
 
 export const caseStudyQuery = groq`
-  *[_type == 'caseStudy' && slug.current == $slug][0]{
+  *[_type == 'caseStudy' && slug.current == $slug] | order(_updatedAt desc){
     "slug": slug.current,
     title,
     deliverables,

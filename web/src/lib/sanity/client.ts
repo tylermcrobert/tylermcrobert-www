@@ -6,7 +6,8 @@ const options = {
   dataset: 'production',
   projectId: 'n1wxk3oc',
   useCdn: process.env.NODE_ENV === 'production',
-  apiVersion: '2023-06-02'
+  apiVersion: '2023-06-02',
+  withCredentials: true
 };
 
 export const client = createClient(options);
