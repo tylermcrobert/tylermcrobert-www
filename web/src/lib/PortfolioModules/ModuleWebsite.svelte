@@ -3,10 +3,14 @@
   import type { ModuleWebsite } from '$lib/sanity/queries';
   import BrowserFrame from '$lib/util/svelte/BrowserFrame.svelte';
   export let data: ModuleWebsite;
-  const { media, theme, showFrame, backgroundImg } = data;
+
+  $: ({ media, showFrame, backgroundImg } = data);
+
+  /** Don't be reactive to theme changes for preview*/
+  const { theme } = data;
 </script>
 
-<div class="wrapper" style={`background:${theme.background || ''}`}>
+<div class="wrapper" style={`background:${theme?.background || ''}`}>
   {#if backgroundImg}
     <div class="backgroundImg">
       <ResponsiveImage
@@ -19,7 +23,7 @@
   {/if}
 
   <div class="browser">
-    {#if showFrame !== false}
+    {#if showFrame !== false && theme.frame}
       <BrowserFrame color={theme.frame} />
     {/if}
 
