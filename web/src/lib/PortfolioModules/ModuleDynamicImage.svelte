@@ -3,8 +3,8 @@
   import type { ModuleDynamicImage } from '$lib/sanity/queries';
   export let data: ModuleDynamicImage;
 
-  let half = data.span === 'half';
-  let full = !half;
+  $: half = data.span === 'half';
+  $: full = !half;
 </script>
 
 <div class="img" class:half class:full>
