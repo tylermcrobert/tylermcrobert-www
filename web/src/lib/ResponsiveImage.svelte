@@ -17,14 +17,14 @@
   export let quality = 75;
   export let color: string | undefined = undefined;
 
-  const naturalAspect = getImageDimensions(image).aspectRatio;
-  const enforcedAspect = aspect; // rename to be more clear
+  $: naturalAspect = getImageDimensions(image).aspectRatio;
+  $: enforcedAspect = aspect; // rename to be more clear
 
   /**
    * Create an srcset for responsive image
    */
 
-  const srcset = IMG_DEVICE_SIZES.map((size) => {
+  $: srcset = IMG_DEVICE_SIZES.map((size) => {
     let builder = urlFor(image).width(size).auto('format').quality(quality);
 
     if (enforcedAspect) {
@@ -38,12 +38,12 @@
    * Add inline style for img
    */
 
-  function getStyle() {
+  $: getStyle = () => {
     let styles = [];
     if (color) styles.push(`background-color: ${color}`);
     styles.push(`aspect-ratio: ${enforcedAspect || naturalAspect}`);
     return styles.join('; ');
-  }
+  };
 </script>
 
 <img
