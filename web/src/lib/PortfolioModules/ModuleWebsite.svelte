@@ -23,8 +23,8 @@
   {/if}
 
   <div class="browser">
-    {#if showFrame !== false && theme.frame}
-      <BrowserFrame color={theme.frame} />
+    {#if showFrame !== false && theme?.frame}
+      <BrowserFrame color={theme?.frame} />
     {/if}
 
     {#if media?.image?.asset}

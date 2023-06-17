@@ -85,7 +85,7 @@ export type PortfolioModule =
 export type ModuleWebsite = {
   _type: 'website';
   media: WebsiteModuleMedia | null;
-  theme: WebsiteFrameTheme;
+  theme: WebsiteFrameTheme | null;
   backgroundImg: SanityImage | null;
   showFrame: boolean | null;
 };
