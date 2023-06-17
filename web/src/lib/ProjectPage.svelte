@@ -8,8 +8,8 @@
 
   export let data: CaseStudyQuery;
 
-  const caseStudies = $page.data.caseStudies;
-  const index = caseStudies.findIndex((cs) => cs.slug === data.slug);
+  $: caseStudies = $page.data.caseStudies;
+  $: index = caseStudies.findIndex((cs) => cs.slug === data.slug);
 </script>
 
 {#key data.slug}
