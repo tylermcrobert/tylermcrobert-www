@@ -6,8 +6,13 @@
 
   $: ({ media, showFrame, backgroundImg } = data);
 
-  /** Don't be reactive to theme changes for preview*/
+  /**
+   * Non-reactive data for preveiw purposes.
+   * The preview data doesn't output join dfata
+   */
+
   const { theme } = data;
+  const video = data.media?.video;
 </script>
 
 <div class="wrapper" style={`background:${theme?.background || ''}`}>
@@ -34,8 +39,8 @@
         alt=""
         sizes="70vw"
       />
-    {:else if media?.video}
-      <video src={media.video} muted playsinline loop autoplay />
+    {:else if video}
+      <video src={video} muted playsinline loop autoplay />
     {/if}
   </div>
 </div>
