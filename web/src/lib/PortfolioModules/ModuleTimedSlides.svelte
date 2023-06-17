@@ -15,9 +15,12 @@
   }
 
   onMount(() => {
+    const length = data.images?.length || 0;
+    const timing = data.seconds || 1 * 1000;
+
     interval = setInterval(() => {
-      index = increment(index, data.images.length);
-    }, data.seconds * 1000 || 1);
+      index = increment(index, length);
+    }, timing);
   });
 
   onDestroy(() => {
@@ -26,7 +29,7 @@
 </script>
 
 <div class="timedSlides" style={bgStyle}>
-  {#each data.images as image, i}
+  {#each data.images || [] as image, i}
     <div class="imgWrap" class:active={i === index}>
       <ResponsiveImage {image} sizes="70vw" alt="" />
     </div>

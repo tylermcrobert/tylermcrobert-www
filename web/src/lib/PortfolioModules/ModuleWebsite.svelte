@@ -6,7 +6,7 @@
   const { media, theme, showFrame, backgroundImg } = data;
 </script>
 
-<div class="wrapper" style={`background:${theme.background}`}>
+<div class="wrapper" style={`background:${theme.background || ''}`}>
   {#if backgroundImg}
     <div class="backgroundImg">
       <ResponsiveImage
@@ -23,14 +23,14 @@
       <BrowserFrame color={theme.frame} />
     {/if}
 
-    {#if media.image?.asset}
+    {#if media?.image?.asset}
       <ResponsiveImage
         color="#ffffff"
         image={media.image}
         alt=""
         sizes="70vw"
       />
-    {:else if media.video}
+    {:else if media?.video}
       <video src={media.video} muted playsinline loop autoplay />
     {/if}
   </div>

@@ -6,7 +6,7 @@
 </script>
 
 <div class="mobileWebsite" style={`background: ${data.theme?.background}`}>
-  {#each data.frames as frame}
+  {#each data.frames || [] as frame}
     {#if frame.image?.asset}
       <ResponsiveImage image={frame.image} alt="Mobile Website" sizes="25vw" />
     {/if}

@@ -8,7 +8,7 @@
 </script>
 
 <div class="img" class:half class:full>
-  {#if data.image.asset}
+  {#if data.image?.asset}
     <ResponsiveImage
       image={data.image}
       alt=""

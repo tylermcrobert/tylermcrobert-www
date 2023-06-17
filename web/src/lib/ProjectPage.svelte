@@ -19,9 +19,9 @@
       <h2 class="overview h1">{data.intro}</h2>
 
       <div class="details">
-        <p class="date indent">{data.date.split('.')[0]}</p>
+        <p class="date indent">{data.date?.split('.')[0]}</p>
         <ul class="deliverables">
-          {#each data.deliverables as deliverable, i}
+          {#each data.deliverables || [] as deliverable, i}
             <li class="deliverable">
               {#if i >= 1}
                 {DOT}&nbsp;{deliverable}
@@ -33,12 +33,14 @@
         </ul>
       </div>
       <div class="description indent">
-        <PortableText value={data.description} />
+        {#if data.description}
+          <PortableText value={data.description} />
+        {/if}
       </div>
     </header>
 
     <div class="grid modules">
-      <Modules modules={data.modules} />
+      <Modules modules={data.modules || []} />
     </div>
   </div>
 {/key}
