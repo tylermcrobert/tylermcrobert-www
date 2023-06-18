@@ -2,8 +2,6 @@ import type { InputValue } from '@portabletext/svelte/ptTypes';
 import groq from 'groq';
 import type { SanityImage } from '../types';
 
-// TODO: Include tripleImage
-
 const websiteMedia = groq`{
   _type,
   "image": { ... },
@@ -48,8 +46,7 @@ export const caseStudyQuery = groq`
       _type == 'mobileWebsite' => {
         _type,
         "frames": frames[]${websiteMedia},
-        theme-> ${themeProjection},
-      },
+        theme-> ${themeProjection}, },
      
       _type == 'timedSlides' => {
         _type,
