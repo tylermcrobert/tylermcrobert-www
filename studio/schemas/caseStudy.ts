@@ -53,6 +53,7 @@ export default {
         {type: 'textBlock'},
         {type: 'mobileWebsite'},
         {type: 'timedSlides'},
+        {type: 'tripleImage'},
       ],
     }),
   ],
