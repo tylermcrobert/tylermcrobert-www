@@ -3,10 +3,19 @@
   import type { ModuleWebsite } from '$lib/sanity/queries';
   import BrowserFrame from '$lib/util/svelte/BrowserFrame.svelte';
   export let data: ModuleWebsite;
-  const { media, theme, showFrame, backgroundImg } = data;
+
+  $: ({ media, showFrame, backgroundImg } = data);
+
+  /**
+   * Non-reactive data for preveiw purposes.
+   * The preview data doesn't output join dfata
+   */
+
+  const { theme } = data;
+  const video = data.media?.video;
 </script>
 
-<div class="wrapper" style={`background:${theme.background || ''}`}>
+<div class="wrapper" style={`background:${theme?.background || ''}`}>
   {#if backgroundImg}
     <div class="backgroundImg">
       <ResponsiveImage
@@ -19,8 +28,8 @@
   {/if}
 
   <div class="browser">
-    {#if showFrame !== false}
-      <BrowserFrame color={theme.frame} />
+    {#if showFrame !== false && theme?.frame}
+      <BrowserFrame color={theme?.frame} />
     {/if}
 
     {#if media?.image?.asset}
@@ -30,8 +39,8 @@
         alt=""
         sizes="70vw"
       />
-    {:else if media?.video}
-      <video src={media.video} muted playsinline loop autoplay />
+    {:else if video}
+      <video src={video} muted playsinline loop autoplay />
     {/if}
   </div>
 </div>

@@ -10,14 +10,14 @@
   let interval: number;
   let index = 0;
 
+  $: length = data.images?.length || 0;
+  $: timing = data.seconds || 1 * 1000;
+
   if (data.theme?.background) {
     bgStyle = `background-color: ${data.theme.background}`;
   }
 
   onMount(() => {
-    const length = data.images?.length || 0;
-    const timing = data.seconds || 1 * 1000;
-
     interval = setInterval(() => {
       index = increment(index, length);
     }, timing);

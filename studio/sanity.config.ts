@@ -16,4 +16,25 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+
+  document: {
+    productionUrl: async (prev, context) => {
+      const url = 'http://localhost:5173/api/preview'
+
+      const {document} = context
+      const slug = (document.slug as any)?.current
+
+      if (!slug) return prev
+
+      if (document._type === 'caseStudy') {
+        const params = new URLSearchParams()
+        params.set('type', 'caseStudy')
+        params.set('slug', slug)
+
+        return `${url}/?${params}`
+      }
+
+      return prev
+    },
+  },
 })
