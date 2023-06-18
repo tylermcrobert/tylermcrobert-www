@@ -25,6 +25,7 @@ export default defineField({
       options: {hotspot: true},
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: 'imageRight',
       type: 'boolean',
