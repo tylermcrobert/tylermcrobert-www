@@ -3,13 +3,17 @@
   import ProjectPage from '$lib/ProjectPage.svelte';
   import Preview from '$lib/Preview.svelte';
 
-  export let data: CaseStudyQuery;
+  export let data: { caseStudy: CaseStudyQuery; isPreview: boolean };
 </script>
 
-<Preview
-  query={caseStudyQuery}
-  params={{ slug: data.slug }}
-  onUpdate={(newData) => (data = newData)}
->
-  <ProjectPage {data} />
-</Preview>
+{#if data.isPreview}
+  <Preview
+    query={caseStudyQuery}
+    params={{ slug: data.caseStudy.slug }}
+    onUpdate={(newData) => (data.caseStudy = newData)}
+  >
+    <ProjectPage data={data.caseStudy} />
+  </Preview>
+{:else}
+  <ProjectPage data={data.caseStudy} />
+{/if}

@@ -40,7 +40,7 @@
 
 <div class="previewIndicator">
   <span>Preview Mode</span>
-  <button>✕</button>
+  <a href="/api/clear-preview">✕</a>
 </div>
 
 <slot />
@@ -84,7 +84,7 @@
     padding: 0.5em 1em;
   }
 
-  button {
+  a {
     font-size: 0.7rem;
 
     cursor: pointer;

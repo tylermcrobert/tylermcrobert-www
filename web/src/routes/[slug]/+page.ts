@@ -6,6 +6,9 @@ export async function load(ctx) {
     slug: ctx.params.slug
   });
 
-  // Add draft if authenticated
-  return responses[0];
+  return {
+    ...ctx.data,
+    // Add draft if authenticated
+    caseStudy: responses[0]
+  };
 }
