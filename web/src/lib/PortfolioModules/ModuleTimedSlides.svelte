@@ -11,7 +11,7 @@
   let index = 0;
 
   $: length = data.images?.length || 0;
-  $: timing = data.seconds || 1 * 1000;
+  $: timing = (data.seconds || 1) * 1000;
 
   if (data.theme?.background) {
     bgStyle = `background-color: ${data.theme.background}`;
