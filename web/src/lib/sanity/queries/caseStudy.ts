@@ -56,6 +56,14 @@ export const caseStudyQuery = groq`
         images,
         seconds,
         theme-> ${themeProjection},
+      },
+
+      _type == 'tripleImage' => {
+        _type,
+        imageRight,
+        mainImage,
+        secondaryImage1,
+        secondaryImage2
       }
     }
   }
@@ -74,6 +82,7 @@ export type CaseStudyQuery = {
 export type PortfolioModule =
   | ModuleWebsite
   | ModuleDynamicImage
+  | ModuleTripleImage
   | ModuleTextBlock
   | ModuleMobileWebsite
   | ModuleTimedSlides;
@@ -102,12 +111,24 @@ export type ModuleDynamicImage = {
 };
 
 /**
- * Dynamic Image
+ * Text Block
  */
 
 export type ModuleTextBlock = {
   _type: 'textBlock';
   content: PortableText | null;
+};
+
+/**
+ * Triple Image
+ */
+
+export type ModuleTripleImage = {
+  _type: 'tripleImage';
+  imageRight: boolean | null;
+  mainImage: SanityImage | null;
+  secondaryImage1: SanityImage | null;
+  secondaryImage2: SanityImage | null;
 };
 
 /**

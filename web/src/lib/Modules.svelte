@@ -5,6 +5,7 @@
   import ModuleTextBlock from './PortfolioModules/ModuleTextBlock.svelte';
   import ModuleMobileWebsite from './PortfolioModules/ModuleMobileWebsite.svelte';
   import ModuleTimedSlides from './PortfolioModules/ModuleTimedSlides.svelte';
+  import ModuleTripleImage from './PortfolioModules/ModuleTripleImage.svelte';
 
   export let modules: PortfolioModule[];
 </script>
@@ -14,6 +15,8 @@
     <ModuleWebsite data={module} />
   {:else if module._type === 'dynamicImage'}
     <ModuleDynamicImage data={module} />
+  {:else if module._type === 'tripleImage'}
+    <ModuleTripleImage data={module} />
   {:else if module._type === 'textBlock'}
     <ModuleTextBlock data={module} />
   {:else if module._type === 'mobileWebsite'}
