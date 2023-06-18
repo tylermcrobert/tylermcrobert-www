@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   import type { ModuleWebsite } from '$lib/sanity/queries';
   import BrowserFrame from '$lib/util/svelte/BrowserFrame.svelte';
@@ -8,7 +9,7 @@
 
   /**
    * Non-reactive data for preveiw purposes.
-   * The preview data doesn't output join dfata
+   * The preview data doesn't output join data
    */
 
   const { theme } = data;
@@ -20,7 +21,7 @@
     <div class="backgroundImg">
       <ResponsiveImage
         image={backgroundImg}
-        alt="Website background image"
+        alt={$page.data.title}
         sizes="90vw"
         aspect={1.5}
       />
@@ -36,7 +37,7 @@
       <ResponsiveImage
         color="#ffffff"
         image={media.image}
-        alt=""
+        alt={$page.data.title}
         sizes="70vw"
       />
     {:else if video}

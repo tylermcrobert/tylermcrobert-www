@@ -1,6 +1,7 @@
 <script lang="ts">
   import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   import type { ModuleMobileWebsite } from '$lib/sanity/queries';
+  import { page } from '$app/stores';
 
   export let data: ModuleMobileWebsite;
   const nonReactiveFrames = data.frames || [];
@@ -9,7 +10,11 @@
 <div class="mobileWebsite" style={`background: ${data.theme?.background}`}>
   {#each data.frames || [] as frame, i}
     {#if frame.image?.asset}
-      <ResponsiveImage image={frame.image} alt="Mobile Website" sizes="25vw" />
+      <ResponsiveImage
+        image={frame.image}
+        alt={$page.data.title}
+        sizes="25vw"
+      />
     {/if}
 
     {#if nonReactiveFrames[i].video}

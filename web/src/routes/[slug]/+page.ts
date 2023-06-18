@@ -1,5 +1,6 @@
 import { client } from '$lib/sanity/client';
 import { caseStudyQuery } from '$lib/sanity/queries';
+import { formatTitle } from '$lib/util/formatTitle.js';
 import { error } from '@sveltejs/kit';
 
 export async function load(ctx) {
@@ -16,6 +17,7 @@ export async function load(ctx) {
   return {
     ...ctx.data,
     // Add draft if authenticated
-    caseStudy: responses[0]
+    caseStudy: responses[0],
+    title: formatTitle(responses[0].title)
   };
 }

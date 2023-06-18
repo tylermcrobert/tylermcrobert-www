@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   import type { ModuleDynamicImage } from '$lib/sanity/queries';
+
   export let data: ModuleDynamicImage;
 
   $: half = data.span === 'half';
@@ -11,7 +13,7 @@
   {#if data.image?.asset}
     <ResponsiveImage
       image={data.image}
-      alt=""
+      alt={$page.data.title}
       aspect={(data.aspect && 1 / data.aspect) || undefined}
       sizes={half ? '50vw' : '100vw'}
     />

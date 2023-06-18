@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { formatTitle } from '../formatTitle';
+
   export let pageTitle: string | null;
   export let route: string;
   export let description: string;
 
-  $: title = pageTitle ? `${pageTitle} - Tyler McRobert` : 'Tyler McRobert';
+  $: title = pageTitle ? formatTitle(pageTitle) : 'Tyler McRobert';
   $: pathWithoutSlug = route.replace(/^\//, '');
   $: url = `https://tylermcrobert.com/${pathWithoutSlug}`;
 </script>

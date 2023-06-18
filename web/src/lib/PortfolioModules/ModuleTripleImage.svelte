@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   import type { ModuleTripleImage } from '$lib/sanity/queries';
 
@@ -15,7 +16,7 @@
       <ResponsiveImage
         image={data.mainImage}
         sizes="45vw"
-        alt=""
+        alt={$page.data.title}
         aspect={2 / 3}
       />
     </div>
@@ -26,7 +27,7 @@
       <ResponsiveImage
         image={data.secondaryImage1}
         sizes="45vw"
-        alt=""
+        alt={$page.data.title}
         aspect={3 / 2}
       />
     </div>
@@ -37,7 +38,7 @@
       <ResponsiveImage
         image={data.secondaryImage2}
         sizes="45vw"
-        alt=""
+        alt={$page.data.title}
         aspect={3 / 2}
       />
     </div>

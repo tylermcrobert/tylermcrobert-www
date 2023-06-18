@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import ResponsiveImage from '$lib/ResponsiveImage.svelte';
   import type { ModuleTimedSlides } from '$lib/sanity/queries';
   import increment from '$lib/util/increment';
@@ -31,7 +32,7 @@
 <div class="timedSlides" style={bgStyle}>
   {#each data.images || [] as image, i}
     <div class="imgWrap" class:active={i === index}>
-      <ResponsiveImage {image} sizes="70vw" alt="" />
+      <ResponsiveImage {image} sizes="70vw" alt={$page.data.title} />
     </div>
   {/each}
 </div>
