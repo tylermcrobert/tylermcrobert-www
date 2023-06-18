@@ -31,7 +31,7 @@ export default {
   preview: {
     select: {media: 'image', layout: 'span'},
     prepare: (prev: any) => {
-      if (!prev.layout) return prev
+      if (!prev.layout) return {...prev, title: 'Full Image'}
       const title = prev.layout[0].toUpperCase() + prev.layout.slice(1) + ' Image'
       return {...prev, title: title}
     },
