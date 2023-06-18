@@ -6,6 +6,7 @@
   import ModuleMobileWebsite from './PortfolioModules/ModuleMobileWebsite.svelte';
   import ModuleTimedSlides from './PortfolioModules/ModuleTimedSlides.svelte';
   import ModuleTripleImage from './PortfolioModules/ModuleTripleImage.svelte';
+  import ModuleEmptySpace from './PortfolioModules/ModuleEmptySpace.svelte';
 
   export let modules: PortfolioModule[];
 </script>
@@ -23,5 +24,7 @@
     <ModuleMobileWebsite data={module} />
   {:else if module._type === 'timedSlides'}
     <ModuleTimedSlides data={module} />
+  {:else if module._type === 'emptySpace'}
+    <ModuleEmptySpace />
   {/if}
 {/each}

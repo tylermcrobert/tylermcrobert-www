@@ -64,6 +64,10 @@ export const caseStudyQuery = groq`
         mainImage,
         secondaryImage1,
         secondaryImage2
+      },
+
+      _type == 'emptySpace' => {
+        _type,
       }
     }
   }
@@ -85,7 +89,8 @@ export type PortfolioModule =
   | ModuleTripleImage
   | ModuleTextBlock
   | ModuleMobileWebsite
-  | ModuleTimedSlides;
+  | ModuleTimedSlides
+  | ModuleEmptySpace;
 
 /**
  * Website
@@ -150,6 +155,14 @@ export type ModuleTimedSlides = {
   images: SanityImage[] | null;
   theme?: WebsiteFrameTheme | null;
   seconds: number | null;
+};
+
+/**
+ * Timed Slides
+ */
+
+export type ModuleEmptySpace = {
+  _type: 'emptySpace';
 };
 
 /**

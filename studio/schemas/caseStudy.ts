@@ -54,6 +54,7 @@ export default {
         {type: 'mobileWebsite'},
         {type: 'timedSlides'},
         {type: 'tripleImage'},
+        {type: 'emptySpace'},
       ],
     }),
   ],

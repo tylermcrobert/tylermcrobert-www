@@ -8,6 +8,7 @@ import dynamicImage from './caseStudyModules/dynamicImage'
 import mobileWebsite from './caseStudyModules/mobileWebsite'
 import timedSlides from './caseStudyModules/timedSlides'
 import tripleImage from './caseStudyModules/tripleImage'
+import emptySpace from './caseStudyModules/emptySpace'
 
 // Other Modules
 import imageOrVideo from './modules/imageOrVideo'
@@ -15,6 +16,7 @@ import aspect from './modules/aspect'
 import textBlock from './modules/textBlock'
 
 export const schemaTypes = [
+  emptySpace,
   tripleImage,
   timedSlides,
   mobileWebsite,
