@@ -9,6 +9,7 @@ declare global {
     // interface Locals {}
     interface PageData {
       caseStudies: HomeCaseStudy[];
+      bio: string;
     }
     // interface Platform {}
   }

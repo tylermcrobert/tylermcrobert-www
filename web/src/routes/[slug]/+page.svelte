@@ -2,9 +2,16 @@
   import { caseStudyQuery, type CaseStudyQuery } from '$lib/sanity/queries';
   import ProjectPage from '$lib/ProjectPage.svelte';
   import Preview from '$lib/Preview.svelte';
+  import Head from '$lib/util/svelte/Head.svelte';
 
   export let data: { caseStudy: CaseStudyQuery; isPreview: boolean };
 </script>
+
+<Head
+  pageTitle={data.caseStudy.title}
+  route={data.caseStudy.slug}
+  description={data.caseStudy.intro || ''}
+/>
 
 {#if data.isPreview}
   <Preview

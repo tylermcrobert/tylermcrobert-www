@@ -62,7 +62,7 @@ export const caseStudyQuery = groq`
 `;
 
 export type CaseStudyQuery = {
-  slug: string | null;
+  slug: string;
   title: string | null;
   deliverables: string[] | null;
   intro: string | null;
