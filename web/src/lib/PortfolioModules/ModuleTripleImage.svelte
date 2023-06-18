@@ -11,30 +11,36 @@
   class:left={!data.imageRight}
 >
   {#if data.mainImage}
-    <ResponsiveImage
-      image={data.mainImage}
-      sizes="45vw"
-      alt=""
-      aspect={2 / 3}
-    />
+    <div class="img image-main">
+      <ResponsiveImage
+        image={data.mainImage}
+        sizes="45vw"
+        alt=""
+        aspect={2 / 3}
+      />
+    </div>
   {/if}
 
   {#if data.secondaryImage1}
-    <ResponsiveImage
-      image={data.secondaryImage1}
-      sizes="45vw"
-      alt=""
-      aspect={3 / 2}
-    />
+    <div class="img image-secondary">
+      <ResponsiveImage
+        image={data.secondaryImage1}
+        sizes="45vw"
+        alt=""
+        aspect={3 / 2}
+      />
+    </div>
   {/if}
 
   {#if data.secondaryImage2}
-    <ResponsiveImage
-      image={data.secondaryImage2}
-      sizes="45vw"
-      alt=""
-      aspect={3 / 2}
-    />
+    <div class="img image-tertiary">
+      <ResponsiveImage
+        image={data.secondaryImage2}
+        sizes="45vw"
+        alt=""
+        aspect={3 / 2}
+      />
+    </div>
   {/if}
 </div>
 
@@ -54,20 +60,22 @@
     }
   }
 
-  .right {
-    :global(img):nth-child(1) {
-      grid-column: 4 / span 3;
-      grid-row: 1 / span 2;
-    }
-
-    :global(img):nth-child(2) {
-      grid-row: 1;
-    }
+  .img {
+    grid-column: span 3;
+    overflow: hidden;
   }
 
-  .left {
-    :global(img):nth-child(1) {
-      grid-row: 1 / span 2;
+  .image-main {
+    grid-row: span 2;
+  }
+
+  .right {
+    .image-main {
+      grid-column: 4 / span 3;
+    }
+
+    .image-secondary {
+      grid-row: 1;
     }
   }
 </style>
