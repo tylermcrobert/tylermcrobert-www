@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { env } from '$env/dynamic/private';
+import { formatTime } from '$lib/util/msToTime';
 
 const clientId = env.SPOTIFY_CLIENT_ID;
 const clientSecret = env.SPOTIFY_CLIENT_SECRET;
@@ -60,25 +61,16 @@ function _formatOutput(data: any): SpotifyPlaylist {
     .map((item: any) => item.track.duration_ms)
     .reduce((total: number, current: number) => total + current, 0);
 
-  const totalSeconds = Math.floor(totalMilliseconds / 1000);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  const formattedTime = [hours, minutes, seconds]
-    .map((item) => item.toString().padStart(2, '0'))
-    .join(':');
-
   return {
     name: data.name,
     href: data.external_urls.spotify,
     image: data.images[0].url,
     date: oldestDate.toISOString().split('.')[0],
-    duration: formattedTime,
+    duration: formatTime(totalMilliseconds, 'hh:mm:ss'),
     tracks: data.tracks.items.map((item: any) => ({
       name: item.track.name,
       added: item.added_at,
-      duration: item.track.duration_ms,
+      duration: formatTime(item.track.duration_ms, 'hh:mm'),
       artists: item.track.artists.map((item: any) => item.name)
     }))
   };
