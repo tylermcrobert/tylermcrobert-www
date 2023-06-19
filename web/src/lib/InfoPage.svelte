@@ -64,7 +64,7 @@
     <ul class="playlists">
       {#each playlists as { href, name, duration, date }, i}
         <li class="playlist">
-          <a {href} target="_blank" class="playlistWrap">
+          <a {href} target="_blank" class="playlistWrap grid">
             <h3 class="playlistItem title">{NUMS[i + 1]} {name}</h3>
             <p class="playlistItem date">{date}</p>
             <p class="playlistItem duration">
@@ -154,8 +154,6 @@
 
     .playlistWrap {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: var(--space-standard);
     }
   }
 </style>

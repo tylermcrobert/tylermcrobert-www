@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class="tripleImage"
+  class="tripleImage grid"
   class:right={data.imageRight}
   class:left={!data.imageRight}
 >
@@ -47,10 +47,7 @@
 
 <style lang="scss">
   .tripleImage {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-gap: var(--space-standard);
     grid-column: span 6;
 
     :global(img) {
