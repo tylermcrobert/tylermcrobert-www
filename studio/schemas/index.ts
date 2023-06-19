@@ -1,6 +1,7 @@
 // Pages
 import webFrameTheme from './webFrameTheme'
 import caseStudy from './caseStudy'
+import playlist from './playlist'
 
 // Case Study Modules
 import moduleWebsite from './caseStudyModules/website'
@@ -27,4 +28,5 @@ export const schemaTypes = [
   caseStudy,
   webFrameTheme,
   moduleWebsite,
+  playlist,
 ]
