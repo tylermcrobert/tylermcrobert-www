@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Modules from '$lib/Modules.svelte';
+  import Modules from '$lib/components/Modules.svelte';
   import type { CaseStudyQuery } from '$lib/sanity/queries';
   import { PortableText } from '@portabletext/svelte';
-  import { DOT, NUMS } from '../constants';
+  import { DOT, NUMS } from '../../constants';
   import HomeIndex from '$lib/components/HomeIndex.svelte';
   import { page } from '$app/stores';
 
@@ -49,7 +49,7 @@
 <HomeIndex />
 
 <style lang="scss">
-  @import '../styles/mixins';
+  @import '../../styles/mixins';
 
   .projectPage {
     position: relative;

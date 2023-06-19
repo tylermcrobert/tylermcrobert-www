@@ -10,7 +10,7 @@
 </div>
 
 <style lang="scss">
-  @import '../../styles/mixins';
+  @import '../../../styles/mixins';
 
   .textBlock {
     grid-column: span 6;

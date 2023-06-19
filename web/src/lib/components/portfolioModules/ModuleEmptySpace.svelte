@@ -1,7 +1,7 @@
 <div class="emptySpace" />
 
 <style lang="scss">
-  @import '../../styles/mixins';
+  @import '../../../styles/mixins';
 
   .emptySpace {
     display: none;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { caseStudyQuery, type CaseStudyQuery } from '$lib/sanity/queries';
-  import ProjectPage from '$lib/ProjectPage.svelte';
-  import Preview from '$lib/Preview.svelte';
+  import ProjectPage from '$lib/components/ProjectPage.svelte';
+  import Preview from '$lib/components/Preview.svelte';
   import Head from '$lib/util/svelte/Head.svelte';
 
   export let data: { caseStudy: CaseStudyQuery; isPreview: boolean };

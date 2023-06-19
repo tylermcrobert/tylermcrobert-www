@@ -1,6 +1,6 @@
 <script lang="ts">
   import '../styles/globals.scss';
-  import Nav from '$lib/Nav.svelte';
+  import Nav from '$lib/components/Nav.svelte';
 </script>
 
 <Nav />

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import ResponsiveImage from '$lib/ResponsiveImage.svelte';
+  import ResponsiveImage from '../ResponsiveImage.svelte';
   import type { ModuleDynamicImage } from '$lib/sanity/queries';
 
   export let data: ModuleDynamicImage;
@@ -21,7 +21,7 @@
 </div>
 
 <style lang="scss">
-  @import '../../styles/mixins';
+  @import '../../../styles/mixins';
 
   .full,
   .half {

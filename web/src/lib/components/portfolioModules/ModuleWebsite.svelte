@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import ResponsiveImage from '$lib/ResponsiveImage.svelte';
+  import ResponsiveImage from '../ResponsiveImage.svelte';
   import type { ModuleWebsite } from '$lib/sanity/queries';
   import BrowserFrame from '$lib/util/svelte/BrowserFrame.svelte';
   export let data: ModuleWebsite;

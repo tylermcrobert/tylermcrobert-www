@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ResponsiveImage from '$lib/ResponsiveImage.svelte';
+  import ResponsiveImage from '../ResponsiveImage.svelte';
   import type { ModuleMobileWebsite } from '$lib/sanity/queries';
   import { page } from '$app/stores';
 

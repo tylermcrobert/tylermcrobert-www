@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import ResponsiveImage from '$lib/ResponsiveImage.svelte';
+  import ResponsiveImage from '../ResponsiveImage.svelte';
   import type { ModuleTripleImage } from '$lib/sanity/queries';
 
   export let data: ModuleTripleImage;

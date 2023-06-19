@@ -1,5 +1,5 @@
 <script lang="ts">
-  import InfoPage from '$lib/InfoPage.svelte';
+  import InfoPage from '$lib/components/InfoPage.svelte';
   import type { InfoQuery } from '$lib/sanity/queries';
   import type { SpotifyPlaylist } from '$lib/spotify/spotify';
 

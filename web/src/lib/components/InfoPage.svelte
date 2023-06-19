@@ -3,9 +3,16 @@
   import Arrow from '$lib/util/svelte/Arrow.svelte';
   import DotHead from '$lib/util/svelte/DotHead.svelte';
   import { onMount } from 'svelte';
-  import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG, CLIENTS } from '../constants';
-  import getNowPlaying, { type NowPlayingData } from './util/nowPlaying';
-  import type { SpotifyPlaylist } from './spotify/spotify';
+  import {
+    EMAIL,
+    LINK_EMAIL,
+    LINK_IG,
+    NUMS,
+    IG,
+    CLIENTS
+  } from '../../constants';
+  import getNowPlaying, { type NowPlayingData } from '../util/nowPlaying';
+  import type { SpotifyPlaylist } from '../spotify/spotify';
 
   export let data: InfoQuery;
   export let playlists: SpotifyPlaylist[];
@@ -80,7 +87,7 @@
 </section>
 
 <style lang="scss">
-  @import '../styles/mixins';
+  @import '../../styles/mixins';
 
   /* General */
   section {

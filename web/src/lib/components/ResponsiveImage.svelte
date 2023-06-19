@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { urlFor } from './sanity/client';
-  import { IMG_DEVICE_SIZES } from '../constants';
-  import type { SanityImage } from './sanity/types';
-  import getImageDimensions from './sanity/lib/getImageDimensions';
+  import { urlFor } from '../sanity/client';
+  import { IMG_DEVICE_SIZES } from '../../constants';
+  import type { SanityImage } from '../sanity/types';
+  import getImageDimensions from '../sanity/lib/getImageDimensions';
 
   /**
    * Halfway through standard and retna

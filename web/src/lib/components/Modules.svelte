@@ -1,12 +1,12 @@
 <script lang="ts">
-  import ModuleDynamicImage from './PortfolioModules/ModuleDynamicImage.svelte';
-  import ModuleWebsite from './PortfolioModules//ModuleWebsite.svelte';
+  import ModuleDynamicImage from './portfolioModules/ModuleDynamicImage.svelte';
+  import ModuleWebsite from './portfolioModules//ModuleWebsite.svelte';
   import type { PortfolioModule } from '$lib/sanity/queries';
-  import ModuleTextBlock from './PortfolioModules/ModuleTextBlock.svelte';
-  import ModuleMobileWebsite from './PortfolioModules/ModuleMobileWebsite.svelte';
-  import ModuleTimedSlides from './PortfolioModules/ModuleTimedSlides.svelte';
-  import ModuleTripleImage from './PortfolioModules/ModuleTripleImage.svelte';
-  import ModuleEmptySpace from './PortfolioModules/ModuleEmptySpace.svelte';
+  import ModuleTextBlock from './portfolioModules/ModuleTextBlock.svelte';
+  import ModuleMobileWebsite from './portfolioModules/ModuleMobileWebsite.svelte';
+  import ModuleTimedSlides from './portfolioModules/ModuleTimedSlides.svelte';
+  import ModuleTripleImage from './portfolioModules/ModuleTripleImage.svelte';
+  import ModuleEmptySpace from './portfolioModules/ModuleEmptySpace.svelte';
 
   export let modules: PortfolioModule[];
 </script>
