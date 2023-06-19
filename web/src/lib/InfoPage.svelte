@@ -2,9 +2,14 @@
   import type { InfoQuery } from '$lib/sanity/queries';
   import Arrow from '$lib/util/svelte/Arrow.svelte';
   import DotHead from '$lib/util/svelte/DotHead.svelte';
+  import { onMount } from 'svelte';
   import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG, CLIENTS } from '../constants';
+  import getNowPlaying, { type NowPlayingData } from './util/nowPlaying';
 
   export let data: InfoQuery;
+  let listenData: NowPlayingData | null = null;
+
+  onMount(async () => (listenData = await getNowPlaying()));
 </script>
 
 <section class="top">
@@ -40,9 +45,21 @@
 
 <section>
   <div class="nowPlaying wrapper">
-    <h2><DotHead>Now Playing</DotHead></h2>
-    <h3 class="h1">Right now I'm playing...</h3>
+    {#if listenData}
+      {@const { trackName, artist, nowPlaying } = listenData}
+
+      <h2><DotHead>Now Playing</DotHead></h2>
+
+      <h3 class="h1">
+        {#if nowPlaying}
+          Right now I'm listening to “{trackName}” by {artist} on Spotify.
+        {:else}
+          The last song I listened to on Spotify was “{trackName}” by {artist}.
+        {/if}
+      </h3>
+    {/if}
   </div>
+
   <div class="wrapper">
     <h2><DotHead>Playlists</DotHead></h2>
     <ul>
@@ -68,7 +85,7 @@
   }
 
   .wrapper {
-    margin: var(--space-medium) 0;
+    margin: var(--space-medium) auto;
   }
 
   .intro,
