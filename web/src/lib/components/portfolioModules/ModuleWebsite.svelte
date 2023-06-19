@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import ResponsiveImage from '../ResponsiveImage.svelte';
   import type { ModuleWebsite } from '$lib/sanity/queries';
-  import BrowserFrame from '$lib/util/svelte/BrowserFrame.svelte';
+  import BrowserFrame from '$lib/components/util/BrowserFrame.svelte';
   export let data: ModuleWebsite;
 
   $: ({ media, showFrame, backgroundImg } = data);

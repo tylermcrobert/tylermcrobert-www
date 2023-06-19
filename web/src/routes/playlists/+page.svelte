@@ -4,7 +4,7 @@
   let LIMIT = 5;
 
   import type { SpotifyPlaylist } from '$lib/spotify/spotify';
-  import DotHead from '$lib/util/svelte/DotHead.svelte';
+  import DotHead from '$lib/components/util/DotHead.svelte';
   import { NUMS } from '../../constants';
 
   let itemOpen: number | null = null;

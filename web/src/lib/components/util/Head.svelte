@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { formatTitle } from '../formatTitle';
+  import { formatTitle } from '$lib/util/formatTitle';
 
   export let pageTitle: string | null;
   export let route: string;
