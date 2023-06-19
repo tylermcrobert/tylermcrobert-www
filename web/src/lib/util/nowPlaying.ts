@@ -15,6 +15,6 @@ export default async function getNowPlaying(): Promise<NowPlayingData> {
   return {
     trackName: track.name,
     artist: track.artist['#text'],
-    nowPlaying: track['@attr']?.nowplaying || false
+    nowPlaying: track['@attr']?.nowplaying === 'true' || false
   };
 }
