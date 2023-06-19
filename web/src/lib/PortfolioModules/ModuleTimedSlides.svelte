@@ -19,7 +19,7 @@
   }
 
   onMount(() => {
-    interval = setInterval(() => {
+    interval = window.setInterval(() => {
       index = increment(index, length);
     }, timing);
   });
