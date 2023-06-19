@@ -6,19 +6,12 @@ export const GET: RequestHandler = ({ url, cookies }) => {
   const type = allParams.get('type');
   const slug = allParams.get('slug');
 
-  if (!slug || !type) {
-    throw error(401, 'Missing slug or type');
-  }
+  cookies.set('preview-mode', 'true', { path: '/' });
 
   if (type === 'caseStudy') {
     const url = `/${slug}`;
-
-    cookies.set('preview-mode', 'true', {
-      path: '/'
-    });
-
     throw redirect(302, url);
   }
 
-  throw redirect(302, '/404');
+  throw redirect(302, '/');
 };
