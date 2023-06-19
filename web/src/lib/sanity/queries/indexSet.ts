@@ -24,6 +24,7 @@ export type InfoQuery = {
 
 export const indexQuery = groq`
   *[_type == 'context' && slug.current == $slug][0]{
+    title,
     caseStudies[]-> { 
       title,
       'slug': slug.current
@@ -33,6 +34,7 @@ export const indexQuery = groq`
 
 export type IndexQuery = {
   caseStudies: HomeCaseStudy[];
+  title: string | null;
 };
 
 export type HomeCaseStudy = {
