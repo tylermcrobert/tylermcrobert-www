@@ -8,7 +8,7 @@
 
   export let data: CaseStudyQuery;
 
-  $: caseStudies = $page.data.caseStudies;
+  $: caseStudies = $page.data.index.caseStudies;
   $: index = caseStudies.findIndex((cs) => cs.slug === data.slug);
 </script>
 

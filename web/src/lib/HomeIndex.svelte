@@ -5,7 +5,7 @@
 
 <div class="indexWrapper">
   <ul class="index h1 wrapper">
-    {#each $page.data.caseStudies as { title, slug }, i}
+    {#each $page.data.index.caseStudies as { title, slug }, i}
       <li class="indexItem">
         {NUMS[i + 1]}&nbsp;<a href={`/${slug}`} class="indexLink">{title}</a>
       </li>

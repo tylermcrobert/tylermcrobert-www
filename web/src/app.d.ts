@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { HomeCaseStudy, IndexQuery } from '$lib/sanity/queries';
+import type { IndexQuery } from '$lib/sanity/queries';
 
 // for information about these interfaces
 declare global {
@@ -11,7 +11,7 @@ declare global {
       isPreview: boolean;
     }
     interface PageData {
-      caseStudies: HomeCaseStudy[];
+      index: IndexQuery;
       bio: string;
     }
     // interface Platform {}
