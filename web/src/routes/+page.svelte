@@ -1,6 +1,6 @@
 <script>
   import { page } from '$app/stores';
-  import HomeIndex from '$lib/HomeIndex.svelte';
+  import HomeIndex from '$lib/components/HomeIndex.svelte';
   import Head from '$lib/util/svelte/Head.svelte';
 </script>
 

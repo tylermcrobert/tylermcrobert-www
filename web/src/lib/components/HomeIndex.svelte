@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { NUMS } from '../constants';
+  import { NUMS } from '../../constants';
   import { page } from '$app/stores';
 </script>
 

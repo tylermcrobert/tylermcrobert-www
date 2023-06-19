@@ -3,7 +3,7 @@
   import type { CaseStudyQuery } from '$lib/sanity/queries';
   import { PortableText } from '@portabletext/svelte';
   import { DOT, NUMS } from '../constants';
-  import HomeIndex from '$lib/HomeIndex.svelte';
+  import HomeIndex from '$lib/components/HomeIndex.svelte';
   import { page } from '$app/stores';
 
   export let data: CaseStudyQuery;
