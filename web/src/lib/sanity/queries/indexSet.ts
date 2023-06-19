@@ -23,7 +23,7 @@ export type InfoQuery = {
 };
 
 export const indexQuery = groq`
-  *[_type == 'context' && slug.current == 'default'][0]{
+  *[_type == 'context' && slug.current == $slug][0]{
     caseStudies[]-> { 
       title,
       'slug': slug.current
