@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { infoQuery } from '$lib/sanity/queries';
 import { client } from '$lib/sanity/client';
-import { getPlaylistById } from '$lib/util/spotify';
+import { getPlaylistById } from '$lib/spotify/spotify';
 
 export async function load() {
   const info = await client.fetch(infoQuery);

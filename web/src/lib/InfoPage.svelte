@@ -5,7 +5,7 @@
   import { onMount } from 'svelte';
   import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG, CLIENTS } from '../constants';
   import getNowPlaying, { type NowPlayingData } from './util/nowPlaying';
-  import type { SpotifyPlaylist } from './util/spotify';
+  import type { SpotifyPlaylist } from './spotify/spotify';
 
   export let data: InfoQuery;
   export let playlists: SpotifyPlaylist[];

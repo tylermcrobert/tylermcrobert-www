@@ -12,15 +12,13 @@
   let sub: Subscription | undefined;
 
   onMount(async () => {
-    function handleSub(err: Error | undefined, res: unknown[] | undefined) {
+    sub = sanityStore.subscribe(query, params, (err, res) => {
       if (err) throw err;
       if (!(res && res[0])) throw Error('Response not found');
 
       loading = false;
       onUpdate(res[0]);
-    }
-
-    sub = sanityStore.subscribe(query, params, handleSub);
+    });
   });
 
   onDestroy(() => sub?.unsubscribe());
