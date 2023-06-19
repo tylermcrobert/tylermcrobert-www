@@ -50,9 +50,7 @@
   <div class="nowPlaying wrapper">
     {#if listenData}
       {@const { trackName, artist, nowPlaying } = listenData}
-
       <h2><DotHead>Now Playing</DotHead></h2>
-
       <h3 class="h1">
         {#if nowPlaying}
           Right now I'm listening to “{trackName}” by {artist} on Spotify.
