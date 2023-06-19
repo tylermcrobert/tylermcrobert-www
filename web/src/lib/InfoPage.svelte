@@ -68,10 +68,12 @@
     <ul class="playlists">
       {#each playlists as { href, name, duration, date }, i}
         <li class="playlist">
-          <a {href} target="_blank">
-            <h3 class="playlistItem">{NUMS[i + 1]} {name}</h3>
-            <p class="playlistItem">{date}</p>
-            <p class="playlistItem">{duration}<span><Arrow /></span></p>
+          <a {href} target="_blank" class="playlistWrap">
+            <h3 class="playlistItem title">{NUMS[i + 1]} {name}</h3>
+            <p class="playlistItem date">{date}</p>
+            <p class="playlistItem duration">
+              {duration}<span><Arrow /></span>
+            </p>
           </a>
         </li>
       {/each}
@@ -124,25 +126,40 @@
     line-height: 1.3;
   }
 
-  .playlist a {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: var(--space-standard);
+  .playlistWrap {
+    display: flex;
+    justify-content: space-between;
   }
 
   .playlistItem {
     grid-column: span 2;
+  }
 
-    &:last-child {
-      display: flex;
-      justify-content: space-between;
-    }
+  .duration {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-standard);
+  }
+
+  .date {
+    display: none;
   }
 
   @include min-width('tablet') {
     .contactItems,
     .clients {
       grid-column: span 3;
+    }
+
+    .date {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .playlistWrap {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--space-standard);
     }
   }
 </style>
