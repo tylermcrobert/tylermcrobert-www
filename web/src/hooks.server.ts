@@ -1,7 +1,8 @@
 import { client } from '$lib/sanity/client';
 import { indexQuery, type IndexQuery } from '$lib/sanity/queries';
+import type { Handle } from '@sveltejs/kit';
 
-export const handle = async ({ event, resolve }) => {
+export const handle = (async ({ event, resolve }) => {
   const ctxSlug = event.cookies.get('context');
   const isPreview = event.cookies.get('preview-mode') === 'true';
 
@@ -13,4 +14,4 @@ export const handle = async ({ event, resolve }) => {
 
   const response = await resolve(event);
   return response;
-};
+}) satisfies Handle;
