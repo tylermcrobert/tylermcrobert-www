@@ -36,9 +36,7 @@
     <div class="clients">
       <h2><DotHead>Clients</DotHead></h2>
       <ul class="clientList">
-        {#each CLIENTS as client}
-          <li>{client}</li>
-        {/each}
+        {#each CLIENTS as client}<li>{client}</li>{/each}
       </ul>
     </div>
   </div>
