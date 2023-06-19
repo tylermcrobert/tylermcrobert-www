@@ -21,7 +21,7 @@
     <h1 class="h1">{data.bio}</h1>
   </div>
 
-  <div class="details grid">
+  <div class="details grid wrapper">
     <div class="contactItems">
       <div class="contact">
         <h3><DotHead>E-M <Arrow /></DotHead></h3>

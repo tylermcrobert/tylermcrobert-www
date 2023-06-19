@@ -14,7 +14,7 @@
 
 {#key data.slug}
   <div class="projectPage">
-    <header class="grid intro">
+    <header class="grid wrapper intro">
       <h1 class="title">{NUMS[index + 1]} {data.title}</h1>
       <h2 class="overview h1">{data.intro}</h2>
 
@@ -39,7 +39,7 @@
       </div>
     </header>
 
-    <div class="grid modules">
+    <div class="grid wrapper modules">
       <Modules modules={data.modules || []} />
     </div>
   </div>
