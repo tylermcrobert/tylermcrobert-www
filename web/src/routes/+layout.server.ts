@@ -5,5 +5,3 @@ export async function load(ctx) {
   const bio = await client.fetch(`*[_type == 'info'][0].bio`);
   return { index, bio };
 }
-
-export const prerender = true;
