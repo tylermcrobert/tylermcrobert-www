@@ -154,10 +154,10 @@
   resolved "https://registry.yarnpkg.com/@ffprobe-installer/darwin-x64/-/darwin-x64-5.1.0.tgz#f52316ac0bbe6f4ac70fdaea8db259ba4a055b00"
   integrity sha512-J+YGscZMpQclFg31O4cfVRGmDpkVsQ2fZujoUdMAAYcP0NtqpC49Hs3SWJpBdsGB4VeqOt5TTm1vSZQzs1NkhA==
 
-"@ffprobe-installer/ffprobe@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@ffprobe-installer/ffprobe/-/ffprobe-2.0.0.tgz#d01ba6e3caa15b18dae809426360f4ccd2d2aaa7"
-  integrity sha512-BT5BHZZSOyFFbHd+3zFdEQCNfBORYwNtqre7l1dMmqvDha60G/7rEDCSeCX4sNLuCcNR4IxvGHicfRQie7SNUA==
+"@ffprobe-installer/ffprobe@^1.4.1":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@ffprobe-installer/ffprobe/-/ffprobe-1.4.2.tgz#87729abccd1a0f2dd435ee122a3790a2eb1cab76"
+  integrity sha512-Jowoycg4aGeDVVaz+25hRSjdIDuDDXYMJjbOLvlKq9WF1n9rkAGR7Scce+bFeoRw0QwSPrpPnEH1weTWZU8CQA==
   optionalDependencies:
     "@ffprobe-installer/darwin-arm64" "5.0.1"
     "@ffprobe-installer/darwin-x64" "5.1.0"
@@ -1056,13 +1056,14 @@ fsevents@~2.3.2:
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
-get-audio-duration@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/get-audio-duration/-/get-audio-duration-4.0.0.tgz#6ef3963ac0044a660e59070542bcd12976bed7ee"
-  integrity sha512-spw+N28DvNr0IZ1j2ix+Zav9RC8F3kuT/b0UPwUAKc2bTifnpIdpVdvuIZi2GxaTFh43zvOkSvzR5KVCZzvPlQ==
+get-audio-duration@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/get-audio-duration/-/get-audio-duration-3.0.1.tgz#09888ff1d9686f8f311e454b00ea3192647a47b4"
+  integrity sha512-dVscH4L75tV0qga24F8+eHm831d+aDT2TwIiV/iYFJRq19T/TVIUlAmIwa3NchkwDGh+dI5n3rUl5Po1GMRYRw==
   dependencies:
-    "@ffprobe-installer/ffprobe" "^2.0.0"
+    "@ffprobe-installer/ffprobe" "^1.4.1"
     execa "^5.0.0"
+    is-stream "^2.0.0"
 
 get-it@^8.1.0:
   version "8.1.3"
