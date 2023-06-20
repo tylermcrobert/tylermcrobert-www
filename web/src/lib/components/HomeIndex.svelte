@@ -15,7 +15,8 @@
 
 <style lang="scss">
   div.indexWrapper {
-    height: 100vh;
+    padding-top: var(--nav-height);
+    min-height: 100vh;
     width: 100vw;
 
     display: flex;
