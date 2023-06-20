@@ -13,7 +13,6 @@
 </script>
 
 {#key data.slug}
-  <span class="navShim" />
   <div class="projectPage">
     <header class="grid wrapper intro">
       <h1 class="title">{NUMS[index + 1]} {data.title}</h1>
@@ -51,16 +50,6 @@
 
 <style lang="scss">
   @import '../../styles/mixins';
-
-  .navShim {
-    display: block;
-    background: white;
-    position: relative;
-    height: var(--nav-height);
-
-    margin-top: calc(var(--nav-height) * -1);
-    z-index: var(--z-project-page);
-  }
 
   .projectPage {
     position: relative;
