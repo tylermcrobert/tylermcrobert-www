@@ -1,12 +1,9 @@
 <script lang="ts">
   import { formatTime } from '$lib/util/msToTime';
-  import { onMount } from 'svelte';
 
   export let data: { link: string };
 
-  let progressLeft = 0;
-  let progressBar: HTMLElement;
-  let progressRect: DOMRect | undefined;
+  let windowWidth: number;
 
   let pressed = false;
 
@@ -16,37 +13,28 @@
   let paused = true;
 
   function handleMouse(e: MouseEvent) {
-    if (!pressed || !progressRect) return;
+    if (!pressed) return;
+    let windowPercent = e.clientX / windowWidth;
+    time = windowPercent * duration;
     muted = true;
-
-    let percent = (e.clientX - progressRect.x) / progressRect.width;
-    if (percent < 0) percent = 0;
-    else if (percent > 1) percent = 1;
-
-    progressLeft = percent * progressRect.width;
-    time = percent * duration;
   }
 
-  onMount(() => (progressRect = progressBar.getBoundingClientRect()));
-
-  $: progressLeft = (time / duration) * (progressRect?.width || 0);
-  $: scrubWrapStyle = `transform: translate3d(${progressLeft}px, 0, 0)`;
+  $: percent = (time / duration) * 100;
+  $: scrubWrapStyle = `transform: translate3d(${percent}vw, 0, 0)`;
 </script>
 
 <div class="wrapper">
-  <audio controls bind:duration bind:currentTime={time} bind:paused bind:muted>
+  <audio bind:duration bind:currentTime={time} bind:paused bind:muted>
     <source src={data.link} />
   </audio>
 
-  <div class="scrubberWrapper" bind:this={progressBar}>
-    <div
-      class="scrubberLine"
-      style={scrubWrapStyle}
-      on:mousedown={() => (pressed = true)}
-    />
-  </div>
+  <div
+    class="scrubberLine"
+    on:mousedown={() => (pressed = true)}
+    style={scrubWrapStyle}
+  />
 
-  <button on:click={() => (paused = !paused)}>
+  <button on:click={() => (paused = !paused)} class="playPauseBtn">
     {paused ? 'Play' : 'Pause'}
   </button>
 
@@ -57,25 +45,31 @@
 </div>
 
 <svelte:window
+  bind:innerWidth={windowWidth}
   on:mousemove={handleMouse}
   on:mouseup={() => ((pressed = false), (muted = false))}
 />
 
 <style lang="scss">
-  .scrubberWrapper {
-    height: 1rem;
-    width: 20rem;
-    background: rgba(0, 0, 255, 0.1);
-    position: relative;
+  .playPauseBtn {
+    border-radius: 50%;
+    border: 1px solid black;
 
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    height: 10rem;
+    cursor: pointer;
   }
 
   .scrubberLine {
     width: 1px;
     height: 100%;
     background: black;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
 
     &:after {
       content: '';
@@ -85,7 +79,6 @@
       left: 0;
       width: 1rem;
       height: 100%;
-      background: rgba(0, 0, 255, 0.1);
       cursor: pointer;
       transform: translateX(-50%);
     }
