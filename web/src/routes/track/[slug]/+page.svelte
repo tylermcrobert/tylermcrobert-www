@@ -10,14 +10,14 @@
 
   let pressed = false;
 
+  let muted: boolean;
   let duration: number;
   let time = 0;
   let paused = true;
 
   function handleMouse(e: MouseEvent) {
     if (!pressed || !progressRect) return;
-
-    paused = true;
+    muted = true;
 
     let percent = (e.clientX - progressRect.x) / progressRect.width;
     if (percent < 0) percent = 0;
@@ -27,11 +27,6 @@
     time = percent * duration;
   }
 
-  function handleMouseUp() {
-    if (pressed) paused = false;
-    pressed = false;
-  }
-
   onMount(() => (progressRect = progressBar.getBoundingClientRect()));
 
   $: progressLeft = (time / duration) * (progressRect?.width || 0);
@@ -39,7 +34,7 @@
 </script>
 
 <div class="wrapper">
-  <audio controls bind:duration bind:currentTime={time} bind:paused>
+  <audio controls bind:duration bind:currentTime={time} bind:paused bind:muted>
     <source src={data.link} />
   </audio>
 
@@ -61,7 +56,10 @@
   {/if}
 </div>
 
-<svelte:window on:mousemove={handleMouse} on:mouseup={handleMouseUp} />
+<svelte:window
+  on:mousemove={handleMouse}
+  on:mouseup={() => ((pressed = false), (muted = false))}
+/>
 
 <style lang="scss">
   .scrubberWrapper {
