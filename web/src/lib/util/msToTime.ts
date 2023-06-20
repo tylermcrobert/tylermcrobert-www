@@ -27,7 +27,8 @@ export function formatTime(ms: number, format: TimeFormat) {
   }
 
   if (format === 'hh:mm:ss') return formatTime([hours, minutes, seconds]);
+  if (format === 'hh:mm') return formatTime([minutes, seconds]);
   return formatTime([minutes, seconds]);
 }
 
-type TimeFormat = 'hh:mm:ss' | 'hh:mm';
+type TimeFormat = 'hh:mm:ss' | 'hh:mm' | 'mm:ss';
