@@ -1,45 +1,95 @@
 <script lang="ts">
   import { formatTime } from '$lib/util/msToTime';
+  import { onMount } from 'svelte';
 
   export let data: { link: string };
+
+  let progressLeft = 0;
+  let progressBar: HTMLElement;
+  let progressRect: DOMRect | undefined;
+
+  let pressed = false;
 
   let duration: number;
   let time = 0;
   let paused = true;
 
-  $: progress = Math.round((time / duration) * 10000) / 100;
-  $: scrubberStyle = `transform: translate3d(${progress}%, 0, 0)`;
+  function handleMouse(e: MouseEvent) {
+    if (!pressed || !progressRect) return;
+
+    paused = true;
+
+    let percent = (e.clientX - progressRect.x) / progressRect.width;
+    if (percent < 0) percent = 0;
+    else if (percent > 1) percent = 1;
+
+    progressLeft = percent * progressRect.width;
+    time = percent * duration;
+  }
+
+  function handleMouseUp() {
+    if (pressed) paused = false;
+    pressed = false;
+  }
+
+  onMount(() => (progressRect = progressBar.getBoundingClientRect()));
+
+  $: progressLeft = (time / duration) * (progressRect?.width || 0);
+  $: scrubWrapStyle = `transform: translate3d(${progressLeft}px, 0, 0)`;
 </script>
 
-<audio controls bind:duration bind:currentTime={time} bind:paused>
-  <source src={data.link} />
-</audio>
+<div class="wrapper">
+  <audio controls bind:duration bind:currentTime={time} bind:paused>
+    <source src={data.link} />
+  </audio>
 
-<div class="scrubberWrapper">
-  <div class="scrubber" style={scrubberStyle} />
+  <div class="scrubberWrapper" bind:this={progressBar}>
+    <div
+      class="scrubberLine"
+      style={scrubWrapStyle}
+      on:mousedown={() => (pressed = true)}
+    />
+  </div>
+
+  <button on:click={() => (paused = !paused)}>
+    {paused ? 'Play' : 'Pause'}
+  </button>
+
+  {#if duration}
+    {formatTime(time * 1000, 'mm:ss')} /
+    {formatTime(duration * 1000, 'mm:ss')}
+  {/if}
 </div>
 
-<button on:click={() => (paused = !paused)}>
-  {paused ? 'Play' : 'Pause'}
-</button>
-
-{#if duration}
-  {formatTime(time * 1000, 'mm:ss')} /
-  {formatTime(duration * 1000, 'mm:ss')}
-{/if}
+<svelte:window on:mousemove={handleMouse} on:mouseup={handleMouseUp} />
 
 <style lang="scss">
   .scrubberWrapper {
     height: 1rem;
     width: 20rem;
-    border: 1px solid blue;
+    background: rgba(0, 0, 255, 0.1);
     position: relative;
-    margin: 1rem;
+
+    overflow: hidden;
   }
 
-  .scrubber {
+  .scrubberLine {
+    width: 1px;
     height: 100%;
-    left: 0;
-    border-left: 1px solid red;
+    background: black;
+    position: relative;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1rem;
+      height: 100%;
+      background: rgba(0, 0, 255, 0.1);
+      cursor: pointer;
+      transform: translateX(-50%);
+    }
   }
 </style>
