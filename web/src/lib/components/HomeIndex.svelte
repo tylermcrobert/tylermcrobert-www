@@ -15,7 +15,6 @@
 
 <style lang="scss">
   div.indexWrapper {
-    padding-top: var(--nav-height);
     min-height: 100vh;
     width: 100vw;
 
@@ -30,7 +29,7 @@
 
   ul.index {
     max-width: var(--wrap-width);
-    margin: var(--space-large) 0;
+    margin: calc(var(--space-large) + var(--nav-height)) 0;
   }
 
   li.indexItem,
