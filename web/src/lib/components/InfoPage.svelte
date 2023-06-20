@@ -25,11 +25,11 @@
     <div class="contactItems">
       <div class="contact">
         <h3><DotHead>E-M <Arrow /></DotHead></h3>
-        <a href={LINK_EMAIL}>{EMAIL}</a>
+        <a href={LINK_EMAIL} class="underline">{EMAIL}</a>
       </div>
       <div class="contact">
         <h3><DotHead>IG <Arrow /></DotHead></h3>
-        <a href={LINK_IG}>{IG}</a>
+        <a href={LINK_IG} class="underline">{IG}</a>
       </div>
     </div>
 
@@ -75,7 +75,7 @@
       {/each}
     </ul>
 
-    <a href="/playlists">See all playlists <Arrow /></a>
+    <a href="/playlists" class="underline">See all playlists <Arrow /></a>
   </div>
 </section>
 
