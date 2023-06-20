@@ -53,24 +53,6 @@ export const NUMS = [
   '㊿'
 ];
 
-export const CLIENTS = [
-  'Apple',
-  'Nike',
-  'Adidas',
-  'Visibility Office',
-  'Airsign',
-  'High Tide NYC',
-  'Sunwink',
-  'Zero Motorcycles',
-  'Specialized Bicycles',
-  'Marriott Hotels',
-  'Provenance Hotels',
-  'Meijer',
-  'Chaco',
-  'Merrell',
-  'Tonal'
-];
-
 const initial = [640, 750, 828, 1080, 1200, 1400, 1600];
 const all = [...initial, ...initial.map((item) => item * 2)];
 const sorted = all.sort((a, b) => a / b);

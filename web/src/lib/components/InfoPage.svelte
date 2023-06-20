@@ -3,14 +3,7 @@
   import Arrow from '$lib/components/util/Arrow.svelte';
   import DotHead from '$lib/components/util/DotHead.svelte';
   import { onMount } from 'svelte';
-  import {
-    EMAIL,
-    LINK_EMAIL,
-    LINK_IG,
-    NUMS,
-    IG,
-    CLIENTS
-  } from '../../constants';
+  import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG } from '../../constants';
   import getNowPlaying, { type NowPlayingData } from '../util/nowPlaying';
   import type { SpotifyPlaylist } from '../spotify/spotify';
 
@@ -43,7 +36,7 @@
     <div class="clients">
       <h2><DotHead>Clients</DotHead></h2>
       <ul class="clientList">
-        {#each CLIENTS as client}<li>{client}</li>{/each}
+        {#each data.clients as client}<li>{client}</li>{/each}
       </ul>
     </div>
   </div>

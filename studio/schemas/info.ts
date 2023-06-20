@@ -30,5 +30,12 @@ export default {
       of: [{type: 'reference', to: {type: 'playlist'}}],
       validation: (Rule) => Rule.required(),
     }),
+
+    defineField({
+      name: 'clients',
+      type: 'array',
+      of: [{type: 'string'}],
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 }
