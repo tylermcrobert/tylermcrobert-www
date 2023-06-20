@@ -4,9 +4,7 @@
   export let data: { link: string };
 
   let windowWidth: number;
-
   let pressed = false;
-
   let muted: boolean;
   let duration: number;
   let time = 0;
@@ -24,10 +22,6 @@
 </script>
 
 <div class="wrapper">
-  <audio bind:duration bind:currentTime={time} bind:paused bind:muted>
-    <source src={data.link} />
-  </audio>
-
   <div
     class="scrubberLine"
     on:mousedown={() => (pressed = true)}
@@ -44,6 +38,10 @@
   {/if}
 </div>
 
+<audio bind:duration bind:currentTime={time} bind:paused bind:muted>
+  <source src={data.link} />
+</audio>
+
 <svelte:window
   bind:innerWidth={windowWidth}
   on:mousemove={handleMouse}
@@ -51,6 +49,10 @@
 />
 
 <style lang="scss">
+  .wrapper {
+    user-select: none;
+  }
+
   .playPauseBtn {
     border-radius: 50%;
     border: 1px solid black;
