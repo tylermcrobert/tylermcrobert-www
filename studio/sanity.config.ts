@@ -3,6 +3,7 @@ import {deskTool} from 'sanity/desk'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemas'
 import {colorInput} from '@sanity/color-input'
+import {DocumentIcon} from '@sanity/icons'
 
 export default defineConfig({
   name: 'default',
@@ -11,7 +12,27 @@ export default defineConfig({
   projectId: 'n1wxk3oc',
   dataset: 'production',
 
-  plugins: [deskTool(), visionTool(), colorInput()],
+  plugins: [
+    deskTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Info')
+              .id('info')
+              .icon(DocumentIcon)
+              .child(S.document().schemaType('info').documentId('info')),
+            S.divider(),
+            S.documentTypeListItem('caseStudy'),
+            S.documentTypeListItem('webFrameTheme'),
+            S.documentTypeListItem('playlist'),
+            S.documentTypeListItem('song'),
+          ]),
+    }),
+    visionTool(),
+    colorInput(),
+  ],
 
   schema: {
     types: schemaTypes,

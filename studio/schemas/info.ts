@@ -1,0 +1,34 @@
+import {defineField} from 'sanity'
+
+export default {
+  name: 'info',
+  title: 'Info',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      hidden: true,
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'bio',
+      type: 'text',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'playlists',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'playlist'}}],
+      validation: (Rule) => Rule.required(),
+    }),
+  ],
+}
