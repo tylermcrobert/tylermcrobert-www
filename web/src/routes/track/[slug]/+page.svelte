@@ -1,5 +1,6 @@
 <script lang="ts">
   import { formatTime } from '$lib/util/msToTime';
+  import { onMount } from 'svelte';
 
   export let data: { link: string };
 
@@ -10,12 +11,23 @@
   let time = 0;
   let paused = true;
 
+  let playPauseEl: HTMLElement;
+  let angle = 0;
+
   function handleMouse(e: MouseEvent) {
     if (!pressed) return;
     let windowPercent = e.clientX / windowWidth;
     time = windowPercent * duration;
     muted = true;
   }
+
+  function rotateDiv() {
+    angle = (time / duration) * 5000;
+    if (playPauseEl) playPauseEl.style.transform = `rotate(${angle}deg)`;
+    requestAnimationFrame(rotateDiv);
+  }
+
+  onMount(() => rotateDiv());
 
   $: percent = (time / duration) * 100;
   $: scrubWrapStyle = `transform: translate3d(${percent}vw, 0, 0)`;
@@ -28,7 +40,11 @@
     style={scrubWrapStyle}
   />
 
-  <button on:click={() => (paused = !paused)} class="playPauseBtn">
+  <button
+    class="playPauseBtn"
+    on:click={() => (paused = !paused)}
+    bind:this={playPauseEl}
+  >
     {paused ? 'Play' : 'Pause'}
   </button>
 
