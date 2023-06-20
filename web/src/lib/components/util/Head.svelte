@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { formatTitle } from '$lib/util/formatTitle';
 
   export let pageTitle: string | null;
   export let route: string;
-  export let description: string;
+  export let description: string | null = $page.data.bio;
 
   $: title = pageTitle ? formatTitle(pageTitle) : 'Tyler McRobert';
   $: pathWithoutSlug = route.replace(/^\//, '');

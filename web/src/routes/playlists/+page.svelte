@@ -6,6 +6,7 @@
   import type { SpotifyPlaylist } from '$lib/spotify/spotify';
   import DotHead from '$lib/components/util/DotHead.svelte';
   import { NUMS } from '../../constants';
+  import Head from '$lib/components/util/Head.svelte';
 
   let itemOpen: number | null = null;
 
@@ -16,6 +17,8 @@
 
   export let data: { playlists: SpotifyPlaylist[] };
 </script>
+
+<Head pageTitle="Playlists" route="playlists" />
 
 {#each data.playlists as { name, tracks, image, date, href, duration }, playlistIndex}
   {@const isActive = playlistIndex === itemOpen}
