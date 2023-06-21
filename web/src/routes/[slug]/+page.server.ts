@@ -3,15 +3,18 @@ import { caseStudyQuery } from '$lib/sanity/queries';
 import { formatTitle } from '$lib/util/formatTitle.js';
 import { error } from '@sveltejs/kit';
 
-export async function load(ctx) {
+export async function load({ params, locals }) {
   const responses = await client.fetch(caseStudyQuery, {
-    slug: ctx.params.slug
+    slug: params.slug
   });
 
-  const caseStudySlugs = ctx.locals.index.caseStudies.map((item) => item.slug);
-  const csExistsInCtx = caseStudySlugs.includes(ctx.params.slug);
+  const caseStudySlugs = locals.index.caseStudies.map((item) => item.slug);
 
-  if (!responses || !responses.length || !csExistsInCtx) {
+  const csExistsInCtx = caseStudySlugs.includes(params.slug);
+  const noResponse = !responses || !responses.length;
+  const is404 = (noResponse || !csExistsInCtx) && !locals.isPreview;
+
+  if (is404) {
     throw error(404, { message: 'Not found' });
   }
 
@@ -19,6 +22,6 @@ export async function load(ctx) {
     // Show first response (Will be draft if authed)
     caseStudy: responses[0],
     title: formatTitle(responses[0].title),
-    isPreview: ctx.locals.isPreview
+    isPreview: locals.isPreview
   };
 }
