@@ -1,8 +1,21 @@
+import { client } from '$lib/sanity/client';
 import type { PageServerLoad } from './$types';
 
-const MP3 =
-  'https://cdn.sanity.io/files/n1wxk3oc/production/a22773b70b09933742e5a2bc52b01c3409c97ac8.mp3';
+export type TrackType = {
+  date: string;
+  title: string;
+  file: string;
+};
 
-export const load = (async () => {
-  return { link: MP3 };
+const trackQuery = `
+  *[_type == 'song' && slug.current == $slug][0]{
+    "date": _createdAt,
+    title,
+    "file": file.asset->url
+  }
+`;
+
+export const load = (async (ctx) => {
+  const track = await client.fetch(trackQuery, { slug: ctx.params.slug });
+  return track;
 }) satisfies PageServerLoad;

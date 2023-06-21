@@ -1,13 +1,15 @@
 <script lang="ts">
   import { formatTime } from '$lib/util/msToTime';
   import { onMount } from 'svelte';
+  import type { TrackType } from './+page.server';
+  import { formatTitle } from '$lib/util/formatTitle';
 
-  export let data: { link: string };
+  export let data: TrackType;
 
   let time = 0;
   let angle = 0;
   let pressed = false;
-  let muted: boolean;
+  let muted = false;
   let paused = true;
 
   let raf: number;
@@ -29,10 +31,9 @@
     if (!pressed) return;
 
     let percent = e.clientX / windowWidth;
-    if (percent <= 0) percent = 0;
-    if (percent >= 1) percent = 1;
+    let percentClamped = Math.min(Math.max(percent, 0), 1);
 
-    time = percent * duration;
+    time = percentClamped * duration;
     player.currentTime = time;
     muted = true;
   }
@@ -110,7 +111,7 @@
 
   <div class="controls">
     {#if duration}
-      <div>"Name"</div>
+      <div>"{data.title}" {data.date.split('T')[0]}</div>
       <div>
         {formatTime(time * 1000, 'mm:ss')} /
         {formatTime(duration * 1000, 'mm:ss')}
@@ -120,7 +121,7 @@
 </div>
 
 <audio bind:this={player} bind:duration bind:paused bind:muted>
-  <source src={data.link} />
+  <source src={data.file} />
 </audio>
 
 <svelte:window
@@ -130,6 +131,7 @@
 />
 
 <svelte:head>
+  <title>{formatTitle(data.title)}</title>
   <meta name="robots" content="noindex" />
 </svelte:head>
 
