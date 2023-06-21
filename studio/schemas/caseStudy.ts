@@ -48,7 +48,6 @@ export default {
       name: 'previewImage',
       type: 'image',
       options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
