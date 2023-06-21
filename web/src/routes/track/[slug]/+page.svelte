@@ -19,6 +19,12 @@
   let player: HTMLAudioElement;
   let scrubberEl: HTMLDivElement;
 
+  /**
+   * Runs on mouse move but executes when
+   * mouse is clicked down to drag slider
+   * and update player.
+   */
+
   function handleMouseMove(e: MouseEvent) {
     if (!pressed) return;
 
@@ -31,20 +37,42 @@
     muted = true;
   }
 
+  /**
+   * Ends drag controls and unmutes.
+   */
+
   function handleMouseUp() {
     pressed = false;
     muted = false;
   }
+
+  /**
+   * Binds the current time to the drag slider
+   * x translate. Runs on every rAF tick.
+   */
 
   function moveLine() {
     const percent = (time / duration) * 100;
     scrubberEl.style.transform = `translate3d(${percent}vw, 0, 0)`;
   }
 
+  /**
+   * Rotates the play button synced with the
+   * current time. Allows for button to
+   * rotate when dragging forward/backwards
+   */
+
   function rotateDiv() {
-    angle = (time / duration) * 2000;
+    angle = (time * 100) % 360;
     playPauseEl.style.transform = `rotate(${angle}deg)`;
   }
+
+  /**
+   * Run on every tick because binding to
+   * player is slow. Updates current time
+   * and run nescessary DOM mutation
+   * functions functions.
+   */
 
   function handleAnimationFrame() {
     if (!pressed) time = player.currentTime;
@@ -52,6 +80,10 @@
     rotateDiv();
     moveLine();
   }
+
+  /**
+   * Set up and cancel RAF
+   */
 
   onMount(() => {
     raf = requestAnimationFrame(handleAnimationFrame);
