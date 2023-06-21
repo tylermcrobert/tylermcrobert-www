@@ -22,6 +22,7 @@ export const caseStudyQuery = groq`
     intro,
     date,
     description,
+    previewImage,
     modules[]{
       _type == 'textBlock' => {
         ...,
@@ -78,6 +79,7 @@ export type CaseStudyQuery = {
   date: string | null;
   description: PortableText | null;
   modules: PortfolioModule[] | null;
+  previewImage: SanityImage | null;
 };
 
 export type PortfolioModule =

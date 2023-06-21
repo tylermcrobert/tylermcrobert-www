@@ -11,6 +11,7 @@
   pageTitle={data.caseStudy.title}
   route={data.caseStudy.slug}
   description={data.caseStudy.intro || ''}
+  sanityImage={data.caseStudy.previewImage}
 />
 
 {#if data.isPreview}
