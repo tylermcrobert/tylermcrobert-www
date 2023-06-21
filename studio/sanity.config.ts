@@ -4,7 +4,6 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemas'
 import {colorInput} from '@sanity/color-input'
 import {DocumentIcon} from '@sanity/icons'
-import {media} from 'sanity-plugin-media'
 
 export default defineConfig({
   name: 'default',
@@ -32,7 +31,6 @@ export default defineConfig({
           ]),
     }),
     visionTool(),
-    media(),
     colorInput(),
   ],
 
