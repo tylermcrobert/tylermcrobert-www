@@ -129,6 +129,10 @@
   on:mouseup={handleMouseUp}
 />
 
+<svelte:head>
+  <meta name="robots" content="noindex" />
+</svelte:head>
+
 <style lang="scss">
   .wrapper {
     user-select: none;
