@@ -7,7 +7,7 @@
   export let pageTitle: string | null;
   export let route: string;
   export let description: string | null = $page.data.bio;
-  export let sanityImage: SanityImage | null;
+  export let sanityImage: SanityImage | null = $page.data.previewImage || null;
 
   let imgUrl: string | null = null;
 
