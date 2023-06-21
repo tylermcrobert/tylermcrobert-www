@@ -4,40 +4,66 @@
 
   export let data: { link: string };
 
-  let windowWidth: number;
+  let time = 0;
+  let angle = 0;
   let pressed = false;
   let muted: boolean;
-  let duration: number;
-  let time = 0;
   let paused = true;
 
-  let playPauseEl: HTMLElement;
-  let angle = 0;
+  let raf: number;
 
-  function handleMouse(e: MouseEvent) {
+  let windowWidth: number;
+  let duration: number;
+
+  let playPauseEl: HTMLElement;
+  let player: HTMLAudioElement;
+  let scrubberEl: HTMLDivElement;
+
+  function handleMouseMove(e: MouseEvent) {
     if (!pressed) return;
-    let windowPercent = e.clientX / windowWidth;
-    time = windowPercent * duration;
+
+    let percent = e.clientX / windowWidth;
+    if (percent <= 0) percent = 0;
+    if (percent >= 1) percent = 1;
+
+    time = percent * duration;
+    player.currentTime = time;
     muted = true;
   }
 
-  function rotateDiv() {
-    angle = (time / duration) * 5000;
-    if (playPauseEl) playPauseEl.style.transform = `rotate(${angle}deg)`;
-    requestAnimationFrame(rotateDiv);
+  function handleMouseUp() {
+    pressed = false;
+    muted = false;
   }
 
-  onMount(() => rotateDiv());
+  function moveLine() {
+    const percent = (time / duration) * 100;
+    scrubberEl.style.transform = `translate3d(${percent}vw, 0, 0)`;
+  }
 
-  $: percent = (time / duration) * 100;
-  $: scrubWrapStyle = `transform: translate3d(${percent}vw, 0, 0)`;
+  function rotateDiv() {
+    angle = (time / duration) * 2000;
+    playPauseEl.style.transform = `rotate(${angle}deg)`;
+  }
+
+  function handleAnimationFrame() {
+    if (!pressed) time = player.currentTime;
+    raf = requestAnimationFrame(handleAnimationFrame);
+    rotateDiv();
+    moveLine();
+  }
+
+  onMount(() => {
+    raf = requestAnimationFrame(handleAnimationFrame);
+    return () => cancelAnimationFrame(raf);
+  });
 </script>
 
 <div class="wrapper">
   <div
     class="scrubberLine"
     on:mousedown={() => (pressed = true)}
-    style={scrubWrapStyle}
+    bind:this={scrubberEl}
   />
 
   <button
@@ -54,14 +80,14 @@
   {/if}
 </div>
 
-<audio bind:duration bind:currentTime={time} bind:paused bind:muted>
+<audio bind:this={player} bind:duration bind:paused bind:muted>
   <source src={data.link} />
 </audio>
 
 <svelte:window
   bind:innerWidth={windowWidth}
-  on:mousemove={handleMouse}
-  on:mouseup={() => ((pressed = false), (muted = false))}
+  on:mousemove={handleMouseMove}
+  on:mouseup={handleMouseUp}
 />
 
 <style lang="scss">
