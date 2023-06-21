@@ -98,18 +98,25 @@
     bind:this={scrubberEl}
   />
 
-  <button
-    class="playPauseBtn"
-    on:click={() => (paused = !paused)}
-    bind:this={playPauseEl}
-  >
-    {paused ? 'Play' : 'Pause'}
-  </button>
+  <div class="playBtnWrap">
+    <button
+      class="playPauseBtn"
+      on:click={() => (paused = !paused)}
+      bind:this={playPauseEl}
+    >
+      {paused ? 'Play' : 'Pause'}
+    </button>
+  </div>
 
-  {#if duration}
-    {formatTime(time * 1000, 'mm:ss')} /
-    {formatTime(duration * 1000, 'mm:ss')}
-  {/if}
+  <div class="controls">
+    {#if duration}
+      <div>"Name"</div>
+      <div>
+        {formatTime(time * 1000, 'mm:ss')} /
+        {formatTime(duration * 1000, 'mm:ss')}
+      </div>
+    {/if}
+  </div>
 </div>
 
 <audio bind:this={player} bind:duration bind:paused bind:muted>
@@ -125,18 +132,38 @@
 <style lang="scss">
   .wrapper {
     user-select: none;
-  }
-
-  .playPauseBtn {
-    border-radius: 50%;
-    border: 1px solid black;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    width: 10rem;
-    height: 10rem;
-    cursor: pointer;
+
+    height: calc(100vh - var(--nav-height));
+  }
+
+  .playBtnWrap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .playPauseBtn {
+      border-radius: 50%;
+      border: 1px solid black;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 10rem;
+      height: 10rem;
+      cursor: pointer;
+    }
+  }
+
+  .controls {
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .scrubberLine {
