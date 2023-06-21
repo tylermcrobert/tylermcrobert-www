@@ -64,7 +64,7 @@
    */
 
   function rotateDiv() {
-    angle = (time * 100) % 360;
+    angle = (time * 60) % 360;
     playPauseEl.style.transform = `rotate(${angle}deg)`;
   }
 
