@@ -25,6 +25,12 @@ export default {
     }),
 
     defineField({
+      name: 'previewImage',
+      type: 'image',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
       name: 'playlists',
       type: 'array',
       of: [{type: 'reference', to: {type: 'playlist'}}],

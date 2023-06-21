@@ -45,6 +45,13 @@ export default {
     }),
 
     defineField({
+      name: 'previewImage',
+      type: 'image',
+      options: {hotspot: true},
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
       name: 'modules',
       type: 'array',
       of: [
