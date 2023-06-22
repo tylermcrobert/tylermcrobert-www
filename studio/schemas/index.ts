@@ -4,6 +4,7 @@ import caseStudy from './caseStudy'
 import playlist from './playlist'
 import song from './song'
 import info from './info'
+import context from './context'
 
 // Case Study Modules
 import moduleWebsite from './caseStudyModules/website'
@@ -19,6 +20,7 @@ import aspect from './modules/aspect'
 import textBlock from './modules/textBlock'
 
 export const schemaTypes = [
+  context,
   info,
   emptySpace,
   tripleImage,

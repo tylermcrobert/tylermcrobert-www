@@ -25,6 +25,7 @@ export default defineConfig({
               .child(S.document().schemaType('info').documentId('info')),
             S.divider(),
             S.documentTypeListItem('caseStudy'),
+            S.documentTypeListItem('context'),
             S.documentTypeListItem('webFrameTheme'),
             S.documentTypeListItem('playlist'),
             S.documentTypeListItem('song'),
