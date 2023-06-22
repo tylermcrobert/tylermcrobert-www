@@ -30,7 +30,7 @@
 
   <div class="browser">
     {#if showFrame !== false && theme?.frame}
-      <BrowserFrame color={theme?.frame} />
+      <BrowserFrame color={theme?.frame} dotColor={theme.dots} />
     {/if}
 
     {#if media?.image?.asset}

@@ -12,6 +12,7 @@ const websiteMedia = groq`{
 const themeProjection = groq`{
   "background": background.hex,
   "frame": frame.hex,
+  "dots": dots.hex
 }`;
 
 export const caseStudyQuery = groq`
@@ -174,4 +175,8 @@ export type WebsiteModuleMedia = {
 };
 
 export type PortableText = InputValue;
-export type WebsiteFrameTheme = { background: string; frame: string };
+export type WebsiteFrameTheme = {
+  background: string | null;
+  frame: string | null;
+  dots: string | null;
+};
