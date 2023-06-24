@@ -5,9 +5,10 @@
 
   export let data: ModuleMobileWebsite;
   const nonReactiveFrames = data.frames || [];
+  const nonReactiveThemeBg = data.theme?.background;
 </script>
 
-<div class="mobileWebsite" style={`background: ${data.theme?.background}`}>
+<div class="mobileWebsite" style={`background: ${nonReactiveThemeBg}`}>
   {#each data.frames || [] as frame, i}
     {#if frame.image?.asset}
       <ResponsiveImage
