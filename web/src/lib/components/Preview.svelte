@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { sanityStore } from '$lib/sanity/client';
+  import { client, sanityStore } from '$lib/sanity/client';
   import type { Subscription } from '@sanity/groq-store';
   import type { QueryParams } from '@sanity/client';
 
@@ -16,8 +16,10 @@
       if (err) throw err;
       if (!(res && res[0])) throw Error('Response not found');
 
-      loading = false;
-      onUpdate(res[0]);
+      client.fetch(query, params).then((res) => {
+        onUpdate(res[0]);
+        loading = false;
+      });
     });
   });
 
