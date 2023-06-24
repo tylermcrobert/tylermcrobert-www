@@ -4,8 +4,8 @@
   import { page } from '$app/stores';
 
   export let data: ModuleMobileWebsite;
-  const nonReactiveFrames = data.frames || [];
-  const nonReactiveThemeBg = data.theme?.background;
+  $: nonReactiveFrames = data.frames || [];
+  $: nonReactiveThemeBg = data.theme?.background;
 </script>
 
 <div class="mobileWebsite" style={`background: ${nonReactiveThemeBg}`}>

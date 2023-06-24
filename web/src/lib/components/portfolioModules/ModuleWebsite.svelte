@@ -5,15 +5,7 @@
   import BrowserFrame from '$lib/components/util/BrowserFrame.svelte';
   export let data: ModuleWebsite;
 
-  $: ({ media, showFrame, backgroundImg } = data);
-
-  /**
-   * Non-reactive data for preveiw purposes.
-   * The preview data doesn't output join data
-   */
-
-  const { theme } = data;
-  const video = data.media?.video;
+  $: ({ media, showFrame, backgroundImg, theme } = data);
 </script>
 
 <div class="wrapper" style={`background:${theme?.background || ''}`}>
@@ -38,10 +30,10 @@
         color="#ffffff"
         image={media.image}
         alt={$page.data.title}
-        sizes="70vw"
+        sizes="80vw"
       />
-    {:else if video}
-      <video src={video} muted playsinline loop autoplay />
+    {:else if media?.video}
+      <video src={media.video} muted playsinline loop autoplay />
     {/if}
   </div>
 </div>

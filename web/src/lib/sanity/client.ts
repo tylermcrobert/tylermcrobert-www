@@ -21,6 +21,7 @@ export const sanityStore = groqStore({
 });
 
 export const client = createClient(options);
+export const previewClient = createClient({ ...options, useCdn: false });
 
 const builder = imageUrlBuilder(client);
 
