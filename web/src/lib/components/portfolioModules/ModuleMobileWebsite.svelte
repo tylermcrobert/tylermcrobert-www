@@ -40,12 +40,14 @@
     align-items: center;
 
     background: black;
-    padding: 7%;
-    gap: 7%;
-  }
+    padding: 10%;
+    gap: 10%;
 
-  .websiteItem {
-    overflow: hidden;
-    max-width: 15rem;
+    :global(img),
+    :global(video) {
+      overflow: hidden;
+      max-height: 70vh;
+      width: auto;
+    }
   }
 </style>
