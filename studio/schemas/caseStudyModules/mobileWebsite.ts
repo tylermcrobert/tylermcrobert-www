@@ -5,9 +5,14 @@ export default defineType({
   type: 'object',
   title: 'Mobile Website',
   fields: [
-    defineType({
+    defineField({
       name: 'frames',
       type: 'imageOrVideo',
+    }),
+
+    defineField({
+      name: 'staticFallback',
+      type: 'image',
     }),
 
     defineField({

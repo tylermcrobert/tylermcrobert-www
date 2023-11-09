@@ -14,6 +14,11 @@ export default defineField({
     }),
 
     defineField({
+      name: 'staticFallback',
+      type: 'image',
+    }),
+
+    defineField({
       name: 'seconds',
       type: 'number',
       validation: (Rule) => Rule.required(),
