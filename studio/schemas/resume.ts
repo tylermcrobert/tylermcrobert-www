@@ -62,6 +62,12 @@ export default {
             },
 
             {
+              type: 'string',
+              name: 'location',
+              validation: (Rule) => Rule.required(),
+            },
+
+            {
               name: 'clients',
               type: 'array',
               of: [{type: 'string'}],
