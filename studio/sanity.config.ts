@@ -29,6 +29,7 @@ export default defineConfig({
             S.documentTypeListItem('webFrameTheme'),
             S.documentTypeListItem('playlist'),
             S.documentTypeListItem('song'),
+            S.documentTypeListItem('resume'),
           ]),
     }),
     visionTool(),

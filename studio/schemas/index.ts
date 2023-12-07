@@ -5,6 +5,7 @@ import playlist from './playlist'
 import song from './song'
 import info from './info'
 import context from './context'
+import resume from './resume'
 
 // Case Study Modules
 import moduleWebsite from './caseStudyModules/website'
@@ -20,6 +21,7 @@ import aspect from './modules/aspect'
 import textBlock from './modules/textBlock'
 
 export const schemaTypes = [
+  resume,
   context,
   info,
   emptySpace,
