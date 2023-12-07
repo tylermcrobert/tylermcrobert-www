@@ -52,6 +52,7 @@ export default {
             {
               type: 'string',
               name: 'endDate',
+              validation: (Rule) => Rule.required(),
             },
 
             {
