@@ -72,31 +72,18 @@ export default {
               type: 'array',
               of: [{type: 'string'}],
             },
-
             {
-              name: 'statements',
+              name: 'body',
+              title: 'Body',
               type: 'array',
+              validation: (Rule) => Rule.required(),
               of: [
                 {
-                  name: 'statement',
-                  type: 'object',
-                  fields: [
-                    {
-                      name: 'body',
-                      title: 'Body',
-                      type: 'array',
-                      of: [
-                        {
-                          type: 'block',
-                          styles: [{title: 'Normal', value: 'normal'}],
-                          lists: [],
-                        },
-                      ],
-                    },
-                  ],
+                  type: 'block',
+                  styles: [{title: 'Normal', value: 'normal'}],
+                  lists: [],
                 },
               ],
-              validation: (Rule) => Rule.required(),
             },
           ],
         },
