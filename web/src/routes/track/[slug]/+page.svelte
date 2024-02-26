@@ -1,10 +1,10 @@
 <script lang="ts">
   import { formatTime } from '$lib/util/msToTime';
   import { onMount } from 'svelte';
-  import type { TrackType } from './+page.server';
+  import type { TrackQuery } from './+page.server';
   import { formatTitle } from '$lib/util/formatTitle';
 
-  export let data: TrackType;
+  export let data: TrackQuery;
 
   let time = 0;
   let angle = 0;
@@ -111,7 +111,7 @@
 
   <div class="controls">
     {#if duration}
-      <div>"{data.title}" {data.date.split('T')[0]}</div>
+      <div>"{data.title}" {data.date?.split('T')[0]}</div>
       <div>
         {formatTime(time * 1000, 'mm:ss')} /
         {formatTime(duration * 1000, 'mm:ss')}
@@ -131,7 +131,7 @@
 />
 
 <svelte:head>
-  <title>{formatTitle(data.title)}</title>
+  <title>{formatTitle(data.title || '')}</title>
   <meta name="robots" content="noindex" />
 </svelte:head>
 
