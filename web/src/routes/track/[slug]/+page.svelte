@@ -110,13 +110,14 @@
   </div>
 
   <div class="controls">
-    {#if duration}
-      <div>"{data.title}" {data.date?.split('T')[0]}</div>
+    <div>{data.title}</div>
+    <div class="controlsMeta">
       <div>
         {formatTime(time * 1000, 'mm:ss')} /
-        {formatTime(duration * 1000, 'mm:ss')}
+        {formatTime((data.duration || 0) * 1000, 'mm:ss')}
       </div>
-    {/if}
+      <div>{data.date?.split('T')[0]}</div>
+    </div>
   </div>
 </div>
 
@@ -151,7 +152,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: var(--window-height);
 
     flex: 1;
     display: flex;
@@ -177,6 +178,15 @@
     left: 0;
     width: 100%;
     padding: var(--space-standard);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .controlsMeta {
+    display: flex;
+    justify-content: space-between;
   }
 
   .scrubberLine {

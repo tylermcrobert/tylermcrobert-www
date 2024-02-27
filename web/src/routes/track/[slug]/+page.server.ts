@@ -24,7 +24,7 @@ const trackQuery = groq`
 export type TrackQuery = {
   title: string | null;
   date: string | null;
-  duration: string | null;
+  duration: number | null;
   file: string | null;
 };
 
