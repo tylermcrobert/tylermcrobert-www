@@ -144,16 +144,10 @@
     flex-direction: column;
     justify-content: center;
 
-    height: calc(100vh - var(--nav-height));
+    height: var(--full-height);
   }
 
   .playBtnWrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--window-height);
-
     flex: 1;
     display: flex;
     justify-content: center;
@@ -173,15 +167,11 @@
   }
 
   .controls {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: var(--space-standard);
+    padding-bottom: var(--space-standard);
 
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.3rem;
   }
 
   .controlsMeta {
