@@ -1,10 +1,9 @@
 <script lang="ts">
   import { formatTime } from '$lib/util/msToTime';
   import { onMount } from 'svelte';
-  import type { TrackQuery } from './+page.server';
   import { formatTitle } from '$lib/util/formatTitle';
 
-  export let data: TrackQuery;
+  export let data;
 
   let time = 0;
   let angle = 0;
@@ -114,15 +113,15 @@
     <div class="controlsMeta">
       <div>
         {formatTime(time * 1000, 'mm:ss')} /
-        {formatTime((data.duration || 0) * 1000, 'mm:ss')}
+        {formatTime((data.primaryVersion.duration || 0) * 1000, 'mm:ss')}
       </div>
-      <div>{data.date?.split('T')[0]}</div>
+      <div>{data.primaryVersion.date?.split('T')[0]}</div>
     </div>
   </div>
 </div>
 
 <audio bind:this={player} bind:duration bind:paused bind:muted>
-  <source src={data.file} />
+  <source src={data.primaryVersion.assetUrl} />
 </audio>
 
 <svelte:window
