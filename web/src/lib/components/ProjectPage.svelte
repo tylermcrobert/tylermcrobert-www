@@ -13,16 +13,20 @@
 </script>
 
 {#key data.slug}
-  <div>
-    <header>
-      <h1>{NUMS[index + 1]} {data.title}</h1>
-      <h2>{data.intro}</h2>
+  <div
+    class="z-project-page pb-large relative border-b border-dashed border-black bg-white"
+  >
+    <header class="wrapper pt-large mb-standard grid-standard">
+      <h1 class="col-span-6">{NUMS[index + 1]} {data.title}</h1>
+      <h2 class="text-head md:mb-small col-span-6 max-w-[11.5em]">
+        {data.intro}
+      </h2>
 
-      <div>
-        <p>{data.date?.split('.')[0]}</p>
+      <div class="col-span-6 md:col-span-3 md:max-w-[16em]">
+        <p class="mb-small indent md:indent-0">{data.date?.split('.')[0]}</p>
         <ul>
           {#each data.deliverables || [] as deliverable, i}
-            <li>
+            <li class="inline">
               {#if i >= 1}
                 {DOT}&nbsp;{deliverable}
               {:else}
@@ -32,9 +36,10 @@
           {/each}
         </ul>
       </div>
-      <div>
+
+      <div class="indent col-span-6 md:col-span-3">
         {#if data.description}
-          <PortableText value={data.description} />
+          <PortableText value={data.description} components={{}} />
         {/if}
       </div>
     </header>
@@ -45,5 +50,5 @@
   </div>
 {/key}
 
-<div />
+<div class="pointer-events-none h-[100dvh]" />
 <HomeIndex />

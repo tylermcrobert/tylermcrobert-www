@@ -35,4 +35,8 @@
   .wrapper {
     @apply max-w-wrapper px-standard mx-auto;
   }
+
+  .grid-standard {
+    @apply gap-standard grid grid-cols-6;
+  }
 }

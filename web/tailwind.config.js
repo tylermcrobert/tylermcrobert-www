@@ -16,6 +16,9 @@ export default {
         small: '0.667rem',
         medium: '3.16rem',
         large: '5rem'
+      },
+      textIndent: {
+        DEFAULT: '2em'
       }
     }
   },
