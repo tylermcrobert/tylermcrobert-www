@@ -20,34 +20,68 @@
 
 <Head pageTitle="Playlists" route="playlists" />
 
-{#each data.playlists as { name, tracks, image, date, href, duration }, playlistIndex}
-  {@const isActive = playlistIndex === itemOpen}
+<div class="space-y-medium my-large">
+  {#each data.playlists as { name, tracks, image, date, href, duration }, playlistIndex}
+    {@const isActive = playlistIndex === itemOpen}
 
-  <section>
-    <div>
-      <img src={image} alt={name} />
-      <h2>{name}</h2>
-    </div>
-
-    <div>
-      <div><DotHead>{date}</DotHead></div>
-      <div><DotHead>DUR {duration}</DotHead></div>
-      <div>
-        <a {href} target="_blank"><DotHead>LINK ↗</DotHead></a>
+    <section class="wrapper my-medium gap-standard mx-auto flex flex-col">
+      <div class="text-head flex gap-4">
+        <img src={image} alt={name} class="size-[1em] object-cover" />
+        <h2>{name}</h2>
       </div>
-    </div>
 
-    <ul>
-      {#each tracks as { name, duration, artists }, i}
-        <li class:hidden={i + 1 > LIMIT && !isActive}>
-          {NUMS[i + 1]}
-          {name}&mdash;{artists.join(' & ')} ({duration}){' '}
-        </li>
-      {/each}
-    </ul>
+      <div class="grid-standard">
+        <div class="col-span-2">
+          <DotHead noMarginBottom>{date}</DotHead>
+        </div>
+        <div class="col-span-2">
+          <DotHead noMarginBottom>DUR {duration}</DotHead>
+        </div>
+        <div class="col-span-2">
+          <a {href} target="_blank">
+            <DotHead noMarginBottom>LINK ↗</DotHead>
+          </a>
+        </div>
+      </div>
 
-    <button on:click={() => handleOpen(playlistIndex)}>
-      <DotHead>{isActive ? 'See Less ↑' : 'See All ↓'}</DotHead>
-    </button>
-  </section>
-{/each}
+      <ul>
+        {#each tracks as { name, duration, artists }, i}
+          <li
+            class:hidden={i + 1 > LIMIT && !isActive}
+            class="text-head inline"
+          >
+            {NUMS[i + 1]}
+            {name}&mdash;{artists.join(' & ')} ({duration}){' '}
+          </li>
+        {/each}
+      </ul>
+
+      <div>
+        <button on:click={() => handleOpen(playlistIndex)}>
+          <DotHead noMarginBottom>
+            {isActive ? 'See Less ↑' : 'See All ↓'}
+          </DotHead>
+        </button>
+      </div>
+    </section>
+  {/each}
+</div>
+<!--   
+  .title {
+    display: flex;
+    gap: 1rem;
+    .playlistImage {
+      height: 1em;
+      width: 1em;
+      object-fit: cover;
+    }
+  }
+  .detailItem {
+    grid-column: span 2;
+  }
+  .playlistTrack {
+    display: inline;
+    &.hidden {
+      display: none;
+    }
+  } -->
