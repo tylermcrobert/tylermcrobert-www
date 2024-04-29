@@ -10,8 +10,8 @@ export const GET: RequestHandler = ({ url, cookies }) => {
 
   if (type === 'caseStudy') {
     const url = `/${slug}`;
-    throw redirect(302, url);
+    redirect(302, url);
   }
 
-  throw redirect(302, '/');
+  redirect(302, '/');
 };

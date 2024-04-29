@@ -19,7 +19,7 @@ export const load = (async (ctx) => {
   const json: SnippetsAPIResponse = await response.json();
 
   if (!json.track) {
-    throw error(404, 'not found');
+    error(404, 'not found');
   }
 
   return json.track;

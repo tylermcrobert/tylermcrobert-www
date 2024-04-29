@@ -15,7 +15,7 @@ export async function load({ params, locals }) {
   const is404 = (noResponse || !csExistsInCtx) && !locals.isPreview;
 
   if (is404) {
-    throw error(404, { message: 'Not found' });
+    error(404, { message: 'Not found' });
   }
 
   return {
