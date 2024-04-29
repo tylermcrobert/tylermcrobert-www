@@ -66,22 +66,3 @@
     </section>
   {/each}
 </div>
-<!--   
-  .title {
-    display: flex;
-    gap: 1rem;
-    .playlistImage {
-      height: 1em;
-      width: 1em;
-      object-fit: cover;
-    }
-  }
-  .detailItem {
-    grid-column: span 2;
-  }
-  .playlistTrack {
-    display: inline;
-    &.hidden {
-      display: none;
-    }
-  } -->
