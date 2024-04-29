@@ -6,10 +6,9 @@
   export let data: ModuleDynamicImage;
 
   $: half = data.span === 'half';
-  $: full = !half;
 </script>
 
-<div class:half class:full>
+<div class:col-span-3={half} class:md:col-span-6={!half}>
   {#if data.image?.asset}
     <ResponsiveImage
       image={data.image}
