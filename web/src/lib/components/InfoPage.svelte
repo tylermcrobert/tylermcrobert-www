@@ -15,27 +15,29 @@
   onMount(async () => (listenData = await getNowPlaying()));
 </script>
 
-<section>
-  <div>
+<section class="my-large">
+  <div class="wrapper my-medium">
     <h2><DotHead>Bio</DotHead></h2>
-    <h1>{data.bio}</h1>
+    <h1 class="text-head">{data.bio}</h1>
   </div>
 
-  <div>
-    <div>
+  <div class="grid-standard wrapper my-medium">
+    <div class="col-span-6 md:col-span-3">
       <div>
-        <h3><DotHead>E-M <Arrow /></DotHead></h3>
-        <a href={LINK_EMAIL}>{EMAIL}</a>
+        <h3 class="inline"><DotHead noMarginBottom>E-M <Arrow /></DotHead></h3>
+        <a class="underline" href={LINK_EMAIL}>{EMAIL}</a>
       </div>
+
       <div>
-        <h3><DotHead>IG <Arrow /></DotHead></h3>
-        <a href={LINK_IG}>{IG}</a>
+        <h3 class="inline"><DotHead noMarginBottom>IG <Arrow /></DotHead></h3>
+        <a class="underline" href={LINK_IG}>{IG}</a>
       </div>
     </div>
 
-    <div>
+    <div class="col-span-6 md:col-span-3">
       <h2><DotHead>Clients</DotHead></h2>
-      <ul>
+
+      <ul class="gap-standard columns-2">
         {#each data.clients as client}<li>{client}</li>{/each}
       </ul>
     </div>
@@ -44,12 +46,12 @@
 
 <hr />
 
-<section>
-  <div>
+<section class="my-large">
+  <div class="wrapper my-medium">
     {#if listenData}
       {@const { trackName, artist, nowPlaying } = listenData}
       <h2><DotHead>Now Playing</DotHead></h2>
-      <h3>
+      <h3 class="text-head">
         {#if nowPlaying}
           Right now I'm listening to “{trackName}” by {artist} on Spotify.
         {:else}
@@ -59,15 +61,20 @@
     {/if}
   </div>
 
-  <div>
+  <div class="wrapper my-medium">
     <h2><DotHead>Featured playlists</DotHead></h2>
-    <ul>
+
+    <ul class="mb-4 leading-[1.3]">
       {#each playlists as { href, name, duration, date }, i}
         <li>
-          <a {href} target="_blank">
-            <h3>{NUMS[i + 1]} {name}</h3>
-            <p>{date}</p>
-            <p>
+          <a
+            {href}
+            target="_blank"
+            class="md:grid-standard flex justify-between"
+          >
+            <h3 class="col-span-4 md:col-span-2">{NUMS[i + 1]} {name}</h3>
+            <p class="col-span-2 hidden md:block">{date}</p>
+            <p class="gap-standard col-span-2 flex justify-between">
               {duration}<span><Arrow /></span>
             </p>
           </a>
@@ -75,6 +82,6 @@
       {/each}
     </ul>
 
-    <a href="/playlists">See all playlists <Arrow /></a>
+    <a href="/playlists" class="underline">See all playlists <Arrow /></a>
   </div>
 </section>
