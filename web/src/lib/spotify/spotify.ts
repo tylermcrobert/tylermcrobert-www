@@ -6,6 +6,10 @@ import { formatTime } from '$lib/util/msToTime';
 const clientId = env.SPOTIFY_CLIENT_ID;
 const clientSecret = env.SPOTIFY_CLIENT_SECRET;
 
+if (!clientId || !clientSecret) {
+  throw new Error('Spotify API keys not found in environment variables.');
+}
+
 const credentialsEndpoint =
   'https://accounts.spotify.com/api/token?grant_type=client_credentials';
 const playlistEndpoint = 'https://api.spotify.com/v1/playlists';
