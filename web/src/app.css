@@ -17,7 +17,7 @@
   }
 
   hr {
-    border-bottom: 1px dashed black;
+    @apply border-b-0 border-dashed border-black;
   }
 }
 
@@ -33,10 +33,10 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-wrapper px-standard mx-auto;
+    @apply mx-auto max-w-wrapper px-standard;
   }
 
   .grid-standard {
-    @apply gap-standard grid grid-cols-6;
+    @apply grid grid-cols-6 gap-standard;
   }
 }
