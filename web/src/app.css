@@ -26,6 +26,10 @@
     display: none;
   }
 
+  br {
+    display: none;
+  }
+
   hr {
     @apply border-b-0 border-dashed border-black;
   }
