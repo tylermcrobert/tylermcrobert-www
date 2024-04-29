@@ -16,8 +16,8 @@
   export let sizes: string;
   export let quality = 75;
   export let color: string | undefined = undefined;
+  export let className: string | undefined = '';
 
-  $: naturalAspect = getImageDimensions(image).aspectRatio;
   $: enforcedAspect = aspect; // rename to be more clear
 
   /**
@@ -41,23 +41,18 @@
   $: getStyle = () => {
     let styles = [];
     if (color) styles.push(`background-color: ${color}`);
-    styles.push(`aspect-ratio: ${enforcedAspect || naturalAspect}`);
+    styles.push(
+      `aspect-ratio: ${enforcedAspect || getImageDimensions(image).aspectRatio}`
+    );
     return styles.join('; ');
   };
 </script>
 
 <img
-  class="responsiveImage"
   src={urlFor(image).url()}
   {alt}
   {srcset}
   {sizes}
   style={getStyle()}
+  class={`bg-image-preload ${className}`.trim()}
 />
-
-<style>
-  .responsiveImage {
-    object-fit: cover;
-    background-color: var(--color-img-preload-background);
-  }
-</style>

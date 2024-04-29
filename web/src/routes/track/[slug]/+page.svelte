@@ -91,26 +91,29 @@
   });
 </script>
 
-<div class="wrapper">
+<div
+  class="wrapper flex h-[calc(100dvh-theme(space.nav-height))] select-none flex-col justify-center"
+>
   <div
-    class="scrubberLine"
     on:mousedown={() => (pressed = true)}
     bind:this={scrubberEl}
+    role="presentation"
+    class="scrubber fixed -left-px top-0 h-full w-px bg-black"
   />
 
-  <div class="playBtnWrap">
+  <div class="flex flex-1 items-center justify-center">
     <button
-      class="playPauseBtn"
       on:click={() => (paused = !paused)}
       bind:this={playPauseEl}
+      class="flex size-40 cursor-pointer items-center justify-center rounded-full border border-solid border-black"
     >
       {paused ? 'Play' : 'Pause'}
     </button>
   </div>
 
-  <div class="controls">
+  <div class="pb-standard flex flex-col gap-[0.3rem]">
     <div>{data.title}</div>
-    <div class="controlsMeta">
+    <div class="flex justify-between">
       <div>
         {formatTime(time * 1000, 'mm:ss')} /
         {formatTime((data.primaryVersion.duration || 0) * 1000, 'mm:ss')}
@@ -135,67 +138,9 @@
   <meta name="robots" content="noindex" />
 </svelte:head>
 
-<style lang="scss">
-  .wrapper {
-    user-select: none;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    height: var(--full-height);
-  }
-
-  .playBtnWrap {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .playPauseBtn {
-      border-radius: 50%;
-      border: 1px solid black;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 10rem;
-      height: 10rem;
-      cursor: pointer;
-    }
-  }
-
-  .controls {
-    padding-bottom: var(--space-standard);
-
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .controlsMeta {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .scrubberLine {
-    width: 1px;
-    height: 100%;
-    background: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 1rem;
-      height: 100%;
-      cursor: pointer;
-      transform: translateX(-50%);
-    }
+<style>
+  .scrubber:after {
+    content: '';
+    @apply absolute left-0 top-0 block h-full w-4 -translate-x-1/2 cursor-pointer;
   }
 </style>

@@ -2,19 +2,9 @@
   import { page } from '$app/stores';
 </script>
 
-<div class="err">
+<div
+  class="flex min-h-[calc(100dvh-theme(space.nav-height))] items-center justify-evenly"
+>
   <p>{$page.status}</p>
   <p>{$page.error?.message}</p>
 </div>
-
-<style>
-  .err {
-    height: calc(100vh - var(--nav-height));
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    justify-content: space-evenly;
-  }
-</style>

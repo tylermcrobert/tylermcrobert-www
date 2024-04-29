@@ -8,19 +8,11 @@
   $: ({ media, showFrame, backgroundImg, theme } = data);
 </script>
 
-<div class="wrapper" style={`background:${theme?.background || ''}`}>
-  {#if backgroundImg}
-    <div class="backgroundImg">
-      <ResponsiveImage
-        image={backgroundImg}
-        alt={$page.data.title}
-        sizes="90vw"
-        aspect={1.5}
-      />
-    </div>
-  {/if}
-
-  <div class="browser">
+<div
+  style={`background:${theme?.background || ''}`}
+  class="relative col-span-6 w-full bg-black p-[10%]"
+>
+  <div class="relative z-10">
     {#if showFrame !== false && theme?.frame}
       <BrowserFrame color={theme?.frame} dotColor={theme.dots} />
     {/if}
@@ -36,29 +28,16 @@
       <video src={media.video} muted playsinline loop autoplay />
     {/if}
   </div>
+
+  {#if backgroundImg}
+    <div>
+      <ResponsiveImage
+        image={backgroundImg}
+        alt={$page.data.title}
+        sizes="90vw"
+        aspect={1.5}
+        className="absolute inset-0 h-full w-full object-cover z-0"
+      />
+    </div>
+  {/if}
 </div>
-
-<style>
-  .wrapper {
-    padding: 10%;
-    position: relative;
-    width: 100%;
-
-    grid-column: span 6;
-  }
-
-  .backgroundImg :global(img) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    z-index: 0;
-  }
-
-  .browser {
-    position: relative;
-    z-index: 1;
-  }
-</style>

@@ -20,74 +20,49 @@
 
 <Head pageTitle="Playlists" route="playlists" />
 
-{#each data.playlists as { name, tracks, image, date, href, duration }, playlistIndex}
-  {@const isActive = playlistIndex === itemOpen}
+<div class="space-y-medium my-large">
+  {#each data.playlists as { name, tracks, image, date, href, duration }, playlistIndex}
+    {@const isActive = playlistIndex === itemOpen}
 
-  <section class="wrapper playlist">
-    <div class="title h1">
-      <img src={image} alt={name} class="playlistImage" />
-      <h2>{name}</h2>
-    </div>
-
-    <div class="details grid">
-      <div class="detailItem"><DotHead>{date}</DotHead></div>
-      <div class="detailItem"><DotHead>DUR {duration}</DotHead></div>
-      <div class="detailItem">
-        <a {href} target="_blank"><DotHead>LINK ↗</DotHead></a>
+    <section class="wrapper my-medium gap-standard mx-auto flex flex-col">
+      <div class="text-head flex gap-4">
+        <img src={image} alt={name} class="size-[1em] object-cover" />
+        <h2>{name}</h2>
       </div>
-    </div>
 
-    <ul class="h1 playlistTracks">
-      {#each tracks as { name, duration, artists }, i}
-        <li class="playlistTrack" class:hidden={i + 1 > LIMIT && !isActive}>
-          {NUMS[i + 1]}
-          {name}&mdash;{artists.join(' & ')} ({duration}){' '}
-        </li>
-      {/each}
-    </ul>
+      <div class="grid-standard">
+        <div class="col-span-2">
+          <DotHead noMarginBottom>{date}</DotHead>
+        </div>
+        <div class="col-span-2">
+          <DotHead noMarginBottom>DUR {duration}</DotHead>
+        </div>
+        <div class="col-span-2">
+          <a {href} target="_blank">
+            <DotHead noMarginBottom>LINK ↗</DotHead>
+          </a>
+        </div>
+      </div>
 
-    <button on:click={() => handleOpen(playlistIndex)}>
-      <DotHead>{isActive ? 'See Less ↑' : 'See All ↓'}</DotHead>
-    </button>
-  </section>
-{/each}
+      <ul>
+        {#each tracks as { name, duration, artists }, i}
+          <li
+            class:hidden={i + 1 > LIMIT && !isActive}
+            class="text-head inline"
+          >
+            {NUMS[i + 1]}
+            {name}&mdash;{artists.join(' & ')} ({duration}){' '}
+          </li>
+        {/each}
+      </ul>
 
-<style lang="scss">
-  .playlist {
-    margin: var(--space-medium) auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-standard);
-
-    &:first-of-type {
-      margin-top: var(--space-large);
-    }
-
-    &:last-of-type {
-      margin-bottom: var(--space-large);
-    }
-  }
-
-  .title {
-    display: flex;
-    gap: 1rem;
-
-    .playlistImage {
-      height: 1em;
-      width: 1em;
-      object-fit: cover;
-    }
-  }
-
-  .detailItem {
-    grid-column: span 2;
-  }
-
-  .playlistTrack {
-    display: inline;
-
-    &.hidden {
-      display: none;
-    }
-  }
-</style>
+      <div>
+        <button on:click={() => handleOpen(playlistIndex)}>
+          <DotHead noMarginBottom>
+            {isActive ? 'See Less ↑' : 'See All ↓'}
+          </DotHead>
+        </button>
+      </div>
+    </section>
+  {/each}
+</div>

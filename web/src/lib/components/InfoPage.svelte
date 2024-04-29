@@ -15,27 +15,29 @@
   onMount(async () => (listenData = await getNowPlaying()));
 </script>
 
-<section class="top">
-  <div class="intro wrapper">
+<section class="my-large">
+  <div class="wrapper my-medium">
     <h2><DotHead>Bio</DotHead></h2>
-    <h1 class="h1">{data.bio}</h1>
+    <h1 class="text-head">{data.bio}</h1>
   </div>
 
-  <div class="details grid wrapper">
-    <div class="contactItems">
-      <div class="contact">
-        <h3><DotHead>E-M <Arrow /></DotHead></h3>
-        <a href={LINK_EMAIL} class="underline">{EMAIL}</a>
+  <div class="grid-standard wrapper my-medium">
+    <div class="col-span-6 md:col-span-3">
+      <div>
+        <h3 class="inline"><DotHead noMarginBottom>E-M <Arrow /></DotHead></h3>
+        <a class="underline" href={LINK_EMAIL}>{EMAIL}</a>
       </div>
-      <div class="contact">
-        <h3><DotHead>IG <Arrow /></DotHead></h3>
-        <a href={LINK_IG} class="underline">{IG}</a>
+
+      <div>
+        <h3 class="inline"><DotHead noMarginBottom>IG <Arrow /></DotHead></h3>
+        <a class="underline" href={LINK_IG}>{IG}</a>
       </div>
     </div>
 
-    <div class="clients">
+    <div class="col-span-6 md:col-span-3">
       <h2><DotHead>Clients</DotHead></h2>
-      <ul class="clientList">
+
+      <ul class="gap-standard columns-2">
         {#each data.clients as client}<li>{client}</li>{/each}
       </ul>
     </div>
@@ -44,12 +46,12 @@
 
 <hr />
 
-<section>
-  <div class="nowPlaying wrapper">
+<section class="my-large">
+  <div class="wrapper my-medium">
     {#if listenData}
       {@const { trackName, artist, nowPlaying } = listenData}
       <h2><DotHead>Now Playing</DotHead></h2>
-      <h3 class="h1">
+      <h3 class="text-head">
         {#if nowPlaying}
           Right now I'm listening to “{trackName}” by {artist} on Spotify.
         {:else}
@@ -59,15 +61,20 @@
     {/if}
   </div>
 
-  <div class="wrapper">
+  <div class="wrapper my-medium">
     <h2><DotHead>Featured playlists</DotHead></h2>
-    <ul class="playlists">
+
+    <ul class="mb-4 leading-[1.3]">
       {#each playlists as { href, name, duration, date }, i}
-        <li class="playlist">
-          <a {href} target="_blank" class="playlistWrap grid">
-            <h3 class="playlistItem title">{NUMS[i + 1]} {name}</h3>
-            <p class="playlistItem date">{date}</p>
-            <p class="playlistItem duration">
+        <li>
+          <a
+            {href}
+            target="_blank"
+            class="md:grid-standard flex justify-between"
+          >
+            <h3 class="col-span-4 md:col-span-2">{NUMS[i + 1]} {name}</h3>
+            <p class="col-span-2 hidden md:block">{date}</p>
+            <p class="gap-standard col-span-2 flex justify-between">
               {duration}<span><Arrow /></span>
             </p>
           </a>
@@ -78,82 +85,3 @@
     <a href="/playlists" class="underline">See all playlists <Arrow /></a>
   </div>
 </section>
-
-<style lang="scss">
-  @import '../../styles/mixins';
-
-  /* General */
-  section {
-    margin: var(--space-large) 0;
-  }
-
-  .wrapper {
-    margin: var(--space-medium) auto;
-  }
-
-  .intro,
-  .contactItems,
-  .clients {
-    grid-column: span 6;
-  }
-
-  h2 {
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  /* Contents */
-
-  .contact h3 {
-    display: inline;
-  }
-
-  /* Client List */
-
-  .clientList {
-    column-count: 2;
-    column-gap: var(--space-standard);
-  }
-
-  /* Playlists */
-
-  .playlists {
-    margin-bottom: 1rem;
-    line-height: 1.3;
-  }
-
-  .playlistWrap {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .playlistItem {
-    grid-column: span 2;
-  }
-
-  .duration {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-standard);
-  }
-
-  .date {
-    display: none;
-  }
-
-  @include min-width('tablet') {
-    .contactItems,
-    .clients {
-      grid-column: span 3;
-    }
-
-    .date {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .playlistWrap {
-      display: grid;
-    }
-  }
-</style>

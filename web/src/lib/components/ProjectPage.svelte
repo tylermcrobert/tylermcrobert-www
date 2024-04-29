@@ -13,16 +13,20 @@
 </script>
 
 {#key data.slug}
-  <div class="projectPage">
-    <header class="grid wrapper intro">
-      <h1 class="title">{NUMS[index + 1]} {data.title}</h1>
-      <h2 class="overview h1">{data.intro}</h2>
+  <div
+    class="z-project-page pb-large relative border-b border-dashed border-black bg-white"
+  >
+    <header class="wrapper pt-large mb-standard grid-standard">
+      <h1 class="col-span-6">{NUMS[index + 1]} {data.title}</h1>
+      <h2 class="text-head md:mb-small col-span-6 max-w-[11.5em]">
+        {data.intro}
+      </h2>
 
-      <div class="details">
-        <p class="date indent">{data.date?.split('.')[0]}</p>
-        <ul class="deliverables">
+      <div class="col-span-6 md:col-span-3 md:max-w-[16em]">
+        <p class="md:mb-small indent md:indent-0">{data.date?.split('.')[0]}</p>
+        <ul>
           {#each data.deliverables || [] as deliverable, i}
-            <li class="deliverable">
+            <li class="inline">
               {#if i >= 1}
                 {DOT}&nbsp;{deliverable}
               {:else}
@@ -32,80 +36,20 @@
           {/each}
         </ul>
       </div>
-      <div class="description indent">
+
+      <div class="indent col-span-6 md:col-span-3">
         {#if data.description}
-          <PortableText value={data.description} />
+          <PortableText value={data.description} components={{}} />
         {/if}
       </div>
     </header>
 
-    <div class="grid wrapper modules">
+    <div class="wrapper grid-standard">
       <Modules modules={data.modules || []} />
     </div>
   </div>
 {/key}
 
-<div class="shim" />
+<div class="pointer-events-none h-dvh" />
+
 <HomeIndex />
-
-<style lang="scss">
-  @import '../../styles/mixins';
-
-  .projectPage {
-    position: relative;
-    z-index: var(--z-project-page);
-    background: white;
-
-    padding-bottom: var(--space-large);
-    border-bottom: 1px dashed black;
-  }
-
-  .shim {
-    height: 100vh;
-    pointer-events: none;
-  }
-
-  .intro {
-    padding-top: var(--space-large);
-    margin-bottom: var(--space-standard);
-  }
-
-  h1,
-  h2,
-  .details,
-  .description {
-    grid-column: span 6;
-  }
-
-  .overview {
-    max-width: 11.5em;
-  }
-
-  .deliverable {
-    display: inline;
-  }
-
-  @include min-width('tablet') {
-    /* 50/50 */
-    .details,
-    .description {
-      grid-column: span 3;
-    }
-
-    /* Tighten details */
-    .details {
-      max-width: 16em;
-    }
-
-    /* little nudge for some extra space */
-    .overview {
-      margin-bottom: var(--space-small);
-    }
-
-    /* Separate date from deliverables */
-    .date {
-      margin-bottom: var(--space-small);
-      text-indent: 0;
-    }
-  }
-</style>

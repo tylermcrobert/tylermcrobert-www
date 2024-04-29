@@ -5,16 +5,18 @@
   if (ctxTitle === 'Default') ctxTitle = null;
 </script>
 
-<nav class="nav">
-  <div class="inner">
-    <div class="nameLockup">
+<nav class="z-nav sticky top-0 text-white mix-blend-difference">
+  <div
+    class="h-nav-height px-standard max-w-wrapper mx-auto flex items-center justify-between"
+  >
+    <div>
       <a href="/">Tyler McRobert</a>
 
       {#if ctxTitle}
-        <a href="/c/default" class="ctxOverlay">
+        <a href="/c/default" class="group">
           &times;
           <span>{ctxTitle}</span>
-          <span class="close">(close)</span>
+          <span class="opacity-0 group-hover:opacity-100">(close)</span>
         </a>
       {/if}
     </div>
@@ -22,36 +24,3 @@
     <a href="/info">Info</a>
   </div>
 </nav>
-
-<style lang="scss">
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: var(--z-nav);
-
-    color: white;
-
-    mix-blend-mode: difference;
-  }
-
-  .inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    height: var(--nav-height);
-    padding: 0 var(--space-standard);
-    max-width: var(--wrap-width);
-    margin: 0 auto;
-  }
-
-  .ctxOverlay {
-    &:hover .close {
-      display: inline-block;
-    }
-
-    .close {
-      display: none;
-    }
-  }
-</style>

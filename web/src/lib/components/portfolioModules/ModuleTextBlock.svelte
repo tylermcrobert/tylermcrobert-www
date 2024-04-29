@@ -5,24 +5,6 @@
   export let data: ModuleTextBlock;
 </script>
 
-<div class="textBlock indent">
-  <PortableText value={data.content || []} />
+<div class="indent col-span-6 space-y-4 md:col-span-3">
+  <PortableText value={data.content || []} components={{}} />
 </div>
-
-<style lang="scss">
-  @import '../../../styles/mixins';
-
-  .textBlock {
-    grid-column: span 6;
-
-    :global(:not(:last-child)) {
-      margin-bottom: 1em;
-    }
-  }
-
-  @include min-width('tablet') {
-    .textBlock {
-      grid-column: span 3;
-    }
-  }
-</style>

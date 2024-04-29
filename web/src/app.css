@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Suisse';
+    src: url('/fonts/SuisseIntl-Regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Suisse';
+    src: url('/fonts/SuisseIntl-Regular.otf') format('opentype');
+  }
+
+  body {
+    background: white;
+    overscroll-behavior-y: none;
+  }
+
+  html {
+    @apply text-[18px] leading-[1.2] tracking-[0.02em] antialiased sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[calc(8px+1vw)];
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  br {
+    display: none;
+  }
+
+  hr {
+    @apply border-b-0 border-dashed border-black;
+  }
+}
+
+@layer components {
+  .text-head {
+    @apply text-[1.78rem] leading-[1.05] md:text-[2.37rem] lg:text-[3.16rem];
+  }
+
+  .text-head br {
+    @apply hidden sm:block;
+  }
+}
+
+@layer utilities {
+  .wrapper {
+    @apply mx-auto max-w-wrapper px-standard;
+  }
+
+  .grid-standard {
+    @apply grid grid-cols-6 gap-standard;
+  }
+}
