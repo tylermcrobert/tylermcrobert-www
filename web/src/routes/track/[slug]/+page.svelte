@@ -98,7 +98,7 @@
     on:mousedown={() => (pressed = true)}
     bind:this={scrubberEl}
     role="presentation"
-    class="scrubber fixed left-0 top-0 h-full w-px bg-black"
+    class="scrubber fixed -left-px top-0 h-full w-px bg-black"
   />
 
   <div class="flex flex-1 items-center justify-center">
