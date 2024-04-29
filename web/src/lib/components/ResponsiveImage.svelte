@@ -16,6 +16,7 @@
   export let sizes: string;
   export let quality = 75;
   export let color: string | undefined = undefined;
+  export let className: string | undefined = undefined;
 
   $: naturalAspect = getImageDimensions(image).aspectRatio;
   $: enforcedAspect = aspect; // rename to be more clear
@@ -46,4 +47,11 @@
   };
 </script>
 
-<img src={urlFor(image).url()} {alt} {srcset} {sizes} style={getStyle()} />
+<img
+  src={urlFor(image).url()}
+  {alt}
+  {srcset}
+  {sizes}
+  style={getStyle()}
+  class={className}
+/>
