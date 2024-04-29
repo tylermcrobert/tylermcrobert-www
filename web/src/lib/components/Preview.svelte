@@ -27,10 +27,16 @@
 </script>
 
 {#if loading}
-  <div>loading preview...</div>
+  <div
+    class="z-preview-overlay fixed inset-0 flex items-center justify-center bg-white"
+  >
+    loading preview...
+  </div>
 {/if}
 
-<div>
+<div
+  class="right-standard bottom-standard z-preview-overlay fixed flex gap-2 rounded-full bg-orange-400 px-3 py-1.5 font-[0.8rem]"
+>
   <span>Preview Mode</span>
   <a href="/api/clear-preview">✕</a>
 </div>
