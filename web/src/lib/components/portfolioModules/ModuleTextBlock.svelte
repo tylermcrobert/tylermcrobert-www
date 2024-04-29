@@ -5,6 +5,6 @@
   export let data: ModuleTextBlock;
 </script>
 
-<div>
-  <PortableText value={data.content || []} />
+<div class="indent col-span-6 md:col-span-3">
+  <PortableText value={data.content || []} components={{}} />
 </div>
