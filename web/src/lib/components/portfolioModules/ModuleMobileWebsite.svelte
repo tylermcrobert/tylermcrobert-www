@@ -8,18 +8,35 @@
   $: nonReactiveThemeBg = data.theme?.background;
 </script>
 
-<div style={`background: ${nonReactiveThemeBg}`}>
+<div
+  class="col-span-6 flex items-center justify-evenly gap-[10%] bg-black p-[10%]"
+  style:background-color={nonReactiveThemeBg}
+>
   {#each data.frames || [] as frame, i}
     {#if frame.image?.asset}
       <ResponsiveImage
         image={frame.image}
         alt={$page.data.title}
         sizes="25vw"
+        className="media"
       />
     {/if}
 
     {#if nonReactiveFrames[i].video}
-      <video src={nonReactiveFrames[i].video} muted playsinline loop autoplay />
+      <video
+        class="media"
+        src={nonReactiveFrames[i].video}
+        muted
+        playsinline
+        loop
+        autoplay
+      />
     {/if}
   {/each}
 </div>
+
+<style>
+  .media {
+    @apply max-h-[70vh] w-auto overflow-hidden;
+  }
+</style>
