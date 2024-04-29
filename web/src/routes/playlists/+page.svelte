@@ -24,8 +24,8 @@
   {@const isActive = playlistIndex === itemOpen}
 
   <section>
-    <div ">
-      <img src={image} alt={name}  />
+    <div>
+      <img src={image} alt={name} />
       <h2>{name}</h2>
     </div>
 
