@@ -16,7 +16,7 @@
   export let sizes: string;
   export let quality = 75;
   export let color: string | undefined = undefined;
-  export let className: string | undefined = undefined;
+  export let className: string | undefined = '';
 
   $: naturalAspect = getImageDimensions(image).aspectRatio;
   $: enforcedAspect = aspect; // rename to be more clear
@@ -53,5 +53,5 @@
   {srcset}
   {sizes}
   style={getStyle()}
-  class={className}
+  class={`bg-image-preload ${className}`.trim()}
 />
