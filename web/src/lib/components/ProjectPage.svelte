@@ -44,7 +44,7 @@
       </div>
     </header>
 
-    <div>
+    <div class="wrapper grid-standard">
       <Modules modules={data.modules || []} />
     </div>
   </div>
