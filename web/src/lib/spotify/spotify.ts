@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { env } from '$env/dynamic/private';
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 import { formatTime } from '$lib/util/msToTime';
 
-const clientId = env.SPOTIFY_CLIENT_ID;
-const clientSecret = env.SPOTIFY_CLIENT_SECRET;
+const clientId = SPOTIFY_CLIENT_ID;
+const clientSecret = SPOTIFY_CLIENT_SECRET;
 
 if (!clientId || !clientSecret) {
   throw new Error('Spotify API keys not found in environment variables.');
