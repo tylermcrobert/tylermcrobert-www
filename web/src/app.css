@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    background: white;
+    overscroll-behavior-y: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  hr {
+    border-bottom: 1px dashed black;
+  }
+}

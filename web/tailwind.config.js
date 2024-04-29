@@ -2,7 +2,18 @@
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    extend: {}
+    extend: {
+      zIndex: {
+        nav: '20',
+        ['project-page']: '10',
+        ['preview-overlay']: '30'
+      },
+      spacing: {
+        ['nav-height']: '2.25rem',
+        wrapper: '65rem',
+        standard: '1.33rem'
+      }
+    }
   },
   plugins: []
 };
