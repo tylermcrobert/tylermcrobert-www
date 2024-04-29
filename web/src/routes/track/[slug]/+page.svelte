@@ -91,18 +91,29 @@
   });
 </script>
 
-<div>
-  <div on:mousedown={() => (pressed = true)} bind:this={scrubberEl} />
+<div
+  class="wrapper flex h-[calc(100dvh-theme(space.nav-height))] select-none flex-col justify-center"
+>
+  <div
+    on:mousedown={() => (pressed = true)}
+    bind:this={scrubberEl}
+    role="presentation"
+    class="scrubber fixed left-0 top-0 h-full w-px bg-black"
+  />
 
-  <div>
-    <button on:click={() => (paused = !paused)} bind:this={playPauseEl}>
+  <div class="flex flex-1 items-center justify-center">
+    <button
+      on:click={() => (paused = !paused)}
+      bind:this={playPauseEl}
+      class="flex size-40 cursor-pointer items-center justify-center rounded-full border border-solid border-black"
+    >
       {paused ? 'Play' : 'Pause'}
     </button>
   </div>
 
-  <div>
+  <div class="pb-standard flex flex-col gap-[0.3rem]">
     <div>{data.title}</div>
-    <div>
+    <div class="flex justify-between">
       <div>
         {formatTime(time * 1000, 'mm:ss')} /
         {formatTime((data.primaryVersion.duration || 0) * 1000, 'mm:ss')}
@@ -126,3 +137,10 @@
   <title>{formatTitle(data.title || '')}</title>
   <meta name="robots" content="noindex" />
 </svelte:head>
+
+<style>
+  .scrubber:after {
+    content: '';
+    @apply absolute left-0 top-0 block h-full w-4 -translate-x-1/2 cursor-pointer;
+  }
+</style>
