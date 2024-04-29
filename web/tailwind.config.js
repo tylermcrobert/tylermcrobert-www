@@ -2,7 +2,17 @@
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1440px',
+      '2xl': '1900px'
+    },
     extend: {
+      fontFamily: {
+        sans: ['Suisse', 'Helvetica', 'Arial', 'sans-serif']
+      },
       zIndex: {
         nav: '20',
         ['project-page']: '10',
