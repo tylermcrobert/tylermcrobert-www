@@ -23,7 +23,7 @@
       </h2>
 
       <div class="col-span-6 md:col-span-3 md:max-w-[16em]">
-        <p class="mb-small indent md:indent-0">{data.date?.split('.')[0]}</p>
+        <p class="md:mb-small indent md:indent-0">{data.date?.split('.')[0]}</p>
         <ul>
           {#each data.deliverables || [] as deliverable, i}
             <li class="inline">
