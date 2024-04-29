@@ -30,3 +30,9 @@
     @apply hidden sm:block;
   }
 }
+
+@layer utilities {
+  .wrapper {
+    @apply max-w-wrapper px-standard mx-auto;
+  }
+}
