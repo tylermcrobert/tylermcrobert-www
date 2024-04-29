@@ -50,6 +50,6 @@
   </div>
 {/key}
 
-<div class="pointer-events-none h-[100dvh]" />
+<div class="pointer-events-none h-dvh" />
 
 <HomeIndex />
