@@ -9,7 +9,7 @@
   $: full = !half;
 </script>
 
-<div class="img" class:half class:full>
+<div class:half class:full>
   {#if data.image?.asset}
     <ResponsiveImage
       image={data.image}
@@ -19,18 +19,3 @@
     />
   {/if}
 </div>
-
-<style lang="scss">
-  @import '../../../styles/mixins';
-
-  .full,
-  .half {
-    grid-column: span 6;
-  }
-
-  @include min-width('tablet') {
-    .half {
-      grid-column: span 3;
-    }
-  }
-</style>

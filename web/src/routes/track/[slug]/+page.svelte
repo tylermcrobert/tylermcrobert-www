@@ -91,26 +91,18 @@
   });
 </script>
 
-<div class="wrapper">
-  <div
-    class="scrubberLine"
-    on:mousedown={() => (pressed = true)}
-    bind:this={scrubberEl}
-  />
+<div>
+  <div on:mousedown={() => (pressed = true)} bind:this={scrubberEl} />
 
-  <div class="playBtnWrap">
-    <button
-      class="playPauseBtn"
-      on:click={() => (paused = !paused)}
-      bind:this={playPauseEl}
-    >
+  <div>
+    <button on:click={() => (paused = !paused)} bind:this={playPauseEl}>
       {paused ? 'Play' : 'Pause'}
     </button>
   </div>
 
-  <div class="controls">
+  <div>
     <div>{data.title}</div>
-    <div class="controlsMeta">
+    <div>
       <div>
         {formatTime(time * 1000, 'mm:ss')} /
         {formatTime((data.primaryVersion.duration || 0) * 1000, 'mm:ss')}
@@ -134,68 +126,3 @@
   <title>{formatTitle(data.title || '')}</title>
   <meta name="robots" content="noindex" />
 </svelte:head>
-
-<style lang="scss">
-  .wrapper {
-    user-select: none;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    height: var(--full-height);
-  }
-
-  .playBtnWrap {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .playPauseBtn {
-      border-radius: 50%;
-      border: 1px solid black;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 10rem;
-      height: 10rem;
-      cursor: pointer;
-    }
-  }
-
-  .controls {
-    padding-bottom: var(--space-standard);
-
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .controlsMeta {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .scrubberLine {
-    width: 1px;
-    height: 100%;
-    background: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 1rem;
-      height: 100%;
-      cursor: pointer;
-      transform: translateX(-50%);
-    }
-  }
-</style>

@@ -29,25 +29,10 @@
   });
 </script>
 
-<div class="timedSlides" style={bgStyle}>
+<div style={bgStyle}>
   {#each data.images || [] as image, i}
-    <div class="imgWrap" class:active={i === index}>
+    <div class:active={i === index}>
       <ResponsiveImage {image} sizes="70vw" alt={$page.data.title} />
     </div>
   {/each}
 </div>
-
-<style lang="scss">
-  .timedSlides {
-    padding: 10%;
-    grid-column: span 6;
-  }
-
-  .imgWrap {
-    display: none;
-
-    &.active {
-      display: block;
-    }
-  }
-</style>

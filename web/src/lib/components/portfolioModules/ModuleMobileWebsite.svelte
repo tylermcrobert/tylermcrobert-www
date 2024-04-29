@@ -8,7 +8,7 @@
   $: nonReactiveThemeBg = data.theme?.background;
 </script>
 
-<div class="mobileWebsite" style={`background: ${nonReactiveThemeBg}`}>
+<div style={`background: ${nonReactiveThemeBg}`}>
   {#each data.frames || [] as frame, i}
     {#if frame.image?.asset}
       <ResponsiveImage
@@ -19,35 +19,7 @@
     {/if}
 
     {#if nonReactiveFrames[i].video}
-      <video
-        class="websiteItem"
-        src={nonReactiveFrames[i].video}
-        muted
-        playsinline
-        loop
-        autoplay
-      />
+      <video src={nonReactiveFrames[i].video} muted playsinline loop autoplay />
     {/if}
   {/each}
 </div>
-
-<style lang="scss">
-  .mobileWebsite {
-    grid-column: span 6 / auto;
-
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-
-    background: black;
-    padding: 10%;
-    gap: 10%;
-
-    :global(img),
-    :global(video) {
-      overflow: hidden;
-      max-height: 70vh;
-      width: auto;
-    }
-  }
-</style>

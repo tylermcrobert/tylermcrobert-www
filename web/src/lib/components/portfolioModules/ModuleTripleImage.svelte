@@ -6,13 +6,9 @@
   export let data: ModuleTripleImage;
 </script>
 
-<div
-  class="tripleImage grid"
-  class:right={data.imageRight}
-  class:left={!data.imageRight}
->
+<div class:right={data.imageRight} class:left={!data.imageRight}>
   {#if data.mainImage}
-    <div class="img image-main">
+    <div>
       <ResponsiveImage
         image={data.mainImage}
         sizes="45vw"
@@ -23,7 +19,7 @@
   {/if}
 
   {#if data.secondaryImage1}
-    <div class="img image-secondary">
+    <div>
       <ResponsiveImage
         image={data.secondaryImage1}
         sizes="45vw"
@@ -34,7 +30,7 @@
   {/if}
 
   {#if data.secondaryImage2}
-    <div class="img image-tertiary">
+    <div>
       <ResponsiveImage
         image={data.secondaryImage2}
         sizes="45vw"
@@ -44,36 +40,3 @@
     </div>
   {/if}
 </div>
-
-<style lang="scss">
-  .tripleImage {
-    grid-template-rows: repeat(2, 1fr);
-    grid-column: span 6;
-
-    :global(img) {
-      grid-column: span 3;
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .img {
-    grid-column: span 3;
-    overflow: hidden;
-  }
-
-  .image-main {
-    grid-row: span 2;
-  }
-
-  .right {
-    .image-main {
-      grid-column: 4 / span 3;
-    }
-
-    .image-secondary {
-      grid-row: 1;
-    }
-  }
-</style>

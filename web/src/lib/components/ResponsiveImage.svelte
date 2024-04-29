@@ -46,18 +46,4 @@
   };
 </script>
 
-<img
-  class="responsiveImage"
-  src={urlFor(image).url()}
-  {alt}
-  {srcset}
-  {sizes}
-  style={getStyle()}
-/>
-
-<style>
-  .responsiveImage {
-    object-fit: cover;
-    background-color: var(--color-img-preload-background);
-  }
-</style>
+<img src={urlFor(image).url()} {alt} {srcset} {sizes} style={getStyle()} />

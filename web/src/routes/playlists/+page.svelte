@@ -23,23 +23,23 @@
 {#each data.playlists as { name, tracks, image, date, href, duration }, playlistIndex}
   {@const isActive = playlistIndex === itemOpen}
 
-  <section class="wrapper playlist">
-    <div class="title h1">
-      <img src={image} alt={name} class="playlistImage" />
+  <section>
+    <div ">
+      <img src={image} alt={name}  />
       <h2>{name}</h2>
     </div>
 
-    <div class="details grid">
-      <div class="detailItem"><DotHead>{date}</DotHead></div>
-      <div class="detailItem"><DotHead>DUR {duration}</DotHead></div>
-      <div class="detailItem">
+    <div>
+      <div><DotHead>{date}</DotHead></div>
+      <div><DotHead>DUR {duration}</DotHead></div>
+      <div>
         <a {href} target="_blank"><DotHead>LINK ↗</DotHead></a>
       </div>
     </div>
 
-    <ul class="h1 playlistTracks">
+    <ul>
       {#each tracks as { name, duration, artists }, i}
-        <li class="playlistTrack" class:hidden={i + 1 > LIMIT && !isActive}>
+        <li class:hidden={i + 1 > LIMIT && !isActive}>
           {NUMS[i + 1]}
           {name}&mdash;{artists.join(' & ')} ({duration}){' '}
         </li>
@@ -51,43 +51,3 @@
     </button>
   </section>
 {/each}
-
-<style lang="scss">
-  .playlist {
-    margin: var(--space-medium) auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-standard);
-
-    &:first-of-type {
-      margin-top: var(--space-large);
-    }
-
-    &:last-of-type {
-      margin-bottom: var(--space-large);
-    }
-  }
-
-  .title {
-    display: flex;
-    gap: 1rem;
-
-    .playlistImage {
-      height: 1em;
-      width: 1em;
-      object-fit: cover;
-    }
-  }
-
-  .detailItem {
-    grid-column: span 2;
-  }
-
-  .playlistTrack {
-    display: inline;
-
-    &.hidden {
-      display: none;
-    }
-  }
-</style>

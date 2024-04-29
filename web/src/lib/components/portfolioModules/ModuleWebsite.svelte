@@ -8,9 +8,9 @@
   $: ({ media, showFrame, backgroundImg, theme } = data);
 </script>
 
-<div class="wrapper" style={`background:${theme?.background || ''}`}>
+<div style={`background:${theme?.background || ''}`}>
   {#if backgroundImg}
-    <div class="backgroundImg">
+    <div>
       <ResponsiveImage
         image={backgroundImg}
         alt={$page.data.title}
@@ -20,7 +20,7 @@
     </div>
   {/if}
 
-  <div class="browser">
+  <div>
     {#if showFrame !== false && theme?.frame}
       <BrowserFrame color={theme?.frame} dotColor={theme.dots} />
     {/if}
@@ -37,28 +37,3 @@
     {/if}
   </div>
 </div>
-
-<style>
-  .wrapper {
-    padding: 10%;
-    position: relative;
-    width: 100%;
-
-    grid-column: span 6;
-  }
-
-  .backgroundImg :global(img) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    z-index: 0;
-  }
-
-  .browser {
-    position: relative;
-    z-index: 1;
-  }
-</style>
