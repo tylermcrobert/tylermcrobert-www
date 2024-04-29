@@ -1,6 +1,4 @@
 import { createClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { groqStore } from '@sanity/groq-store';
 
 const options = {
@@ -22,9 +20,3 @@ export const sanityStore = groqStore({
 
 export const client = createClient(options);
 export const previewClient = createClient({ ...options, useCdn: false });
-
-const builder = imageUrlBuilder(client);
-
-export const urlFor = (source: SanityImageSource) => {
-  return builder.image(source);
-};

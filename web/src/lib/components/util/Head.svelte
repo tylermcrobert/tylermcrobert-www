@@ -1,8 +1,9 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { urlFor } from '$lib/sanity/client';
+  import { imageUrlBuilder } from '@tylermcrobert/svelte-sanity-image';
   import type { SanityImage } from '$lib/sanity/types';
   import { formatTitle } from '$lib/util/formatTitle';
+  import { client } from '$lib/sanity/client';
 
   export let pageTitle: string | null;
   export let route: string;
@@ -12,7 +13,11 @@
   let imgUrl: string | null = null;
 
   if (sanityImage) {
-    imgUrl = urlFor(sanityImage).width(1200).height(630).url();
+    imgUrl = imageUrlBuilder(client)
+      .image(sanityImage)
+      .width(1200)
+      .height(630)
+      .url();
   }
 
   $: title = pageTitle ? formatTitle(pageTitle) : 'Tyler McRobert';
