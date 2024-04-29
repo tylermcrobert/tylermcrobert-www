@@ -7,16 +7,11 @@
 
   export let data: ModuleTimedSlides;
 
-  let bgStyle = '';
   let interval: number;
   let index = 0;
 
   $: length = data.images?.length || 0;
   $: timing = (data.seconds || 1) * 1000;
-
-  if (data.theme?.background) {
-    bgStyle = `background-color: ${data.theme.background}`;
-  }
 
   onMount(() => {
     interval = window.setInterval(() => {
@@ -29,9 +24,12 @@
   });
 </script>
 
-<div style={bgStyle}>
+<div
+  class="col-span-6 bg-neutral-100 p-[10%]"
+  style:background-color={data.theme?.background}
+>
   {#each data.images || [] as image, i}
-    <div class:active={i === index}>
+    <div class:hidden={i !== index}>
       <ResponsiveImage {image} sizes="70vw" alt={$page.data.title} />
     </div>
   {/each}
