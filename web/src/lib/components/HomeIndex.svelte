@@ -4,7 +4,7 @@
 </script>
 
 <div class="fixed top-0 flex min-h-dvh w-full items-center justify-center">
-  <ul class="wrapper my-[calc(theme(space.large)+theme(space.nav-height))]">
+  <ul class="wrapper my-large">
     {#each $page.data.index.caseStudies as { title, slug }, i}
       <li class="text-head inline">
         {NUMS[i + 1]}&nbsp;<a
