@@ -8,6 +8,7 @@
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 439 13"
   preserveAspectRatio="none"
+  class="block"
 >
   <g fill="none" fill-rule="evenodd">
     <path
