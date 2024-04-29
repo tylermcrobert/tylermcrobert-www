@@ -8,7 +8,7 @@
   $: half = data.span === 'half';
 </script>
 
-<div class:md:col-span-3={half} class:md:col-span-6={!half} class="col-span-6">
+<div class:md:col-span-3={half} class="col-span-6">
   {#if data.image?.asset}
     <ResponsiveImage
       image={data.image}
