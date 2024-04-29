@@ -18,7 +18,6 @@
   export let color: string | undefined = undefined;
   export let className: string | undefined = '';
 
-  $: naturalAspect = getImageDimensions(image).aspectRatio;
   $: enforcedAspect = aspect; // rename to be more clear
 
   /**
@@ -42,7 +41,9 @@
   $: getStyle = () => {
     let styles = [];
     if (color) styles.push(`background-color: ${color}`);
-    styles.push(`aspect-ratio: ${enforcedAspect || naturalAspect}`);
+    styles.push(
+      `aspect-ratio: ${enforcedAspect || getImageDimensions(image).aspectRatio}`
+    );
     return styles.join('; ');
   };
 </script>
