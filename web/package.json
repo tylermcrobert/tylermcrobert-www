@@ -36,7 +36,7 @@
     "@portabletext/svelte": "^2.0.0",
     "@sanity/client": "^6.15.20",
     "@sanity/groq-store": "^2.1.0",
-    "@tylermcrobert/svelte-sanity-image": "^0.2.17",
+    "@tylermcrobert/svelte-sanity-image": "^0.2.21",
     "groq": "^3.12.0",
     "prettier-plugin-tailwindcss": "^0.5.14"
   }

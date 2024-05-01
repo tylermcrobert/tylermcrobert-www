@@ -15,8 +15,8 @@ dependencies:
     specifier: ^2.1.0
     version: 2.3.4
   '@tylermcrobert/svelte-sanity-image':
-    specifier: ^0.2.17
-    version: 0.2.17(svelte@4.2.15)
+    specifier: ^0.2.21
+    version: 0.2.21(svelte@4.2.15)
   groq:
     specifier: ^3.12.0
     version: 3.30.0
@@ -719,8 +719,8 @@ packages:
       - supports-color
     dev: true
 
-  /@tylermcrobert/svelte-sanity-image@0.2.17(svelte@4.2.15):
-    resolution: {integrity: sha512-ToHh4uSipYkYrWuDjvEqfxwdztCF8wgJJqWXaFoYYwHwRskTf+pXKFuUvPz0AGRXiU+hBZCwZQifS43SoX5mJg==}
+  /@tylermcrobert/svelte-sanity-image@0.2.21(svelte@4.2.15):
+    resolution: {integrity: sha512-ZYbt5N5qhYz1rGPt1pRumoHHZERtoHWk1ovvc4H2lXCsL6aJCDusZJaD8dYr1KFo7tQNsVzlcWWL+B0JG6LleQ==}
     peerDependencies:
       svelte: ^4.0.0
     dependencies:
