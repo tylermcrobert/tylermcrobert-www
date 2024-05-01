@@ -37,7 +37,7 @@
 
 @layer components {
   .text-head {
-    @apply text-[1.78rem] leading-[1.05] md:text-[2.37rem] lg:text-[3.16rem];
+    @apply text-[1.78rem] leading-[1.05] tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
   }
 
   .text-head br {
