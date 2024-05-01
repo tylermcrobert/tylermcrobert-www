@@ -38,7 +38,6 @@ export async function getAuthToken(): Promise<string> {
  * Fetches data on a Playlist given its ID
  * @param link Link to Spotify Playlist
  */
-
 export async function getPlaylistById(link: string) {
   const authToken = await getAuthToken();
   const id = link.replace('https://open.spotify.com/playlist/', '');
@@ -55,7 +54,6 @@ export async function getPlaylistById(link: string) {
  * @param data Spotify Output
  * @returns SpotifyPlaylist
  */
-
 function _formatOutput(data: any): SpotifyPlaylist {
   const oldestDate = data.tracks.items
     .map((item: any) => new Date(item.added_at))
