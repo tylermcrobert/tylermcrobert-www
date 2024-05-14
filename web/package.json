@@ -15,6 +15,7 @@
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@types/gtag.js": "^0.0.19",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "autoprefixer": "^10.4.19",
@@ -36,7 +37,7 @@
     "@portabletext/svelte": "^2.0.0",
     "@sanity/client": "^6.15.20",
     "@sanity/groq-store": "^2.1.0",
-    "@tylermcrobert/svelte-sanity-image": "^0.2.21",
+    "@tylermcrobert/svelte-sanity-image": "0.4.0-next.2",
     "groq": "^3.12.0",
     "prettier-plugin-tailwindcss": "^0.5.14"
   }

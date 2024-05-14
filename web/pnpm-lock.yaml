@@ -15,8 +15,8 @@ dependencies:
     specifier: ^2.1.0
     version: 2.3.4
   '@tylermcrobert/svelte-sanity-image':
-    specifier: ^0.2.21
-    version: 0.2.21(svelte@4.2.15)
+    specifier: 0.4.0-next.2
+    version: 0.4.0-next.2(svelte@4.2.15)
   groq:
     specifier: ^3.12.0
     version: 3.30.0
@@ -34,6 +34,9 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte':
     specifier: ^3.0.0
     version: 3.1.0(svelte@4.2.15)(vite@5.2.10)
+  '@types/gtag.js':
+    specifier: ^0.0.19
+    version: 0.0.19
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.45.0
     version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.57.0)(typescript@5.3.3)
@@ -719,16 +722,13 @@ packages:
       - supports-color
     dev: true
 
-  /@tylermcrobert/svelte-sanity-image@0.2.21(svelte@4.2.15):
-    resolution: {integrity: sha512-ZYbt5N5qhYz1rGPt1pRumoHHZERtoHWk1ovvc4H2lXCsL6aJCDusZJaD8dYr1KFo7tQNsVzlcWWL+B0JG6LleQ==}
+  /@tylermcrobert/svelte-sanity-image@0.4.0-next.2(svelte@4.2.15):
+    resolution: {integrity: sha512-Ni/F1tCtxPc6L201yk/JGY6tpCIdSnf2WbAy84ZtNO3TwumHhHpTxGsJ0iwefwvLJ8u5wn7nb1IpwKC5N4nJQw==}
     peerDependencies:
-      svelte: ^4.0.0
+      svelte: ^5.0.0-next.1
     dependencies:
-      '@sanity/client': 6.15.20
       '@sanity/image-url': 1.0.2
       svelte: 4.2.15
-    transitivePeerDependencies:
-      - debug
     dev: false
 
   /@types/cookie@0.6.0:
@@ -753,6 +753,10 @@ packages:
   /@types/eventsource@1.1.15:
     resolution: {integrity: sha512-XQmGcbnxUNa06HR3VBVkc9+A2Vpi9ZyLJcdS5dwaQQ/4ZMWFO+5c90FnMUpbtMZwB/FChoYHwuVg8TvkECacTA==}
     dev: false
+
+  /@types/gtag.js@0.0.19:
+    resolution: {integrity: sha512-KHoDzrf9rSd0mooKN576PjExpdk/XRrNu4RQnmigsScSTSidwyOUe9kDrHz9UPKjiBrx2QEsSkexbJSgS0j72w==}
+    dev: true
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
