@@ -4,7 +4,7 @@
 
   $: {
     if (typeof gtag !== 'undefined') {
-      gtag('config', 'MEASUREMENT_ID', {
+      gtag('config', MEASUREMENT_ID, {
         page_title: document.title,
         page_path: $page.url.pathname
       });
