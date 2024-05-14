@@ -1,14 +1,14 @@
 <script lang="ts">
-  // import { page } from '$app/stores';
+  import { page } from '$app/stores';
 
-  // $: {
-  //   if (typeof gtag !== 'undefined') {
-  //     gtag('config', 'UA-72543203-1', {
-  //       page_title: document.title,
-  //       page_path: $page.url.pathname
-  //     });
-  //   }
-  // }
+  $: {
+    if (typeof gtag !== 'undefined') {
+      gtag('config', 'UA-72543203-1', {
+        page_title: document.title,
+        page_path: $page.url.pathname
+      });
+    }
+  }
 </script>
 
 <svelte:head>
