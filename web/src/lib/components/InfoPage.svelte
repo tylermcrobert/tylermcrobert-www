@@ -72,7 +72,10 @@
             target="_blank"
             class="md:grid-standard flex justify-between"
           >
-            <h3 class="col-span-4 md:col-span-2">{NUMS[i + 1]} {name}</h3>
+            <div class="col-span-4 flex gap-2 md:col-span-2">
+              <span>{NUMS[i + 1]}</span>
+              <h3 class="max-w-[18ch]">{name}</h3>
+            </div>
             <p class="col-span-2 hidden md:block">{date}</p>
             <p class="gap-standard col-span-2 flex justify-between">
               {duration}<span><Arrow /></span>
