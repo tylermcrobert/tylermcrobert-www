@@ -30,17 +30,17 @@
         <h2>{name}</h2>
       </div>
 
-      <div class="grid-standard">
-        <div class="col-span-2">
-          <DotHead noMarginBottom>{date}</DotHead>
-        </div>
-        <div class="col-span-2">
-          <DotHead noMarginBottom>DUR {duration}</DotHead>
-        </div>
-        <div class="col-span-2">
+      <div class="grid-standard [&]:gap-y-1">
+        <div class="col-span-6 md:col-span-2">
           <a {href} target="_blank">
             <DotHead noMarginBottom>LINK ↗</DotHead>
           </a>
+        </div>
+        <div class="col-span-3 md:col-span-2">
+          <DotHead noMarginBottom>{date}</DotHead>
+        </div>
+        <div class="col-span-3 md:col-span-2">
+          <DotHead noMarginBottom>DUR {duration}</DotHead>
         </div>
       </div>
 
