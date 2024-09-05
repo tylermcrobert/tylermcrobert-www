@@ -6,9 +6,9 @@ import {structure} from './desk'
 
 export default defineConfig({
   name: 'default',
-  title: 'ffwd',
+  title: 'Svelte Sanity Starter',
 
-  projectId: '4cwcet86',
+  projectId: 'tjt0kiru',
   dataset: 'production',
 
   plugins: [structureTool({structure}), visionTool()],
