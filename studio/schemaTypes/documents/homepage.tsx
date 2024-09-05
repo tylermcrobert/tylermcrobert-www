@@ -11,6 +11,7 @@ export default defineType({
       type: 'string',
       name: 'title',
       hidden: true,
+      initialValue: 'Homepage',
     },
 
     {

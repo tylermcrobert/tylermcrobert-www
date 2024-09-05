@@ -11,6 +11,7 @@ export default defineType({
       name: 'title',
       type: 'string',
       hidden: true,
+      initialValue: 'Footer',
     },
 
     {
