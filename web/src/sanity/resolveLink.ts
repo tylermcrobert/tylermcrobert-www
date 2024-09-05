@@ -1,0 +1,31 @@
+import type { LinkProjection } from './queries';
+
+type Link = {
+	slug: string | null;
+	type: string | null;
+};
+
+export function resolveLink({ slug, type }: Link) {
+	if (type === 'page') {
+		return `/${slug}`;
+	}
+
+	if (type === 'homepage') {
+		return `/`;
+	}
+
+	return null;
+}
+
+export function resolveLinkProjection(link: LinkProjection) {
+	if (link.href) return link.href;
+
+	const resolvedLink = resolveLink({
+		type: link.reference?._type || null,
+		slug: link.reference?.slug || null
+	});
+
+	if (resolvedLink) return resolvedLink;
+
+	return null;
+}

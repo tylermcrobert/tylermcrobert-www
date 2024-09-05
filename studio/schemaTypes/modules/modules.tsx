@@ -1,0 +1,16 @@
+import {defineType} from 'sanity'
+
+export default defineType({
+  name: 'modules',
+  type: 'array',
+  of: [
+    {
+      type: 'textBlock',
+      icon: () => '✍️',
+    },
+    {
+      type: 'mediaBlock',
+      icon: () => '🏞️',
+    },
+  ],
+})
