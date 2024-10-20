@@ -4,6 +4,7 @@ export default {
   name: 'playlist',
   title: 'Playlist',
   type: 'document',
+  icon: () => '🎵',
   fields: [
     defineField({
       name: 'title',

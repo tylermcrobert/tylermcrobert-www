@@ -4,6 +4,7 @@ export default {
   name: 'resume',
   title: 'Resume',
   type: 'document',
+  icon: () => '📄',
   fields: [
     defineField({
       name: 'title',

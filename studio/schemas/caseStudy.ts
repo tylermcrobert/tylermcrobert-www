@@ -4,6 +4,7 @@ export default {
   type: 'document',
   name: 'caseStudy',
   title: 'Case Study',
+  icon: () => '🎨',
   fields: [
     defineField({
       name: 'title',

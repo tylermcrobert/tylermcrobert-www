@@ -4,6 +4,7 @@ export default {
   name: 'song',
   title: 'Song',
   type: 'document',
+  deprecated: {reason: 'Use snippets instead'},
   fields: [
     defineField({
       name: 'title',

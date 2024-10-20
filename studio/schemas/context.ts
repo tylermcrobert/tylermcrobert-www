@@ -4,6 +4,7 @@ export default {
   name: 'context',
   title: 'Context',
   type: 'document',
+  icon: () => '🗺️',
   fields: [
     defineField({
       name: 'slug',

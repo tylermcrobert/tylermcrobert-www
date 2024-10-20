@@ -5,6 +5,7 @@ export default {
   name: 'webFrameTheme',
   type: 'document',
   title: 'Browser Frame Theme',
+  icon: () => '🧭',
   fields: [
     defineField({
       name: 'title',

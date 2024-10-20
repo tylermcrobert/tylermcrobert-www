@@ -4,6 +4,7 @@ export default {
   name: 'info',
   title: 'Info',
   type: 'document',
+  icon: () => '🙋🏼‍♀️',
   fields: [
     defineField({
       name: 'slug',

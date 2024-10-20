@@ -21,14 +21,14 @@ export default defineConfig({
             S.listItem()
               .title('Info')
               .id('info')
-              .icon(DocumentIcon)
+              .icon(() => '🙋🏼‍♀️')
               .child(S.document().schemaType('info').documentId('info')),
             S.divider(),
             S.documentTypeListItem('caseStudy'),
             S.documentTypeListItem('context'),
             S.documentTypeListItem('webFrameTheme'),
             S.documentTypeListItem('playlist'),
-            S.documentTypeListItem('song'),
+            // S.documentTypeListItem('song'),
             S.documentTypeListItem('resume'),
           ]),
     }),
