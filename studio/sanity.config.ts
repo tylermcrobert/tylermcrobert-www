@@ -3,6 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './desk'
+import {media} from 'sanity-plugin-media'
 
 const CREATABLE_DOCTYPES = ['page']
 
@@ -13,7 +14,11 @@ export default defineConfig({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
   dataset: 'production',
 
-  plugins: [structureTool({structure}), visionTool()],
+  plugins: [
+    structureTool({structure}),
+    media(),
+    ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
+  ],
 
   schema: {
     types: schemaTypes,
@@ -37,6 +42,13 @@ export default defineConfig({
       params.set('type', type)
 
       return `${baseUrl}/api/draft?${params}`
+    },
+  },
+
+  form: {
+    image: {
+      // Hiding sanity default from the asset source because it's conusing to have two ways to add images
+      assetSources: (source) => source.filter((item) => item.name !== 'sanity-default'),
     },
   },
 })
