@@ -1,6 +1,9 @@
 import { SITE_QUERY, type SiteQuery } from '$sanity';
 
-export const load = async ({ locals: { isDraftMode, client } }) => {
+export const load = async ({
+	locals: { isDraftMode, client },
+	url: { pathname }
+}) => {
 	const { footer, navigation, settings } =
 		await client.fetch<SiteQuery>(SITE_QUERY);
 
@@ -12,5 +15,5 @@ export const load = async ({ locals: { isDraftMode, client } }) => {
 		siteMetadata: settings?.metadata
 	};
 
-	return data;
+	return { ...data, pathname };
 };

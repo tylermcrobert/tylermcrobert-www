@@ -2,14 +2,16 @@
 	import { Metadata, DraftModePreview, Navigation, Footer } from '$components';
 	import '../app.css';
 
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
 <Navigation />
 
-<main class="bg-purple-100">
-	{@render children()}
-</main>
+{#key data.pathname}
+	<main class="bg-purple-100">
+		{@render children()}
+	</main>
+{/key}
 
 <Footer />
 
