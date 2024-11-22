@@ -4,16 +4,13 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './desk'
 
-const PROJECT_ID = 'tjt0kiru'
-const TITLE = 'Svelte Sanity Starter'
-const STAGING_URL = 'https://example.com'
 const CREATABLE_DOCTYPES = ['page']
 
 export default defineConfig({
   name: 'default',
-  title: TITLE,
+  title: process.env.SANITY_STUDIO_TITLE,
 
-  projectId: PROJECT_ID,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
   dataset: 'production',
 
   plugins: [structureTool({structure}), visionTool()],
@@ -29,7 +26,7 @@ export default defineConfig({
 
     productionUrl: async (prev, context) => {
       const isDev = window.location.host === 'localhost:3333'
-      const baseUrl = isDev ? 'http://localhost:5173' : STAGING_URL
+      const baseUrl = isDev ? 'http://localhost:5173' : process.env.SANITY_STUDIO_PREVIEW_LINK
 
       const slug = (context.document as any)?.slug?.current
       const type = (context.document as any)._type
