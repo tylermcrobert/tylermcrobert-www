@@ -7,6 +7,7 @@ export default defineType({
   title: TITLE,
   name: 'textBlock',
   type: 'object',
+  icon: () => '✍️',
   fields: [
     {
       name: 'richText',
