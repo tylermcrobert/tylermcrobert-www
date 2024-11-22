@@ -6,14 +6,14 @@
 	};
 
 	export function getTitle({ data, error, status }: PageStore) {
-		const { siteTitle, pageTitle, formatTitle } = data;
+		const { siteTitle, pageTitle, homepageTitle } = data;
 
 		if (error) {
 			return `${status} ${error.message} – ${siteTitle}`;
 		}
 
-		if (formatTitle === false && pageTitle) {
-			return pageTitle;
+		if (homepageTitle && data.pathname === '/') {
+			return homepageTitle;
 		}
 
 		return pageTitle ? `${pageTitle} – ${siteTitle}` : siteTitle;

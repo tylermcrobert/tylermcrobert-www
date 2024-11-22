@@ -14,7 +14,7 @@ export default defineType({
     {
       name: 'slug',
       type: 'slug',
-      description: 'This is the URL path of the page.',
+      description: 'This is used ine the URL path of the page.',
       validation: (Rule) => Rule.required(),
       options: {
         source: 'title',
@@ -24,6 +24,7 @@ export default defineType({
     {
       name: 'modules',
       type: 'modules',
+      description: "Build the page's content using Modules",
     },
 
     {

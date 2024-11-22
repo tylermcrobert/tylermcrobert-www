@@ -1,5 +1,10 @@
 import groq from 'groq';
-import type { Settings, TextBlock, SanityImageAsset } from './types';
+import type {
+	TextBlock,
+	SanityImageAsset,
+	SITE_QUERYResult,
+	Settings
+} from './types';
 
 /*****************************************************
  * PROJECTIONS
@@ -91,7 +96,6 @@ export const PAGE_QUERY = groq`
 
 export const HOMEPAGE_QUERY = groq`
   *[_id == 'homepage'][0]{
-    title,
     modules[]${MODULES_PROJECTION},
   }
 `;
@@ -110,14 +114,16 @@ export const SITE_QUERY = groq`{
   "settings": *[_id == "settings"][0]{
     metadata,
     siteTitle,
-  }
+  },
+  "homepageTitle": *[_id == 'homepage'][0].title
 }`;
 
-export type SiteQuery = Nullable<{
-	footer: { links: LinkProjection[] };
-	navigation: { links: LinkProjection[] };
-	settings: Pick<Settings, 'metadata' | 'siteTitle'>;
-}>;
+export type SiteQuery = SITE_QUERYResult &
+	Nullable<{
+		footer: { links: LinkProjection[] };
+		navigation: { links: LinkProjection[] };
+		settings: Pick<Settings, 'metadata'>;
+	}>;
 
 /*****************************************************
  * UTILS

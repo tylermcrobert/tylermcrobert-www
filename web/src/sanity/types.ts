@@ -414,18 +414,12 @@ export type PAGE_QUERYResult = {
 	> | null;
 } | null;
 // Variable: HOMEPAGE_QUERY
-// Query: *[_id == 'homepage'][0]{    title,    modules[]{  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}},  }
+// Query: *[_id == 'homepage'][0]{    modules[]{  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}},  }
 export type HOMEPAGE_QUERYResult =
 	| {
-			title: null;
 			modules: null;
 	  }
 	| {
-			title: string | null;
-			modules: null;
-	  }
-	| {
-			title: string | null;
 			modules: Array<
 				| {
 						_type: 'mediaBlock';
@@ -481,7 +475,7 @@ export type HOMEPAGE_QUERYResult =
 	  }
 	| null;
 // Variable: SITE_QUERY
-// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  }}
+// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
 export type SITE_QUERYResult = {
 	footer: {
 		links: null;
@@ -507,6 +501,7 @@ export type SITE_QUERYResult = {
 				siteTitle: null;
 		  }
 		| null;
+	homepageTitle: string | null;
 };
 
 // Query TypeMap
@@ -518,7 +513,7 @@ declare module '@sanity/client' {
 		'{\n  "image": @.media.image\n}': MEDIA_PROJECTIONResult;
 		'{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n}': MODULES_PROJECTIONResult;
 		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': PAGE_QUERYResult;
-		'\n  *[_id == \'homepage\'][0]{\n    title,\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': HOMEPAGE_QUERYResult;
-		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  }\n}': SITE_QUERYResult;
+		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': HOMEPAGE_QUERYResult;
+		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
 	}
 }

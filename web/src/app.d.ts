@@ -14,12 +14,13 @@ declare global {
 			isDraftMode: boolean;
 			siteMetadata: Metadata | null | undefined;
 			siteTitle: string | null | undefined;
+			homepageTitle: string | null | undefined;
+			pathname: string;
 		}
 
 		interface PageData extends LayoutData {
 			pageTitle: string | null | undefined;
 			metadata: Metadata | null | undefined;
-			formatTitle: boolean;
 		}
 
 		// interface Error {}
