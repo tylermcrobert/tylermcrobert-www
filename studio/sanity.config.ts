@@ -4,6 +4,7 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './desk'
 
+const PROJECT_ID = 'imer5y0j'
 const TITLE = 'Svelte Sanity Starter'
 const STAGING_URL = 'https://example.com'
 const CREATABLE_DOCTYPES = ['page']
@@ -12,7 +13,7 @@ export default defineConfig({
   name: 'default',
   title: TITLE,
 
-  projectId: 'tjt0kiru',
+  projectId: PROJECT_ID,
   dataset: 'production',
 
   plugins: [structureTool({structure}), visionTool()],

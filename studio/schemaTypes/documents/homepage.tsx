@@ -8,13 +8,6 @@ export default defineType({
   icon,
   fields: [
     {
-      type: 'string',
-      name: 'title',
-      hidden: true,
-      initialValue: 'Homepage',
-    },
-
-    {
       name: 'modules',
       type: 'modules',
     },
