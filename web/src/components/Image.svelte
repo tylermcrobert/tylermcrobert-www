@@ -9,7 +9,10 @@
 
 	const title = $derived(getTitle($page));
 
-	type Props = Omit<SvelteSanityImageProps, 'client' | 'alt' | 'image'> & {
+	type Props = Omit<
+		SvelteSanityImageProps,
+		'client' | 'alt' | 'image' | 'hidden'
+	> & {
 		image: SanityImageAsset;
 		alt: string | null;
 		priority?: boolean;
