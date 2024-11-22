@@ -80,31 +80,11 @@ export type Settings = {
 
 export type Navigation = {
 	_type: 'navigation';
-	title?: string;
 	links?: Array<
 		{
 			_key: string;
 		} & Link
 	>;
-};
-
-export type Link = {
-	_type: 'link';
-	reference?:
-		| {
-				_ref: string;
-				_type: 'reference';
-				_weak?: boolean;
-				[internalGroqTypeReferenceTo]?: 'page';
-		  }
-		| {
-				_ref: string;
-				_type: 'reference';
-				_weak?: boolean;
-				[internalGroqTypeReferenceTo]?: 'homepage';
-		  };
-	href?: string;
-	label?: string;
 };
 
 export type Homepage = {
@@ -115,9 +95,12 @@ export type Homepage = {
 	_rev: string;
 	title?: string;
 	modules?: Array<
-		{
-			_key: string;
-		} & TextBlock
+		| ({
+				_key: string;
+		  } & TextBlock)
+		| ({
+				_key: string;
+		  } & MediaBlock)
 	>;
 };
 
@@ -130,22 +113,18 @@ export type Page = {
 	title?: string;
 	slug?: Slug;
 	modules?: Array<
-		{
-			_key: string;
-		} & TextBlock
+		| ({
+				_key: string;
+		  } & TextBlock)
+		| ({
+				_key: string;
+		  } & MediaBlock)
 	>;
 	metadata?: Metadata;
 };
 
-export type Slug = {
-	_type: 'slug';
-	current?: string;
-	source?: string;
-};
-
 export type Footer = {
 	_type: 'footer';
-	title?: string;
 	links?: Array<
 		{
 			_key: string;
@@ -167,6 +146,78 @@ export type Metadata = {
 		crop?: SanityImageCrop;
 		_type: 'image';
 	};
+};
+
+export type RichTextMinimal = Array<{
+	children?: Array<{
+		marks?: Array<string>;
+		text?: string;
+		_type: 'span';
+		_key: string;
+	}>;
+	style?: 'normal';
+	listItem?: never;
+	markDefs?: null;
+	level?: number;
+	_type: 'block';
+	_key: string;
+}>;
+
+export type RichText = Array<{
+	children?: Array<{
+		marks?: Array<string>;
+		text?: string;
+		_type: 'span';
+		_key: string;
+	}>;
+	style?: 'normal' | 'h1' | 'h2' | 'h3' | 'blockquote';
+	listItem?: 'bullet' | 'number';
+	markDefs?: Array<{
+		link?: Link;
+		_type: 'link';
+		_key: string;
+	}>;
+	level?: number;
+	_type: 'block';
+	_key: string;
+}>;
+
+export type Modules = Array<
+	| ({
+			_key: string;
+	  } & TextBlock)
+	| ({
+			_key: string;
+	  } & MediaBlock)
+>;
+
+export type TextBlock = {
+	_type: 'textBlock';
+	richText?: RichText;
+};
+
+export type Link = {
+	_type: 'link';
+	reference?:
+		| {
+				_ref: string;
+				_type: 'reference';
+				_weak?: boolean;
+				[internalGroqTypeReferenceTo]?: 'page';
+		  }
+		| {
+				_ref: string;
+				_type: 'reference';
+				_weak?: boolean;
+				[internalGroqTypeReferenceTo]?: 'homepage';
+		  };
+	href?: string;
+	label?: string;
+};
+
+export type MediaBlock = {
+	_type: 'mediaBlock';
+	media?: Media;
 };
 
 export type SanityImageCrop = {
@@ -226,30 +277,34 @@ export type SanityImageMetadata = {
 	isOpaque?: boolean;
 };
 
-export type RichTextMinimal = Array<{
-	children?: Array<{
-		marks?: Array<string>;
-		text?: string;
-		_type: 'span';
-		_key: string;
-	}>;
-	style?: 'normal';
-	listItem?: never;
-	markDefs?: null;
-	level?: number;
-	_type: 'block';
-	_key: string;
-}>;
+export type Media = {
+	_type: 'media';
+	image?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
+};
 
-export type Modules = Array<
-	{
-		_key: string;
-	} & TextBlock
->;
+export type MediaTag = {
+	_id: string;
+	_type: 'media.tag';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	name?: Slug;
+};
 
-export type TextBlock = {
-	_type: 'textBlock';
-	richText?: RichTextMinimal;
+export type Slug = {
+	_type: 'slug';
+	current?: string;
+	source?: string;
 };
 
 export type AllSanitySchemaTypes =
@@ -260,20 +315,24 @@ export type AllSanitySchemaTypes =
 	| Geopoint
 	| Settings
 	| Navigation
-	| Link
 	| Homepage
 	| Page
-	| Slug
 	| Footer
 	| Metadata
+	| RichTextMinimal
+	| RichText
+	| Modules
+	| TextBlock
+	| Link
+	| MediaBlock
 	| SanityImageCrop
 	| SanityImageHotspot
 	| SanityImageAsset
 	| SanityAssetSourceData
 	| SanityImageMetadata
-	| RichTextMinimal
-	| Modules
-	| TextBlock;
+	| Media
+	| MediaTag
+	| Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/sanity/queries.ts
 // Variable: LINK_PROJECTION
@@ -283,33 +342,141 @@ export type LINK_PROJECTIONResult = {
 	href: never;
 	reference: never;
 };
+// Variable: RICH_TEXT_PROJECTION
+// Query: {  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }}
+export type RICH_TEXT_PROJECTIONResult = never;
+// Variable: MEDIA_PROJECTION
+// Query: {  "image": @.media.image}
+export type MEDIA_PROJECTIONResult = {
+	image: never;
+};
 // Variable: MODULES_PROJECTION
-// Query: {  _type,    _type == 'textBlock' => {    richText  },}
+// Query: {  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}}
 export type MODULES_PROJECTIONResult = {
 	_type: never;
 };
 // Variable: PAGE_QUERY
-// Query:   *[_type == 'page' && slug.current == $slug][0]{    title,    metadata,    modules[],  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    title,    metadata,    modules[]{  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}},  }
 export type PAGE_QUERYResult = {
 	title: string | null;
 	metadata: Metadata | null;
 	modules: Array<
-		{
-			_key: string;
-		} & TextBlock
+		| {
+				_type: 'mediaBlock';
+				image: {
+					asset?: {
+						_ref: string;
+						_type: 'reference';
+						_weak?: boolean;
+						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+					};
+					hotspot?: SanityImageHotspot;
+					crop?: SanityImageCrop;
+					_type: 'image';
+				} | null;
+		  }
+		| {
+				_type: 'textBlock';
+				richText: Array<{
+					children?: Array<{
+						marks?: Array<string>;
+						text?: string;
+						_type: 'span';
+						_key: string;
+					}>;
+					style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'normal';
+					listItem?: 'bullet' | 'number';
+					markDefs: Array<{
+						link: {
+							label: string | null;
+							href: string | null;
+							reference:
+								| {
+										_type: 'homepage';
+										title: string | null;
+										slug: null;
+								  }
+								| {
+										_type: 'page';
+										title: string | null;
+										slug: string | null;
+								  }
+								| null;
+						} | null;
+						_type: 'link';
+						_key: string;
+					}> | null;
+					level?: number;
+					_type: 'block';
+					_key: string;
+				}> | null;
+		  }
 	> | null;
 } | null;
 // Variable: HOMEPAGE_QUERY
-// Query:   *[_id == 'homepage'][0]{    modules[],  }
+// Query: *[_id == 'homepage'][0]{    title,    modules[]{  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}},  }
 export type HOMEPAGE_QUERYResult =
 	| {
+			title: null;
 			modules: null;
 	  }
 	| {
+			title: string | null;
+			modules: null;
+	  }
+	| {
+			title: string | null;
 			modules: Array<
-				{
-					_key: string;
-				} & TextBlock
+				| {
+						_type: 'mediaBlock';
+						image: {
+							asset?: {
+								_ref: string;
+								_type: 'reference';
+								_weak?: boolean;
+								[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+							};
+							hotspot?: SanityImageHotspot;
+							crop?: SanityImageCrop;
+							_type: 'image';
+						} | null;
+				  }
+				| {
+						_type: 'textBlock';
+						richText: Array<{
+							children?: Array<{
+								marks?: Array<string>;
+								text?: string;
+								_type: 'span';
+								_key: string;
+							}>;
+							style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'normal';
+							listItem?: 'bullet' | 'number';
+							markDefs: Array<{
+								link: {
+									label: string | null;
+									href: string | null;
+									reference:
+										| {
+												_type: 'homepage';
+												title: string | null;
+												slug: null;
+										  }
+										| {
+												_type: 'page';
+												title: string | null;
+												slug: string | null;
+										  }
+										| null;
+								} | null;
+								_type: 'link';
+								_key: string;
+							}> | null;
+							level?: number;
+							_type: 'block';
+							_key: string;
+						}> | null;
+				  }
 			> | null;
 	  }
 	| null;
@@ -341,3 +508,17 @@ export type SITE_QUERYResult = {
 		  }
 		| null;
 };
+
+// Query TypeMap
+import '@sanity/client';
+declare module '@sanity/client' {
+	interface SanityQueries {
+		'{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}': LINK_PROJECTIONResult;
+		'{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n}': RICH_TEXT_PROJECTIONResult;
+		'{\n  "image": @.media.image\n}': MEDIA_PROJECTIONResult;
+		'{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n}': MODULES_PROJECTIONResult;
+		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': PAGE_QUERYResult;
+		'\n  *[_id == \'homepage\'][0]{\n    title,\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': HOMEPAGE_QUERYResult;
+		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  }\n}': SITE_QUERYResult;
+	}
+}

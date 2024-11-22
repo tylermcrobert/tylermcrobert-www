@@ -19,6 +19,7 @@ declare global {
 		interface PageData extends LayoutData {
 			pageTitle: string | null | undefined;
 			metadata: Metadata | null | undefined;
+			formatTitle: boolean;
 		}
 
 		// interface Error {}

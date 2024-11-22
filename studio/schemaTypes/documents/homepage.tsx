@@ -8,8 +8,19 @@ export default defineType({
   icon,
   fields: [
     {
+      name: 'title',
+      type: 'string',
+    },
+    {
       name: 'modules',
       type: 'modules',
     },
   ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Homepage',
+      }
+    },
+  },
 })

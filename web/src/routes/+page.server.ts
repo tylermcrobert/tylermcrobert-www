@@ -9,8 +9,9 @@ export const load = async ({ locals: { client } }) => {
 	}
 
 	return {
-		pageTitle: null,
+		pageTitle: data.title || null,
 		metadata: null,
+		formatTitle: !!data.title,
 		modules: data.modules || []
 	};
 };

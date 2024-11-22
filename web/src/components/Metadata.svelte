@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	type PageStore = {
 		data: App.PageData;
 		error: App.Error | null;
@@ -6,10 +6,14 @@
 	};
 
 	export function getTitle({ data, error, status }: PageStore) {
-		const { siteTitle, pageTitle } = data;
+		const { siteTitle, pageTitle, formatTitle } = data;
 
 		if (error) {
 			return `${status} ${error.message} – ${siteTitle}`;
+		}
+
+		if (formatTitle === false && pageTitle) {
+			return pageTitle;
 		}
 
 		return pageTitle ? `${pageTitle} – ${siteTitle}` : siteTitle;

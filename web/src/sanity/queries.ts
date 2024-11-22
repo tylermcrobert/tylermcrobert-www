@@ -91,6 +91,7 @@ export const PAGE_QUERY = groq`
 
 export const HOMEPAGE_QUERY = groq`
   *[_id == 'homepage'][0]{
+    title,
     modules[]${MODULES_PROJECTION},
   }
 `;

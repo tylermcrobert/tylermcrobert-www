@@ -51,11 +51,12 @@ export default defineType({
       referenceSlug: 'reference.slug.current',
       title: 'label',
       href: 'href',
+      type: 'reference._type',
     },
-    prepare: ({referenceTitle, referenceSlug, title, href}) => {
+    prepare: ({referenceTitle, referenceSlug, title, href, type}) => {
       return {
         title: title || referenceTitle,
-        subtitle: referenceSlug || href,
+        subtitle: referenceSlug || href || type,
       }
     },
   },
