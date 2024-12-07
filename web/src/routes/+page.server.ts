@@ -1,4 +1,8 @@
-import { HOMEPAGE_QUERY, type HOMEPAGE_QUERYResult } from '$sanity';
+import {
+	HOMEPAGE_QUERY,
+	type HOMEPAGE_QUERYResult,
+	type Module
+} from '$sanity';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({ locals: { client } }) => {
@@ -11,6 +15,6 @@ export const load = async ({ locals: { client } }) => {
 	return {
 		pageTitle: null,
 		metadata: null,
-		modules: data.modules || []
+		modules: (data.modules || []) as Module[]
 	};
 };
