@@ -11,7 +11,7 @@
 
 	type Props = Omit<
 		SvelteSanityImageProps,
-		'client' | 'alt' | 'image' | 'hidden'
+		'client' | 'alt' | 'image' | 'hidden' | 'children'
 	> & {
 		image: SanityImageAsset;
 		alt: string | null;
