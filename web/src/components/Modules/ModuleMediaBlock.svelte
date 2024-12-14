@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Image } from '$components';
+	import { Media } from '$components';
 	import type { ModuleMediaBlock } from '$sanity';
 
 	type Props = {
@@ -9,6 +9,6 @@
 	let { data }: Props = $props();
 </script>
 
-{#if data.image}
-	<Image image={data.image} alt={null} sizes="100vw" />
+{#if data.media}
+	<Media data={data.media} sizes="100vw" alt={null} />
 {/if}

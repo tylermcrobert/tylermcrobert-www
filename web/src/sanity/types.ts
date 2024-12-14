@@ -475,14 +475,107 @@ export type HOMEPAGE_QUERYResult =
 	  }
 	| null;
 // Variable: SITE_QUERY
-// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
+// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0],  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
 export type SITE_QUERYResult = {
 	footer: {
 		links: null;
 	} | null;
-	navigation: {
-		links: null;
-	} | null;
+	navigation:
+		| {
+				_id: string;
+				_type: 'homepage';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				modules?: Array<
+					| ({
+							_key: string;
+					  } & MediaBlock)
+					| ({
+							_key: string;
+					  } & TextBlock)
+				>;
+		  }
+		| {
+				_id: string;
+				_type: 'media.tag';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				name?: Slug;
+		  }
+		| {
+				_id: string;
+				_type: 'page';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				slug?: Slug;
+				modules?: Array<
+					| ({
+							_key: string;
+					  } & MediaBlock)
+					| ({
+							_key: string;
+					  } & TextBlock)
+				>;
+				metadata?: Metadata;
+		  }
+		| {
+				_id: string;
+				_type: 'sanity.fileAsset';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				originalFilename?: string;
+				label?: string;
+				title?: string;
+				description?: string;
+				altText?: string;
+				sha1hash?: string;
+				extension?: string;
+				mimeType?: string;
+				size?: number;
+				assetId?: string;
+				uploadId?: string;
+				path?: string;
+				url?: string;
+				source?: SanityAssetSourceData;
+		  }
+		| {
+				_id: string;
+				_type: 'sanity.imageAsset';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				originalFilename?: string;
+				label?: string;
+				title?: string;
+				description?: string;
+				altText?: string;
+				sha1hash?: string;
+				extension?: string;
+				mimeType?: string;
+				size?: number;
+				assetId?: string;
+				uploadId?: string;
+				path?: string;
+				url?: string;
+				metadata?: SanityImageMetadata;
+				source?: SanityAssetSourceData;
+		  }
+		| {
+				_id: string;
+				_type: 'settings';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				siteTitle?: string;
+				metadata?: Metadata;
+		  }
+		| null;
 	settings:
 		| {
 				metadata: null;
@@ -514,6 +607,6 @@ declare module '@sanity/client' {
 		'{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n}': MODULES_PROJECTIONResult;
 		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': PAGE_QUERYResult;
 		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': HOMEPAGE_QUERYResult;
-		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
+		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0],\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
 	}
 }

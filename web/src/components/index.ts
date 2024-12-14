@@ -7,3 +7,5 @@ export { default as Modules } from './Modules/Modules.svelte';
 export { default as BodyScrollLock } from './BodyScrollLock.svelte';
 export { default as RichText } from './RichText/RichText.svelte';
 export { default as Image } from './Image.svelte';
+export { default as Video } from './Video/Video.svelte';
+export { default as Media } from './Media.svelte';

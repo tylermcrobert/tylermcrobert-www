@@ -4,6 +4,7 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './desk'
 import {media} from 'sanity-plugin-media'
+import {muxInput} from 'sanity-plugin-mux-input'
 
 const CREATABLE_DOCTYPES = ['page']
 
@@ -17,6 +18,7 @@ export default defineConfig({
   plugins: [
     structureTool({structure}),
     media(),
+    muxInput(),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
 

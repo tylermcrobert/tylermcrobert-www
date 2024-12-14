@@ -41,11 +41,25 @@ const RICH_TEXT_PROJECTION = groq`{
 }`;
 
 export const MEDIA_PROJECTION = groq`{
-  "image": @.media.image
+  "image": image,
+  "video": video.asset->{
+    "id": playbackId,
+    "aspect": data.aspect_ratio,
+    "showControls": ^.showVideoControls,
+    "posterFrame": ^.posterFrame
+  }
 }`;
+
+export type MediaProjectionVideo = {
+	id: string;
+	aspect: string;
+	showControls: boolean;
+	posterFrame: SanityImageAsset;
+};
 
 export type MediaProjection = Nullable<{
 	image: SanityImageAsset;
+	video: MediaProjectionVideo;
 }>;
 
 /*****************************************************
@@ -59,7 +73,9 @@ export const MODULES_PROJECTION = groq`{
     richText[]${RICH_TEXT_PROJECTION},
   },
 
-  _type == 'mediaBlock' => ${MEDIA_PROJECTION}
+  _type == 'mediaBlock' => {
+    media${MEDIA_PROJECTION}
+  }
 }`;
 
 /**
@@ -73,8 +89,8 @@ export type ModuleTextBlock = Nullable<{
 
 export type ModuleMediaBlock = Nullable<{
 	_type: 'mediaBlock';
-}> &
-	MediaProjection;
+	media: MediaProjection;
+}>;
 
 /**
  * Export

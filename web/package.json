@@ -36,8 +36,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@mux/mux-video": "^0.23.0",
 		"@portabletext/svelte": "^2.1.11",
 		"@sanity/client": "^6.24.1",
-		"@tylermcrobert/svelte-sanity-image": "^0.3.13"
+		"@tylermcrobert/svelte-sanity-image": "^0.3.13",
+		"media-chrome": "^4.3.0",
+		"svelte-intersection-observer": "^1.0.0"
 	}
 }
