@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { client } from '$sanity';
 	import { getTitle } from './Metadata.svelte';
 	import Image, {
@@ -7,7 +6,7 @@
 		type SvelteSanityImageProps
 	} from '@tylermcrobert/svelte-sanity-image';
 
-	const title = $derived(getTitle($page));
+	const title = $derived(getTitle());
 
 	type Props = Omit<SvelteSanityImageProps, 'client' | 'alt' | 'image'> & {
 		image: SanityImageSource;

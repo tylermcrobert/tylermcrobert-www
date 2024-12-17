@@ -1,18 +1,12 @@
 <script lang="ts" module>
-	type PageStore = {
-		data: App.PageData;
-		error: App.Error | null;
-		status: number;
-	};
+	export function getTitle() {
+		const { siteTitle, pageTitle, homepageTitle } = page.data;
 
-	export function getTitle({ data, error, status }: PageStore) {
-		const { siteTitle, pageTitle, homepageTitle } = data;
-
-		if (error) {
-			return `${status} ${error.message} – ${siteTitle}`;
+		if (page.error) {
+			return `${page.status} ${page.error.message} – ${siteTitle}`;
 		}
 
-		if (homepageTitle && data.pathname === '/') {
+		if (homepageTitle && page.data.pathname === '/') {
 			return homepageTitle;
 		}
 
@@ -21,10 +15,10 @@
 </script>
 
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { urlFor } from '$sanity/image';
 
-	const title = $derived(getTitle($page));
+	const title = $derived(getTitle());
 
 	let { description, url, siteTitle, imageUrl } = $derived.by(() => {
 		const {
@@ -32,20 +26,20 @@
 			siteMetadata,
 			siteTitle,
 			metadata: pageMetadata
-		} = $page.data as App.PageData;
+		} = page.data as App.PageData;
 
-		if ($page.status === 200 && pageTitle === undefined) {
+		if (page.status === 200 && pageTitle === undefined) {
 			console.warn('Page title is undefined.');
 		}
 
-		if ($page.status === 200 && pageMetadata === undefined) {
+		if (page.status === 200 && pageMetadata === undefined) {
 			console.warn('Page metadata is undefined.');
 		}
 
 		let image = pageMetadata?.image || siteMetadata?.image;
 
 		return {
-			url: $page.url.origin + $page.url.pathname,
+			url: page.url.origin + page.url.pathname,
 			description: pageMetadata?.description || siteMetadata?.description,
 			imageUrl: image ? urlFor(image).width(1200).height(630).url() : null,
 			siteTitle
