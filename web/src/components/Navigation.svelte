@@ -14,7 +14,7 @@
 	class="h-nav gap-standard px-standard z-nav sticky top-0 flex items-center bg-blue-500"
 >
 	<div class="flex-1">
-		<a href="/">Fast Forward</a>
+		<a href="/">svelte-sanity-starter</a>
 	</div>
 
 	<ul class="gap-standard hidden bg-purple-400 sm:flex">
