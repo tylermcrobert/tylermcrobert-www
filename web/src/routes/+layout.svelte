@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Metadata, DraftModePreview, Navigation, Footer } from '$components';
-	import '../app.css';
+	import '../style/app.css';
 
 	let { children, data } = $props();
 </script>

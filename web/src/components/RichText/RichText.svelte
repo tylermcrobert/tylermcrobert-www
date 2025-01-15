@@ -7,7 +7,7 @@
 	let { value }: { value: InputValue } = $props();
 </script>
 
-<div>
+<div class="richtext">
 	<PortableText
 		value={value as any}
 		components={{
