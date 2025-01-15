@@ -40,7 +40,7 @@
 		class="h-available-dvh top-nav-height z-nav fixed w-full bg-red-200 p-4 sm:hidden"
 	>
 		<ul>
-			{#each page.data.site.navigation?.links || [] as link}
+			{#each page.data.navigation?.links || [] as link}
 				<li>
 					<Link {link} />
 				</li>
