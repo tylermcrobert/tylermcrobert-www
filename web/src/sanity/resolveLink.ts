@@ -14,6 +14,8 @@ export function resolveLink({ slug, type }: Link) {
 		return `/`;
 	}
 
+	console.error('Could not resolve link', { slug, type });
+
 	return null;
 }
 

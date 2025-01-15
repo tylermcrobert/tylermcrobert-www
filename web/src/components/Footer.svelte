@@ -3,10 +3,12 @@
 	import { Link } from '$components';
 </script>
 
-<ul class="flex flex-wrap gap-4 bg-orange-500 p-4">
-	{#each page.data.footer?.links || [] as link}
-		<li>
-			<Link {link} />
-		</li>
-	{/each}
-</ul>
+<footer class="bg-orange-500 p-4">
+	<ul class="flex flex-wrap gap-4">
+		{#each page.data.footer?.links || [] as link}
+			<li>
+				<Link {link} />
+			</li>
+		{/each}
+	</ul>
+</footer>

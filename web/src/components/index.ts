@@ -1,5 +1,5 @@
 export { default as Metadata } from './Metadata.svelte';
-export { default as DraftModePreview } from './DraftModePreview.svelte';
+export { default as DraftModeOverlay } from './DraftModeOverlay.svelte';
 export { default as Navigation } from './Navigation.svelte';
 export { default as Link } from './Link.svelte';
 export { default as Footer } from './Footer.svelte';

@@ -16,15 +16,24 @@ export default defineType({
   ],
   preview: {
     select: {
-      media: 'media.image',
-      videoName: 'media.video.asset.originalFilename',
+      video: 'media.video',
+      image: 'media.image',
       imageName: 'media.image.asset.originalFilename',
+      posterFrame: 'media.posterFrame',
     },
-    prepare({media, videoName, imageName}) {
+    prepare({image, imageName, posterFrame, video}) {
+      if (video?.asset) {
+        return {
+          title: TITLE,
+          subtitle: 'Video asset',
+          media: posterFrame || (() => '🎥'),
+        }
+      }
+
       return {
         title: TITLE,
-        subtitle: videoName || imageName,
-        media: media,
+        subtitle: imageName,
+        media: image,
       }
     },
   },
