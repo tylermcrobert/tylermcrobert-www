@@ -7,6 +7,6 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="m-4 bg-purple-300">
+<div class="bg-purple-300 p-4">
 	<RichText value={data.richText} />
 </div>
