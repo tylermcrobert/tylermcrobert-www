@@ -1,10 +1,6 @@
 import groq from 'groq';
-import type {
-	TextBlock,
-	SanityImageAsset,
-	SITE_QUERYResult,
-	Settings
-} from './types';
+import type { SanityImageAsset, SITE_QUERYResult, Settings } from './types';
+import type { InputValue } from '@portabletext/svelte';
 
 /*****************************************************
  * PROJECTIONS
@@ -43,6 +39,8 @@ const RICH_TEXT_PROJECTION = groq`{
     []
   )
 }`;
+
+export type RichTextProjection = InputValue;
 
 export const MEDIA_PROJECTION = groq`{
   "image": image,
@@ -88,8 +86,8 @@ export const MODULES_PROJECTION = groq`{
 
 export type ModuleTextBlock = Nullable<{
 	_type: 'textBlock';
-}> &
-	Pick<TextBlock, 'richText'>;
+	richText: RichTextProjection;
+}>;
 
 export type ModuleMediaBlock = Nullable<{
 	_type: 'mediaBlock';

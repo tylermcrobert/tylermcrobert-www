@@ -7,6 +7,8 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="bg-purple-300 p-4">
-	<RichText value={data.richText} />
-</div>
+{#if data.richText}
+	<div class="bg-purple-300 p-4">
+		<RichText value={data.richText} />
+	</div>
+{/if}
