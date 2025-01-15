@@ -10,14 +10,12 @@
 	});
 </script>
 
-<nav
-	class="h-nav gap-standard px-standard z-nav sticky top-0 flex items-center bg-blue-500"
->
+<nav class="h-nav z-nav sticky top-0 flex items-center gap-4 bg-blue-500 px-4">
 	<div class="flex-1">
-		<a href="/">Fast Forward</a>
+		<a href="/">svelte-sanity-starter</a>
 	</div>
 
-	<ul class="gap-standard hidden bg-purple-400 sm:flex">
+	<ul class="hidden gap-4 bg-purple-400 sm:flex">
 		{#each $page.data.navigation?.links || [] as link}
 			<li>
 				<Link {link} />
@@ -37,7 +35,7 @@
 	<BodyScrollLock />
 
 	<aside
-		class="h-available-dvh top-nav p-standard z-nav fixed w-full bg-red-200 sm:hidden"
+		class="h-available-dvh top-nav z-nav fixed w-full bg-red-200 p-4 sm:hidden"
 	>
 		<ul>
 			{#each $page.data.site.navigation?.links || [] as link}

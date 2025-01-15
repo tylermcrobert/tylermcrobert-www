@@ -3,7 +3,7 @@
 </script>
 
 <section
-	class="h-available-dvh px-standard flex flex-col justify-center bg-yellow-200 text-center"
+	class="h-available-dvh flex flex-col justify-center bg-yellow-200 px-4 text-center"
 >
 	{#if $page.status === 404}
 		<div>404</div>
