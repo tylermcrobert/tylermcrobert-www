@@ -7,11 +7,13 @@ export default defineType({
   type: 'object',
   validation: (Rule) =>
     Rule.custom((link: any) => {
-      if (link?.href || link?.reference) {
-        return true
+      const hasLink = link?.href || link?.reference
+
+      if (!hasLink && link?.label) {
+        return 'Add either an internal or external link.'
       }
 
-      return 'Add either an internal or external link.'
+      return true
     }),
   fields: [
     {
