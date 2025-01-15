@@ -14,7 +14,8 @@
 			block: {
 				normal: RichTextStyleRenderer as any,
 				h1: RichTextStyleRenderer as any,
-				h2: RichTextStyleRenderer as any
+				h2: RichTextStyleRenderer as any,
+				blockquote: RichTextStyleRenderer as any
 			},
 			list: {
 				bullet: RichTextListRenderer as any,

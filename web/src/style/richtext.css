@@ -3,7 +3,8 @@
 
 	.richtext .text-para:not(:last-child),
 	.richtext .text-h1:not(:last-child),
-	.richtext .text-h2:not(:last-child) {
+	.richtext .text-h2:not(:last-child),
+	blockquote:not(:last-child) {
 		@apply mb-3;
 	}
 
