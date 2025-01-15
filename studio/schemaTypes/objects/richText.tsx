@@ -1,68 +1,113 @@
-import {defineType} from 'sanity'
+import {DocumentIcon, LinkIcon} from '@sanity/icons'
+import {RichTextMinimalContainer} from '../../components/richText'
+import {defineType, defineArrayMember} from 'sanity'
 
-export const richTextMinimal = defineType({
-  name: 'richTextMinimal',
-  type: 'array',
-  of: [
-    {
-      title: 'Block',
-      type: 'block',
-      lists: [],
-      styles: [{title: 'Normal', value: 'normal'}],
-      marks: {
-        annotations: [],
-        decorators: [
-          {title: 'Strong', value: 'strong'},
-          {title: 'Emphasis', value: 'em'},
-        ],
-      },
-    },
-  ],
-})
+const ANNOTATIONS = [
+  {type: 'internalLink', name: 'internalLink'},
+  {type: 'externalLink', name: 'link'},
+]
 
-export const richText = defineType({
-  title: 'Rich Text',
+const DECORATORS = [
+  {title: 'Strong', value: 'strong'},
+  {title: 'Emphasis', value: 'em'},
+]
+
+export default defineType({
   name: 'richText',
   type: 'array',
   of: [
-    {
+    defineArrayMember({
       title: 'Block',
       type: 'block',
       styles: [
         {title: 'Normal', value: 'normal'},
         {title: 'Heading 1', value: 'h1'},
         {title: 'Heading 2', value: 'h2'},
-        {title: 'Heading 3', value: 'h3'},
-        {title: 'Quote', value: 'blockquote'},
       ],
       lists: [
         {title: 'Bullet', value: 'bullet'},
         {title: 'Numbered', value: 'number'},
       ],
       marks: {
-        decorators: [
-          {title: 'Strong', value: 'strong'},
-          {title: 'Emphasis', value: 'em'},
-        ],
-        annotations: [
-          {
-            name: 'link',
-            type: 'object',
-            fields: [{name: 'link', type: 'link'}],
-          },
-        ],
+        decorators: DECORATORS,
+        annotations: ANNOTATIONS,
       },
-    },
+    }),
   ],
 })
 
-export function previewBlockContent(blocks: any) {
-  const firstBlock = (blocks || []).find((block: any) => block._type === 'block')
+export const richTextMinimal = defineType({
+  name: 'richTextMinimal',
+  type: 'array',
+  components: {
+    input: RichTextMinimalContainer,
+  },
+  of: [
+    defineArrayMember({
+      title: 'Block',
+      type: 'block',
+      lists: [],
+      styles: [],
+      marks: {
+        decorators: [],
+        annotations: [],
+      },
+    }),
+  ],
+})
 
-  return firstBlock
-    ? firstBlock.children
-        .filter((child: any) => child._type === 'span')
-        .map((span: any) => span.text)
-        .join('')
-    : 'No title'
+export const richTextSimple = defineType({
+  name: 'richTextSimple',
+  type: 'array',
+  of: [
+    defineArrayMember({
+      title: 'Block',
+      type: 'block',
+      lists: [],
+      styles: [{title: 'Normal', value: 'normal'}],
+      marks: {
+        decorators: DECORATORS,
+        annotations: ANNOTATIONS,
+      },
+    }),
+  ],
+})
+
+export const richTextInternalLink = {
+  icon: DocumentIcon,
+  name: 'internalLink',
+  type: 'object',
+  title: 'Internal link',
+  fields: [
+    {
+      name: 'reference',
+      type: 'reference',
+      to: [{type: 'homepage'}, {type: 'page'}],
+    },
+  ],
+}
+
+export const richTextExternalLink = {
+  icon: LinkIcon,
+  name: 'externalLink',
+  type: 'object',
+  title: 'External link',
+  fields: [
+    {
+      title: 'URL',
+      name: 'href',
+      type: 'url',
+      validation: (Rule: any) =>
+        Rule.uri({
+          allowRelative: false,
+          scheme: ['http', 'https', 'mailto', 'tel'],
+        }),
+    },
+    {
+      title: 'Open in new tab',
+      name: 'blank',
+      type: 'boolean',
+      initialValue: true,
+    },
+  ],
 }

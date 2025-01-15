@@ -5,7 +5,12 @@ import link from './objects/link'
 import metadata from './objects/metadata'
 import settings from './documents/settings'
 import footer from './documents/footer'
-import {richTextMinimal, richText} from './objects/richText'
+import richText, {
+  richTextMinimal,
+  richTextSimple,
+  richTextInternalLink,
+  richTextExternalLink,
+} from './objects/richText'
 import modules from './modules/modules'
 import textBlock from './modules/textBlock'
 import media from './objects/media'
@@ -16,8 +21,11 @@ export const schemaTypes = [
   media,
   textBlock,
   modules,
+  richTextInternalLink,
+  richTextExternalLink,
   richText,
   richTextMinimal,
+  richTextSimple,
   metadata,
   footer,
   link,

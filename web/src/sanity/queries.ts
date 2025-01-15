@@ -32,12 +32,16 @@ export type LinkProjection = {
 
 const RICH_TEXT_PROJECTION = groq`{
   ...,
-  "markDefs": markDefs[]{
-    ...,
-    _type == 'link' => {
-      "link": @.link${LINK_PROJECTION}
-    }
-  }
+ "markDefs": coalesce(
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        'type': @.reference->_type,
+        "slug": @.reference->slug.current
+      }
+    }, 
+    []
+  )
 }`;
 
 export const MEDIA_PROJECTION = groq`{

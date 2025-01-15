@@ -29,7 +29,6 @@
 	</svelte:element>
 {:else if listItem === 'number'}
 	<li
-		class="max-w-rag-paragraph my-1.5 pl-1.5"
 		class:list-decimal={level1}
 		class:list-[lower-latin]={level2}
 		class:list-[lower-roman]={level3}
@@ -38,7 +37,6 @@
 	</li>
 {:else if listItem === 'bullet'}
 	<li
-		class="max-w-rag-paragraph my-1.5 pl-1.5"
 		class:list-disc={level1}
 		class:list-[circle]={level2}
 		class:list-[square]={level3}
@@ -46,5 +44,5 @@
 		{@render children()}
 	</li>
 {:else}
-	{$inspect('Could not find list ', portableText)}
+	{console.log('Could not find list ', portableText)}
 {/if}

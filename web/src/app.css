@@ -12,3 +12,13 @@
 		@apply text-foreground antialiased;
 	}
 }
+
+@layer components {
+	.text-h1 {
+		@apply text-[36px] leading-1.2;
+	}
+
+	.text-h2 {
+		@apply text-[26px] leading-1.2;
+	}
+}
