@@ -3,7 +3,7 @@
 	import { Link } from '$components';
 </script>
 
-<ul class="gap-standard p-standard flex flex-wrap bg-orange-500">
+<ul class="flex flex-wrap gap-4 bg-orange-500 p-4">
 	{#each $page.data.footer?.links || [] as link}
 		<li>
 			<Link {link} />

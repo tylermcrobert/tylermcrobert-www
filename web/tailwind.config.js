@@ -21,7 +21,6 @@ export default {
 				'rag-paragraph': '55ch'
 			},
 			spacing: {
-				standard: '1rem',
 				nav: '60px',
 				'available-svh': 'calc(100svh - 60px)',
 				'available-dvh': 'calc(100dvh - 60px)'
