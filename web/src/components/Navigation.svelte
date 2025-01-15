@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { BodyScrollLock, Link } from '$components';
 
 	let isMobileNavOpen = $state(false);
@@ -18,7 +18,7 @@
 	</div>
 
 	<ul class="hidden gap-4 bg-purple-400 sm:flex">
-		{#each $page.data.navigation?.links || [] as link}
+		{#each page.data.navigation?.links || [] as link}
 			<li>
 				<Link {link} />
 			</li>
@@ -40,7 +40,7 @@
 		class="h-available-dvh top-nav-height z-nav fixed w-full bg-red-200 p-4 sm:hidden"
 	>
 		<ul>
-			{#each $page.data.site.navigation?.links || [] as link}
+			{#each page.data.site.navigation?.links || [] as link}
 				<li>
 					<Link {link} />
 				</li>
