@@ -25,8 +25,8 @@ export default defineType({
       if (video?.asset) {
         return {
           title: TITLE,
-          subtitle: 'Video',
-          media: posterFrame,
+          subtitle: 'Video asset',
+          media: posterFrame || (() => '🎥'),
         }
       }
 
