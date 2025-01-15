@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Metadata, DraftModePreview, Navigation, Footer } from '$components';
+	import { Metadata, DraftModeOverlay, Navigation, Footer } from '$components';
 	import '../app.css';
 
 	let { children, data } = $props();
@@ -17,4 +17,4 @@
 
 <Metadata />
 
-<DraftModePreview />
+<DraftModeOverlay />
