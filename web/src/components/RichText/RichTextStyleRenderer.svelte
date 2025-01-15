@@ -19,9 +19,11 @@
 {#if children}
 	<svelte:element
 		this={elementName}
-		class:text-h1={style === 'h1'}
-		class:text-h2={style === 'h2'}
-		class:text-para={style === 'normal'}
+		class={{
+			'text-h1': style === 'h1',
+			'text-h2': style === 'h2',
+			'text-para': style === 'normal'
+		}}
 	>
 		{@render children()}
 	</svelte:element>
