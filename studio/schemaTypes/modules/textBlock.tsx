@@ -1,5 +1,5 @@
 import {defineType} from 'sanity'
-import {previewBlockContent} from '../objects/richText'
+import {toPlainText} from '../../util/toPlainText'
 
 const TITLE = 'Text Block'
 
@@ -21,7 +21,7 @@ export default defineType({
     prepare(value) {
       return {
         title: TITLE,
-        subtitle: previewBlockContent(value.richText),
+        subtitle: toPlainText(value.richText),
       }
     },
   },

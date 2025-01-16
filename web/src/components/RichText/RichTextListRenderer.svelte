@@ -22,29 +22,30 @@
 {#if _type === '@list'}
 	<svelte:element
 		this={listItem === 'number' ? 'ol' : 'ul'}
-		class="pl-5"
-		class:mb-3={level === 1}
+		class={['pl-5', { 'mb-3': level === 1 }]}
 	>
 		{@render children()}
 	</svelte:element>
 {:else if listItem === 'number'}
 	<li
-		class="max-w-rag-paragraph my-1.5 pl-1.5"
-		class:list-decimal={level1}
-		class:list-[lower-latin]={level2}
-		class:list-[lower-roman]={level3}
+		class={{
+			'list-decimal': level1,
+			'list-[lower-latin]': level2,
+			'list-[lower-roman]': level3
+		}}
 	>
 		{@render children()}
 	</li>
 {:else if listItem === 'bullet'}
 	<li
-		class="max-w-rag-paragraph my-1.5 pl-1.5"
-		class:list-disc={level1}
-		class:list-[circle]={level2}
-		class:list-[square]={level3}
+		class={{
+			'list-disc': level1,
+			'list-[circle]': level2,
+			'list-[square]': level3
+		}}
 	>
 		{@render children()}
 	</li>
 {:else}
-	{$inspect('Could not find list ', portableText)}
+	{console.log('Could not find list ', portableText)}
 {/if}
