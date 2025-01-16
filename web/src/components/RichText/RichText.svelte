@@ -10,7 +10,7 @@
 
 <div class="richtext">
 	<PortableText
-		value={value as any}
+		{value}
 		components={{
 			block: {
 				normal: RichTextStyleRenderer as any,
