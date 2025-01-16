@@ -29,6 +29,7 @@
 					metadata-viewer-user-id="s4u780"
 					playsinline
 					slot="media"
+					style:transform="scale(1.001)"
 					style:--media-object-fit="cover"
 				>
 				</mux-video>

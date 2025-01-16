@@ -28,11 +28,11 @@
 			bind:this={videoElement}
 			metadata-viewer-user-id="s4u780"
 			playback-id={video?.id}
-			class="absolute -inset-px"
 			muted
 			loop
 			playsinline
 			style:--media-object-fit="cover"
+			style:transform="scale(1.001)"
 		>
 		</mux-video>
 	{/await}
