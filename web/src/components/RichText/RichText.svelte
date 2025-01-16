@@ -3,7 +3,7 @@
 	import RichTextLinkRenderer from './RichTextLinkRenderer.svelte';
 	import RichTextListRenderer from './RichTextListRenderer.svelte';
 	import RichTextStyleRenderer from './RichTextStyleRenderer.svelte';
-	import { PortableText, type InputValue } from '@portabletext/svelte';
+	import { PortableText } from '@portabletext/svelte';
 
 	let { value }: { value: RichTextProjection } = $props();
 </script>
