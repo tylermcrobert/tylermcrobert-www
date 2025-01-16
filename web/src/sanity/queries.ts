@@ -127,7 +127,7 @@ export const SITE_QUERY = groq`{
     links[]${LINK_PROJECTION},
   },
   "navigation": *[_id == "navigation"][0]{
-    links[]${LINK_PROJECTION}
+    links[]${LINK_PROJECTION},
   },
   "settings": *[_id == "settings"][0]{
     metadata,
@@ -136,11 +136,11 @@ export const SITE_QUERY = groq`{
   "homepageTitle": *[_id == 'homepage'][0].title
 }`;
 
-export type SiteQuery = SITE_QUERYResult &
+export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 	Nullable<{
 		footer: { links: LinkProjection[] };
 		navigation: { links: LinkProjection[] };
-		settings: Pick<Settings, 'metadata'>;
+		settings: Pick<Settings, 'metadata' | 'siteTitle'>;
 	}>;
 
 /*****************************************************
