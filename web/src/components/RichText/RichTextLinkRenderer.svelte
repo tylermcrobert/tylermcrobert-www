@@ -4,9 +4,7 @@
 	import type { Snippet } from 'svelte';
 
 	type Props = {
-		portableText: MarkComponentProps & {
-			value: LinkValue | InternalLinkValue;
-		};
+		portableText: MarkComponentProps & { value: LinkValue | InternalLinkValue };
 		children: Snippet;
 	};
 
@@ -24,7 +22,7 @@
 	};
 
 	let { children, portableText }: Props = $props();
-	let value = $derived(portableText.value);
+	let { value } = $derived(portableText);
 </script>
 
 {#if value._type === 'link' && typeof value.href === 'string'}
