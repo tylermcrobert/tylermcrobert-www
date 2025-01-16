@@ -1,6 +1,6 @@
 import {DocumentIcon, LinkIcon} from '@sanity/icons'
 import {RichTextMinimalContainer} from '../../components/richText'
-import {defineType, defineArrayMember} from 'sanity'
+import {defineType} from 'sanity'
 
 const ANNOTATIONS = [
   {type: 'internalLink', name: 'internalLink'},
@@ -16,7 +16,7 @@ export default defineType({
   name: 'richText',
   type: 'array',
   of: [
-    defineArrayMember({
+    {
       title: 'Block',
       type: 'block',
       styles: [
@@ -32,7 +32,7 @@ export default defineType({
         decorators: DECORATORS,
         annotations: ANNOTATIONS,
       },
-    }),
+    },
   ],
 })
 
@@ -43,7 +43,7 @@ export const richTextMinimal = defineType({
     input: RichTextMinimalContainer,
   },
   of: [
-    defineArrayMember({
+    {
       title: 'Block',
       type: 'block',
       lists: [],
@@ -52,7 +52,7 @@ export const richTextMinimal = defineType({
         decorators: [],
         annotations: [],
       },
-    }),
+    },
   ],
 })
 
@@ -60,7 +60,7 @@ export const richTextSimple = defineType({
   name: 'richTextSimple',
   type: 'array',
   of: [
-    defineArrayMember({
+    {
       title: 'Block',
       type: 'block',
       lists: [],
@@ -69,7 +69,7 @@ export const richTextSimple = defineType({
         decorators: DECORATORS,
         annotations: ANNOTATIONS,
       },
-    }),
+    },
   ],
 })
 
