@@ -9,3 +9,4 @@ export { default as RichText } from './RichText/RichText.svelte';
 export { default as Image } from './Image.svelte';
 export { default as Video } from './Video/Video.svelte';
 export { default as Media } from './Media.svelte';
+export { default as ConsoleCredit } from './ConsoleCredit.svelte';
