@@ -14,5 +14,5 @@ export const load = async ({ params, locals: { client } }) => {
 		pageTitle: data.title,
 		metadata: data.metadata,
 		modules: data.modules || []
-	};
+	} satisfies App.PageReturn;
 };

@@ -7,7 +7,7 @@ export const load = async ({
 	const { footer, navigation, settings, homepageTitle } =
 		await client.fetch<SiteQuery>(SITE_QUERY);
 
-	const data: App.LayoutData = {
+	return {
 		navigation,
 		footer,
 		isDraftMode,
@@ -15,7 +15,5 @@ export const load = async ({
 		homepageTitle: homepageTitle,
 		siteTitle: settings?.siteTitle,
 		siteMetadata: settings?.metadata
-	};
-
-	return data;
+	} satisfies App.LayoutData;
 };

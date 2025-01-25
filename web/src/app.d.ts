@@ -18,10 +18,12 @@ declare global {
 			pathname: string;
 		}
 
-		interface PageData extends LayoutData {
-			pageTitle: string | null | undefined;
-			metadata: Metadata | null | undefined;
+		interface PageReturn extends Record<string, unknown> {
+			pageTitle: string | null;
+			metadata: Metadata | null;
 		}
+
+		interface PageData extends LayoutData, PageReturn {}
 
 		// interface Error {}
 		// interface PageState {}

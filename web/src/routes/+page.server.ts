@@ -16,5 +16,5 @@ export const load = async ({ locals: { client } }) => {
 		pageTitle: null,
 		metadata: null,
 		modules: (data.modules || []) as Module[]
-	};
+	} satisfies App.PageReturn;
 };
