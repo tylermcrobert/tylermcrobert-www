@@ -87,40 +87,23 @@ export type Navigation = {
 	>;
 };
 
-export type Homepage = {
-	_id: string;
-	_type: 'homepage';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	title?: string;
-	modules?: Array<
-		| ({
-				_key: string;
-		  } & TextBlock)
-		| ({
-				_key: string;
-		  } & MediaBlock)
-	>;
-};
-
-export type Page = {
-	_id: string;
-	_type: 'page';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	title?: string;
-	slug?: Slug;
-	modules?: Array<
-		| ({
-				_key: string;
-		  } & TextBlock)
-		| ({
-				_key: string;
-		  } & MediaBlock)
-	>;
-	metadata?: Metadata;
+export type Link = {
+	_type: 'link';
+	reference?:
+		| {
+				_ref: string;
+				_type: 'reference';
+				_weak?: boolean;
+				[internalGroqTypeReferenceTo]?: 'page';
+		  }
+		| {
+				_ref: string;
+				_type: 'reference';
+				_weak?: boolean;
+				[internalGroqTypeReferenceTo]?: 'homepage';
+		  };
+	href?: string;
+	label?: string;
 };
 
 export type Footer = {
@@ -132,21 +115,27 @@ export type Footer = {
 	>;
 };
 
-export type Metadata = {
-	_type: 'metadata';
-	description?: string;
-	image?: {
-		asset?: {
-			_ref: string;
-			_type: 'reference';
-			_weak?: boolean;
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-		};
-		hotspot?: SanityImageHotspot;
-		crop?: SanityImageCrop;
-		_type: 'image';
-	};
-};
+export type RichTextSimple = Array<{
+	children?: Array<{
+		marks?: Array<string>;
+		text?: string;
+		_type: 'span';
+		_key: string;
+	}>;
+	style?: 'normal';
+	listItem?: never;
+	markDefs?: Array<
+		| ({
+				_key: string;
+		  } & InternalLink)
+		| ({
+				_key: string;
+		  } & ExternalLink)
+	>;
+	level?: number;
+	_type: 'block';
+	_key: string;
+}>;
 
 export type RichTextMinimal = Array<{
 	children?: Array<{
@@ -170,17 +159,95 @@ export type RichText = Array<{
 		_type: 'span';
 		_key: string;
 	}>;
-	style?: 'normal' | 'h1' | 'h2' | 'h3' | 'blockquote';
+	style?: 'normal' | 'h1' | 'h2';
 	listItem?: 'bullet' | 'number';
-	markDefs?: Array<{
-		link?: Link;
-		_type: 'link';
-		_key: string;
-	}>;
+	markDefs?: Array<
+		| ({
+				_key: string;
+		  } & InternalLink)
+		| ({
+				_key: string;
+		  } & ExternalLink)
+	>;
 	level?: number;
 	_type: 'block';
 	_key: string;
 }>;
+
+export type ExternalLink = {
+	_type: 'externalLink';
+	href?: string;
+	blank?: boolean;
+};
+
+export type InternalLink = {
+	_type: 'internalLink';
+	reference?:
+		| {
+				_ref: string;
+				_type: 'reference';
+				_weak?: boolean;
+				[internalGroqTypeReferenceTo]?: 'homepage';
+		  }
+		| {
+				_ref: string;
+				_type: 'reference';
+				_weak?: boolean;
+				[internalGroqTypeReferenceTo]?: 'page';
+		  };
+};
+
+export type Page = {
+	_id: string;
+	_type: 'page';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	modules?: Array<
+		| ({
+				_key: string;
+		  } & TextBlock)
+		| ({
+				_key: string;
+		  } & MediaBlock)
+	>;
+	metadata?: Metadata;
+};
+
+export type Metadata = {
+	_type: 'metadata';
+	description?: string;
+	image?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
+};
+
+export type Homepage = {
+	_id: string;
+	_type: 'homepage';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	modules?: Array<
+		| ({
+				_key: string;
+		  } & TextBlock)
+		| ({
+				_key: string;
+		  } & MediaBlock)
+	>;
+};
 
 export type Modules = Array<
 	| ({
@@ -194,25 +261,6 @@ export type Modules = Array<
 export type TextBlock = {
 	_type: 'textBlock';
 	richText?: RichText;
-};
-
-export type Link = {
-	_type: 'link';
-	reference?:
-		| {
-				_ref: string;
-				_type: 'reference';
-				_weak?: boolean;
-				[internalGroqTypeReferenceTo]?: 'page';
-		  }
-		| {
-				_ref: string;
-				_type: 'reference';
-				_weak?: boolean;
-				[internalGroqTypeReferenceTo]?: 'homepage';
-		  };
-	href?: string;
-	label?: string;
 };
 
 export type MediaBlock = {
@@ -290,6 +338,104 @@ export type Media = {
 		crop?: SanityImageCrop;
 		_type: 'image';
 	};
+	video?: MuxVideo;
+	showVideoControls?: boolean;
+	posterFrame?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
+};
+
+export type MuxVideo = {
+	_type: 'mux.video';
+	asset?: {
+		_ref: string;
+		_type: 'reference';
+		_weak?: boolean;
+		[internalGroqTypeReferenceTo]?: 'mux.videoAsset';
+	};
+};
+
+export type MuxVideoAsset = {
+	_type: 'mux.videoAsset';
+	status?: string;
+	assetId?: string;
+	playbackId?: string;
+	filename?: string;
+	thumbTime?: number;
+	data?: MuxAssetData;
+};
+
+export type MuxAssetData = {
+	_type: 'mux.assetData';
+	resolution_tier?: string;
+	upload_id?: string;
+	created_at?: string;
+	id?: string;
+	status?: string;
+	max_stored_resolution?: string;
+	passthrough?: string;
+	encoding_tier?: string;
+	master_access?: string;
+	aspect_ratio?: string;
+	duration?: number;
+	max_stored_frame_rate?: number;
+	mp4_support?: string;
+	max_resolution_tier?: string;
+	tracks?: Array<
+		{
+			_key: string;
+		} & MuxTrack
+	>;
+	playback_ids?: Array<
+		{
+			_key: string;
+		} & MuxPlaybackId
+	>;
+	static_renditions?: MuxStaticRenditions;
+};
+
+export type MuxStaticRenditions = {
+	_type: 'mux.staticRenditions';
+	status?: string;
+	files?: Array<
+		{
+			_key: string;
+		} & MuxStaticRenditionFile
+	>;
+};
+
+export type MuxStaticRenditionFile = {
+	_type: 'mux.staticRenditionFile';
+	ext?: string;
+	name?: string;
+	width?: number;
+	bitrate?: number;
+	filesize?: number;
+	height?: number;
+};
+
+export type MuxPlaybackId = {
+	_type: 'mux.playbackId';
+	id?: string;
+	policy?: string;
+};
+
+export type MuxTrack = {
+	_type: 'mux.track';
+	id?: string;
+	type?: string;
+	max_width?: number;
+	max_frame_rate?: number;
+	duration?: number;
+	max_height?: number;
 };
 
 export type MediaTag = {
@@ -315,15 +461,18 @@ export type AllSanitySchemaTypes =
 	| Geopoint
 	| Settings
 	| Navigation
-	| Homepage
-	| Page
+	| Link
 	| Footer
-	| Metadata
+	| RichTextSimple
 	| RichTextMinimal
 	| RichText
+	| ExternalLink
+	| InternalLink
+	| Page
+	| Metadata
+	| Homepage
 	| Modules
 	| TextBlock
-	| Link
 	| MediaBlock
 	| SanityImageCrop
 	| SanityImageHotspot
@@ -331,6 +480,13 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageMetadata
 	| Media
+	| MuxVideo
+	| MuxVideoAsset
+	| MuxAssetData
+	| MuxStaticRenditions
+	| MuxStaticRenditionFile
+	| MuxPlaybackId
+	| MuxTrack
 	| MediaTag
 	| Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
@@ -343,36 +499,40 @@ export type LINK_PROJECTIONResult = {
 	reference: never;
 };
 // Variable: RICH_TEXT_PROJECTION
-// Query: {  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }}
+// Query: {  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}
 export type RICH_TEXT_PROJECTIONResult = never;
 // Variable: MEDIA_PROJECTION
-// Query: {  "image": @.media.image}
+// Query: {  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }}
 export type MEDIA_PROJECTIONResult = {
 	image: never;
+	video: never;
 };
 // Variable: MODULES_PROJECTION
-// Query: {  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}}
+// Query: {  _type,    _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }}  },    _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },}
 export type MODULES_PROJECTIONResult = {
 	_type: never;
 };
 // Variable: PAGE_QUERY
-// Query: *[_type == 'page' && slug.current == $slug][0]{    title,    metadata,    modules[]{  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}},  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    title,    metadata,    modules[]{  _type,    _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }}  },    _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },},  }
 export type PAGE_QUERYResult = {
 	title: string | null;
 	metadata: Metadata | null;
 	modules: Array<
 		| {
 				_type: 'mediaBlock';
-				image: {
-					asset?: {
-						_ref: string;
-						_type: 'reference';
-						_weak?: boolean;
-						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-					};
-					hotspot?: SanityImageHotspot;
-					crop?: SanityImageCrop;
-					_type: 'image';
+				media: {
+					image: {
+						asset?: {
+							_ref: string;
+							_type: 'reference';
+							_weak?: boolean;
+							[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+						};
+						hotspot?: SanityImageHotspot;
+						crop?: SanityImageCrop;
+						_type: 'image';
+					} | null;
+					video: null;
 				} | null;
 		  }
 		| {
@@ -384,28 +544,37 @@ export type PAGE_QUERYResult = {
 						_type: 'span';
 						_key: string;
 					}>;
-					style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'normal';
+					style?: 'h1' | 'h2' | 'normal';
 					listItem?: 'bullet' | 'number';
-					markDefs: Array<{
-						link: {
-							label: string | null;
-							href: string | null;
-							reference:
+					markDefs:
+						| Array<never>
+						| Array<
 								| {
-										_type: 'homepage';
-										title: string | null;
-										slug: null;
+										_key: string;
+										_type: 'externalLink';
+										href?: string;
+										blank?: boolean;
 								  }
 								| {
-										_type: 'page';
-										title: string | null;
+										_key: string;
+										_type: 'internalLink';
+										reference?:
+											| {
+													_ref: string;
+													_type: 'reference';
+													_weak?: boolean;
+													[internalGroqTypeReferenceTo]?: 'homepage';
+											  }
+											| {
+													_ref: string;
+													_type: 'reference';
+													_weak?: boolean;
+													[internalGroqTypeReferenceTo]?: 'page';
+											  };
+										type: 'homepage' | 'page' | null;
 										slug: string | null;
 								  }
-								| null;
-						} | null;
-						_type: 'link';
-						_key: string;
-					}> | null;
+						  >;
 					level?: number;
 					_type: 'block';
 					_key: string;
@@ -414,7 +583,7 @@ export type PAGE_QUERYResult = {
 	> | null;
 } | null;
 // Variable: HOMEPAGE_QUERY
-// Query: *[_id == 'homepage'][0]{    modules[]{  _type,    _type == 'textBlock' => {    richText[]{  ...,  "markDefs": markDefs[]{    ...,    _type == 'link' => {      "link": @.link{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}    }  }},  },  _type == 'mediaBlock' => {  "image": @.media.image}},  }
+// Query: *[_id == 'homepage'][0]{    modules[]{  _type,    _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }}  },    _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },},  }
 export type HOMEPAGE_QUERYResult =
 	| {
 			modules: null;
@@ -423,16 +592,19 @@ export type HOMEPAGE_QUERYResult =
 			modules: Array<
 				| {
 						_type: 'mediaBlock';
-						image: {
-							asset?: {
-								_ref: string;
-								_type: 'reference';
-								_weak?: boolean;
-								[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-							};
-							hotspot?: SanityImageHotspot;
-							crop?: SanityImageCrop;
-							_type: 'image';
+						media: {
+							image: {
+								asset?: {
+									_ref: string;
+									_type: 'reference';
+									_weak?: boolean;
+									[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+								};
+								hotspot?: SanityImageHotspot;
+								crop?: SanityImageCrop;
+								_type: 'image';
+							} | null;
+							video: null;
 						} | null;
 				  }
 				| {
@@ -444,28 +616,37 @@ export type HOMEPAGE_QUERYResult =
 								_type: 'span';
 								_key: string;
 							}>;
-							style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'normal';
+							style?: 'h1' | 'h2' | 'normal';
 							listItem?: 'bullet' | 'number';
-							markDefs: Array<{
-								link: {
-									label: string | null;
-									href: string | null;
-									reference:
+							markDefs:
+								| Array<never>
+								| Array<
 										| {
-												_type: 'homepage';
-												title: string | null;
-												slug: null;
+												_key: string;
+												_type: 'externalLink';
+												href?: string;
+												blank?: boolean;
 										  }
 										| {
-												_type: 'page';
-												title: string | null;
+												_key: string;
+												_type: 'internalLink';
+												reference?:
+													| {
+															_ref: string;
+															_type: 'reference';
+															_weak?: boolean;
+															[internalGroqTypeReferenceTo]?: 'homepage';
+													  }
+													| {
+															_ref: string;
+															_type: 'reference';
+															_weak?: boolean;
+															[internalGroqTypeReferenceTo]?: 'page';
+													  };
+												type: 'homepage' | 'page' | null;
 												slug: string | null;
 										  }
-										| null;
-								} | null;
-								_type: 'link';
-								_key: string;
-							}> | null;
+								  >;
 							level?: number;
 							_type: 'block';
 							_key: string;
@@ -475,107 +656,14 @@ export type HOMEPAGE_QUERYResult =
 	  }
 	| null;
 // Variable: SITE_QUERY
-// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0],  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
+// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
 export type SITE_QUERYResult = {
 	footer: {
 		links: null;
 	} | null;
-	navigation:
-		| {
-				_id: string;
-				_type: 'homepage';
-				_createdAt: string;
-				_updatedAt: string;
-				_rev: string;
-				title?: string;
-				modules?: Array<
-					| ({
-							_key: string;
-					  } & MediaBlock)
-					| ({
-							_key: string;
-					  } & TextBlock)
-				>;
-		  }
-		| {
-				_id: string;
-				_type: 'media.tag';
-				_createdAt: string;
-				_updatedAt: string;
-				_rev: string;
-				name?: Slug;
-		  }
-		| {
-				_id: string;
-				_type: 'page';
-				_createdAt: string;
-				_updatedAt: string;
-				_rev: string;
-				title?: string;
-				slug?: Slug;
-				modules?: Array<
-					| ({
-							_key: string;
-					  } & MediaBlock)
-					| ({
-							_key: string;
-					  } & TextBlock)
-				>;
-				metadata?: Metadata;
-		  }
-		| {
-				_id: string;
-				_type: 'sanity.fileAsset';
-				_createdAt: string;
-				_updatedAt: string;
-				_rev: string;
-				originalFilename?: string;
-				label?: string;
-				title?: string;
-				description?: string;
-				altText?: string;
-				sha1hash?: string;
-				extension?: string;
-				mimeType?: string;
-				size?: number;
-				assetId?: string;
-				uploadId?: string;
-				path?: string;
-				url?: string;
-				source?: SanityAssetSourceData;
-		  }
-		| {
-				_id: string;
-				_type: 'sanity.imageAsset';
-				_createdAt: string;
-				_updatedAt: string;
-				_rev: string;
-				originalFilename?: string;
-				label?: string;
-				title?: string;
-				description?: string;
-				altText?: string;
-				sha1hash?: string;
-				extension?: string;
-				mimeType?: string;
-				size?: number;
-				assetId?: string;
-				uploadId?: string;
-				path?: string;
-				url?: string;
-				metadata?: SanityImageMetadata;
-				source?: SanityAssetSourceData;
-		  }
-		| {
-				_id: string;
-				_type: 'settings';
-				_createdAt: string;
-				_updatedAt: string;
-				_rev: string;
-				siteTitle?: string;
-				metadata?: Metadata;
-		  }
-		| null;
+	navigation: {
+		links: null;
+	} | null;
 	settings:
 		| {
 				metadata: null;
@@ -602,11 +690,11 @@ import '@sanity/client';
 declare module '@sanity/client' {
 	interface SanityQueries {
 		'{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}': LINK_PROJECTIONResult;
-		'{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n}': RICH_TEXT_PROJECTIONResult;
-		'{\n  "image": @.media.image\n}': MEDIA_PROJECTIONResult;
-		'{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n}': MODULES_PROJECTIONResult;
-		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': PAGE_QUERYResult;
-		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n  "markDefs": markDefs[]{\n    ...,\n    _type == \'link\' => {\n      "link": @.link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    }\n  }\n},\n  },\n\n  _type == \'mediaBlock\' => {\n  "image": @.media.image\n}\n},\n  }\n': HOMEPAGE_QUERYResult;
-		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0],\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
+		'{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}': RICH_TEXT_PROJECTIONResult;
+		'{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}': MEDIA_PROJECTIONResult;
+		'{\n  _type,\n  \n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n': MODULES_PROJECTIONResult;
+		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  \n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': PAGE_QUERYResult;
+		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  \n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  \n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': HOMEPAGE_QUERYResult;
+		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
 	}
 }

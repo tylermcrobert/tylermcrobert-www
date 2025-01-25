@@ -68,26 +68,29 @@ export type MediaProjection = Nullable<{
  * MODULES
  *****************************************************/
 
-export const MODULES_PROJECTION = groq`{
-  _type,
-  
+/**
+ * Text Block
+ */
+
+const MODULE_TEXT_BLOCK = `// groq
   _type == 'textBlock' => {
     richText[]${RICH_TEXT_PROJECTION},
-  },
-
-  _type == 'mediaBlock' => {
-    media${MEDIA_PROJECTION}
   }
-}`;
-
-/**
- * TYPES
- */
+`;
 
 export type ModuleTextBlock = Nullable<{
 	_type: 'textBlock';
-	richText: RichTextProjection;
 }>;
+
+/**
+ * Media Block
+ */
+
+const MODULE_MEDIA_BLOCK = `// groq
+  _type == 'mediaBlock' => {
+    media${MEDIA_PROJECTION}
+  }
+`;
 
 export type ModuleMediaBlock = Nullable<{
 	_type: 'mediaBlock';
@@ -95,10 +98,17 @@ export type ModuleMediaBlock = Nullable<{
 }>;
 
 /**
- * Export
+ * Modules
  */
 
-export type Module = ModuleTextBlock | ModuleMediaBlock;
+const MODULES_PROJECTION = groq`{
+  _type,
+  ${MODULE_MEDIA_BLOCK},
+  ${MODULE_TEXT_BLOCK},
+}
+`;
+
+export type Module = ModuleMediaBlock | ModuleTextBlock;
 
 /*****************************************************
  * PAGES
