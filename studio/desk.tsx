@@ -16,6 +16,7 @@ export const structure: StructureResolver = (S) => {
       S.documentTypeListItem('caseStudy').title('Case Studies'),
       S.documentTypeListItem('context').title('Contexts'),
       S.documentTypeListItem('playlist').title('Playlists'),
+      S.documentTypeListItem('webFrameTheme').title('Browser Frames'),
       S.divider(),
 
       S.listItem()

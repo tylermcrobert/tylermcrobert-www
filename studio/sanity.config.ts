@@ -6,7 +6,7 @@ import {structure} from './desk'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
 
-const CREATABLE_DOCTYPES = ['page']
+const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 
 export default defineConfig({
   name: 'default',
