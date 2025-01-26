@@ -26,10 +26,15 @@ export default defineType({
     },
   ],
   preview: {
-    select: {},
-    prepare() {
+    select: {
+      image: 'media.image',
+      imageName: 'media.image.asset.originalFilename',
+    },
+    prepare({image, imageName}) {
       return {
         title: TITLE,
+        media: image,
+        subtitle: imageName,
       }
     },
   },
