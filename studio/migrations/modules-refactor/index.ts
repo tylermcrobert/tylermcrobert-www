@@ -1,6 +1,5 @@
 import {at, defineMigration, set} from 'sanity/migrate'
-import {MediaBlock, Modules, type CASE_STUDY_QUERYResult} from '../../../web/src/sanity/types'
-import mediaBlock from '../../schemaTypes/modules/mediaBlock'
+import {MediaBlock} from '../../../web/src/sanity/types'
 
 export default defineMigration({
   title:
@@ -27,48 +26,45 @@ export default defineMigration({
         if (module._type === 'dynamicImage') {
           const nextIndex = i + 1
 
-          const isFull = module.span === 'full'
+          const isHalf = module.span === 'half'
 
-          if (isFull) {
-            const mediaBlock: MediaBlock = {
-              _type: 'mediaBlock',
-              media: {
-                image: module.image,
-              } as any,
+          if (isHalf) {
+            const nextModule = doc.modules[nextIndex]
+
+            return {
+              _type: 'diptych',
+              items: [
+                {
+                  _type: 'diptych.media',
+                  media: {
+                    image: module.image,
+                  },
+                },
+              ],
             }
 
-            return mediaBlock
+            // const isNextAlsoHalfImage =
+            //   nextModule._type === 'dynamicImage' && nextModule.span === 'half'
+
+            // console.log({isHalf, isNextAlsoHalfImage})
+
+            // console.log({title: doc.title, module, isHalf})
           }
 
-          const isHalf = module.span === 'half'
-          const nextModule = doc.modules[nextIndex]
-
-          if (!nextModule) {
-            return {}
+          const mediaBlock: MediaBlock = {
+            _type: 'mediaBlock',
+            media: {
+              image: module.image,
+            } as any,
           }
 
-          const isNextAlsoHalfImage =
-            nextModule._type === 'dynamicImage' && nextModule.span === 'half'
-
-          // console.log({isHalf, isNextAlsoHalfImage})
-
-          // console.log({title: doc.title, module, isHalf})
-
-          // if (nextIndex && ) {
-          //   // console.log('asdf')
-          // }
-
-          return module
+          return mediaBlock
         }
 
         return module
       })
 
-      // console.log(modulesV2)
-
       return [at('modulesV2', set(modulesV2))]
-
-      // this will be called for every document of the matching type
     },
     node(node, path, context) {
       // this will be called for every node in every document of the matching type
