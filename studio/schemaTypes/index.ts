@@ -5,6 +5,7 @@ import metadata from './objects/metadata'
 import settings from './documents/settings'
 import context from './documents/context'
 import caseStudy from './documents/caseStudy'
+import playlist from './documents/playlist'
 import richText, {
   richTextMinimal,
   richTextSimple,
@@ -17,6 +18,7 @@ import media from './objects/media'
 import mediaBlock from './modules/mediaBlock'
 
 export const schemaTypes = [
+  playlist,
   caseStudy,
   context,
   mediaBlock,
