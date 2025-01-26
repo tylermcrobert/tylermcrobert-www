@@ -7,6 +7,7 @@ import context from './documents/context'
 import caseStudy from './documents/caseStudy'
 import playlist from './documents/playlist'
 import webFrameTheme from './documents/webFrameTheme'
+import info from './documents/info'
 import richText, {
   richTextMinimal,
   richTextSimple,
@@ -19,6 +20,7 @@ import media from './objects/media'
 import mediaBlock from './modules/mediaBlock'
 
 export const schemaTypes = [
+  info,
   webFrameTheme,
   playlist,
   caseStudy,
