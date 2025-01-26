@@ -19,8 +19,12 @@ import textBlock from './modules/textBlock'
 import media from './objects/media'
 import mediaBlock from './modules/mediaBlock'
 import website from './modules/website'
+import diptych, {diptychMedia, diptychText} from './modules/diptych'
 
 export const schemaTypes = [
+  diptychMedia,
+  diptychText,
+  diptych,
   website,
   info,
   webFrameTheme,
