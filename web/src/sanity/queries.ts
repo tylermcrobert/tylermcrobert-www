@@ -80,6 +80,7 @@ const MODULE_TEXT_BLOCK = `// groq
 
 export type ModuleTextBlock = Nullable<{
 	_type: 'textBlock';
+	richText: RichTextProjection;
 }>;
 
 /**
