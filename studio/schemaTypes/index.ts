@@ -18,8 +18,10 @@ import modules from './modules/modules'
 import textBlock from './modules/textBlock'
 import media from './objects/media'
 import mediaBlock from './modules/mediaBlock'
+import website from './modules/website'
 
 export const schemaTypes = [
+  website,
   info,
   webFrameTheme,
   playlist,
