@@ -13,13 +13,21 @@ Do the following checklist before getting started
 `/studio/.env`:
 
 ```env
-SANITY_STUDIO_PROJECT_ID=example-id
-SANITY_STUDIO_TITLE=Example Name
-SANITY_STUDIO_PREVIEW_LINK=https://example.com
+SANITY_STUDIO_PROJECT_ID="xxx"
+SANITY_STUDIO_TITLE="Example Name"
+SANITY_STUDIO_PREVIEW_LINK="https://yourdomain.com"
 ```
 
 `/web/.env`:
 
 ```env
-PUBLIC_SANITY_PROJECT_ID=example-id
+SANITY_TOKEN="xxx"
+PUBLIC_SANITY_PROJECT_ID="xxx"
+PUBLIC_SITE_URL="https://yourdomain.com"
 ```
+
+## Before Launch
+
+1. Update Favicon
+2. Verify sitemap.xml
+3. Verify schema.org
