@@ -15,9 +15,10 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'modules',
-      type: 'modules',
-      description: "Build the page's content using Modules",
+      name: 'defaultContext',
+      type: 'reference',
+      to: [{type: 'context'}],
+      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {
