@@ -153,6 +153,14 @@ export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 		settings: Pick<Settings, 'metadata' | 'siteTitle'>;
 	}>;
 
+export const SITEMAP_QUERY = groq`{
+  "pages": *[_type == 'page'][]{ 
+    title,
+    "slug": slug.current,
+    _updatedAt,
+  }
+}`;
+
 /*******************************************************************************
  * UTILLS
  ******************************************************************************/
