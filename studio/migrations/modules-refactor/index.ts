@@ -10,8 +10,15 @@ export default defineMigration({
     document(doc: any, context) {
       const modulesV2 = (doc.modules || []).map((module: any, i: number) => {
         if (module._type === 'textBlock') {
-          console.log(module)
-          return {...textBlock}
+          return {
+            ...module,
+            content: undefined,
+            richText: module.content,
+          }
+        }
+
+        if (module._type === 'website') {
+          return {...module, media: {image: null}}
         }
 
         if (module._type === 'dynamicImage') {
@@ -54,8 +61,8 @@ export default defineMigration({
         return module
       })
 
-      // return [at('modulesv2', set(undefined)), at('modulesV2', set(modulesV2))]
-      return []
+      // return [at('modulesV2', set(modulesV2))]
+
       // this will be called for every document of the matching type
     },
     node(node, path, context) {
