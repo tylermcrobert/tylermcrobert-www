@@ -18,6 +18,9 @@ export default defineMigration({
         }
 
         if (module._type === 'website') {
+          if (module.media[0]._type === 'image') {
+            return {...module, media: {image: module.media[0]}}
+          }
           return {...module, media: {image: null}}
         }
 
@@ -41,7 +44,7 @@ export default defineMigration({
           const nextModule = doc.modules[nextIndex]
 
           if (!nextModule) {
-            return undefined
+            return {}
           }
 
           const isNextAlsoHalfImage =
@@ -55,13 +58,15 @@ export default defineMigration({
           //   // console.log('asdf')
           // }
 
-          return doc
+          return module
         }
 
         return module
       })
 
-      // return [at('modulesV2', set(modulesV2))]
+      // console.log(modulesV2)
+
+      return [at('modulesV2', set(modulesV2))]
 
       // this will be called for every document of the matching type
     },
