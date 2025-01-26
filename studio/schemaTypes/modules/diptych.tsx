@@ -20,10 +20,13 @@ export default defineType({
   preview: {
     select: {items: 'items'},
     prepare({items}) {
+      const text = toPlainText(items.find((item: any) => item?.richText)?.richText)
+      const itemCount = `${items?.length} item${items?.length === 1 ? '' : 's'}`
+
       return {
         title: TITLE,
         media: items.find((item: any) => item?.media)?.media?.image,
-        subtitle: toPlainText(items.find((item: any) => item?.richText)?.richText),
+        subtitle: text || itemCount,
       }
     },
   },
