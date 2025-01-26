@@ -227,14 +227,12 @@ export type Homepage = {
 	_updatedAt: string;
 	_rev: string;
 	title?: string;
-	modules?: Array<
-		| ({
-				_key: string;
-		  } & TextBlock)
-		| ({
-				_key: string;
-		  } & MediaBlock)
-	>;
+	defaultContext?: {
+		_ref: string;
+		_type: 'reference';
+		_weak?: boolean;
+		[internalGroqTypeReferenceTo]?: 'context';
+	};
 };
 
 export type Modules = Array<
@@ -248,12 +246,138 @@ export type Modules = Array<
 
 export type TextBlock = {
 	_type: 'textBlock';
+	content?: RichText;
 	richText?: RichText;
 };
 
 export type MediaBlock = {
 	_type: 'mediaBlock';
 	media?: Media;
+};
+
+export type Media = {
+	_type: 'media';
+	image?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
+	video?: MuxVideo;
+	showVideoControls?: boolean;
+	posterFrame?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
+};
+
+export type Context = {
+	_id: string;
+	_type: 'context';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	caseStudies?: Array<{
+		_ref: string;
+		_type: 'reference';
+		_weak?: boolean;
+		_key: string;
+		[internalGroqTypeReferenceTo]?: 'caseStudy';
+	}>;
+};
+
+export type CaseStudy = {
+	_id: string;
+	_type: 'caseStudy';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	date?: string;
+	intro?: string;
+	deliverables?: Array<string>;
+	previewImage?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
+	description?: RichTextSimple;
+	modules?: Modules;
+	modulesV2?: Modules;
+};
+
+export type Playlist = {
+	_id: string;
+	_type: 'playlist';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	link?: string;
+};
+
+export type WebFrameTheme = {
+	_id: string;
+	_type: 'webFrameTheme';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	background?: Color;
+	frame?: Color;
+	dots?: Color;
+};
+
+export type Info = {
+	_id: string;
+	_type: 'info';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	bio?: string;
+	clients?: Array<string>;
+	playlists?: Array<{
+		_ref: string;
+		_type: 'reference';
+		_weak?: boolean;
+		_key: string;
+		[internalGroqTypeReferenceTo]?: 'playlist';
+	}>;
+	previewImage?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
+	slug?: Slug;
 };
 
 export type SanityImageCrop = {
@@ -313,58 +437,37 @@ export type SanityImageMetadata = {
 	isOpaque?: boolean;
 };
 
-export type Media = {
-	_type: 'media';
-	image?: {
-		asset?: {
-			_ref: string;
-			_type: 'reference';
-			_weak?: boolean;
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-		};
-		hotspot?: SanityImageHotspot;
-		crop?: SanityImageCrop;
-		_type: 'image';
-	};
-	video?: MuxVideo;
-	showVideoControls?: boolean;
-	posterFrame?: {
-		asset?: {
-			_ref: string;
-			_type: 'reference';
-			_weak?: boolean;
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-		};
-		hotspot?: SanityImageHotspot;
-		crop?: SanityImageCrop;
-		_type: 'image';
-	};
+export type Color = {
+	_type: 'color';
+	hex?: string;
+	alpha?: number;
+	hsl?: HslaColor;
+	hsv?: HsvaColor;
+	rgb?: RgbaColor;
 };
 
-export type Context = {
-	_id: string;
-	_type: 'context';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	title?: string;
-	slug?: Slug;
-	caseStudies?: Array<{
-		title?: string;
-		slug?: Slug;
-		_type: 'caseStudy';
-		_key: string;
-	}>;
+export type RgbaColor = {
+	_type: 'rgbaColor';
+	r?: number;
+	g?: number;
+	b?: number;
+	a?: number;
 };
 
-export type CaseStudy = {
-	_id: string;
-	_type: 'caseStudy';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	title?: string;
-	slug?: Slug;
+export type HsvaColor = {
+	_type: 'hsvaColor';
+	h?: number;
+	s?: number;
+	v?: number;
+	a?: number;
+};
+
+export type HslaColor = {
+	_type: 'hslaColor';
+	h?: number;
+	s?: number;
+	l?: number;
+	a?: number;
 };
 
 export type MuxVideo = {
@@ -486,14 +589,21 @@ export type AllSanitySchemaTypes =
 	| Modules
 	| TextBlock
 	| MediaBlock
+	| Media
+	| Context
+	| CaseStudy
+	| Playlist
+	| WebFrameTheme
+	| Info
 	| SanityImageCrop
 	| SanityImageHotspot
 	| SanityImageAsset
 	| SanityAssetSourceData
 	| SanityImageMetadata
-	| Media
-	| Context
-	| CaseStudy
+	| Color
+	| RgbaColor
+	| HsvaColor
+	| HslaColor
 	| MuxVideo
 	| MuxVideoAsset
 	| MuxAssetData
@@ -681,6 +791,11 @@ export type HOMEPAGE_QUERYResult =
 			> | null;
 	  }
 	| null;
+// Variable: CASE_STUDY_QUERY
+// Query: *[_type == 'caseStudy'][0]{    modules  }
+export type CASE_STUDY_QUERYResult = {
+	modules: Modules | null;
+} | null;
 // Variable: SITE_QUERY
 // Query: {  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
 export type SITE_QUERYResult = {
@@ -724,6 +839,7 @@ declare module '@sanity/client' {
 		'{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n': MODULES_PROJECTIONResult;
 		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': PAGE_QUERYResult;
 		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': HOMEPAGE_QUERYResult;
+		"\n  *[_type == 'caseStudy'][0]{\n    modules\n  }\n": CASE_STUDY_QUERYResult;
 		'{\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
 		'{\n  "pages": *[_type == \'page\'][]{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
