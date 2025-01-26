@@ -5,6 +5,7 @@ import {schemaTypes} from './schemaTypes'
 import {structure} from './desk'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
+import {colorInput} from '@sanity/color-input'
 
 const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 
@@ -19,6 +20,7 @@ export default defineConfig({
     structureTool({structure}),
     media(),
     muxInput(),
+    colorInput(),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
 
