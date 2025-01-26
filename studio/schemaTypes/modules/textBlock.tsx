@@ -12,6 +12,14 @@ export default defineType({
     {
       name: 'content',
       type: 'richText',
+      deprecated: {
+        reason: 'Use RichText instaed',
+      },
+    },
+    {
+      title: 'Content',
+      name: 'richText',
+      type: 'richText',
     },
   ],
   preview: {
