@@ -82,7 +82,7 @@ export const richTextInternalLink = {
     {
       name: 'reference',
       type: 'reference',
-      to: [{type: 'homepage'}, {type: 'page'}],
+      to: [{type: 'homepage'}, {type: 'caseStudy'}, {type: 'page'}],
     },
   ],
 }

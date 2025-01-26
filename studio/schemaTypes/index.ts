@@ -1,10 +1,10 @@
 import page from './documents/page'
 import homepage from './documents/homepage'
-import navigation from './documents/navigation'
 import link from './objects/link'
 import metadata from './objects/metadata'
 import settings from './documents/settings'
-import footer from './documents/footer'
+import context from './documents/context'
+import caseStudy from './documents/caseStudy'
 import richText, {
   richTextMinimal,
   richTextSimple,
@@ -17,6 +17,8 @@ import media from './objects/media'
 import mediaBlock from './modules/mediaBlock'
 
 export const schemaTypes = [
+  caseStudy,
+  context,
   mediaBlock,
   media,
   textBlock,
@@ -27,9 +29,7 @@ export const schemaTypes = [
   richTextMinimal,
   richTextSimple,
   metadata,
-  footer,
   link,
-  navigation,
   homepage,
   page,
   settings,

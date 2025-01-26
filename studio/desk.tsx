@@ -1,7 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
 
-import {icon as navIcon} from './schemaTypes/documents/navigation'
-import {icon as footerIcon} from './schemaTypes/documents/footer'
 import {icon as homepageIcon} from './schemaTypes/documents/homepage'
 import {icon as settingsIcon} from './schemaTypes/documents/settings'
 
@@ -15,15 +13,10 @@ export const structure: StructureResolver = (S) => {
         .child(S.editor().schemaType('homepage').documentId('homepage').title('Homepage')),
       S.divider(),
       S.documentTypeListItem('page').title('Pages'),
+      S.documentTypeListItem('caseStudy').title('Case Studies'),
+      S.documentTypeListItem('context').title('Contexts'),
       S.divider(),
-      S.listItem()
-        .title('Navigation')
-        .icon(navIcon)
-        .child(S.editor().schemaType('navigation').documentId('navigation').title('Navigation')),
-      S.listItem()
-        .title('Footer')
-        .icon(footerIcon)
-        .child(S.editor().schemaType('footer').documentId('footer').title('Footer')),
+
       S.listItem()
         .title('Settings')
         .icon(settingsIcon)
