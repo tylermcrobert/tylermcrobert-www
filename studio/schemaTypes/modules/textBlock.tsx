@@ -10,7 +10,7 @@ export default defineType({
   icon: () => '✍️',
   fields: [
     {
-      name: 'richText',
+      name: 'content',
       type: 'richText',
     },
   ],
