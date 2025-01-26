@@ -3,19 +3,28 @@
 
 @config '../../tailwind.config.js';
 
-@utility text-h1 {
-	@apply leading-1.2 text-[36px];
-}
-
-@utility text-h2 {
-	@apply leading-1.2 text-[26px];
-}
-
 @theme {
 	--color-background: 255 255 255;
 	--color-foreground: 0 0 0;
 
 	--spacing-nav-height: 60px;
+	--spacing-available-svh: calc(100svh - 60px);
+	--spacing-available-dvh: calc(100dvh - 60px);
+
+	--max-width-rag-heading: 25ch;
+	--max-width-rag-paragraph: 70ch;
+
+	--z-index-nav: 100;
+
+	--leading-100: 1;
+}
+
+@utility text-h1 {
+	@apply max-w-rag-heading text-[36px] leading-100;
+}
+
+@utility text-h2 {
+	@apply max-w-rag-heading text-[26px] leading-100;
 }
 
 @layer base {

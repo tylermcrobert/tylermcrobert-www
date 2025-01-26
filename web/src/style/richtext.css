@@ -1,3 +1,10 @@
+/* max-widths */
+.richtext p,
+.richtext ul,
+.richtext ol {
+	@apply max-w-rag-paragraph;
+}
+
 /* bottom margins */
 
 .richtext .text-para:not(:last-child),
