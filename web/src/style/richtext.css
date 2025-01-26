@@ -1,34 +1,32 @@
-@layer base {
-	/* bottom margins */
+/* bottom margins */
 
-	.richtext .text-para:not(:last-child),
-	.richtext .text-h1:not(:last-child),
-	.richtext .text-h2:not(:last-child),
-	blockquote:not(:last-child) {
-		@apply mb-3;
-	}
+.richtext .text-para:not(:last-child),
+.richtext .text-h1:not(:last-child),
+.richtext .text-h2:not(:last-child),
+blockquote:not(:last-child) {
+	@apply mb-3;
+}
 
-	/* H1 margins */
+/* H1 margins */
 
-	.richtext .text-h1:not(:first-child) {
-		@apply mt-6;
-	}
+.richtext .text-h1:not(:first-child) {
+	@apply mt-6;
+}
 
-	/* H2 margins */
+/* H2 margins */
 
-	.richtext .text-h2:not(:first-child) {
-		@apply mt-6;
-	}
+.richtext .text-h2:not(:first-child) {
+	@apply mt-6;
+}
 
-	/* List */
+/* List */
 
-	.richtext li {
-		@apply pl-1.5 not-last:mb-1.5;
-	}
+.richtext li {
+	@apply pl-1.5 not-last:mb-1.5;
+}
 
-	/* No margin on last  */
+/* No margin on last  */
 
-	.richtext :last-child {
-		@apply mb-0;
-	}
+.richtext :last-child {
+	@apply mb-0;
 }

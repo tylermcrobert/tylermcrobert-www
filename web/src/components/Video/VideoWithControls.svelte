@@ -18,7 +18,9 @@
 <VideoWrapper {video} class={className}>
 	{#snippet children({ aspect })}
 		{#await Promise.all( [import('media-chrome'), import('@mux/mux-video')] ) then}
-			<media-controller class="controller outline-none">
+			<media-controller
+				class="controller outline-hidden absolute inset-0 cursor-pointer bg-transparent"
+			>
 				<mux-video
 					poster={video?.posterFrame &&
 						urlFor(video?.posterFrame)
@@ -78,8 +80,6 @@
 		--media-range-thumb-opacity: 0;
 		--media-preview-time-margin: 0 0 -16px;
 		--media-range-track-border-radius: 999999px;
-
-		@apply absolute inset-0 cursor-pointer bg-transparent;
 	}
 
 	.controller:after {
