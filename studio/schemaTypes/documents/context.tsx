@@ -25,7 +25,13 @@ export default defineField({
     {
       name: 'caseStudies',
       type: 'array',
-      of: [{type: 'caseStudy'}],
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'caseStudy'}],
+          validation: (Rule) => Rule.required(),
+        },
+      ],
       validation: (Rule) => Rule.required(),
     },
   ],
