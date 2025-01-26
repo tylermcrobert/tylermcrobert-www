@@ -4,12 +4,9 @@ export const load = async ({
 	locals: { isDraftMode, client },
 	url: { pathname }
 }) => {
-	const { footer, navigation, settings, homepageTitle } =
-		await client.fetch<SiteQuery>(SITE_QUERY);
+	const { settings, homepageTitle } = await client.fetch<SiteQuery>(SITE_QUERY);
 
 	return {
-		navigation,
-		footer,
 		isDraftMode,
 		pathname,
 		homepageTitle: homepageTitle,

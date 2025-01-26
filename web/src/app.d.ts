@@ -10,7 +10,7 @@ declare global {
 			isDraftMode: boolean;
 		}
 
-		interface LayoutData extends Pick<SiteQuery, 'footer' | 'navigation'> {
+		interface LayoutData extends Pick<SiteQuery> {
 			isDraftMode: boolean;
 			siteMetadata: Metadata | null | undefined;
 			siteTitle: string | null | undefined;

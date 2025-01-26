@@ -78,15 +78,6 @@ export type Settings = {
 	metadata?: Metadata;
 };
 
-export type Navigation = {
-	_type: 'navigation';
-	links?: Array<
-		{
-			_key: string;
-		} & Link
-	>;
-};
-
 export type Link = {
 	_type: 'link';
 	reference?:
@@ -104,15 +95,6 @@ export type Link = {
 		  };
 	href?: string;
 	label?: string;
-};
-
-export type Footer = {
-	_type: 'footer';
-	links?: Array<
-		{
-			_key: string;
-		} & Link
-	>;
 };
 
 export type RichTextSimple = Array<{
@@ -188,6 +170,12 @@ export type InternalLink = {
 				_type: 'reference';
 				_weak?: boolean;
 				[internalGroqTypeReferenceTo]?: 'homepage';
+		  }
+		| {
+				_ref: string;
+				_type: 'reference';
+				_weak?: boolean;
+				[internalGroqTypeReferenceTo]?: 'caseStudy';
 		  }
 		| {
 				_ref: string;
@@ -353,6 +341,32 @@ export type Media = {
 	};
 };
 
+export type Context = {
+	_id: string;
+	_type: 'context';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	caseStudies?: Array<{
+		title?: string;
+		slug?: Slug;
+		_type: 'caseStudy';
+		_key: string;
+	}>;
+};
+
+export type CaseStudy = {
+	_id: string;
+	_type: 'caseStudy';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+};
+
 export type MuxVideo = {
 	_type: 'mux.video';
 	asset?: {
@@ -460,9 +474,7 @@ export type AllSanitySchemaTypes =
 	| SanityFileAsset
 	| Geopoint
 	| Settings
-	| Navigation
 	| Link
-	| Footer
 	| RichTextSimple
 	| RichTextMinimal
 	| RichText
@@ -480,6 +492,8 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageMetadata
 	| Media
+	| Context
+	| CaseStudy
 	| MuxVideo
 	| MuxVideoAsset
 	| MuxAssetData
@@ -563,6 +577,12 @@ export type PAGE_QUERYResult = {
 													_ref: string;
 													_type: 'reference';
 													_weak?: boolean;
+													[internalGroqTypeReferenceTo]?: 'caseStudy';
+											  }
+											| {
+													_ref: string;
+													_type: 'reference';
+													_weak?: boolean;
 													[internalGroqTypeReferenceTo]?: 'homepage';
 											  }
 											| {
@@ -571,7 +591,7 @@ export type PAGE_QUERYResult = {
 													_weak?: boolean;
 													[internalGroqTypeReferenceTo]?: 'page';
 											  };
-										type: 'homepage' | 'page' | null;
+										type: 'caseStudy' | 'homepage' | 'page' | null;
 										slug: string | null;
 								  }
 						  >;
@@ -635,6 +655,12 @@ export type HOMEPAGE_QUERYResult =
 															_ref: string;
 															_type: 'reference';
 															_weak?: boolean;
+															[internalGroqTypeReferenceTo]?: 'caseStudy';
+													  }
+													| {
+															_ref: string;
+															_type: 'reference';
+															_weak?: boolean;
 															[internalGroqTypeReferenceTo]?: 'homepage';
 													  }
 													| {
@@ -643,7 +669,7 @@ export type HOMEPAGE_QUERYResult =
 															_weak?: boolean;
 															[internalGroqTypeReferenceTo]?: 'page';
 													  };
-												type: 'homepage' | 'page' | null;
+												type: 'caseStudy' | 'homepage' | 'page' | null;
 												slug: string | null;
 										  }
 								  >;
@@ -656,14 +682,8 @@ export type HOMEPAGE_QUERYResult =
 	  }
 	| null;
 // Variable: SITE_QUERY
-// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
+// Query: {  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,  },  "homepageTitle": *[_id == 'homepage'][0].title}
 export type SITE_QUERYResult = {
-	footer: {
-		links: null;
-	} | null;
-	navigation: {
-		links: null;
-	} | null;
 	settings:
 		| {
 				metadata: null;
@@ -704,7 +724,7 @@ declare module '@sanity/client' {
 		'{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n': MODULES_PROJECTIONResult;
 		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': PAGE_QUERYResult;
 		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': HOMEPAGE_QUERYResult;
-		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
+		'{\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
 		'{\n  "pages": *[_type == \'page\'][]{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
 }

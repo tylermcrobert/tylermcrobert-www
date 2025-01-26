@@ -3,7 +3,6 @@
 		Metadata,
 		DraftModeOverlay,
 		Navigation,
-		Footer,
 		ConsoleCredit
 	} from '$components';
 	import '../style/app.css';
@@ -18,8 +17,6 @@
 		{@render children()}
 	</main>
 {/key}
-
-<Footer />
 
 <Metadata />
 <DraftModeOverlay />

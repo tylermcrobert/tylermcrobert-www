@@ -1,5 +1,10 @@
 import groq from 'groq';
-import type { SanityImageAsset, SITE_QUERYResult, Settings } from './types';
+import type {
+	SanityImageAsset,
+	SITE_QUERYResult,
+	Settings,
+	PAGE_QUERYResult
+} from './types';
 import type { InputValue } from '@portabletext/svelte';
 
 /*******************************************************************************
@@ -123,6 +128,8 @@ export const PAGE_QUERY = groq`
   }
 `;
 
+export type PageQuery = PAGE_QUERYResult & Nullable<{ modules: Module[] }>;
+
 export const HOMEPAGE_QUERY = groq`
   *[_id == 'homepage'][0]{
     modules[]${MODULES_PROJECTION},
@@ -134,12 +141,6 @@ export const HOMEPAGE_QUERY = groq`
  ******************************************************************************/
 
 export const SITE_QUERY = groq`{
-  "footer": *[_id == "footer"][0]{
-    links[]${LINK_PROJECTION},
-  },
-  "navigation": *[_id == "navigation"][0]{
-    links[]${LINK_PROJECTION},
-  },
   "settings": *[_id == "settings"][0]{
     metadata,
     siteTitle,
@@ -149,8 +150,6 @@ export const SITE_QUERY = groq`{
 
 export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 	Nullable<{
-		footer: { links: LinkProjection[] };
-		navigation: { links: LinkProjection[] };
 		settings: Pick<Settings, 'metadata' | 'siteTitle'>;
 	}>;
 

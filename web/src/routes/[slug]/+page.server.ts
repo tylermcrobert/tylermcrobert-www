@@ -1,8 +1,8 @@
-import { PAGE_QUERY, type PAGE_QUERYResult } from '$sanity';
+import { PAGE_QUERY, type PageQuery } from '$sanity';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({ params, locals: { client } }) => {
-	const data = await client.fetch<PAGE_QUERYResult>(PAGE_QUERY, {
+	const data = await client.fetch<PageQuery>(PAGE_QUERY, {
 		slug: params.slug
 	});
 
