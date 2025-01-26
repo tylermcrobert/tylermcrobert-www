@@ -1,6 +1,0 @@
-User-agent: * 
-
-Disallow: /track/*
-
-User-agent: Pinterest
-Crawl-delay: 1
