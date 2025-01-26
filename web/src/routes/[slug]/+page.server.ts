@@ -1,27 +1,18 @@
-import { client } from '$lib/sanity/client';
-import { caseStudyQuery } from '$lib/sanity/queries';
-import { formatTitle } from '$lib/util/formatTitle.js';
+import { PAGE_QUERY, type PAGE_QUERYResult } from '$sanity';
 import { error } from '@sveltejs/kit';
 
-export async function load({ params, locals }) {
-  const responses = await client.fetch(caseStudyQuery, {
-    slug: params.slug
-  });
+export const load = async ({ params, locals: { client } }) => {
+	const data = await client.fetch<PAGE_QUERYResult>(PAGE_QUERY, {
+		slug: params.slug
+	});
 
-  const caseStudySlugs = locals.index.caseStudies.map((item) => item.slug);
+	if (!data) {
+		return error(404);
+	}
 
-  const csExistsInCtx = caseStudySlugs.includes(params.slug);
-  const noResponse = !responses || !responses.length;
-  const is404 = (noResponse || !csExistsInCtx) && !locals.isPreview;
-
-  if (is404) {
-    error(404, { message: 'Not found' });
-  }
-
-  return {
-    // Show first response (Will be draft if authed)
-    caseStudy: responses[0],
-    title: formatTitle(responses[0].title),
-    isPreview: locals.isPreview
-  };
-}
+	return {
+		pageTitle: data.title,
+		metadata: data.metadata,
+		modules: data.modules || []
+	} satisfies App.PageReturn;
+};

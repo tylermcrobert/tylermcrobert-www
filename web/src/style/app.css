@@ -1,0 +1,34 @@
+@import './richtext.css' layer(base);
+@import 'tailwindcss';
+
+@config '../../tailwind.config.js';
+
+@theme {
+	--color-background: 255 255 255;
+	--color-foreground: 0 0 0;
+
+	--spacing-nav-height: 60px;
+	--spacing-available-svh: calc(100svh - 60px);
+	--spacing-available-dvh: calc(100dvh - 60px);
+
+	--max-width-rag-heading: 25ch;
+	--max-width-rag-paragraph: 70ch;
+
+	--z-index-nav: 100;
+
+	--leading-heading: 1;
+}
+
+@utility text-h1 {
+	@apply max-w-rag-heading text-[36px] leading-heading;
+}
+
+@utility text-h2 {
+	@apply max-w-rag-heading text-[26px] leading-heading;
+}
+
+@layer base {
+	html {
+		@apply bg-background text-foreground antialiased;
+	}
+}

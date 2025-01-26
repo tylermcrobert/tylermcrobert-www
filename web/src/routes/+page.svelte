@@ -1,8 +1,7 @@
-<script>
-  import { page } from '$app/stores';
-  import HomeIndex from '$lib/components/HomeIndex.svelte';
-  import Head from '$lib/components/util/Head.svelte';
+<script lang="ts">
+	import { Modules } from '$components';
+
+	let { data } = $props();
 </script>
 
-<Head pageTitle={null} description={$page.data.bio} route="/" />
-<HomeIndex />
+<Modules modules={data.modules} />

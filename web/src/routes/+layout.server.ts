@@ -1,10 +1,19 @@
-import { client } from '../lib/sanity/client';
+import { SITE_QUERY, type SiteQuery } from '$sanity';
 
-const layoutQuery = `*[_type == 'info'][0]{ bio, previewImage }`;
+export const load = async ({
+	locals: { isDraftMode, client },
+	url: { pathname }
+}) => {
+	const { footer, navigation, settings, homepageTitle } =
+		await client.fetch<SiteQuery>(SITE_QUERY);
 
-export async function load(ctx) {
-  const { index } = ctx.locals;
-  const { bio, previewImage } = await client.fetch(layoutQuery);
-
-  return { index, previewImage, bio };
-}
+	return {
+		navigation,
+		footer,
+		isDraftMode,
+		pathname,
+		homepageTitle: homepageTitle,
+		siteTitle: settings?.siteTitle,
+		siteMetadata: settings?.metadata
+	} satisfies App.LayoutData;
+};
