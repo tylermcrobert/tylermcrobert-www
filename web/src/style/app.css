@@ -16,15 +16,15 @@
 
 	--z-index-nav: 100;
 
-	--leading-100: 1;
+	--leading-heading: 1;
 }
 
 @utility text-h1 {
-	@apply max-w-rag-heading text-[36px] leading-100;
+	@apply max-w-rag-heading text-[36px] leading-heading;
 }
 
 @utility text-h2 {
-	@apply max-w-rag-heading text-[26px] leading-100;
+	@apply max-w-rag-heading text-[26px] leading-heading;
 }
 
 @layer base {
