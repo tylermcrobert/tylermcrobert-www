@@ -11,12 +11,14 @@
 	@apply leading-1.2 text-[26px];
 }
 
-@layer base {
-	:root {
-		--color-background: 255 255 255;
-		--color-foreground: 0 0 0;
-	}
+@theme {
+	--color-background: 255 255 255;
+	--color-foreground: 0 0 0;
 
+	--spacing-nav-height: 60px;
+}
+
+@layer base {
 	html {
 		@apply bg-background text-foreground antialiased;
 	}
