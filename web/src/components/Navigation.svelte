@@ -1,4 +1,4 @@
-<nav class="z-nav text-background sticky top-0 mix-blend-difference">
+<nav class="z-nav sticky top-0 text-white mix-blend-difference">
 	<div
 		class="h-nav-height px-standard max-w-wrapper mx-auto flex items-center justify-between"
 	>
