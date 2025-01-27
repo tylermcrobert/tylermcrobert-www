@@ -7,28 +7,71 @@
 	--color-background: 255 255 255;
 	--color-foreground: 0 0 0;
 
-	--spacing-nav-height: 60px;
+	/* --spacing-nav-height: 60px;
 	--spacing-available-svh: calc(100svh - 60px);
-	--spacing-available-dvh: calc(100dvh - 60px);
+	--spacing-available-dvh: calc(100dvh - 60px); */
 
 	--max-width-rag-heading: 25ch;
 	--max-width-rag-paragraph: 70ch;
 
 	--z-index-nav: 100;
 
-	--leading-heading: 1;
-}
-
-@utility text-h1 {
-	@apply max-w-rag-heading text-[36px] leading-heading;
-}
-
-@utility text-h2 {
-	@apply max-w-rag-heading text-[26px] leading-heading;
+	--leading-heading: 1.05;
 }
 
 @layer base {
+	@font-face {
+		font-family: 'Suisse';
+		src: url('../lib/fonts/SuisseIntl-Regular.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'Suisse';
+		src: url('../lib/fonts/SuisseIntl-Regular.otf') format('opentype');
+	}
+
 	html {
 		@apply bg-background text-foreground antialiased;
+		@apply text-[18px] leading-[1.2] tracking-[0.02em] antialiased sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[calc(8px+1vw)];
+	}
+
+	body::-webkit-scrollbar {
+		@apply hidden;
+	}
+
+	br {
+		@apply hidden;
+	}
+
+	hr {
+		@apply border-b-0 border-dashed border-black;
+	}
+
+	.indent {
+		@apply indent-8;
+	}
+}
+
+@layer components {
+	.text-h1 {
+		@apply leading-heading text-[1.78rem] tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
+	}
+
+	.text-h1 br {
+		@apply hidden sm:block;
+	}
+
+	.text-h2 {
+		@apply max-w-rag-heading leading-heading text-[26px];
+	}
+}
+
+@layer utilities {
+	.wrapper {
+		@apply px-standard max-w-wrapper mx-auto;
+	}
+
+	.grid-standard {
+		@apply gap-standard grid grid-cols-6;
 	}
 }
