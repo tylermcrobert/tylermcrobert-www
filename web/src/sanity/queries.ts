@@ -134,6 +134,40 @@ export type ModuleWebsite = Nullable<{
 	Pick<Website, 'showFrame' | 'backgroundImg'>;
 
 /**
+ * Diptych
+ */
+
+const MODULE_DIPTYCH = `//groq
+  _type == 'diptych' => {
+    items[]{
+      _type,
+
+      _type == 'diptych.media' => {
+        media${MEDIA_PROJECTION}
+      },
+      
+      _type == 'diptych.text' => {
+        richText[]${RICH_TEXT_PROJECTION}
+      }
+    }
+  }
+`;
+
+export type ModuleDiptych = Nullable<{
+	_type: 'diptych';
+	items: (
+		| Nullable<{
+				_type: 'diptych.text';
+				richText: RichTextProjection;
+		  }>
+		| Nullable<{
+				_type: 'diptych.media';
+				media: MediaProjection | null;
+		  }>
+	)[];
+}>;
+
+/**
  * Modules
  */
 
@@ -141,11 +175,16 @@ const MODULES_PROJECTION = groq`{
   _type,
   ${MODULE_MEDIA_BLOCK},
   ${MODULE_TEXT_BLOCK},
-  ${MODULE_WEBSITE}
+  ${MODULE_WEBSITE},
+  ${MODULE_DIPTYCH}
 }
 `;
 
-export type Module = ModuleMediaBlock | ModuleTextBlock | ModuleWebsite;
+export type Module =
+	| ModuleMediaBlock
+	| ModuleTextBlock
+	| ModuleWebsite
+	| ModuleDiptych;
 
 /*******************************************************************************
  * PAGES
