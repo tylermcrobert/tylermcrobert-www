@@ -44,19 +44,5 @@ export const load = async ({
 		} satisfies App.PageReturn;
 	}
 
-	const context = await client.fetch(
-		'*[_type == "context" && slug.current == $slug][0]._id',
-		{ slug: params.slug }
-	);
-
-	if (context) {
-		cookies.set('context', params.slug, {
-			httpOnly: true,
-			path: '/'
-		});
-
-		redirect(307, '/');
-	}
-
 	return error(404);
 };

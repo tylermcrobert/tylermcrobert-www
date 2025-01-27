@@ -12,7 +12,7 @@
 			<a href="/">Tyler McRobert</a>
 
 			{#if contextTitle}
-				<a href="/c/exit" class="group">
+				<a href="/x/exit" class="group">
 					&times;
 					<span>{contextTitle}</span>
 					<span class="opacity-0 group-hover:opacity-100">(close)</span>
