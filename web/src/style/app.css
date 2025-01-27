@@ -40,8 +40,8 @@
 
 	/* For RichText */
 
-	--max-width-rag-heading: 25ch;
-	--max-width-rag-paragraph: 70ch;
+	--max-width-rag-heading: 15ch;
+	--max-width-rag-paragraph: 40ch;
 }
 
 @layer base {
