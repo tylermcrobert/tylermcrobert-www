@@ -4,22 +4,44 @@
 @config '../../tailwind.config.js';
 
 @theme {
-	--color-background: 255 255 255;
-	--color-foreground: 0 0 0;
+	/* Colors */
+
+	--color-background: rgb(255, 255, 255);
+	--color-foreground: rgb(0, 0, 0);
+	--color-image-preload: 245 245 245;
+
+	/* Spacing */
+
+	--spacing-nav-height: 2.25rem;
+	--spacing-wrapper: 65rem;
+
+	--spacing-standard: 1.33rem;
+	--spacing-small: 0.667rem;
+	--spacing-medium: 3.16rem;
+	--spacing-large: 5rem;
 
 	/* --spacing-nav-height: 60px;
 	--spacing-available-svh: calc(100svh - 60px);
 	--spacing-available-dvh: calc(100dvh - 60px); */
 
-	--max-width-rag-heading: 25ch;
-	--max-width-rag-paragraph: 70ch;
+	/* Z-Index */
 
 	--z-index-nav: 100;
 
-	--leading-heading: 1.05;
+	/* Breakpoints */
 
 	--breakpoint-xl: 1440px;
 	--breakpoint-2xl: 1900px;
+
+	/* Font */
+
+	--font-sans: Suisse, Helvetica, Arial, sans-serif;
+	--leading-heading: 1.05;
+
+	/* For RichText */
+
+	--max-width-rag-heading: 25ch;
+	--max-width-rag-paragraph: 70ch;
 }
 
 @layer base {

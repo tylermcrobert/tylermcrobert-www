@@ -13,9 +13,7 @@
 <Navigation />
 
 {#key data.pathname}
-	<main class="bg-purple-100">
-		{@render children()}
-	</main>
+	{@render children()}
 {/key}
 
 <Metadata />
