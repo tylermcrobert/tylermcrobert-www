@@ -14,7 +14,7 @@ export default defineType({
       type: 'array',
       validation: (Rule) =>
         Rule.required().min(1).max(2).error('Diptychs must contain 1 to 2 items.'),
-      of: [{type: 'diptych.media'}, {type: 'diptych.text'}],
+      of: [{type: 'diptych.media'}, {type: 'diptych.text'}, {type: 'diptych.spacer'}],
     },
   ],
   preview: {
@@ -67,6 +67,26 @@ export const diptychText = defineType({
     select: {richText: 'richText'},
     prepare({richText}) {
       return {title: toPlainText(richText)}
+    },
+  },
+})
+
+export const diptychSpacer = defineType({
+  title: 'Spacer',
+  name: 'diptych.spacer',
+  type: 'object',
+  icon: () => '✏️',
+  fields: [
+    {
+      name: 'arbitraryText',
+      type: 'string',
+      initialValue: 'Hello world',
+      hidden: true,
+    },
+  ],
+  preview: {
+    prepare() {
+      return {title: 'Spacer'}
     },
   },
 })

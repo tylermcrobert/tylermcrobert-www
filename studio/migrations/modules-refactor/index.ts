@@ -12,6 +12,34 @@ export default defineMigration({
 
       for (let i = 0; i < modules.length; i++) {
         const module = modules[i]
+        const nextIndex = i + 1
+        const nextModule = modules[nextIndex]
+
+        if (module._type === 'emptySpace') {
+          console.log(nextModule?._type)
+          if (nextModule?._type === 'dynamicImage') {
+            // Add the current module as a diptych
+            modulesV2.push({
+              _type: 'diptych',
+              items: [
+                {
+                  _type: 'diptych.spacer',
+                  arbitraryText: 'Hello World',
+                },
+                {
+                  _type: 'diptych.media',
+                  media: {
+                    image: nextModule.image,
+                  },
+                },
+              ],
+            })
+
+            // Skip the next module
+            i++ // Increment `i` to skip processing the next module
+            continue
+          }
+        }
 
         if (module._type === 'textBlock') {
           modulesV2.push({
@@ -32,13 +60,7 @@ export default defineMigration({
         }
 
         if (module._type === 'dynamicImage') {
-          const nextIndex = i + 1
-
           if (module.span === 'half') {
-            const nextModule = modules[nextIndex]
-
-            console.log(nextModule)
-
             // Check the condition to remove the next module
             if (nextModule?._type === 'dynamicImage' && nextModule.span === 'half') {
               // Add the current module as a diptych
@@ -94,7 +116,7 @@ export default defineMigration({
         modulesV2.push(module)
       }
 
-      return [at('modulesV2', set(modulesV2))]
+      return [at('modulesV2', set([]))]
     },
     node(node, path, context) {
       // this will be called for every node in every document of the matching type
