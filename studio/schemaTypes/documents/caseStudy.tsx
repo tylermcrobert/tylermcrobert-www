@@ -73,6 +73,11 @@ export default defineField({
       type: 'modules',
       // validation: (Rule) => Rule.required(),
     },
+
+    {
+      name: 'metadata',
+      type: 'metadata',
+    },
   ],
 
   preview: {
