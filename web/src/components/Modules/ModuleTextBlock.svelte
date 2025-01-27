@@ -8,7 +8,7 @@
 </script>
 
 {#if data.richText}
-	<div class="bg-purple-300 p-4">
+	<div class="wrapper my-standard">
 		<RichText value={data.richText} />
 	</div>
 {/if}
