@@ -17,6 +17,9 @@
 	--z-index-nav: 100;
 
 	--leading-heading: 1.05;
+
+	--breakpoint-xl: 1440px;
+	--breakpoint-2xl: 1900px;
 }
 
 @layer base {
