@@ -3,7 +3,8 @@ import type {
 	SanityImageAsset,
 	SITE_QUERYResult,
 	Settings,
-	PAGE_QUERYResult
+	PAGE_QUERYResult,
+	CASE_STUDY_QUERYResult
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
 
@@ -137,10 +138,19 @@ export const HOMEPAGE_QUERY = groq`
 `;
 
 export const CASE_STUDY_QUERY = groq`
-  *[_type == 'caseStudy'][0]{
-    modules
+  *[_type == 'caseStudy' && slug.current == $slug][0]{
+    intro,
+    deliverables,
+    date,
+    title,
+    description,
+    metadata,
+    "modules": modulesV2[]${MODULES_PROJECTION},
   }
 `;
+
+export type CaseStudyQuery = CASE_STUDY_QUERYResult &
+	Nullable<{ modules: Module[] }>;
 
 /*******************************************************************************
  * GLOBAL
