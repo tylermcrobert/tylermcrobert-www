@@ -13,7 +13,6 @@
 	/* Spacing */
 
 	--spacing-nav-height: 2.25rem;
-	--spacing-wrapper: 65rem;
 
 	--spacing-standard: 1.33rem;
 	--spacing-small: 0.667rem;
@@ -30,6 +29,9 @@
 
 	/* Breakpoints */
 
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
 	--breakpoint-xl: 1440px;
 	--breakpoint-2xl: 1900px;
 
@@ -42,6 +44,7 @@
 
 	--max-width-rag-heading: 15ch;
 	--max-width-rag-paragraph: 40ch;
+	--max-width-wrapper: 65rem;
 }
 
 @layer base {
