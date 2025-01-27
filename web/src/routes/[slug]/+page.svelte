@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { CaseStudyIntro, Modules } from '$components';
+	import { CaseStudyHeader, Modules } from '$components';
 
 	let { data } = $props();
 </script>
 
 {#if data.caseStudy}
-	<CaseStudyIntro
+	<CaseStudyHeader
 		index={0}
 		intro={data.caseStudy.intro}
 		deliverables={data.caseStudy.deliverables}
