@@ -4,12 +4,13 @@ import {
 	type CaseStudyQuery,
 	type PageQuery
 } from '$sanity';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 
 export const load = async ({
 	parent,
 	params,
-	locals: { client, isDraftMode }
+	locals: { client, isDraftMode },
+	cookies
 }) => {
 	const { contextCaseStudies } = await parent();
 
@@ -41,6 +42,20 @@ export const load = async ({
 			metadata: page.metadata,
 			modules: page.modules || []
 		} satisfies App.PageReturn;
+	}
+
+	const context = await client.fetch(
+		'*[_type == "context" && slug.current == $slug][0]._id',
+		{ slug: params.slug }
+	);
+
+	if (context) {
+		cookies.set('context', params.slug, {
+			httpOnly: true,
+			path: '/'
+		});
+
+		redirect(307, '/');
 	}
 
 	return error(404);
