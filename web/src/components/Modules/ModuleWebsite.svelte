@@ -10,7 +10,7 @@
 
 <div
 	style:background={data.theme?.background}
-	class="m-standard relative w-full bg-black p-[10%]"
+	class="my-standard relative w-full bg-black p-[10%]"
 >
 	<div class="relative z-10">
 		{#if showFrame !== false && theme?.frame}

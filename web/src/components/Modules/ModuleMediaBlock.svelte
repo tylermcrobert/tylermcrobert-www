@@ -10,5 +10,7 @@
 </script>
 
 {#if data.media}
-	<Media data={data.media} sizes="100vw" alt={null} />
+	<div class="my-standard">
+		<Media data={data.media} sizes="100vw" alt={null} />
+	</div>
 {/if}

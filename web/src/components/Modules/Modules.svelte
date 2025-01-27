@@ -9,16 +9,18 @@
 	let { modules }: Props = $props();
 </script>
 
-{#each modules as data}
-	<section data-name={data._type}>
-		{#if data._type === 'textBlock'}
-			<TextBlock {data} />
-		{:else if data._type === 'mediaBlock'}
-			<MediaBlock {data} />
-		{:else if data._type === 'website'}
-			<ModuleWebsite {data} />
-		{:else}
-			{console.warn('Cannot find module:', data._type)}
-		{/if}
-	</section>
-{/each}
+<div class="wrapper mx-auto">
+	{#each modules as data}
+		<section data-name={data._type}>
+			{#if data._type === 'textBlock'}
+				<TextBlock {data} />
+			{:else if data._type === 'mediaBlock'}
+				<MediaBlock {data} />
+			{:else if data._type === 'website'}
+				<ModuleWebsite {data} />
+			{:else}
+				{console.warn('Cannot find module:', data._type)}
+			{/if}
+		</section>
+	{/each}
+</div>
