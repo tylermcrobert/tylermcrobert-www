@@ -6,8 +6,18 @@ import {
 } from '$sanity';
 import { error } from '@sveltejs/kit';
 
-export const load = async ({ parent, params, locals: { client } }) => {
+export const load = async ({
+	parent,
+	params,
+	locals: { client, isDraftMode }
+}) => {
 	const { contextCaseStudies } = await parent();
+
+	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
+
+	if (index === -1 && !isDraftMode) {
+		return error(404);
+	}
 
 	const caseStudy = await client.fetch<CaseStudyQuery>(CASE_STUDY_QUERY, {
 		slug: params.slug
@@ -19,7 +29,7 @@ export const load = async ({ parent, params, locals: { client } }) => {
 			pageTitle: caseStudy.title,
 			modules: caseStudy.modules || [],
 			metadata: caseStudy.metadata,
-			index: contextCaseStudies.findIndex(({ slug }) => slug == params.slug)
+			index: index
 		} satisfies App.PageReturn;
 	}
 

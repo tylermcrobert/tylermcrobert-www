@@ -6,7 +6,7 @@ type Link = {
 };
 
 export function resolveLink({ slug, type }: Link) {
-	if (type === 'page') {
+	if (type === 'page' || type == 'caseStudy') {
 		return `/${slug}`;
 	}
 
