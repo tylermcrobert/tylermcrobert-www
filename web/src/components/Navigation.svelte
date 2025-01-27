@@ -1,50 +1,19 @@
-<script lang="ts">
-	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/state';
-	import { BodyScrollLock, Link } from '$components';
+<nav class="z-nav text-background sticky top-0 mix-blend-difference">
+	<div
+		class="h-nav-height px-standard max-w-wrapper mx-auto flex items-center justify-between"
+	>
+		<div>
+			<a href="/">Tyler McRobert</a>
 
-	let isMobileNavOpen = $state(false);
+			<!-- {#if ctxTitle}
+        <a href="/c/default" class="group">
+          &times;
+          <span>{ctxTitle}</span>
+          <span class="opacity-0 group-hover:opacity-100">(close)</span>
+        </a>
+      {/if} -->
+		</div>
 
-	afterNavigate(() => {
-		isMobileNavOpen = false;
-	});
-</script>
-
-<nav
-	class="h-nav-height z-nav sticky top-0 flex items-center gap-4 bg-blue-500 px-4"
->
-	<div class="flex-1">
-		<a href="/">svelte-sanity-starter</a>
+		<a href="/info">Info</a>
 	</div>
-
-	<ul class="hidden gap-4 bg-purple-400 sm:flex">
-		{#each page.data.navigation?.links || [] as link}
-			<li>
-				<Link {link} />
-			</li>
-		{/each}
-	</ul>
-
-	<button
-		class="bg-green-500 sm:hidden"
-		onclick={() => (isMobileNavOpen = !isMobileNavOpen)}
-	>
-		{isMobileNavOpen ? 'Close' : 'Menu'}
-	</button>
 </nav>
-
-{#if isMobileNavOpen}
-	<BodyScrollLock />
-
-	<aside
-		class="h-available-dvh top-nav-height z-nav fixed w-full bg-red-200 p-4 sm:hidden"
-	>
-		<ul>
-			{#each page.data.navigation?.links || [] as link}
-				<li>
-					<Link {link} />
-				</li>
-			{/each}
-		</ul>
-	</aside>
-{/if}
