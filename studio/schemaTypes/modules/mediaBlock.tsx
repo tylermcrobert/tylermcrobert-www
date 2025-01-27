@@ -13,6 +13,11 @@ export default defineType({
       type: 'media',
       validation: (Rule) => Rule.required(),
     },
+
+    {
+      name: 'aspect',
+      type: 'aspect',
+    },
   ],
   preview: {
     select: {

@@ -20,8 +20,10 @@ import media from './objects/media'
 import mediaBlock from './modules/mediaBlock'
 import website from './modules/website'
 import diptych, {diptychMedia, diptychText, diptychSpacer} from './modules/diptych'
+import aspect from './objects/aspect'
 
 export const schemaTypes = [
+  aspect,
   diptychSpacer,
   diptychMedia,
   diptychText,

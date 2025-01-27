@@ -249,6 +249,7 @@ export type TextBlock = {
 export type MediaBlock = {
 	_type: 'mediaBlock';
 	media?: Media;
+	aspect?: 1.25 | 1.33 | 1.5 | 1.6 | 1.78 | 0.8 | 0.75 | 0.67 | 0.63 | 0.56;
 };
 
 export type Context = {
@@ -397,6 +398,9 @@ export type Diptych = {
 		| ({
 				_key: string;
 		  } & DiptychText)
+		| ({
+				_key: string;
+		  } & DiptychSpacer)
 	>;
 };
 
@@ -408,6 +412,7 @@ export type DiptychText = {
 export type DiptychMedia = {
 	_type: 'diptych.media';
 	media?: Media;
+	aspect?: 1.25 | 1.33 | 1.5 | 1.6 | 1.78 | 0.8 | 0.75 | 0.67 | 0.63 | 0.56;
 };
 
 export type SanityImageCrop = {
@@ -494,6 +499,23 @@ export type Media = {
 		_type: 'image';
 	};
 };
+
+export type DiptychSpacer = {
+	_type: 'diptych.spacer';
+	arbitraryText?: string;
+};
+
+export type Aspect =
+	| 1.25
+	| 1.33
+	| 1.5
+	| 1.6
+	| 1.78
+	| 0.8
+	| 0.75
+	| 0.67
+	| 0.63
+	| 0.56;
 
 export type Color = {
 	_type: 'color';
@@ -662,6 +684,8 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageMetadata
 	| Media
+	| DiptychSpacer
+	| Aspect
 	| Color
 	| RgbaColor
 	| HsvaColor
@@ -694,18 +718,103 @@ export type MEDIA_PROJECTIONResult = {
 	video: never;
 };
 // Variable: MODULES_PROJECTION
-// Query: {  _type,  // groq  _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    theme->{      "dots": dots.hex,      "frame": frame.hex,      "background": background.hex,    },    backgroundImg,    showFrame,    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},  }}
+// Query: {  _type,  // groq  _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},    aspect  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    theme->{      "dots": dots.hex,      "frame": frame.hex,      "background": background.hex,    },    backgroundImg,    showFrame,    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},  },  //groq  _type == 'diptych' => {    items[]{      _type,      _type == 'diptych.media' => {        media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},        aspect,      },            _type == 'diptych.text' => {        richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}      }    }  }}
 export type MODULES_PROJECTIONResult = {
 	_type: never;
 };
 // Variable: PAGE_QUERY
-// Query: *[_type == 'page' && slug.current == $slug][0]{    title,    metadata,    modules[]{  _type,  // groq  _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    theme->{      "dots": dots.hex,      "frame": frame.hex,      "background": background.hex,    },    backgroundImg,    showFrame,    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},  }},  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    title,    metadata,    modules[]{  _type,  // groq  _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},    aspect  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    theme->{      "dots": dots.hex,      "frame": frame.hex,      "background": background.hex,    },    backgroundImg,    showFrame,    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},  },  //groq  _type == 'diptych' => {    items[]{      _type,      _type == 'diptych.media' => {        media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},        aspect,      },            _type == 'diptych.text' => {        richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}      }    }  }},  }
 export type PAGE_QUERYResult = {
 	title: string | null;
 	metadata: Metadata | null;
 	modules: Array<
 		| {
 				_type: 'diptych';
+				items: Array<
+					| {
+							_type: 'diptych.media';
+							media: {
+								image: {
+									asset?: {
+										_ref: string;
+										_type: 'reference';
+										_weak?: boolean;
+										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+									};
+									hotspot?: SanityImageHotspot;
+									crop?: SanityImageCrop;
+									_type: 'image';
+								} | null;
+								video: null;
+							} | null;
+							aspect:
+								| 0.56
+								| 0.63
+								| 0.67
+								| 0.75
+								| 0.8
+								| 1.25
+								| 1.33
+								| 1.5
+								| 1.6
+								| 1.78
+								| null;
+					  }
+					| {
+							_type: 'diptych.spacer';
+					  }
+					| {
+							_type: 'diptych.text';
+							richText: Array<{
+								children?: Array<{
+									marks?: Array<string>;
+									text?: string;
+									_type: 'span';
+									_key: string;
+								}>;
+								style?: 'h1' | 'h2' | 'normal';
+								listItem?: 'bullet' | 'number';
+								markDefs:
+									| Array<never>
+									| Array<
+											| {
+													_key: string;
+													_type: 'externalLink';
+													href?: string;
+													blank?: boolean;
+											  }
+											| {
+													_key: string;
+													_type: 'internalLink';
+													reference?:
+														| {
+																_ref: string;
+																_type: 'reference';
+																_weak?: boolean;
+																[internalGroqTypeReferenceTo]?: 'caseStudy';
+														  }
+														| {
+																_ref: string;
+																_type: 'reference';
+																_weak?: boolean;
+																[internalGroqTypeReferenceTo]?: 'homepage';
+														  }
+														| {
+																_ref: string;
+																_type: 'reference';
+																_weak?: boolean;
+																[internalGroqTypeReferenceTo]?: 'page';
+														  };
+													type: 'caseStudy' | 'homepage' | 'page' | null;
+													slug: string | null;
+											  }
+									  >;
+								level?: number;
+								_type: 'block';
+								_key: string;
+							}> | null;
+					  }
+				> | null;
 		  }
 		| {
 				_type: 'mediaBlock';
@@ -723,6 +832,18 @@ export type PAGE_QUERYResult = {
 					} | null;
 					video: null;
 				} | null;
+				aspect:
+					| 0.56
+					| 0.63
+					| 0.67
+					| 0.75
+					| 0.8
+					| 1.25
+					| 1.33
+					| 1.5
+					| 1.6
+					| 1.78
+					| null;
 		  }
 		| {
 				_type: 'textBlock';
@@ -812,7 +933,7 @@ export type PAGE_QUERYResult = {
 	> | null;
 } | null;
 // Variable: CASE_STUDY_QUERY
-// Query: *[_type == 'caseStudy' && slug.current == $slug][0]{    intro,    deliverables,    date,    title,    description,    metadata,    "modules": modulesV2[]{  _type,  // groq  _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    theme->{      "dots": dots.hex,      "frame": frame.hex,      "background": background.hex,    },    backgroundImg,    showFrame,    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},  }},  }
+// Query: *[_type == 'caseStudy' && slug.current == $slug][0]{    intro,    deliverables,    date,    title,    description,    metadata,    "modules": modulesV2[]{  _type,  // groq  _type == 'mediaBlock' => {    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},    aspect  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    theme->{      "dots": dots.hex,      "frame": frame.hex,      "background": background.hex,    },    backgroundImg,    showFrame,    media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},  },  //groq  _type == 'diptych' => {    items[]{      _type,      _type == 'diptych.media' => {        media{  "image": image,  "video": video.asset->{    "id": playbackId,    "aspect": data.aspect_ratio,    "showControls": ^.showVideoControls,    "posterFrame": ^.posterFrame  }},        aspect,      },            _type == 'diptych.text' => {        richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}      }    }  }},  }
 export type CASE_STUDY_QUERYResult = {
 	intro: string | null;
 	deliverables: Array<string> | null;
@@ -823,6 +944,91 @@ export type CASE_STUDY_QUERYResult = {
 	modules: Array<
 		| {
 				_type: 'diptych';
+				items: Array<
+					| {
+							_type: 'diptych.media';
+							media: {
+								image: {
+									asset?: {
+										_ref: string;
+										_type: 'reference';
+										_weak?: boolean;
+										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+									};
+									hotspot?: SanityImageHotspot;
+									crop?: SanityImageCrop;
+									_type: 'image';
+								} | null;
+								video: null;
+							} | null;
+							aspect:
+								| 0.56
+								| 0.63
+								| 0.67
+								| 0.75
+								| 0.8
+								| 1.25
+								| 1.33
+								| 1.5
+								| 1.6
+								| 1.78
+								| null;
+					  }
+					| {
+							_type: 'diptych.spacer';
+					  }
+					| {
+							_type: 'diptych.text';
+							richText: Array<{
+								children?: Array<{
+									marks?: Array<string>;
+									text?: string;
+									_type: 'span';
+									_key: string;
+								}>;
+								style?: 'h1' | 'h2' | 'normal';
+								listItem?: 'bullet' | 'number';
+								markDefs:
+									| Array<never>
+									| Array<
+											| {
+													_key: string;
+													_type: 'externalLink';
+													href?: string;
+													blank?: boolean;
+											  }
+											| {
+													_key: string;
+													_type: 'internalLink';
+													reference?:
+														| {
+																_ref: string;
+																_type: 'reference';
+																_weak?: boolean;
+																[internalGroqTypeReferenceTo]?: 'caseStudy';
+														  }
+														| {
+																_ref: string;
+																_type: 'reference';
+																_weak?: boolean;
+																[internalGroqTypeReferenceTo]?: 'homepage';
+														  }
+														| {
+																_ref: string;
+																_type: 'reference';
+																_weak?: boolean;
+																[internalGroqTypeReferenceTo]?: 'page';
+														  };
+													type: 'caseStudy' | 'homepage' | 'page' | null;
+													slug: string | null;
+											  }
+									  >;
+								level?: number;
+								_type: 'block';
+								_key: string;
+							}> | null;
+					  }
+				> | null;
 		  }
 		| {
 				_type: 'mediaBlock';
@@ -840,6 +1046,18 @@ export type CASE_STUDY_QUERYResult = {
 					} | null;
 					video: null;
 				} | null;
+				aspect:
+					| 0.56
+					| 0.63
+					| 0.67
+					| 0.75
+					| 0.8
+					| 1.25
+					| 1.33
+					| 1.5
+					| 1.6
+					| 1.78
+					| null;
 		  }
 		| {
 				_type: 'textBlock';
@@ -1168,9 +1386,9 @@ declare module '@sanity/client' {
 		'{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}': LINK_PROJECTIONResult;
 		'{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}': RICH_TEXT_PROJECTIONResult;
 		'{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}': MEDIA_PROJECTIONResult;
-		'{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n\n}\n': MODULES_PROJECTIONResult;
-		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n\n}\n,\n  }\n': PAGE_QUERYResult;
-		'\n  *[_type == \'caseStudy\' && slug.current == $slug][0]{\n    intro,\n    deliverables,\n    date,\n    title,\n    description,\n    metadata,\n    "modules": modulesV2[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n\n}\n,\n  }\n': CASE_STUDY_QUERYResult;
+		'{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n\n}\n': MODULES_PROJECTIONResult;
+		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n\n}\n,\n  }\n': PAGE_QUERYResult;
+		'\n  *[_type == \'caseStudy\' && slug.current == $slug][0]{\n    intro,\n    deliverables,\n    date,\n    title,\n    description,\n    metadata,\n    "modules": modulesV2[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n\n}\n,\n  }\n': CASE_STUDY_QUERYResult;
 		'{\n  "homepageTitle": *[_id == \'homepage\'][0].title,\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;
 		'{\n  "info": *[_id == \'info\'][0],\n  "pages": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}

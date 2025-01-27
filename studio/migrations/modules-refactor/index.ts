@@ -30,12 +30,14 @@ export default defineMigration({
               items: [
                 {
                   _type: 'diptych.media',
+                  aspect: 1 / module.aspect,
                   media: {
                     image: module.image,
                   },
                 },
                 {
                   _type: 'diptych.media',
+                  aspect: 1 / module.aspect,
                   media: {
                     image: nextModule.image,
                   },
@@ -53,6 +55,7 @@ export default defineMigration({
               items: [
                 {
                   _type: 'diptych.media',
+                  aspect: 1 / module.aspect,
                   media: {
                     image: module.image,
                   },
@@ -77,6 +80,7 @@ export default defineMigration({
                 },
                 {
                   _type: 'diptych.media',
+                  aspect: 1 / module.aspect,
                   media: {
                     image: module.image,
                   },
@@ -92,6 +96,7 @@ export default defineMigration({
             items: [
               {
                 _type: 'diptych.media',
+                aspect: 1 / module.aspect,
                 media: {
                   image: module.image,
                 },
@@ -133,6 +138,7 @@ export default defineMigration({
           // Handle other dynamicImage modules
           modulesV2.push({
             _type: 'mediaBlock',
+            aspect: 1 / module.aspect,
             media: {
               image: module.image,
             },

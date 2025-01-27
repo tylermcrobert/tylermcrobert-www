@@ -11,6 +11,11 @@
 
 {#if data.media}
 	<div class="my-standard">
-		<Media data={data.media} sizes="100vw" alt={null} />
+		<Media
+			data={data.media}
+			imageAspect={data.aspect}
+			sizes="100vw"
+			alt={null}
+		/>
 	</div>
 {/if}

@@ -5,7 +5,9 @@ import type {
 	PAGE_QUERYResult,
 	CASE_STUDY_QUERYResult,
 	Website,
-	SITE_QUERYResult
+	SITE_QUERYResult,
+	MediaBlock,
+	DiptychMedia
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
 
@@ -96,14 +98,16 @@ export type ModuleTextBlock = Nullable<{
 
 const MODULE_MEDIA_BLOCK = `// groq
   _type == 'mediaBlock' => {
-    media${MEDIA_PROJECTION}
+    media${MEDIA_PROJECTION},
+    aspect
   }
 `;
 
 export type ModuleMediaBlock = Nullable<{
 	_type: 'mediaBlock';
 	media: MediaProjection;
-}>;
+}> &
+	Pick<MediaBlock, 'aspect'>;
 
 /**
  * Website
@@ -143,7 +147,8 @@ const MODULE_DIPTYCH = `//groq
       _type,
 
       _type == 'diptych.media' => {
-        media${MEDIA_PROJECTION}
+        media${MEDIA_PROJECTION},
+        aspect,
       },
       
       _type == 'diptych.text' => {
@@ -160,10 +165,11 @@ export type ModuleDiptych = Nullable<{
 				_type: 'diptych.text';
 				richText: RichTextProjection;
 		  }>
-		| Nullable<{
+		| (Nullable<{
 				_type: 'diptych.media';
 				media: MediaProjection | null;
-		  }>
+		  }> &
+				Pick<DiptychMedia, 'aspect'>)
 	)[];
 }>;
 

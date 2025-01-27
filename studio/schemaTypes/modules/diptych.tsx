@@ -41,6 +41,12 @@ export const diptychMedia = defineType({
     {
       name: 'media',
       type: 'media',
+      validation: (Rule) => Rule.required(),
+    },
+
+    {
+      name: 'aspect',
+      type: 'aspect',
     },
   ],
   preview: {

@@ -14,6 +14,7 @@
 				data={item.media}
 				alt={null}
 				sizes="(min-width: 768px), 50vw, 100vw"
+				imageAspect={item.aspect}
 			/>
 		{:else if item._type === 'diptych.text' && item.richText}
 			<RichText value={item.richText} />
