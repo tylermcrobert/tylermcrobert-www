@@ -12,7 +12,8 @@ export async function GET({ locals }) {
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-    ${sanityData.pages
+
+    ${(sanityData.pages || [])
 			.map(
 				(page) => `
         <url>
@@ -22,7 +23,18 @@ export async function GET({ locals }) {
         </url>`
 			)
 			.join('')}
-  </urlset>
+                
+    ${
+			sanityData.info
+				? `<url>
+        <loc>${PUBLIC_SITE_URL}/info</loc>
+        <lastmod>${sanityData.info?._updatedAt}</lastmod>
+        <priority>0.8</priority>
+      </url>
+    `
+				: ''
+		}
+    </urlset>
   `;
 
 	const response = new Response(body);

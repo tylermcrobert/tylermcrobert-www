@@ -959,13 +959,206 @@ export type SITE_QUERYResult = {
 	} | null;
 };
 // Variable: SITEMAP_QUERY
-// Query: {  "pages": *[_type == 'page'][]{     title,    "slug": slug.current,    _updatedAt,  }}
+// Query: {  "info": *[_id == 'info'][0],  "pages": *[_id == "homepage"][0].context->caseStudies[]->{     title,    "slug": slug.current,    _updatedAt,  }}
 export type SITEMAP_QUERYResult = {
+	info:
+		| {
+				_id: string;
+				_type: 'caseStudy';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				slug?: Slug;
+				date?: string;
+				intro?: string;
+				deliverables?: Array<string>;
+				previewImage?: {
+					asset?: {
+						_ref: string;
+						_type: 'reference';
+						_weak?: boolean;
+						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+					};
+					hotspot?: SanityImageHotspot;
+					crop?: SanityImageCrop;
+					_type: 'image';
+				};
+				description?: RichTextSimple;
+				modules?: Modules;
+				modulesV2?: Modules;
+				metadata?: Metadata;
+		  }
+		| {
+				_id: string;
+				_type: 'context';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				slug?: Slug;
+				caseStudies?: Array<{
+					_ref: string;
+					_type: 'reference';
+					_weak?: boolean;
+					_key: string;
+					[internalGroqTypeReferenceTo]?: 'caseStudy';
+				}>;
+		  }
+		| {
+				_id: string;
+				_type: 'homepage';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				context?: {
+					_ref: string;
+					_type: 'reference';
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: 'context';
+				};
+		  }
+		| {
+				_id: string;
+				_type: 'info';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				bio?: string;
+				clients?: Array<string>;
+				playlists?: Array<{
+					_ref: string;
+					_type: 'reference';
+					_weak?: boolean;
+					_key: string;
+					[internalGroqTypeReferenceTo]?: 'playlist';
+				}>;
+				previewImage?: {
+					asset?: {
+						_ref: string;
+						_type: 'reference';
+						_weak?: boolean;
+						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+					};
+					hotspot?: SanityImageHotspot;
+					crop?: SanityImageCrop;
+					_type: 'image';
+				};
+				slug?: Slug;
+		  }
+		| {
+				_id: string;
+				_type: 'media.tag';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				name?: Slug;
+		  }
+		| {
+				_id: string;
+				_type: 'page';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				slug?: Slug;
+				modules?: Array<
+					| ({
+							_key: string;
+					  } & Diptych)
+					| ({
+							_key: string;
+					  } & MediaBlock)
+					| ({
+							_key: string;
+					  } & TextBlock)
+					| ({
+							_key: string;
+					  } & Website)
+				>;
+				metadata?: Metadata;
+		  }
+		| {
+				_id: string;
+				_type: 'playlist';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				slug?: Slug;
+				link?: string;
+		  }
+		| {
+				_id: string;
+				_type: 'sanity.fileAsset';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				originalFilename?: string;
+				label?: string;
+				title?: string;
+				description?: string;
+				altText?: string;
+				sha1hash?: string;
+				extension?: string;
+				mimeType?: string;
+				size?: number;
+				assetId?: string;
+				uploadId?: string;
+				path?: string;
+				url?: string;
+				source?: SanityAssetSourceData;
+		  }
+		| {
+				_id: string;
+				_type: 'sanity.imageAsset';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				originalFilename?: string;
+				label?: string;
+				title?: string;
+				description?: string;
+				altText?: string;
+				sha1hash?: string;
+				extension?: string;
+				mimeType?: string;
+				size?: number;
+				assetId?: string;
+				uploadId?: string;
+				path?: string;
+				url?: string;
+				metadata?: SanityImageMetadata;
+				source?: SanityAssetSourceData;
+		  }
+		| {
+				_id: string;
+				_type: 'settings';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				siteTitle?: string;
+				metadata?: Metadata;
+		  }
+		| {
+				_id: string;
+				_type: 'webFrameTheme';
+				_createdAt: string;
+				_updatedAt: string;
+				_rev: string;
+				title?: string;
+				background?: Color;
+				frame?: Color;
+				dots?: Color;
+		  }
+		| null;
 	pages: Array<{
 		title: string | null;
 		slug: string | null;
 		_updatedAt: string;
-	}>;
+	}> | null;
 };
 
 // Query TypeMap
@@ -979,6 +1172,6 @@ declare module '@sanity/client' {
 		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n\n}\n,\n  }\n': PAGE_QUERYResult;
 		'\n  *[_type == \'caseStudy\' && slug.current == $slug][0]{\n    intro,\n    deliverables,\n    date,\n    title,\n    description,\n    metadata,\n    "modules": modulesV2[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n\n}\n,\n  }\n': CASE_STUDY_QUERYResult;
 		'{\n  "homepageTitle": *[_id == \'homepage\'][0].title,\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;
-		'{\n  "pages": *[_type == \'page\'][]{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
+		'{\n  "info": *[_id == \'info\'][0],\n  "pages": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
 }
