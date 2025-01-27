@@ -10,7 +10,7 @@ export default defineMigration({
       const modulesV2 = []
       const modules = doc.modules || [] // Ensure the modules array exists
 
-      let skipNext = false // Flag to skip modules already paired
+      let skipNext = false // Flag to skip modules already processed
 
       for (let i = 0; i < modules.length; i++) {
         if (skipNext) {
@@ -23,8 +23,31 @@ export default defineMigration({
         const prevModule = modules[i - 1] || null
 
         if (module._type === 'dynamicImage' && module.span === 'half') {
+          // Handle a pair of consecutive half images
+          if (nextModule?._type === 'dynamicImage' && nextModule.span === 'half') {
+            modulesV2.push({
+              _type: 'diptych',
+              items: [
+                {
+                  _type: 'diptych.media',
+                  media: {
+                    image: module.image,
+                  },
+                },
+                {
+                  _type: 'diptych.media',
+                  media: {
+                    image: nextModule.image,
+                  },
+                },
+              ],
+            })
+            skipNext = true // Skip the next module as it's already processed
+            continue
+          }
+
+          // Handle pairing a half image with a textBlock
           if (nextModule?._type === 'textBlock') {
-            // Pair dynamicImage with the next textBlock
             modulesV2.push({
               _type: 'diptych',
               items: [
@@ -40,9 +63,11 @@ export default defineMigration({
                 },
               ],
             })
-            skipNext = true // Skip the next module as it's already paired
-          } else if (prevModule?._type === 'textBlock') {
-            // Pair dynamicImage with the previous textBlock
+            skipNext = true // Skip the next module as it's already processed
+            continue
+          }
+
+          if (prevModule?._type === 'textBlock') {
             modulesV2.push({
               _type: 'diptych',
               items: [
@@ -58,20 +83,21 @@ export default defineMigration({
                 },
               ],
             })
-          } else {
-            // Handle standalone dynamicImage
-            modulesV2.push({
-              _type: 'diptych',
-              items: [
-                {
-                  _type: 'diptych.media',
-                  media: {
-                    image: module.image,
-                  },
-                },
-              ],
-            })
+            continue
           }
+
+          // Handle standalone half image
+          modulesV2.push({
+            _type: 'diptych',
+            items: [
+              {
+                _type: 'diptych.media',
+                media: {
+                  image: module.image,
+                },
+              },
+            ],
+          })
           continue
         }
 
