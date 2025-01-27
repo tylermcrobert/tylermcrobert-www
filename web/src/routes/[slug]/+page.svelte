@@ -6,7 +6,7 @@
 
 {#if data.caseStudy}
 	<CaseStudyHeader
-		index={0}
+		index={data.index}
 		intro={data.caseStudy.intro}
 		deliverables={data.caseStudy.deliverables}
 		date={data.caseStudy.date}
