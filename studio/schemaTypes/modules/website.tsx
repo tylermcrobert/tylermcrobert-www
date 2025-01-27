@@ -24,6 +24,12 @@ export default defineType({
       type: 'reference',
       to: [{type: 'webFrameTheme'}],
     },
+
+    {
+      name: 'backgroundImg',
+      type: 'image',
+      options: {hotspot: true},
+    },
   ],
   preview: {
     select: {

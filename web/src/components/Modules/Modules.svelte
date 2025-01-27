@@ -2,6 +2,7 @@
 	import type { Module } from '$sanity';
 	import TextBlock from './ModuleTextBlock.svelte';
 	import MediaBlock from './ModuleMediaBlock.svelte';
+	import ModuleWebsite from './ModuleWebsite.svelte';
 
 	type Props = { modules: Module[] };
 
@@ -14,6 +15,8 @@
 			<TextBlock {data} />
 		{:else if data._type === 'mediaBlock'}
 			<MediaBlock {data} />
+		{:else if data._type === 'website'}
+			<ModuleWebsite {data} />
 		{:else}
 			{console.warn('Cannot find module:', data._type)}
 		{/if}

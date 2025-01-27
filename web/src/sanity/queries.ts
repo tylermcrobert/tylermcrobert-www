@@ -4,7 +4,8 @@ import type {
 	SITE_QUERYResult,
 	Settings,
 	PAGE_QUERYResult,
-	CASE_STUDY_QUERYResult
+	CASE_STUDY_QUERYResult,
+	Website
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
 
@@ -105,6 +106,34 @@ export type ModuleMediaBlock = Nullable<{
 }>;
 
 /**
+ * Website
+ */
+
+const MODULE_WEBSITE = `//groq
+  _type == 'website' => {
+    theme->{
+      "dots": dots.hex,
+      "frame": frame.hex,
+      "background": background.hex,
+    },
+    backgroundImg,
+    showFrame,
+    media${MEDIA_PROJECTION},
+  }
+`;
+
+export type ModuleWebsite = Nullable<{
+	_type: 'website';
+	media: MediaProjection;
+	theme: Nullable<{
+		frame: string;
+		background: string;
+		dots: string;
+	}>;
+}> &
+	Pick<Website, 'showFrame' | 'backgroundImg'>;
+
+/**
  * Modules
  */
 
@@ -112,10 +141,11 @@ const MODULES_PROJECTION = groq`{
   _type,
   ${MODULE_MEDIA_BLOCK},
   ${MODULE_TEXT_BLOCK},
+  ${MODULE_WEBSITE}
 }
 `;
 
-export type Module = ModuleMediaBlock | ModuleTextBlock;
+export type Module = ModuleMediaBlock | ModuleTextBlock | ModuleWebsite;
 
 /*******************************************************************************
  * PAGES
