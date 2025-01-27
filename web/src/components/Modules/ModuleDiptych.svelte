@@ -16,9 +16,7 @@
 				sizes="(min-width: 768px), 50vw, 100vw"
 			/>
 		{:else if item._type === 'diptych.text' && item.richText}
-			<div class="px-4">
-				<RichText value={item.richText} />
-			</div>
+			<RichText value={item.richText} />
 		{/if}
 	{/each}
 </div>
