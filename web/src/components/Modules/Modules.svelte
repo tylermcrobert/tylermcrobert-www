@@ -9,7 +9,7 @@
 </script>
 
 {#each modules as data}
-	<section>
+	<section data-name={data._type}>
 		{#if data._type === 'textBlock'}
 			<TextBlock {data} />
 		{:else if data._type === 'mediaBlock'}
