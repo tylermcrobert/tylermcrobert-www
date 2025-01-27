@@ -10,18 +10,21 @@ export default defineMigration({
       const modulesV2 = []
       const modules = doc.modules || [] // Ensure the modules array exists
 
+      let skipNext = false // Flag to skip modules already paired
+
       for (let i = 0; i < modules.length; i++) {
+        if (skipNext) {
+          skipNext = false
+          continue // Skip this module as it was already processed
+        }
+
         const module = modules[i]
-        const nextIndex = i + 1
-        const prevIndex = i - 1
-        const nextModule = modules[nextIndex]
-        const prevModule = modules[prevIndex]
+        const nextModule = modules[i + 1] || null
+        const prevModule = modules[i - 1] || null
 
         if (module._type === 'dynamicImage' && module.span === 'half') {
-          // Check if the previous or next module is a textBlock
-          if (nextModule?._type === 'textBlock' || prevModule?._type === 'textBlock') {
-            const textModule = nextModule?._type === 'textBlock' ? nextModule : prevModule
-
+          if (nextModule?._type === 'textBlock') {
+            // Pair dynamicImage with the next textBlock
             modulesV2.push({
               _type: 'diptych',
               items: [
@@ -33,35 +36,55 @@ export default defineMigration({
                 },
                 {
                   _type: 'diptych.text',
-                  richText: textModule.content,
+                  richText: nextModule.content,
                 },
               ],
             })
-
-            // Skip the adjacent textBlock module if it was the next module
-            if (nextModule?._type === 'textBlock') {
-              i++ // Increment `i` to skip processing the next module
-            }
-            continue
-          }
-
-          // Handle dynamicImage with no adjacent textBlock
-          modulesV2.push({
-            _type: 'diptych',
-            items: [
-              {
-                _type: 'diptych.media',
-                media: {
-                  image: module.image,
+            skipNext = true // Skip the next module as it's already paired
+          } else if (prevModule?._type === 'textBlock') {
+            // Pair dynamicImage with the previous textBlock
+            modulesV2.push({
+              _type: 'diptych',
+              items: [
+                {
+                  _type: 'diptych.text',
+                  richText: prevModule.content,
                 },
-              },
-            ],
-          })
+                {
+                  _type: 'diptych.media',
+                  media: {
+                    image: module.image,
+                  },
+                },
+              ],
+            })
+          } else {
+            // Handle standalone dynamicImage
+            modulesV2.push({
+              _type: 'diptych',
+              items: [
+                {
+                  _type: 'diptych.media',
+                  media: {
+                    image: module.image,
+                  },
+                },
+              ],
+            })
+          }
           continue
         }
 
-        // Handle textBlock normally if it's not part of a diptych
         if (module._type === 'textBlock') {
+          // Skip textBlock if it would be paired with a half dynamicImage
+          const nextIsHalfImage = nextModule?._type === 'dynamicImage' && nextModule.span === 'half'
+          const prevIsHalfImage = prevModule?._type === 'dynamicImage' && prevModule.span === 'half'
+
+          if (nextIsHalfImage || prevIsHalfImage) {
+            continue
+          }
+
+          // Handle unpaired textBlock
           modulesV2.push({
             ...module,
             content: undefined, // Remove deprecated field
@@ -70,8 +93,8 @@ export default defineMigration({
           continue
         }
 
-        // Handle website with media
         if (module._type === 'website') {
+          // Handle website with media
           if (module.media[0]._type === 'image') {
             modulesV2.push({...module, media: {image: module.media[0]}})
           } else {
@@ -80,8 +103,8 @@ export default defineMigration({
           continue
         }
 
-        // Handle other dynamicImage modules
         if (module._type === 'dynamicImage') {
+          // Handle other dynamicImage modules
           modulesV2.push({
             _type: 'mediaBlock',
             media: {
