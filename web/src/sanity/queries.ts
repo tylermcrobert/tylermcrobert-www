@@ -1,11 +1,11 @@
 import groq from 'groq';
 import type {
 	SanityImageAsset,
-	SITE_QUERYResult,
 	Settings,
 	PAGE_QUERYResult,
 	CASE_STUDY_QUERYResult,
-	Website
+	Website,
+	SITE_QUERYResult
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
 
@@ -161,12 +161,6 @@ export const PAGE_QUERY = groq`
 
 export type PageQuery = PAGE_QUERYResult & Nullable<{ modules: Module[] }>;
 
-export const HOMEPAGE_QUERY = groq`
-  *[_id == 'homepage'][0]{
-    modules[]${MODULES_PROJECTION},
-  }
-`;
-
 export const CASE_STUDY_QUERY = groq`
   *[_type == 'caseStudy' && slug.current == $slug][0]{
     intro,
@@ -187,15 +181,33 @@ export type CaseStudyQuery = CASE_STUDY_QUERYResult &
  ******************************************************************************/
 
 export const SITE_QUERY = groq`{
+  "homepageTitle": *[_id == 'homepage'][0].title,
   "settings": *[_id == "settings"][0]{
     metadata,
     siteTitle,
   },
-  "homepageTitle": *[_id == 'homepage'][0].title
+  "context": coalesce(
+    *[_type == "context" && slug.current == $contextSlug][0],
+    *[_id == "homepage"][0].context->
+  ) {
+    title,
+    caseStudies[]->{
+      "slug": slug.current,
+      title,
+    }
+  },
 }`;
 
 export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 	Nullable<{
+		context: Nullable<{
+			slug: string;
+			title: string;
+			caseStudies: Nullable<{
+				slug: string;
+				title: string;
+			}>[];
+		}>;
 		settings: Pick<Settings, 'metadata' | 'siteTitle'>;
 	}>;
 

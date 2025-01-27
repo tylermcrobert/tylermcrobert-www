@@ -15,7 +15,7 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'defaultContext',
+      name: 'context',
       type: 'reference',
       to: [{type: 'context'}],
       validation: (Rule) => Rule.required(),

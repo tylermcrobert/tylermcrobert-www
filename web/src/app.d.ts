@@ -16,6 +16,11 @@ declare global {
 			siteTitle: string | null | undefined;
 			homepageTitle: string | null | undefined;
 			pathname: string;
+			contextTitle: string | null;
+			contextCaseStudies: {
+				title: string | null;
+				slug: string | null;
+			}[];
 		}
 
 		interface PageReturn extends Record<string, unknown> {

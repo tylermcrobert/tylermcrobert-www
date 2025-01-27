@@ -1198,7 +1198,7 @@
         },
         "optional": true
       },
-      "defaultContext": {
+      "context": {
         "type": "objectAttribute",
         "value": {
           "type": "object",

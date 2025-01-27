@@ -4,4 +4,8 @@
 	let { data } = $props();
 </script>
 
-<Modules modules={data.modules} />
+{#each data.contextCaseStudies as { title, slug }}
+	<h1 class="wrapper">
+		<a href={`/${slug}`}>{title}</a>
+	</h1>
+{/each}
