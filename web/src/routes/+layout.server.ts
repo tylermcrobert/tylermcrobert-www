@@ -2,13 +2,12 @@ import { SITE_QUERY, type SiteQuery } from '$sanity';
 
 export const load = async ({
 	locals: { isDraftMode, client },
-	url: { pathname }
+	url: { pathname },
+	cookies
 }) => {
-	const contextSlug = 'apple';
-	const { settings, homepageTitle, context } = await client.fetch<SiteQuery>(
-		SITE_QUERY,
-		{ contextSlug }
-	);
+	const contextSlug = cookies.get('context')?.toString() || null;
+	const site = await client.fetch<SiteQuery>(SITE_QUERY, { contextSlug });
+	const { settings, homepageTitle, context } = site;
 
 	return {
 		isDraftMode,
