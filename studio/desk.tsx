@@ -18,8 +18,8 @@ export const structure: StructureResolver = (S) => {
         .child(S.editor().schemaType('info').documentId('info').title('Info')),
 
       S.divider(),
-      S.documentTypeListItem('page').title('Pages'),
       S.documentTypeListItem('caseStudy').title('Case Studies'),
+      S.documentTypeListItem('page').title('Pages'),
       S.documentTypeListItem('context').title('Contexts'),
       S.documentTypeListItem('playlist').title('Playlists'),
       S.documentTypeListItem('webFrameTheme').title('Browser Frames'),
