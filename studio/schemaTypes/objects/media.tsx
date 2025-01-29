@@ -35,7 +35,7 @@ export default defineType({
         reason: 'Use video',
       },
       hidden: ({parent}) => {
-        return !parent?.oldVideoFIle
+        return !parent?.oldVideoFile
       },
     },
 

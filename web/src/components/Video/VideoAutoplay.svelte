@@ -27,6 +27,7 @@
 		<mux-video
 			bind:this={videoElement}
 			metadata-viewer-user-id="s4u780"
+			class="w-full"
 			playback-id={video?.id}
 			muted
 			loop
