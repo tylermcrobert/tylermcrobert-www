@@ -10,3 +10,4 @@ export { default as Video } from './Video/Video.svelte';
 export { default as Media } from './Media.svelte';
 export { default as ConsoleCredit } from './ConsoleCredit.svelte';
 export { default as CaseStudyHeader } from './CaseStudyHeader.svelte';
+export { default as HomeIndex } from './HomeIndex.svelte';
