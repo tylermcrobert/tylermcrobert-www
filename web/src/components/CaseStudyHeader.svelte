@@ -37,7 +37,7 @@
 			{#each deliverables || [] as deliverable, i}
 				<li class="inline">
 					{#if i >= 1}
-						{DOT}&nbsp;{deliverable}
+						{' '}{DOT}&nbsp;{deliverable}
 					{:else}
 						{deliverable}
 					{/if}
