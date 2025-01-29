@@ -9,5 +9,6 @@ export default defineType({
     {type: 'website'},
     {type: 'diptych'},
     {type: 'mobileWebsite'},
+    {type: 'tripleImage'},
   ],
 })

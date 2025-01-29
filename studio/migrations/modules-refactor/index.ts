@@ -22,6 +22,17 @@ export default defineMigration({
         const nextModule = modules[i + 1] || null
         const prevModule = modules[i - 1] || null
 
+        if (module._type === 'tripleImage') {
+          modulesV2.push({
+            _type: 'tripleImage',
+            imageRight: module.imageRight,
+            mainMedia: {image: module.mainImage},
+            secondaryMedia1: {image: module.secondaryImage1},
+            secondaryMedia2: {image: module.secondaryImage2},
+          })
+          continue
+        }
+
         if (module._type === 'dynamicImage' && module.span === 'half') {
           // Handle a pair of consecutive half images
           if (nextModule?._type === 'dynamicImage' && nextModule.span === 'half') {

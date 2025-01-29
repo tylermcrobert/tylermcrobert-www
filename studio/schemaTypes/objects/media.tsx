@@ -34,6 +34,9 @@ export default defineType({
       deprecated: {
         reason: 'Use video',
       },
+      hidden: ({parent}) => {
+        return !parent?.videoFile
+      },
     },
 
     {

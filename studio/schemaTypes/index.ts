@@ -22,8 +22,10 @@ import website from './modules/website'
 import diptych, {diptychMedia, diptychText, diptychSpacer} from './modules/diptych'
 import aspect from './objects/aspect'
 import mobileWebsite from './modules/mobileWebsite'
+import tripleImage from './modules/tripleImage'
 
 export const schemaTypes = [
+  tripleImage,
   mobileWebsite,
   aspect,
   diptychSpacer,
