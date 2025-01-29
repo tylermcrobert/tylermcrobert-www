@@ -28,6 +28,15 @@ export default defineType({
     },
 
     {
+      title: 'Old video file',
+      name: 'videoFile',
+      type: 'file',
+      deprecated: {
+        reason: 'Use video',
+      },
+    },
+
+    {
       name: 'showVideoControls',
       type: 'boolean',
       initialValue: false,
