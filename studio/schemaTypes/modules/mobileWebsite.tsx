@@ -51,6 +51,7 @@ export const mobileWebsiteItem = defineType({
     {
       name: 'media',
       type: 'media',
+      validation: mediaRequired,
     },
   ],
   preview: {
