@@ -19,7 +19,7 @@
 		<Modules modules={data.modules} />
 	</div>
 
-	<div class="pointer-events-none h-dvh" />
+	<div class="pointer-events-none h-dvh"></div>
 	<HomeIndex />
 {:else}
 	<Modules modules={data.modules} />
