@@ -1,4 +1,5 @@
 import {defineType} from 'sanity'
+import {mediaRequired} from '../objects/media'
 
 const TITLE = 'Mobile Website'
 
@@ -11,7 +12,7 @@ export default defineType({
     {
       name: 'frames',
       type: 'array',
-      of: [{type: 'media'}],
+      of: [{type: 'mobileWebsite.item'}],
       validation: (Rule) => Rule.required(),
     },
 
@@ -19,12 +20,39 @@ export default defineType({
       name: 'staticFallback',
       type: 'image',
       validation: (Rule) => Rule.required(),
+      hidden: true,
+      deprecated: {
+        reason: "I don't know why this was here",
+      },
     },
 
     {
       name: 'theme',
       type: 'reference',
       to: [{type: 'webFrameTheme'}],
+    },
+  ],
+  preview: {
+    select: {frames: 'frames'},
+    prepare({frames}) {
+      const itemCount = `${frames?.length} item${frames?.length === 1 ? '' : 's'}`
+
+      return {
+        title: TITLE,
+        subtitle: itemCount,
+      }
+    },
+  },
+})
+
+export const mobileWebsiteItem = defineType({
+  name: 'mobileWebsite.item',
+  type: 'object',
+  fields: [
+    {
+      name: 'media',
+      type: 'media',
+      validation: mediaRequired,
     },
   ],
   preview: {

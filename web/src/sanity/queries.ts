@@ -197,6 +197,29 @@ export type ModuleTripleImage = Nullable<{
 }>;
 
 /**
+ * Mobile Website
+ */
+
+const MODULE_MOBILE_WEBSITE = `//groq
+  _type == 'mobileWebsite' => {
+    "themeBackground": theme->.background.hex,
+    frames[]{
+      _type == 'mobileWebsite.item' => {
+        media${MEDIA_PROJECTION}
+      }
+    }
+  }
+`;
+
+export type ModuleMobileWebsite = Nullable<{
+	_type: 'mobileWebsite';
+	themeBackground: string;
+	frames: Nullable<{
+		media: MediaProjection;
+	}>[];
+}>;
+
+/**
  * Modules
  */
 
@@ -206,7 +229,8 @@ const MODULES_PROJECTION = groq`{
   ${MODULE_TEXT_BLOCK},
   ${MODULE_WEBSITE},
   ${MODULE_DIPTYCH},
-  ${MODULE_TRIPLE_IMAGE}
+  ${MODULE_TRIPLE_IMAGE},
+  ${MODULE_MOBILE_WEBSITE}
 }
 `;
 
@@ -215,7 +239,8 @@ export type Module =
 	| ModuleTextBlock
 	| ModuleWebsite
 	| ModuleDiptych
-	| ModuleTripleImage;
+	| ModuleTripleImage
+	| ModuleMobileWebsite;
 
 /*******************************************************************************
  * PAGES

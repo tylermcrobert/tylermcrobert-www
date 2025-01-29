@@ -21,10 +21,11 @@ import mediaBlock from './modules/mediaBlock'
 import website from './modules/website'
 import diptych, {diptychMedia, diptychText, diptychSpacer} from './modules/diptych'
 import aspect from './objects/aspect'
-import mobileWebsite from './modules/mobileWebsite'
+import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
 import tripleImage from './modules/tripleImage'
 
 export const schemaTypes = [
+  mobileWebsiteItem,
   tripleImage,
   mobileWebsite,
   aspect,

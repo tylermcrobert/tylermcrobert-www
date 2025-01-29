@@ -5,6 +5,7 @@
 	import ModuleWebsite from './ModuleWebsite.svelte';
 	import ModuleDiptych from './ModuleDiptych.svelte';
 	import ModuleTripleImage from './ModuleTripleImage.svelte';
+	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
 
 	type Props = { modules: Module[] };
 
@@ -24,6 +25,8 @@
 				<ModuleDiptych {data} />
 			{:else if data._type === 'tripleImage'}
 				<ModuleTripleImage {data} />
+			{:else if data._type === 'mobileWebsite'}
+				<ModuleMobileWebsite {data} />
 			{:else}
 				{console.warn('Cannot find module:', data._type)}
 			{/if}
