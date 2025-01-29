@@ -1,4 +1,5 @@
 import {defineType} from 'sanity'
+import {mediaRequired} from '../objects/media'
 
 const TITLE = 'Media Block'
 
@@ -11,7 +12,7 @@ export default defineType({
     {
       name: 'media',
       type: 'media',
-      validation: (Rule) => Rule.required(),
+      validation: mediaRequired,
     },
 
     {

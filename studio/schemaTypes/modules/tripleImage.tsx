@@ -1,4 +1,5 @@
 import {defineType} from 'sanity'
+import {mediaRequired} from '../objects/media'
 
 const TITLE = 'Triple Image'
 
@@ -11,25 +12,25 @@ export default defineType({
     {
       name: 'mainMedia',
       type: 'media',
-      validation: (Rule) => Rule.required(),
+      validation: mediaRequired,
     },
 
     {
       name: 'imageRight',
       type: 'boolean',
-      validation: (Rule) => Rule.required(),
+      validation: mediaRequired,
     },
 
     {
       name: 'secondaryMedia1',
       type: 'media',
-      validation: (Rule) => Rule.required(),
+      validation: mediaRequired,
     },
 
     {
       name: 'secondaryMedia2',
       type: 'media',
-      validation: (Rule) => Rule.required(),
+      validation: mediaRequired,
     },
   ],
   preview: {

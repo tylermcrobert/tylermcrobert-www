@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType, Rule} from 'sanity'
 
 export default defineType({
   name: 'media',
@@ -73,3 +73,12 @@ export default defineType({
     },
   },
 })
+
+export const mediaRequired = (Rule: Rule) =>
+  Rule.custom((val: any) => {
+    if (!val.image && !val.video) {
+      return 'Please choose an image or video.'
+    }
+
+    return true
+  })

@@ -1,5 +1,6 @@
 import {defineType} from 'sanity'
 import {toPlainText} from '../../util/toPlainText'
+import {mediaRequired} from '../objects/media'
 
 const TITLE = 'Diptych'
 
@@ -41,7 +42,7 @@ export const diptychMedia = defineType({
     {
       name: 'media',
       type: 'media',
-      validation: (Rule) => Rule.required(),
+      validation: mediaRequired,
     },
 
     {
