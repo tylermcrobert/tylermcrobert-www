@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { HomeIndex, Modules } from '$components';
-
-	let { data } = $props();
+	import { HomeIndex } from '$components';
 </script>
 
 <HomeIndex />
