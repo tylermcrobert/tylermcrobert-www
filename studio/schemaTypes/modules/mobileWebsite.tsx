@@ -19,7 +19,6 @@ export default defineType({
     {
       name: 'staticFallback',
       type: 'image',
-      validation: (Rule) => Rule.required(),
       hidden: true,
       deprecated: {
         reason: "I don't know why this was here",
@@ -52,7 +51,6 @@ export const mobileWebsiteItem = defineType({
     {
       name: 'media',
       type: 'media',
-      validation: mediaRequired,
     },
   ],
   preview: {
