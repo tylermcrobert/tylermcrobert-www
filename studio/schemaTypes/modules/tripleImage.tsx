@@ -18,7 +18,6 @@ export default defineType({
     {
       name: 'imageRight',
       type: 'boolean',
-      validation: mediaRequired,
     },
 
     {
