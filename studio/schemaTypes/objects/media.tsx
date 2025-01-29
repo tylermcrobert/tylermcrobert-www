@@ -29,13 +29,13 @@ export default defineType({
 
     {
       title: 'Old video file',
-      name: 'videoFile',
+      name: 'oldVideoFile',
       type: 'file',
       deprecated: {
         reason: 'Use video',
       },
       hidden: ({parent}) => {
-        return !parent?.videoFile
+        return !parent?.oldVideoFIle
       },
     },
 

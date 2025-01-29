@@ -140,7 +140,7 @@ export default defineMigration({
           if (module.media[0]._type === 'image') {
             modulesV2.push({...module, media: {image: module.media[0]}})
           } else {
-            modulesV2.push({...module, media: {videoFile: module.media[0].videoFile}})
+            modulesV2.push({...module, media: {oldVideoFile: module.media[0].videoFile}})
           }
           continue
         }
