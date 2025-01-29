@@ -8,7 +8,7 @@
 </script>
 
 {#if data.richText}
-	<div class="my-standard">
+	<div class="my-standard indent">
 		<RichText value={data.richText} />
 	</div>
 {/if}
