@@ -19,7 +19,9 @@ export default defineConfig({
   plugins: [
     structureTool({structure}),
     media(),
-    muxInput(),
+    muxInput({
+      max_resolution_tier: '2160p',
+    }),
     colorInput(),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
