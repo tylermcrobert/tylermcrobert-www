@@ -174,6 +174,27 @@ export type ModuleDiptych = Nullable<{
 }>;
 
 /**
+ * Triple Image
+ */
+
+const MODULE_TRIPLE_IMAGE = `//groq
+  _type == 'tripleImage' => {
+    mainMedia${MEDIA_PROJECTION},
+    secondaryMedia1${MEDIA_PROJECTION},
+    secondaryMedia2${MEDIA_PROJECTION},
+    imageRight,
+  }
+`;
+
+export type ModuleTripleImage = Nullable<{
+	_type: 'tripleImage';
+	mainMedia: MediaProjection;
+	secondaryMedia1: MediaProjection;
+	secondaryMedia2: MediaProjection;
+	imageRight: boolean;
+}>;
+
+/**
  * Modules
  */
 
@@ -182,7 +203,8 @@ const MODULES_PROJECTION = groq`{
   ${MODULE_MEDIA_BLOCK},
   ${MODULE_TEXT_BLOCK},
   ${MODULE_WEBSITE},
-  ${MODULE_DIPTYCH}
+  ${MODULE_DIPTYCH},
+  ${MODULE_TRIPLE_IMAGE}
 }
 `;
 
@@ -190,7 +212,8 @@ export type Module =
 	| ModuleMediaBlock
 	| ModuleTextBlock
 	| ModuleWebsite
-	| ModuleDiptych;
+	| ModuleDiptych
+	| ModuleTripleImage;
 
 /*******************************************************************************
  * PAGES

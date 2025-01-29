@@ -4,6 +4,7 @@
 	import MediaBlock from './ModuleMediaBlock.svelte';
 	import ModuleWebsite from './ModuleWebsite.svelte';
 	import ModuleDiptych from './ModuleDiptych.svelte';
+	import ModuleTripleImage from './ModuleTripleImage.svelte';
 
 	type Props = { modules: Module[] };
 
@@ -21,6 +22,8 @@
 				<ModuleWebsite {data} />
 			{:else if data._type === 'diptych'}
 				<ModuleDiptych {data} />
+			{:else if data._type === 'tripleImage'}
+				<ModuleTripleImage {data} />
 			{:else}
 				{console.warn('Cannot find module:', data._type)}
 			{/if}
