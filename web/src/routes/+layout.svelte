@@ -8,6 +8,7 @@
 	import '../style/app.css';
 
 	let { children, data } = $props();
+	//
 </script>
 
 <Navigation />
