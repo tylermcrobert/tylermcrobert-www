@@ -53,6 +53,7 @@ export type RichTextProjection = InputValue;
 
 export const MEDIA_PROJECTION = groq`{
   "image": image,
+  "oldVideoFile": oldVideoFile.asset->url,
   "video": video.asset->{
     "id": playbackId,
     "aspect": data.aspect_ratio,
@@ -71,6 +72,7 @@ export type MediaProjectionVideo = {
 export type MediaProjection = Nullable<{
 	image: SanityImageAsset;
 	video: MediaProjectionVideo;
+	oldVideoFile: string;
 }>;
 
 /*******************************************************************************

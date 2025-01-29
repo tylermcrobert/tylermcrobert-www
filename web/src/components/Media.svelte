@@ -24,6 +24,17 @@
 
 {#if data?.video}
 	<Video video={data.video} class={className} />
+{:else if data?.oldVideoFile}
+	<div class="bg-pink-500">
+		<a
+			href={data.oldVideoFile}
+			download={data.oldVideoFile}
+			aria-label="Download video"
+		>
+			<video autoplay muted src={data.oldVideoFile} class="w-full opacity-30"
+			></video>
+		</a>
+	</div>
 {:else if data?.image}
 	<Image
 		image={data.image}
