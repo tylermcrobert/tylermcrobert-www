@@ -1,4 +1,4 @@
-import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$sanity';
+import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$lib/sanity';
 import { PUBLIC_SITE_URL } from '$env/static/public';
 
 export async function GET({ locals }) {

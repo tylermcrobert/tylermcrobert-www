@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { Metadata, SiteQuery } from '$sanity';
+import type { Metadata, SiteQuery } from '$lib/sanity';
 
 // for information about these interfaces
 declare global {

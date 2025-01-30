@@ -3,7 +3,7 @@ import {
 	PAGE_QUERY,
 	type CaseStudyQuery,
 	type PageQuery
-} from '$sanity';
+} from '$lib/sanity';
 import { error, redirect } from '@sveltejs/kit';
 
 export const load = async ({

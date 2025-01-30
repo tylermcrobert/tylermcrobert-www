@@ -1,4 +1,4 @@
-import { resolveLink } from '$sanity';
+import { resolveLink } from '$lib/sanity';
 import { redirect } from '@sveltejs/kit';
 
 export const GET = async ({ cookies, url }) => {
