@@ -1,23 +1,15 @@
 <script lang="ts">
-	// import type { InfoQuery } from '$lib/sanity/queries';
-	// import Arrow from '$lib/components/util/Arrow.svelte';
-	// import DotHead from '$lib/components/util/DotHead.svelte';
-	// import { onMount } from 'svelte';
 	import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG } from '../../constants';
-	// import getNowPlaying, { type NowPlayingData } from '../util/nowPlaying';
-	// import type { SpotifyPlaylist } from '../spotify/spotify';
-
 	import { DotHead } from '$components';
-
-	// export let data: InfoQuery;
-	// export let playlists: SpotifyPlaylist[];
-
-	// let listenData: NowPlayingData | null = null;
+	import getNowPlaying, { type NowPlayingData } from '$lib/last.fm/+lastfm';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
 	let { bio, clients, playlists } = $derived(data.infoPage);
 
-	// onMount(async () => (listenData = await getNowPlaying()));
+	let listenData = $state<NowPlayingData | null>(null);
+
+	onMount(async () => (listenData = await getNowPlaying()));
 </script>
 
 <section class="my-large">
@@ -55,17 +47,17 @@
 
 <section class="my-large">
 	<div class="wrapper my-medium">
-		<!-- {#if listenData}
+		{#if listenData}
 			{@const { trackName, artist, nowPlaying } = listenData}
 			<h2><DotHead>Now Playing</DotHead></h2>
-			<h3 class="text-head">
+			<h3 class="text-h1">
 				{#if nowPlaying}
 					Right now I'm listening to “{trackName}” by {artist} on Spotify.
 				{:else}
 					The last song I listened to on Spotify was “{trackName}” by {artist}.
 				{/if}
 			</h3>
-		{/if} -->
+		{/if}
 	</div>
 
 	<div class="wrapper my-medium">
