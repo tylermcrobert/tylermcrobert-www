@@ -4,13 +4,12 @@ import {
 	type CaseStudyQuery,
 	type PageQuery
 } from '$sanity';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const load = async ({
 	parent,
 	params,
-	locals: { client, isDraftMode },
-	cookies
+	locals: { client, isDraftMode }
 }) => {
 	const { contextCaseStudies } = await parent();
 

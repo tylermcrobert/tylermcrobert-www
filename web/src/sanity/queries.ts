@@ -7,7 +7,8 @@ import type {
 	Website,
 	SITE_QUERYResult,
 	MediaBlock,
-	DiptychMedia
+	DiptychMedia,
+	InfoQueryResult
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
 
@@ -270,6 +271,34 @@ export const CASE_STUDY_QUERY = groq`
 
 export type CaseStudyQuery = CASE_STUDY_QUERYResult &
 	Nullable<{ modules: Module[] }>;
+
+/**
+ * Info
+ */
+
+export const infoQuery = groq`
+  *[_type == 'info' ][0]{
+    bio,
+    clients,
+    playlists[]-> {
+      "slug": slug.current,
+      link,
+      title,
+    }
+  }
+`;
+
+export type InfoPlaylist = Nullable<{
+	link: string;
+	title: string;
+	slug: string;
+}>;
+
+export type InfoQuery = {
+	// bio: string;
+	// playlists: InfoPlaylist[];
+	// clients: string[];
+} & InfoQueryResult;
 
 /*******************************************************************************
  * GLOBAL
