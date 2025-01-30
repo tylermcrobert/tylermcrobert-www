@@ -26,6 +26,8 @@
 	/* Z-Index */
 
 	--z-index-nav: 100;
+	--z-index-draft-overlay: 120;
+	--z-index-project-page: 90;
 
 	/* Breakpoints */
 
