@@ -4,15 +4,14 @@ import {
 	type CaseStudyQuery,
 	type PageQuery
 } from '$lib/sanity';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const load = async ({
 	parent,
 	params,
-	locals: { client, isDraftMode },
-	cookies
+	locals: { client, isDraftMode }
 }) => {
-	const { contextCaseStudies } = await parent();
+	const { contextCaseStudies } = (await parent()) as App.LayoutData;
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
 
