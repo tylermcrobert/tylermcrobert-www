@@ -6,10 +6,6 @@
 
 	let { data } = $props();
 	let { bio, clients, playlists } = $derived(data.infoPage);
-
-	let listenData = $state<NowPlayingData | null>(null);
-
-	onMount(async () => (listenData = await getNowPlaying()));
 </script>
 
 <section class="my-large">
@@ -47,8 +43,8 @@
 
 <section class="my-large">
 	<div class="wrapper my-medium">
-		{#if listenData}
-			{@const { trackName, artist, nowPlaying } = listenData}
+		{#if data.nowPlaying}
+			{@const { trackName, artist, nowPlaying } = data.nowPlaying}
 			<h2><DotHead>Now Playing</DotHead></h2>
 			<h3 class="text-h1">
 				{#if nowPlaying}
