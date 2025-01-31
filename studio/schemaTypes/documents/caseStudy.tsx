@@ -62,16 +62,7 @@ export default defineField({
     {
       name: 'modules',
       type: 'modules',
-      deprecated: {
-        reason: 'Use Modules V2',
-      },
       validation: (Rule) => Rule.required(),
-    },
-
-    {
-      name: 'modulesV2',
-      type: 'modules',
-      // validation: (Rule) => Rule.required(),
     },
 
     {
