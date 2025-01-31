@@ -264,7 +264,7 @@ export const CASE_STUDY_QUERY = groq`
     title,
     description,
     metadata,
-    "modules": modulesV2[]${MODULES_PROJECTION},
+    "modules": modules[]${MODULES_PROJECTION},
   }
 `;
 
