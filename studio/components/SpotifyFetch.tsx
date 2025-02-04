@@ -1,7 +1,7 @@
 // 'http://localhost:5173/api/spotify/playlist/4ZKYVt4lSbsfOWgOc0bybT'
 
 import React, {useState} from 'react'
-import {Button} from '@sanity/ui'
+import {Box, Button} from '@sanity/ui'
 import {set, ObjectInputProps} from 'sanity'
 
 function formatOutput(data: any) {
@@ -66,11 +66,13 @@ const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
 
   return (
     <>
-      <Button
-        text={loading ? 'Fetching...' : 'Fetch Data'}
-        onClick={fetchData}
-        disabled={loading}
-      />
+      <Box marginBottom={5}>
+        <Button
+          text={loading ? 'Fetching...' : 'Fetch playlist data'}
+          onClick={fetchData}
+          disabled={loading}
+        />
+      </Box>
       {error && <p style={{color: 'red'}}>{error}</p>}
       {renderDefault(props)} {/* This renders the native array field UI */}
     </>
