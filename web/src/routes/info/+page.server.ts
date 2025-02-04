@@ -1,4 +1,5 @@
 import getNowPlaying from '$lib/last.fm/+lastfm.js';
+import { infoQuery, type InfoQuery } from '$sanity';
 
 export const load = async ({ locals: { client } }) => {
 	const [nowPlaying, infoPage] = [
@@ -13,5 +14,3 @@ export const load = async ({ locals: { client } }) => {
 		pageTitle: infoPage.title
 	} satisfies App.PageReturn;
 };
-
-import { infoQuery, type InfoQuery } from '$sanity';
