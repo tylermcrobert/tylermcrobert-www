@@ -50,5 +50,10 @@ export default defineType({
       deprecated: {reason: "Don't need this"},
       validation: (Rule) => Rule.required(),
     },
+
+    {
+      name: 'metadata',
+      type: 'metadata',
+    },
   ],
 })
