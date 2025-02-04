@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG } from '../../constants';
 	import { DotHead } from '$components';
-	import getNowPlaying, { type NowPlayingData } from '$lib/last.fm/+lastfm';
-	import { onMount } from 'svelte';
 
 	let { data } = $props();
-	let { bio, clients, playlists } = $derived(data.infoPage);
+	let { bio, clients } = $derived(data.infoPage);
 </script>
 
 <section class="my-large">
@@ -60,7 +58,7 @@
 		<h2><DotHead>Featured playlists</DotHead></h2>
 
 		<ul class="mb-4 leading-[1.3]">
-			<!-- {#each playlists as { href, name, duration, date }, i}
+			{#each data.playlists as { href, name, duration, date }, i}
 				<li>
 					<a
 						{href}
@@ -77,7 +75,7 @@
 						</p>
 					</a>
 				</li>
-			{/each} -->
+			{/each}
 		</ul>
 
 		<a href="/playlists" class="underline">See all playlists &rarr;</a>

@@ -287,22 +287,6 @@ export type CaseStudy = {
 	metadata?: Metadata;
 };
 
-export type Metadata = {
-	_type: 'metadata';
-	description?: string;
-	image?: {
-		asset?: {
-			_ref: string;
-			_type: 'reference';
-			_weak?: boolean;
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-		};
-		hotspot?: SanityImageHotspot;
-		crop?: SanityImageCrop;
-		_type: 'image';
-	};
-};
-
 export type Playlist = {
 	_id: string;
 	_type: 'playlist';
@@ -342,6 +326,23 @@ export type Info = {
 		_type: 'image';
 	};
 	slug?: Slug;
+	metadata?: Metadata;
+};
+
+export type Metadata = {
+	_type: 'metadata';
+	description?: string;
+	image?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: 'image';
+	};
 };
 
 export type Website = {
@@ -729,9 +730,9 @@ export type AllSanitySchemaTypes =
 	| MediaBlock
 	| Context
 	| CaseStudy
-	| Metadata
 	| Playlist
 	| Info
+	| Metadata
 	| Website
 	| Diptych
 	| DiptychText
@@ -1357,8 +1358,9 @@ export type CASE_STUDY_QUERYResult = {
 	> | null;
 } | null;
 // Variable: infoQuery
-// Query: *[_type == 'info' ][0]{    bio,    clients,    playlists[]-> {      "slug": slug.current,      link,      title,    }  }
+// Query: *[_type == 'info' ][0]{    metadata,    bio,    clients,    playlists[]-> {      "slug": slug.current,      link,      title,    }  }
 export type InfoQueryResult = {
+	metadata: Metadata | null;
 	bio: string | null;
 	clients: Array<string> | null;
 	playlists: Array<{
@@ -1486,6 +1488,7 @@ export type SITEMAP_QUERYResult = {
 					_type: 'image';
 				};
 				slug?: Slug;
+				metadata?: Metadata;
 		  }
 		| {
 				_id: string;
@@ -1616,7 +1619,7 @@ declare module '@sanity/client' {
 		'{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    secondaryMedia1{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    secondaryMedia2{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n      }\n    }\n  }\n\n}\n': MODULES_PROJECTIONResult;
 		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    secondaryMedia1{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    secondaryMedia2{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n      }\n    }\n  }\n\n}\n,\n  }\n': PAGE_QUERYResult;
 		'\n  *[_type == \'caseStudy\' && slug.current == $slug][0]{\n    intro,\n    deliverables,\n    date,\n    title,\n    description,\n    metadata,\n    "modules": modulesV2[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    theme->{\n      "dots": dots.hex,\n      "frame": frame.hex,\n      "background": background.hex,\n    },\n    backgroundImg,\n    showFrame,\n    media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    secondaryMedia1{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    secondaryMedia2{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "image": image,\n  "oldVideoFile": oldVideoFile.asset->url,\n  "video": video.asset->{\n    "id": playbackId,\n    "aspect": data.aspect_ratio,\n    "showControls": ^.showVideoControls,\n    "posterFrame": ^.posterFrame\n  }\n}\n      }\n    }\n  }\n\n}\n,\n  }\n': CASE_STUDY_QUERYResult;
-		'\n  *[_type == \'info\' ][0]{\n    bio,\n    clients,\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n    }\n  }\n': InfoQueryResult;
+		'\n  *[_type == \'info\' ][0]{\n    metadata,\n    bio,\n    clients,\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n    }\n  }\n': InfoQueryResult;
 		'{\n  "homepageTitle": *[_id == \'homepage\'][0].title,\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;
 		'{\n  "info": *[_id == \'info\'][0],\n  "pages": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}

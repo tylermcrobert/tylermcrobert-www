@@ -278,6 +278,7 @@ export type CaseStudyQuery = CASE_STUDY_QUERYResult &
 
 export const infoQuery = groq`
   *[_type == 'info' ][0]{
+    metadata,
     bio,
     clients,
     playlists[]-> {
