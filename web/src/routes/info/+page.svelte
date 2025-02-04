@@ -43,7 +43,9 @@
 	<div class="wrapper my-medium">
 		{#if data.nowPlaying}
 			{@const { trackName, artist, nowPlaying } = data.nowPlaying}
-			<h2><DotHead>Now Playing</DotHead></h2>
+			<h2>
+				<DotHead>{nowPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
+			</h2>
 			<h3 class="text-h1">
 				{#if nowPlaying}
 					Right now I'm listening to “{trackName}” by {artist} on Spotify.
