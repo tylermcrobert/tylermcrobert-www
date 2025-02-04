@@ -124,6 +124,7 @@ const MODULE_WEBSITE = `//groq
       "background": background.hex,
     },
     backgroundImg,
+    "backgroundColor": backgroundColor.hex,
     showFrame,
     media${MEDIA_PROJECTION},
   }
@@ -132,6 +133,7 @@ const MODULE_WEBSITE = `//groq
 export type ModuleWebsite = Nullable<{
 	_type: 'website';
 	media: MediaProjection;
+	backgroundColor: string;
 	theme: Nullable<{
 		frame: string;
 		background: string;
@@ -265,7 +267,7 @@ export const CASE_STUDY_QUERY = groq`
     title,
     description,
     metadata,
-    "modules": modulesV2[]${MODULES_PROJECTION},
+    "modules": modules[]${MODULES_PROJECTION},
   }
 `;
 

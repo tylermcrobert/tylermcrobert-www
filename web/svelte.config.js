@@ -14,7 +14,7 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$components: 'src/components',
-			$sanity: 'src/sanity',
+			$sanity: 'src/lib/sanity',
 			$lib: 'src/lib'
 		}
 	}

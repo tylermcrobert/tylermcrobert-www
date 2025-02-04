@@ -1579,14 +1579,6 @@
         },
         "optional": true
       },
-      "modulesV2": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "modules"
-        },
-        "optional": true
-      },
       "metadata": {
         "type": "objectAttribute",
         "value": {
@@ -2041,6 +2033,14 @@
                 }
               }
             }
+          },
+          "optional": true
+        },
+        "backgroundColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "color"
           },
           "optional": true
         }

@@ -1,4 +1,4 @@
-import { SITE_QUERY, type SiteQuery } from '$sanity';
+import { SITE_QUERY, type SiteQuery } from '$lib/sanity';
 
 export const load = async ({
 	locals: { isDraftMode, client },

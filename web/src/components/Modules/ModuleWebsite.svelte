@@ -10,7 +10,7 @@
 </script>
 
 <div
-	style:background={data.theme?.background}
+	style:background={data.backgroundColor || data.theme?.background}
 	class="my-standard relative w-full bg-black p-[10%]"
 >
 	<div class="relative z-10">
