@@ -64,6 +64,12 @@ export default defineType({
       of: [
         {
           type: 'object',
+          preview: {
+            select: {title: 'name', artists: 'artists'},
+            prepare: ({title, artists}) => {
+              return {title: title, subtitle: artists.join(', ')}
+            },
+          },
           fields: [
             {
               name: 'name',
