@@ -1,11 +1,17 @@
 import getNowPlaying from '$lib/last.fm/+lastfm.js';
 
-export const load = async () => {
-	const nowPlaying = await getNowPlaying();
+export const load = async ({ locals: { client } }) => {
+	const [nowPlaying, infoPage] = [
+		await getNowPlaying(),
+		await client.fetch<InfoQuery>(infoQuery)
+	];
 
 	return {
-		nowPlaying
-	};
+		nowPlaying,
+		infoPage,
+		metadata: infoPage.metadata,
+		pageTitle: 'Info'
+	} satisfies App.PageReturn;
 };
 
-export const prerender = true;
+import { infoQuery, type InfoQuery } from '$sanity';

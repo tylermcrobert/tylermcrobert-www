@@ -60,7 +60,7 @@
 		<h2><DotHead>Featured playlists</DotHead></h2>
 
 		<ul class="mb-4 leading-[1.3]">
-			{#each data.playlists as { href, name, duration, date }, i}
+			<!-- {#each data.playlists as { href, name, duration, date }, i}
 				<li>
 					<a
 						{href}
@@ -77,7 +77,7 @@
 						</p>
 					</a>
 				</li>
-			{/each}
+			{/each} -->
 		</ul>
 
 		<a href="/playlists" class="underline">See all playlists &rarr;</a>
