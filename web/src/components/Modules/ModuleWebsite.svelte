@@ -13,9 +13,9 @@
 	style:background={data.backgroundColor || data.theme?.background}
 	class="my-standard relative w-full bg-black p-[10%]"
 >
-	<div class="relative z-10">
+	<div class="relative z-10 bg-white">
 		{#if showFrame !== false && theme?.frame}
-			{@render browserFrameWithUI()}
+			{@render browserFrame()}
 		{/if}
 
 		{#if media}
