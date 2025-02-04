@@ -60,7 +60,7 @@
 			</ul>
 
 			<div>
-				<button onclick={() => togglePlaylist(slug)}>
+				<button onclick={() => togglePlaylist(slug)} class="cursor-pointer">
 					<DotHead noMarginBottom>
 						{isActive ? 'See Less ↑' : 'See All ↓'}
 					</DotHead>
