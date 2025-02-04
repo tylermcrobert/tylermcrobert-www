@@ -51,7 +51,7 @@ const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
     const id = getSpotifyPlaylistId(value.link)
 
     try {
-      const response = await fetch(`http://localhost:5173/api/spotify/playlist/${id}`)
+      const response = await fetch(`${process.env.SANITY_STUDIO_SPOTIFY_API_URL}/playlist/${id}`)
       const data = await response.json()
       const formattedData = formatOutput(data)
 
