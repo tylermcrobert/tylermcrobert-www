@@ -13,13 +13,15 @@
 	style:background={data.backgroundColor || data.theme?.background}
 	class="my-standard relative w-full bg-black p-[10%]"
 >
-	<div class="relative z-10 bg-white">
+	<div class="relative z-10">
 		{#if showFrame !== false && theme?.frame}
 			{@render browserFrame()}
 		{/if}
 
 		{#if media}
-			<Media sizes="80vw" data={media} alt={null} />
+			<div class="bg-white">
+				<Media sizes="80vw" data={media} alt={null} />
+			</div>
 		{/if}
 	</div>
 
