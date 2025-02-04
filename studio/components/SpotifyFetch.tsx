@@ -14,8 +14,8 @@ function formatOutput(data: any) {
     .reduce((total: number, current: number) => total + current, 0)
 
   return {
-    name: data.name,
-    href: data.external_urls.spotify,
+    title: data.name,
+    link: data.external_urls.spotify,
     image: data.images[0].url,
     date: oldestDate.toISOString().split('.')[0],
     duration: totalMilliseconds,
@@ -29,8 +29,13 @@ function formatOutput(data: any) {
   }
 }
 
+function getSpotifyPlaylistId(url: string) {
+  const match = url.match(/playlist\/([a-zA-Z0-9]+)/)
+  return match ? match[1] : null
+}
+
 const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
-  const {value = [], onChange, renderDefault} = props
+  const {value = {}, onChange, renderDefault} = props
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -38,13 +43,19 @@ const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
     setLoading(true)
     setError(null)
 
-    try {
-      const response = await fetch(
-        'http://localhost:5173/api/spotify/playlist/4ZKYVt4lSbsfOWgOc0bybT',
-      )
-      const data = await response.json()
+    if (!value.link) {
+      setError('Link must be provided.')
+      setLoading(false)
+    }
 
-      onChange(set(formatOutput(data).tracks))
+    const id = getSpotifyPlaylistId(value.link)
+
+    try {
+      const response = await fetch(`http://localhost:5173/api/spotify/playlist/${id}`)
+      const data = await response.json()
+      const formattedData = formatOutput(data)
+
+      onChange(set(formattedData))
     } catch (err) {
       setError('Failed to fetch data.')
       console.error(err)
