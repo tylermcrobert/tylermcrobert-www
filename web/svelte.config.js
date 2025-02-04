@@ -16,7 +16,8 @@ const config = {
 			$components: 'src/components',
 			$sanity: 'src/lib/sanity',
 			$lib: 'src/lib',
-			$util: 'src/util'
+			$util: 'src/util',
+			$constants: 'src/constants'
 		}
 	}
 };

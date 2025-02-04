@@ -1674,7 +1674,7 @@
           "of": {
             "type": "object",
             "attributes": {
-              "name": {
+              "title": {
                 "type": "objectAttribute",
                 "value": {
                   "type": "string"

@@ -7,10 +7,10 @@ import type {
 	Website,
 	SITE_QUERYResult,
 	MediaBlock,
-	DiptychMedia
+	DiptychMedia,
+	InfoQueryResult
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
-import type { InfoQueryResult } from '../../sanity/types';
 
 /*******************************************************************************
  * PROJECTIONS
@@ -300,11 +300,29 @@ export type InfoPlaylist = Nullable<{
 	slug: string;
 }>;
 
-export type InfoQuery = {
-	// bio: string;
-	// playlists: InfoPlaylist[];
-	// clients: string[];
-} & InfoQueryResult;
+export type InfoQuery = {} & InfoQueryResult;
+
+/**
+ * Playlist
+ */
+
+export const PLAYLISTS_QUERY = groq`
+  *[_type == 'info' ][0]{
+    playlists[]-> {
+      "slug": slug.current,
+      link,
+      title,
+      duration, 
+      date,
+      image,
+      tracks[]{
+        title, 
+        duration, 
+        artists 
+      }
+    }
+  }
+`;
 
 /*******************************************************************************
  * GLOBAL
