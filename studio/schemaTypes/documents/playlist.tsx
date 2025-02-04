@@ -61,18 +61,19 @@ export default defineType({
       type: 'array',
       title: 'Fetched Data',
       readOnly: true,
+      validation: (Rule) => Rule.required(),
       of: [
         {
           type: 'object',
           preview: {
-            select: {title: 'name', artists: 'artists'},
+            select: {title: 'title', artists: 'artists'},
             prepare: ({title, artists}) => {
               return {title: title, subtitle: artists.join(', ')}
             },
           },
           fields: [
             {
-              name: 'name',
+              name: 'title',
               type: 'string',
               validation: (Rule) => Rule.required(),
             },

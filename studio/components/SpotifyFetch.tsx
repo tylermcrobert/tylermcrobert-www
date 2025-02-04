@@ -1,5 +1,3 @@
-// 'http://localhost:5173/api/spotify/playlist/4ZKYVt4lSbsfOWgOc0bybT'
-
 import React, {useState} from 'react'
 import {Box, Button} from '@sanity/ui'
 import {set, ObjectInputProps} from 'sanity'
@@ -21,7 +19,7 @@ function formatOutput(data: any) {
     duration: totalMilliseconds,
     tracks: data.tracks.items.map((item: any) => ({
       _key: crypto.randomUUID(),
-      name: item.track.name,
+      title: item.track.name,
       added: item.added_at,
       duration: item.track.duration_ms,
       artists: item.track.artists.map((item: any) => item.name),
