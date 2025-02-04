@@ -282,11 +282,14 @@ export const infoQuery = groq`
   *[_type == 'info' ][0]{
     metadata,
     bio,
+    title,
     clients,
     playlists[]-> {
       "slug": slug.current,
       link,
       title,
+      duration, 
+      date 
     }
   }
 `;

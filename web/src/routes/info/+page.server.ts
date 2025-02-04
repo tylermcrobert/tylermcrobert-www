@@ -10,7 +10,7 @@ export const load = async ({ locals: { client } }) => {
 		nowPlaying,
 		infoPage,
 		metadata: infoPage.metadata,
-		pageTitle: 'Info'
+		pageTitle: infoPage.title
 	} satisfies App.PageReturn;
 };
 
