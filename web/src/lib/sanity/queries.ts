@@ -7,10 +7,10 @@ import type {
 	Website,
 	SITE_QUERYResult,
 	MediaBlock,
-	DiptychMedia,
-	InfoQueryResult
+	DiptychMedia
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
+import type { InfoQueryResult } from '../../sanity/types';
 
 /*******************************************************************************
  * PROJECTIONS
