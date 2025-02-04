@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
-// import { formatTime } from '../../util/msToTime';
 
 const clientId = SPOTIFY_CLIENT_ID;
 const clientSecret = SPOTIFY_CLIENT_SECRET;
