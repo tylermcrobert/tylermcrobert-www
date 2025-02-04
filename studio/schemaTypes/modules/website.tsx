@@ -31,6 +31,11 @@ export default defineType({
       type: 'image',
       options: {hotspot: true},
     },
+
+    {
+      name: 'backgroundColor',
+      type: 'color',
+    },
   ],
   preview: {
     select: {
