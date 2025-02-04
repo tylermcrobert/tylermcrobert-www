@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { client } from '$sanity';
+	import { getContext } from 'svelte';
 	import { getTitle } from './Metadata.svelte';
 	import Image, {
 		type SanityImageSource,
@@ -14,7 +15,9 @@
 		priority?: boolean;
 	};
 
-	let { alt, priority, image, ...props }: Props = $props();
+	let { alt, priority: priorityProp, image, ...props }: Props = $props();
+
+	let priority = $derived(priorityProp || getContext('imagePriorityContext'));
 </script>
 
 <Image

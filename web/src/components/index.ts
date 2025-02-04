@@ -12,3 +12,4 @@ export { default as ConsoleCredit } from './ConsoleCredit.svelte';
 export { default as CaseStudyHeader } from './CaseStudyHeader.svelte';
 export { default as HomeIndex } from './HomeIndex.svelte';
 export { default as DotHead } from './DotHead.svelte';
+export { default as ImagePriorityProvider } from './ImagePriorityProvider.svelte';
