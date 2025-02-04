@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG } from '../../constants';
 	import { DotHead } from '$components';
+	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
-	let { bio, clients } = $derived(data.infoPage);
+	let { bio, clients, playlists } = $derived(data.infoPage);
 </script>
 
 <section class="my-large">
@@ -60,20 +61,20 @@
 		<h2><DotHead>Featured playlists</DotHead></h2>
 
 		<ul class="mb-4 leading-[1.3]">
-			{#each data.playlists as { href, name, duration, date }, i}
+			{#each playlists || [] as { link, title, duration, date }, i}
 				<li>
 					<a
-						{href}
+						href={link}
 						target="_blank"
 						class="gap-standard flex grid-cols-6 justify-between md:grid"
 					>
 						<div class="col-span-4 flex gap-2 md:col-span-2">
 							<span>{NUMS[i + 1]}</span>
-							<h3 class="max-w-[18ch]">{name}</h3>
+							<h3 class="max-w-[18ch]">{title}</h3>
 						</div>
 						<p class="col-span-2 hidden md:block">{date}</p>
 						<p class="gap-standard col-span-2 flex justify-between">
-							{duration}<span>&rarr;</span>
+							{formatTime(duration || 0, 'hh:mm:ss')}<span>&rarr;</span>
 						</p>
 					</a>
 				</li>
