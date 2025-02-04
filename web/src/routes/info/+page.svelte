@@ -12,7 +12,7 @@
 		<h1 class="text-h1">{bio}</h1>
 	</div>
 
-	<div class="grid-standard wrapper my-medium">
+	<div class="wrapper my-medium grid grid-cols-6">
 		<div class="col-span-6 md:col-span-3">
 			<div>
 				<h3 class="inline"><DotHead noMarginBottom>E-M &rarr;</DotHead></h3>
@@ -63,7 +63,7 @@
 					<a
 						{href}
 						target="_blank"
-						class="md:grid-standard flex justify-between"
+						class="gap-standard flex grid-cols-6 justify-between md:grid"
 					>
 						<div class="col-span-4 flex gap-2 md:col-span-2">
 							<span>{NUMS[i + 1]}</span>
