@@ -1,45 +1,54 @@
 <script lang="ts">
 	import { formatTime } from '$util/msToTime';
-	import { onMount } from 'svelte';
 
-	export let data;
+	// Types for the component props
+	interface AudioData {
+		title: string;
+		primaryVersion: {
+			duration: number;
+			date: string;
+			assetUrl: string;
+		};
+	}
 
-	let time = 0;
-	let angle = 0;
-	let pressed = false;
-	let muted = false;
-	let paused = true;
+	// Props
+	let { data } = $props<{ data: AudioData }>();
 
-	let raf: number;
+	// State
+	let time = $state(0);
+	let angle = $state(0);
+	let pressed = $state(false);
+	let muted = $state(false);
+	let paused = $state(true);
+	let windowWidth = $state(0);
+	let duration = $state(0);
 
-	let windowWidth: number;
-	let duration: number;
-
-	let playPauseEl: HTMLElement;
-	let player: HTMLAudioElement;
-	let scrubberEl: HTMLDivElement;
+	// Refs
+	let playPauseEl = $state<HTMLElement>();
+	let player = $state<HTMLAudioElement>();
+	let scrubberEl = $state<HTMLDivElement>();
 
 	/**
 	 * Runs on mouse move but executes when
 	 * mouse is clicked down to drag slider
 	 * and update player.
 	 */
-
 	function handleMouseMove(e: MouseEvent) {
 		if (!pressed) return;
 
-		let percent = e.clientX / windowWidth;
-		let percentClamped = Math.min(Math.max(percent, 0), 1);
+		const percent = e.clientX / windowWidth;
+		const percentClamped = Math.min(Math.max(percent, 0), 1);
 
 		time = percentClamped * duration;
-		player.currentTime = time;
-		muted = true;
+		if (player) {
+			player.currentTime = time;
+			muted = true;
+		}
 	}
 
 	/**
 	 * Ends drag controls and unmutes.
 	 */
-
 	function handleMouseUp() {
 		pressed = false;
 		muted = false;
@@ -49,8 +58,8 @@
 	 * Binds the current time to the drag slider
 	 * x translate. Runs on every rAF tick.
 	 */
-
 	function moveLine() {
+		if (!scrubberEl) return;
 		const percent = (time / duration) * 100;
 		scrubberEl.style.transform = `translate3d(${percent}vw, 0, 0)`;
 	}
@@ -60,31 +69,25 @@
 	 * current time. Allows for button to
 	 * rotate when dragging forward/backwards
 	 */
-
 	function rotateDiv() {
+		if (!playPauseEl) return;
 		angle = (time * 60) % 360;
 		playPauseEl.style.transform = `rotate(${angle}deg)`;
 	}
 
-	/**
-	 * Run on every tick because binding to
-	 * player is slow. Updates current time
-	 * and run nescessary DOM mutation
-	 * functions functions.
-	 */
+	// Animation frame effect
+	$effect(() => {
+		let raf: number;
 
-	function handleAnimationFrame() {
-		if (!pressed) time = player.currentTime;
-		raf = requestAnimationFrame(handleAnimationFrame);
-		rotateDiv();
-		moveLine();
-	}
+		function handleAnimationFrame() {
+			if (!pressed && player) {
+				time = player.currentTime;
+			}
+			raf = requestAnimationFrame(handleAnimationFrame);
+			rotateDiv();
+			moveLine();
+		}
 
-	/**
-	 * Set up and cancel RAF
-	 */
-
-	onMount(() => {
 		raf = requestAnimationFrame(handleAnimationFrame);
 		return () => cancelAnimationFrame(raf);
 	});
