@@ -2,7 +2,7 @@
 .richtext p,
 .richtext ul,
 .richtext ol {
-	@apply max-w-rag-paragraph;
+	@apply max-w-rag-paragraph text-pretty;
 }
 
 /* bottom margins */
