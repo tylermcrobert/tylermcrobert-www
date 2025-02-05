@@ -45,7 +45,7 @@
 	/* For RichText */
 
 	--max-width-rag-heading: 15ch;
-	--max-width-rag-paragraph: 40ch;
+	--max-width-rag-paragraph: 50ch;
 	--max-width-wrapper: 65rem;
 }
 

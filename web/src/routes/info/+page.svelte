@@ -13,7 +13,7 @@
 		<h1 class="text-h1">{bio}</h1>
 	</div>
 
-	<div class="wrapper my-medium grid grid-cols-6">
+	<div class="wrapper my-medium gap-standard grid grid-cols-6">
 		<div class="col-span-6 md:col-span-3">
 			<div>
 				<h3 class="inline"><DotHead noMarginBottom>E-M &rarr;</DotHead></h3>
