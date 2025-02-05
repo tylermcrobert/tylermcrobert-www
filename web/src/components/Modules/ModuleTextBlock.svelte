@@ -8,7 +8,9 @@
 </script>
 
 {#if data.richText}
-	<div class="my-standard indent">
-		<RichText value={data.richText} />
+	<div class="my-standard grid-cols-6 md:grid">
+		<div class="indent col-span-4 lg:col-span-3">
+			<RichText value={data.richText} />
+		</div>
 	</div>
 {/if}
