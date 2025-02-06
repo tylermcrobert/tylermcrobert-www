@@ -26,6 +26,7 @@ declare global {
 		interface PageReturn extends Record<string, unknown> {
 			pageTitle: string | null;
 			metadata: Metadata | null;
+			titleOverride?: string | null;
 		}
 
 		interface PageData extends LayoutData, PageReturn {}

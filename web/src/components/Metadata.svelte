@@ -1,9 +1,13 @@
 <script lang="ts" module>
 	export function getTitle() {
-		const { siteTitle, pageTitle, homepageTitle } = page.data;
+		const { siteTitle, pageTitle, homepageTitle, titleOverride } = page.data;
 
 		if (page.error) {
 			return `${page.status} ${page.error.message} – ${siteTitle}`;
+		}
+
+		if (titleOverride) {
+			return titleOverride;
 		}
 
 		if (homepageTitle && page.data.pathname === '/') {
