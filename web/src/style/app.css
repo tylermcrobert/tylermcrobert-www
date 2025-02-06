@@ -52,12 +52,7 @@
 @layer base {
 	@font-face {
 		font-family: 'Suisse';
-		src: url('../lib/fonts/SuisseIntl-Regular.woff2') format('woff2');
-	}
-
-	@font-face {
-		font-family: 'Suisse';
-		src: url('../lib/fonts/SuisseIntl-Regular.otf') format('opentype');
+		src: url('/fonts/SuisseIntl-Regular.woff2') format('woff2');
 	}
 
 	html {
