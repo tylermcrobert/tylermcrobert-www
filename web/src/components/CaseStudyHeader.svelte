@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { RichText } from '$components';
 	import type { CaseStudy, Nullable } from '$sanity';
-	import { DOT, NUMS } from '../constants';
+	import { DOT, NUMS } from '$constants';
 
 	type CaseStudyIntroProps = Nullable<
 		Required<

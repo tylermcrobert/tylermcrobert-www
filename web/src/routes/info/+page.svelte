@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG } from '../../constants';
+	import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG } from '$constants';
 	import { DotHead } from '$components';
 	import { formatTime } from '$util/msToTime';
 

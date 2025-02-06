@@ -37,6 +37,8 @@ export async function GET({ params: { id } }) {
 			return json({ error: 'Failed to fetch auth token' }, { status: 500 });
 		}
 
+		console.log(accessToken);
+
 		/**
 		 * Fetch Playlists
 		 */
