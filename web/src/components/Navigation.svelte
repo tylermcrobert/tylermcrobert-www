@@ -6,17 +6,18 @@
 
 <nav class="z-nav sticky top-0 text-white mix-blend-difference">
 	<div
-		class="h-nav-height px-standard max-w-wrapper mx-auto flex items-center justify-between"
+		class="min-h-nav-height px-standard max-w-wrapper mx-auto flex items-center justify-between py-4"
 	>
-		<div>
-			<a href="/">Tyler McRobert</a>
+		<div class="flex flex-wrap">
+			<a href="/" class="mr-1">Tyler McRobert</a>
 
 			{#if contextTitle}
-				<a href="/x/exit" class="group">
-					&times;
-					<span>{contextTitle}</span>
-					<span class="opacity-0 group-hover:opacity-100">(close)</span>
-				</a>
+				<div class="group">
+					<span class="cursor-default">&times; {contextTitle}</span>
+					<a href="/x/exit" class="opacity-0 group-hover:opacity-100">
+						(close)
+					</a>
+				</div>
 			{/if}
 		</div>
 
