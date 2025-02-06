@@ -14,6 +14,10 @@ export function resolveLink({ slug, type }: Link) {
 		return `/`;
 	}
 
+	if (type === 'context') {
+		return `/x/${slug}`;
+	}
+
 	console.error('Could not resolve link', { slug, type });
 
 	return null;
