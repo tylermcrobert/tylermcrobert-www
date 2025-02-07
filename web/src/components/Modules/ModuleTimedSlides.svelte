@@ -31,10 +31,7 @@
 	style:background={data.background}
 >
 	{#each data.images || [] as image, i}
-		<div
-			class:hidden={i !== index}
-			class="col-start-1 row-start-1 duration-500"
-		>
+		<div class:opacity-0={i !== index} class="col-start-1 row-start-1">
 			<Image {image} sizes="90vw" alt={null} />
 		</div>
 	{/each}
