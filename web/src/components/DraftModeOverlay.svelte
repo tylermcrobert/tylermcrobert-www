@@ -1,0 +1,24 @@
+<script lang="ts">
+	import { page } from '$app/state';
+</script>
+
+{#if page.data.isDraftMode}
+	<div
+		class="z-draft-overlay fixed bottom-4 right-4 flex items-center justify-center gap-2 rounded-full bg-[#ffcc5a] p-2 px-4"
+	>
+		<span>Previewing Drafts</span>
+		<a href="/api/draft/disable" aria-label="exit draft mode">
+			<svg
+				class="stroke-current"
+				width="10"
+				height="10"
+				viewBox="0 0 10 10"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d="M9 1L1 9" stroke-width="1.5" />
+				<path d="M9 9L1 1" stroke-width="1.5" />
+			</svg>
+		</a>
+	</div>
+{/if}

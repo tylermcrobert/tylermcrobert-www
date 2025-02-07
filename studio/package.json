@@ -1,5 +1,5 @@
 {
-  "name": "tyler-mcrobert",
+  "name": "svelte-sanity-starter",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
@@ -9,29 +9,32 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "typegen": "sanity schema extract && sanity typegen generate"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/color-input": "^3.1.0",
-    "@sanity/icons": "^3.2.0",
-    "@sanity/vision": "^3.12.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "sanity": "^3.12.0",
-    "styled-components": "^6.1.11",
-    "svelte": "^4.2.18"
+    "@sanity/color-input": "^4.0.3",
+    "@sanity/icons": "^3.5.7",
+    "@sanity/ui": "^2.11.7",
+    "@sanity/vision": "^3.71.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.71.2",
+    "sanity-plugin-media": "^2.3.2",
+    "sanity-plugin-mux-input": "^2.4.0",
+    "styled-components": "^6.1.14"
   },
   "devDependencies": {
-    "@sanity/eslint-config-studio": "^2.0.1",
-    "@types/react": "^18.0.25",
-    "@types/styled-components": "^5.1.26",
-    "eslint": "^8.6.0",
-    "prettier": "^2.8.8",
-    "typescript": "^4.9.5"
+    "@sanity/eslint-config-studio": "^4.0.0",
+    "@types/react": "^18.3.18",
+    "eslint": "^8.57.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-svelte": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.7.3"
   },
   "prettier": {
     "semi": false,

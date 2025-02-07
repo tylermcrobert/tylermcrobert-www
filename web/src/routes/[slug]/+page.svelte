@@ -1,27 +1,26 @@
 <script lang="ts">
-  import { caseStudyQuery, type CaseStudyQuery } from '$lib/sanity/queries';
-  import ProjectPage from '$lib/components/ProjectPage.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import Head from '$lib/components/util/Head.svelte';
+	import { CaseStudyHeader, HomeIndex, Modules } from '$components';
 
-  export let data: { caseStudy: CaseStudyQuery; isPreview: boolean };
+	let { data } = $props();
 </script>
 
-<Head
-  pageTitle={data.caseStudy.title}
-  route={data.caseStudy.slug}
-  description={data.caseStudy.intro || ''}
-  sanityImage={data.caseStudy.previewImage}
-/>
+{#if data.caseStudy}
+	<div
+		class="z-project-page pb-large relative border-b border-dashed border-black bg-white"
+	>
+		<CaseStudyHeader
+			index={data.index}
+			intro={data.caseStudy.intro}
+			deliverables={data.caseStudy.deliverables}
+			date={data.caseStudy.date}
+			title={data.caseStudy.title}
+			description={data.caseStudy.description}
+		/>
+		<Modules modules={data.modules} />
+	</div>
 
-{#if data.isPreview}
-  <Preview
-    query={caseStudyQuery}
-    params={{ slug: data.caseStudy.slug }}
-    onUpdate={(newData) => (data.caseStudy = newData)}
-  >
-    <ProjectPage data={data.caseStudy} />
-  </Preview>
+	<div class="pointer-events-none h-dvh"></div>
+	<HomeIndex />
 {:else}
-  <ProjectPage data={data.caseStudy} />
+	<Modules modules={data.modules} />
 {/if}

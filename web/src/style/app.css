@@ -1,0 +1,106 @@
+@import './richtext.css' layer(base);
+@import 'tailwindcss';
+
+@config '../../tailwind.config.js';
+
+@theme {
+	/* Colors */
+
+	--color-background: rgb(255, 255, 255);
+	--color-foreground: rgb(0, 0, 0);
+	--color-image-preload: 245 245 245;
+
+	/* Spacing */
+
+	--spacing-nav-height: 2.25rem;
+
+	--spacing-standard: 1.33rem;
+	--spacing-small: 0.667rem;
+	--spacing-medium: 3.16rem;
+	--spacing-large: 5rem;
+
+	/* --spacing-nav-height: 60px;
+	--spacing-available-svh: calc(100svh - 60px);
+	--spacing-available-dvh: calc(100dvh - 60px); */
+
+	/* Z-Index */
+
+	--z-index-nav: 100;
+	--z-index-draft-overlay: 120;
+	--z-index-project-page: 90;
+
+	/* Breakpoints */
+
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1440px;
+	--breakpoint-2xl: 1900px;
+
+	/* Font */
+
+	--font-sans: Suisse, Helvetica, Arial, sans-serif;
+	--leading-heading: 1.05;
+
+	/* For RichText */
+
+	--max-width-rag-heading: 17ch;
+	--max-width-rag-paragraph: 45ch;
+	--max-width-wrapper: 65rem;
+}
+
+@layer base {
+	@font-face {
+		font-family: 'Suisse';
+		src: url('/fonts/SuisseIntl-Regular.woff2') format('woff2');
+	}
+
+	html {
+		@apply bg-background text-foreground antialiased;
+		@apply text-[18px] leading-[1.2] tracking-[0.02em] antialiased sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[calc(8px+1vw)];
+	}
+
+	body {
+		overscroll-behavior-y: none;
+	}
+
+	body::-webkit-scrollbar {
+		@apply hidden;
+	}
+
+	br {
+		@apply hidden;
+	}
+
+	hr {
+		@apply border-b-0 border-dashed border-black;
+	}
+
+	.indent {
+		@apply indent-8;
+	}
+}
+
+@layer components {
+	.text-h1 {
+		@apply leading-heading text-[1.78rem] tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
+	}
+
+	.text-h1 br {
+		@apply hidden sm:block;
+	}
+
+	.text-h2 {
+		@apply max-w-rag-heading leading-heading text-[26px];
+	}
+}
+
+@layer utilities {
+	.wrapper {
+		@apply px-standard max-w-wrapper mx-auto;
+	}
+
+	.grid-standard {
+		@apply gap-standard grid grid-cols-6;
+	}
+}

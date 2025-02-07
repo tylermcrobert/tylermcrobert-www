@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { infoQuery } from '$lib/sanity/queries';
-import { client } from '$lib/sanity/client';
-import { getPlaylistById } from '$lib/spotify/spotify';
+import getNowPlaying from '$lib/last.fm/+lastfm.js';
+import { infoQuery, type InfoQuery } from '$sanity';
 
-export async function load() {
-  const info = await client.fetch(infoQuery);
+export const load = async ({ locals: { client } }) => {
+	const [nowPlaying, infoPage] = await Promise.all([
+		await getNowPlaying(),
+		await client.fetch<InfoQuery>(infoQuery)
+	]);
 
-  const links: string[] = info.playlists.map((item: any) => item.link);
-  const playlists = await Promise.all(
-    links.map((item) => getPlaylistById(item))
-  );
-
-  return { info, playlists };
-}
-
-export const prerender = true;
+	return {
+		nowPlaying,
+		infoPage,
+		metadata: infoPage.metadata,
+		pageTitle: infoPage.title
+	} satisfies App.PageReturn;
+};

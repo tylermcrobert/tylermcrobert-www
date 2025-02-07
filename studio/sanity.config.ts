@@ -1,39 +1,29 @@
 import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
+import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemas'
+import {schemaTypes} from './schemaTypes'
+import {structure} from './desk'
+import {media} from 'sanity-plugin-media'
+import {muxInput} from 'sanity-plugin-mux-input'
 import {colorInput} from '@sanity/color-input'
-import {DocumentIcon} from '@sanity/icons'
+
+const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 
 export default defineConfig({
   name: 'default',
-  title: 'Tyler McRobert',
+  title: process.env.SANITY_STUDIO_TITLE,
 
-  projectId: 'n1wxk3oc',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
   dataset: 'production',
 
   plugins: [
-    deskTool({
-      structure: (S) =>
-        S.list()
-          .title('Content')
-          .items([
-            S.listItem()
-              .title('Info')
-              .id('info')
-              .icon(() => '🙋🏼‍♀️')
-              .child(S.document().schemaType('info').documentId('info')),
-            S.divider(),
-            S.documentTypeListItem('caseStudy'),
-            S.documentTypeListItem('context'),
-            S.documentTypeListItem('webFrameTheme'),
-            S.documentTypeListItem('playlist'),
-            // S.documentTypeListItem('song'),
-            S.documentTypeListItem('resume'),
-          ]),
+    structureTool({structure}),
+    media(),
+    muxInput({
+      max_resolution_tier: '2160p',
     }),
-    visionTool(),
     colorInput(),
+    ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
 
   schema: {
@@ -41,23 +31,30 @@ export default defineConfig({
   },
 
   document: {
+    newDocumentOptions: (item) => {
+      return item.filter((item) => CREATABLE_DOCTYPES.includes(item.templateId))
+    },
+
     productionUrl: async (prev, context) => {
-      const url = 'http://localhost:5173/api/preview'
+      const isDev = window.location.host === 'localhost:3333'
+      const baseUrl = isDev ? 'http://localhost:5173' : process.env.SANITY_STUDIO_PREVIEW_LINK
 
-      const {document} = context
-      const slug = (document.slug as any)?.current
+      const slug = (context.document as any)?.slug?.current
+      const type = (context.document as any)._type
 
-      if (!slug) return prev
+      const params = new URLSearchParams()
 
-      if (document._type === 'caseStudy') {
-        const params = new URLSearchParams()
-        params.set('type', 'caseStudy')
-        params.set('slug', slug)
+      params.set('slug', slug)
+      params.set('type', type)
 
-        return `${url}/?${params}`
-      }
+      return `${baseUrl}/api/draft?${params}`
+    },
+  },
 
-      return prev
+  form: {
+    image: {
+      // Hiding sanity default from the asset source because it's conusing to have two ways to add images
+      assetSources: (source) => source.filter((item) => item.name !== 'sanity-default'),
     },
   },
 })

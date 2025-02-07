@@ -1,68 +1,71 @@
 <script lang="ts">
-  // TODO: Update details for mobile
+	import { DotHead } from '$components';
+	import { NUMS } from '$constants';
+	import { formatTime } from '$util/msToTime.js';
 
-  let LIMIT = 5;
+	// TODO: Update details for mobile
 
-  import type { SpotifyPlaylist } from '$lib/spotify/spotify';
-  import DotHead from '$lib/components/util/DotHead.svelte';
-  import { NUMS } from '../../constants';
-  import Head from '$lib/components/util/Head.svelte';
+	let { data } = $props();
 
-  let itemOpen: number | null = null;
+	const LIMIT = 5;
 
-  function handleOpen(index: number) {
-    if (index === itemOpen) itemOpen = null;
-    else itemOpen = index;
-  }
+	let activeSlug = $state<string | null>(null);
 
-  export let data: { playlists: SpotifyPlaylist[] };
+	function togglePlaylist(slug: string | null) {
+		if (activeSlug === slug) {
+			activeSlug = null;
+		} else {
+			activeSlug = slug;
+		}
+	}
 </script>
 
-<Head pageTitle="Playlists" route="playlists" />
-
 <div class="space-y-medium my-large">
-  {#each data.playlists as { name, tracks, image, date, href, duration }, playlistIndex}
-    {@const isActive = playlistIndex === itemOpen}
+	{#each data.playlists as { title, tracks, image, date, link, duration, slug }, playlistIndex}
+		{@const isActive = slug === activeSlug}
 
-    <section class="wrapper my-medium gap-standard mx-auto flex flex-col">
-      <div class="text-head flex gap-4">
-        <img src={image} alt={name} class="size-[1em] object-cover" />
-        <h2>{name}</h2>
-      </div>
+		<section class="wrapper my-medium gap-standard mx-auto flex flex-col">
+			<div class="text-h1 flex gap-4">
+				<img src={image} alt={title} class="size-[1em] object-cover" />
+				<h2>{title}</h2>
+			</div>
 
-      <div class="grid-standard [&]:gap-y-1">
-        <div class="col-span-6 md:col-span-2">
-          <a {href} target="_blank">
-            <DotHead noMarginBottom>LINK ↗</DotHead>
-          </a>
-        </div>
-        <div class="col-span-3 md:col-span-2">
-          <DotHead noMarginBottom>{date}</DotHead>
-        </div>
-        <div class="col-span-3 md:col-span-2">
-          <DotHead noMarginBottom>DUR {duration}</DotHead>
-        </div>
-      </div>
+			<div class="grid-standard !gap-y-1">
+				<div class="col-span-6 md:col-span-2">
+					<a href={link} target="_blank">
+						<DotHead noMarginBottom>LINK ↗</DotHead>
+					</a>
+				</div>
+				<div class="col-span-3 md:col-span-2">
+					<DotHead noMarginBottom>{date}</DotHead>
+				</div>
+				<div class="col-span-3 md:col-span-2">
+					<DotHead noMarginBottom>
+						DUR {formatTime(duration || 0, 'hh:mm:ss')}
+					</DotHead>
+				</div>
+			</div>
 
-      <ul>
-        {#each tracks as { name, duration, artists }, i}
-          <li
-            class:hidden={i + 1 > LIMIT && !isActive}
-            class="text-head inline"
-          >
-            {NUMS[i + 1]}
-            {name}&mdash;{artists.join(' & ')} ({duration}){' '}
-          </li>
-        {/each}
-      </ul>
+			<ul>
+				{#each tracks || [] as { title, duration, artists }, i}
+					{@const durFormatted = formatTime(duration || 0, 'mm:ss')}
+					{@const artistsFormatted = artists?.join(' & ')}
+					{@const hidden = i + 1 > LIMIT && !isActive}
 
-      <div>
-        <button on:click={() => handleOpen(playlistIndex)}>
-          <DotHead noMarginBottom>
-            {isActive ? 'See Less ↑' : 'See All ↓'}
-          </DotHead>
-        </button>
-      </div>
-    </section>
-  {/each}
+					<li class={['text-h1 ', hidden ? 'hidden' : 'inline']}>
+						{NUMS[i + 1]}
+						{title}&mdash;{artistsFormatted} ({durFormatted}){' '}
+					</li>
+				{/each}
+			</ul>
+
+			<div>
+				<button onclick={() => togglePlaylist(slug)} class="cursor-pointer">
+					<DotHead noMarginBottom>
+						{isActive ? 'See Less ↑' : 'See All ↓'}
+					</DotHead>
+				</button>
+			</div>
+		</section>
+	{/each}
 </div>

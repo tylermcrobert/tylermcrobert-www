@@ -1,10 +1,21 @@
-import { client } from '../lib/sanity/client';
+import { SITE_QUERY, type SiteQuery } from '$lib/sanity';
 
-const layoutQuery = `*[_type == 'info'][0]{ bio, previewImage }`;
+export const load = async ({
+	locals: { isDraftMode, client },
+	url: { pathname },
+	cookies
+}) => {
+	const contextSlug = cookies.get('context')?.toString() || null;
+	const site = await client.fetch<SiteQuery>(SITE_QUERY, { contextSlug });
+	const { settings, homepageTitle, context } = site;
 
-export async function load(ctx) {
-  const { index } = ctx.locals;
-  const { bio, previewImage } = await client.fetch(layoutQuery);
-
-  return { index, previewImage, bio };
-}
+	return {
+		isDraftMode,
+		pathname,
+		contextCaseStudies: context?.caseStudies || [],
+		homepageTitle: homepageTitle,
+		contextTitle: (contextSlug && context?.title) || null,
+		siteTitle: settings?.siteTitle,
+		siteMetadata: settings?.metadata
+	} satisfies App.LayoutData;
+};

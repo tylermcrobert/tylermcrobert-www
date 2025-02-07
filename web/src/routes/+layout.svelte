@@ -1,10 +1,21 @@
 <script lang="ts">
-  import '../app.css';
-  import Nav from '$lib/components/Nav.svelte';
-  import Analytics from '$lib/components/Analytics.svelte';
+	import {
+		Metadata,
+		DraftModeOverlay,
+		Navigation,
+		ConsoleCredit
+	} from '$components';
+	import '../style/app.css';
+
+	let { children, data } = $props();
 </script>
 
-<Nav />
-<slot />
+<Navigation />
 
-<Analytics />
+{#key data.pathname}
+	{@render children()}
+{/key}
+
+<Metadata />
+<DraftModeOverlay />
+<ConsoleCredit />
