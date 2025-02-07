@@ -7,6 +7,7 @@
 	import ModuleTripleImage from './ModuleTripleImage.svelte';
 	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
 	import { ImagePriorityProvider } from '$components';
+	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
 
 	type Props = { modules: Module[] };
 
@@ -29,6 +30,8 @@
 					<ModuleTripleImage {data} />
 				{:else if data._type === 'mobileWebsite'}
 					<ModuleMobileWebsite {data} />
+				{:else if data._type === 'timedSlides'}
+					<ModuleTimedSlides {data} />
 				{:else}
 					{console.warn('Cannot find module:', data._type)}
 				{/if}

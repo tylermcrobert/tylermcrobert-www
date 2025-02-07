@@ -223,6 +223,24 @@ export type ModuleMobileWebsite = Nullable<{
 }>;
 
 /**
+ * Timed Slides
+ */
+
+const MODULE_TIMED_SLIDES = `//groq
+  _type == 'timedSlides' => {
+    images,
+    seconds,
+    'background': theme->background.hex
+  }
+`;
+
+export type ModuleTimedSlides = Nullable<{
+	_type: 'timedSlides';
+	seconds: number;
+	images: SanityImageAsset[];
+	background: string | undefined;
+}>;
+/**
  * Modules
  */
 
@@ -233,7 +251,8 @@ const MODULES_PROJECTION = groq`{
   ${MODULE_WEBSITE},
   ${MODULE_DIPTYCH},
   ${MODULE_TRIPLE_IMAGE},
-  ${MODULE_MOBILE_WEBSITE}
+  ${MODULE_MOBILE_WEBSITE},
+  ${MODULE_TIMED_SLIDES}
 }
 `;
 
@@ -243,7 +262,8 @@ export type Module =
 	| ModuleWebsite
 	| ModuleDiptych
 	| ModuleTripleImage
-	| ModuleMobileWebsite;
+	| ModuleMobileWebsite
+	| ModuleTimedSlides;
 
 /*******************************************************************************
  * PAGES
