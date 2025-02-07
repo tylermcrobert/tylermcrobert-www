@@ -14,7 +14,7 @@ export default defineConfig({
   title: process.env.SANITY_STUDIO_TITLE,
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
-  dataset: 'refactor-2025',
+  dataset: 'production',
 
   plugins: [
     structureTool({structure}),
