@@ -8,7 +8,13 @@
 	};
 
 	let { children, portableText }: Props = $props();
-	let { style } = $derived(portableText.value);
+
+	let { indexInParent, global, value } = $derived(portableText);
+	let { style } = $derived(value);
+
+	let isHeading = $derived(style === 'h1' || style === 'h2');
+	let isFirst = $derived(indexInParent === 0);
+	let isLast = $derived(global.ptBlocks.length === indexInParent + 1);
 
 	let elementName = $derived.by(() => {
 		if (style === 'normal') return 'p';
@@ -23,7 +29,10 @@
 			'text-h1': style === 'h1',
 			'text-h2': style === 'h2',
 			'text-para': style === 'normal',
-			'border-l border-current pl-3': style === 'blockquote'
+			'border-l border-current pl-3': style === 'blockquote',
+			'mt-6': !isFirst && isHeading,
+			'mb-3': !isLast,
+			'max-w-rag-paragraph': !isHeading
 		}}
 	>
 		{@render children()}

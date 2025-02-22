@@ -22,7 +22,7 @@
 {#if _type === '@list'}
 	<svelte:element
 		this={listItem === 'number' ? 'ol' : 'ul'}
-		class={['pl-5', { 'mb-3': level === 1 }]}
+		class={['max-w-rag-paragraph pl-5', { 'mb-3': level === 1 }]}
 	>
 		{@render children()}
 	</svelte:element>

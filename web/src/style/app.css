@@ -1,4 +1,3 @@
-@import './richtext.css' layer(base);
 @import 'tailwindcss';
 
 @config '../../tailwind.config.js';
