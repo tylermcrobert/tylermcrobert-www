@@ -16,20 +16,20 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/icons": "^3.5.7",
-    "@sanity/vision": "^3.71.2",
+    "@sanity/icons": "^3.6.0",
+    "@sanity/vision": "^3.76.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^3.71.2",
+    "sanity": "^3.76.3",
     "sanity-plugin-media": "^2.3.2",
-    "sanity-plugin-mux-input": "^2.4.0",
-    "styled-components": "^6.1.14"
+    "sanity-plugin-mux-input": "^2.5.0",
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",
     "@types/react": "^18.3.18",
     "eslint": "^8.57.1",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.2",
     "prettier-plugin-svelte": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "^5.7.3"
