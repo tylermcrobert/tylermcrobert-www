@@ -4,8 +4,8 @@
 @config '../../tailwind.config.js';
 
 @theme {
-	--color-background: 255 255 255;
-	--color-foreground: 0 0 0;
+	--color-background: rgb(255, 255, 255);
+	--color-foreground: rgb(0, 0, 0);
 
 	--spacing-nav-height: 60px;
 	--spacing-available-svh: calc(100svh - 60px);
@@ -20,11 +20,11 @@
 }
 
 @utility text-h1 {
-	@apply max-w-rag-heading text-[36px] leading-heading;
+	@apply max-w-rag-heading leading-heading text-[36px];
 }
 
 @utility text-h2 {
-	@apply max-w-rag-heading text-[26px] leading-heading;
+	@apply max-w-rag-heading leading-heading text-[26px];
 }
 
 @layer base {
