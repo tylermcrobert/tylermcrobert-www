@@ -14,7 +14,7 @@
 	class="h-nav-height z-nav sticky top-0 flex items-center gap-4 bg-blue-500 px-4"
 >
 	<div class="flex-1">
-		<a href="/">svelte-sanity-starter</a>
+		<a href="/">{page.data.siteTitle}</a>
 	</div>
 
 	<ul class="hidden gap-4 bg-purple-400 sm:flex">
