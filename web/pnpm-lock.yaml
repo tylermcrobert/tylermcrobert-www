@@ -43,6 +43,9 @@ devDependencies:
   '@types/eslint':
     specifier: ^9.6.1
     version: 9.6.1
+  '@types/gtag.js':
+    specifier: ^0.0.20
+    version: 0.0.20
   eslint:
     specifier: ^9.19.0
     version: 9.19.0
@@ -923,6 +926,10 @@ packages:
     dependencies:
       '@types/node': 22.13.1
     dev: false
+
+  /@types/gtag.js@0.0.20:
+    resolution: {integrity: sha512-wwAbk3SA2QeU67unN7zPxjEHmPmlXwZXZvQEpbEUQuMCRGgKyE1m6XDuTUA9b6pCGb/GqJmdfMOY5LuDjJSbbg==}
+    dev: true
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}

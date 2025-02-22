@@ -19,6 +19,7 @@
 		"@tailwindcss/postcss": "^4.0.3",
 		"@tailwindcss/vite": "^4.0.3",
 		"@types/eslint": "^9.6.1",
+		"@types/gtag.js": "^0.0.20",
 		"eslint": "^9.19.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.46.1",
