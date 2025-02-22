@@ -15,8 +15,8 @@ dependencies:
     specifier: ^6.28.0
     version: 6.28.0
   '@tylermcrobert/svelte-sanity-image':
-    specifier: ^0.3.13
-    version: 0.3.13(svelte@5.20.2)
+    specifier: ^1.0.0
+    version: 1.0.0(@sanity/image-url@1.1.0)(svelte@5.20.2)
   media-chrome:
     specifier: ^4.5.0
     version: 4.5.0
@@ -890,12 +890,24 @@ packages:
       vite: 5.4.14
     dev: true
 
-  /@tylermcrobert/svelte-sanity-image@0.3.13(svelte@5.20.2):
-    resolution: {integrity: sha512-yaX/uWhkneHRjOUYj1daC0uU+YD33AYe6hBHLxSl/bhEaOBNn7FKIkaWUEibvOG8SBYiT3xW+3Ut0hBnuc0/wQ==}
+  /@tylermcrobert/svelte-sanity-image@0.4.0-next.4(@sanity/image-url@1.1.0)(svelte@5.20.2):
+    resolution: {integrity: sha512-olTc8ctAcemcYJQ4NDGxhNka32sQPrE/Gjh+GFQyTsOLitwT0ybpoz+bkrDxvhVqldUf8rPye7eksxLdaFmKyg==}
     peerDependencies:
-      svelte: ^4.0.0
+      '@sanity/image-url': ^1.1.0
+      svelte: ^5.0.0
     dependencies:
       '@sanity/image-url': 1.1.0
+      svelte: 5.20.2
+    dev: false
+
+  /@tylermcrobert/svelte-sanity-image@1.0.0(@sanity/image-url@1.1.0)(svelte@5.20.2):
+    resolution: {integrity: sha512-Yh5FqJUNQz4UMgcWn5dhnW/UJpZfw5l1IVgM+AOhoVNKiDlZlVI0QaWSbL9+h3QQFHlZwA79GJSvCa34dbtZiQ==}
+    peerDependencies:
+      '@sanity/image-url': ^1.1.0
+      svelte: ^5.0.0
+    dependencies:
+      '@sanity/image-url': 1.1.0
+      '@tylermcrobert/svelte-sanity-image': 0.4.0-next.4(@sanity/image-url@1.1.0)(svelte@5.20.2)
       svelte: 5.20.2
     dev: false
 
