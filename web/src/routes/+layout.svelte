@@ -7,7 +7,7 @@
 		ConsoleCredit,
 		Analytics
 	} from '$components';
-	import '../style/app.css';
+	import '../app.css';
 
 	let { children, data } = $props();
 </script>

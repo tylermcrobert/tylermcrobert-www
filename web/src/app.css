@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@config '../../tailwind.config.js';
+@config '../tailwind.config.js';
 
 @theme {
 	--color-background: rgb(255, 255, 255);
