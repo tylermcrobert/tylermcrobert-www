@@ -3,7 +3,8 @@
 		Metadata,
 		DraftModeOverlay,
 		Navigation,
-		ConsoleCredit
+		ConsoleCredit,
+		Analytics
 	} from '$components';
 	import '../style/app.css';
 
@@ -19,3 +20,4 @@
 <Metadata />
 <DraftModeOverlay />
 <ConsoleCredit />
+<Analytics id="G-S98MMVCHW0" />
