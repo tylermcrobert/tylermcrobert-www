@@ -8,6 +8,7 @@ export const load = async ({
 		await client.fetch<SiteQuery>(SITE_QUERY);
 
 	return {
+		googleAnalyticsId: settings?.googleAnalyticsId,
 		navigation,
 		footer,
 		isDraftMode,

@@ -16,6 +16,7 @@ declare global {
 			siteTitle: string | null | undefined;
 			homepageTitle: string | null | undefined;
 			pathname: string;
+			googleAnalyticsId: string | null | undefined;
 		}
 
 		interface PageReturn extends Record<string, unknown> {

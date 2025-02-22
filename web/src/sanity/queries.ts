@@ -143,6 +143,7 @@ export const SITE_QUERY = groq`{
   "settings": *[_id == "settings"][0]{
     metadata,
     siteTitle,
+    googleAnalyticsId,
   },
   "homepageTitle": *[_id == 'homepage'][0].title
 }`;
@@ -151,7 +152,7 @@ export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 	Nullable<{
 		footer: { links: LinkProjection[] };
 		navigation: { links: LinkProjection[] };
-		settings: Pick<Settings, 'metadata' | 'siteTitle'>;
+		settings: Pick<Settings, 'metadata' | 'siteTitle' | 'googleAnalyticsId'>;
 	}>;
 
 export const SITEMAP_QUERY = groq`{

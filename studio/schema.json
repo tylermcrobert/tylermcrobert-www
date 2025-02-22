@@ -367,6 +367,13 @@
         },
         "optional": true
       },
+      "googleAnalyticsId": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "metadata": {
         "type": "objectAttribute",
         "value": {

@@ -4,7 +4,8 @@
 		DraftModeOverlay,
 		Navigation,
 		Footer,
-		ConsoleCredit
+		ConsoleCredit,
+		Analytics
 	} from '$components';
 	import '../style/app.css';
 
@@ -24,3 +25,7 @@
 <Metadata />
 <DraftModeOverlay />
 <ConsoleCredit />
+
+{#if data.googleAnalyticsId}
+	<Analytics id={data.googleAnalyticsId} />
+{/if}
