@@ -5,10 +5,15 @@
 	import RichTextStyleRenderer from './RichTextStyleRenderer.svelte';
 	import { PortableText } from '@portabletext/svelte';
 
-	let { value }: { value: RichTextProjection } = $props();
+	type Props = {
+		value: RichTextProjection;
+		class?: string;
+	};
+
+	let { value, class: className }: Props = $props();
 </script>
 
-<div class="richtext">
+<div class={['richtext', className]}>
 	<PortableText
 		{value}
 		components={{
