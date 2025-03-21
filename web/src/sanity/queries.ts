@@ -156,6 +156,10 @@ export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 	}>;
 
 export const SITEMAP_QUERY = groq`{
+  "homepage": *[_type == 'homepage'][0]{
+    _updatedAt,
+  },
+
   "pages": *[_type == 'page'][]{ 
     title,
     "slug": slug.current,

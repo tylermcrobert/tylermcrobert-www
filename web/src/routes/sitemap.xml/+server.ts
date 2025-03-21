@@ -12,6 +12,12 @@ export async function GET({ locals }) {
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+    <url>
+      <loc>${PUBLIC_SITE_URL}</loc>
+      <lastmod>${sanityData.homepage?._updatedAt}</lastmod>
+      <priority>0.8</priority>
+    </url>
+
     ${sanityData.pages
 			.map(
 				(page) => `
