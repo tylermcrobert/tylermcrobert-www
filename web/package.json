@@ -39,7 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"@mux/mux-video": "^0.23.1",
-		"@portabletext/svelte": "^2.1.12",
+		"@portabletext/svelte": "^3.0.0",
 		"@sanity/client": "^6.28.3",
 		"@tylermcrobert/svelte-sanity-image": "^1.0.1",
 		"media-chrome": "^4.8.0",
