@@ -1,4 +1,4 @@
-import { PAGE_QUERY, type PAGE_QUERYResult } from '$sanity';
+import { PAGE_QUERY, type Module, type PAGE_QUERYResult } from '$sanity';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({ params, locals: { client } }) => {
@@ -13,6 +13,6 @@ export const load = async ({ params, locals: { client } }) => {
 	return {
 		pageTitle: data.title,
 		metadata: data.metadata,
-		modules: data.modules || []
+		modules: (data.modules || []) as Module[]
 	} satisfies App.PageReturn;
 };
