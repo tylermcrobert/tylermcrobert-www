@@ -491,7 +491,7 @@ export type AllSanitySchemaTypes =
 	| MediaTag
 	| Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ../web/src/sanity/queries.ts
+// Source: ../web/src/lib/sanity/queries.ts
 // Variable: LINK_PROJECTION
 // Query: {  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }}
 export type LINK_PROJECTIONResult = {
