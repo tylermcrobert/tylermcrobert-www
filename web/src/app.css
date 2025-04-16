@@ -16,6 +16,8 @@
 	--z-index-nav: 100;
 
 	--leading-heading: 1;
+
+	--font-sans: Suisse, Helvetica, Arial, sans-serif;
 }
 
 @utility text-h1 {
@@ -27,6 +29,11 @@
 }
 
 @layer base {
+	@font-face {
+		font-family: 'Suisse';
+		src: url('/fonts/SuisseIntl-Regular.woff2') format('woff2');
+	}
+
 	html {
 		@apply bg-background text-foreground antialiased;
 	}
