@@ -11,7 +11,8 @@ export default defineType({
       title: 'Homepage Title',
       name: 'title',
       type: 'string',
-      description: "A title specifically for the homepage. Define the site's title in Settings",
+      description:
+        "A browser tab title specifically for the homepage. Define the site's global title in Settings",
       validation: (Rule) => Rule.required(),
     },
     {
