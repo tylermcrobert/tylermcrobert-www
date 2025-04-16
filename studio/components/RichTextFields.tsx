@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Container = styled.div`
+const RichTextMinimalContainerStyle = styled.div`
   [data-testid='pt-editor'][data-fullscreen='false'] {
     height: 10rem;
   }
@@ -11,5 +11,7 @@ const Container = styled.div`
 `
 
 export const RichTextMinimalContainer = ((props: any) => (
-  <Container>{props.renderDefault({...props, initialActive: true})}</Container>
+  <RichTextMinimalContainerStyle>
+    {props.renderDefault({...props, initialActive: true})}
+  </RichTextMinimalContainerStyle>
 )) as any
