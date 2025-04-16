@@ -30,6 +30,8 @@
 
 @layer base {
 	@font-face {
+		/* NOTE: Remember to edit index.html to preload these fonts. */
+
 		font-family: 'Suisse';
 		src: url('/fonts/SuisseIntl-Regular.woff2') format('woff2');
 	}
