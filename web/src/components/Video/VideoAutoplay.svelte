@@ -26,6 +26,7 @@
 	{#await import('@mux/mux-video') then}
 		<mux-video
 			bind:this={videoElement}
+			class="w-full"
 			metadata-viewer-user-id="s4u780"
 			playback-id={video?.id}
 			muted
