@@ -1,5 +1,5 @@
+import {toPlainText} from '@util'
 import {defineType} from 'sanity'
-import {toPlainText} from '../../util'
 
 const TITLE = 'Text Block'
 

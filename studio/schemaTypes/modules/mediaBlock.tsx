@@ -1,5 +1,5 @@
+import {prepareMedia, selectMedia} from '@util'
 import {defineType} from 'sanity'
-import {prepareMedia, selectMedia} from '../../util'
 
 const TITLE = 'Media Block'
 
