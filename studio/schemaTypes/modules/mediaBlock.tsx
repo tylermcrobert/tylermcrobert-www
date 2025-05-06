@@ -1,4 +1,5 @@
 import {defineType} from 'sanity'
+import {prepareMedia, selectMedia} from '../../util'
 
 const TITLE = 'Media Block'
 
@@ -15,25 +16,11 @@ export default defineType({
     },
   ],
   preview: {
-    select: {
-      video: 'media.video',
-      image: 'media.image',
-      imageName: 'media.image.asset.originalFilename',
-      posterFrame: 'media.posterFrame',
-    },
-    prepare({image, imageName, posterFrame, video}) {
-      if (video?.asset) {
-        return {
-          title: TITLE,
-          subtitle: 'Video asset',
-          media: posterFrame || (() => '🎥'),
-        }
-      }
-
+    select: {...selectMedia('media')},
+    prepare(p) {
       return {
         title: TITLE,
-        subtitle: imageName,
-        media: image,
+        ...prepareMedia(p),
       }
     },
   },
