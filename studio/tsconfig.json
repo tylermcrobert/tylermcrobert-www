@@ -13,7 +13,8 @@
     "incremental": true,
     "baseUrl": ".", // Added baseUrl
     "paths": {
-      "@util": ["util/index"]
+      "@util": ["util/index"],
+      "@components/*": ["components/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

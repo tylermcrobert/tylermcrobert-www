@@ -1,5 +1,5 @@
 import {DocumentIcon, LinkIcon} from '@sanity/icons'
-import {RichTextMinimalContainer} from '../../components/RichTextFields'
+import {RichTextMinimalContainer} from '@components/RichTextFields'
 import {defineType} from 'sanity'
 
 const ANNOTATIONS = [
