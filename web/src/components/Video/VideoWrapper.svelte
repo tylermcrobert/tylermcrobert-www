@@ -26,7 +26,7 @@
 
 <div
 	style:aspect-ratio={aspect}
-	class={`relative overflow-hidden bg-neutral-100 ${className}`.trim()}
+	class={['relative overflow-hidden', className]}
 >
 	{@render children({ aspect })}
 </div>
