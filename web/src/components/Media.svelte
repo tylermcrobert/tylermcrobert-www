@@ -23,11 +23,11 @@
 	}: Props = $props();
 </script>
 
-{#if data?.video}
-	<Video video={data.video} class={className} />
-{:else if data?.image}
+{#if data?.asset?._type === 'video'}
+	<Video video={data.asset.video} class={className} />
+{:else if data?.asset?._type === 'image'}
 	<Image
-		image={data.image}
+		image={data.asset.image}
 		{alt}
 		class={className}
 		{sizes}
