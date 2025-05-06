@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType, Rule} from 'sanity'
 
 export default defineType({
   name: 'media',
@@ -47,17 +47,62 @@ export default defineType({
   ],
   preview: {
     select: {
-      image: 'image',
-      imageName: 'image.asset.originalFilename',
-      video: 'video',
+      ...selectMedia(null),
     },
-    prepare: ({image, imageName, video}) => {
-      const isVideo = !!video
-
+    prepare: (p) => {
       return {
-        title: imageName || (isVideo && 'Video Block') || 'Media Block',
-        media: image || video,
+        media: prepareMedia(p).media,
+        title: prepareMedia(p).subtitle,
       }
     },
   },
 })
+
+/**
+ * Checks if the video or audio fields are both undefined
+ */
+export function validateMedia(Rule: Rule) {
+  return Rule.custom((data: {image?: unknown; video?: unknown}) => {
+    if (!(!!data.image || !!data.video)) {
+      return 'An image or video is required.'
+    }
+
+    return true
+  })
+}
+
+/**
+ * For use in object previews. Selects the projected image and video assets. `path` selects the media object
+ */
+export function selectMedia(path: string | null) {
+  const p = path ? `${path}.` : ''
+  return {
+    image: `${p}image`,
+    imageFileName: `${p}image.asset.originalFilename`,
+    video: `${p}video`,
+    videoPlaybackId: `${p}video.playbackId`,
+  }
+}
+
+/**
+ * Takes the props selected from selectMedia and formats them for the preview
+ */
+export function prepareMedia(props: Record<keyof ReturnType<typeof selectMedia>, any>) {
+  if (!props.video?.asset && !props.image) {
+    return {
+      subtitle: 'No media selected',
+    }
+  }
+
+  if (props.video?.asset) {
+    return {
+      subtitle: 'Video asset',
+      media: () => '🎥',
+    }
+  }
+
+  return {
+    subtitle: props.imageFileName,
+    media: props.image,
+  }
+}
