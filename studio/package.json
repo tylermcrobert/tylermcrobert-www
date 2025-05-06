@@ -16,24 +16,24 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/icons": "^3.6.0",
-    "@sanity/vision": "^3.76.3",
+    "@sanity/icons": "^3.7.0",
+    "@sanity/vision": "^3.88.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^3.76.3",
-    "sanity-plugin-media": "^2.3.2",
-    "sanity-plugin-mux-input": "^2.5.0",
-    "styled-components": "^6.1.15",
+    "sanity": "^3.88.0",
+    "sanity-plugin-media": "^2.4.2",
+    "sanity-plugin-mux-input": "^2.8.0",
+    "styled-components": "^6.1.17",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",
-    "@types/react": "^18.3.18",
+    "@types/react": "^18.3.21",
     "eslint": "^8.57.1",
-    "prettier": "^3.5.2",
+    "prettier": "^3.5.3",
     "prettier-plugin-svelte": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   },
   "prettier": {
     "semi": false,
