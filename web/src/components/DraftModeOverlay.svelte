@@ -4,7 +4,7 @@
 
 {#if $page.data.isDraftMode}
 	<div
-		class="fixed bottom-4 right-4 flex items-center justify-center gap-2 rounded-full bg-[#ffcc5a] p-2 px-4"
+		class="z-nav fixed bottom-4 right-4 flex items-center justify-center gap-2 rounded-full bg-[#ffcc5a] p-2 px-4"
 	>
 		<span>Previewing Drafts</span>
 		<a href="/api/draft/disable" aria-label="exit draft mode">
