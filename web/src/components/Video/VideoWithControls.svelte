@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { MediaProjectionVideo } from '$sanity';
 	import { urlFor } from '$sanity/image';
+	import type { ClassValue } from 'svelte/elements';
 	import PauseIcon from './icons/PauseIcon.svelte';
 	import PlayIcon from './icons/PlayIcon.svelte';
 	import VolumeMuted from './icons/VolumeMuted.svelte';
@@ -9,7 +10,7 @@
 
 	type Props = {
 		video: MediaProjectionVideo;
-		class?: string;
+		class?: ClassValue;
 	};
 
 	let { video, class: className }: Props = $props();

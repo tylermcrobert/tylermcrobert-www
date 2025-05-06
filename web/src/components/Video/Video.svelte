@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { MediaProjectionVideo } from '$sanity';
+	import type { ClassValue } from 'svelte/elements';
 	import VideoAutoplay from './VideoAutoplay.svelte';
 	import VideoWithControls from './VideoWithControls.svelte';
 
 	type Props = {
 		video: MediaProjectionVideo;
-		class?: string;
+		class?: ClassValue;
 	};
 
 	let { video, class: className }: Props = $props();

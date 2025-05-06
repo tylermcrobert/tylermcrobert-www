@@ -2,10 +2,11 @@
 	import SvelteIntersectionObserver from 'svelte-intersection-observer';
 	import type { MediaProjectionVideo } from '$sanity';
 	import VideoWrapper from './VideoWrapper.svelte';
+	import type { ClassValue } from 'svelte/elements';
 
 	type Props = {
 		video: MediaProjectionVideo;
-		class: string | undefined;
+		class: ClassValue | undefined;
 	};
 
 	let { class: className, video }: Props = $props();

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { MediaProjection, MediaProjectionVideo } from '$sanity';
 	import type { Snippet } from 'svelte';
+	import type { ClassValue } from 'svelte/elements';
 
 	type FormSnippet = {
 		aspect: number;
@@ -8,7 +9,7 @@
 
 	type Props = {
 		video: MediaProjectionVideo;
-		class: string | undefined;
+		class: ClassValue | undefined;
 		children: Snippet<[FormSnippet]>;
 	};
 
