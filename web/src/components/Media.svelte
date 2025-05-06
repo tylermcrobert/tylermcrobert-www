@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { MediaProjection } from '$sanity';
 	import { Video, Image } from '$components';
+	import type { ClassValue } from 'svelte/elements';
 
 	type Props = {
 		data: MediaProjection;
 		sizes: string;
-		class?: string;
+		class?: ClassValue;
 		priority?: boolean;
 		videoElement?: HTMLVideoElement;
 		imageAspect?: number | undefined;
