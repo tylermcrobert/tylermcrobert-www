@@ -43,13 +43,13 @@ const RICH_TEXT_PROJECTION = groq`{
 export type RichTextProjection = InputValue;
 
 export const MEDIA_PROJECTION = groq`{
-  "_type": 'mediaProjection',
+  "_type": "mediaProjection",
   "asset": select(
-    @.image != null => {
+    defined(@.image) => {
       "_type": "image",
-      "image": @.image,
+      "image": @.image
     },
-    @.video.asset != null => { 
+    defined(@.video.asset) => {
       "_type": "video",
       "video": @.video.asset-> {
         "id": playbackId,
