@@ -1,5 +1,7 @@
 import {defineType} from 'sanity'
 
+export const INTERNAL_LINK_TYPES = [{type: 'page'}, {type: 'homepage'}]
+
 export default defineType({
   title: 'Link',
   name: 'link',
@@ -63,3 +65,21 @@ export default defineType({
     },
   },
 })
+
+export function selectLink(path: string | null) {
+  const p = path ? `${path}.` : ''
+  return {
+    title: `${p}reference.title`,
+    label: `${p}label`,
+    slug: `${p}reference.slug.current`,
+    href: `${p}href`,
+    type: `${p}reference._type`,
+  }
+}
+
+export function prepareLink(props: Record<keyof ReturnType<typeof selectLink>, any>) {
+  return {
+    title: props.label || props.title,
+    subtitle: props.href || props.type,
+  }
+}

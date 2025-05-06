@@ -1,6 +1,7 @@
 import {DocumentIcon, LinkIcon} from '@sanity/icons'
 import {RichTextMinimalContainer} from '@components'
 import {defineType} from 'sanity'
+import {INTERNAL_LINK_TYPES} from '@util'
 
 const ANNOTATIONS = [
   {type: 'internalLink', name: 'internalLink'},
@@ -82,7 +83,7 @@ export const richTextInternalLink = {
     {
       name: 'reference',
       type: 'reference',
-      to: [{type: 'homepage'}, {type: 'page'}],
+      to: INTERNAL_LINK_TYPES,
     },
   ],
 }
