@@ -10,12 +10,7 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
-    "baseUrl": ".", // Added baseUrl
-    "paths": {
-      "@util": ["util/index"],
-      "@components/*": ["components/*"]
-    }
+    "incremental": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

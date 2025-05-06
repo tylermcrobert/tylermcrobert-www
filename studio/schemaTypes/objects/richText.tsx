@@ -1,6 +1,6 @@
 import {DocumentIcon, LinkIcon} from '@sanity/icons'
-import {RichTextMinimalContainer} from '@components/RichTextFields'
 import {defineType} from 'sanity'
+import {RichTextMinimalContainer} from '../../components/RichTextFields'
 
 const ANNOTATIONS = [
   {type: 'internalLink', name: 'internalLink'},
