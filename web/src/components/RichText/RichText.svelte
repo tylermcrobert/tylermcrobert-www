@@ -18,25 +18,25 @@
 		{value}
 		components={{
 			block: {
-				normal: RichTextStyleRenderer as any,
-				h1: RichTextStyleRenderer as any,
-				h2: RichTextStyleRenderer as any,
-				blockquote: RichTextStyleRenderer as any
+				normal: RichTextStyleRenderer,
+				h1: RichTextStyleRenderer,
+				h2: RichTextStyleRenderer,
+				blockquote: RichTextStyleRenderer
 			},
 			list: {
-				bullet: RichTextListRenderer as any,
-				number: RichTextListRenderer as any,
-				normal: RichTextListRenderer as any
+				bullet: RichTextListRenderer,
+				number: RichTextListRenderer,
+				normal: RichTextListRenderer
 			},
 			listItem: {
-				bullet: RichTextListRenderer as any,
-				number: RichTextListRenderer as any,
-				normal: RichTextListRenderer as any
+				bullet: RichTextListRenderer,
+				number: RichTextListRenderer,
+				normal: RichTextListRenderer
 			},
 			marks: {
-				link: RichTextLinkRenderer as any,
-				internalLink: RichTextLinkRenderer as any,
-				externalLink: RichTextLinkRenderer as any
+				link: RichTextLinkRenderer,
+				internalLink: RichTextLinkRenderer,
+				externalLink: RichTextLinkRenderer
 			},
 			types: {
 				// Components here...
