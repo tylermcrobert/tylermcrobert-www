@@ -19,7 +19,7 @@
 	let aspect = $derived(
 		video.aspect
 			?.split(':')
-			.map(Number)
+			.map((num) => parseInt(num))
 			.reduce((a, b) => a / b)
 	);
 </script>
