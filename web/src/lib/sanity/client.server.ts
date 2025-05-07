@@ -8,7 +8,7 @@ if (!SANITY_API_READ_TOKEN) {
 }
 
 export const previewClient = client.withConfig({
-	useCdn: false, // must be false for previewDrafts
-	perspective: 'previewDrafts',
+	useCdn: false,
+	perspective: 'drafts',
 	token: SANITY_API_READ_TOKEN
 });
