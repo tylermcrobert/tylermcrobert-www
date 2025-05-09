@@ -27,7 +27,7 @@
 <media-controller
 	style:aspect-ratio={getAspect(aspect)}
 	class={[
-		'controller outline-hidden block cursor-pointer bg-transparent',
+		'controller outline-hidden relative block cursor-pointer bg-transparent',
 		className
 	]}
 >
