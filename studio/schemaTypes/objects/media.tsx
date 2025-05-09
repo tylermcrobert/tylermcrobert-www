@@ -96,6 +96,7 @@ export function prepareMedia({
   videoFilename,
   posterFrame,
   imageFileName,
+  thumbTime,
 }: Record<keyof ReturnType<typeof selectMedia>, any>) {
   if (!videoPlaybackId && !image) {
     return {
@@ -116,7 +117,7 @@ export function prepareMedia({
             <img
               alt="Video thumbnail"
               style={{width: '100%', height: '100%', objectFit: 'cover'}}
-              src={`https://image.mux.com/${videoPlaybackId}/thumbnail.jpg?fit=crop&width=100&height=100&time=${selection.thumbTime || 0}`}
+              src={`https://image.mux.com/${videoPlaybackId}/thumbnail.jpg?fit=crop&width=100&height=100&time=${thumbTime || 0}`}
             />
           )
         }
