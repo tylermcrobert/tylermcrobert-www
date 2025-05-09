@@ -16,7 +16,7 @@ export default defineType({
     }),
 
     {
-      title: 'Video file',
+      title: 'Video',
       name: 'video',
       type: 'mux.video',
       hidden: ({parent}) => {
@@ -79,30 +79,48 @@ export function selectMedia(path: string | null) {
   return {
     image: `${p}image`,
     imageFileName: `${p}image.asset.originalFilename`,
-    video: `${p}video`,
-    videoPlaybackId: `${p}video.playbackId`,
+    posterFrame: `${p}posterFrame`,
+    videoPlaybackId: `${p}video.asset.playbackId`,
+    thumbTime: `${p}video.asset.thumbTime`,
+    videoFilename: `${p}video.asset.filename`,
   }
 }
 
 /**
  * Takes the props selected from selectMedia and formats them for the preview
  */
-export function prepareMedia(props: Record<keyof ReturnType<typeof selectMedia>, any>) {
-  if (!props.video?.asset && !props.image) {
+export function prepareMedia(selection: Record<keyof ReturnType<typeof selectMedia>, any>) {
+  const {videoPlaybackId, image, videoFilename, posterFrame} = selection
+
+  if (!videoPlaybackId && !image) {
     return {
       subtitle: 'No media selected',
     }
   }
 
-  if (props.video?.asset) {
+  if (videoPlaybackId) {
     return {
-      subtitle: 'Video asset',
-      media: () => '🎥',
+      subtitle: `Video asset${videoFilename ? ` - ${videoFilename}` : ''}`,
+      media: (() => {
+        if (posterFrame) {
+          return posterFrame
+        }
+
+        if (videoPlaybackId) {
+          return () => (
+            <img
+              alt="Video thumbnail"
+              style={{width: '100%', height: '100%', objectFit: 'cover'}}
+              src={`https://image.mux.com/${videoPlaybackId}/thumbnail.jpg?fit=crop&width=100&height=100&time=${selection.thumbTime || 0}`}
+            />
+          )
+        }
+      })(),
     }
   }
 
   return {
-    subtitle: props.imageFileName,
-    media: props.image,
+    subtitle: selection.imageFileName,
+    media: selection.image,
   }
 }
