@@ -106,7 +106,7 @@ export function prepareMedia({
 
   if (videoPlaybackId) {
     return {
-      subtitle: `Video asset${videoFilename ? ` - ${videoFilename}` : ''}`,
+      subtitle: `Video${videoFilename ? `: ${videoFilename}` : ''}`,
       media: (() => {
         if (posterFrame) {
           return posterFrame
@@ -126,7 +126,7 @@ export function prepareMedia({
   }
 
   return {
-    subtitle: imageFileName,
+    subtitle: `Image: ${imageFileName}`,
     media: image,
   }
 }
