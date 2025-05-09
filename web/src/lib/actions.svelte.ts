@@ -8,17 +8,17 @@ type IntersectionOptions = {
 
 export function intersect(
 	target: Element,
-	options: IntersectionCallback | IntersectionOptions
+	props: IntersectionCallback | IntersectionOptions
 ): void {
 	const observer = new IntersectionObserver(
 		([entry]) => {
-			if (typeof options === 'function') {
-				options(entry);
+			if (typeof props === 'function') {
+				props(entry);
 			} else {
-				options.callback(entry);
+				props.callback(entry);
 			}
 		},
-		typeof options === 'object' ? options.options : undefined
+		typeof props === 'object' ? props.options : undefined
 	);
 
 	onMount(() => {
