@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Modules } from '$components';
-
 	let { data } = $props();
 </script>
 
