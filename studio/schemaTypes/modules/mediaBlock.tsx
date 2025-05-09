@@ -1,4 +1,4 @@
-import {prepareMedia, selectMedia, validateMedia} from '@util'
+import {prepareMedia, selectMedia, mediaRequired} from '@util'
 import {defineType} from 'sanity'
 
 const TITLE = 'Media Block'
@@ -12,7 +12,7 @@ export default defineType({
     {
       name: 'media',
       type: 'media',
-      validation: validateMedia,
+      validation: mediaRequired,
     },
   ],
   preview: {
