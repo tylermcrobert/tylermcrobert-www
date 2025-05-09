@@ -89,9 +89,14 @@ export function selectMedia(path: string | null) {
 /**
  * Takes the props selected from selectMedia and formats them for the preview
  */
-export function prepareMedia(selection: Record<keyof ReturnType<typeof selectMedia>, any>) {
-  const {videoPlaybackId, image, videoFilename, posterFrame} = selection
 
+export function prepareMedia({
+  videoPlaybackId,
+  image,
+  videoFilename,
+  posterFrame,
+  imageFileName,
+}: Record<keyof ReturnType<typeof selectMedia>, any>) {
   if (!videoPlaybackId && !image) {
     return {
       subtitle: 'No media selected',
@@ -120,7 +125,7 @@ export function prepareMedia(selection: Record<keyof ReturnType<typeof selectMed
   }
 
   return {
-    subtitle: selection.imageFileName,
-    media: selection.image,
+    subtitle: imageFileName,
+    media: image,
   }
 }
