@@ -9,6 +9,6 @@
 	let { data }: Props = $props();
 </script>
 
-{#if data.media}
-	<Media data={data.media} sizes="100vw" alt={null} />
+{#if data.media?.asset}
+	<Media value={data.media.asset} sizes="100vw" alt={null} />
 {/if}
