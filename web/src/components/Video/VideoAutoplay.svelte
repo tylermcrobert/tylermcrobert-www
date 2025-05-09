@@ -8,7 +8,7 @@
 
 	type Props = {
 		class: ClassValue | undefined;
-	} & Pick<MediaProjectionVideo, 'id' | 'aspect'>;
+	} & Pick<MediaProjectionVideo, 'playbackId' | 'aspect'>;
 
 	let { class: className, ...video }: Props = $props();
 
@@ -40,7 +40,7 @@
 	bind:this={videoElement}
 	class={['block w-full', className]}
 	metadata-viewer-user-id="s4u780"
-	playback-id={video?.id}
+	playback-id={video?.playbackId}
 	muted
 	loop
 	playsinline

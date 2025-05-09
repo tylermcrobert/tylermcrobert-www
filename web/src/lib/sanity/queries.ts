@@ -52,7 +52,7 @@ export const MEDIA_PROJECTION = groq`{
     defined(@.video.asset) => {
       "_type": "video",
       "video": @.video.asset-> {
-        "id": playbackId,
+        "playbackId": playbackId,
         "aspect": data.aspect_ratio,
         "showControls": ^.showVideoControls,
         "posterFrame": ^.posterFrame
@@ -63,7 +63,7 @@ export const MEDIA_PROJECTION = groq`{
 }`;
 
 export type MediaProjectionVideo = {
-	id: string;
+	playbackId: string;
 	aspect: string;
 	showControls: boolean;
 	posterFrame: SanityImageAsset;

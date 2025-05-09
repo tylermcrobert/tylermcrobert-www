@@ -1,6 +1,6 @@
 # Svelte + Sanity Starter
 
-Version 1.1.6
+Version 1.1.7
 
 A starter template integrating [SvelteKit](https://kit.svelte.dev/) with [Sanity.io](https://www.sanity.io/) for building modern, fast, and dynamic web applications with a robust CMS backend.
 

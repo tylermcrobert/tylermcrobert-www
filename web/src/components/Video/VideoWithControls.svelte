@@ -11,9 +11,9 @@
 
 	type Props = {
 		class?: ClassValue;
-	} & Pick<MediaProjectionVideo, 'aspect' | 'id' | 'posterFrame'>;
+	} & Pick<MediaProjectionVideo, 'aspect' | 'playbackId' | 'posterFrame'>;
 
-	let { class: className, id, aspect, posterFrame }: Props = $props();
+	let { class: className, playbackId, aspect, posterFrame }: Props = $props();
 
 	let loaded = $state(false);
 
@@ -39,7 +39,7 @@
 					.height(Math.round(1440 / getAspect(aspect)))
 					.url()}
 			autoplay
-			playback-id={id}
+			playback-id={playbackId}
 			metadata-viewer-user-id="s4u780"
 			playsinline
 			slot="media"
