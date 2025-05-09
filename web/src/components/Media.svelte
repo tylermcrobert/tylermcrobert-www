@@ -29,8 +29,8 @@
 {:else if value?._type === 'image'}
 	<Image
 		image={value.image}
-		{alt}
 		class={className}
+		{alt}
 		{sizes}
 		{priority}
 		{...imageProps}
