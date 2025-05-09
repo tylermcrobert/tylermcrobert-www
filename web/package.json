@@ -42,7 +42,6 @@
 		"@portabletext/svelte": "^3.0.0",
 		"@sanity/client": "^6.29.1",
 		"@tylermcrobert/svelte-sanity-image": "^1.0.1",
-		"media-chrome": "^4.9.1",
-		"svelte-intersection-observer": "^1.0.0"
+		"media-chrome": "^4.9.1"
 	}
 }

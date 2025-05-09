@@ -1,10 +1,10 @@
 <script lang="ts">
-	import SvelteIntersectionObserver from 'svelte-intersection-observer';
 	import type { MediaProjectionVideo } from '$sanity';
 
 	import type { ClassValue } from 'svelte/elements';
 	import { getAspect } from '$lib/util';
 	import { onMount } from 'svelte';
+	import { intersect } from '$lib/actions.svelte';
 
 	type Props = {
 		class: ClassValue | undefined;
@@ -46,7 +46,6 @@
 	playsinline
 	style:--media-object-fit="cover"
 	style:transform="scale(1.001)"
+	use:intersect={(e) => (intersecting = e.isIntersecting)}
 >
 </mux-video>
-
-<SvelteIntersectionObserver element={videoElement} bind:intersecting />

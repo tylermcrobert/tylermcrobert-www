@@ -20,9 +20,6 @@ dependencies:
   media-chrome:
     specifier: ^4.9.1
     version: 4.9.1(react@19.1.0)
-  svelte-intersection-observer:
-    specifier: ^1.0.0
-    version: 1.0.0
 
 devDependencies:
   '@sveltejs/adapter-auto':
@@ -2954,10 +2951,6 @@ packages:
       postcss-scss: 4.0.9(postcss@8.5.3)
       svelte: 5.28.2
     dev: true
-
-  /svelte-intersection-observer@1.0.0:
-    resolution: {integrity: sha512-AoxSog8fSt9sSN8ajMYM1I48ndq+rmPlaZSkJFCRbZ7I3KO8IPX6pl5mewWxdYL1JDI06hHu/7epn3h5tlJV9w==}
-    dev: false
 
   /svelte-preprocess@5.1.4(postcss@8.5.3)(svelte@5.28.2)(typescript@5.8.3):
     resolution: {integrity: sha512-IvnbQ6D6Ao3Gg6ftiM5tdbR6aAETwjhHV+UKGf5bHGYR69RQvF1ho0JKPcbUON4vy4R7zom13jPjgdOWCQ5hDA==}
