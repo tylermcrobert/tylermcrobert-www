@@ -6,18 +6,14 @@
 </script>
 
 <Modules modules={data.modules} />
-{intersecting}
-<!-- <div
+
+<div
 	use:intersect={{
-		callback: () => {},
-		options: { rootMargin: '0px 0px -50% 0px' }
+		callback: (e) => {
+			console.log(e.isIntersecting);
+		},
+		options: { rootMargin: '0px 0px 0px 0px' }
 	}}
 >
-	asdf
-</div> -->
-<div
-	use:intersect={(e) => {
-		intersecting = e.isIntersecting;
-		console.log(e);
-	}}
-></div>
+	Item
+</div>

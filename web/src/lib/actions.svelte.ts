@@ -1,3 +1,5 @@
+// REFERENCE https://github.com/CaptainCodeman/svelte-intersection-observer-action/tree/master/src
+
 import { onMount } from 'svelte';
 
 type IntersectionCallback = (entry: IntersectionObserverEntry) => void;
