@@ -5,7 +5,11 @@ import {
 } from '$sanity';
 import { error } from '@sveltejs/kit';
 
-export const load = async ({ locals: { client } }) => {
+export const load = async ({
+	locals: {
+		sanity: { client }
+	}
+}) => {
 	const data = await client.fetch<HOMEPAGE_QUERYResult>(HOMEPAGE_QUERY);
 
 	if (!data) {

@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 </script>
 
-{#if page.data.isDraftMode}
+{#if page.data.previewEnabled}
 	<div
 		class="z-nav fixed bottom-4 right-4 flex items-center justify-center gap-2 rounded-full bg-[#ffcc5a] p-2 px-4 text-black"
 	>
