@@ -23,7 +23,7 @@ export default defineType({
       title: 'Internal Link',
       type: 'reference',
       description: 'An internal reference to other Sanity documents',
-      to: [{type: 'page'}, {type: 'homepage'}],
+      to: INTERNAL_LINK_TYPES,
       hidden: ({parent}) => {
         return !!parent?.href
       },
@@ -51,16 +51,11 @@ export default defineType({
   ],
   preview: {
     select: {
-      referenceTitle: 'reference.title',
-      referenceSlug: 'reference.slug.current',
-      title: 'label',
-      href: 'href',
-      type: 'reference._type',
+      ...selectLink(null),
     },
-    prepare: ({referenceTitle, referenceSlug, title, href, type}) => {
+    prepare: (p) => {
       return {
-        title: title || referenceTitle,
-        subtitle: referenceSlug || href || type,
+        ...prepareLink(p),
       }
     },
   },
@@ -69,17 +64,17 @@ export default defineType({
 export function selectLink(path: string | null) {
   const p = path ? `${path}.` : ''
   return {
-    title: `${p}reference.title`,
-    label: `${p}label`,
-    slug: `${p}reference.slug.current`,
-    href: `${p}href`,
-    type: `${p}reference._type`,
+    referenceTitle: `${p}reference.title`,
+    referenceSlug: `${p}reference.slug.current`,
+    referenceType: `${p}reference._type`,
+    linkLabel: `${p}label`,
+    linkHref: `${p}href`,
   }
 }
 
 export function prepareLink(props: Record<keyof ReturnType<typeof selectLink>, any>) {
   return {
-    title: props.label || props.title,
-    subtitle: props.href || props.type,
+    title: props.linkLabel || props.referenceTitle,
+    subtitle: props.linkHref || props.referenceSlug || props.referenceType,
   }
 }
