@@ -10,6 +10,10 @@ export function resolveLink({ slug, type }: Link) {
 		return `/${slug}`;
 	}
 
+	if (type === 'project') {
+		return `/work/${slug}`;
+	}
+
 	if (type === 'homepage') {
 		return `/`;
 	}
@@ -30,4 +34,8 @@ export function resolveLinkProjection(link: LinkProjection) {
 	if (resolvedLink) return resolvedLink;
 
 	return null;
+}
+
+export function getLinkProjectionLabel(linkProjection: LinkProjection) {
+	return linkProjection.label || linkProjection.reference?.title || null;
 }

@@ -1,6 +1,6 @@
 # Svelte + Sanity Starter
 
-Version 1.1.7
+Version 1.1.8
 
 A starter template integrating [SvelteKit](https://kit.svelte.dev/) with [Sanity.io](https://www.sanity.io/) for building modern, fast, and dynamic web applications with a robust CMS backend.
 
@@ -17,3 +17,4 @@ Do the following checklist before getting started
 1. Update Favicon
 2. Verify sitemap.xml
 3. Verify schema.org
+   f
