@@ -17,4 +17,3 @@ Do the following checklist before getting started
 1. Update Favicon
 2. Verify sitemap.xml
 3. Verify schema.org
-   f
