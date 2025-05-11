@@ -1,3 +1,4 @@
+import {prepareLink, selectLink} from '@util'
 import {defineType} from 'sanity'
 
 export const icon = () => '🙋🏼‍♀️'
@@ -20,6 +21,34 @@ export default defineType({
     },
 
     {
+      name: 'links',
+      type: 'array',
+      validation: (Rule) => Rule.required(),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'label',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+
+            {
+              name: 'link',
+              type: 'link',
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+          preview: {
+            select: {...selectLink('link'), label: 'label'},
+            prepare: (p) => ({title: p.label, subtitle: prepareLink(p).title}),
+          },
+        },
+      ],
+    },
+
+    {
       name: 'clients',
       type: 'array',
       of: [{type: 'string'}],
@@ -35,19 +64,6 @@ export default defineType({
           to: [{type: 'playlist'}],
         },
       ],
-      validation: (Rule) => Rule.required(),
-    },
-
-    {
-      name: 'previewImage',
-      type: 'image',
-      deprecated: {reason: "Don't need this"},
-    },
-
-    {
-      name: 'slug',
-      type: 'slug',
-      deprecated: {reason: "Don't need this"},
       validation: (Rule) => Rule.required(),
     },
 

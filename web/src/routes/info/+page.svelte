@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { EMAIL, LINK_EMAIL, LINK_IG, NUMS, IG } from '$constants';
-	import { DotHead } from '$components';
+	import { NUMS } from '$constants';
+	import { DotHead, Link } from '$components';
 	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
-	let { bio, clients, playlists } = $derived(data.infoPage);
+	let { bio, clients, playlists, links } = $derived(data.infoPage);
 </script>
 
 <section class="my-large">
@@ -14,17 +14,19 @@
 	</div>
 
 	<div class="wrapper my-medium gap-standard grid grid-cols-6">
-		<div class="col-span-6 md:col-span-3">
-			<div>
-				<h3 class="inline"><DotHead noMarginBottom>E-M &rarr;</DotHead></h3>
-				<a class="underline" href={LINK_EMAIL}>{EMAIL}</a>
-			</div>
+		<ul class="col-span-6 md:col-span-3">
+			{#each links as link}
+				<li>
+					<h3 class="inline">
+						<DotHead noMarginBottom>{link.label} &rarr;</DotHead>
+					</h3>
 
-			<div>
-				<h3 class="inline"><DotHead noMarginBottom>IG &rarr;</DotHead></h3>
-				<a class="underline" href={LINK_IG}>{IG}</a>
-			</div>
-		</div>
+					{#if link.link}
+						<Link link={link.link} class="underline" />
+					{/if}
+				</li>
+			{/each}
+		</ul>
 
 		{#if clients?.length}
 			<div class="col-span-6 md:col-span-3">

@@ -326,6 +326,10 @@ export const infoQuery = groq`
     bio,
     title,
     clients,
+    links[]{
+      label,
+      link${LINK_PROJECTION}
+    },
     playlists[]-> {
       "slug": slug.current,
       link,
@@ -342,7 +346,12 @@ export type InfoPlaylist = Nullable<{
 	slug: string;
 }>;
 
-export type InfoQuery = {} & InfoQueryResult;
+export type InfoQuery = {
+	links: Nullable<{
+		label: string;
+		link: LinkProjection;
+	}>[];
+} & InfoQueryResult;
 
 /**
  * Playlist

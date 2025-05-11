@@ -14,6 +14,10 @@ export function resolveLink({ slug, type }: Link) {
 		return `/work/${slug}`;
 	}
 
+	if (type === 'info') {
+		return `/info`;
+	}
+
 	if (type === 'homepage') {
 		return `/`;
 	}
