@@ -9,13 +9,13 @@
 	let { data }: Props = $props();
 </script>
 
-{#if data.media}
+{#if data.media?.asset}
 	<div class="my-standard">
 		<Media
-			data={data.media}
-			imageAspect={data.aspect}
+			value={data.media.asset}
 			sizes="100vw"
 			alt={null}
+			imageProps={{ aspect: data.aspect }}
 		/>
 	</div>
 {/if}

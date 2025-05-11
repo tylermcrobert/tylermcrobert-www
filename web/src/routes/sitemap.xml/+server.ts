@@ -1,4 +1,4 @@
-import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$lib/sanity';
+import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$sanity';
 import { PUBLIC_SITE_URL } from '$env/static/public';
 
 export async function GET({ locals }) {
@@ -13,12 +13,12 @@ export async function GET({ locals }) {
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 
-    ${(sanityData.pages || [])
+    ${(sanityData.projects || [])
 			.map(
-				(page) => `
+				(project) => `
         <url>
-          <loc>${PUBLIC_SITE_URL}/${page.slug}</loc>
-          <lastmod>${page._updatedAt}</lastmod>
+          <loc>${PUBLIC_SITE_URL}/${project.slug}</loc>
+          <lastmod>${project._updatedAt}</lastmod>
           <priority>0.8</priority>
         </url>`
 			)

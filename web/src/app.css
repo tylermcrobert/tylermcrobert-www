@@ -1,0 +1,42 @@
+@import 'tailwindcss';
+
+@config '../tailwind.config.js';
+
+@theme {
+	--color-background: rgb(255, 255, 255);
+	--color-foreground: rgb(0, 0, 0);
+
+	--spacing-nav-height: 60px;
+	--spacing-available-svh: calc(100svh - 60px);
+	--spacing-available-dvh: calc(100dvh - 60px);
+
+	--max-width-rag-heading: 25ch;
+	--max-width-rag-paragraph: 70ch;
+
+	--z-index-nav: 100;
+
+	--leading-heading: 1;
+
+	--font-sans: Suisse, Helvetica, Arial, sans-serif;
+}
+
+@utility text-h1 {
+	@apply max-w-rag-heading leading-heading text-[36px];
+}
+
+@utility text-h2 {
+	@apply max-w-rag-heading leading-heading text-[26px];
+}
+
+@layer base {
+	@font-face {
+		/* NOTE: Remember to edit index.html to preload these fonts. */
+
+		font-family: 'Suisse';
+		src: url('/fonts/SuisseIntl-Regular.woff2') format('woff2');
+	}
+
+	html {
+		@apply bg-background text-foreground antialiased;
+	}
+}

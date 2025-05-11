@@ -1,0 +1,63 @@
+{
+  "Sanity Required Field": {
+    "description": "Creates a required field for a Sanity schema",
+    "prefix": "sf",
+    "body": [
+      "{",
+      "  name: \"$1\",",
+      "  type: \"$2\",",
+      "  // validation: (Rule) => Rule.required()$3",
+      "},"
+    ]
+  },
+
+  "Sanity Module": {
+    "prefix": "sanmod",
+    "description": "Sanity object schema template",
+    "body": [
+      "import {defineType} from 'sanity'",
+      "",
+      "const TITLE = '$2'",
+      "",
+      "export default defineType({",
+      "  title: TITLE,",
+      "  name: '$1',",
+      "  type: 'object',",
+      "  icon: () => '$3',",
+      "  fields: [$4],",
+      "  preview: {",
+      "    select: {},",
+      "    prepare() {",
+      "      return {",
+      "        title: TITLE,",
+      "      }",
+      "    },",
+      "  },",
+      "})",
+      ""
+    ]
+  },
+
+  "Sanity Object Export": {
+    "prefix": "sanobjexp",
+    "description": "Export a sanity object schema",
+    "body": [
+      "export const $1 = defineType({",
+      "  name: '$2'",
+      "  title: '$3',",
+      "  type: 'object',",
+      "  icon: () => '$4',",
+      "  fields: [$5],",
+      "  preview: {",
+      "    select: {},",
+      "    prepare() {",
+      "      return {",
+      "        title: TITLE,",
+      "      }",
+      "    },",
+      "  },",
+      "})",
+      ""
+    ]
+  }
+}

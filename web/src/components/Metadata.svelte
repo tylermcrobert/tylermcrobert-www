@@ -1,54 +1,16 @@
-<script lang="ts" module>
-	export function getTitle() {
-		const { siteTitle, pageTitle, homepageTitle, titleOverride } = page.data;
-
-		if (page.error) {
-			return `${page.status} ${page.error.message} – ${siteTitle}`;
-		}
-
-		if (titleOverride) {
-			return titleOverride;
-		}
-
-		if (homepageTitle && page.data.pathname === '/') {
-			return homepageTitle;
-		}
-
-		return pageTitle ? `${pageTitle} – ${siteTitle}` : siteTitle;
-	}
-</script>
-
 <script lang="ts">
 	import { page } from '$app/state';
-	import { urlFor } from '$sanity/image';
+	import { metadata } from '$lib/state';
 
-	const title = $derived(getTitle());
+	const { url, title, description, imageUrl, siteTitle } = $derived(metadata);
 
-	let { description, url, siteTitle, imageUrl } = $derived.by(() => {
-		const {
-			pageTitle,
-			siteMetadata,
-			siteTitle,
-			metadata: pageMetadata
-		} = page.data as App.PageData;
+	if (page.status === 200 && page.data.pageTitle === undefined) {
+		console.warn('Page title is undefined.');
+	}
 
-		if (page.status === 200 && pageTitle === undefined) {
-			console.warn('Page title is undefined.');
-		}
-
-		if (page.status === 200 && pageMetadata === undefined) {
-			console.warn('Page metadata is undefined.');
-		}
-
-		let image = pageMetadata?.image || siteMetadata?.image;
-
-		return {
-			url: page.url.origin + page.url.pathname,
-			description: pageMetadata?.description || siteMetadata?.description,
-			imageUrl: image ? urlFor(image).width(1200).height(630).url() : null,
-			siteTitle
-		};
-	});
+	if (page.status === 200 && page.data.metadata === undefined) {
+		console.warn('Page metadata is undefined.');
+	}
 </script>
 
 <svelte:head>

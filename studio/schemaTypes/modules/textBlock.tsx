@@ -1,5 +1,5 @@
+import {toPlainText} from '@util'
 import {defineType} from 'sanity'
-import {toPlainText} from '../../util/toPlainText'
 
 const TITLE = 'Text Block'
 
@@ -10,14 +10,6 @@ export default defineType({
   icon: () => '✍️',
   fields: [
     {
-      name: 'content',
-      type: 'richText',
-      deprecated: {
-        reason: 'Use RichText instaed',
-      },
-    },
-    {
-      title: 'Content',
       name: 'richText',
       type: 'richText',
     },

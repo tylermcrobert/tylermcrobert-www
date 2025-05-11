@@ -53,28 +53,50 @@ const RICH_TEXT_PROJECTION = groq`{
 export type RichTextProjection = InputValue;
 
 export const MEDIA_PROJECTION = groq`{
-  "image": image,
-  "oldVideoFile": oldVideoFile.asset->url,
-  "video": video.asset->{
-    "id": playbackId,
-    "aspect": data.aspect_ratio,
-    "showControls": ^.showVideoControls,
-    "posterFrame": ^.posterFrame
-  }
+  "_type": "mediaProjection",
+  "asset": select(
+    defined(@.image) => {
+      "_type": "image",
+      "image": @.image
+    },
+    defined(@.video.asset) => {
+      "_type": "video",
+      "video": @.video.asset-> {
+        "playbackId": playbackId,
+        "aspect": data.aspect_ratio,
+        "showControls": ^.showVideoControls,
+        "posterFrame": ^.posterFrame
+      }
+    },
+    null
+  ),
 }`;
 
 export type MediaProjectionVideo = {
-	id: string;
+	playbackId: string;
 	aspect: string;
 	showControls: boolean;
 	posterFrame: SanityImageAsset;
 };
 
-export type MediaProjection = Nullable<{
-	image: SanityImageAsset;
+type MediaProjectionVideoAsset = {
+	_type: 'video';
 	video: MediaProjectionVideo;
-	oldVideoFile: string;
-}>;
+};
+
+type MediaProjectionImageAsset = {
+	_type: 'image';
+	image: SanityImageAsset;
+};
+
+export type MediaProjectionAsset =
+	| MediaProjectionVideoAsset
+	| MediaProjectionImageAsset;
+
+export type MediaProjection = {
+	_type: 'mediaProjection';
+	asset: MediaProjectionAsset | null;
+};
 
 /*******************************************************************************
  * MODULES

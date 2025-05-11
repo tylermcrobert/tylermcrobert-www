@@ -1,61 +1,70 @@
 <script lang="ts">
 	import type { MediaProjectionVideo } from '$sanity';
 	import { urlFor } from '$sanity/image';
+	import type { ClassValue } from 'svelte/elements';
 	import PauseIcon from './icons/PauseIcon.svelte';
 	import PlayIcon from './icons/PlayIcon.svelte';
 	import VolumeMuted from './icons/VolumeMuted.svelte';
 	import VolumePlaying from './icons/VolumePlaying.svelte';
-	import VideoWrapper from './VideoWrapper.svelte';
+	import { getAspect } from '$lib/util';
+	import { onMount } from 'svelte';
 
 	type Props = {
-		video: MediaProjectionVideo;
-		class?: string;
-	};
+		class?: ClassValue;
+	} & Pick<MediaProjectionVideo, 'aspect' | 'playbackId' | 'posterFrame'>;
 
-	let { video, class: className }: Props = $props();
+	let { class: className, playbackId, aspect, posterFrame }: Props = $props();
+
+	let loaded = $state(false);
+
+	onMount(() => {
+		Promise.all([import('media-chrome'), import('@mux/mux-video')]).then(() => {
+			loaded = true;
+		});
+	});
 </script>
 
-<VideoWrapper {video} class={className}>
-	{#snippet children({ aspect })}
-		{#await Promise.all( [import('media-chrome'), import('@mux/mux-video')] ) then}
-			<media-controller
-				class="controller outline-hidden absolute inset-0 cursor-pointer bg-transparent"
-			>
-				<mux-video
-					poster={video?.posterFrame &&
-						urlFor(video?.posterFrame)
-							.width(1440)
-							.height(Math.round(1440 / aspect))
-							.url()}
-					playback-id={video?.id}
-					metadata-viewer-user-id="s4u780"
-					playsinline
-					slot="media"
-					style:transform="scale(1.001)"
-					style:--media-object-fit="cover"
-				>
-				</mux-video>
+<media-controller
+	style:aspect-ratio={getAspect(aspect)}
+	class={[
+		'controller outline-hidden relative block cursor-pointer bg-transparent',
+		className
+	]}
+>
+	{#if loaded}
+		<mux-video
+			poster={posterFrame &&
+				urlFor(posterFrame)
+					.width(1440)
+					.height(Math.round(1440 / getAspect(aspect)))
+					.url()}
+			autoplay
+			playback-id={playbackId}
+			metadata-viewer-user-id="s4u780"
+			playsinline
+			slot="media"
+			class="w-full"
+		>
+		</mux-video>
 
-				<media-play-button class="z-10 w-8 md:w-14" slot="centered-chrome">
-					<span slot="play" class="w-full"><PlayIcon /></span>
-					<span slot="pause" class="w-full"><PauseIcon /></span>
-				</media-play-button>
+		<media-play-button class="z-10 w-8 md:w-14" slot="centered-chrome">
+			<span slot="play" class="w-full"><PlayIcon /></span>
+			<span slot="pause" class="w-full"><PauseIcon /></span>
+		</media-play-button>
 
-				<media-control-bar
-					class="absolute inset-x-0 bottom-0 z-10 flex gap-5 px-6 py-4"
-				>
-					<media-mute-button>
-						<span slot="low" class="w-4"><VolumePlaying /></span>
-						<span slot="off" class="w-4"><VolumeMuted /></span>
-					</media-mute-button>
-					<media-time-display></media-time-display>
-					<media-time-range><span slot="preview"></span></media-time-range>
-					<media-duration-display></media-duration-display>
-				</media-control-bar>
-			</media-controller>
-		{/await}
-	{/snippet}
-</VideoWrapper>
+		<media-control-bar
+			class="absolute inset-x-0 bottom-0 z-10 flex gap-5 px-6 py-4"
+		>
+			<media-mute-button>
+				<span slot="low" class="w-4"><VolumePlaying /></span>
+				<span slot="off" class="w-4"><VolumeMuted /></span>
+			</media-mute-button>
+			<media-time-display></media-time-display>
+			<media-time-range><span slot="preview"></span></media-time-range>
+			<media-duration-display></media-duration-display>
+		</media-control-bar>
+	{/if}
+</media-controller>
 
 <style lang="postcss">
 	.controller {

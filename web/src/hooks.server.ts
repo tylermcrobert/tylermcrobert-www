@@ -1,5 +1,5 @@
-import { client } from '$lib/sanity';
-import { previewClient } from '$lib/sanity/client.server';
+import { client } from '$sanity';
+import { previewClient } from '$sanity/client.server';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
