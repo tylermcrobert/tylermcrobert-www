@@ -6,7 +6,7 @@ import {structure} from './desk'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
 import {colorInput} from '@sanity/color-input'
-import {defineDocuments, presentationTool} from 'sanity/presentation'
+import {defineDocuments, defineLocations, presentationTool} from 'sanity/presentation'
 
 const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 
@@ -23,6 +23,12 @@ export default defineConfig({
     presentationTool({
       previewUrl: process.env.SANITY_STUDIO_PREVIEW_LINK || '',
       resolve: {
+        locations: {
+          caseStudy: {
+            select: {title: 'title', slug: 'slug.current'},
+            resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),
+          },
+        },
         mainDocuments: defineDocuments([
           {route: '/info', type: 'info'},
           {route: '/', type: 'homepage'},
@@ -30,9 +36,7 @@ export default defineConfig({
             route: '/:slug',
             resolve: (ctx) => ({
               filter: `(_type == "caseStudy" || _type == "page") && slug.current == $slug`,
-              params: {
-                slug: ctx.params.slug,
-              },
+              params: {slug: ctx.params.slug},
             }),
           },
         ]),
