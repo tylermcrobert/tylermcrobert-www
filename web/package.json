@@ -10,7 +10,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"typegen": "cd ../studio/ && pnpm typegen"
+		"typegen": "cd ../studio/ && pnpm typegen",
+		"update-starter": "git fetch starter && git merge starter/main"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^6.0.0",
