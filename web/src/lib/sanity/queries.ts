@@ -375,6 +375,7 @@ export const SITE_QUERY = groq`{
   "settings": *[_id == "settings"][0]{
     metadata,
     siteTitle,
+    googleAnalyticsId,
   },
   "context": coalesce(
     *[_type == "context" && slug.current == $contextSlug][0],
@@ -398,7 +399,7 @@ export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 				title: string;
 			}>[];
 		}>;
-		settings: Pick<Settings, 'metadata' | 'siteTitle'>;
+		settings: Pick<Settings, 'metadata' | 'siteTitle' | 'googleAnalyticsId'>;
 	}>;
 
 export const SITEMAP_QUERY = groq`{

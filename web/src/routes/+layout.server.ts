@@ -10,6 +10,7 @@ export const load = async ({
 	const { settings, homepageTitle, context } = site;
 
 	return {
+		googleAnalyticsId: settings?.googleAnalyticsId || null,
 		isDraftMode,
 		pathname,
 		contextCaseStudies: context?.caseStudies || [],
