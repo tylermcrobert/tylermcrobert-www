@@ -18,9 +18,9 @@
 			{@render browserFrame()}
 		{/if}
 
-		{#if media}
+		{#if media?.asset}
 			<div class="bg-white">
-				<Media sizes="80vw" data={media} alt={null} />
+				<Media sizes="80vw" value={media.asset} alt={null} />
 			</div>
 		{/if}
 	</div>

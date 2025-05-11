@@ -15,9 +15,9 @@
 	style:background={data.themeBackground}
 >
 	{#each data.frames || [] as frame}
-		{#if frame.media}
+		{#if frame.media?.asset}
 			<Media
-				data={frame.media}
+				value={frame.media.asset}
 				sizes={`${100 / (data.frames?.length || 1)}vw`}
 				alt={null}
 				class="max-h-[70vh] w-auto overflow-hidden"

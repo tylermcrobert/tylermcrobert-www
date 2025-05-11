@@ -9,12 +9,12 @@
 
 <div class="gap-standard grid-cols-2 sm:grid">
 	{#each data.items || [] as item}
-		{#if item._type === 'diptych.media' && item.media}
+		{#if item._type === 'diptych.media' && item.media?.asset}
 			<Media
-				data={item.media}
+				value={item.media.asset}
 				alt={null}
 				sizes="(min-width: 768px), 50vw, 100vw"
-				imageAspect={item.aspect}
+				imageProps={{ aspect: item.aspect }}
 			/>
 		{:else if item._type === 'diptych.text' && item.richText}
 			<RichText value={item.richText} />
