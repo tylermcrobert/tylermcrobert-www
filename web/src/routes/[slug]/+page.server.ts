@@ -9,13 +9,15 @@ import { error } from '@sveltejs/kit';
 export const load = async ({
 	parent,
 	params,
-	locals: { client, isDraftMode }
+	locals: {
+		sanity: { client, previewEnabled }
+	}
 }) => {
 	const { contextCaseStudies } = (await parent()) as App.LayoutData;
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
 
-	if (index === -1 && !isDraftMode) {
+	if (index === -1 && !previewEnabled) {
 		return error(404);
 	}
 

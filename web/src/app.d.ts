@@ -1,17 +1,16 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { Metadata, SiteQuery } from '$lib/sanity';
+import type { Metadata, SiteQuery } from '$sanity';
+import type { SanityLocals } from '@sanity/sveltekit';
 
 // for information about these interfaces
 declare global {
 	namespace App {
-		interface Locals {
-			client: import('@sanity/client').SanityClient;
-			isDraftMode: boolean;
-		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface Locals extends SanityLocals {}
 
 		interface LayoutData extends Pick<SiteQuery> {
-			isDraftMode: boolean;
+			previewEnabled: boolean;
 			siteMetadata: Metadata | null | undefined;
 			siteTitle: string | null | undefined;
 			homepageTitle: string | null | undefined;

@@ -1,7 +1,9 @@
 import { SITE_QUERY, type SiteQuery } from '$lib/sanity';
 
 export const load = async ({
-	locals: { isDraftMode, client },
+	locals: {
+		sanity: { previewEnabled, client }
+	},
 	url: { pathname },
 	cookies
 }) => {
@@ -11,7 +13,7 @@ export const load = async ({
 
 	return {
 		googleAnalyticsId: settings?.googleAnalyticsId || null,
-		isDraftMode,
+		previewEnabled,
 		pathname,
 		contextCaseStudies: context?.caseStudies || [],
 		homepageTitle: homepageTitle,

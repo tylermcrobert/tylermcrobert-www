@@ -6,6 +6,7 @@ import {structure} from './desk'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
 import {colorInput} from '@sanity/color-input'
+import {defineDocuments, presentationTool} from 'sanity/presentation'
 
 const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 
@@ -19,6 +20,24 @@ export default defineConfig({
   plugins: [
     structureTool({structure}),
     media(),
+    presentationTool({
+      previewUrl: process.env.SANITY_STUDIO_PREVIEW_LINK || '',
+      resolve: {
+        mainDocuments: defineDocuments([
+          {route: '/info', type: 'info'},
+          {route: '/', type: 'homepage'},
+          {
+            route: '/:slug',
+            resolve: (ctx) => ({
+              filter: `(_type == "caseStudy" || _type == "page") && slug.current == $slug`,
+              params: {
+                slug: ctx.params.slug,
+              },
+            }),
+          },
+        ]),
+      },
+    }),
     muxInput({
       max_resolution_tier: '2160p',
     }),
