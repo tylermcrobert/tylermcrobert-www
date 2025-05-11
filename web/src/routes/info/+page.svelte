@@ -2,9 +2,24 @@
 	import { NUMS } from '$constants';
 	import { DotHead, Link } from '$components';
 	import { formatTime } from '$util/msToTime';
+	import getNowPlaying, { type NowPlayingData } from '$lib/last.fm/+lastfm';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
 	let { bio, clients, playlists, links } = $derived(data.infoPage);
+
+	let nowPlaying = $state<NowPlayingData>();
+
+	onMount(() => {
+		getNowPlaying()
+			.then((result) => {
+				nowPlaying = result;
+			})
+			.catch(() => {
+				console.error('Error loading now playing');
+				nowPlaying = undefined;
+			});
+	});
 </script>
 
 <section class="my-large">
@@ -44,13 +59,13 @@
 
 <section class="my-large">
 	<div class="wrapper my-medium">
-		{#if data.nowPlaying}
-			{@const { trackName, artist, nowPlaying } = data.nowPlaying}
+		{#if nowPlaying}
+			{@const { trackName, artist, nowPlaying: isNowPlaying } = nowPlaying}
 			<h2>
-				<DotHead>{nowPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
+				<DotHead>{isNowPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
 			</h2>
 			<h3 class="text-h1">
-				{#if nowPlaying}
+				{#if isNowPlaying}
 					Right now I'm listening to “{trackName}” by {artist} on Spotify.
 				{:else}
 					The last song I listened to on Spotify was “{trackName}” by {artist}.
