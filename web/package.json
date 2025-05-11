@@ -42,8 +42,8 @@
 		"@mux/mux-video": "^0.25.2",
 		"@portabletext/svelte": "^3.0.0",
 		"@sanity/client": "^7.2.1",
+		"@sanity/sveltekit": "^0.0.1",
 		"@tylermcrobert/svelte-sanity-image": "^1.0.3",
-		"media-chrome": "^4.9.1",
-		"svelte-intersection-observer": "^1.0.0"
+		"media-chrome": "^4.9.1"
 	}
 }

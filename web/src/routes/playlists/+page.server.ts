@@ -1,6 +1,10 @@
 import { PLAYLISTS_QUERY, type PLAYLISTS_QUERYResult } from '$sanity';
 
-export const load = async ({ locals: { client } }) => {
+export const load = async ({
+	locals: {
+		sanity: { client }
+	}
+}) => {
 	const data = await client.fetch<PLAYLISTS_QUERYResult>(PLAYLISTS_QUERY);
 	return {
 		playlists: data?.playlists || [],
