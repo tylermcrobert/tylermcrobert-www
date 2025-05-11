@@ -1,5 +1,5 @@
 import {defineType} from 'sanity'
-import {mediaRequired} from '../objects/media'
+import {mediaRequired, prepareMedia, selectMedia} from '@util'
 
 const TITLE = 'Website'
 
@@ -39,14 +39,12 @@ export default defineType({
   ],
   preview: {
     select: {
-      image: 'media.image',
-      imageName: 'media.image.asset.originalFilename',
+      ...selectMedia('media'),
     },
-    prepare({image, imageName}) {
+    prepare(p) {
       return {
         title: TITLE,
-        media: image,
-        subtitle: imageName,
+        ...prepareMedia(p),
       }
     },
   },
