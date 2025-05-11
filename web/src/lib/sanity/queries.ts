@@ -53,28 +53,50 @@ const RICH_TEXT_PROJECTION = groq`{
 export type RichTextProjection = InputValue;
 
 export const MEDIA_PROJECTION = groq`{
-  "image": image,
-  "oldVideoFile": oldVideoFile.asset->url,
-  "video": video.asset->{
-    "id": playbackId,
-    "aspect": data.aspect_ratio,
-    "showControls": ^.showVideoControls,
-    "posterFrame": ^.posterFrame
-  }
+  "_type": "mediaProjection",
+  "asset": select(
+    defined(@.image) => {
+      "_type": "image",
+      "image": @.image
+    },
+    defined(@.video.asset) => {
+      "_type": "video",
+      "video": @.video.asset-> {
+        "playbackId": playbackId,
+        "aspect": data.aspect_ratio,
+        "showControls": ^.showVideoControls,
+        "posterFrame": ^.posterFrame
+      }
+    },
+    null
+  ),
 }`;
 
 export type MediaProjectionVideo = {
-	id: string;
+	playbackId: string;
 	aspect: string;
 	showControls: boolean;
 	posterFrame: SanityImageAsset;
 };
 
-export type MediaProjection = Nullable<{
-	image: SanityImageAsset;
+type MediaProjectionVideoAsset = {
+	_type: 'video';
 	video: MediaProjectionVideo;
-	oldVideoFile: string;
-}>;
+};
+
+type MediaProjectionImageAsset = {
+	_type: 'image';
+	image: SanityImageAsset;
+};
+
+export type MediaProjectionAsset =
+	| MediaProjectionVideoAsset
+	| MediaProjectionImageAsset;
+
+export type MediaProjection = {
+	_type: 'mediaProjection';
+	asset: MediaProjectionAsset | null;
+};
 
 /*******************************************************************************
  * MODULES
@@ -353,6 +375,7 @@ export const SITE_QUERY = groq`{
   "settings": *[_id == "settings"][0]{
     metadata,
     siteTitle,
+    googleAnalyticsId,
   },
   "context": coalesce(
     *[_type == "context" && slug.current == $contextSlug][0],
@@ -376,12 +399,12 @@ export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 				title: string;
 			}>[];
 		}>;
-		settings: Pick<Settings, 'metadata' | 'siteTitle'>;
+		settings: Pick<Settings, 'metadata' | 'siteTitle' | 'googleAnalyticsId'>;
 	}>;
 
 export const SITEMAP_QUERY = groq`{
   "info": *[_id == 'info'][0],
-  "pages": *[_id == "homepage"][0].context->caseStudies[]->{ 
+  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ 
     title,
     "slug": slug.current,
     _updatedAt,

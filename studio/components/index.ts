@@ -1,0 +1,1 @@
+export {RichTextMinimalContainer} from './RichTextFields'

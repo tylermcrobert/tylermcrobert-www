@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { client } from '$sanity';
 	import { getContext } from 'svelte';
-	import { getTitle } from './Metadata.svelte';
 	import Image, {
 		type SanityImageSource,
 		type SvelteSanityImageProps
 	} from '@tylermcrobert/svelte-sanity-image';
-
-	const title = $derived(getTitle());
+	import { metadata } from '$lib/state';
 
 	type Props = Omit<SvelteSanityImageProps, 'client' | 'alt' | 'image'> & {
 		image: SanityImageSource;
@@ -24,7 +22,7 @@
 	{...props}
 	{client}
 	{image}
-	alt={alt || title || null}
+	alt={alt || metadata.title || null}
 	autoFormat
 	loading={priority ? 'eager' : 'lazy'}
 	fetchpriority={priority ? 'high' : undefined}

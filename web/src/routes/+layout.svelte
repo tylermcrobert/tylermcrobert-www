@@ -20,4 +20,7 @@
 <Metadata />
 <DraftModeOverlay />
 <ConsoleCredit />
-<Analytics id="G-S98MMVCHW0" />
+
+{#if data.googleAnalyticsId}
+	<Analytics id={data.googleAnalyticsId} />
+{/if}

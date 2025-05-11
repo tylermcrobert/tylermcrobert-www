@@ -14,6 +14,19 @@ export default defineType({
     },
 
     {
+      name: 'googleAnalyticsId',
+      title: 'Google Analytics ID',
+      type: 'string',
+      description:
+        'To find your Measurement ID, go to Google Analytics > Admin > Data Streams > Select your stream > Copy the Measurement ID.',
+      validation: (Rule) =>
+        Rule.regex(/^G-[A-Z0-9]+$/, {
+          name: 'Google Analytics Measurement ID',
+          invert: false,
+        }).error('Must be a valid GA4 Measurement ID, e.g., G-XXXXXXXXXX'),
+    },
+
+    {
       name: 'metadata',
       type: 'metadata',
       validation: (Rule) => Rule.required(),

@@ -21,6 +21,7 @@ declare global {
 				title: string | null;
 				slug: string | null;
 			}[];
+			googleAnalyticsId: string | null;
 		}
 
 		interface PageReturn extends Record<string, unknown> {
