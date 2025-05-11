@@ -1,6 +1,6 @@
 import {defineType} from 'sanity'
 import {toPlainText} from '../../util/toPlainText'
-import {mediaRequired} from '../objects/media'
+import {mediaRequired, prepareMedia, selectMedia} from '@util'
 
 const TITLE = 'Diptych'
 
@@ -20,7 +20,7 @@ export default defineType({
   ],
   preview: {
     select: {items: 'items'},
-    prepare({items}) {
+    prepare({items = []}) {
       const text = toPlainText(items.find((item: any) => item?.richText)?.richText)
       const itemCount = `${items?.length} item${items?.length === 1 ? '' : 's'}`
 
@@ -51,9 +51,9 @@ export const diptychMedia = defineType({
     },
   ],
   preview: {
-    select: {media: 'media'},
-    prepare({media}) {
-      return {media: media.image.asset, title: 'Media'}
+    select: {...selectMedia('media')},
+    prepare(p) {
+      return {title: 'Media', ...prepareMedia(p)}
     },
   },
 })
@@ -82,7 +82,7 @@ export const diptychSpacer = defineType({
   title: 'Spacer',
   name: 'diptych.spacer',
   type: 'object',
-  icon: () => '✏️',
+  icon: () => '📏',
   fields: [
     {
       name: 'arbitraryText',

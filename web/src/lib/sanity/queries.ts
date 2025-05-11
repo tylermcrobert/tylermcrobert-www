@@ -197,6 +197,9 @@ export type ModuleDiptych = Nullable<{
 				media: MediaProjection | null;
 		  }> &
 				Pick<DiptychMedia, 'aspect'>)
+		| Nullable<{
+				_type: 'diptych.spacer';
+		  }>
 	)[];
 }>;
 
