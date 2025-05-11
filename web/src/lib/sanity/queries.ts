@@ -403,7 +403,7 @@ export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
 
 export const SITEMAP_QUERY = groq`{
   "info": *[_id == 'info'][0],
-  "pages": *[_id == "homepage"][0].context->caseStudies[]->{ 
+  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ 
     title,
     "slug": slug.current,
     _updatedAt,

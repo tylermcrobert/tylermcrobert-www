@@ -1790,7 +1790,7 @@ export type SITE_QUERYResult = {
 	} | null;
 };
 // Variable: SITEMAP_QUERY
-// Query: {  "info": *[_id == 'info'][0],  "pages": *[_id == "homepage"][0].context->caseStudies[]->{     title,    "slug": slug.current,    _updatedAt,  }}
+// Query: {  "info": *[_id == 'info'][0],  "projects": *[_id == "homepage"][0].context->caseStudies[]->{     title,    "slug": slug.current,    _updatedAt,  }}
 export type SITEMAP_QUERYResult = {
 	info:
 		| {
@@ -2016,7 +2016,7 @@ export type SITEMAP_QUERYResult = {
 				dots?: Color;
 		  }
 		| null;
-	pages: Array<{
+	projects: Array<{
 		title: string | null;
 		slug: string | null;
 		_updatedAt: string;
@@ -2036,6 +2036,6 @@ declare module '@sanity/client' {
 		'\n  *[_type == \'info\' ][0]{\n    metadata,\n    bio,\n    title,\n    clients,\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n      duration, \n      date \n    }\n  }\n': InfoQueryResult;
 		'\n  *[_type == \'info\' ][0]{\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n      duration, \n      date,\n      image,\n      tracks[]{\n        title, \n        duration, \n        artists \n      }\n    }\n  }\n': PLAYLISTS_QUERYResult;
 		'{\n  "homepageTitle": *[_id == \'homepage\'][0].title,\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;
-		'{\n  "info": *[_id == \'info\'][0],\n  "pages": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
+		'{\n  "info": *[_id == \'info\'][0],\n  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
 }
