@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { MediaProjectionVideo } from '$sanity';
-
-	import type { ClassValue } from 'svelte/elements';
-	import { getAspect } from '$lib/util';
 	import { onMount } from 'svelte';
-	import { intersect } from '$lib/actions.svelte';
+	import type { ClassValue } from 'svelte/elements';
+	import type { MediaProjectionVideo } from '$sanity';
+	import { getAspect } from '$lib/util';
+	import { intersect } from '$lib/actions';
 
 	type Props = {
 		class: ClassValue | undefined;
