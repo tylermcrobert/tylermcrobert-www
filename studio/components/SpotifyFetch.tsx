@@ -49,7 +49,13 @@ const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
     const id = getSpotifyPlaylistId(value.link)
 
     try {
-      const response = await fetch(`${process.env.SANITY_STUDIO_SPOTIFY_API_URL}/playlist/${id}`)
+      const baseUrl = process.env.SANITY_STUDIO_SPOTIFY_API_URL
+
+      if (!baseUrl) {
+        throw new Error('SANITY_STUDIO_SPOTIFY_API_URL environment variable is not set')
+      }
+
+      const response = await fetch(`${baseUrl}/playlist/${id}`)
       const data = await response.json()
       const formattedData = formatOutput(data)
 
