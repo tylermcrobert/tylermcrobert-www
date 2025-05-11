@@ -4,10 +4,10 @@ const endpoint =
 export type NowPlayingData = {
 	trackName: string;
 	artist: string;
-	nowPlaying: boolean;
+	isPlaying: boolean;
 };
 
-export default async function getNowPlaying(): Promise<NowPlayingData> {
+export default async function fetchNowPlaying(): Promise<NowPlayingData> {
 	const req = await fetch(endpoint);
 	const data = await req.json();
 	const track = data.recenttracks.track[0];
@@ -15,6 +15,6 @@ export default async function getNowPlaying(): Promise<NowPlayingData> {
 	return {
 		trackName: track.name,
 		artist: track.artist['#text'],
-		nowPlaying: track['@attr']?.nowplaying === 'true' || false
+		isPlaying: track['@attr']?.nowplaying === 'true' || false
 	};
 }

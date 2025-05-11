@@ -6,9 +6,20 @@
 		ConsoleCredit,
 		Analytics
 	} from '$components';
+	import { onMount } from 'svelte';
 	import '../style/app.css';
+	import { fetchNowPlaying } from '$lib/last.fm';
+	import { setNowPlaying } from '$lib/state';
 
 	let { children, data } = $props();
+
+	onMount(() => {
+		fetchNowPlaying()
+			.then((result) => setNowPlaying(result))
+			.catch(() => {
+				console.error('Error loading now playing');
+			});
+	});
 </script>
 
 <Navigation />
