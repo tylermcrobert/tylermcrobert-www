@@ -1,7 +1,9 @@
 import { SITE_QUERY, type SiteQuery } from '$sanity';
 
 export const load = async ({
-	locals: { isDraftMode, client },
+	locals: {
+		sanity: { previewEnabled, client }
+	},
 	url: { pathname }
 }) => {
 	const { footer, navigation, settings, homepageTitle } =
@@ -11,7 +13,7 @@ export const load = async ({
 		googleAnalyticsId: settings?.googleAnalyticsId,
 		navigation,
 		footer,
-		isDraftMode,
+		previewEnabled,
 		pathname,
 		homepageTitle: homepageTitle,
 		siteTitle: settings?.siteTitle,
