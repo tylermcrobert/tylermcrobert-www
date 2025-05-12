@@ -19,7 +19,7 @@ export default defineConfig({
   plugins: [
     structureTool({
       title: 'Content',
-      ...structure,
+      structure,
     }),
     presentationTool({
       title: 'Preview',
