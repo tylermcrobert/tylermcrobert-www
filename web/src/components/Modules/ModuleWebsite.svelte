@@ -14,7 +14,7 @@
 	class="my-standard relative w-full bg-black p-[10%]"
 >
 	<div class="relative z-10">
-		{#if showFrame === true && theme?.frame}
+		{#if showFrame !== false && theme?.frame}
 			{@render browserFrame()}
 		{/if}
 
@@ -70,7 +70,7 @@
 			height="27"
 			rx="5.5"
 			fill="#000"
-			fill-opacity=".15"
+			fill-opacity=".1"
 		/>
 		<rect
 			x="16"
