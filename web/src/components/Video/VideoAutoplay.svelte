@@ -38,7 +38,6 @@
 	style:aspect-ratio={getAspect(video.aspect)}
 	bind:this={videoElement}
 	class={['block w-full', className]}
-	metadata-viewer-user-id="s4u780"
 	playback-id={video?.playbackId}
 	muted
 	loop
