@@ -8,8 +8,14 @@ export default defineType({
   icon,
   fields: [
     {
-      title: 'Homepage Title',
       name: 'title',
+      type: 'string',
+      initialValue: 'Homepage',
+      hidden: true,
+    },
+    {
+      title: 'Homepage Title',
+      name: 'homepageMetaTitle',
       type: 'string',
       description:
         "A browser tab title specifically for the homepage. Define the site's global title in Settings",

@@ -8,6 +8,13 @@ export default defineType({
   icon,
   fields: [
     {
+      name: 'title',
+      type: 'string',
+      initialValue: 'Settings',
+      hidden: true,
+    },
+
+    {
       type: 'string',
       name: 'siteTitle',
       validation: (Rule) => Rule.required(),

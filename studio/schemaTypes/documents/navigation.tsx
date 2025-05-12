@@ -8,6 +8,12 @@ export default defineType({
   icon,
   fields: [
     {
+      name: 'title',
+      type: 'string',
+      initialValue: 'Navigation',
+      hidden: true,
+    },
+    {
       name: 'links',
       type: 'array',
       validation: (Rule) => Rule.required(),
