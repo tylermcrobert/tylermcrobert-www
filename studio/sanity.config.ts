@@ -28,17 +28,14 @@ export default defineConfig({
             select: {title: 'title', slug: 'slug.current'},
             resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),
           },
+          page: {
+            select: {title: 'title', slug: 'slug.current'},
+            resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),
+          },
         },
         mainDocuments: defineDocuments([
           {route: '/info', type: 'info'},
           {route: '/', type: 'homepage'},
-          {
-            route: '/:slug',
-            resolve: (ctx) => ({
-              filter: `(_type == "caseStudy" || _type == "page") && slug.current == $slug`,
-              params: {slug: ctx.params.slug},
-            }),
-          },
         ]),
       },
     }),
