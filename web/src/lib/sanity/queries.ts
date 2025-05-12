@@ -169,7 +169,7 @@ export const SITE_QUERY = groq`{
     siteTitle,
     googleAnalyticsId,
   },
-  "homepageTitle": *[_id == 'homepage'][0].title
+  "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle
 }`;
 
 export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
