@@ -388,7 +388,7 @@ export const PLAYLISTS_QUERY = groq`
  ******************************************************************************/
 
 export const SITE_QUERY = groq`{
-  "homepageTitle": *[_id == 'homepage'][0].title,
+  "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,
   "settings": *[_id == "settings"][0]{
     metadata,
     siteTitle,

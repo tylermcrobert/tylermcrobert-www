@@ -28,6 +28,6 @@ export const structure: StructureResolver = (S) => {
       S.listItem()
         .title('Settings')
         .icon(settingsIcon)
-        .child(S.editor().schemaType('settings').documentId('settings').title('Settings')),
+        .child(S.editor().schemaType('settings').documentId('settings')),
     ])
 }
