@@ -44,7 +44,6 @@
 	loop
 	playsinline
 	style:--media-object-fit="cover"
-	style:transform="scale(1.001)"
 	use:intersect={(e) => (intersecting = e.isIntersecting)}
 >
 </mux-video>
