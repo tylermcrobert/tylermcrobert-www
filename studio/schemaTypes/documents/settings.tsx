@@ -27,6 +27,14 @@ export default defineType({
     },
 
     {
+      name: 'defaultBrowserFrame',
+      description: 'When browser frames are not specified for a block, this will be used.',
+      type: 'reference',
+      to: [{type: 'webFrameTheme'}],
+      validation: (Rule) => Rule.required(),
+    },
+
+    {
       name: 'metadata',
       type: 'metadata',
       validation: (Rule) => Rule.required(),

@@ -138,13 +138,18 @@ export type ModuleMediaBlock = Nullable<{
  * Website
  */
 
+const WEB_FRAME_THEME_PROJECTION = groq`{
+  "dots": dots.hex,
+  "frame": frame.hex,
+  "background": background.hex,
+}`;
+
 const MODULE_WEBSITE = `//groq
   _type == 'website' => {
-    theme->{
-      "dots": dots.hex,
-      "frame": frame.hex,
-      "background": background.hex,
-    },
+    "theme": coalesce(
+      theme->${WEB_FRAME_THEME_PROJECTION},
+      *[_id == "settings"][0].defaultBrowserFrame->${WEB_FRAME_THEME_PROJECTION}
+    ),
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
     showFrame,

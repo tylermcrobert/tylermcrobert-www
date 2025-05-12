@@ -14,7 +14,7 @@
 	class="my-standard relative w-full bg-black p-[10%]"
 >
 	<div class="relative z-10">
-		{#if showFrame !== false && theme?.frame}
+		{#if showFrame === true && theme?.frame}
 			{@render browserFrame()}
 		{/if}
 
@@ -72,13 +72,6 @@
 			fill="#000"
 			fill-opacity=".15"
 		/>
-		<path
-			fill-rule="evenodd"
-			clip-rule="evenodd"
-			d="M970.354 18.646a.502.502 0 0 0-.708.708l2.147 2.146H971c-2.947 0-5.5 1.852-5.5 4.804 0 2.9 2.492 5.196 5.5 5.196s5.5-2.297 5.5-5.196a.503.503 0 0 0-.5-.5.5.5 0 0 0-.5.5c0 2.288-1.985 4.196-4.5 4.196-2.515 0-4.5-1.908-4.5-4.196 0-2.234 1.924-3.804 4.5-3.804h.793l-1.647 1.646a.5.5 0 1 0 .708.708l2.499-2.5"
-			fill="#B8B7B9"
-			fill-opacity=".5"
-		/>
 		<rect
 			x="16"
 			y="20"
@@ -103,6 +96,8 @@
 			rx="6"
 			fill={data.theme?.dots || '#FFBE2C'}
 		/>
+
+		<!-- FWD/BK -->
 		<g
 			opacity=".4"
 			stroke="#B8B7B9"
@@ -122,7 +117,7 @@
 			y="50%"
 			font-size="10.5"
 			fill="white"
-			opacity={0.6}
+			opacity={0.3}
 			font-weight="bold"
 			text-anchor="middle"
 			dominant-baseline="middle"
