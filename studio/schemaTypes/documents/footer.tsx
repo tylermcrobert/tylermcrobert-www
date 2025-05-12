@@ -11,7 +11,7 @@ export default defineType({
       name: 'title',
       type: 'string',
       initialValue: 'Footer',
-      // hidden:true,
+      hidden: true,
     },
     {
       name: 'links',
