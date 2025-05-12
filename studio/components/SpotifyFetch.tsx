@@ -23,6 +23,7 @@ function formatOutput(data: any) {
       added: item.added_at,
       duration: item.track.duration_ms,
       artists: item.track.artists.map((item: any) => item.name),
+      image: item.track.album.images[0].url,
     })),
   }
 }
