@@ -6,25 +6,28 @@ import {structure} from './desk'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
 import {presentationTool} from 'sanity/presentation'
+import {presentationOptions} from './presentation'
 
 const CREATABLE_DOCTYPES = ['page']
 
 export default defineConfig({
   name: 'default',
   title: process.env.SANITY_STUDIO_TITLE,
-
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
   dataset: 'production',
 
   plugins: [
-    structureTool({structure}),
-    media(),
+    structureTool({
+      title: 'Content',
+      ...structure,
+    }),
     presentationTool({
-      previewUrl: process.env.SANITY_STUDIO_PREVIEW_LINK || '',
+      title: 'Preview',
+      ...presentationOptions,
     }),
-    muxInput({
-      max_resolution_tier: '2160p',
-    }),
+
+    media(),
+    muxInput({max_resolution_tier: '2160p'}),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
 
