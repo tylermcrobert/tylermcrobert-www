@@ -12,7 +12,10 @@ export const presentationOptions: PresentationPluginOptions = {
     // Automatically will switch to these documents when navigating in the Presentation Tool
     mainDocuments: defineDocuments([
       {route: '/', type: 'homepage'},
-      {route: '/:slug', filter: `_type == "page" && slug.current == $slug`},
+      {
+        route: '/:slug',
+        filter: `(_type == "page" || _type == "caseStudy") && slug.current == $slug`,
+      },
     ]),
 
     // Adds link to Presentation Tool in in the structure
