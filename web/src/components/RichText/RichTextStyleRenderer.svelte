@@ -22,7 +22,7 @@
 		class={{
 			'text-h1': style === 'h1',
 			'text-h2': style === 'h2',
-			'text-para indent': style === 'normal',
+			'text-para first-of-type:indent-8': style === 'normal',
 			'border-l border-current pl-3': style === 'blockquote'
 		}}
 	>
