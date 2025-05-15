@@ -24,7 +24,7 @@
 
 	<div class="my-large gap-standard mx-auto flex flex-col">
 		<div class="text-h1 flex gap-4 text-balance">
-			<img src={image} alt={title} class="size-[1em] object-cover" />
+			<img src={image} alt={title} class="size-[.85em] object-cover" />
 			<h2>{title}</h2>
 		</div>
 
@@ -54,15 +54,22 @@
 				{@const restOfWords = (title || '').split(' ').slice(1).join(' ')}
 
 				<li class={['text-h1 inline-block', hidden ? 'hidden' : '']}>
-					<span class="inline-flex items-baseline">
-						{#if image}
-							<img
-								src={image}
-								alt=""
-								class="mr-[0.3ch] block h-[1ch] w-[1ch]"
-							/>{firstWord}
-						{/if}
-					</span>{' '}<span class="pr-[0.3ch]">{restOfWords}</span>
+					{#each tracks as { title, image }}
+						{#each (title || '').split(' ') as word, i}
+							{#if i === 0}
+								{' '}
+								<div class="inline-flex items-baseline">
+									<img
+										src={image}
+										alt=""
+										class="mr-[0.3ch] block h-[.85em] w-[.85em]"
+									/>&nbsp;{word}
+								</div>
+							{:else}
+								<span>{' '}{word}</span>
+							{/if}
+						{/each}
+					{/each}
 				</li>
 			{/each}
 		</ul>
