@@ -19,21 +19,20 @@ const corsHeaders = {
 };
 
 export async function GET({ params: { id } }) {
+	if (!id) {
+		return json(
+			{ error: 'Playlist ID is required' },
+			{ status: 400, headers: corsHeaders }
+		);
+	}
+
+	/**
+	 * Fetch Auth code
+	 */
+
+	let accessToken: string;
+
 	try {
-		if (!id) {
-			return json(
-				{ error: 'Playlist ID is required' },
-				{
-					status: 400,
-					headers: corsHeaders
-				}
-			);
-		}
-
-		/**
-		 * Fetch Auth code
-		 */
-
 		const authFormatted = `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`;
 		const authEncoded = Buffer.from(authFormatted).toString('base64');
 
@@ -45,26 +44,38 @@ export async function GET({ params: { id } }) {
 			}
 		});
 
-		const credentialsData = await credentialsRes.json();
-		const accessToken = credentialsData.access_token;
-
-		if (!credentialsRes.ok || !accessToken) {
+		if (!credentialsRes.ok) {
 			return json(
 				{ error: 'Failed to fetch auth token' },
-				{
-					status: 500,
-					headers: corsHeaders
-				}
+				{ status: credentialsRes.status, headers: corsHeaders }
 			);
 		}
 
-		/**
-		 * Fetch Playlists
-		 */
+		const credentialsData = await credentialsRes.json();
+		accessToken = credentialsData.access_token;
+	} catch (error) {
+		console.error('Unknown error fetching auth token:', error);
+		return json(
+			{ error: 'Unknown error fetching auth token' },
+			{ status: 500, headers: corsHeaders }
+		);
+	}
 
+	/**
+	 * Fetch Playlists
+	 */
+
+	try {
 		const res = await fetch(`${PLAYLISTS_ENDPOINT}/${id}`, {
 			headers: { Authorization: `Bearer ${accessToken}` }
 		});
+
+		if (!res.ok) {
+			return json(
+				{ error: 'Failed to fetch playlist' },
+				{ status: res.status, headers: corsHeaders }
+			);
+		}
 
 		const data = await res.json();
 
@@ -74,11 +85,8 @@ export async function GET({ params: { id } }) {
 	} catch (error) {
 		console.error('Error fetching playlist:', error);
 		return json(
-			{ error: 'Internal server error' },
-			{
-				status: 500,
-				headers: corsHeaders
-			}
+			{ error: 'Failed to fetch playlist' },
+			{ status: 500, headers: corsHeaders }
 		);
 	}
 }
