@@ -1,4 +1,4 @@
-import { ROOT_SLUG_QUERY } from '$lib/sanity';
+import { ROOT_SLUG_QUERY, type ROOT_SLUG_QUERYResult } from '$lib/sanity';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({
@@ -12,7 +12,9 @@ export const load = async ({
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
 
-	const data = await client.fetch(ROOT_SLUG_QUERY, { slug: params.slug });
+	const data = await client.fetch<ROOT_SLUG_QUERYResult>(ROOT_SLUG_QUERY, {
+		slug: params.slug
+	});
 
 	if (!data) {
 		return error(404);
@@ -24,10 +26,7 @@ export const load = async ({
 
 	return {
 		type: data._type,
-		caseStudy: {
-			index,
-			...data.caseStudy
-		},
+		caseStudy: data._type === 'caseStudy' ? { index, ...data.caseStudy } : null,
 		pageTitle: data.title,
 		modules: data.modules || [],
 		metadata: data.metadata
