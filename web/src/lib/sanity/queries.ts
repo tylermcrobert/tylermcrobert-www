@@ -295,16 +295,18 @@ const MODULE_PLAYLIST_BLOCK = `//groq
   }
 `;
 
+export type PlaylistBlockTrack = Nullable<{
+	title: string;
+	artists: string[];
+	duration: number;
+	image: string;
+}>;
+
 type PlaylistBlockPlaylist = Nullable<{
 	slug: string;
 }> &
 	Pick<Playlist, 'title' | 'link' | 'duration' | 'date' | 'image'> & {
-		tracks: Nullable<{
-			title: string;
-			artists: string[];
-			duration: number;
-			image: string;
-		}>[];
+		tracks: PlaylistBlockTrack[];
 	};
 
 export type ModulePlaylistBlock = Nullable<{
