@@ -7,7 +7,7 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="gap-standard my-standard grid-cols-2 sm:grid">
+<div class="my-standard gap-standard grid sm:grid-cols-2">
 	{#each data.items || [] as item}
 		{#if item._type === 'diptych.media' && item.media?.asset}
 			<Media

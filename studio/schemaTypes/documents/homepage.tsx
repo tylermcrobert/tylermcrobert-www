@@ -9,9 +9,10 @@ export default defineType({
   fields: [
     {
       title: 'Homepage Title',
-      name: 'title',
+      name: 'homepageMetaTitle',
       type: 'string',
-      description: "A title specifically for the homepage. Define the site's title in Settings",
+      description:
+        "A browser tab title specifically for the homepage. Define the site's global title in Settings",
       validation: (Rule) => Rule.required(),
     },
     {
@@ -22,10 +23,6 @@ export default defineType({
     },
   ],
   preview: {
-    prepare() {
-      return {
-        title: 'Homepage',
-      }
-    },
+    prepare: () => ({title: 'Homepage'}),
   },
 })

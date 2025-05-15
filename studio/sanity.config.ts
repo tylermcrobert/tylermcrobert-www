@@ -6,43 +6,30 @@ import {structure} from './desk'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
 import {colorInput} from '@sanity/color-input'
-import {defineDocuments, defineLocations, presentationTool} from 'sanity/presentation'
+import {presentationTool} from 'sanity/presentation'
+import {presentationOptions} from './presentation'
 
 const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 
 export default defineConfig({
   name: 'default',
   title: process.env.SANITY_STUDIO_TITLE,
-
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
   dataset: 'production',
 
   plugins: [
-    structureTool({structure}),
-    media(),
+    structureTool({
+      title: 'Content',
+      structure,
+    }),
     presentationTool({
-      previewUrl: process.env.SANITY_STUDIO_PREVIEW_LINK || '',
-      resolve: {
-        locations: {
-          caseStudy: {
-            select: {title: 'title', slug: 'slug.current'},
-            resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),
-          },
-          page: {
-            select: {title: 'title', slug: 'slug.current'},
-            resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),
-          },
-        },
-        mainDocuments: defineDocuments([
-          {route: '/info', type: 'info'},
-          {route: '/', type: 'homepage'},
-        ]),
-      },
+      title: 'Preview',
+      ...presentationOptions,
     }),
-    muxInput({
-      max_resolution_tier: '2160p',
-    }),
+
     colorInput(),
+    media(),
+    muxInput({max_resolution_tier: '2160p'}),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
 
