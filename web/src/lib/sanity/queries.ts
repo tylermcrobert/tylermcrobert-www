@@ -286,9 +286,10 @@ const MODULE_PLAYLIST_BLOCK = `//groq
       date,
       image,
       tracks[]{
+        image,
         title, 
         duration, 
-        artists 
+        artists,
       }
     }
   }
@@ -298,7 +299,12 @@ type PlaylistBlockPlaylist = Nullable<{
 	slug: string;
 }> &
 	Pick<Playlist, 'title' | 'link' | 'duration' | 'date' | 'image'> & {
-		tracks: { title: string; artists: string[]; duration: number }[];
+		tracks: Nullable<{
+			title: string;
+			artists: string[];
+			duration: number;
+			image: string;
+		}>[];
 	};
 
 export type ModulePlaylistBlock = Nullable<{
@@ -415,7 +421,8 @@ export const PLAYLISTS_QUERY = groq`
       tracks[]{
         title, 
         duration, 
-        artists 
+        artists,
+        image
       }
     }
   }
