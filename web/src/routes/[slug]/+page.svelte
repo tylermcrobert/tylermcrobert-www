@@ -22,5 +22,7 @@
 	<div class="pointer-events-none h-dvh"></div>
 	<HomeIndex />
 {:else}
-	<Modules modules={data.modules} />
+	<div class="my-large">
+		<Modules modules={data.modules} />
+	</div>
 {/if}
