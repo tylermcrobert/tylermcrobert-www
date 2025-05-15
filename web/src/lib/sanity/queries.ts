@@ -2,8 +2,6 @@ import groq from 'groq';
 import type {
 	SanityImageAsset,
 	Settings,
-	PAGE_QUERYResult,
-	CASE_STUDY_QUERYResult,
 	Website,
 	SITE_QUERYResult,
 	MediaBlock,
@@ -343,30 +341,25 @@ export type Module =
  * PAGES
  ******************************************************************************/
 
-export const PAGE_QUERY = groq`
-  *[_type == 'page' && slug.current == $slug][0]{
+export const ROOT_SLUG_QUERY = groq`
+  *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
+    _type,
+
+    _type == 'caseStudy' => {
+      "caseStudy": {
+        intro,
+        deliverables,
+        date,
+        title,
+        description,
+      },
+    },
+    
     title,
     metadata,
     modules[]${MODULES_PROJECTION},
   }
 `;
-
-export type PageQuery = PAGE_QUERYResult & Nullable<{ modules: Module[] }>;
-
-export const CASE_STUDY_QUERY = groq`
-  *[_type == 'caseStudy' && slug.current == $slug][0]{
-    intro,
-    deliverables,
-    date,
-    title,
-    description,
-    metadata,
-    "modules": modules[]${MODULES_PROJECTION},
-  }
-`;
-
-export type CaseStudyQuery = CASE_STUDY_QUERYResult &
-	Nullable<{ modules: Module[] }>;
 
 /**
  * Info

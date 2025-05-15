@@ -1,9 +1,4 @@
-import {
-	CASE_STUDY_QUERY,
-	PAGE_QUERY,
-	type CaseStudyQuery,
-	type PageQuery
-} from '$lib/sanity';
+import { ROOT_SLUG_QUERY } from '$lib/sanity';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({
@@ -17,33 +12,23 @@ export const load = async ({
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
 
-	if (index === -1 && !previewEnabled) {
+	const data = await client.fetch(ROOT_SLUG_QUERY, { slug: params.slug });
+
+	if (!data) {
 		return error(404);
 	}
 
-	const caseStudy = await client.fetch<CaseStudyQuery>(CASE_STUDY_QUERY, {
-		slug: params.slug
-	});
-
-	if (caseStudy) {
-		return {
-			caseStudy: caseStudy,
-			pageTitle: caseStudy.title,
-			modules: caseStudy.modules || [],
-			metadata: caseStudy.metadata,
-			index: index
-		} satisfies App.PageReturn;
+	if (data._type === 'caseStudy' && index === -1 && !previewEnabled) {
+		return error(404);
 	}
 
-	const page = await client.fetch<PageQuery>(PAGE_QUERY, { slug: params.slug });
-
-	if (page) {
-		return {
-			pageTitle: page.title,
-			metadata: page.metadata,
-			modules: page.modules || []
-		} satisfies App.PageReturn;
-	}
-
-	return error(404);
+	return {
+		caseStudy: {
+			index,
+			...data.caseStudy
+		},
+		pageTitle: data.title,
+		modules: data.modules || [],
+		metadata: data.metadata
+	} satisfies App.PageReturn;
 };
