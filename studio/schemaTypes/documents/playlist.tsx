@@ -65,15 +65,15 @@ export default defineType({
       of: [
         {
           type: 'object',
-          preview: {
-            select: {title: 'title', artists: 'artists'},
-            prepare: ({title, artists}) => {
-              return {title: title, subtitle: artists.join(', ')}
-            },
-          },
           fields: [
             {
               name: 'title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+
+            {
+              name: 'image',
               type: 'string',
               validation: (Rule) => Rule.required(),
             },
@@ -103,8 +103,25 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             },
           ],
+          preview: {
+            select: {title: 'title', artists: 'artists', image: 'image'},
+            prepare: ({title, artists, image}) => {
+              return {
+                title: title,
+                subtitle: artists.join(', '),
+                media: image && <img src={image} alt={title} />,
+              }
+            },
+          },
         },
-      ], // Change type based on API response structure
+      ],
     },
   ],
+
+  preview: {
+    select: {title: 'title', image: 'image'},
+    prepare({title, image}) {
+      return {title: title, media: image && <img src={image} alt={title} />}
+    },
+  },
 })

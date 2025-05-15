@@ -10,5 +10,6 @@ export default defineType({
     {type: 'diptych'},
     {type: 'mobileWebsite'},
     {type: 'tripleImage'},
+    {type: 'playlistBlock'},
   ],
 })

@@ -8,7 +8,8 @@ import type {
 	SITE_QUERYResult,
 	MediaBlock,
 	DiptychMedia,
-	InfoQueryResult
+	InfoQueryResult,
+	Playlist
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
 
@@ -270,6 +271,41 @@ export type ModuleTimedSlides = Nullable<{
 	images: SanityImageAsset[];
 	background: string | undefined;
 }>;
+
+/**
+ * Playlist Block
+ */
+
+const MODULE_PLAYLIST_BLOCK = `//groq
+  _type == 'playlistBlock' => {
+    playlist->{
+      "slug": slug.current,
+      link,
+      title,
+      duration, 
+      date,
+      image,
+      tracks[]{
+        title, 
+        duration, 
+        artists 
+      }
+    }
+  }
+`;
+
+type PlaylistBlockPlaylist = Nullable<{
+	slug: string;
+}> &
+	Pick<Playlist, 'title' | 'link' | 'duration' | 'date' | 'image'> & {
+		tracks: { title: string; artists: string[]; duration: number }[];
+	};
+
+export type ModulePlaylistBlock = Nullable<{
+	_type: 'playlistBlock';
+	playlist: PlaylistBlockPlaylist;
+}>;
+
 /**
  * Modules
  */
@@ -282,7 +318,8 @@ const MODULES_PROJECTION = groq`{
   ${MODULE_DIPTYCH},
   ${MODULE_TRIPLE_IMAGE},
   ${MODULE_MOBILE_WEBSITE},
-  ${MODULE_TIMED_SLIDES}
+  ${MODULE_TIMED_SLIDES},
+  ${MODULE_PLAYLIST_BLOCK}
 }
 `;
 
@@ -293,7 +330,8 @@ export type Module =
 	| ModuleDiptych
 	| ModuleTripleImage
 	| ModuleMobileWebsite
-	| ModuleTimedSlides;
+	| ModuleTimedSlides
+	| ModulePlaylistBlock;
 
 /*******************************************************************************
  * PAGES

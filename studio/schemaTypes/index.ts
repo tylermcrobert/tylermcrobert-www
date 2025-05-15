@@ -23,8 +23,10 @@ import diptych, {diptychMedia, diptychText, diptychSpacer} from './modules/dipty
 import aspect from './objects/aspect'
 import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
 import tripleImage from './modules/tripleImage'
+import playlistBlock from './modules/playlist'
 
 export const schemaTypes = [
+  playlistBlock,
   mobileWebsiteItem,
   tripleImage,
   mobileWebsite,
