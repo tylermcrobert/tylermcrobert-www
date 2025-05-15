@@ -54,17 +54,29 @@
 				{@const restOfWords = (title || '').split(' ').slice(1).join(' ')}
 
 				<li class={['text-h1 inline-block', hidden ? 'hidden' : '']}>
-					{#each tracks as { title, image }}
-						{#each (title || '').split(' ') as word, i}
-							{#if i === 0}
-								{' '}
-								<div class="inline-flex items-baseline">
+					{#each tracks as { title: rawTitle, image }}
+						{@const title = rawTitle || ''}
+
+						{#each title.split(' ') as word, i}
+							{@const isFirstWord = i === 0}
+							{@const isLastWord = i === title.split(' ').length - 1}
+							{@const isOneWord = title.split(' ').length === 1}
+
+							{#if isFirstWord}
+								<div
+									class={[
+										'inline-flex items-baseline',
+										isOneWord && 'mr-[0.3em]'
+									]}
+								>
 									<img
 										src={image}
 										alt=""
-										class="mr-[0.3ch] block h-[.85em] w-[.85em]"
-									/>&nbsp;{word}
+										class="mr-[0.25em] block h-[.85em] w-[.85em]"
+									/>{word}
 								</div>
+							{:else if isLastWord}
+								<span class="mr-[0.3em]">{word}</span>
 							{:else}
 								<span>{' '}{word}</span>
 							{/if}
