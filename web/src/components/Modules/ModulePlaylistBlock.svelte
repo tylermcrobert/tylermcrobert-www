@@ -75,10 +75,8 @@
 										class="mr-[0.25em] block h-[.85em] w-[.85em]"
 									/>{word}
 								</div>
-							{:else if isLastWord}
-								<span class="mr-[0.3em]">{word}</span>
 							{:else}
-								<span>{' '}{word}</span>
+								<span class={[isLastWord && 'mr-[0.3em]']}>{' '}{word}</span>
 							{/if}
 						{/each}
 					{/each}
