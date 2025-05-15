@@ -53,7 +53,7 @@
 				{@const firstWord = (title || '').split(' ')[0]}
 				{@const restOfWords = (title || '').split(' ').slice(1).join(' ')}
 
-				<li class={['text-h1 ', hidden ? 'hidden' : 'inline']}>
+				<li class={['text-h1 inline-block', hidden ? 'hidden' : '']}>
 					<span class="inline-flex items-baseline">
 						{#if image}
 							<img
