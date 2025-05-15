@@ -4,12 +4,12 @@
 	let { data } = $props();
 </script>
 
-{#if data.caseStudy}
+{#if data.type === 'caseStudy'}
 	<div
 		class="z-project-page pb-large relative border-b border-dashed border-black bg-white"
 	>
 		<CaseStudyHeader
-			index={data.index}
+			index={data.caseStudy.index}
 			intro={data.caseStudy.intro}
 			deliverables={data.caseStudy.deliverables}
 			date={data.caseStudy.date}

@@ -23,6 +23,7 @@ export const load = async ({
 	}
 
 	return {
+		type: data._type,
 		caseStudy: {
 			index,
 			...data.caseStudy
