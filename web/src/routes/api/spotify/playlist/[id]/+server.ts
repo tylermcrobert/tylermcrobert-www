@@ -8,9 +8,11 @@ const PLAYLISTS_ENDPOINT = 'https://api.spotify.com/v1/playlists';
 if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
 	throw new Error('Spotify API keys not found in environment variables.');
 }
-
 const corsHeaders = {
-	'Access-Control-Allow-Origin': '*', // More permissive for development
+	'Access-Control-Allow-Origin':
+		process.env.NODE_ENV === 'development'
+			? '*'
+			: 'https://content.tylermcrobert.com',
 	'Access-Control-Allow-Methods': 'GET, OPTIONS',
 	'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 	'Access-Control-Allow-Credentials': 'true'
@@ -55,8 +57,6 @@ export async function GET({ params: { id } }) {
 				}
 			);
 		}
-
-		console.log(accessToken);
 
 		/**
 		 * Fetch Playlists
