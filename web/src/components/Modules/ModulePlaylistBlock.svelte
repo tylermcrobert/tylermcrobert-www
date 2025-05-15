@@ -22,8 +22,8 @@
 {#if data.playlist}
 	{@const { title, link, date, duration, image, tracks } = data.playlist}
 
-	<div class="my-medium gap-standard mx-auto flex flex-col">
-		<div class="text-h1 flex gap-4">
+	<div class="my-large gap-standard mx-auto flex flex-col">
+		<div class="text-h1 flex gap-4 text-balance">
 			<img src={image} alt={title} class="size-[1em] object-cover" />
 			<h2>{title}</h2>
 		</div>
@@ -56,26 +56,14 @@
 				<li class={['text-h1 ', hidden ? 'hidden' : 'inline']}>
 					<span class="inline-flex items-baseline">
 						{#if image}
-							{@render AlbumCover(image)}&nbsp;{firstWord}
+							<img
+								src={image}
+								alt=""
+								class="mr-[0.3ch] block h-[1ch] w-[1ch]"
+							/>{firstWord}
 						{/if}
-					</span>{' '}<span class="pr-4">{restOfWords}</span>
+					</span>{' '}<span class="pr-[0.3ch]">{restOfWords}</span>
 				</li>
-
-				<!-- 				
-
-				<li class={['text-h1 ', hidden ? 'hidden' : 'inline']}>
-					{#each (title || '').split(' ') as word, i}
-						{#if i === 0}
-							{' '}
-							<div class="inline-flex items-baseline">
-								{@render AlbumCover(image)}&nbsp;{word}
-							</div>
-						{:else}
-							<span>{' '}{word} </span>
-						{/if}
-					{/each}
-					– {artistsFormatted}
-				</li> -->
 			{/each}
 		</ul>
 
@@ -88,15 +76,3 @@
 		</div>
 	</div>
 {/if}
-
-{#snippet AlbumCover(image: string)}
-	<div
-		class="h-6 w-6 md:h-8 md:w-8 lg:h-11 lg:w-11 xl:h-[calc(1.75rem+1vw)] xl:w-[calc(1.75rem+1vw)]"
-	>
-		<img
-			src={image}
-			alt=""
-			class="h-6 w-6 md:h-8 md:w-8 lg:h-11 lg:w-11 xl:h-[calc(1.75rem+1vw)] xl:w-[calc(1.75rem+1vw)]"
-		/>
-	</div>
-{/snippet}
