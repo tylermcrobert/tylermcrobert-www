@@ -274,22 +274,24 @@ export type ModuleTimedSlides = Nullable<{
  * Playlist Block
  */
 
+const PLAYLIST_PROJECTION = groq`{
+  "slug": slug.current,
+  link,
+  title,
+  duration, 
+  date,
+  image,
+  tracks[]{
+    image,
+    title, 
+    duration, 
+    artists,
+  }
+}`;
+
 const MODULE_PLAYLIST_BLOCK = `//groq
   _type == 'playlistBlock' => {
-    playlist->{
-      "slug": slug.current,
-      link,
-      title,
-      duration, 
-      date,
-      image,
-      tracks[]{
-        image,
-        title, 
-        duration, 
-        artists,
-      }
-    }
+    playlist->${PLAYLIST_PROJECTION}
   }
 `;
 
@@ -402,23 +404,8 @@ export type InfoQuery = {
  * Playlist
  */
 
-export const PLAYLISTS_QUERY = groq`
-  *[_type == 'info' ][0]{
-    playlists[]-> {
-      "slug": slug.current,
-      link,
-      title,
-      duration, 
-      date,
-      image,
-      tracks[]{
-        title, 
-        duration, 
-        artists,
-        image
-      }
-    }
-  }
+export const PLAYLIST_QUERY = groq`
+  *[_type == 'playlist' && slug.current == $slug][0]${PLAYLIST_PROJECTION}
 `;
 
 /*******************************************************************************

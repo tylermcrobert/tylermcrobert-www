@@ -16,6 +16,10 @@ export const presentationOptions: PresentationPluginOptions = {
         route: '/:slug',
         filter: `(_type == "page" || _type == "caseStudy") && slug.current == $slug`,
       },
+      {
+        route: '/playlists/:slug',
+        filter: `_type == "playlist" && slug.current == $slug`,
+      },
     ]),
 
     // Adds link to Presentation Tool in in the structure
@@ -27,6 +31,10 @@ export const presentationOptions: PresentationPluginOptions = {
       page: {
         select: {title: 'title', slug: 'slug.current'},
         resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),
+      },
+      playlist: {
+        select: {title: 'title', slug: 'slug.current'},
+        resolve: (doc) => ({locations: [{title: doc?.title, href: `/playlists/${doc?.slug}`}]}),
       },
     },
   },

@@ -8,11 +8,12 @@
 
 	type Props = {
 		data: ModulePlaylistBlock;
+		showAll?: boolean;
 	};
 
-	let { data }: Props = $props();
+	let { data, showAll = false }: Props = $props();
 
-	let isExpanded = $state(false);
+	let isExpanded = $state(showAll ? true : false);
 </script>
 
 {#if data.playlist}
@@ -53,12 +54,17 @@
 			{/each}
 		</ul>
 
-		<div>
-			<button onclick={() => (isExpanded = !isExpanded)} class="cursor-pointer">
-				<DotHead noMarginBottom>
-					{isExpanded ? 'See Less ↑' : 'See All ↓'}
-				</DotHead>
-			</button>
-		</div>
+		{#if !showAll}
+			<div>
+				<button
+					onclick={() => (isExpanded = !isExpanded)}
+					class="cursor-pointer"
+				>
+					<DotHead noMarginBottom>
+						{isExpanded ? 'See Less ↑' : 'See All ↓'}
+					</DotHead>
+				</button>
+			</div>
+		{/if}
 	</section>
 {/if}
