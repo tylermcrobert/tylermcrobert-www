@@ -6,12 +6,16 @@ type Link = {
 };
 
 export function resolveLink({ slug, type }: Link) {
+	if (type === 'project') {
+		return `/${slug}`;
+	}
+
 	if (type === 'page') {
 		return `/${slug}`;
 	}
 
-	if (type === 'project') {
-		return `/work/${slug}`;
+	if (type === 'playlist') {
+		return `/playlists/${slug}`;
 	}
 
 	if (type === 'info') {

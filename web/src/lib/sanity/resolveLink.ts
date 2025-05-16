@@ -10,6 +10,10 @@ export function resolveLink({ slug, type }: Link) {
 		return `/${slug}`;
 	}
 
+	if (type === 'playlist') {
+		return `/playlists/${slug}`;
+	}
+
 	if (type === 'homepage') {
 		return `/`;
 	}
