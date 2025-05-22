@@ -1,8 +1,9 @@
 // REFERENCE https://github.com/CaptainCodeman/svelte-intersection-observer-action/tree/master/src
 
-import { onMount } from 'svelte';
+import type { Attachment } from 'svelte/attachments';
 
 type IntersectionCallback = (entry: IntersectionObserverEntry) => void;
+
 type IntersectionOptions = {
 	callback: IntersectionCallback;
 	options?: IntersectionObserverInit;
@@ -46,19 +47,22 @@ function observe(
 	intersectionCallbacks.set(target, callback);
 	observer.observe(target);
 
-	return () => {
-		observer.unobserve(target);
-		intersectionCallbacks.delete(target);
+	return {
+		unobserve: () => {
+			observer.unobserve(target);
+			intersectionCallbacks.delete(target);
+		}
 	};
 }
 
-export function intersect(
-	target: Element,
+export function intersection(
 	props: IntersectionCallback | IntersectionOptions
-): void {
-	const unobserve = observe(target, props);
+): Attachment {
+	return (element) => {
+		const observer = observe(element, props);
 
-	onMount(() => {
-		return () => unobserve();
-	});
+		return () => {
+			observer.unobserve();
+		};
+	};
 }
