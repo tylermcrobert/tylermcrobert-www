@@ -74,6 +74,7 @@ export type Settings = {
 	_createdAt: string;
 	_updatedAt: string;
 	_rev: string;
+	title?: string;
 	siteTitle?: string;
 	googleAnalyticsId?: string;
 	metadata?: Metadata;
@@ -205,6 +206,7 @@ export type Homepage = {
 	_updatedAt: string;
 	_rev: string;
 	title?: string;
+	homepageMetaTitle?: string;
 	modules?: Array<
 		| ({
 				_key: string;
@@ -516,18 +518,22 @@ export type MEDIA_PROJECTIONResult = {
 	asset: null;
 };
 // Variable: MODULES_PROJECTION
-// Query: {  _type,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },}
+// Query: {  _type,  _key,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },}
 export type MODULES_PROJECTIONResult = {
 	_type: never;
+	_key: never;
 };
 // Variable: PAGE_QUERY
-// Query: *[_type == 'page' && slug.current == $slug][0]{    title,    metadata,    modules[]{  _type,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },},  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _type,    _id,    title,    metadata,    modules[]{  _type,  _key,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },},  }
 export type PAGE_QUERYResult = {
+	_type: 'page';
+	_id: string;
 	title: string | null;
 	metadata: Metadata | null;
 	modules: Array<
 		| {
 				_type: 'mediaBlock';
+				_key: string;
 				media: {
 					_type: 'mediaProjection';
 					asset:
@@ -571,6 +577,7 @@ export type PAGE_QUERYResult = {
 		  }
 		| {
 				_type: 'textBlock';
+				_key: string;
 				richText: Array<{
 					children?: Array<{
 						marks?: Array<string>;
@@ -617,7 +624,7 @@ export type PAGE_QUERYResult = {
 	> | null;
 } | null;
 // Variable: HOMEPAGE_QUERY
-// Query: *[_id == 'homepage'][0]{    modules[]{  _type,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },},  }
+// Query: *[_id == 'homepage'][0]{    modules[]{  _type,  _key,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },},  }
 export type HOMEPAGE_QUERYResult =
 	| {
 			modules: null;
@@ -626,6 +633,7 @@ export type HOMEPAGE_QUERYResult =
 			modules: Array<
 				| {
 						_type: 'mediaBlock';
+						_key: string;
 						media: {
 							_type: 'mediaProjection';
 							asset:
@@ -669,6 +677,7 @@ export type HOMEPAGE_QUERYResult =
 				  }
 				| {
 						_type: 'textBlock';
+						_key: string;
 						richText: Array<{
 							children?: Array<{
 								marks?: Array<string>;
@@ -716,7 +725,7 @@ export type HOMEPAGE_QUERYResult =
 	  }
 	| null;
 // Variable: SITE_QUERY
-// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,    googleAnalyticsId,  },  "homepageTitle": *[_id == 'homepage'][0].title}
+// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,    googleAnalyticsId,  },  "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle}
 export type SITE_QUERYResult = {
 	footer: {
 		links: null;
@@ -746,7 +755,7 @@ export type SITE_QUERYResult = {
 				googleAnalyticsId: string | null;
 		  }
 		| null;
-	homepageTitle: string | null;
+	homepageTitle: null | string;
 };
 // Variable: SITEMAP_QUERY
 // Query: {  "homepage": *[_type == 'homepage'][0]{    _updatedAt,  },  "pages": *[_type == 'page'][]{     title,    "slug": slug.current,    _updatedAt,  }}
@@ -768,10 +777,10 @@ declare module '@sanity/client' {
 		'{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}': LINK_PROJECTIONResult;
 		'{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}': RICH_TEXT_PROJECTIONResult;
 		'{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}': MEDIA_PROJECTIONResult;
-		'{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n': MODULES_PROJECTIONResult;
-		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': PAGE_QUERYResult;
-		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': HOMEPAGE_QUERYResult;
-		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
+		'{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n': MODULES_PROJECTIONResult;
+		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _type,\n    _id,\n    title,\n    metadata,\n    modules[]{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': PAGE_QUERYResult;
+		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': HOMEPAGE_QUERYResult;
+		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].homepageMetaTitle\n}': SITE_QUERYResult;
 		'{\n  "homepage": *[_type == \'homepage\'][0]{\n    _updatedAt,\n  },\n\n  "pages": *[_type == \'page\'][]{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
 }

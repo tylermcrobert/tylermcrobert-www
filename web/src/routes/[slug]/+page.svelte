@@ -4,4 +4,8 @@
 	let { data } = $props();
 </script>
 
-<Modules modules={data.modules} />
+<Modules
+	modules={data.modules}
+	documentId={data._id}
+	documentType={data._type}
+/>

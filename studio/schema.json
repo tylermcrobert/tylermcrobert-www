@@ -360,6 +360,13 @@
           "type": "string"
         }
       },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "siteTitle": {
         "type": "objectAttribute",
         "value": {
@@ -1117,6 +1124,13 @@
         }
       },
       "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "homepageMetaTitle": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

@@ -128,12 +128,13 @@ export type ModuleMediaBlock = Nullable<{
 
 const MODULES_PROJECTION = groq`{
   _type,
+  _key,
   ${MODULE_MEDIA_BLOCK},
   ${MODULE_TEXT_BLOCK},
 }
 `;
 
-export type Module = ModuleMediaBlock | ModuleTextBlock;
+export type Module = { _key: string } & (ModuleMediaBlock | ModuleTextBlock);
 
 /*******************************************************************************
  * PAGES
@@ -141,6 +142,8 @@ export type Module = ModuleMediaBlock | ModuleTextBlock;
 
 export const PAGE_QUERY = groq`
   *[_type == 'page' && slug.current == $slug][0]{
+    _type,
+    _id,
     title,
     metadata,
     modules[]${MODULES_PROJECTION},

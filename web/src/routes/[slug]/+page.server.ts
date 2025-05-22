@@ -16,6 +16,7 @@ export const load = async ({
 	}
 
 	return {
+		...data,
 		pageTitle: data.title,
 		metadata: data.metadata,
 		modules: (data.modules || []) as Module[]
