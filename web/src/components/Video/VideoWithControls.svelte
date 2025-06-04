@@ -40,7 +40,6 @@
 					.url()}
 			autoplay
 			playback-id={playbackId}
-			metadata-viewer-user-id="s4u780"
 			playsinline
 			slot="media"
 			class="w-full"
