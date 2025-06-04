@@ -17,6 +17,8 @@ export const load = async ({
 	}
 
 	return {
+		documentId: data._id,
+		documentType: data._type,
 		pageTitle: null,
 		metadata: null,
 		modules: (data.modules || []) as Module[]
