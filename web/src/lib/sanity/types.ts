@@ -13,67 +13,13 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-	_type: 'sanity.imagePaletteSwatch';
-	background?: string;
-	foreground?: string;
-	population?: number;
-	title?: string;
-};
-
-export type SanityImagePalette = {
-	_type: 'sanity.imagePalette';
-	darkMuted?: SanityImagePaletteSwatch;
-	lightVibrant?: SanityImagePaletteSwatch;
-	darkVibrant?: SanityImagePaletteSwatch;
-	vibrant?: SanityImagePaletteSwatch;
-	dominant?: SanityImagePaletteSwatch;
-	lightMuted?: SanityImagePaletteSwatch;
-	muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-	_type: 'sanity.imageDimensions';
-	height?: number;
-	width?: number;
-	aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
-	_id: string;
-	_type: 'sanity.fileAsset';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	originalFilename?: string;
-	label?: string;
-	title?: string;
-	description?: string;
-	altText?: string;
-	sha1hash?: string;
-	extension?: string;
-	mimeType?: string;
-	size?: number;
-	assetId?: string;
-	uploadId?: string;
-	path?: string;
-	url?: string;
-	source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-	_type: 'geopoint';
-	lat?: number;
-	lng?: number;
-	alt?: number;
-};
-
 export type Settings = {
 	_id: string;
 	_type: 'settings';
 	_createdAt: string;
 	_updatedAt: string;
 	_rev: string;
+	title?: string;
 	siteTitle?: string;
 	googleAnalyticsId?: string;
 	metadata?: Metadata;
@@ -205,6 +151,7 @@ export type Homepage = {
 	_updatedAt: string;
 	_rev: string;
 	title?: string;
+	homepageMetaTitle?: string;
 	modules?: Array<
 		| ({
 				_key: string;
@@ -268,63 +215,6 @@ export type TextBlock = {
 export type MediaBlock = {
 	_type: 'mediaBlock';
 	media?: Media;
-};
-
-export type SanityImageCrop = {
-	_type: 'sanity.imageCrop';
-	top?: number;
-	bottom?: number;
-	left?: number;
-	right?: number;
-};
-
-export type SanityImageHotspot = {
-	_type: 'sanity.imageHotspot';
-	x?: number;
-	y?: number;
-	height?: number;
-	width?: number;
-};
-
-export type SanityImageAsset = {
-	_id: string;
-	_type: 'sanity.imageAsset';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	originalFilename?: string;
-	label?: string;
-	title?: string;
-	description?: string;
-	altText?: string;
-	sha1hash?: string;
-	extension?: string;
-	mimeType?: string;
-	size?: number;
-	assetId?: string;
-	uploadId?: string;
-	path?: string;
-	url?: string;
-	metadata?: SanityImageMetadata;
-	source?: SanityAssetSourceData;
-};
-
-export type SanityAssetSourceData = {
-	_type: 'sanity.assetSourceData';
-	name?: string;
-	id?: string;
-	url?: string;
-};
-
-export type SanityImageMetadata = {
-	_type: 'sanity.imageMetadata';
-	location?: Geopoint;
-	dimensions?: SanityImageDimensions;
-	palette?: SanityImagePalette;
-	lqip?: string;
-	blurHash?: string;
-	hasAlpha?: boolean;
-	isOpaque?: boolean;
 };
 
 export type Media = {
@@ -455,18 +345,125 @@ export type MediaTag = {
 	name?: Slug;
 };
 
+export type SanityImagePaletteSwatch = {
+	_type: 'sanity.imagePaletteSwatch';
+	background?: string;
+	foreground?: string;
+	population?: number;
+	title?: string;
+};
+
+export type SanityImagePalette = {
+	_type: 'sanity.imagePalette';
+	darkMuted?: SanityImagePaletteSwatch;
+	lightVibrant?: SanityImagePaletteSwatch;
+	darkVibrant?: SanityImagePaletteSwatch;
+	vibrant?: SanityImagePaletteSwatch;
+	dominant?: SanityImagePaletteSwatch;
+	lightMuted?: SanityImagePaletteSwatch;
+	muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+	_type: 'sanity.imageDimensions';
+	height?: number;
+	width?: number;
+	aspectRatio?: number;
+};
+
+export type SanityImageHotspot = {
+	_type: 'sanity.imageHotspot';
+	x?: number;
+	y?: number;
+	height?: number;
+	width?: number;
+};
+
+export type SanityImageCrop = {
+	_type: 'sanity.imageCrop';
+	top?: number;
+	bottom?: number;
+	left?: number;
+	right?: number;
+};
+
+export type SanityFileAsset = {
+	_id: string;
+	_type: 'sanity.fileAsset';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	originalFilename?: string;
+	label?: string;
+	title?: string;
+	description?: string;
+	altText?: string;
+	sha1hash?: string;
+	extension?: string;
+	mimeType?: string;
+	size?: number;
+	assetId?: string;
+	uploadId?: string;
+	path?: string;
+	url?: string;
+	source?: SanityAssetSourceData;
+};
+
+export type SanityImageAsset = {
+	_id: string;
+	_type: 'sanity.imageAsset';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	originalFilename?: string;
+	label?: string;
+	title?: string;
+	description?: string;
+	altText?: string;
+	sha1hash?: string;
+	extension?: string;
+	mimeType?: string;
+	size?: number;
+	assetId?: string;
+	uploadId?: string;
+	path?: string;
+	url?: string;
+	metadata?: SanityImageMetadata;
+	source?: SanityAssetSourceData;
+};
+
+export type SanityImageMetadata = {
+	_type: 'sanity.imageMetadata';
+	location?: Geopoint;
+	dimensions?: SanityImageDimensions;
+	palette?: SanityImagePalette;
+	lqip?: string;
+	blurHash?: string;
+	hasAlpha?: boolean;
+	isOpaque?: boolean;
+};
+
+export type Geopoint = {
+	_type: 'geopoint';
+	lat?: number;
+	lng?: number;
+	alt?: number;
+};
+
 export type Slug = {
 	_type: 'slug';
 	current?: string;
 	source?: string;
 };
 
+export type SanityAssetSourceData = {
+	_type: 'sanity.assetSourceData';
+	name?: string;
+	id?: string;
+	url?: string;
+};
+
 export type AllSanitySchemaTypes =
-	| SanityImagePaletteSwatch
-	| SanityImagePalette
-	| SanityImageDimensions
-	| SanityFileAsset
-	| Geopoint
 	| Settings
 	| Navigation
 	| Link
@@ -482,11 +479,6 @@ export type AllSanitySchemaTypes =
 	| Modules
 	| TextBlock
 	| MediaBlock
-	| SanityImageCrop
-	| SanityImageHotspot
-	| SanityImageAsset
-	| SanityAssetSourceData
-	| SanityImageMetadata
 	| Media
 	| MuxVideo
 	| MuxVideoAsset
@@ -496,7 +488,17 @@ export type AllSanitySchemaTypes =
 	| MuxPlaybackId
 	| MuxTrack
 	| MediaTag
-	| Slug;
+	| SanityImagePaletteSwatch
+	| SanityImagePalette
+	| SanityImageDimensions
+	| SanityImageHotspot
+	| SanityImageCrop
+	| SanityFileAsset
+	| SanityImageAsset
+	| SanityImageMetadata
+	| Geopoint
+	| Slug
+	| SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/lib/sanity/queries.ts
 // Variable: LINK_PROJECTION
@@ -716,7 +718,7 @@ export type HOMEPAGE_QUERYResult =
 	  }
 	| null;
 // Variable: SITE_QUERY
-// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,    googleAnalyticsId,  },  "homepageTitle": *[_id == 'homepage'][0].title}
+// Query: {  "footer": *[_id == "footer"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "navigation": *[_id == "navigation"][0]{    links[]{  label,  href,  reference-> {    _type,    title,    "slug": slug.current   }},  },  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,    googleAnalyticsId,  },  "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle}
 export type SITE_QUERYResult = {
 	footer: {
 		links: null;
@@ -746,7 +748,7 @@ export type SITE_QUERYResult = {
 				googleAnalyticsId: string | null;
 		  }
 		| null;
-	homepageTitle: string | null;
+	homepageTitle: null | string;
 };
 // Variable: SITEMAP_QUERY
 // Query: {  "homepage": *[_type == 'homepage'][0]{    _updatedAt,  },  "pages": *[_type == 'page'][]{     title,    "slug": slug.current,    _updatedAt,  }}
@@ -771,7 +773,7 @@ declare module '@sanity/client' {
 		'{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n': MODULES_PROJECTIONResult;
 		'\n  *[_type == \'page\' && slug.current == $slug][0]{\n    title,\n    metadata,\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': PAGE_QUERYResult;
 		'\n  *[_id == \'homepage\'][0]{\n    modules[]{\n  _type,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n}\n,\n  }\n': HOMEPAGE_QUERYResult;
-		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].title\n}': SITE_QUERYResult;
+		'{\n  "footer": *[_id == "footer"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "navigation": *[_id == "navigation"][0]{\n    links[]{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n},\n  },\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "homepageTitle": *[_id == \'homepage\'][0].homepageMetaTitle\n}': SITE_QUERYResult;
 		'{\n  "homepage": *[_type == \'homepage\'][0]{\n    _updatedAt,\n  },\n\n  "pages": *[_type == \'page\'][]{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
 }
