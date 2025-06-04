@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { metadata } from '$lib/state';
 	import { client } from '$sanity';
+	import { stegaClean } from '@sanity/client/stega';
 	import Image, {
 		type SanityImageSource,
 		type SvelteSanityImageProps
@@ -19,7 +20,7 @@
 	{...props}
 	{client}
 	{image}
-	alt={alt || metadata.title || null}
+	alt={alt || stegaClean(metadata.title) || null}
 	autoFormat
 	loading={priority ? 'eager' : 'lazy'}
 	fetchpriority={priority ? 'high' : undefined}
