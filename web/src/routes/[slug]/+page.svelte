@@ -2,10 +2,7 @@
 	import { Modules } from '$components';
 
 	let { data } = $props();
+	let { modules, documentId, documentType } = $derived(data);
 </script>
 
-<Modules
-	modules={data.modules}
-	documentId={data._id}
-	documentType={data._type}
-/>
+<Modules {modules} {documentId} {documentType} />
