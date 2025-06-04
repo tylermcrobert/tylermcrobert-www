@@ -3,7 +3,7 @@
 	import type { ClassValue } from 'svelte/elements';
 	import type { MediaProjectionVideo } from '$sanity';
 	import { getAspect } from '$lib/util';
-	import { intersect } from '$lib/actions';
+	import { intersection } from '$lib/attachments';
 
 	type Props = {
 		class: ClassValue | undefined;
@@ -11,8 +11,6 @@
 
 	let { class: className, ...video }: Props = $props();
 
-	let videoElement = $state<HTMLVideoElement>();
-	let intersecting = $state(false);
 	let packageLoaded = $state(false);
 
 	onMount(() => {
@@ -20,29 +18,27 @@
 			packageLoaded = true;
 		});
 	});
-
-	$effect(() => {
-		if (!packageLoaded) {
-			return;
-		}
-
-		if (!intersecting) {
-			videoElement?.pause();
-		} else {
-			videoElement?.play();
-		}
-	});
 </script>
 
 <mux-video
 	style:aspect-ratio={getAspect(video.aspect)}
-	bind:this={videoElement}
 	class={['block w-full', className]}
 	playback-id={video?.playbackId}
 	muted
 	loop
 	playsinline
+	autoplay
 	style:--media-object-fit="cover"
-	use:intersect={(e) => (intersecting = e.isIntersecting)}
+	{@attach intersection(({ isIntersecting, target }) => {
+		let el = target as HTMLVideoElement;
+
+		if (!packageLoaded) {
+			return;
+		} else if (isIntersecting) {
+			el.play();
+		} else {
+			el.pause();
+		}
+	})}
 >
 </mux-video>
