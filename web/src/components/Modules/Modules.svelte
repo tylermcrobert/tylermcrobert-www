@@ -9,16 +9,26 @@
 	import { ImagePriorityProvider } from '$components';
 	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
 	import ModulePlaylistBlock from './ModulePlaylistBlock.svelte';
+	import { createDataAttribute } from '@sanity/sveltekit';
 
-	type Props = { modules: Module[] };
+	type Props = {
+		modules: Module[];
+		documentId: string;
+		documentType: string;
+	};
 
-	let { modules }: Props = $props();
+	let { modules, documentId: id, documentType: type }: Props = $props();
+
+	const attr = $derived(createDataAttribute({ id, type, path: 'modules' }));
 </script>
 
 <div class="wrapper mx-auto">
 	{#each modules as data, i}
 		<ImagePriorityProvider priority={i <= 1}>
-			<section data-name={data._type}>
+			<section
+				data-type={data._type}
+				data-sanity={attr(`[_key=="${data._key}"]`)}
+			>
 				{#if data._type === 'textBlock'}
 					<TextBlock {data} />
 				{:else if data._type === 'mediaBlock'}

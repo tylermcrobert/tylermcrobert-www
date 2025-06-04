@@ -318,6 +318,7 @@ export type ModulePlaylistBlock = Nullable<{
 
 const MODULES_PROJECTION = groq`{
   _type,
+  _key,
   ${MODULE_MEDIA_BLOCK},
   ${MODULE_TEXT_BLOCK},
   ${MODULE_WEBSITE},
@@ -329,7 +330,7 @@ const MODULES_PROJECTION = groq`{
 }
 `;
 
-export type Module =
+export type Module = { _key: string } & (
 	| ModuleMediaBlock
 	| ModuleTextBlock
 	| ModuleWebsite
@@ -337,7 +338,8 @@ export type Module =
 	| ModuleTripleImage
 	| ModuleMobileWebsite
 	| ModuleTimedSlides
-	| ModulePlaylistBlock;
+	| ModulePlaylistBlock
+);
 
 /*******************************************************************************
  * PAGES
@@ -346,6 +348,7 @@ export type Module =
 export const ROOT_SLUG_QUERY = groq`
   *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
     _type,
+    _id,
 
     _type == 'caseStudy' => {
       "caseStudy": {

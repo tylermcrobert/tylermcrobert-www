@@ -1,4 +1,8 @@
-import { ROOT_SLUG_QUERY, type ROOT_SLUG_QUERYResult } from '$lib/sanity';
+import {
+	ROOT_SLUG_QUERY,
+	type Module,
+	type ROOT_SLUG_QUERYResult
+} from '$lib/sanity';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({
@@ -25,10 +29,12 @@ export const load = async ({
 	}
 
 	return {
+		documentId: data._id,
+		documentType: data._type,
 		type: data._type,
 		caseStudy: data._type === 'caseStudy' ? { index, ...data.caseStudy } : null,
 		pageTitle: data.title,
-		modules: data.modules || [],
+		modules: (data.modules || []) as Module[],
 		metadata: data.metadata
 	} satisfies App.PageReturn;
 };

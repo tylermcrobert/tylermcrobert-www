@@ -2,27 +2,29 @@
 	import { CaseStudyHeader, HomeIndex, Modules } from '$components';
 
 	let { data } = $props();
+
+	let { documentId, documentType, modules, caseStudy } = $derived(data);
 </script>
 
-{#if data.type === 'caseStudy'}
+{#if data.type === 'caseStudy' && caseStudy}
 	<div
 		class="z-project-page pb-large relative border-b border-dashed border-black bg-white"
 	>
 		<CaseStudyHeader
-			index={data.caseStudy.index}
-			intro={data.caseStudy.intro}
-			deliverables={data.caseStudy.deliverables}
-			date={data.caseStudy.date}
-			title={data.caseStudy.title}
-			description={data.caseStudy.description}
+			index={caseStudy.index}
+			intro={caseStudy.intro}
+			deliverables={caseStudy.deliverables}
+			date={caseStudy.date}
+			title={caseStudy.title}
+			description={caseStudy.description}
 		/>
-		<Modules modules={data.modules} />
+		<Modules {modules} {documentId} {documentType} />
 	</div>
 
 	<div class="pointer-events-none h-dvh"></div>
 	<HomeIndex />
 {:else}
 	<div class="my-large">
-		<Modules modules={data.modules} />
+		<Modules {modules} {documentId} {documentType} />
 	</div>
 {/if}
