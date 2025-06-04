@@ -25,7 +25,7 @@
 	{#each modules as data}
 		<section
 			data-type={data._type}
-			data-sanity={attr(`modules[_key=="${data._key}"]`)}
+			data-sanity={attr(`[_key=="${data._key}"]`)}
 		>
 			{#if data._type === 'textBlock'}
 				<TextBlock {data} />
