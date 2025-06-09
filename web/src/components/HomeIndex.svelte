@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { NUMS } from '$constants';
+	import { stegaClean } from '@sanity/client/stega';
 </script>
 
 <div class="fixed top-0 flex min-h-dvh w-full items-center justify-center">
@@ -9,7 +10,7 @@
 			<li class="text-h1 inline">
 				{' '}{NUMS[i + 1]}&nbsp;<a
 					class="inline hover:line-through"
-					href={`/${slug}`}>{title}</a
+					href={`/${slug}`}>{stegaClean(title)}</a
 				>
 			</li>
 		{/each}
