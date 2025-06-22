@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	export let id: string;
+
+	let { id }: { id: string } = $props();
 
 	if (browser) {
 		window.dataLayer = window.dataLayer || [];
-		window.gtag = function gtag(): void {
-			window.dataLayer.push(arguments);
-		};
-		window.gtag('js', new Date());
-		window.gtag('config', id);
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', id);
 	}
 </script>
 
