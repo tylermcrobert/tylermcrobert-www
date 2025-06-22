@@ -1,17 +1,20 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-
-	let { id }: { id: string } = $props();
-
-	if (browser) {
-		window.dataLayer = window.dataLayer || [];
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-
-		gtag('config', id);
+	interface Props {
+		id: string;
 	}
+
+	let { id }: Props = $props();
+
+	$effect(() => {
+		const script = document.createElement('script');
+		script.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', '${id}');
+      `;
+		document.head.appendChild(script);
+	});
 </script>
 
 <svelte:head>
