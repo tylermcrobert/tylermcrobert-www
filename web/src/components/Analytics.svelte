@@ -1,6 +1,6 @@
 <svelte:head>
 	<!-- Google tag (gtag.js) -->
-	<script
+	<!-- <script
 		async
 		src="https://www.googletagmanager.com/gtag/js?id=G-EY4G6J80EJ"
 	></script>
@@ -12,5 +12,5 @@
 		gtag('js', new Date());
 
 		gtag('config', 'G-EY4G6J80EJ');
-	</script>
+	</script> -->
 </svelte:head>
