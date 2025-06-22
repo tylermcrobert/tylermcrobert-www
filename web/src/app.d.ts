@@ -31,14 +31,14 @@ declare global {
 
 		interface PageData extends LayoutData, PageReturn {}
 
-		// For Analytics.svelte
-		declare interface Window {
-			dataLayer: IArguments[];
-		}
-
 		// interface Error {}
 		// interface PageState {}
 		// interface Platform {}
+	}
+
+	// For Analytics.svelte
+	declare interface Window {
+		dataLayer: IArguments[];
 	}
 }
 
