@@ -28,6 +28,10 @@ export const presentationOptions: PresentationPluginOptions = {
         select: {title: 'title', slug: 'slug.current'},
         resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),
       },
+      homepage: {
+        select: {title: 'title', slug: 'slug.current'},
+        resolve: (doc) => ({locations: [{title: doc?.title, href: `/`}]}),
+      },
       page: {
         select: {title: 'title', slug: 'slug.current'},
         resolve: (doc) => ({locations: [{title: doc?.title, href: `/${doc?.slug}`}]}),

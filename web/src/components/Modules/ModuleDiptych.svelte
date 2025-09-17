@@ -7,7 +7,7 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="my-standard gap-standard grid sm:grid-cols-2">
+<div class="my-standard grid gap-standard sm:grid-cols-2">
 	{#each data.items || [] as item}
 		{#if item._type === 'diptych.media' && item.media?.asset}
 			<Media
@@ -17,7 +17,9 @@
 				imageProps={{ aspect: item.aspect }}
 			/>
 		{:else if item._type === 'diptych.text' && item.richText}
-			<RichText value={item.richText} />
+			<div>
+				<RichText value={item.richText} />
+			</div>
 		{:else if item._type === 'diptych.spacer'}
 			<div class="hidden sm:grid"></div>
 		{/if}

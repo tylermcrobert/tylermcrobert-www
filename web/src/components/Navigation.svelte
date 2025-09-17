@@ -4,7 +4,7 @@
 	let contextTitle = $derived(page.data.contextTitle);
 </script>
 
-<nav class="z-nav sticky top-0 text-white mix-blend-difference">
+<nav class="sticky top-0 z-nav text-white mix-blend-difference">
 	<div
 		class="min-h-nav-height px-standard max-w-wrapper mx-auto flex items-center justify-between py-4"
 	>

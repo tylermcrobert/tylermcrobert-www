@@ -7,7 +7,7 @@
 		Analytics
 	} from '$components';
 	import { onMount } from 'svelte';
-	import '../style/app.css';
+	import '../app.css';
 	import { fetchNowPlaying } from '$lib/last.fm';
 	import { setNowPlaying } from '$lib/state';
 

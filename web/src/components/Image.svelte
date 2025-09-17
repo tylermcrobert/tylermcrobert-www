@@ -1,3 +1,14 @@
+<script module lang="ts">
+	export type ImageProps = Omit<
+		SvelteSanityImageProps,
+		'client' | 'alt' | 'image'
+	> & {
+		image: SanityImageSource;
+		alt: string | null;
+		priority?: boolean;
+	};
+</script>
+
 <script lang="ts">
 	import { client } from '$sanity';
 	import { getContext } from 'svelte';
@@ -8,13 +19,7 @@
 	} from '@tylermcrobert/svelte-sanity-image';
 	import { metadata } from '$lib/state';
 
-	type Props = Omit<SvelteSanityImageProps, 'client' | 'alt' | 'image'> & {
-		image: SanityImageSource;
-		alt: string | null;
-		priority?: boolean;
-	};
-
-	let { alt, priority: priorityProp, image, ...props }: Props = $props();
+	let { alt, priority: priorityProp, image, ...props }: ImageProps = $props();
 
 	let priority = $derived(priorityProp || getContext('imagePriorityContext'));
 </script>

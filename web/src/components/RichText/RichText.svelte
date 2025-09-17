@@ -8,34 +8,32 @@
 	let { value }: { value: RichTextProjection } = $props();
 </script>
 
-<div class="richtext">
-	<PortableText
-		{value}
-		components={{
-			block: {
-				normal: RichTextStyleRenderer,
-				h1: RichTextStyleRenderer,
-				h2: RichTextStyleRenderer,
-				blockquote: RichTextStyleRenderer
-			},
-			list: {
-				bullet: RichTextListRenderer,
-				number: RichTextListRenderer,
-				normal: RichTextListRenderer
-			},
-			listItem: {
-				bullet: RichTextListRenderer,
-				number: RichTextListRenderer,
-				normal: RichTextListRenderer
-			},
-			marks: {
-				link: RichTextLinkRenderer,
-				internalLink: RichTextLinkRenderer,
-				externalLink: RichTextLinkRenderer
-			},
-			types: {
-				// Components here...
-			}
-		}}
-	/>
-</div>
+<PortableText
+	{value}
+	components={{
+		block: {
+			normal: RichTextStyleRenderer,
+			h1: RichTextStyleRenderer,
+			h2: RichTextStyleRenderer,
+			blockquote: RichTextStyleRenderer
+		},
+		list: {
+			bullet: RichTextListRenderer,
+			number: RichTextListRenderer,
+			normal: RichTextListRenderer
+		},
+		listItem: {
+			bullet: RichTextListRenderer,
+			number: RichTextListRenderer,
+			normal: RichTextListRenderer
+		},
+		marks: {
+			link: RichTextLinkRenderer,
+			internalLink: RichTextLinkRenderer,
+			externalLink: RichTextLinkRenderer
+		},
+		types: {
+			// Components here...
+		}
+	}}
+/>

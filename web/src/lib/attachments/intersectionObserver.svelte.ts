@@ -2,7 +2,7 @@
 
 import type { Attachment } from 'svelte/attachments';
 
-type IntersectionCallback = (entry: IntersectionObserverEntry) => void;
+export type IntersectionCallback = (entry: IntersectionObserverEntry) => void;
 
 type IntersectionOptions = {
 	callback: IntersectionCallback;
@@ -33,7 +33,7 @@ function createObserver(init: IntersectionObserverInit | undefined) {
 	return observer;
 }
 
-function observe(
+export function observe(
 	target: Element,
 	props: IntersectionCallback | IntersectionOptions
 ) {
@@ -59,10 +59,12 @@ export function intersection(
 	props: IntersectionCallback | IntersectionOptions
 ): Attachment {
 	return (element) => {
-		const observer = observe(element, props);
+		$effect(() => {
+			const observer = observe(element, props);
 
-		return () => {
-			observer.unobserve();
-		};
+			return () => {
+				observer.unobserve();
+			};
+		});
 	};
 }

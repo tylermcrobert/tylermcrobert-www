@@ -13,61 +13,6 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-	_type: 'sanity.imagePaletteSwatch';
-	background?: string;
-	foreground?: string;
-	population?: number;
-	title?: string;
-};
-
-export type SanityImagePalette = {
-	_type: 'sanity.imagePalette';
-	darkMuted?: SanityImagePaletteSwatch;
-	lightVibrant?: SanityImagePaletteSwatch;
-	darkVibrant?: SanityImagePaletteSwatch;
-	vibrant?: SanityImagePaletteSwatch;
-	dominant?: SanityImagePaletteSwatch;
-	lightMuted?: SanityImagePaletteSwatch;
-	muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-	_type: 'sanity.imageDimensions';
-	height?: number;
-	width?: number;
-	aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
-	_id: string;
-	_type: 'sanity.fileAsset';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	originalFilename?: string;
-	label?: string;
-	title?: string;
-	description?: string;
-	altText?: string;
-	sha1hash?: string;
-	extension?: string;
-	mimeType?: string;
-	size?: number;
-	assetId?: string;
-	uploadId?: string;
-	path?: string;
-	url?: string;
-	source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-	_type: 'geopoint';
-	lat?: number;
-	lng?: number;
-	alt?: number;
-};
-
 export type Settings = {
 	_id: string;
 	_type: 'settings';
@@ -249,6 +194,14 @@ export type Modules = Array<
 export type TextBlock = {
 	_type: 'textBlock';
 	richText?: RichText;
+};
+
+export type MediaVideoPlaybackSettings = {
+	_type: 'media.videoPlaybackSettings';
+	controls?: boolean;
+	autoplay?: boolean;
+	muted?: boolean;
+	loop?: boolean;
 };
 
 export type MediaBlock = {
@@ -488,63 +441,6 @@ export type MobileWebsiteItem = {
 	media?: Media;
 };
 
-export type SanityImageCrop = {
-	_type: 'sanity.imageCrop';
-	top?: number;
-	bottom?: number;
-	left?: number;
-	right?: number;
-};
-
-export type SanityImageHotspot = {
-	_type: 'sanity.imageHotspot';
-	x?: number;
-	y?: number;
-	height?: number;
-	width?: number;
-};
-
-export type SanityImageAsset = {
-	_id: string;
-	_type: 'sanity.imageAsset';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	originalFilename?: string;
-	label?: string;
-	title?: string;
-	description?: string;
-	altText?: string;
-	sha1hash?: string;
-	extension?: string;
-	mimeType?: string;
-	size?: number;
-	assetId?: string;
-	uploadId?: string;
-	path?: string;
-	url?: string;
-	metadata?: SanityImageMetadata;
-	source?: SanityAssetSourceData;
-};
-
-export type SanityAssetSourceData = {
-	_type: 'sanity.assetSourceData';
-	name?: string;
-	id?: string;
-	url?: string;
-};
-
-export type SanityImageMetadata = {
-	_type: 'sanity.imageMetadata';
-	location?: Geopoint;
-	dimensions?: SanityImageDimensions;
-	palette?: SanityImagePalette;
-	lqip?: string;
-	blurHash?: string;
-	hasAlpha?: boolean;
-	isOpaque?: boolean;
-};
-
 export type Media = {
 	_type: 'media';
 	image?: {
@@ -560,8 +456,9 @@ export type Media = {
 		_type: 'image';
 	};
 	video?: MuxVideo;
-	showVideoControls?: boolean;
-	posterFrame?: {
+	playbackSettings?: 'autoplay' | 'controls' | 'custom';
+	customVideoPlayback?: MediaVideoPlaybackSettings;
+	poster?: {
 		asset?: {
 			_ref: string;
 			_type: 'reference';
@@ -705,12 +602,6 @@ export type MediaTag = {
 	name?: Slug;
 };
 
-export type Slug = {
-	_type: 'slug';
-	current?: string;
-	source?: string;
-};
-
 export type Color = {
 	_type: 'color';
 	hex?: string;
@@ -744,12 +635,125 @@ export type HslaColor = {
 	a?: number;
 };
 
+export type SanityImagePaletteSwatch = {
+	_type: 'sanity.imagePaletteSwatch';
+	background?: string;
+	foreground?: string;
+	population?: number;
+	title?: string;
+};
+
+export type SanityImagePalette = {
+	_type: 'sanity.imagePalette';
+	darkMuted?: SanityImagePaletteSwatch;
+	lightVibrant?: SanityImagePaletteSwatch;
+	darkVibrant?: SanityImagePaletteSwatch;
+	vibrant?: SanityImagePaletteSwatch;
+	dominant?: SanityImagePaletteSwatch;
+	lightMuted?: SanityImagePaletteSwatch;
+	muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+	_type: 'sanity.imageDimensions';
+	height?: number;
+	width?: number;
+	aspectRatio?: number;
+};
+
+export type SanityImageHotspot = {
+	_type: 'sanity.imageHotspot';
+	x?: number;
+	y?: number;
+	height?: number;
+	width?: number;
+};
+
+export type SanityImageCrop = {
+	_type: 'sanity.imageCrop';
+	top?: number;
+	bottom?: number;
+	left?: number;
+	right?: number;
+};
+
+export type SanityFileAsset = {
+	_id: string;
+	_type: 'sanity.fileAsset';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	originalFilename?: string;
+	label?: string;
+	title?: string;
+	description?: string;
+	altText?: string;
+	sha1hash?: string;
+	extension?: string;
+	mimeType?: string;
+	size?: number;
+	assetId?: string;
+	uploadId?: string;
+	path?: string;
+	url?: string;
+	source?: SanityAssetSourceData;
+};
+
+export type SanityImageAsset = {
+	_id: string;
+	_type: 'sanity.imageAsset';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	originalFilename?: string;
+	label?: string;
+	title?: string;
+	description?: string;
+	altText?: string;
+	sha1hash?: string;
+	extension?: string;
+	mimeType?: string;
+	size?: number;
+	assetId?: string;
+	uploadId?: string;
+	path?: string;
+	url?: string;
+	metadata?: SanityImageMetadata;
+	source?: SanityAssetSourceData;
+};
+
+export type SanityImageMetadata = {
+	_type: 'sanity.imageMetadata';
+	location?: Geopoint;
+	dimensions?: SanityImageDimensions;
+	palette?: SanityImagePalette;
+	lqip?: string;
+	blurHash?: string;
+	hasAlpha?: boolean;
+	isOpaque?: boolean;
+};
+
+export type Geopoint = {
+	_type: 'geopoint';
+	lat?: number;
+	lng?: number;
+	alt?: number;
+};
+
+export type Slug = {
+	_type: 'slug';
+	current?: string;
+	source?: string;
+};
+
+export type SanityAssetSourceData = {
+	_type: 'sanity.assetSourceData';
+	name?: string;
+	id?: string;
+	url?: string;
+};
+
 export type AllSanitySchemaTypes =
-	| SanityImagePaletteSwatch
-	| SanityImagePalette
-	| SanityImageDimensions
-	| SanityFileAsset
-	| Geopoint
 	| Settings
 	| RichTextSimple
 	| RichTextMinimal
@@ -760,6 +764,7 @@ export type AllSanitySchemaTypes =
 	| Homepage
 	| Modules
 	| TextBlock
+	| MediaVideoPlaybackSettings
 	| MediaBlock
 	| Context
 	| CaseStudy
@@ -776,11 +781,6 @@ export type AllSanitySchemaTypes =
 	| WebFrameTheme
 	| TripleImage
 	| MobileWebsiteItem
-	| SanityImageCrop
-	| SanityImageHotspot
-	| SanityImageAsset
-	| SanityAssetSourceData
-	| SanityImageMetadata
 	| Media
 	| PlaylistBlock
 	| Playlist
@@ -792,11 +792,21 @@ export type AllSanitySchemaTypes =
 	| MuxPlaybackId
 	| MuxTrack
 	| MediaTag
-	| Slug
 	| Color
 	| RgbaColor
 	| HsvaColor
-	| HslaColor;
+	| HslaColor
+	| SanityImagePaletteSwatch
+	| SanityImagePalette
+	| SanityImageDimensions
+	| SanityImageHotspot
+	| SanityImageCrop
+	| SanityFileAsset
+	| SanityImageAsset
+	| SanityImageMetadata
+	| Geopoint
+	| Slug
+	| SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/lib/sanity/queries.ts
 // Variable: LINK_PROJECTION
@@ -810,7 +820,7 @@ export type LINK_PROJECTIONResult = {
 // Query: {  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}
 export type RICH_TEXT_PROJECTIONResult = never;
 // Variable: MEDIA_PROJECTION
-// Query: {  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}
+// Query: {  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),}
 export type MEDIA_PROJECTIONResult = {
 	_type: 'mediaProjection';
 	asset: null;
@@ -834,13 +844,13 @@ export type PLAYLIST_PROJECTIONResult = {
 	tracks: never;
 };
 // Variable: MODULES_PROJECTION
-// Query: {  _type,  _key,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    aspect  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    "theme": coalesce(      theme->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,},      *[_id == "settings"][0].defaultBrowserFrame->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,}    ),    backgroundImg,    "backgroundColor": backgroundColor.hex,    showFrame,    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},  },  //groq  _type == 'diptych' => {    items[]{      _type,      _type == 'diptych.media' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},        aspect,      },            _type == 'diptych.text' => {        richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}      }    }  },  //groq  _type == 'tripleImage' => {    mainMedia{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    secondaryMedia1{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    secondaryMedia2{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    imageRight,  },  //groq  _type == 'mobileWebsite' => {    "themeBackground": theme->.background.hex,    frames[]{      _type == 'mobileWebsite.item' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}      }    }  },  //groq  _type == 'timedSlides' => {    images,    seconds,    'background': theme->background.hex  },  //groq  _type == 'playlistBlock' => {    playlist->{  "slug": slug.current,  link,  title,  duration,   date,  image,  tracks[]{    image,    title,     duration,     artists,  }}  }}
+// Query: {  _type,  _key,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    aspect  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    "theme": coalesce(      theme->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,},      *[_id == "settings"][0].defaultBrowserFrame->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,}    ),    backgroundImg,    "backgroundColor": backgroundColor.hex,    showFrame,    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},  },  //groq  _type == 'diptych' => {    items[]{      _type,      _type == 'diptych.media' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},        aspect,      },            _type == 'diptych.text' => {        richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}      }    }  },  //groq  _type == 'tripleImage' => {    mainMedia{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    secondaryMedia1{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    secondaryMedia2{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    imageRight,  },  //groq  _type == 'mobileWebsite' => {    "themeBackground": theme->.background.hex,    frames[]{      _type == 'mobileWebsite.item' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),}      }    }  },  //groq  _type == 'timedSlides' => {    images,    seconds,    'background': theme->background.hex  },  //groq  _type == 'playlistBlock' => {    playlist->{  "slug": slug.current,  link,  title,  duration,   date,  image,  tracks[]{    image,    title,     duration,     artists,  }}  }}
 export type MODULES_PROJECTIONResult = {
 	_type: never;
 	_key: never;
 };
 // Variable: ROOT_SLUG_QUERY
-// Query: *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{    _type,    _id,    _type == 'caseStudy' => {      "caseStudy": {        intro,        deliverables,        date,        title,        description,      },    },        title,    metadata,    modules[]{  _type,  _key,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    aspect  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    "theme": coalesce(      theme->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,},      *[_id == "settings"][0].defaultBrowserFrame->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,}    ),    backgroundImg,    "backgroundColor": backgroundColor.hex,    showFrame,    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},  },  //groq  _type == 'diptych' => {    items[]{      _type,      _type == 'diptych.media' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},        aspect,      },            _type == 'diptych.text' => {        richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}      }    }  },  //groq  _type == 'tripleImage' => {    mainMedia{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    secondaryMedia1{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    secondaryMedia2{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),},    imageRight,  },  //groq  _type == 'mobileWebsite' => {    "themeBackground": theme->.background.hex,    frames[]{      _type == 'mobileWebsite.item' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "showControls": ^.showVideoControls,        "posterFrame": ^.posterFrame      }    },    null  ),}      }    }  },  //groq  _type == 'timedSlides' => {    images,    seconds,    'background': theme->background.hex  },  //groq  _type == 'playlistBlock' => {    playlist->{  "slug": slug.current,  link,  title,  duration,   date,  image,  tracks[]{    image,    title,     duration,     artists,  }}  }},  }
+// Query: *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{    _type,    _id,    _type == 'caseStudy' => {      "caseStudy": {        intro,        deliverables,        date,        title,        description,      },    },        title,    metadata,    modules[]{  _type,  _key,  // groq  _type == 'mediaBlock' => {    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    aspect  },  // groq  _type == 'textBlock' => {    richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )},  },  //groq  _type == 'website' => {    "theme": coalesce(      theme->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,},      *[_id == "settings"][0].defaultBrowserFrame->{  "dots": dots.hex,  "frame": frame.hex,  "background": background.hex,}    ),    backgroundImg,    "backgroundColor": backgroundColor.hex,    showFrame,    media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},  },  //groq  _type == 'diptych' => {    items[]{      _type,      _type == 'diptych.media' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},        aspect,      },            _type == 'diptych.text' => {        richText[]{  ..., "markDefs": coalesce(    markDefs[]{      ...,      _type == "internalLink" => {        'type': @.reference->_type,        "slug": @.reference->slug.current      }    },     []  )}      }    }  },  //groq  _type == 'tripleImage' => {    mainMedia{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    secondaryMedia1{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    secondaryMedia2{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),},    imageRight,  },  //groq  _type == 'mobileWebsite' => {    "themeBackground": theme->.background.hex,    frames[]{      _type == 'mobileWebsite.item' => {        media{  "_type": "mediaProjection",  "asset": select(    defined(@.image) => {      "_type": "image",      "image": @.image    },    defined(@.video.asset) => {      "_type": "video",      "video": @.video.asset-> {        "playbackId": playbackId,        "aspect": data.aspect_ratio,        "poster": ^.poster,        "playbackSettings": ^.playbackSettings,        "customVideoPlayback": ^.customVideoPlayback,      }    },    null  ),}      }    }  },  //groq  _type == 'timedSlides' => {    images,    seconds,    'background': theme->background.hex  },  //groq  _type == 'playlistBlock' => {    playlist->{  "slug": slug.current,  link,  title,  duration,   date,  image,  tracks[]{    image,    title,     duration,     artists,  }}  }},  }
 export type ROOT_SLUG_QUERYResult =
 	| {
 			_type: 'caseStudy';
@@ -884,8 +894,7 @@ export type ROOT_SLUG_QUERYResult =
 													video: {
 														playbackId: string | null;
 														aspect: string | null;
-														showControls: boolean | null;
-														posterFrame: {
+														poster: {
 															asset?: {
 																_ref: string;
 																_type: 'reference';
@@ -897,6 +906,12 @@ export type ROOT_SLUG_QUERYResult =
 															crop?: SanityImageCrop;
 															_type: 'image';
 														} | null;
+														playbackSettings:
+															| 'autoplay'
+															| 'controls'
+															| 'custom'
+															| null;
+														customVideoPlayback: MediaVideoPlaybackSettings | null;
 													} | null;
 											  }
 											| null;
@@ -996,8 +1011,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1009,6 +1023,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1054,8 +1074,7 @@ export type ROOT_SLUG_QUERYResult =
 											video: {
 												playbackId: string | null;
 												aspect: string | null;
-												showControls: boolean | null;
-												posterFrame: {
+												poster: {
 													asset?: {
 														_ref: string;
 														_type: 'reference';
@@ -1067,6 +1086,12 @@ export type ROOT_SLUG_QUERYResult =
 													crop?: SanityImageCrop;
 													_type: 'image';
 												} | null;
+												playbackSettings:
+													| 'autoplay'
+													| 'controls'
+													| 'custom'
+													| null;
+												customVideoPlayback: MediaVideoPlaybackSettings | null;
 											} | null;
 									  }
 									| null;
@@ -1169,8 +1194,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1182,6 +1206,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1209,8 +1239,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1222,6 +1251,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1249,8 +1284,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1262,6 +1296,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1313,8 +1353,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1326,6 +1365,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1368,8 +1413,7 @@ export type ROOT_SLUG_QUERYResult =
 													video: {
 														playbackId: string | null;
 														aspect: string | null;
-														showControls: boolean | null;
-														posterFrame: {
+														poster: {
 															asset?: {
 																_ref: string;
 																_type: 'reference';
@@ -1381,6 +1425,12 @@ export type ROOT_SLUG_QUERYResult =
 															crop?: SanityImageCrop;
 															_type: 'image';
 														} | null;
+														playbackSettings:
+															| 'autoplay'
+															| 'controls'
+															| 'custom'
+															| null;
+														customVideoPlayback: MediaVideoPlaybackSettings | null;
 													} | null;
 											  }
 											| null;
@@ -1480,8 +1530,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1493,6 +1542,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1538,8 +1593,7 @@ export type ROOT_SLUG_QUERYResult =
 											video: {
 												playbackId: string | null;
 												aspect: string | null;
-												showControls: boolean | null;
-												posterFrame: {
+												poster: {
 													asset?: {
 														_ref: string;
 														_type: 'reference';
@@ -1551,6 +1605,12 @@ export type ROOT_SLUG_QUERYResult =
 													crop?: SanityImageCrop;
 													_type: 'image';
 												} | null;
+												playbackSettings:
+													| 'autoplay'
+													| 'controls'
+													| 'custom'
+													| null;
+												customVideoPlayback: MediaVideoPlaybackSettings | null;
 											} | null;
 									  }
 									| null;
@@ -1653,8 +1713,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1666,6 +1725,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1693,8 +1758,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1706,6 +1770,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1733,8 +1803,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1746,6 +1815,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -1797,8 +1872,7 @@ export type ROOT_SLUG_QUERYResult =
 										video: {
 											playbackId: string | null;
 											aspect: string | null;
-											showControls: boolean | null;
-											posterFrame: {
+											poster: {
 												asset?: {
 													_ref: string;
 													_type: 'reference';
@@ -1810,6 +1884,12 @@ export type ROOT_SLUG_QUERYResult =
 												crop?: SanityImageCrop;
 												_type: 'image';
 											} | null;
+											playbackSettings:
+												| 'autoplay'
+												| 'controls'
+												| 'custom'
+												| null;
+											customVideoPlayback: MediaVideoPlaybackSettings | null;
 										} | null;
 								  }
 								| null;
@@ -2150,11 +2230,11 @@ declare module '@sanity/client' {
 	interface SanityQueries {
 		'{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}': LINK_PROJECTIONResult;
 		'{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}': RICH_TEXT_PROJECTIONResult;
-		'{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}': MEDIA_PROJECTIONResult;
+		'{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n}': MEDIA_PROJECTIONResult;
 		'{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n}': WEB_FRAME_THEME_PROJECTIONResult;
 		'{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}': PLAYLIST_PROJECTIONResult;
-		'{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    "theme": coalesce(\n      theme->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n},\n      *[_id == "settings"][0].defaultBrowserFrame->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n}\n    ),\n    backgroundImg,\n    "backgroundColor": backgroundColor.hex,\n    showFrame,\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia1{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia2{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'timedSlides\' => {\n    images,\n    seconds,\n    \'background\': theme->background.hex\n  }\n,\n  //groq\n  _type == \'playlistBlock\' => {\n    playlist->{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n  }\n\n}\n': MODULES_PROJECTIONResult;
-		'\n  *[(_type == \'caseStudy\' || _type == \'page\') && slug.current == $slug][0]{\n    _type,\n    _id,\n\n    _type == \'caseStudy\' => {\n      "caseStudy": {\n        intro,\n        deliverables,\n        date,\n        title,\n        description,\n      },\n    },\n    \n    title,\n    metadata,\n    modules[]{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    "theme": coalesce(\n      theme->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n},\n      *[_id == "settings"][0].defaultBrowserFrame->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n}\n    ),\n    backgroundImg,\n    "backgroundColor": backgroundColor.hex,\n    showFrame,\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia1{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia2{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "showControls": ^.showVideoControls,\n        "posterFrame": ^.posterFrame\n      }\n    },\n    null\n  ),\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'timedSlides\' => {\n    images,\n    seconds,\n    \'background\': theme->background.hex\n  }\n,\n  //groq\n  _type == \'playlistBlock\' => {\n    playlist->{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n  }\n\n}\n,\n  }\n': ROOT_SLUG_QUERYResult;
+		'{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    "theme": coalesce(\n      theme->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n},\n      *[_id == "settings"][0].defaultBrowserFrame->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n}\n    ),\n    backgroundImg,\n    "backgroundColor": backgroundColor.hex,\n    showFrame,\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia1{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia2{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'timedSlides\' => {\n    images,\n    seconds,\n    \'background\': theme->background.hex\n  }\n,\n  //groq\n  _type == \'playlistBlock\' => {\n    playlist->{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n  }\n\n}\n': MODULES_PROJECTIONResult;
+		'\n  *[(_type == \'caseStudy\' || _type == \'page\') && slug.current == $slug][0]{\n    _type,\n    _id,\n\n    _type == \'caseStudy\' => {\n      "caseStudy": {\n        intro,\n        deliverables,\n        date,\n        title,\n        description,\n      },\n    },\n    \n    title,\n    metadata,\n    modules[]{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    "theme": coalesce(\n      theme->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n},\n      *[_id == "settings"][0].defaultBrowserFrame->{\n  "dots": dots.hex,\n  "frame": frame.hex,\n  "background": background.hex,\n}\n    ),\n    backgroundImg,\n    "backgroundColor": backgroundColor.hex,\n    showFrame,\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia1{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia2{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'timedSlides\' => {\n    images,\n    seconds,\n    \'background\': theme->background.hex\n  }\n,\n  //groq\n  _type == \'playlistBlock\' => {\n    playlist->{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n  }\n\n}\n,\n  }\n': ROOT_SLUG_QUERYResult;
 		'\n  *[_type == \'info\' ][0]{\n    metadata,\n    bio,\n    title,\n    clients,\n    links[]{\n      label,\n      link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    },\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n      duration, \n      date \n    }\n  }\n': InfoQueryResult;
 		'\n  *[_type == \'playlist\' && slug.current == $slug][0]{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n': PLAYLIST_QUERYResult;
 		'{\n  "homepageTitle": *[_id == \'homepage\'][0].homepageMetaTitle,\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;

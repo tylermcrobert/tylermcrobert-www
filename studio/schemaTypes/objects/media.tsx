@@ -1,8 +1,10 @@
+import {MediaInput} from '@components'
 import {defineField, defineType, Rule} from 'sanity'
 
 export default defineType({
   name: 'media',
   type: 'object',
+  components: {input: MediaInput},
   fields: [
     defineField({
       name: 'image',
@@ -28,20 +30,53 @@ export default defineType({
     },
 
     {
-      name: 'showVideoControls',
-      type: 'boolean',
-      initialValue: false,
+      name: 'playbackSettings',
+      type: 'string',
+      options: {
+        list: [
+          {value: 'autoplay', title: 'Autoplay + No Controls'},
+          {value: 'controls', title: 'Controls + Initially Paused'},
+          {value: 'custom', title: 'Custom...'},
+        ],
+      },
+      initialValue: 'autoplay',
       hidden: ({parent}) => {
         return !parent?.video
+      },
+      validation: (rule) =>
+        rule
+          .custom((playbackSettings, {parent}: any) =>
+            parent?.video && !playbackSettings ? 'Playback settings are required' : true,
+          )
+          .error(),
+    },
+
+    {
+      name: 'customVideoPlayback',
+      type: 'media.videoPlaybackSettings',
+      options: {collapsed: false},
+      hidden: ({parent}) => {
+        return parent?.playbackSettings !== 'custom'
       },
     },
 
     {
-      name: 'posterFrame',
+      name: 'showVideoControls',
+      type: 'boolean',
+      deprecated: {reason: 'Use settings instead'},
+      hidden: true,
+    },
+
+    {
+      name: 'poster',
       type: 'image',
       initialValue: false,
       hidden: ({parent}) => {
-        return !(parent?.video && parent.showVideoControls)
+        const notVideo = !parent?.video?.asset
+        const controlsPreset = parent?.playbackSettings === 'controls'
+        const isAutoplay = parent?.customVideoPlayback?.autoplay === true
+
+        return notVideo || (!controlsPreset && isAutoplay)
       },
     },
   ],
@@ -56,6 +91,47 @@ export default defineType({
       }
     },
   },
+})
+
+export const mediaPlaybackSettings = defineType({
+  name: 'media.videoPlaybackSettings',
+  type: 'object',
+  options: {collapsed: false},
+  fields: [
+    {
+      name: 'controls',
+      type: 'boolean',
+      description: 'Displays video controls including play/pause',
+      initialValue: true,
+    },
+
+    {
+      name: 'autoplay',
+      type: 'boolean',
+      description: 'Automatically play video when video is in view',
+      initialValue: false,
+    },
+
+    {
+      name: 'muted',
+      type: 'boolean',
+      description: 'Video starts muted. Required for autoplaying videos',
+      initialValue: false,
+      validation: (rule) =>
+        rule
+          .custom((muted, {parent}: any) => {
+            return parent?.autoplay && !muted ? 'Autoplaying videos must be muted' : true
+          })
+          .error(),
+    },
+
+    {
+      name: 'loop',
+      type: 'boolean',
+      description: 'Restarts the video when it reaches the end.',
+      initialValue: false,
+    },
+  ],
 })
 
 /**

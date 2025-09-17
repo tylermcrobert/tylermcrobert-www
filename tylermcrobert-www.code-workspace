@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "name": "studio",
+      "path": "studio"
+    },
+    {
+      "name": "web",
+      "path": "web"
+    }
+  ],
+  "settings": {}
+}
