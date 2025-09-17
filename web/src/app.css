@@ -1,4 +1,3 @@
-@import './richtext.css';
 @import 'tailwindcss';
 
 @config '../tailwind.config.js';
@@ -44,7 +43,6 @@
 
 	/* For RichText */
 
-	--max-width-rag-heading: 17ch;
 	--max-width-rag-paragraph: 45ch;
 	--max-width-wrapper: 65rem;
 }
@@ -83,7 +81,7 @@
 
 @layer components {
 	.text-h1 {
-		@apply text-[1.78rem] leading-heading tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
+		@apply max-w-[17ch] text-[1.78rem] leading-heading tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
 	}
 
 	.text-h1 br {
@@ -91,7 +89,7 @@
 	}
 
 	.text-h2 {
-		@apply max-w-rag-heading text-[26px] leading-heading;
+		@apply max-w-[30ch] text-[26px] leading-heading;
 	}
 }
 
