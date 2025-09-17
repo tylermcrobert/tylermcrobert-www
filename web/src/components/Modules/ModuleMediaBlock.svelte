@@ -16,6 +16,7 @@
 			sizes="100vw"
 			alt={null}
 			imageProps={{ aspect: data.aspect }}
+			videoProps={{ aspect: data.aspect }}
 		/>
 	</div>
 {/if}
