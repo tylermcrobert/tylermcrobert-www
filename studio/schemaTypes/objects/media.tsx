@@ -61,6 +61,13 @@ export default defineType({
     },
 
     {
+      name: 'showVideoControls',
+      type: 'boolean',
+      deprecated: {reason: 'Use settings instead'},
+      hidden: true,
+    },
+
+    {
       name: 'poster',
       type: 'image',
       initialValue: false,
