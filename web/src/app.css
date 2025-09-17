@@ -45,6 +45,7 @@
 
 	--max-width-rag-paragraph: 45ch;
 	--max-width-wrapper: 65rem;
+	--max-width-rag-heading: 17ch;
 }
 
 @layer base {
