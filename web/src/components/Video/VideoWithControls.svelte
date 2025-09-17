@@ -1,48 +1,50 @@
 <script lang="ts">
-	import type { MediaProjectionVideo } from '$sanity';
-	import { urlFor } from '$sanity/image';
-	import type { ClassValue } from 'svelte/elements';
 	import PauseIcon from './icons/PauseIcon.svelte';
 	import PlayIcon from './icons/PlayIcon.svelte';
 	import VolumeMuted from './icons/VolumeMuted.svelte';
 	import VolumePlaying from './icons/VolumePlaying.svelte';
-	import { getAspect } from '$lib/util';
 	import { onMount } from 'svelte';
+	import type { VideoProps } from '$lib/video';
+	import { playOnIntersect } from '$lib/attachments';
 
-	type Props = {
-		class?: ClassValue;
-	} & Pick<MediaProjectionVideo, 'aspect' | 'playbackId' | 'posterFrame'>;
+	let {
+		class: className,
+		poster,
+		playbackId,
+		autoplay,
+		maxResolution,
+		...props
+	}: VideoProps = $props();
 
-	let { class: className, playbackId, aspect, posterFrame }: Props = $props();
-
-	let loaded = $state(false);
+	let packagesLoaded = $state(false);
 
 	onMount(() => {
 		Promise.all([import('media-chrome'), import('@mux/mux-video')]).then(() => {
-			loaded = true;
+			packagesLoaded = true;
 		});
 	});
 </script>
 
 <media-controller
-	style:aspect-ratio={getAspect(aspect)}
+	style:aspect-ratio={props.aspect}
 	class={[
-		'controller outline-hidden relative block cursor-pointer bg-transparent',
+		'controller relative block cursor-pointer bg-transparent outline-hidden',
 		className
 	]}
 >
-	{#if loaded}
+	{#if packagesLoaded}
 		<mux-video
-			poster={posterFrame &&
-				urlFor(posterFrame)
-					.width(1440)
-					.height(Math.round(1440 / getAspect(aspect)))
-					.url()}
-			autoplay
+			{...props}
+			{poster}
+			max-resolution={maxResolution}
+			controls={undefined}
 			playback-id={playbackId}
 			playsinline
+			disablepictureinpicture
 			slot="media"
 			class="w-full"
+			style:--media-object-fit="cover"
+			{@attach playOnIntersect(packagesLoaded && !!autoplay)}
 		>
 		</mux-video>
 

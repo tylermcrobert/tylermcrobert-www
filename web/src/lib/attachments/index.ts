@@ -1,1 +1,2 @@
-export { intersection } from './intersectionObserver';
+export { intersection } from './intersectionObserver.svelte';
+export { playOnIntersect } from './playOnIntersect.svelte';

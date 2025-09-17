@@ -16,7 +16,7 @@ import richText, {
 } from './objects/richText'
 import modules from './modules/modules'
 import textBlock from './modules/textBlock'
-import media from './objects/media'
+import media, {mediaPlaybackSettings} from './objects/media'
 import mediaBlock from './modules/mediaBlock'
 import website from './modules/website'
 import diptych, {diptychMedia, diptychText, diptychSpacer} from './modules/diptych'
@@ -43,6 +43,7 @@ export const schemaTypes = [
   context,
   mediaBlock,
   media,
+  mediaPlaybackSettings,
   textBlock,
   modules,
   richTextInternalLink,

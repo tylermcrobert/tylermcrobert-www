@@ -1,5 +1,4 @@
-/* max-widths */
-.richtext p,
+max-widths .richtext p,
 .richtext ul,
 .richtext ol {
 	@apply max-w-rag-paragraph text-pretty;

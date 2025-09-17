@@ -12,6 +12,7 @@
 
 	let elementName = $derived.by(() => {
 		if (style === 'normal') return 'p';
+		if (style === 'h1') return 'h2';
 		return style;
 	});
 </script>

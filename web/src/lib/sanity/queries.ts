@@ -7,6 +7,7 @@ import type {
 	MediaBlock,
 	DiptychMedia,
 	InfoQueryResult,
+	Media,
 	Playlist
 } from './types';
 import type { InputValue } from '@portabletext/svelte';
@@ -63,19 +64,22 @@ export const MEDIA_PROJECTION = groq`{
       "video": @.video.asset-> {
         "playbackId": playbackId,
         "aspect": data.aspect_ratio,
-        "showControls": ^.showVideoControls,
-        "posterFrame": ^.posterFrame
+        "poster": ^.poster,
+        "playbackSettings": ^.playbackSettings,
+        "customVideoPlayback": ^.customVideoPlayback,
       }
     },
     null
   ),
 }`;
 
-export type MediaProjectionVideo = {
+export type MediaProjectionVideo = Pick<
+	Media,
+	'customVideoPlayback' | 'playbackSettings' | 'poster'
+> & {
 	playbackId: string;
 	aspect: string;
-	showControls: boolean;
-	posterFrame: SanityImageAsset;
+	poster: SanityImageAsset;
 };
 
 type MediaProjectionVideoAsset = {

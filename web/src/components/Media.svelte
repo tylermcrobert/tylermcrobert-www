@@ -1,7 +1,9 @@
 <script lang="ts">
-	import type { MediaProjectionAsset, MediaProjectionVideo } from '$sanity';
+	import type { MediaProjectionAsset } from '$sanity';
+	import { formatVideoProjection, type VideoProps } from '$lib/video';
 	import { Video, Image } from '$components';
 	import type { ClassValue } from 'svelte/elements';
+	import type { ImageProps } from './Image.svelte';
 
 	type Props = {
 		value: MediaProjectionAsset;
@@ -9,8 +11,8 @@
 		class?: ClassValue;
 		priority?: boolean;
 		alt: string | null;
-		imageProps?: Partial<{ aspect: number }>;
-		videoProps?: Partial<MediaProjectionVideo>;
+		imageProps?: Partial<ImageProps>;
+		videoProps?: Partial<VideoProps>;
 	};
 
 	let {
@@ -25,14 +27,18 @@
 </script>
 
 {#if value?._type === 'video'}
-	<Video {...value.video} {...videoProps} class={className} />
+	<Video
+		{...formatVideoProjection(value.video)}
+		{...videoProps}
+		class={className}
+	/>
 {:else if value?._type === 'image'}
 	<Image
+		{...imageProps}
 		image={value.image}
 		class={className}
 		{alt}
 		{sizes}
 		{priority}
-		{...imageProps}
 	/>
 {/if}

@@ -1,7 +1,7 @@
-@import './richtext.css' layer(base);
+@import './richtext.css';
 @import 'tailwindcss';
 
-@config '../../tailwind.config.js';
+@config '../tailwind.config.js';
 
 @theme {
 	/* Colors */
@@ -83,7 +83,7 @@
 
 @layer components {
 	.text-h1 {
-		@apply leading-heading text-[1.78rem] tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
+		@apply text-[1.78rem] leading-heading tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
 	}
 
 	.text-h1 br {
@@ -91,16 +91,16 @@
 	}
 
 	.text-h2 {
-		@apply max-w-rag-heading leading-heading text-[26px];
+		@apply max-w-rag-heading text-[26px] leading-heading;
 	}
 }
 
 @layer utilities {
 	.wrapper {
-		@apply px-standard max-w-wrapper mx-auto;
+		@apply mx-auto max-w-wrapper px-standard;
 	}
 
 	.grid-standard {
-		@apply gap-standard grid grid-cols-6;
+		@apply grid grid-cols-6 gap-standard;
 	}
 }

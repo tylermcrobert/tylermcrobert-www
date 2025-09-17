@@ -1,18 +1,13 @@
 <script lang="ts">
-	import type { MediaProjectionVideo } from '$sanity';
-	import type { ClassValue } from 'svelte/elements';
-	import VideoAutoplay from './VideoAutoplay.svelte';
 	import VideoWithControls from './VideoWithControls.svelte';
+	import VideoWithoutControls from './VideoWithoutControls.svelte';
+	import type { VideoProps } from '$lib/video';
 
-	type Props = {
-		class?: ClassValue;
-	} & MediaProjectionVideo;
-
-	let { class: className, showControls, ...video }: Props = $props();
+	let { ...props }: VideoProps = $props();
 </script>
 
-{#if showControls}
-	<VideoWithControls {...video} class={className} />
+{#if props.controls === true}
+	<VideoWithControls {...props} />
 {:else}
-	<VideoAutoplay {...video} class={className} />
+	<VideoWithoutControls {...props} />
 {/if}
