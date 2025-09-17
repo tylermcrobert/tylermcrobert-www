@@ -11,7 +11,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"typegen": "cd ../studio/ && pnpm typegen",
-		"update-starter": "git fetch starter && git merge starter/main"
+		"merge-starter": "git fetch starter && git merge --squash starter/main"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^6.0.1",
