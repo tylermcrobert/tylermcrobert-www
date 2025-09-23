@@ -13,7 +13,7 @@ export const previewClient = client.withConfig({
 	perspective: 'drafts',
 	token: SANITY_API_READ_TOKEN,
 	stega: {
-		enabled: true,
+		enabled: false,
 		studioUrl: PUBLIC_SANITY_STUDIO_URL
 	}
 });
