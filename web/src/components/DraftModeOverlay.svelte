@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { PUBLIC_SANITY_STUDIO_URL } from '$env/static/public';
-	import { VisualEditing } from '@sanity/sveltekit';
+	import { VisualEditing } from '@sanity/visual-editing/svelte';
 	import { onMount } from 'svelte';
 
 	let isWithinSanityStudio = $state(false);
@@ -16,18 +16,18 @@
 	});
 </script>
 
-{#if page.data.previewEnabled}
+{#if page.data.preview}
 	{#if isWithinSanityStudio}
 		<VisualEditing />
 	{/if}
 
 	<div
-		class="fixed bottom-4 right-4 z-nav flex items-center justify-center gap-2 rounded-full bg-[#ffcc5a] p-2 px-4 text-[16px] text-black"
+		class="fixed right-4 bottom-4 z-nav flex items-center justify-center gap-2 rounded-full bg-[#ffcc5a] p-2 px-4 text-[16px] text-black"
 	>
 		{#if presentationLink && !isWithinSanityStudio}
 			<a href={presentationLink} class="hover:underline">Previewing Drafts</a>
 
-			<a href="/api/draft/disable" aria-label="exit draft mode">
+			<a href="/preview/disable" aria-label="exit draft mode">
 				<svg
 					class="stroke-current"
 					width="10"

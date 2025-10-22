@@ -1,0 +1,6 @@
+---
+globs: queries.ts
+alwaysApply: false
+---
+
+Before making ANY changes to queries.ts, you MUST read the README.md file to understand the best practices for writing queries. If there's any context you need, ask me first.

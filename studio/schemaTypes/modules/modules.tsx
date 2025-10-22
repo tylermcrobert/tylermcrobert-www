@@ -12,4 +12,15 @@ export default defineType({
     {type: 'tripleImage'},
     {type: 'playlistBlock'},
   ],
+  options: {
+    insertMenu: {
+      views: [
+        {
+          name: 'grid',
+          previewImageUrl: (schemaTypeName) => `/static/previews/preview-${schemaTypeName}.png`,
+        },
+        {name: 'list'},
+      ],
+    },
+  },
 })

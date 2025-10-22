@@ -1,9 +1,17 @@
 import { createClient } from '@sanity/client';
-import { PUBLIC_SANITY_PROJECT_ID } from '$env/static/public';
+import {
+	PUBLIC_SANITY_PROJECT_ID,
+	PUBLIC_SANITY_STUDIO_URL,
+	PUBLIC_SANITY_DATASET
+} from '$env/static/public';
 
 export const client = createClient({
 	projectId: PUBLIC_SANITY_PROJECT_ID,
-	dataset: 'production',
-	useCdn: process.env.NODE_ENV === 'production',
-	apiVersion: '2024-04-20'
+	dataset: PUBLIC_SANITY_DATASET,
+	useCdn: true,
+	apiVersion: '2025-10-21',
+	stega: {
+		enabled: false,
+		studioUrl: PUBLIC_SANITY_STUDIO_URL
+	}
 });

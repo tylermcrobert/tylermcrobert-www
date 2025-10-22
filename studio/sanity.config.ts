@@ -2,20 +2,20 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
-import {structure} from './desk'
+import {structure} from './config/desk'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
 import {colorInput} from '@sanity/color-input'
 import {presentationTool} from 'sanity/presentation'
-import {presentationOptions} from './presentation'
+import {presentationOptions} from './config/presentation'
 
 const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 
 export default defineConfig({
   name: 'default',
-  title: process.env.SANITY_STUDIO_TITLE,
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
-  dataset: 'production',
+  title: process.env.SANITY_STUDIO_TITLE!,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.SANITY_STUDIO_DATASET!,
 
   plugins: [
     structureTool({
@@ -43,18 +43,9 @@ export default defineConfig({
     },
 
     productionUrl: async (prev, context) => {
-      const isDev = window.location.host === 'localhost:3333'
-      const baseUrl = isDev ? 'http://localhost:5173' : process.env.SANITY_STUDIO_PREVIEW_LINK
-
       const slug = (context.document as any)?.slug?.current
       const type = (context.document as any)._type
-
-      const params = new URLSearchParams()
-
-      params.set('slug', slug)
-      params.set('type', type)
-
-      return `${baseUrl}/api/draft?${params}`
+      return `${process.env.SANITY_STUDIO_PREVIEW_LINK}/api/preview/redirect?slug=${slug}&type=${type}`
     },
   },
 

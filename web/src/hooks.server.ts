@@ -1,10 +1,35 @@
-import { previewClient } from '$sanity/client.server';
-import { handlePreviewMode } from '@sanity/sveltekit';
+import { PREVIEW_COOKIE_SECRET } from '$env/static/private';
+import { serverClient } from '$sanity/client.server';
+import { handlePreview } from '@sanity/visual-editing/svelte';
+import type { RequestEvent } from '@sveltejs/kit';
 
-export const handle = handlePreviewMode({
-	client: previewClient,
-	preview: {
-		cookie: 'draftMode',
-		secret: 'true'
-	}
-});
+export const PREVIEW_COOKIE_NAME = 'preview_mode_secret';
+
+/**
+ * Determins if stega should be enabled.
+ * By default it should not ship to the browser unless:
+ *  - The user is previewing a draft
+ *  - The user is not using Firefox (because it creates a bug with flexbox)
+ * @returns boolean
+ */
+function getStegaEnabledState(event: RequestEvent) {
+	const isPreview =
+		event.cookies.get(PREVIEW_COOKIE_NAME) === PREVIEW_COOKIE_SECRET;
+	const isFirefox = event.request.headers
+		.get('user-agent')
+		?.toLowerCase()
+		.includes('firefox');
+
+	return isPreview && !isFirefox;
+}
+
+export const handle = (ctx) =>
+	handlePreview({
+		client: serverClient.withConfig({
+			stega: { enabled: getStegaEnabledState(ctx.event) }
+		}),
+		preview: {
+			cookie: PREVIEW_COOKIE_NAME,
+			secret: PREVIEW_COOKIE_SECRET
+		}
+	})(ctx);

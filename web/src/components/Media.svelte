@@ -8,9 +8,8 @@
 	type Props = {
 		value: MediaProjectionAsset;
 		sizes: string;
-		class?: ClassValue;
-		priority?: boolean;
 		alt: string | null;
+		class?: ClassValue;
 		imageProps?: Partial<ImageProps>;
 		videoProps?: Partial<VideoProps>;
 	};
@@ -20,7 +19,6 @@
 		alt,
 		class: className = 'w-full',
 		sizes,
-		priority,
 		imageProps,
 		videoProps
 	}: Props = $props();
@@ -33,12 +31,5 @@
 		class={className}
 	/>
 {:else if value?._type === 'image'}
-	<Image
-		{...imageProps}
-		image={value.image}
-		class={className}
-		{alt}
-		{sizes}
-		{priority}
-	/>
+	<Image {...imageProps} image={value.image} class={className} {alt} {sizes} />
 {/if}

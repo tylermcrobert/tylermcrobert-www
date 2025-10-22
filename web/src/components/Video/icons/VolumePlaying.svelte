@@ -6,7 +6,7 @@
 	<path
 		d="M18.016 17.734A6.99 6.99 0 0 0 21 12a6.99 6.99 0 0 0-2.984-5.734M15.72 14.458A2.998 2.998 0 0 0 17 12a2.998 2.998 0 0 0-1.28-2.458"
 		stroke="currentColor"
-		stroke-width="1.3"
+		stroke-width="1.5"
 		stroke-linecap="round"
 	/>
 </svg>

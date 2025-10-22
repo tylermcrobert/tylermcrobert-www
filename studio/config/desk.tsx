@@ -1,8 +1,8 @@
 import type {StructureResolver} from 'sanity/structure'
 
-import {icon as homepageIcon} from './schemaTypes/documents/homepage'
-import {icon as settingsIcon} from './schemaTypes/documents/settings'
-import {icon as infoIcon} from './schemaTypes/documents/info'
+import {icon as homepageIcon} from '../schemaTypes/documents/homepage'
+import {icon as settingsIcon} from '../schemaTypes/documents/settings'
+import {icon as infoIcon} from '../schemaTypes/documents/info'
 
 export const structure: StructureResolver = (S) => {
   return S.list()

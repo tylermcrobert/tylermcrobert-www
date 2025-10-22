@@ -4,11 +4,6 @@ import type { Attachment } from 'svelte/attachments';
 
 export type IntersectionCallback = (entry: IntersectionObserverEntry) => void;
 
-type IntersectionOptions = {
-	callback: IntersectionCallback;
-	options?: IntersectionObserverInit;
-};
-
 // Keep track of which callback is associated with each element
 const intersectionCallbacks = new WeakMap<Element, IntersectionCallback>();
 
@@ -27,6 +22,7 @@ function createObserver(init: IntersectionObserverInit | undefined) {
 			}
 		}
 	}, init);
+
 	if (init) {
 		intersectionObservers.set(init, observer);
 	}
@@ -35,11 +31,9 @@ function createObserver(init: IntersectionObserverInit | undefined) {
 
 export function observe(
 	target: Element,
-	props: IntersectionCallback | IntersectionOptions
+	callback: IntersectionCallback,
+	options?: IntersectionObserverInit
 ) {
-	const callback = typeof props === 'function' ? props : props.callback;
-	const options = typeof props === 'object' ? props.options : undefined;
-
 	const observer = options
 		? intersectionObservers.get(options) || createObserver(options)
 		: createObserver(undefined);
@@ -56,11 +50,12 @@ export function observe(
 }
 
 export function intersection(
-	props: IntersectionCallback | IntersectionOptions
+	callback: IntersectionCallback,
+	options?: IntersectionObserverInit
 ): Attachment {
 	return (element) => {
 		$effect(() => {
-			const observer = observe(element, props);
+			const observer = observe(element, callback, options);
 
 			return () => {
 				observer.unobserve();

@@ -14,7 +14,7 @@ export default defineType({
     {
       name: 'slug',
       type: 'slug',
-      description: 'This is used ine the URL path of the page.',
+      description: 'This is used in the URL path of the page.',
       validation: (Rule) => Rule.required(),
       options: {
         source: 'title',

@@ -1,26 +1,22 @@
 import type { Attachment } from 'svelte/attachments';
-import { observe } from './intersectionObserver.svelte';
+import { intersection } from './intersectionObserver.svelte';
 
-export function playOnIntersect(enabled: boolean): Attachment {
+export function playOnIntersect({
+	autoPlay,
+	autoPause,
+	ready
+}: {
+	autoPlay: boolean;
+	autoPause: boolean;
+	ready: boolean;
+}): Attachment<HTMLVideoElement> {
 	return (element) => {
-		$effect(() => {
-			const observer = observe(element, {
-				callback: (e) => {
-					const el = e.target as HTMLVideoElement;
-
-					if (!enabled) {
-						return;
-					} else if (e.isIntersecting) {
-						el.play();
-					} else {
-						el.pause();
-					}
-				}
-			});
-
-			return () => {
-				observer.unobserve();
-			};
-		});
+		return intersection((e) => {
+			if (autoPlay && ready && e.isIntersecting) {
+				element.play();
+			} else if (autoPause && ready) {
+				element.pause();
+			}
+		})(element);
 	};
 }

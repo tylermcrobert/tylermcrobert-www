@@ -5,13 +5,7 @@ import {
 } from '$lib/sanity';
 import { error } from '@sveltejs/kit';
 
-export const load = async ({
-	parent,
-	params,
-	locals: {
-		sanity: { client, previewEnabled }
-	}
-}) => {
+export const load = async ({ parent, params, locals: { client, preview } }) => {
 	const { contextCaseStudies } = (await parent()) as App.LayoutData;
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
@@ -24,7 +18,7 @@ export const load = async ({
 		return error(404);
 	}
 
-	if (data._type === 'caseStudy' && index === -1 && !previewEnabled) {
+	if (data._type === 'caseStudy' && index === -1 && !preview) {
 		return error(404);
 	}
 

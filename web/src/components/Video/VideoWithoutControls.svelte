@@ -30,6 +30,10 @@
 	disablepictureinpicture
 	max-resolution={maxResolution}
 	style:--media-object-fit="cover"
-	{@attach playOnIntersect(packageLoaded && !!autoplay)}
+	{@attach playOnIntersect({
+		ready: packageLoaded,
+		autoPlay: !!autoplay,
+		autoPause: true
+	})}
 >
 </mux-video>

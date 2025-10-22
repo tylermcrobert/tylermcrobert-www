@@ -9,7 +9,7 @@
 	import { ImagePriorityProvider } from '$components';
 	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
 	import ModulePlaylistBlock from './ModulePlaylistBlock.svelte';
-	import { createDataAttribute } from '@sanity/sveltekit';
+	import { createDataAttribute } from '@sanity/visual-editing';
 
 	type Props = {
 		modules: Module[];

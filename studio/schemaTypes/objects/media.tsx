@@ -56,15 +56,8 @@ export default defineType({
       type: 'media.videoPlaybackSettings',
       options: {collapsed: false},
       hidden: ({parent}) => {
-        return parent?.playbackSettings !== 'custom'
+        return !parent?.video || parent?.playbackSettings !== 'custom'
       },
-    },
-
-    {
-      name: 'showVideoControls',
-      type: 'boolean',
-      deprecated: {reason: 'Use settings instead'},
-      hidden: true,
     },
 
     {

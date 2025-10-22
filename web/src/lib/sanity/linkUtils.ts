@@ -35,9 +35,7 @@ export function resolveLinkProjection(link: LinkProjection) {
 		slug: link.reference?.slug || null
 	});
 
-	if (resolvedLink) return resolvedLink;
-
-	return null;
+	return resolvedLink ?? null;
 }
 
 export function getLinkProjectionLabel(linkProjection: LinkProjection) {

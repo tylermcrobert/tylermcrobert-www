@@ -44,7 +44,11 @@
 			slot="media"
 			class="w-full"
 			style:--media-object-fit="cover"
-			{@attach playOnIntersect(packagesLoaded && !!autoplay)}
+			{@attach playOnIntersect({
+				ready: packagesLoaded,
+				autoPlay: !!autoplay,
+				autoPause: true
+			})}
 		>
 		</mux-video>
 
@@ -57,7 +61,7 @@
 			class="absolute inset-x-0 bottom-0 z-10 flex gap-5 px-6 py-4"
 		>
 			<media-mute-button>
-				<span slot="low" class="w-4"><VolumePlaying /></span>
+				<span slot="high" class="w-4"><VolumePlaying /></span>
 				<span slot="off" class="w-4"><VolumeMuted /></span>
 			</media-mute-button>
 			<media-time-display></media-time-display>
