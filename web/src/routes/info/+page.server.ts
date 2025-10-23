@@ -1,10 +1,6 @@
 import { infoQuery, type InfoQuery } from '$sanity';
 
-export const load = async ({
-	locals: {
-		sanity: { client }
-	}
-}) => {
+export const load = async ({ locals: { client } }) => {
 	const infoPage = await client.fetch<InfoQuery>(infoQuery);
 
 	return {
