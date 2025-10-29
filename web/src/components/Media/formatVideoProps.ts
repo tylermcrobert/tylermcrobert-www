@@ -25,14 +25,14 @@ export function formatVideoProps(
 	const playbackProps = getPlaybackOptionProps(mediaProjectionVideo);
 
 	return {
+		...playbackProps,
+		...videoProps,
 		poster:
 			videoProps?.poster || sanityPosterImage
 				? getSanityPosterUrl(sanityPosterImage, assetAspect)
 				: getMuxThumbnailUrl(playbackId, 0.0), // TODO: GET POSTER TIME,
 		aspect: videoProps?.aspect || assetAspect,
-		playbackId,
-		...playbackProps,
-		...videoProps
+		playbackId
 	};
 }
 
