@@ -1,13 +1,55 @@
 <script lang="ts">
-	import VideoWithControls from './VideoWithControls.svelte';
-	import VideoWithoutControls from './VideoWithoutControls.svelte';
-	import type { VideoProps } from '$lib/video';
+	import { onMount } from 'svelte';
 
-	let { ...props }: VideoProps = $props();
+	import { playOnIntersect } from '$lib/attachments';
+
+	import type { VideoProps } from './types';
+	import VideoControls from './VideoControls.svelte';
+
+	let {
+		class: className,
+		playbackId,
+		autoplay,
+		controls,
+		poster,
+		...props
+	}: VideoProps = $props();
+
+	let muxVideoPkgLoaded = $state(false);
+
+	onMount(() => {
+		import('@mux/mux-video').then(() => {
+			muxVideoPkgLoaded = true;
+		});
+	});
 </script>
 
-{#if props.controls === true}
-	<VideoWithControls {...props} />
+{#snippet video()}
+	<mux-video
+		{...props}
+		playback-id={playbackId}
+		style:background={poster && !controls // use background in VideoControls
+			? `url('${poster}') center / cover`
+			: undefined}
+		class={['block w-full', controls ? className : '']}
+		style:aspect-ratio={controls ? undefined : props.aspect}
+		style:--media-object-fit="cover"
+		slot="media"
+		disablepictureinpicture
+		playsinline
+		{@attach playOnIntersect({
+			ready: muxVideoPkgLoaded,
+			autoPlay: !!autoplay,
+			autoPause: true
+		})}
+	>
+	</mux-video>
+{/snippet}
+
+{#if controls}
+	<VideoControls aspect={props.aspect} class={className} {poster}>
+		{@render video()}
+	</VideoControls>
 {:else}
-	<VideoWithoutControls {...props} />
+	{@render video()}
 {/if}

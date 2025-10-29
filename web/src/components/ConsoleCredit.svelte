@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
 	import { onMount } from 'svelte';
+
+	import { dev } from '$app/environment';
 
 	onMount(() => {
 		if (!dev) {

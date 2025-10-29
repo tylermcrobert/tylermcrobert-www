@@ -1,11 +1,12 @@
 <script lang="ts">
-	import {
-		getLinkProjectionLabel,
-		resolveLinkProjection,
-		type LinkProjection
-	} from '$sanity';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
+
+	import {
+		getLinkProjectionLabel,
+		type LinkProjection,
+		resolveLinkProjection
+	} from '$sanity';
 
 	type Props = {
 		children?: Snippet;

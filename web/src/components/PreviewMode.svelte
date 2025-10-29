@@ -1,32 +1,45 @@
 <script lang="ts">
+	import { PreviewMode, VisualEditing } from '@sanity/sveltekit';
+	import type { Snippet } from 'svelte';
+
 	import { page } from '$app/state';
 	import { PUBLIC_SANITY_STUDIO_URL } from '$env/static/public';
-	import { VisualEditing } from '@sanity/visual-editing/svelte';
-	import { onMount } from 'svelte';
 
-	let isWithinSanityStudio = $state(false);
+	type Props = {
+		enabled: boolean;
+		children: Snippet;
+	};
 
+	let { enabled, children }: Props = $props();
+
+	let isInIframe = $derived(
+		typeof window !== 'undefined' && window.self !== window.top
+	);
 	let presentationLink = $derived(
 		`${PUBLIC_SANITY_STUDIO_URL}/presentation?preview=${page.url.pathname}`
 	);
-
-	onMount(() => {
-		const isInFrame = window.self !== window.top;
-		isWithinSanityStudio = isInFrame;
-	});
 </script>
 
-{#if page.data.preview}
-	{#if isWithinSanityStudio}
-		<VisualEditing />
-	{/if}
+<PreviewMode {enabled}>
+	<VisualEditing enabled={enabled && isInIframe}>
+		{@render children()}
+	</VisualEditing>
+</PreviewMode>
 
+{#if enabled}
+	<!-- 
+  	Preview mode overlay 
+	-->
 	<div
 		class="fixed right-4 bottom-4 z-nav flex items-center justify-center gap-2 rounded-full bg-[#ffcc5a] p-2 px-4 text-[16px] text-black"
 	>
-		{#if presentationLink && !isWithinSanityStudio}
+		{#if isInIframe}
+			Previewing Drafts
+		{:else}
+			<!-- 
+				When not in iframe show link and close button 
+			-->
 			<a href={presentationLink} class="hover:underline">Previewing Drafts</a>
-
 			<a href="/preview/disable" aria-label="exit draft mode">
 				<svg
 					class="stroke-current"
@@ -40,8 +53,6 @@
 					<path d="M9 9L1 1" stroke-width="1.5" />
 				</svg>
 			</a>
-		{:else}
-			Previewing Drafts
 		{/if}
 	</div>
 {/if}

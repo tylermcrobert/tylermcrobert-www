@@ -1,11 +1,18 @@
-import {
-	ROOT_SLUG_QUERY,
-	type Module,
-	type ROOT_SLUG_QUERYResult
-} from '$lib/sanity';
 import { error } from '@sveltejs/kit';
 
-export const load = async ({ parent, params, locals: { client, preview } }) => {
+import {
+	type Module,
+	ROOT_SLUG_QUERY,
+	type ROOT_SLUG_QUERYResult
+} from '$lib/sanity';
+
+export const load = async ({
+	parent,
+	params,
+	locals: {
+		sanity: { client, previewEnabled }
+	}
+}) => {
 	const { contextCaseStudies } = (await parent()) as App.LayoutData;
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
@@ -18,7 +25,7 @@ export const load = async ({ parent, params, locals: { client, preview } }) => {
 		return error(404);
 	}
 
-	if (data._type === 'caseStudy' && index === -1 && !preview) {
+	if (data._type === 'caseStudy' && index === -1 && !previewEnabled) {
 		return error(404);
 	}
 

@@ -1,7 +1,9 @@
+import { handlePreviewMode } from '@sanity/sveltekit';
+import { redirect, type RequestEvent } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+
 import { PREVIEW_COOKIE_SECRET } from '$env/static/private';
 import { serverClient } from '$sanity/client.server';
-import { handlePreview } from '@sanity/visual-editing/svelte';
-import type { RequestEvent } from '@sveltejs/kit';
 
 export const PREVIEW_COOKIE_NAME = 'preview_mode_secret';
 
@@ -24,12 +26,15 @@ function getStegaEnabledState(event: RequestEvent) {
 }
 
 export const handle = (ctx) =>
-	handlePreview({
-		client: serverClient.withConfig({
-			stega: { enabled: getStegaEnabledState(ctx.event) }
-		}),
-		preview: {
-			cookie: PREVIEW_COOKIE_NAME,
-			secret: PREVIEW_COOKIE_SECRET
-		}
-	})(ctx);
+	sequence(
+		handlePreviewMode({
+			client: serverClient.withConfig({
+				stega: { enabled: getStegaEnabledState(ctx.event) }
+			}),
+			preview: {
+				redirect,
+				cookie: PREVIEW_COOKIE_NAME,
+				secret: PREVIEW_COOKIE_SECRET
+			}
+		})
+	)(ctx);

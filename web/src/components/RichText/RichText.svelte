@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { PortableText } from '@portabletext/svelte';
+
 	import type { RichTextProjection } from '$sanity';
+
 	import RichTextLinkRenderer from './RichTextLinkRenderer.svelte';
 	import RichTextListRenderer from './RichTextListRenderer.svelte';
 	import RichTextStyleRenderer from './RichTextStyleRenderer.svelte';
-	import { PortableText } from '@portabletext/svelte';
 
 	let { value }: { value: RichTextProjection } = $props();
 </script>

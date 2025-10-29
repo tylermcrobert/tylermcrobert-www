@@ -3,12 +3,12 @@
     "description": "Creates a required field for a Sanity schema",
     "prefix": "sf",
     "body": [
-      "{",
+      "defineField({",
       "  name: \"$1\",",
       "  type: \"$2\",",
       "  // validation: (Rule) => Rule.required()$3",
-      "},"
-    ]
+      "}),",
+    ],
   },
 
   "Sanity Module": {
@@ -34,8 +34,8 @@
       "    },",
       "  },",
       "})",
-      ""
-    ]
+      "",
+    ],
   },
 
   "Sanity Object Export": {
@@ -57,7 +57,7 @@
       "    },",
       "  },",
       "})",
-      ""
-    ]
-  }
+      "",
+    ],
+  },
 }

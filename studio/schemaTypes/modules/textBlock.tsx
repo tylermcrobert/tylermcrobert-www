@@ -1,18 +1,18 @@
 import {toPlainText} from '@util'
-import {defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 const TITLE = 'Text Block'
 
-export default defineType({
+export const textBlock = defineType({
   title: TITLE,
   name: 'textBlock',
   type: 'object',
   icon: () => '✍️',
   fields: [
-    {
+    defineField({
       name: 'richText',
       type: 'richText',
-    },
+    }),
   ],
   preview: {
     select: {

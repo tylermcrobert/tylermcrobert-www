@@ -1,4 +1,5 @@
 import type { Attachment } from 'svelte/attachments';
+
 import { intersection } from './intersectionObserver.svelte';
 
 export function playOnIntersect({

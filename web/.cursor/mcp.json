@@ -1,0 +1,12 @@
+{
+	"mcpServers": {
+		"svelte": {
+			"command": "npx",
+			"args": ["-y", "@sveltejs/mcp"]
+		},
+		"Sanity": {
+			"url": "https://mcp.sanity.io",
+			"type": "http"
+		}
+	}
+}

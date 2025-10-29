@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { resolveLink } from '$sanity';
 	import type { MarkComponentProps } from '@portabletext/svelte';
 	import type { Snippet } from 'svelte';
+
+	import { resolveLink } from '$sanity';
 
 	type Props = {
 		portableText: MarkComponentProps & { value: LinkValue | InternalLinkValue };

@@ -1,15 +1,17 @@
 <script lang="ts">
-	import type { Module } from '$sanity';
-	import TextBlock from './ModuleTextBlock.svelte';
-	import MediaBlock from './ModuleMediaBlock.svelte';
-	import ModuleWebsite from './ModuleWebsite.svelte';
-	import ModuleDiptych from './ModuleDiptych.svelte';
-	import ModuleTripleImage from './ModuleTripleImage.svelte';
-	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
+	import { createDataAttribute } from '@sanity/sveltekit';
+
 	import { ImagePriorityProvider } from '$components';
-	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
+	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
+	import type { Module } from '$sanity';
+
+	import ModuleDiptych from './ModuleDiptych.svelte';
+	import MediaBlock from './ModuleMediaBlock.svelte';
 	import ModulePlaylistBlock from './ModulePlaylistBlock.svelte';
-	import { createDataAttribute } from '@sanity/visual-editing';
+	import TextBlock from './ModuleTextBlock.svelte';
+	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
+	import ModuleTripleImage from './ModuleTripleImage.svelte';
+	import ModuleWebsite from './ModuleWebsite.svelte';
 
 	type Props = {
 		modules: Module[];

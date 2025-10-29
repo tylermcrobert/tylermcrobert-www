@@ -1,16 +1,17 @@
+import type { InputValue } from '@portabletext/svelte';
 import groq from 'groq';
+
 import type {
-	SanityImageAsset,
-	Settings,
-	Website,
-	SITE_QUERYResult,
-	MediaBlock,
 	DiptychMedia,
 	InfoQueryResult,
 	Media,
-	Playlist
+	MediaBlock,
+	Playlist,
+	SanityImageAsset,
+	Settings,
+	SITE_QUERYResult,
+	Website
 } from './types';
-import type { InputValue } from '@portabletext/svelte';
 
 /*******************************************************************************
  * PROJECTIONS

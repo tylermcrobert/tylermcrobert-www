@@ -1,13 +1,15 @@
 <script lang="ts">
-	import {
-		Metadata,
-		DraftModeOverlay,
-		Navigation,
-		ConsoleCredit,
-		Analytics
-	} from '$components';
-	import { onMount } from 'svelte';
 	import '../app.css';
+
+	import { onMount } from 'svelte';
+
+	import {
+		Analytics,
+		ConsoleCredit,
+		Metadata,
+		Navigation,
+		PreviewMode
+	} from '$components';
 	import { fetchNowPlaying } from '$lib/last.fm';
 	import { setNowPlaying } from '$lib/state';
 
@@ -22,16 +24,17 @@
 	});
 </script>
 
-<Navigation />
+<PreviewMode enabled={data.previewEnabled}>
+	<Navigation />
 
-{#key data.pathname}
-	{@render children()}
-{/key}
+	{#key data.pathname}
+		{@render children()}
+	{/key}
 
-<Metadata />
-<DraftModeOverlay />
-<ConsoleCredit />
+	<Metadata />
+	<ConsoleCredit />
 
-{#if data.googleAnalyticsId}
-	<Analytics id={data.googleAnalyticsId} />
-{/if}
+	{#if data.googleAnalyticsId}
+		<Analytics id={data.googleAnalyticsId} />
+	{/if}
+</PreviewMode>

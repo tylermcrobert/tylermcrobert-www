@@ -1,13 +1,14 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
+import {colorInput} from '@sanity/color-input'
 import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
-import {structure} from './config/desk'
+import {defineConfig} from 'sanity'
+import {presentationTool} from 'sanity/presentation'
+import {structureTool} from 'sanity/structure'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
-import {colorInput} from '@sanity/color-input'
-import {presentationTool} from 'sanity/presentation'
+
+import {structure} from './config/desk'
 import {presentationOptions} from './config/presentation'
+import {schemaTypes} from './schemaTypes'
 
 const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
 

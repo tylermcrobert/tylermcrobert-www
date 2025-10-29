@@ -18,6 +18,8 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.36.0",
+		"@mux/playback-core": "^0.31.1",
+		"@sanity/client": "^7.12.0",
 		"@sveltejs/adapter-auto": "^6.1.0",
 		"@sveltejs/kit": "^2.43.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.0",
@@ -26,6 +28,8 @@
 		"@types/node": "^24",
 		"eslint": "^9.36.0",
 		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"eslint-plugin-svelte": "^3.12.4",
 		"globals": "^16.4.0",
 		"groq": "^4.11.0",
@@ -42,8 +46,7 @@
 	"dependencies": {
 		"@mux/mux-video": "^0.25.2",
 		"@portabletext/svelte": "^3.0.0",
-		"@sanity/client": "^7.12.0",
-		"@sanity/visual-editing": "^3.2.4",
+		"@sanity/sveltekit": "^1.0.3",
 		"@tylermcrobert/svelte-sanity-image": "^1.0.4",
 		"media-chrome": "^4.11.0"
 	}

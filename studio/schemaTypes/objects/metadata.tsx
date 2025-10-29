@@ -1,11 +1,11 @@
-import {defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 
-export default defineType({
+export const metadata = defineType({
   name: 'metadata',
   type: 'object',
   description: 'Metadata for SEO and social sharing.',
   fields: [
-    {
+    defineField({
       name: 'description',
       title: 'Description',
       description:
@@ -14,9 +14,9 @@ export default defineType({
       rows: 2,
       validation: (Rule) =>
         Rule.max(150).warning('Longer descriptions may be truncated by search engines'),
-    },
+    }),
 
-    {
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
@@ -25,6 +25,6 @@ export default defineType({
       options: {
         hotspot: true,
       },
-    },
+    }),
   ],
 })

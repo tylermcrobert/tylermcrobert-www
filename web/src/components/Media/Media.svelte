@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { MediaProjectionAsset } from '$sanity';
-	import { formatVideoProjection, type VideoProps } from '$lib/video';
-	import { Video, Image } from '$components';
 	import type { ClassValue } from 'svelte/elements';
-	import type { ImageProps } from './Image.svelte';
+
+	import { Image, type ImageProps, Video, type VideoProps } from '$components';
+	import type { MediaProjectionAsset } from '$sanity';
+
+	import { formatVideoProjection } from './formatVideoProjection';
 
 	type Props = {
 		value: MediaProjectionAsset;

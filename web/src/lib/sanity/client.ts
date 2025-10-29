@@ -1,8 +1,9 @@
-import { createClient } from '@sanity/client';
+import { createClient } from '@sanity/sveltekit';
+
 import {
+	PUBLIC_SANITY_DATASET,
 	PUBLIC_SANITY_PROJECT_ID,
-	PUBLIC_SANITY_STUDIO_URL,
-	PUBLIC_SANITY_DATASET
+	PUBLIC_SANITY_STUDIO_URL
 } from '$env/static/public';
 
 export const client = createClient({

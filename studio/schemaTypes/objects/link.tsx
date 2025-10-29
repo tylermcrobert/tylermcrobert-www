@@ -1,8 +1,8 @@
-import {defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const INTERNAL_LINK_TYPES = [{type: 'homepage'}, {type: 'caseStudy'}, {type: 'page'}]
 
-export default defineType({
+export const link = defineType({
   title: 'Link',
   name: 'link',
   icon: () => '🔗',
@@ -18,7 +18,7 @@ export default defineType({
       return true
     }),
   fields: [
-    {
+    defineField({
       name: 'reference',
       title: 'Internal Link',
       type: 'reference',
@@ -27,9 +27,9 @@ export default defineType({
       hidden: ({parent}) => {
         return !!parent?.href
       },
-    },
+    }),
 
-    {
+    defineField({
       name: 'href',
       title: 'External Link URL',
       type: 'url',
@@ -41,13 +41,13 @@ export default defineType({
           allowRelative: false,
           scheme: ['https', 'tel', 'mailto', '@'],
         }).warning(`This is not an external link. Consider using internal links instead.`),
-    },
+    }),
 
-    {
+    defineField({
       name: 'label',
       title: 'Label',
       type: 'string',
-    },
+    }),
   ],
   preview: {
     select: {

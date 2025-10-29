@@ -10,14 +10,15 @@
 </script>
 
 <script lang="ts">
-	import { client } from '$sanity';
-	import { getContext } from 'svelte';
-	import { stegaClean } from '@sanity/client/stega';
+	import { stegaClean } from '@sanity/sveltekit';
 	import Image, {
 		type SanityImageSource,
 		type SvelteSanityImageProps
 	} from '@tylermcrobert/svelte-sanity-image';
+	import { getContext } from 'svelte';
+
 	import { metadata } from '$lib/state';
+	import { client } from '$sanity';
 
 	let { alt, priority: priorityProp, image, ...props }: ImageProps = $props();
 
@@ -28,7 +29,7 @@
 	{...props}
 	{client}
 	{image}
-	alt={alt || stegaClean(metadata.title) || null}
+	alt={stegaClean(alt) || stegaClean(metadata.title) || null}
 	autoFormat
 	loading={priority ? 'eager' : 'lazy'}
 	fetchpriority={priority ? 'high' : undefined}

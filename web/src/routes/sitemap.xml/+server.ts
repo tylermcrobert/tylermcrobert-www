@@ -1,7 +1,11 @@
-import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$sanity';
 import { PUBLIC_SITE_URL } from '$env/static/public';
+import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$sanity';
 
-export async function GET({ locals: { client } }) {
+export async function GET({
+	locals: {
+		sanity: { client }
+	}
+}) {
 	const sanityData = await client.fetch<SITEMAP_QUERYResult>(SITEMAP_QUERY);
 
 	const body = `<?xml version="1.0" encoding="UTF-8"?>

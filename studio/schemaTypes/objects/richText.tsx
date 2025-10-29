@@ -1,7 +1,7 @@
-import {DocumentIcon, LinkIcon} from '@sanity/icons'
 import {RichTextMinimalContainer} from '@components'
-import {defineType} from 'sanity'
+import {DocumentIcon, LinkIcon} from '@sanity/icons'
 import {INTERNAL_LINK_TYPES} from '@util'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 const ANNOTATIONS = [
   {type: 'internalLink', name: 'internalLink'},
@@ -13,11 +13,11 @@ const DECORATORS = [
   {title: 'Emphasis', value: 'em'},
 ]
 
-export default defineType({
+export const richText = defineType({
   name: 'richText',
   type: 'array',
   of: [
-    {
+    defineArrayMember({
       title: 'Block',
       type: 'block',
       styles: [
@@ -33,7 +33,7 @@ export default defineType({
         decorators: DECORATORS,
         annotations: ANNOTATIONS,
       },
-    },
+    }),
   ],
 })
 
@@ -44,7 +44,7 @@ export const richTextMinimal = defineType({
     input: RichTextMinimalContainer,
   },
   of: [
-    {
+    defineArrayMember({
       title: 'Block',
       type: 'block',
       lists: [],
@@ -53,7 +53,7 @@ export const richTextMinimal = defineType({
         decorators: [],
         annotations: [],
       },
-    },
+    }),
   ],
 })
 
@@ -61,7 +61,7 @@ export const richTextSimple = defineType({
   name: 'richTextSimple',
   type: 'array',
   of: [
-    {
+    defineArrayMember({
       title: 'Block',
       type: 'block',
       lists: [],
@@ -70,31 +70,31 @@ export const richTextSimple = defineType({
         decorators: DECORATORS,
         annotations: ANNOTATIONS,
       },
-    },
+    }),
   ],
 })
 
-export const richTextInternalLink = {
+export const richTextInternalLink = defineType({
   icon: DocumentIcon,
   name: 'internalLink',
   type: 'object',
   title: 'Internal link',
   fields: [
-    {
+    defineField({
       name: 'reference',
       type: 'reference',
       to: INTERNAL_LINK_TYPES,
-    },
+    }),
   ],
-}
+})
 
-export const richTextExternalLink = {
+export const richTextExternalLink = defineType({
   icon: LinkIcon,
   name: 'externalLink',
   type: 'object',
   title: 'External link',
   fields: [
-    {
+    defineField({
       title: 'URL',
       name: 'href',
       type: 'url',
@@ -103,12 +103,12 @@ export const richTextExternalLink = {
           allowRelative: false,
           scheme: ['http', 'https', 'mailto', 'tel'],
         }),
-    },
-    {
+    }),
+    defineField({
       title: 'Open in new tab',
       name: 'blank',
       type: 'boolean',
       initialValue: true,
-    },
+    }),
   ],
-}
+})

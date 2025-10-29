@@ -1,7 +1,9 @@
-import { resolveLink } from '$sanity';
-import { PREVIEW_COOKIE_SECRET } from '$env/static/private';
-import { PREVIEW_COOKIE_NAME } from '../../../../hooks.server';
 import { redirect } from '@sveltejs/kit';
+
+import { PREVIEW_COOKIE_SECRET } from '$env/static/private';
+import { resolveLink } from '$sanity';
+
+import { PREVIEW_COOKIE_NAME } from '../../../../hooks.server';
 
 export const GET = async ({ cookies, url }) => {
 	const slug = url.searchParams.get('slug');

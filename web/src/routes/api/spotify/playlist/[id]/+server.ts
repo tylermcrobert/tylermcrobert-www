@@ -1,4 +1,5 @@
 import { json } from '@sveltejs/kit';
+
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 
 const CREDENTIALS_ENDPOINT =

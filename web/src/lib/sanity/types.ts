@@ -158,13 +158,31 @@ export type Homepage = {
 	_createdAt: string;
 	_updatedAt: string;
 	_rev: string;
+	title?: string;
 	homepageMetaTitle?: string;
-	context?: {
-		_ref: string;
-		_type: 'reference';
-		_weak?: boolean;
-		[internalGroqTypeReferenceTo]?: 'context';
-	};
+	modules?: Array<
+		| ({
+				_key: string;
+		  } & TextBlock)
+		| ({
+				_key: string;
+		  } & MediaBlock)
+		| ({
+				_key: string;
+		  } & Website)
+		| ({
+				_key: string;
+		  } & Diptych)
+		| ({
+				_key: string;
+		  } & MobileWebsite)
+		| ({
+				_key: string;
+		  } & TripleImage)
+		| ({
+				_key: string;
+		  } & PlaylistBlock)
+	>;
 };
 
 export type Modules = Array<
@@ -1918,7 +1936,7 @@ export type InfoQueryResult = {
 				  }
 				| {
 						_type: 'homepage';
-						title: null;
+						title: string | null;
 						slug: null;
 				  }
 				| {
@@ -2040,13 +2058,31 @@ export type SITEMAP_QUERYResult = {
 				_createdAt: string;
 				_updatedAt: string;
 				_rev: string;
+				title?: string;
 				homepageMetaTitle?: string;
-				context?: {
-					_ref: string;
-					_type: 'reference';
-					_weak?: boolean;
-					[internalGroqTypeReferenceTo]?: 'context';
-				};
+				modules?: Array<
+					| ({
+							_key: string;
+					  } & Diptych)
+					| ({
+							_key: string;
+					  } & MediaBlock)
+					| ({
+							_key: string;
+					  } & MobileWebsite)
+					| ({
+							_key: string;
+					  } & PlaylistBlock)
+					| ({
+							_key: string;
+					  } & TextBlock)
+					| ({
+							_key: string;
+					  } & TripleImage)
+					| ({
+							_key: string;
+					  } & Website)
+				>;
 		  }
 		| {
 				_id: string;
@@ -2217,11 +2253,7 @@ export type SITEMAP_QUERYResult = {
 				dots?: Color;
 		  }
 		| null;
-	projects: Array<{
-		title: string | null;
-		slug: string | null;
-		_updatedAt: string;
-	}> | null;
+	projects: null;
 };
 
 // Query TypeMap

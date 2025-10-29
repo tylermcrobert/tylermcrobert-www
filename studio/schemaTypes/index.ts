@@ -1,29 +1,30 @@
-import page from './documents/page'
-import homepage from './documents/homepage'
-import link from './objects/link'
-import metadata from './objects/metadata'
-import settings from './documents/settings'
-import context from './documents/context'
 import caseStudy from './documents/caseStudy'
-import playlist from './documents/playlist'
-import webFrameTheme from './documents/webFrameTheme'
+import context from './documents/context'
+import {homepage} from './documents/homepage'
 import info from './documents/info'
-import richText, {
+import {page} from './documents/page'
+import playlist from './documents/playlist'
+import {settings} from './documents/settings'
+import webFrameTheme from './documents/webFrameTheme'
+import diptych, {diptychMedia, diptychSpacer, diptychText} from './modules/diptych'
+import {mediaBlock} from './modules/mediaBlock'
+import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
+import {modules} from './modules/modules'
+import playlistBlock from './modules/playlist'
+import {textBlock} from './modules/textBlock'
+import {tripleImage} from './modules/tripleImage'
+import {website} from './modules/website'
+import aspect from './objects/aspect'
+import {link} from './objects/link'
+import {media, mediaPlaybackSettings} from './objects/media'
+import {metadata} from './objects/metadata'
+import {
+  richText,
+  richTextExternalLink,
+  richTextInternalLink,
   richTextMinimal,
   richTextSimple,
-  richTextInternalLink,
-  richTextExternalLink,
 } from './objects/richText'
-import modules from './modules/modules'
-import textBlock from './modules/textBlock'
-import media, {mediaPlaybackSettings} from './objects/media'
-import mediaBlock from './modules/mediaBlock'
-import website from './modules/website'
-import diptych, {diptychMedia, diptychText, diptychSpacer} from './modules/diptych'
-import aspect from './objects/aspect'
-import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
-import tripleImage from './modules/tripleImage'
-import playlistBlock from './modules/playlist'
 
 export const schemaTypes = [
   playlistBlock,
