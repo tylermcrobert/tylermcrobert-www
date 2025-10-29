@@ -11,8 +11,9 @@ const POSTER_WIDTH = 1280;
  * @param mediaProjectionVideo the "video" projection of a "media projection"
  * @returns Props that are ready for the Video component
  */
-export function formatVideoProjection(
-	mediaProjectionVideo: MediaProjectionVideo
+export function formatVideoProps(
+	mediaProjectionVideo: MediaProjectionVideo,
+	videoProps: Partial<VideoProps> | undefined = {}
 ): VideoProps {
 	const {
 		playbackId,
@@ -24,12 +25,14 @@ export function formatVideoProjection(
 	const playbackProps = getPlaybackOptionProps(mediaProjectionVideo);
 
 	return {
-		poster: sanityPosterImage
-			? getSanityPosterUrl(sanityPosterImage, assetAspect)
-			: getMuxThumbnailUrl(playbackId, 0.0), // TODO: GET POSTER TIME,
-		aspect: assetAspect,
+		poster:
+			videoProps?.poster || sanityPosterImage
+				? getSanityPosterUrl(sanityPosterImage, assetAspect)
+				: getMuxThumbnailUrl(playbackId, 0.0), // TODO: GET POSTER TIME,
+		aspect: videoProps?.aspect || assetAspect,
 		playbackId,
-		...playbackProps
+		...playbackProps,
+		...videoProps
 	};
 }
 
