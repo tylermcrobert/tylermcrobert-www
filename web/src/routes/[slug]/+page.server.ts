@@ -1,10 +1,32 @@
+import { groq } from '@sanity/sveltekit';
 import { error } from '@sveltejs/kit';
 
 import {
+	client as clientImported,
 	type Module,
 	ROOT_SLUG_QUERY,
-	type ROOT_SLUG_QUERYResult
+	type ROOT_SLUG_QUERYResult,
+	SITE_QUERY,
+	type SiteQuery
 } from '$lib/sanity';
+import { getPrerender } from '$util/getPrerender.js';
+
+export const entries = async () => {
+	const site = await clientImported.fetch<SiteQuery>(SITE_QUERY, {
+		contextSlug: null
+	});
+
+	const pageSlugs: { slug: string }[] = await clientImported.fetch(
+		groq`*[_type == "page"]{ "slug": slug.current }`
+	);
+
+	return [
+		...pageSlugs,
+		...((site.context?.caseStudies
+			?.map(({ slug }) => ({ slug }))
+			.filter(({ slug }) => slug !== null) as { slug: string }[]) || [])
+	];
+};
 
 export const load = async ({
 	parent,
@@ -39,3 +61,5 @@ export const load = async ({
 		metadata: data.metadata
 	} satisfies App.PageReturn;
 };
+
+export const prerender = getPrerender();

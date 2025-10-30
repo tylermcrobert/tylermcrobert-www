@@ -1,4 +1,5 @@
 import { type InfoQuery, infoQuery } from '$sanity';
+import { getPrerender } from '$util/getPrerender';
 
 export const load = async ({
 	locals: {
@@ -13,3 +14,5 @@ export const load = async ({
 		pageTitle: infoPage.title
 	} satisfies App.PageReturn;
 };
+
+export const prerender = getPrerender();
