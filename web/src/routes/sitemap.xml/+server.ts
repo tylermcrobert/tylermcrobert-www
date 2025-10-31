@@ -1,26 +1,17 @@
-import { PUBLIC_SITE_URL } from '$env/static/public';
 import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$sanity';
 
 export async function GET({
+	url,
 	locals: {
 		sanity: { client }
 	}
 }) {
-	const sanityData = await client.fetch<SITEMAP_QUERYResult>(SITEMAP_QUERY);
+	const { pages, projects, info } =
+		await client.fetch<SITEMAP_QUERYResult>(SITEMAP_QUERY);
 
-	const pages: { slug: string; _updatedAt: string }[] = [];
-
-	sanityData.pages.forEach((page) => {
-		if (page !== null && page !== undefined) {
-			pages.push(page);
-		}
-	});
-
-	sanityData.projects?.forEach((project) => {
-		if (project !== null && project !== undefined && project.slug !== null) {
-			pages.push({ slug: project.slug, _updatedAt: project._updatedAt });
-		}
-	});
+	const idk = [...pages, ...(projects || [])].filter(
+		(page): page is { slug: string; _updatedAt: string } => page.slug !== null
+	);
 
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset 
@@ -30,11 +21,11 @@ export async function GET({
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 
-    ${pages
+    ${idk
 			.map(
 				(project) => `
         <url>
-          <loc>${PUBLIC_SITE_URL}/${project.slug}</loc>
+          <loc>${new URL(project.slug, url)}</loc>
           <lastmod>${project._updatedAt}</lastmod>
           <priority>0.8</priority>
         </url>`
@@ -42,10 +33,10 @@ export async function GET({
 			.join('')}
                 
     ${
-			sanityData.info
+			info
 				? `<url>
-        <loc>${PUBLIC_SITE_URL}/info</loc>
-        <lastmod>${sanityData.info?._updatedAt}</lastmod>
+        <loc>${new URL('info', url)}</loc>
+        <lastmod>${info?._updatedAt}</lastmod>
         <priority>0.8</priority>
       </url>
     `
