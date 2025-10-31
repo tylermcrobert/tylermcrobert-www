@@ -458,6 +458,10 @@ export const SITEMAP_QUERY = groq`{
     title,
     "slug": slug.current,
     _updatedAt,
+  },
+  "pages": *[_type == 'page']->{
+    "slug": slug.current,
+    _updatedAt,
   }
 }`;
 

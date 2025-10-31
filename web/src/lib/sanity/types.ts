@@ -158,31 +158,13 @@ export type Homepage = {
 	_createdAt: string;
 	_updatedAt: string;
 	_rev: string;
-	title?: string;
 	homepageMetaTitle?: string;
-	modules?: Array<
-		| ({
-				_key: string;
-		  } & TextBlock)
-		| ({
-				_key: string;
-		  } & MediaBlock)
-		| ({
-				_key: string;
-		  } & Website)
-		| ({
-				_key: string;
-		  } & Diptych)
-		| ({
-				_key: string;
-		  } & MobileWebsite)
-		| ({
-				_key: string;
-		  } & TripleImage)
-		| ({
-				_key: string;
-		  } & PlaylistBlock)
-	>;
+	context?: {
+		_ref: string;
+		_type: 'reference';
+		_weak?: boolean;
+		[internalGroqTypeReferenceTo]?: 'context';
+	};
 };
 
 export type Modules = Array<
@@ -1936,7 +1918,7 @@ export type InfoQueryResult = {
 				  }
 				| {
 						_type: 'homepage';
-						title: string | null;
+						title: null;
 						slug: null;
 				  }
 				| {
@@ -2006,7 +1988,7 @@ export type SITE_QUERYResult = {
 	} | null;
 };
 // Variable: SITEMAP_QUERY
-// Query: {  "info": *[_id == 'info'][0],  "projects": *[_id == "homepage"][0].context->caseStudies[]->{     title,    "slug": slug.current,    _updatedAt,  }}
+// Query: {  "info": *[_id == 'info'][0],  "projects": *[_id == "homepage"][0].context->caseStudies[]->{     title,    "slug": slug.current,    _updatedAt,  },  "pages": *[_type == 'page']->{    "slug": slug.current,    _updatedAt,  }}
 export type SITEMAP_QUERYResult = {
 	info:
 		| {
@@ -2058,31 +2040,13 @@ export type SITEMAP_QUERYResult = {
 				_createdAt: string;
 				_updatedAt: string;
 				_rev: string;
-				title?: string;
 				homepageMetaTitle?: string;
-				modules?: Array<
-					| ({
-							_key: string;
-					  } & Diptych)
-					| ({
-							_key: string;
-					  } & MediaBlock)
-					| ({
-							_key: string;
-					  } & MobileWebsite)
-					| ({
-							_key: string;
-					  } & PlaylistBlock)
-					| ({
-							_key: string;
-					  } & TextBlock)
-					| ({
-							_key: string;
-					  } & TripleImage)
-					| ({
-							_key: string;
-					  } & Website)
-				>;
+				context?: {
+					_ref: string;
+					_type: 'reference';
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: 'context';
+				};
 		  }
 		| {
 				_id: string;
@@ -2253,7 +2217,12 @@ export type SITEMAP_QUERYResult = {
 				dots?: Color;
 		  }
 		| null;
-	projects: null;
+	projects: Array<{
+		title: string | null;
+		slug: string | null;
+		_updatedAt: string;
+	}> | null;
+	pages: Array<null>;
 };
 
 // Query TypeMap
@@ -2270,6 +2239,6 @@ declare module '@sanity/client' {
 		'\n  *[_type == \'info\' ][0]{\n    metadata,\n    bio,\n    title,\n    clients,\n    links[]{\n      label,\n      link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    },\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n      duration, \n      date \n    }\n  }\n': InfoQueryResult;
 		'\n  *[_type == \'playlist\' && slug.current == $slug][0]{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n': PLAYLIST_QUERYResult;
 		'{\n  "homepageTitle": *[_id == \'homepage\'][0].homepageMetaTitle,\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;
-		'{\n  "info": *[_id == \'info\'][0],\n  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
+		'{\n  "info": *[_id == \'info\'][0],\n  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  },\n  "pages": *[_type == \'page\']->{\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
 }

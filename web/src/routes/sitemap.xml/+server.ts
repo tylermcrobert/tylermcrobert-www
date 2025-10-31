@@ -8,6 +8,20 @@ export async function GET({
 }) {
 	const sanityData = await client.fetch<SITEMAP_QUERYResult>(SITEMAP_QUERY);
 
+	const pages: { slug: string; _updatedAt: string }[] = [];
+
+	sanityData.pages.forEach((page) => {
+		if (page !== null && page !== undefined) {
+			pages.push(page);
+		}
+	});
+
+	sanityData.projects?.forEach((project) => {
+		if (project !== null && project !== undefined && project.slug !== null) {
+			pages.push({ slug: project.slug, _updatedAt: project._updatedAt });
+		}
+	});
+
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset 
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -16,7 +30,7 @@ export async function GET({
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 
-    ${(sanityData.projects || [])
+    ${pages
 			.map(
 				(project) => `
         <url>
