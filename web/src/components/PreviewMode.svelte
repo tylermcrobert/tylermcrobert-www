@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
+	import { PreviewMode, VisualEditing } from '@sanity/sveltekit';
+	import type { Snippet } from 'svelte';
 
 	import { page } from '$app/state';
 	import { PUBLIC_SANITY_STUDIO_URL } from '$env/static/public';
@@ -17,30 +18,15 @@
 	let presentationLink = $derived(
 		`${PUBLIC_SANITY_STUDIO_URL}/presentation?preview=${page.url.pathname}`
 	);
-
-	let PreviewMode = $state<
-		typeof import('@sanity/sveltekit').PreviewMode | null
-	>(null);
-	let VisualEditing = $state<
-		typeof import('@sanity/sveltekit').VisualEditing | null
-	>(null);
-
-	onMount(async () => {
-		PreviewMode = (await import('@sanity/sveltekit')).PreviewMode;
-		VisualEditing = (await import('@sanity/sveltekit')).VisualEditing;
-	});
 </script>
 
+<PreviewMode {enabled}>
+	<VisualEditing enabled={enabled && isInIframe}>
+		{@render children()}
+	</VisualEditing>
+</PreviewMode>
+
 {#if enabled}
-	{#if PreviewMode && VisualEditing}
-		<PreviewMode {enabled}>
-			<VisualEditing enabled={enabled && isInIframe}>
-				{@render children()}
-			</VisualEditing>
-		</PreviewMode>
-	{:else}
-		Loading...
-	{/if}
 	<!-- 
   	Preview mode overlay 
 	-->
@@ -69,6 +55,4 @@
 			</a>
 		{/if}
 	</div>
-{:else}
-	{@render children()}
 {/if}
