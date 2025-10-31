@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { stegaClean } from '@sanity/sveltekit';
+
 	import { page } from '$app/state';
 	import { NUMS } from '$constants';
-	import { stegaClean } from '@sanity/client/stega';
 </script>
 
 <div class="fixed top-0 flex min-h-dvh w-full items-center justify-center">

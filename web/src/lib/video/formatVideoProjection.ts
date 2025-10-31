@@ -1,6 +1,8 @@
+import { stegaClean } from '@sanity/sveltekit';
+
 import type { MediaProjectionVideo, SanityImageAsset } from '$sanity';
 import { urlFor } from '$sanity/image';
-import { stegaClean } from '@sanity/client/stega';
+
 import type { VideoPlaybackProps, VideoProps } from './types';
 
 function formatAspect(aspect: string): number {
