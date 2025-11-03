@@ -4,7 +4,7 @@
 	let { data } = $props();
 </script>
 
-<div class="wrapper my-large mx-auto">
+<div class="wrapper mx-auto my-large">
 	<ModulePlaylistBlock data={{ ...data, _type: 'playlistBlock' }} showAll />
 	<a href="/playlists">See All &rarr;</a>
 </div>

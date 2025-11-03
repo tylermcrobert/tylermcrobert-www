@@ -8,7 +8,7 @@
 
 {#if data.type === 'caseStudy' && caseStudy}
 	<div
-		class="z-project-page pb-large relative border-b border-dashed border-black bg-white"
+		class="relative z-project-page border-b border-dashed border-black bg-white pb-large"
 	>
 		<CaseStudyHeader
 			index={caseStudy.index}

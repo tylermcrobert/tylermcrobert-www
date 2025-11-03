@@ -94,13 +94,13 @@
 </script>
 
 <div
-	class="wrapper flex h-[calc(100dvh-theme(space.nav-height))] select-none flex-col justify-center"
+	class="wrapper flex h-[calc(100dvh-theme(space.nav-height))] flex-col justify-center select-none"
 >
 	<div
 		onmousedown={() => (pressed = true)}
 		bind:this={scrubberEl}
 		role="presentation"
-		class="scrubber fixed -left-px top-0 h-full w-px bg-black"
+		class="scrubber fixed top-0 -left-px h-full w-px bg-black"
 	></div>
 
 	<div class="flex flex-1 items-center justify-center">
@@ -113,7 +113,7 @@
 		</button>
 	</div>
 
-	<div class="pb-standard flex flex-col gap-[0.3rem]">
+	<div class="flex flex-col gap-[0.3rem] pb-standard">
 		<div>{data.title}</div>
 		<div class="flex justify-between">
 			<div>

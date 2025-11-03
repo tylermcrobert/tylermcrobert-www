@@ -27,7 +27,7 @@
 
 <header class="wrapper grid-standard mb-standard pt-large">
 	<h1 class="col-span-6">{NUMS[index + 1]} {title}</h1>
-	<h2 class="text-h1 max-w-rag-heading col-span-6 md:mb-small">
+	<h2 class="text-h1 col-span-6 max-w-rag-heading md:mb-small">
 		{intro}
 	</h2>
 

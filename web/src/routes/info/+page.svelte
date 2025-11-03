@@ -15,7 +15,7 @@
 		<h1 class="text-h1">{bio}</h1>
 	</div>
 
-	<div class="wrapper my-medium gap-standard grid grid-cols-6">
+	<div class="wrapper my-medium grid grid-cols-6 gap-standard">
 		<ul class="col-span-6 md:col-span-3">
 			{#each links as link}
 				<li>
@@ -34,7 +34,7 @@
 			<div class="col-span-6 md:col-span-3">
 				<h2><DotHead>Clients</DotHead></h2>
 
-				<ul class="gap-standard columns-2">
+				<ul class="columns-2 gap-standard">
 					{#each clients as client}<li>{client}</li>{/each}
 				</ul>
 			</div>
@@ -70,14 +70,14 @@
 					<a
 						href={link}
 						target="_blank"
-						class="gap-standard flex grid-cols-6 justify-between md:grid"
+						class="flex grid-cols-6 justify-between gap-standard md:grid"
 					>
 						<div class="col-span-4 flex gap-2 md:col-span-2">
 							<span>{NUMS[i + 1]}</span>
 							<h3 class="max-w-[18ch]">{title}</h3>
 						</div>
 						<p class="col-span-2 hidden md:block">{date}</p>
-						<p class="gap-standard col-span-2 flex justify-between">
+						<p class="col-span-2 flex justify-between gap-standard">
 							{formatTime(duration || 0, 'hh:mm:ss')}<span>&rarr;</span>
 						</p>
 					</a>

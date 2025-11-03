@@ -6,7 +6,7 @@
 
 <nav class="sticky top-0 z-nav text-white mix-blend-difference">
 	<div
-		class="min-h-nav-height px-standard max-w-wrapper mx-auto flex items-center justify-between py-4"
+		class="mx-auto flex min-h-nav-height max-w-wrapper items-center justify-between px-standard py-4"
 	>
 		<div class="flex flex-wrap">
 			<a href="/" class="mr-1">Tyler McRobert</a>
