@@ -2,13 +2,13 @@ import { groq } from '@sanity/sveltekit';
 import { error } from '@sveltejs/kit';
 
 import {
-	client as clientImported,
 	type Module,
 	ROOT_SLUG_QUERY,
 	type ROOT_SLUG_QUERYResult,
 	SITE_QUERY,
 	type SiteQuery
 } from '$lib/sanity';
+import { client as clientImported } from '$sanity/client';
 import { getPrerender } from '$util/getPrerender.js';
 
 export const entries = async () => {

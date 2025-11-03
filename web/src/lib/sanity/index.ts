@@ -1,4 +1,3 @@
-export * from './client';
-export * from './types';
-export * from './queries';
 export * from './linkUtils';
+export * from './queries';
+export * from './types';
