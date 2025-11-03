@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RichText } from '$components';
+	import RichText from '$components/RichText/RichText.svelte';
 	import type { ModuleTextBlock } from '$sanity';
 
 	type Props = { data: ModuleTextBlock };

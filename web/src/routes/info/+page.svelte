@@ -1,9 +1,9 @@
 <script lang="ts">
+	import DotHead from '$components/DotHead.svelte';
+	import Link from '$components/Link.svelte';
 	import { NUMS } from '$constants';
-	import { DotHead, Link } from '$components';
-	import { formatTime } from '$util/msToTime';
-
 	import { nowPlaying } from '$lib/state';
+	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
 	let { bio, clients, playlists, links } = $derived(data.infoPage);

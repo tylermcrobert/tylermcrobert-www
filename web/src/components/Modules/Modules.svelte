@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createDataAttribute } from '@sanity/sveltekit';
 
-	import { ImagePriorityProvider } from '$components';
+	import ImagePriorityProvider from '$components/ImagePriorityProvider.svelte';
 	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
 	import type { Module } from '$sanity';
 

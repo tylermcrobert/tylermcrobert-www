@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { RichText } from '$components';
-	import type { CaseStudy, Nullable } from '$sanity';
+	import RichText from '$components/RichText/RichText.svelte';
 	import { DOT, NUMS } from '$constants';
+	import type { CaseStudy, Nullable } from '$sanity';
 
 	type CaseStudyIntroProps = Nullable<
 		Required<

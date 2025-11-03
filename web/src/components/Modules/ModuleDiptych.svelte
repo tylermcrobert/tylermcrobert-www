@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Media, RichText } from '$components';
+	import Media from '$components/Media/Media.svelte';
+	import RichText from '$components/RichText/RichText.svelte';
 	import type { ModuleDiptych } from '$sanity';
 
 	type Props = { data: ModuleDiptych };

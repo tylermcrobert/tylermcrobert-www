@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DotHead } from '$components';
+	import DotHead from '$components/DotHead.svelte';
 	import { NUMS } from '$constants';
 	import type { ModulePlaylistBlock } from '$sanity';
 	import { formatTime } from '$util/msToTime';
@@ -48,8 +48,7 @@
 				{@const hidden = i + 1 > LIMIT && !isExpanded}
 
 				<li class={['text-h1 ', hidden ? 'hidden' : 'inline']}>
-					{NUMS[i + 1]}
-					{title}&mdash;{artistsFormatted} ({durFormatted}){' '}
+					{NUMS[i + 1]} {title}&mdash;{artistsFormatted} ({durFormatted})
 				</li>
 			{/each}
 		</ul>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Media } from '$components';
+	import Media from '$components/Media/Media.svelte';
 	import type { ModuleTripleImage } from '$sanity';
 
 	type Props = { data: ModuleTripleImage };
