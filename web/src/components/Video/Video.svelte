@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
+	import { browser } from '$app/environment';
 	import { playOnIntersect } from '$lib/attachments';
 
 	import type { VideoProps } from './types';
-	import VideoControls from './VideoControls.svelte';
 
 	let {
 		class: className,
@@ -17,11 +15,9 @@
 
 	let muxVideoPkgLoaded = $state(false);
 
-	onMount(() => {
-		import('@mux/mux-video').then(() => {
-			muxVideoPkgLoaded = true;
-		});
-	});
+	if (browser) {
+		import('@mux/mux-video').then(() => (muxVideoPkgLoaded = true));
+	}
 </script>
 
 {#snippet video()}
@@ -47,9 +43,11 @@
 {/snippet}
 
 {#if controls}
-	<VideoControls aspect={props.aspect} class={className} {poster}>
-		{@render video()}
-	</VideoControls>
+	{#await import('./VideoControls.svelte') then { default: VideoControls }}
+		<VideoControls aspect={props.aspect} class={className} {poster}>
+			{@render video()}
+		</VideoControls>
+	{/await}
 {:else}
 	{@render video()}
 {/if}

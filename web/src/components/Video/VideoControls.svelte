@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import type { ClassValue } from 'svelte/elements';
+
+	import { browser } from '$app/environment';
 
 	import PauseIcon from './icons/PauseIcon.svelte';
 	import PlayIcon from './icons/PlayIcon.svelte';
@@ -18,11 +20,9 @@
 
 	let packageLoaded = $state(false);
 
-	onMount(() => {
-		import('media-chrome').then(() => {
-			packageLoaded = true;
-		});
-	});
+	if (browser) {
+		import('media-chrome').then(() => (packageLoaded = true));
+	}
 </script>
 
 <media-controller
