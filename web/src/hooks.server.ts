@@ -34,6 +34,17 @@ const previewWithStegaLogic: Handle = async ({ event, resolve }) => {
 };
 
 /**
+ * Preload handler that includes fonts.
+ * https://svelte.dev/docs/kit/performance#Optimizing-assets-Fonts
+ */
+const preload: Handle = async ({ event, resolve }) =>
+	resolve(event, {
+		preload: ({ type }) => {
+			return ['js', 'css', 'font'].includes(type);
+		}
+	});
+
+/**
  * Sequence of hooks to run
  */
-export const handle = sequence(previewWithStegaLogic);
+export const handle = sequence(previewWithStegaLogic, preload);
