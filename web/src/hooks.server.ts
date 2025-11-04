@@ -7,11 +7,15 @@ import { serverClient } from '$sanity/client.server';
 
 export const PREVIEW_COOKIE_NAME = 'preview_mode_secret';
 
+/*
+ * Dynamically enables/disables stega when appropriate
+ *  - The user is previewing a draft
+ *  - The user is not using Firefox (because it creates a bug with flexbox)
+ */
 const previewWithStegaLogic: Handle = async ({ event, resolve }) => {
 	const previewCookie = event.cookies.get(PREVIEW_COOKIE_NAME);
 	const isPreview = previewCookie === PREVIEW_COOKIE_SECRET;
 
-	// Firefox has layout issues with stega
 	const notFirefox = !event.request.headers
 		.get('user-agent')
 		?.toLowerCase()
@@ -29,4 +33,7 @@ const previewWithStegaLogic: Handle = async ({ event, resolve }) => {
 	})({ event, resolve });
 };
 
+/**
+ * Sequence of hooks to run
+ */
 export const handle = sequence(previewWithStegaLogic);
