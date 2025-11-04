@@ -3,13 +3,11 @@
 
 	import { onMount } from 'svelte';
 
-	import {
-		Analytics,
-		ConsoleCredit,
-		Metadata,
-		Navigation,
-		PreviewMode
-	} from '$components';
+	import Analytics from '$components/Analytics.svelte';
+	import ConsoleCredit from '$components/ConsoleCredit.svelte';
+	import Metadata from '$components/Metadata.svelte';
+	import Navigation from '$components/Navigation.svelte';
+	import PreviewMode from '$components/PreviewMode.svelte';
 	import { fetchNowPlaying } from '$lib/last.fm';
 	import { setNowPlaying } from '$lib/state';
 

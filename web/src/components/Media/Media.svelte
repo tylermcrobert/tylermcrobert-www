@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { ClassValue } from 'svelte/elements';
 
-	import { Image, type ImageProps, Video, type VideoProps } from '$components';
+	import Image, { type ImageProps } from '$components/Image.svelte';
+	import Video, { type VideoProps } from '$components/Video/Video.svelte';
 	import type { MediaProjectionAsset } from '$sanity';
 
 	import { formatVideoProps } from './formatVideoProps';

@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { Image } from '$components';
-	import type { ModuleTimedSlides } from '$sanity';
 	import { onMount } from 'svelte';
+
+	import Image from '$components/Image.svelte';
+	import type { ModuleTimedSlides } from '$sanity';
 
 	type Props = {
 		data: ModuleTimedSlides;
