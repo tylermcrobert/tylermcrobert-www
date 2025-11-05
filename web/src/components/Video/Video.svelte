@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { playOnIntersect } from '$lib/attachments';
-
+	import { handleVideoPlayback } from './attachments/handleVideoPlayback.svelte';
 	import type { VideoProps } from './types';
+	import VideoControls from './VideoControls.svelte';
 
 	let {
 		class: className,
@@ -10,31 +9,33 @@
 		autoplay,
 		controls,
 		poster,
+		aspect,
+		lazyLoadMuxVideoPackage = true,
 		...props
 	}: VideoProps = $props();
 
-	let muxVideoPkgLoaded = $state(false);
-
-	if (browser) {
-		import('@mux/mux-video').then(() => (muxVideoPkgLoaded = true));
+	if (!lazyLoadMuxVideoPackage) {
+		import('@mux/mux-video');
 	}
 </script>
 
 {#snippet video()}
+	{@const aspectProp = !controls ? aspect : undefined}
+	{@const isPoster = !!poster && !controls}
+	{@const posterBg = isPoster ? `url('${poster}') center / cover` : undefined}
+	{@const classNameIfNoControls = !controls ? undefined : className}
+
 	<mux-video
 		{...props}
 		playback-id={playbackId}
-		style:background={poster && !controls // use background in VideoControls
-			? `url('${poster}') center / cover`
-			: undefined}
-		class={['block w-full', controls ? className : '']}
-		style:aspect-ratio={controls ? undefined : props.aspect}
-		style:--media-object-fit="cover"
-		slot="media"
+		class={['block w-full', classNameIfNoControls]}
 		disablepictureinpicture
 		playsinline
-		{@attach playOnIntersect({
-			ready: muxVideoPkgLoaded,
+		style:background={posterBg}
+		style:aspect-ratio={aspectProp}
+		style:--media-object-fit="cover"
+		slot="media"
+		{@attach handleVideoPlayback({
 			autoPlay: !!autoplay,
 			autoPause: true
 		})}
@@ -43,11 +44,9 @@
 {/snippet}
 
 {#if controls}
-	{#await import('./VideoControls.svelte') then { default: VideoControls }}
-		<VideoControls aspect={props.aspect} class={className} {poster}>
-			{@render video()}
-		</VideoControls>
-	{/await}
+	<VideoControls {aspect} class={className} {poster}>
+		{@render video()}
+	</VideoControls>
 {:else}
 	{@render video()}
 {/if}
