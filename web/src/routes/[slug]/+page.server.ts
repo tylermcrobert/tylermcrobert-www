@@ -1,15 +1,10 @@
 import { groq } from '@sanity/sveltekit';
 import { error } from '@sveltejs/kit';
 
-import {
-	type Module,
-	ROOT_SLUG_QUERY,
-	type ROOT_SLUG_QUERYResult,
-	SITE_QUERY,
-	type SiteQuery
-} from '$lib/sanity';
+import { type Module, SITE_QUERY, type SiteQuery } from '$lib/sanity';
 import { client as clientImported } from '$sanity/client';
-import { getPrerender } from '$util/getPrerender.js';
+
+import { prerenderSlugData, querySlugData } from './data.remote.js';
 
 export const entries = async () => {
 	const site = await clientImported.fetch<SiteQuery>(SITE_QUERY, {
@@ -32,16 +27,15 @@ export const load = async ({
 	parent,
 	params,
 	locals: {
-		sanity: { client, previewEnabled }
+		sanity: { previewEnabled }
 	}
 }) => {
 	const { contextCaseStudies } = (await parent()) as App.LayoutData;
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
+	const data = await (previewEnabled ? querySlugData : prerenderSlugData)();
 
-	const data = await client.fetch<ROOT_SLUG_QUERYResult>(ROOT_SLUG_QUERY, {
-		slug: params.slug
-	});
+	console.log({ data, previewEnabled });
 
 	if (!data) {
 		return error(404);
@@ -62,4 +56,4 @@ export const load = async ({
 	} satisfies App.PageReturn;
 };
 
-export const prerender = getPrerender();
+export const prerender = 'auto';

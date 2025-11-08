@@ -18,6 +18,14 @@ const config = {
 			$lib: 'src/lib',
 			$util: 'src/util',
 			$constants: 'src/constants'
+		},
+		experimental: {
+			remoteFunctions: true
+		}
+	},
+	compilerOptions: {
+		experimental: {
+			async: true
 		}
 	}
 };
