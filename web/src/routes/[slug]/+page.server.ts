@@ -33,9 +33,9 @@ export const load = async ({
 	const { contextCaseStudies } = (await parent()) as App.LayoutData;
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
-	const data = await (previewEnabled ? querySlugData : prerenderSlugData)();
-
-	console.log({ data, previewEnabled });
+	const data = await (previewEnabled
+		? querySlugData(params.slug)
+		: prerenderSlugData(params.slug));
 
 	if (!data) {
 		return error(404);
