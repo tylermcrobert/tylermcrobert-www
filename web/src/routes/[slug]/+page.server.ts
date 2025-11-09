@@ -6,20 +6,22 @@ import { client as clientImported } from '$sanity/client';
 
 import { prerenderSlugData, querySlugData } from './data.remote.js';
 
-export const entries = async () => {
-	const site = await clientImported.fetch<SiteQuery>(SITE_QUERY, {
-		contextSlug: null
-	});
+type Entry = { slug: string };
 
-	const pageSlugs: { slug: string }[] = await clientImported.fetch(
+export const entries = async () => {
+	const caseStudies = await clientImported
+		.fetch<SiteQuery>(SITE_QUERY, { contextSlug: null })
+		.then(({ context }) => context?.caseStudies || []);
+
+	const pageSlugs: Entry[] = await clientImported.fetch(
 		groq`*[_type == "page"]{ "slug": slug.current }`
 	);
 
 	return [
 		...pageSlugs,
-		...((site.context?.caseStudies
-			?.map(({ slug }) => ({ slug }))
-			.filter(({ slug }) => slug !== null) as { slug: string }[]) || [])
+		...(caseStudies
+			.map(({ slug }) => ({ slug }))
+			.filter(({ slug }) => slug !== null) as Entry[])
 	];
 };
 
