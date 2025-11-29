@@ -3,6 +3,7 @@
 	import Link from '$components/Link.svelte';
 	import { NUMS } from '$constants';
 	import { nowPlaying } from '$lib/state';
+	import { censor } from '$util/censor.js';
 	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
@@ -48,14 +49,20 @@
 	<div class="wrapper my-medium">
 		{#if nowPlaying.data}
 			{@const { trackName, artist, isPlaying } = nowPlaying.data}
+
+			{@const censoredTrackName = censor(trackName)}
+			{@const censoredArtist = censor(artist)}
+
 			<h2>
 				<DotHead>{isPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
 			</h2>
 			<h3 class="text-h1">
 				{#if isPlaying}
-					Right now I'm listening to “{trackName}” by {artist} on Spotify.
+					Right now I'm listening to “{censoredTrackName}” by {censoredArtist} on
+					Spotify.
 				{:else}
-					The last song I listened to on Spotify was “{trackName}” by {artist}.
+					The last song I listened to on Spotify was “{censoredTrackName}” by
+					{censoredArtist}.
 				{/if}
 			</h3>
 		{/if}

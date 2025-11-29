@@ -48,6 +48,7 @@
 		"@portabletext/svelte": "^3.0.0",
 		"@sanity/sveltekit": "^1.0.3",
 		"@tylermcrobert/svelte-sanity-image": "^1.0.4",
+		"bad-words": "^4.0.0",
 		"media-chrome": "^4.11.0"
 	}
 }

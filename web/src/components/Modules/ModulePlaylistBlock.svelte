@@ -2,6 +2,7 @@
 	import DotHead from '$components/DotHead.svelte';
 	import { NUMS } from '$constants';
 	import type { ModulePlaylistBlock } from '$sanity';
+	import { censor } from '$util/censor';
 	import { formatTime } from '$util/msToTime';
 
 	const LIMIT = 5;
@@ -44,11 +45,11 @@
 		<ul>
 			{#each tracks || [] as { title, duration, artists }, i}
 				{@const durFormatted = formatTime(duration || 0, 'mm:ss')}
-				{@const artistsFormatted = artists?.join(' & ')}
+				{@const artistsFormatted = (artists || []).filter(censor).join(' & ')}
 				{@const hidden = i + 1 > LIMIT && !isExpanded}
 
-				<li class={['text-h1 ', hidden ? 'hidden' : 'inline']}>
-					{NUMS[i + 1]} {title}&mdash;{artistsFormatted} ({durFormatted})
+				<li class={['text-h1 mr-[0.4ch]', hidden ? 'hidden' : 'inline']}>
+					{NUMS[i + 1]}&nbsp;{censor(title!)}&mdash;{artistsFormatted} ({durFormatted})
 				</li>
 			{/each}
 		</ul>
