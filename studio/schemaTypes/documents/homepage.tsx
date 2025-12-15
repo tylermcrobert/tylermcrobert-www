@@ -8,6 +8,13 @@ export const homepage = defineType({
   icon,
   fields: [
     defineField({
+      name: 'title',
+      type: 'string',
+      initialValue: 'Home',
+      hidden: true,
+    }),
+
+    defineField({
       title: 'Homepage Title',
       name: 'homepageMetaTitle',
       type: 'string',

@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
-	import type { ClassValue } from 'svelte/elements';
 
 	import PauseIcon from './icons/PauseIcon.svelte';
 	import PlayIcon from './icons/PlayIcon.svelte';
 	import VolumeMuted from './icons/VolumeMuted.svelte';
 	import VolumePlaying from './icons/VolumePlaying.svelte';
+	import type { VideoProps } from './types';
 
-	type Props = {
-		class?: ClassValue;
-		aspect: number;
+	interface Props extends Pick<VideoProps, 'aspect' | 'class' | 'poster'> {
 		children: Snippet;
-		poster?: string;
-	};
+	}
 
 	let { class: className, children, aspect, poster }: Props = $props();
 

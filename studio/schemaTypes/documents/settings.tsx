@@ -8,6 +8,13 @@ export const settings = defineType({
   icon,
   fields: [
     defineField({
+      name: 'title',
+      type: 'string',
+      initialValue: 'Settings',
+      hidden: true,
+    }),
+
+    defineField({
       type: 'string',
       name: 'siteTitle',
       validation: (Rule) => Rule.required(),

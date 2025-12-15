@@ -19,6 +19,7 @@ export type Settings = {
 	_createdAt: string;
 	_updatedAt: string;
 	_rev: string;
+	title?: string;
 	siteTitle?: string;
 	googleAnalyticsId?: string;
 	defaultBrowserFrame?: {
@@ -158,6 +159,7 @@ export type Homepage = {
 	_createdAt: string;
 	_updatedAt: string;
 	_rev: string;
+	title?: string;
 	homepageMetaTitle?: string;
 	context?: {
 		_ref: string;
@@ -538,6 +540,7 @@ export type MuxAssetData = {
 	max_stored_resolution?: string;
 	passthrough?: string;
 	encoding_tier?: string;
+	video_quality?: string;
 	master_access?: string;
 	aspect_ratio?: string;
 	duration?: number;
@@ -569,12 +572,18 @@ export type MuxStaticRenditions = {
 
 export type MuxStaticRenditionFile = {
 	_type: 'mux.staticRenditionFile';
-	ext?: string;
 	name?: string;
+	ext?: string;
+	height?: number;
 	width?: number;
 	bitrate?: number;
-	filesize?: number;
-	height?: number;
+	filesize?: string;
+	type?: string;
+	status?: string;
+	resolution_tier?: string;
+	resolution?: string;
+	id?: string;
+	passthrough?: string;
 };
 
 export type MuxPlaybackId = {
@@ -1918,7 +1927,7 @@ export type InfoQueryResult = {
 				  }
 				| {
 						_type: 'homepage';
-						title: null;
+						title: string | null;
 						slug: null;
 				  }
 				| {
@@ -2040,6 +2049,7 @@ export type SITEMAP_QUERYResult = {
 				_createdAt: string;
 				_updatedAt: string;
 				_rev: string;
+				title?: string;
 				homepageMetaTitle?: string;
 				context?: {
 					_ref: string;
@@ -2195,6 +2205,7 @@ export type SITEMAP_QUERYResult = {
 				_createdAt: string;
 				_updatedAt: string;
 				_rev: string;
+				title?: string;
 				siteTitle?: string;
 				googleAnalyticsId?: string;
 				defaultBrowserFrame?: {
