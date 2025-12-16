@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import Image from '$components/Image.svelte';
-	import Media from '$components/Media/Media.svelte';
+	import Media from '$components/Media.svelte';
 	import type { ModuleWebsite } from '$sanity';
 
 	type Props = { data: ModuleWebsite };

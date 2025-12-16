@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Media from '$components/Media/Media.svelte';
+	import Media from '$components/Media.svelte';
 	import type { ModuleMobileWebsite } from '$sanity';
 
 	type Props = { data: ModuleMobileWebsite };
