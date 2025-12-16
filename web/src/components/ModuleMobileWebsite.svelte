@@ -20,7 +20,6 @@
 				value={frame.media.asset}
 				sizes={`${100 / (data.frames?.length || 1)}vw`}
 				alt={null}
-				class="max-h-[70vh] w-auto overflow-hidden"
 			/>
 		{/if}
 	{/each}
