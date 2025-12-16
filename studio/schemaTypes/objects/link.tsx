@@ -47,6 +47,8 @@ export const link = defineType({
       name: 'label',
       title: 'Label',
       type: 'string',
+      description:
+        'Optional. Override the default label for the link. Defaults to internally linked title or external link URL.',
     }),
   ],
   preview: {

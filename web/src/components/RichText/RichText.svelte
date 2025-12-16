@@ -7,7 +7,11 @@
 	import RichTextListRenderer from './RichTextListRenderer.svelte';
 	import RichTextStyleRenderer from './RichTextStyleRenderer.svelte';
 
-	let { value }: { value: RichTextProjection } = $props();
+	type Props = {
+		value: RichTextProjection;
+	};
+
+	let { value }: Props = $props();
 </script>
 
 <PortableText

@@ -39,9 +39,7 @@ const previewWithStegaLogic: Handle = async ({ event, resolve }) => {
  */
 const preload: Handle = async ({ event, resolve }) =>
 	resolve(event, {
-		preload: ({ type }) => {
-			return ['js', 'css', 'font'].includes(type);
-		}
+		preload: ({ type }) => ['js', 'css', 'font'].includes(type)
 	});
 
 /**

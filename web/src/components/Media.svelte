@@ -2,11 +2,9 @@
 	import type { ClassValue } from 'svelte/elements';
 
 	import Image, { type ImageProps } from '$components/Image.svelte';
-	import { type VideoProps } from '$components/Video/types';
-	import Video from '$components/Video/Video.svelte';
+	import type { VideoProps } from '$components/Video/types';
+	import VideoFromProjection from '$components/Video/VideoFromProjection.svelte';
 	import type { MediaProjectionAsset } from '$sanity';
-
-	import { formatVideoProps } from './formatVideoProps';
 
 	type Props = {
 		value: MediaProjectionAsset;
@@ -28,7 +26,11 @@
 </script>
 
 {#if value?._type === 'video'}
-	<Video {...formatVideoProps(value.video, videoProps)} class={className} />
+	<VideoFromProjection
+		{...videoProps}
+		projection={value.video}
+		class={className}
+	/>
 {:else if value?._type === 'image'}
 	<Image {...imageProps} image={value.image} class={className} {alt} {sizes} />
 {/if}

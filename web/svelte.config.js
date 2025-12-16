@@ -19,6 +19,12 @@ const config = {
 			$util: 'src/util',
 			$constants: 'src/constants'
 		}
+	},
+
+	compilerOptions: {
+		experimental: {
+			async: true
+		}
 	}
 };
 

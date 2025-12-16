@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Media from '$components/Media/Media.svelte';
+	import Media from '$components/Media.svelte';
 	import type { ModuleMobileWebsite } from '$sanity';
 
 	type Props = { data: ModuleMobileWebsite };
@@ -20,7 +20,6 @@
 				value={frame.media.asset}
 				sizes={`${100 / (data.frames?.length || 1)}vw`}
 				alt={null}
-				class="max-h-[70vh] w-auto overflow-hidden"
 			/>
 		{/if}
 	{/each}

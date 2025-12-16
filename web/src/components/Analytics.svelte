@@ -1,16 +1,14 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-
 	let { id }: { id: string } = $props();
 
-	if (browser) {
+	$effect(() => {
 		window.dataLayer = window.dataLayer || [];
 		window.gtag = function gtag(): void {
 			window.dataLayer.push(arguments);
 		};
 		window.gtag('js', new Date());
 		window.gtag('config', id);
-	}
+	});
 </script>
 
 <svelte:head>

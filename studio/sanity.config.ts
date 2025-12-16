@@ -42,7 +42,6 @@ export default defineConfig({
     newDocumentOptions: (item) => {
       return item.filter((item) => CREATABLE_DOCTYPES.includes(item.templateId))
     },
-
     productionUrl: async (prev, context) => {
       const slug = (context.document as any)?.slug?.current
       const type = (context.document as any)._type

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { handleVideoPlayback } from './attachments/handleVideoPlayback.svelte';
+	import { intersectionHandlePlayback } from './attachments/onScrollHandlePlayback.svelte';
+	import { intersectionLoadMux } from './attachments/onScrollLoadMux.svelte';
 	import type { VideoProps } from './types';
 	import VideoControls from './VideoControls.svelte';
 
@@ -14,31 +15,28 @@
 		...props
 	}: VideoProps = $props();
 
-	if (!lazyLoadMuxVideoPackage) {
-		import('@mux/mux-video');
-	}
+	let isMuxLoaded = $derived(
+		lazyLoadMuxVideoPackage ? false : !!(await import('@mux/mux-video'))
+	);
 </script>
 
 {#snippet video()}
-	{@const aspectProp = !controls ? aspect : undefined}
-	{@const isPoster = !!poster && !controls}
-	{@const posterBg = isPoster ? `url('${poster}') center / cover` : undefined}
-	{@const classNameIfNoControls = !controls ? undefined : className}
+	{@const shouldShowPoster = poster && !controls}
+	{@const posterStyle = `url('${poster}') center / cover`}
 
 	<mux-video
 		{...props}
 		playback-id={playbackId}
-		class={['block w-full', classNameIfNoControls]}
+		class={['block w-full', !controls && className]}
+		style:--media-object-fit="cover"
+		style:background={shouldShowPoster ? posterStyle : undefined}
+		style:aspect-ratio={controls ? undefined : aspect}
 		disablepictureinpicture
 		playsinline
-		style:background={posterBg}
-		style:aspect-ratio={aspectProp}
-		style:--media-object-fit="cover"
 		slot="media"
-		{@attach handleVideoPlayback({
-			autoPlay: !!autoplay,
-			autoPause: true
-		})}
+		{@attach isMuxLoaded
+			? intersectionHandlePlayback({ autoPlay: !!autoplay, autoPause: true })
+			: intersectionLoadMux(() => (isMuxLoaded = true))}
 	>
 	</mux-video>
 {/snippet}
