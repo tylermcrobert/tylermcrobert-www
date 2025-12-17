@@ -15,9 +15,13 @@
 		...props
 	}: VideoProps = $props();
 
-	let isMuxLoaded = $derived(
-		lazyLoadMuxVideoPackage ? false : !!(await import('@mux/mux-video'))
-	);
+	let isMuxLoaded = $state(false);
+
+	$effect(() => {
+		if (!lazyLoadMuxVideoPackage) {
+			isMuxLoaded = true;
+		}
+	});
 </script>
 
 {#snippet video()}
