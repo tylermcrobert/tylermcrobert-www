@@ -39,14 +39,14 @@
 			d="M0 8a8 8 0 0 1 8-8h1424c4.42 0 8 3.582 8 8v44H0V8Z"
 			fill="var(--browser-background)"
 		/>
-		<line
+		<!-- <line
 			x1="0"
 			y1="52"
 			x2="1440"
 			y2="52"
 			stroke="var(--browser-stroke)"
 			stroke-width="1"
-		/>
+		/> -->
 
 		<rect
 			x="16"
