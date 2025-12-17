@@ -143,14 +143,6 @@ export type ModuleMediaBlock = Nullable<{
  * Website
  */
 
-const WEB_FRAME_THEME_PROJECTION = groq`{
-  "dots": dots,
-  "frameBackground": frameBackground,
-  "frameForeground": frameForeground,
-  "sectionBackground": sectionBackground,
-  "style": style,
-}`;
-
 const MODULE_WEBSITE = `//groq
   _type == 'website' => {
     backgroundImg,
@@ -344,6 +336,13 @@ export type Module = { _key: string } & (
  * PAGES
  ******************************************************************************/
 
+const WEB_FRAME_THEME_PROJECTION = groq`{
+  "dots": dots,
+  "frameBackground": frameBackground,
+  "frameForeground": frameForeground,
+  "sectionBackground": sectionBackground,
+  "style": style,
+}`;
 export const ROOT_SLUG_QUERY = groq`
   *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
     _type,
