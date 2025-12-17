@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { stegaClean } from '@sanity/sveltekit';
+
 	import { page } from '$app/state';
 	import Image from '$components/Image.svelte';
 	import Media from '$components/Media.svelte';
@@ -14,9 +16,16 @@
 	style:background={data.backgroundColor || data.theme?.background}
 	class="relative my-standard w-full bg-black p-[10%]"
 >
-	<div class="relative z-10">
+	<div
+		class="relative z-10"
+		style:--dots={stegaClean(data.theme?.dots) || ''}
+		style:--browser-background={stegaClean(data.theme?.frame) || '#222'}
+		style:--browser-foreground="#ffffff50"
+		style:--browser-text="#ffffff80"
+		style:--address-stroke="#ffffff20"
+	>
 		{#if showFrame !== false && theme?.frame}
-			{@render browserFrame()}
+			{@render browserFrameWithUI()}
 		{/if}
 
 		{#if media?.asset}
@@ -49,11 +58,11 @@
 		<g fill="none" fill-rule="evenodd">
 			<path
 				d="M4 0h431c2.209139 0 4 1.790861 4 4v9H0V4c0-2.209139 1.790861-4 4-4z"
-				fill={data.theme?.frame}
+				fill="var(--browser-background)"
 			/>
-			<circle fill={data.theme?.dots || '#FF6158'} cx="6.5" cy="6.5" r="2.5" />
-			<circle fill={data.theme?.dots || '#FFBE2D'} cx="22.5" cy="6.5" r="2.5" />
-			<circle fill={data.theme?.dots || '#27C93F'} cx="14.5" cy="6.5" r="2.5" />
+			<circle fill="var(--dots, #FF6158)" cx="6.5" cy="6.5" r="2.5" />
+			<circle fill="var(--dots, #FFBE2D)" cx="22.5" cy="6.5" r="2.5" />
+			<circle fill="var(--dots, #27C93F)" cx="14.5" cy="6.5" r="2.5" />
 		</g>
 	</svg>
 {/snippet}
@@ -62,24 +71,16 @@
 	<svg fill="none" viewBox="0 0 1440 52">
 		<path
 			d="M0 8a8 8 0 0 1 8-8h1424c4.42 0 8 3.582 8 8v44H0V8Z"
-			fill={data.theme?.frame || '#282828'}
+			fill="var(--browser-background)"
 		/>
-		<rect
-			x="457.5"
-			y="11.5"
-			width="525"
-			height="27"
-			rx="5.5"
-			fill="#000"
-			fill-opacity=".1"
-		/>
+
 		<rect
 			x="16"
 			y="20"
 			width="12"
 			height="12"
 			rx="6"
-			fill={data.theme?.dots || '#FF6158'}
+			fill="var(--dots, #FF6158)"
 		/>
 		<rect
 			x="36"
@@ -87,7 +88,7 @@
 			width="12"
 			height="12"
 			rx="6"
-			fill={data.theme?.dots || '#29C93F'}
+			fill="var(--dots, #FFBE2D)"
 		/>
 		<rect
 			x="56"
@@ -95,34 +96,45 @@
 			width="12"
 			height="12"
 			rx="6"
-			fill={data.theme?.dots || '#FFBE2C'}
+			fill="var(--dots, #27C93F)"
 		/>
 
 		<!-- FWD/BK -->
+
 		<g
-			opacity=".4"
-			stroke="#B8B7B9"
-			stroke-width="2"
+			stroke="var(--browser-foreground)"
+			stroke-width="2.25"
 			stroke-linecap="round"
 			stroke-linejoin="round"><path d="m107 19-7 7 7 7M135 33l7-7-7-7" /></g
 		>
 		<g
-			opacity=".4"
-			stroke="#B8B7B9"
-			stroke-width="2"
+			stroke="var(--browser-foreground)"
+			stroke-width="2.25"
 			stroke-linecap="round"
 			stroke-linejoin="round"><path d="M1406 18.5v16M1414 26.5h-16" /></g
 		>
+
+		<!-- Address Bar -->
+
+		<rect
+			x="457.5"
+			y="11.5"
+			width="525"
+			height="27"
+			rx="5.5"
+			stroke="var(--address-stroke, var(--browser-foreground))"
+		/>
+
 		<text
 			x="50%"
 			y="50%"
-			font-size="10.5"
-			fill="white"
-			opacity={0.3}
+			font-size="12"
+			class="select-none"
+			fill="var(--browser-text, var(--browser-foreground))"
 			font-weight="bold"
 			text-anchor="middle"
 			dominant-baseline="middle"
-			letter-spacing=".5"
+			letter-spacing=".6"
 		>
 			{page.data.caseStudy.title}
 		</text>
