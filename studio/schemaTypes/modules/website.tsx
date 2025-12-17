@@ -25,6 +25,7 @@ export const website = defineType({
       name: 'theme',
       type: 'reference',
       to: [{type: 'webFrameTheme'}],
+      hidden: ({parent}) => parent?.showFrame === false,
     }),
 
     defineField({

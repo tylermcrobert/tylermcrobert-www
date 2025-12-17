@@ -20,6 +20,11 @@ export default defineField({
     },
 
     {
+      name: 'foreground',
+      type: 'color',
+    },
+
+    {
       name: 'frame',
       type: 'color',
       validation: (Rule) => Rule.required(),

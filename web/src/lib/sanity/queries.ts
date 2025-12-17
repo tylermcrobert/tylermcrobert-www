@@ -146,6 +146,7 @@ const WEB_FRAME_THEME_PROJECTION = groq`{
   "dots": dots.hex,
   "frame": frame.hex,
   "background": background.hex,
+  "foreground": foreground.hex
 }`;
 
 const MODULE_WEBSITE = `//groq
@@ -166,6 +167,7 @@ export type ModuleWebsite = Nullable<{
 	media: MediaProjection;
 	backgroundColor: string;
 	theme: Nullable<{
+		foreground: string;
 		frame: string;
 		background: string;
 		dots: string;

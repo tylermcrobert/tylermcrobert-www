@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { stegaClean } from '@sanity/sveltekit';
 
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 	import Image from '$components/Image.svelte';
 	import Media from '$components/Media.svelte';
@@ -16,16 +17,19 @@
 	style:background={data.backgroundColor || data.theme?.background}
 	class="relative my-standard w-full bg-black p-[10%]"
 >
-	<div
-		class="relative z-10"
-		style:--dots={stegaClean(data.theme?.dots) || ''}
-		style:--browser-background={stegaClean(data.theme?.frame) || '#222'}
-		style:--browser-foreground="#ffffff50"
-		style:--browser-text="#ffffff80"
-		style:--address-stroke="#ffffff20"
-	>
+	<div class="relative z-10">
 		{#if showFrame !== false && theme?.frame}
-			{@render browserFrameWithUI()}
+			<!-- prettier-ignore -->
+			<span
+				class="relative z-10 -mb-px block"
+				style:--dots={data.theme?.dots || ''}
+				style:--browser-background={data.theme?.frame || '#222'}
+				style:--browser-foreground={data.theme?.foreground || '#999'}
+				style:--browser-text=""
+				style:--browser-stroke="color-mix(in srgb, var(--browser-foreground) 20%, transparent)"
+			>
+				{@render browserFrameWithUI()}
+			</span>
 		{/if}
 
 		{#if media?.asset}
@@ -72,6 +76,14 @@
 		<path
 			d="M0 8a8 8 0 0 1 8-8h1424c4.42 0 8 3.582 8 8v44H0V8Z"
 			fill="var(--browser-background)"
+		/>
+		<line
+			x1="0"
+			y1="52"
+			x2="1440"
+			y2="52"
+			stroke="var(--browser-stroke)"
+			stroke-width="1"
 		/>
 
 		<rect
@@ -122,7 +134,7 @@
 			width="525"
 			height="27"
 			rx="5.5"
-			stroke="var(--address-stroke, var(--browser-foreground))"
+			stroke="var(--browser-stroke)"
 		/>
 
 		<text
