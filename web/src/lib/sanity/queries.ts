@@ -2,6 +2,7 @@ import type { InputValue } from '@portabletext/svelte';
 import groq from 'groq';
 
 import type {
+	BrowserFrame,
 	DiptychMedia,
 	InfoQueryResult,
 	Media,
@@ -143,18 +144,17 @@ export type ModuleMediaBlock = Nullable<{
  */
 
 const WEB_FRAME_THEME_PROJECTION = groq`{
-  "dots": dots.hex,
-  "frame": frame.hex,
-  "background": background.hex,
-  "foreground": foreground.hex
+  "dots": dots,
+  "frameBackground": frameBackground,
+  "frameForeground": frameForeground,
+  "sectionBackground": sectionBackground,
+  "style": style,
 }`;
 
 const MODULE_WEBSITE = `//groq
   _type == 'website' => {
-    "theme": coalesce(
-      theme->${WEB_FRAME_THEME_PROJECTION},
-      *[_id == "settings"][0].defaultBrowserFrame->${WEB_FRAME_THEME_PROJECTION}
-    ),
+    // TODO: Grab this from the case study and if not found, use the default from the settings
+    "theme":  *[_id == "settings"][0].defaultBrowserFrameV2${WEB_FRAME_THEME_PROJECTION},
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
     showFrame,
@@ -166,12 +166,14 @@ export type ModuleWebsite = Nullable<{
 	_type: 'website';
 	media: MediaProjection;
 	backgroundColor: string;
-	theme: Nullable<{
-		foreground: string;
-		frame: string;
-		background: string;
-		dots: string;
-	}>;
+	theme: Pick<
+		BrowserFrame,
+		| 'dots'
+		| 'frameBackground'
+		| 'frameForeground'
+		| 'sectionBackground'
+		| 'style'
+	>;
 }> &
 	Pick<Website, 'showFrame' | 'backgroundImg'>;
 
@@ -364,6 +366,7 @@ export const ROOT_SLUG_QUERY = groq`
         date,
         title,
         description,
+        browserFrame
       },
     },
     

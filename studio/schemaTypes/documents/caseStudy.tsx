@@ -69,6 +69,11 @@ export default defineField({
       name: 'metadata',
       type: 'metadata',
     },
+
+    defineField({
+      name: 'browserFrame',
+      type: 'browserFrame',
+    }),
   ],
 
   preview: {

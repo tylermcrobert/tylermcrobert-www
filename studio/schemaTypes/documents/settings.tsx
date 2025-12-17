@@ -33,12 +33,25 @@ export const settings = defineType({
         }).error('Must be a valid GA4 Measurement ID, e.g., G-XXXXXXXXXX'),
     }),
 
+    // defineField({
+    //   name: 'defaultBrowserFrame',
+    //   deprecated: {reason: 'Use defaultBrowserFrameV2 instead'},
+    //   description: 'When browser frames are not specified for a block, this will be used.',
+    //   type: 'reference',
+    //   to: [{type: 'webFrameTheme'}],
+    //   validation: (Rule) => Rule.required(),
+    // }),
+
     defineField({
-      name: 'defaultBrowserFrame',
-      description: 'When browser frames are not specified for a block, this will be used.',
-      type: 'reference',
-      to: [{type: 'webFrameTheme'}],
+      name: 'defaultBrowserFrameV2',
+      description:
+        "The default browser frame in case studies that don't have a browser frame specified.",
+      type: 'browserFrame',
       validation: (Rule) => Rule.required(),
+      options: {
+        collapsable: true,
+        collapsed: true,
+      },
     }),
 
     defineField({

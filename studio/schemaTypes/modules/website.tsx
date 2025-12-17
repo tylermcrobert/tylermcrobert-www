@@ -22,13 +22,6 @@ export const website = defineType({
     }),
 
     defineField({
-      name: 'theme',
-      type: 'reference',
-      to: [{type: 'webFrameTheme'}],
-      hidden: ({parent}) => parent?.showFrame === false,
-    }),
-
-    defineField({
       name: 'backgroundImg',
       type: 'image',
       options: {hotspot: true},
