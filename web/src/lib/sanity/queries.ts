@@ -153,10 +153,6 @@ const WEB_FRAME_THEME_PROJECTION = groq`{
 
 const MODULE_WEBSITE = `//groq
   _type == 'website' => {
-    "theme": coalesce(
-      ^.browserFrame${WEB_FRAME_THEME_PROJECTION},
-      *[_id == "settings"][0].defaultBrowserFrameV2${WEB_FRAME_THEME_PROJECTION}
-    ),
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
     showFrame,
@@ -168,14 +164,6 @@ export type ModuleWebsite = Nullable<{
 	_type: 'website';
 	media: MediaProjection;
 	backgroundColor: string;
-	theme: Pick<
-		BrowserFrame,
-		| 'dots'
-		| 'frameBackground'
-		| 'frameForeground'
-		| 'sectionBackground'
-		| 'style'
-	>;
 }> &
 	Pick<Website, 'showFrame' | 'backgroundImg'>;
 
@@ -363,6 +351,10 @@ export const ROOT_SLUG_QUERY = groq`
 
     _type == 'caseStudy' => {
       "caseStudy": {
+        "theme": coalesce(
+          @.browserFrame${WEB_FRAME_THEME_PROJECTION},
+          *[_id == "settings"][0].defaultBrowserFrameV2${WEB_FRAME_THEME_PROJECTION}
+        ),
         intro,
         deliverables,
         date,

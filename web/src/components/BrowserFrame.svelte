@@ -1,32 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { stegaClean } from '@sanity/sveltekit';
+	import { getBrowserThemeCtx } from './BrowserFrameThemeProvider.svelte';
 
-	interface Props {
-		dots: string | null;
-		frameBackground: string;
-		frameForeground: string;
-		style: 'simple' | 'accurate';
-	}
-
-	let { dots, frameBackground, frameForeground, style }: Props = $props();
-
-	// Browser text and stroke TBD
+	let ctx = getBrowserThemeCtx();
 </script>
 
-<span
-	class="contents"
-	style:--dots={dots || ''}
-	style:--browser-background={frameBackground}
-	style:--browser-foreground={frameForeground}
-	style:--browser-text=""
-	style:--browser-stroke={`
-    color-mix(in srgb, var(--browser-foreground) 25%, transparent)`}
->
-	{#if stegaClean(style) === 'simple'}
+<span class="relative z-10 -mb-px block">
+	{#if stegaClean(ctx.getStyle()) === 'simple'}
 		{@render browserFrameSimple()}
 	{:else}
-		{@render browserFrameWithUI()}
+		{@render browserFrameAccurate()}
 	{/if}
 </span>
 
@@ -49,7 +33,7 @@
 	</svg>
 {/snippet}
 
-{#snippet browserFrameWithUI()}
+{#snippet browserFrameAccurate()}
 	<svg fill="none" viewBox="0 0 1440 52">
 		<path
 			d="M0 8a8 8 0 0 1 8-8h1424c4.42 0 8 3.582 8 8v44H0V8Z"

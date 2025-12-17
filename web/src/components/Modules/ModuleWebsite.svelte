@@ -1,29 +1,25 @@
 <script lang="ts">
+	import { createContext } from 'svelte';
 	import BrowserFrame from '$components/BrowserFrame.svelte';
 	import Image from '$components/Image.svelte';
 	import Media from '$components/Media.svelte';
 	import type { ModuleWebsite } from '$sanity';
 	import { colorToString } from '$util/colorToRgba';
+	import { setContext } from 'svelte';
 
 	type Props = { data: ModuleWebsite };
 
 	let { data }: Props = $props();
-	let { theme, showFrame, backgroundImg, media } = $derived(data);
+	let { showFrame, backgroundImg, media } = $derived(data);
 </script>
 
 <div
-	style:background={data.backgroundColor ||
-		colorToString(theme?.sectionBackground)}
+	style:background="var(--browser-section-background)"
 	class="relative my-standard w-full bg-black p-[10%]"
 >
 	<div class="relative z-10">
 		{#if showFrame !== false}
-			<BrowserFrame
-				dots={colorToString(theme?.dots) || null}
-				frameBackground={colorToString(theme?.frameBackground) || '#282828'}
-				frameForeground={colorToString(theme?.frameForeground) || '#ffffff50'}
-				style={theme?.style || 'simple'}
-			/>
+			<BrowserFrame />
 		{/if}
 
 		{#if media?.asset}
