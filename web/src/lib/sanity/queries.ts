@@ -153,8 +153,10 @@ const WEB_FRAME_THEME_PROJECTION = groq`{
 
 const MODULE_WEBSITE = `//groq
   _type == 'website' => {
-    // TODO: Grab this from the case study and if not found, use the default from the settings
-    "theme":  *[_id == "settings"][0].defaultBrowserFrameV2${WEB_FRAME_THEME_PROJECTION},
+    "theme": coalesce(
+      ^.browserFrame${WEB_FRAME_THEME_PROJECTION},
+      *[_id == "settings"][0].defaultBrowserFrameV2${WEB_FRAME_THEME_PROJECTION}
+    ),
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
     showFrame,
