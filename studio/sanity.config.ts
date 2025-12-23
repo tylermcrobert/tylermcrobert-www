@@ -51,8 +51,8 @@ export default defineConfig({
 
   form: {
     image: {
-      // Hiding sanity default from the asset source because it's conusing to have two ways to add images
-      assetSources: (source) => source.filter((item) => item.name !== 'sanity-default'),
+      // Hiding media from the asset source because it's conusing to have two ways to add images and the media plugin blocks drag and drop
+      assetSources: (sources) => sources.filter((source) => source.name !== 'media'),
     },
   },
 })
