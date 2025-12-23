@@ -1,12 +1,16 @@
 import {defineField, defineType} from 'sanity'
 
+import {FlattenNestedMediaBlock} from './components/FlattenNestedMediaBlock'
 import {MediaInput} from './components/MediaInput'
 import {prepareMedia, selectMedia} from './mediaPreview'
 
 export const media = defineType({
   name: 'media',
   type: 'object',
-  components: {input: MediaInput},
+  components: {
+    input: MediaInput,
+    field: FlattenNestedMediaBlock,
+  },
   fields: [
     defineField({
       name: 'image',
