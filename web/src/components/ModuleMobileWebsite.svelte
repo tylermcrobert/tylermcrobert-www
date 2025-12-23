@@ -16,11 +16,13 @@
 >
 	{#each data.frames || [] as frame}
 		{#if frame.media?.asset}
-			<Media
-				value={frame.media.asset}
-				sizes={`${100 / (data.frames?.length || 1)}vw`}
-				alt={null}
-			/>
+			<div>
+				<Media
+					value={frame.media.asset}
+					sizes={`${100 / (data.frames?.length || 1)}vw`}
+					alt={null}
+				/>
+			</div>
 		{/if}
 	{/each}
 </div>
