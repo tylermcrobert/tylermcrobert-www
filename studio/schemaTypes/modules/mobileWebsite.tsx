@@ -24,12 +24,6 @@ export default defineType({
         reason: "I don't know why this was here",
       },
     },
-
-    {
-      name: 'theme',
-      type: 'reference',
-      to: [{type: 'webFrameTheme'}],
-    },
   ],
   preview: {
     select: {frames: 'frames'},

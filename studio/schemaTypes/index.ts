@@ -5,7 +5,6 @@ import info from './documents/info'
 import {page} from './documents/page'
 import playlist from './documents/playlist'
 import {settings} from './documents/settings'
-import webFrameTheme from './documents/webFrameTheme'
 import diptych, {diptychMedia, diptychSpacer, diptychText} from './modules/diptych'
 import {mediaBlock} from './modules/mediaBlock'
 import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
@@ -15,6 +14,7 @@ import {textBlock} from './modules/textBlock'
 import {tripleImage} from './modules/tripleImage'
 import {website} from './modules/website'
 import aspect from './objects/aspect'
+import {browserFrame} from './objects/browserFrame'
 import {link} from './objects/link'
 import {media, mediaPlaybackSettings} from './objects/media'
 import {metadata} from './objects/metadata'
@@ -27,6 +27,7 @@ import {
 } from './objects/richText'
 
 export const schemaTypes = [
+  browserFrame,
   playlistBlock,
   mobileWebsiteItem,
   tripleImage,
@@ -38,7 +39,6 @@ export const schemaTypes = [
   diptych,
   website,
   info,
-  webFrameTheme,
   playlist,
   caseStudy,
   context,

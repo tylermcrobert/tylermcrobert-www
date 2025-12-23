@@ -2,6 +2,7 @@ import type { InputValue } from '@portabletext/svelte';
 import groq from 'groq';
 
 import type {
+	BrowserFrame,
 	DiptychMedia,
 	InfoQueryResult,
 	Media,
@@ -142,18 +143,8 @@ export type ModuleMediaBlock = Nullable<{
  * Website
  */
 
-const WEB_FRAME_THEME_PROJECTION = groq`{
-  "dots": dots.hex,
-  "frame": frame.hex,
-  "background": background.hex,
-}`;
-
 const MODULE_WEBSITE = `//groq
   _type == 'website' => {
-    "theme": coalesce(
-      theme->${WEB_FRAME_THEME_PROJECTION},
-      *[_id == "settings"][0].defaultBrowserFrame->${WEB_FRAME_THEME_PROJECTION}
-    ),
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
     showFrame,
@@ -165,11 +156,6 @@ export type ModuleWebsite = Nullable<{
 	_type: 'website';
 	media: MediaProjection;
 	backgroundColor: string;
-	theme: Nullable<{
-		frame: string;
-		background: string;
-		dots: string;
-	}>;
 }> &
 	Pick<Website, 'showFrame' | 'backgroundImg'>;
 
@@ -350,6 +336,13 @@ export type Module = { _key: string } & (
  * PAGES
  ******************************************************************************/
 
+const WEB_FRAME_THEME_PROJECTION = groq`{
+  "dots": dots,
+  "frameBackground": frameBackground,
+  "frameForeground": frameForeground,
+  "sectionBackground": sectionBackground,
+  "style": style,
+}`;
 export const ROOT_SLUG_QUERY = groq`
   *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
     _type,
@@ -357,11 +350,16 @@ export const ROOT_SLUG_QUERY = groq`
 
     _type == 'caseStudy' => {
       "caseStudy": {
+        "theme": coalesce(
+          @.browserFrame${WEB_FRAME_THEME_PROJECTION},
+          *[_id == "settings"][0].defaultBrowserFrameV2${WEB_FRAME_THEME_PROJECTION}
+        ),
         intro,
         deliverables,
         date,
         title,
         description,
+        browserFrame
       },
     },
     
