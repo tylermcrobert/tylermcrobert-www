@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { stegaClean } from '@sanity/sveltekit';
+
 	let { id }: { id: string } = $props();
 
 	$effect(() => {
@@ -7,7 +9,7 @@
 			window.dataLayer.push(arguments);
 		};
 		window.gtag('js', new Date());
-		window.gtag('config', id);
+		window.gtag('config', stegaClean(id));
 	});
 </script>
 
