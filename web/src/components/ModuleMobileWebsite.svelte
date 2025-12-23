@@ -12,7 +12,7 @@
 		'col-span-6 flex items-center justify-evenly gap-[10%] p-[10%]',
 		{ 'bg-black': !data.themeBackground }
 	]}
-	style:background={data.themeBackground}
+	style:background={data.themeBackground || 'var(--browser-section-background)'}
 >
 	{#each data.frames || [] as frame}
 		{#if frame.media?.asset}
