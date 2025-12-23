@@ -35,10 +35,7 @@
 
 {#snippet browserFrameAccurate()}
 	<svg fill="none" viewBox="0 0 1440 52">
-		<path
-			d="M0 0h1440v52H0Z"
-			fill="var(--browser-background)"
-		/>
+		<path d="M0 0h1440v52H0Z" fill="var(--browser-background)" />
 		<!-- <line
 			x1="0"
 			y1="52"

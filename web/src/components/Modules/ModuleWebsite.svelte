@@ -14,10 +14,15 @@
 </script>
 
 <div
-	style:background={data.backgroundColor || "var(--browser-section-background)"}
+	style:background={data.backgroundColor || 'var(--browser-section-background)'}
 	class="relative my-standard w-full bg-black p-[10%]"
 >
-	<div class="relative z-10 md:rounded-sm overflow-hidden rounded-xs">
+	<div
+		class={[
+			'relative z-10',
+			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-sm'
+		]}
+	>
 		{#if showFrame !== false}
 			<BrowserFrame />
 		{/if}
