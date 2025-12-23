@@ -36,7 +36,7 @@
 {#snippet browserFrameAccurate()}
 	<svg fill="none" viewBox="0 0 1440 52">
 		<path
-			d="M0 8a8 8 0 0 1 8-8h1424c4.42 0 8 3.582 8 8v44H0V8Z"
+			d="M0 0h1440v52H0Z"
 			fill="var(--browser-background)"
 		/>
 		<!-- <line
