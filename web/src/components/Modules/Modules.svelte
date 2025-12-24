@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createDataAttribute } from '@sanity/sveltekit';
 
-	import ImagePriorityProvider from '$components/ImagePriorityProvider.svelte';
 	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
 	import type { Module } from '$sanity';
 
@@ -12,6 +11,8 @@
 	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
 	import ModuleTripleImage from './ModuleTripleImage.svelte';
 	import ModuleWebsite from './ModuleWebsite.svelte';
+	import { sanityDataAttribute } from '$lib/attachments';
+	import ModuleContext from './ModuleContext.svelte';
 
 	type Props = {
 		modules: Module[];
@@ -19,18 +20,15 @@
 		documentType: string;
 	};
 
-	let { modules, documentId: id, documentType: type }: Props = $props();
-
-	const attr = $derived(createDataAttribute({ id, type, path: 'modules' }));
+	let { modules, documentId, documentType }: Props = $props();
 </script>
 
 <div class="wrapper mx-auto">
-	{#each modules as data, i}
-		<ImagePriorityProvider priority={i <= 1}>
-			<section
-				data-type={data._type}
-				data-sanity={attr(`[_key=="${data._key}"]`)}
-			>
+	{#each modules as data, index}
+		{@const path = `modules[_key=="${data._key}"]`}
+
+		<ModuleContext {index} {documentId} {documentType} {path}>
+			<section data-type={data._type} {@attach sanityDataAttribute()}>
 				{#if data._type === 'textBlock'}
 					<TextBlock {data} />
 				{:else if data._type === 'mediaBlock'}
@@ -51,6 +49,6 @@
 					{console.warn('Cannot find module:', data._type)}
 				{/if}
 			</section>
-		</ImagePriorityProvider>
+		</ModuleContext>
 	{/each}
 </div>

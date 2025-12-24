@@ -22,10 +22,12 @@
 		PUBLIC_SANITY_PROJECT_ID
 	} from '$env/static/public';
 	import { metadata } from '$lib/state';
+	import { getModuleContext } from '$lib/context/moduleContext';
 
 	let { alt, priority: priorityProp, image, ...props }: ImageProps = $props();
 
-	let priority = $derived(priorityProp || getContext('imagePriorityContext'));
+	const moduleContext = getModuleContext();
+	let priority = $derived(priorityProp || moduleContext.index <= 1);
 </script>
 
 <Image

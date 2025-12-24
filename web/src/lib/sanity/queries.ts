@@ -2,7 +2,6 @@ import type { InputValue } from '@portabletext/svelte';
 import groq from 'groq';
 
 import type {
-	BrowserFrame,
 	DiptychMedia,
 	InfoQueryResult,
 	Media,
@@ -166,6 +165,7 @@ export type ModuleWebsite = Nullable<{
 const MODULE_DIPTYCH = `//groq
   _type == 'diptych' => {
     items[]{
+      _key,
       _type,
 
       _type == 'diptych.media' => {
@@ -180,22 +180,29 @@ const MODULE_DIPTYCH = `//groq
   }
 `;
 
+type ModuleDiptychText = Nullable<{
+	_type: 'diptych.text';
+	richText: RichTextProjection;
+}>;
+
+type ModuleDiptychMedia = Pick<DiptychMedia, 'aspect'> &
+	Nullable<{
+		_type: 'diptych.media';
+		media: MediaProjection | null;
+	}>;
+
+type ModuleDiptychSpacer = Nullable<{
+	_type: 'diptych.spacer';
+}>;
+
+type ModuleDiptychItem =
+	| ModuleDiptychText
+	| ModuleDiptychMedia
+	| ModuleDiptychSpacer;
+
 export type ModuleDiptych = Nullable<{
 	_type: 'diptych';
-	items: (
-		| Nullable<{
-				_type: 'diptych.text';
-				richText: RichTextProjection;
-		  }>
-		| (Nullable<{
-				_type: 'diptych.media';
-				media: MediaProjection | null;
-		  }> &
-				Pick<DiptychMedia, 'aspect'>)
-		| Nullable<{
-				_type: 'diptych.spacer';
-		  }>
-	)[];
+	items: (ModuleDiptychItem & { _key: string })[];
 }>;
 
 /**
