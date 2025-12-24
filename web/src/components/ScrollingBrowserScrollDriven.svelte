@@ -1,4 +1,5 @@
 <!-- Scroller -->
+<div class="h-100 bg-green-200"></div>
 <div class="bg-purple-200">
 	<!-- Frame -->
 	<div class="sticky top-0 w-full bg-black p-[10vh]">
@@ -11,6 +12,7 @@
 		<div>Text</div>
 	{/each}
 </div>
+<div class="h-100 bg-red-200"></div>
 
 <style>
 	@keyframes slide {
