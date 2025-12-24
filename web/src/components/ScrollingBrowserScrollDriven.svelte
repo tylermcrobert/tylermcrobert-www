@@ -3,7 +3,7 @@
 	<!-- Frame -->
 	<div class="sticky top-0 w-full bg-black p-[10vh]">
 		<!-- Aspect clip -->
-		<div class="img-container aspect-video bg-white">
+		<div class="img-container aspect-video overflow-hidden bg-white">
 			<img src="/browser-1.webp" class="max-w-full" alt="" />
 		</div>
 	</div>
@@ -29,6 +29,6 @@
 
 	img {
 		animation: linear slide forwards;
-		animation-timeline: scroll();
+		animation-timeline: scroll(block root);
 	}
 </style>
