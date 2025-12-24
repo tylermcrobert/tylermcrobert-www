@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Media from '$components/Media.svelte';
+	import { sanityDataAttribute } from '$lib/attachments';
 	import type { ModuleMobileWebsite } from '$sanity';
 
 	type Props = { data: ModuleMobileWebsite };
@@ -16,7 +17,10 @@
 >
 	{#each data.frames || [] as frame}
 		{#if frame.media?.asset}
-			<div>
+			<div
+				class="w-full"
+				{@attach sanityDataAttribute(`frames[_key=="${frame._key}"]`)}
+			>
 				<Media
 					value={frame.media.asset}
 					sizes={`${100 / (data.frames?.length || 1)}vw`}

@@ -2,11 +2,17 @@
 	import { page } from '$app/state';
 	import { stegaClean } from '@sanity/sveltekit';
 	import { getBrowserThemeCtx } from './BrowserFrameThemeProvider.svelte';
+	import { sanityDataAttribute } from '$lib/attachments';
 
 	let ctx = getBrowserThemeCtx();
 </script>
 
-<span class="relative z-10 -mb-px block">
+<span
+	class="relative z-10 -mb-px block"
+	{@attach sanityDataAttribute('browserFrame.style', {
+		path: ''
+	})}
+>
 	{#if stegaClean(ctx.getStyle()) === 'simple'}
 		{@render browserFrameSimple()}
 	{:else}

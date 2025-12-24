@@ -234,6 +234,7 @@ const MODULE_MOBILE_WEBSITE = `//groq
   _type == 'mobileWebsite' => {
     "themeBackground": theme->.background.hex,
     frames[]{
+      _key,
       _type == 'mobileWebsite.item' => {
         media${MEDIA_PROJECTION}
       }
@@ -246,6 +247,7 @@ export type ModuleMobileWebsite = Nullable<{
 	themeBackground: string;
 	frames: Nullable<{
 		media: MediaProjection;
+		_key: string;
 	}>[];
 }>;
 
