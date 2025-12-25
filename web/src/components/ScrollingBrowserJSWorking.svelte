@@ -1,4 +1,6 @@
 <script lang="ts">
+	import BrowserFrame from './BrowserFrame.svelte';
+
 	const ASPECT = 8192 / 1429;
 
 	let scrollerRef = $state<HTMLElement | null>(null);
@@ -17,20 +19,18 @@
 
 <svelte:window onscroll={handleScroll} />
 
-<div class="bg-black px-20">
+<div class="bg-black px-[10%]">
 	<!-- Contained -->
 	<div
-		class="parent relative h-(--total-height) bg-green-500"
+		class="parent relative h-(--total-height)"
 		style:--progress={progress}
 		style:--image-aspect={ASPECT}
 		bind:this={scrollerRef}
 	>
 		<!-- Sticky -->
-		<div
-			class="sticky top-0 grid h-lvh items-center justify-center bg-orange-200"
-		>
+		<div class="sticky top-0 grid h-lvh items-center justify-center">
 			<!-- video clipped -->
-			<div class="aspect-video w-full overflow-hidden">
+			<div class="aspect-video w-full overflow-hidden rounded-md">
 				<img src="/browser-1.webp" class="max-w-full" alt="" />
 			</div>
 		</div>
