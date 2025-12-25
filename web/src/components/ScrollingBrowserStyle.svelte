@@ -5,13 +5,11 @@
 <div class="bg-black px-20">
 	<div class="parent relative bg-green-500" style:--image-aspect={ASPECT}>
 		<div
-			class="sticky top-0 flex h-lvh w-full items-center justify-center bg-red-500/50"
+			class="sticky top-0 flex w-full items-center justify-center bg-red-500/50"
 		>
-			<div class="aspect-video w-full bg-blue-500">asdf</div>
-		</div>
-
-		<div class="shim absolute inset-x-0 top-0 h-100 bg-red-500">
-			<div>asdf</div>
+			<div class="w-full bg-blue-500 py-[calc(var(--height-minus-video)/2)]">
+				<img src="/browser-1.webp" alt="" />
+			</div>
 		</div>
 	</div>
 </div>
