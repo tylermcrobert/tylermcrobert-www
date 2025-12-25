@@ -1,7 +1,10 @@
 <script lang="ts">
 	import BrowserFrame from './BrowserFrame.svelte';
+	import type { MediaProjection } from '$sanity';
+	import Media from './Media.svelte';
 
-	const ASPECT = 8192 / 1429;
+	type Props = { aspect: number; asset: NonNullable<MediaProjection['asset']> };
+	let { aspect, asset }: Props = $props();
 
 	let scrollerRef = $state<HTMLElement | null>(null);
 	let progress = $state(0);
@@ -24,14 +27,14 @@
 	<div
 		class="parent relative h-(--total-height)"
 		style:--progress={progress}
-		style:--image-aspect={ASPECT}
+		style:--image-aspect={aspect}
 		bind:this={scrollerRef}
 	>
 		<!-- Sticky -->
 		<div class="sticky top-0 grid h-lvh items-center justify-center">
 			<!-- video clipped -->
 			<div class="aspect-video w-full overflow-hidden rounded-md">
-				<img src="/browser-1.webp" class="max-w-full" alt="" />
+				<Media value={asset} sizes="100vw" alt={null} />
 			</div>
 		</div>
 	</div>
@@ -56,7 +59,7 @@
 		);
 	}
 
-	img {
+	:global(img) {
 		--distance: calc(var(--image-height) - var(--video-height));
 		--total-offset: calc((var(--progress) * var(--distance)) * -1);
 		transform: translateY(var(--total-offset));
