@@ -4,6 +4,7 @@
 	import Media from './Media.svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import { scrollY } from 'svelte/reactivity/window';
+	import { intersection } from '$lib/attachments';
 
 	type Props = {
 		aspect: number;
@@ -12,6 +13,7 @@
 	let { aspect, asset }: Props = $props();
 
 	let progress = $state(0);
+	let isIntersecting = $state(false);
 
 	const scroller: Attachment = (element) => {
 		let frameId: number;
@@ -27,7 +29,13 @@
 			frameId = requestAnimationFrame(updateProgress);
 		}
 
-		frameId = requestAnimationFrame(updateProgress);
+		$effect(() => {
+			if (isIntersecting) {
+				frameId = requestAnimationFrame(updateProgress);
+			} else {
+				cancelAnimationFrame(frameId);
+			}
+		});
 
 		return () => {
 			running = false;
@@ -41,6 +49,7 @@
 	style:--image-aspect={aspect}
 	style:--frame-aspect={16 / 9}
 	{@attach scroller}
+	{@attach intersection((e) => (isIntersecting = e.isIntersecting))}
 	class="scrollweb-container bg-black px-[10%]"
 >
 	<div class="@container">
