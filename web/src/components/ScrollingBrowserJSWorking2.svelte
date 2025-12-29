@@ -14,12 +14,25 @@
 	let progress = $state(0);
 
 	const scroller: Attachment = (element) => {
-		scrollY.current;
+		let frameId: number;
+		let running = true;
 
-		const rect = element.getBoundingClientRect();
-		const progressUnclamped = -rect.top / (rect.height - window.innerHeight);
-		const progressClamped = Math.max(Math.min(progressUnclamped, 1), 0);
-		progress = progressClamped;
+		function updateProgress() {
+			if (!running) return;
+			const rect = element.getBoundingClientRect();
+			const progressUnclamped = -rect.top / (rect.height - window.innerHeight);
+			const progressClamped = Math.max(Math.min(progressUnclamped, 1), 0);
+			progress = progressClamped;
+
+			frameId = requestAnimationFrame(updateProgress);
+		}
+
+		frameId = requestAnimationFrame(updateProgress);
+
+		return () => {
+			running = false;
+			cancelAnimationFrame(frameId);
+		};
 	};
 </script>
 
