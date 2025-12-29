@@ -21,7 +21,7 @@
 
 		<ScrollingBrowserJSWorking2
 			{height}
-			aspect={height / width}
+			aspect={width / height}
 			asset={media?.asset}
 		/>
 	{/if}
