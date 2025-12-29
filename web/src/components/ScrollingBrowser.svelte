@@ -44,23 +44,19 @@
 
 	.scrollweb-wrapper {
 		/* Settings */
-		--total-height: 100lvh;
-		--frame-aspect: calc(16 / 9);
+		--total-height: 100lvh /* height of client browser */;
+		--frame-aspect: calc(16 / 9) /* aspect ratio of the browser frame */;
 
 		view-timeline-name: --scroll-timeline;
 
-		/* Browser frame height: { width of wrapper } / { aspect ratio of the browser frame } */
-		--calc-browser-frame-height: calc(100cqi / var(--frame-aspect));
-		/* Y Negative Space: { height of the wrapper } - { height of the browser frame } */
-		--calc-y-negative-space: calc(var(--total-height) - var(--calc-browser-frame-height));
-		/* Final Value */
-		--scroll-distance: calc(
-			(100cqi / var(--image-aspect)) + var(--calc-y-negative-space)
-		);
+		--calc-browser-frame-height: calc(100cqi / var(--frame-aspect)); /* { width of contained wrapper } / { aspect ratio of the browser frame } = { height of the browser frame } */
+		--calc-y-negative-space: calc(var(--total-height) - var(--calc-browser-frame-height)); /* Y Negative Space: { height of the contained wrapper } - { height of the browser frame } = { negative space left over } */	
+		--scroll-distance: calc((100cqi / var(--image-aspect)) + var(--calc-y-negative-space)); /* Scroll Distance: { width of the image } + { y negative space } */
 	}
 
 	.scrollweb-wrapper :global(img) {
 		--scroll-offset: calc(-100% + var(--calc-browser-frame-height));
+
 		animation: scroll-image linear forwards;
 		animation-timeline: --scroll-timeline;
 		animation-range: contain;
