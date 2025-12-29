@@ -55,13 +55,17 @@
 	<div class="@container">
 		<div class="h-(--scroll-distance)">
 			<div class="sticky top-0 grid h-lvh place-items-center">
-				<div class="grid aspect-(--frame-aspect) overflow-hidden rounded-md">
-					<Media
-						value={asset}
-						sizes="100vw"
-						alt={null}
-						class="translate-y-(--image-offset)"
-					/>
+				<div class="overflow-hidden rounded-sm">
+					<BrowserFrame />
+
+					<div class="grid aspect-(--frame-aspect) overflow-hidden">
+						<Media
+							value={asset}
+							sizes="100vw"
+							alt={null}
+							class="translate-y-(--image-offset)"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
