@@ -6,6 +6,8 @@
 	import type { ModuleWebsite } from '$sanity';
 	import { colorToString } from '$util/colorToRgba';
 	import { setContext } from 'svelte';
+	import ScrollingBrowserJSWorking2 from '$components/ScrollingBrowserJSWorking2.svelte';
+	import { getImageDimensions } from '@tylermcrobert/svelte-sanity-image';
 
 	type Props = { data: ModuleWebsite };
 
@@ -13,36 +15,14 @@
 	let { showFrame, backgroundImg, media } = $derived(data);
 </script>
 
-<div
-	style:background={data.backgroundColor || 'var(--browser-section-background)'}
-	class="relative my-standard w-full bg-black p-[10%]"
->
-	<div
-		class={[
-			'relative z-10',
-			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-sm'
-		]}
-	>
-		{#if showFrame !== false}
-			<BrowserFrame />
-		{/if}
+<div class="-mx-standard">
+	{#if media?.asset && media?.asset?._type === 'image'}
+		{@const { width, height } = getImageDimensions(media?.asset.image)}
 
-		{#if media?.asset}
-			<div class="bg-white">
-				<Media sizes="80vw" value={media.asset} alt={null} />
-			</div>
-		{/if}
-	</div>
-
-	{#if backgroundImg}
-		<div>
-			<Image
-				image={backgroundImg}
-				alt={null}
-				sizes="90vw"
-				aspect={1.5}
-				class="absolute inset-0 z-0 h-full w-full object-cover"
-			/>
-		</div>
+		<ScrollingBrowserJSWorking2
+			{height}
+			aspect={height / width}
+			asset={media?.asset}
+		/>
 	{/if}
 </div>
