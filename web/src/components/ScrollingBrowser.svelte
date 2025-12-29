@@ -10,14 +10,10 @@
 	let { aspect, asset }: Props = $props();
 </script>
 
-<div
-	style:--image-aspect={aspect}
-	style:--frame-aspect={16 / 9}
-	class="scrollweb-wrapper bg-black px-[10%]"
->
+<div style:--image-aspect={aspect} class="scrollweb-wrapper bg-black px-[10%]">
 	<div class="@container">
 		<div class="h-(--scroll-distance)">
-			<div class="sticky top-0 grid h-lvh place-items-center">
+			<div class="sticky top-0 grid h-(--total-height) place-items-center">
 				<div class="overflow-hidden rounded-sm">
 					<BrowserFrame />
 
@@ -35,6 +31,7 @@
 	</div>
 </div>
 
+<!-- prettier-ignore -->
 <style>
 	@keyframes scroll-image {
 		from {
@@ -46,12 +43,16 @@
 	}
 
 	.scrollweb-wrapper {
+		/* Settings */
+		--total-height: 100lvh;
+		--frame-aspect: calc(16 / 9);
+
 		view-timeline-name: --scroll-timeline;
 
 		/* Browser frame height: { width of wrapper } / { aspect ratio of the browser frame } */
 		--calc-browser-frame-height: calc(100cqi / var(--frame-aspect));
 		/* Y Negative Space: { height of the wrapper } - { height of the browser frame } */
-		--calc-y-negative-space: calc(100lvh - var(--calc-browser-frame-height));
+		--calc-y-negative-space: calc(var(--total-height) - var(--calc-browser-frame-height));
 		/* Final Value */
 		--scroll-distance: calc(
 			(100cqi / var(--image-aspect)) + var(--calc-y-negative-space)
