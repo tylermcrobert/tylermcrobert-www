@@ -104,3 +104,21 @@
 		@apply grid grid-cols-6 gap-standard;
 	}
 }
+
+@custom-variant window-landscape {
+	@media (aspect-ratio > 1/1) {
+		@slot;
+	}
+}
+
+@custom-variant window-landscape-tight {
+	@media (aspect-ratio > 1.5) {
+		@slot;
+	}
+}
+
+@custom-variant window-landscape-ultratight {
+	@media (aspect-ratio > 1.8) {
+		@slot;
+	}
+}

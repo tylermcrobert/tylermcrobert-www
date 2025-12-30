@@ -10,8 +10,13 @@
 	let { aspect, asset }: Props = $props();
 </script>
 
-<div style:--image-aspect={aspect} class="scrollweb-wrapper bg-black px-[10%]">
-	<div class="@container">
+<div
+	style:--image-aspect={aspect}
+	class="bg-black px-[10%] window-landscape-tight:px-[15%] window-landscape-ultratight:px-[10%]"
+>
+	<div
+		class="scrollweb-wrapper @container not-window-landscape:hidden window-landscape-ultratight:hidden"
+	>
 		<div class="h-(--scroll-distance)">
 			<div class="sticky top-0 grid h-(--total-height) place-items-center">
 				<div class="overflow-hidden rounded-sm">
@@ -27,6 +32,16 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<!-- Non-scrolling version -->
+	<div
+		class="py-[15%] window-landscape:hidden window-landscape-ultratight:block"
+	>
+		<div class="overflow-hidden rounded-sm">
+			<BrowserFrame />
+			<Media value={asset} sizes="100vw" alt={null} />
 		</div>
 	</div>
 </div>
