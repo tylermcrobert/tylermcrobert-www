@@ -16,21 +16,21 @@
 
 	type Props = {
 		children: Snippet;
-		theme: BrowserFrame;
+		theme: BrowserFrame | null;
 	};
 
 	let { children, theme }: Props = $props();
 
 	// TODO: I don't like this. Feels clunky
-	setBrowserThemeCtx({ getStyle: () => theme.style });
+	setBrowserThemeCtx({ getStyle: () => theme?.style });
 </script>
 
 <div
 	class="contents"
-	style:--dots={colorToString(theme.dots)}
-	style:--browser-background={colorToString(theme.frameBackground)}
-	style:--browser-foreground={colorToString(theme.frameForeground)}
-	style:--browser-section-background={colorToString(theme.sectionBackground)}
+	style:--dots={colorToString(theme?.dots)}
+	style:--browser-background={colorToString(theme?.frameBackground)}
+	style:--browser-foreground={colorToString(theme?.frameForeground)}
+	style:--browser-section-background={colorToString(theme?.sectionBackground)}
 	style:--browser-text=""
 	style:--browser-stroke={`
     color-mix(in srgb, var(--browser-foreground) 25%, transparent)`}
