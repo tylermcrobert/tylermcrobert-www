@@ -11,8 +11,8 @@
 	 */
 	import { createContext, type Snippet } from 'svelte';
 
-	import { colorToString } from '$util/colorToRgba';
 	import type { BrowserFrame } from '$sanity';
+	import { colorToString } from '$util/colorToRgba';
 
 	type Props = {
 		children: Snippet;

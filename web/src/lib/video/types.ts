@@ -1,5 +1,4 @@
 import type { HTMLImgAttributes } from 'svelte/elements';
-
 import type { ClassValue } from 'svelte/elements';
 
 type MediaResolution =

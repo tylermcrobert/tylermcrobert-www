@@ -1,9 +1,9 @@
 <script lang="ts">
-	import {
-		setModuleContext,
-		type ModuleContext
-	} from '$lib/context/moduleContext';
 	import { type Snippet } from 'svelte';
+
+	import {
+		type ModuleContext,
+		setModuleContext	} from '$lib/context/moduleContext';
 
 	interface Props extends ModuleContext {
 		children: Snippet;
