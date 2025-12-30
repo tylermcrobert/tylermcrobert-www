@@ -9,7 +9,6 @@
 		asset: NonNullable<MediaProjection['asset']>;
 	};
 	let { aspect, asset }: Props = $props();
-	const idk = '';
 </script>
 
 <div

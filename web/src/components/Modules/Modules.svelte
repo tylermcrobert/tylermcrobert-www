@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { createDataAttribute } from '@sanity/sveltekit';
-
 	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
 	import { sanityDataAttribute } from '$lib/attachments';
 	import type { Module } from '$sanity';

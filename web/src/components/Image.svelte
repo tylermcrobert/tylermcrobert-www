@@ -15,7 +15,6 @@
 		type SanityImageSource,
 		type SvelteSanityImageProps
 	} from '@tylermcrobert/svelte-sanity-image';
-	import { getContext } from 'svelte';
 
 	import {
 		PUBLIC_SANITY_DATASET,

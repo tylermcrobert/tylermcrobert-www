@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { createContext } from 'svelte';
-	import { setContext } from 'svelte';
-
 	import BrowserFrame from '$components/BrowserFrame.svelte';
 	import Image from '$components/Image.svelte';
 	import Media from '$components/Media.svelte';
 	import type { ModuleWebsite } from '$sanity';
-	import { colorToString } from '$util/colorToRgba';
 
 	type Props = { data: ModuleWebsite };
 

@@ -1,2 +1,2 @@
 export type { NowPlayingData } from './lastfm';
-export { default as fetchNowPlaying } from './lastfm';
+export { fetchNowPlaying } from './lastfm';
