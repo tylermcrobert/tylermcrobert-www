@@ -1,6 +1,12 @@
 <script lang="ts">
+<<<<<<< HEAD
 	import BrowserFrame from './BrowserFrame.svelte';
 	import type { MediaProjection } from '$sanity';
+=======
+	import type { MediaProjection } from '$sanity';
+
+	import BrowserFrame from './BrowserFrame.svelte';
+>>>>>>> main
 	import Media from './Media.svelte';
 
 	type Props = {
@@ -12,10 +18,17 @@
 
 <div
 	style:--image-aspect={aspect}
+<<<<<<< HEAD
 	class="bg-black px-[10%] not-window-landscape:px-[15%] window-landscape-tight:px-[15%] window-landscape-ultratight:px-[10%]"
 >
 	<div
 		class="scrollweb-wrapper @container not-window-landscape:hidden window-landscape-ultratight:hidden"
+=======
+	class="not-window-landscape:px-[15%] window-landscape-tight:px-[15%] window-landscape-ultratight:px-[10%] bg-black px-[10%]"
+>
+	<div
+		class="scrollweb-wrapper not-window-landscape:hidden window-landscape-ultratight:hidden @container"
+>>>>>>> main
 	>
 		<div class="h-(--scroll-distance)">
 			<div class="sticky top-0 grid h-(--total-height) place-items-center">
@@ -37,7 +50,11 @@
 
 	<!-- Non-scrolling version -->
 	<div
+<<<<<<< HEAD
 		class="py-[20%] window-landscape:hidden window-landscape-ultratight:block"
+=======
+		class="window-landscape:hidden window-landscape-ultratight:block py-[20%]"
+>>>>>>> main
 	>
 		<div class="overflow-hidden rounded-sm">
 			<BrowserFrame />

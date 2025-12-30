@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { createDataAttribute } from '@sanity/sveltekit';
-
 	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
+	import { sanityDataAttribute } from '$lib/attachments';
 	import type { Module } from '$sanity';
 
+	import ModuleContext from './ModuleContext.svelte';
 	import ModuleDiptych from './ModuleDiptych.svelte';
 	import MediaBlock from './ModuleMediaBlock.svelte';
 	import ModulePlaylistBlock from './ModulePlaylistBlock.svelte';
@@ -11,8 +11,6 @@
 	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
 	import ModuleTripleImage from './ModuleTripleImage.svelte';
 	import ModuleWebsite from './ModuleWebsite.svelte';
-	import { sanityDataAttribute } from '$lib/attachments';
-	import ModuleContext from './ModuleContext.svelte';
 
 	type Props = {
 		modules: Module[];

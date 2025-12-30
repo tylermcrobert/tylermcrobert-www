@@ -3,6 +3,7 @@
 	import CaseStudyHeader from '$components/CaseStudyHeader.svelte';
 	import HomeIndex from '$components/HomeIndex.svelte';
 	import Modules from '$components/Modules/Modules.svelte';
+	import type { BrowserFrame } from '$sanity';
 
 	let { data } = $props();
 
@@ -13,7 +14,7 @@
 	<div
 		class="relative z-project-page border-b border-dashed border-black bg-white pb-large"
 	>
-		<BrowserFrameThemeProvider theme={caseStudy.theme}>
+		<BrowserFrameThemeProvider theme={caseStudy.theme as BrowserFrame | null}>
 			<CaseStudyHeader
 				index={caseStudy.index}
 				intro={caseStudy.intro}

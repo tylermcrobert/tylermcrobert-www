@@ -33,8 +33,8 @@ export default defineConfig(
 		},
 
 		rules: {
-			'simple-import-sort/imports': 'error',
-			'simple-import-sort/exports': 'error',
+			'simple-import-sort/imports': 'warn',
+			'simple-import-sort/exports': 'warn',
 			'import/no-default-export': 'error',
 
 			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.

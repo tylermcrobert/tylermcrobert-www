@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { stegaClean } from '@sanity/sveltekit';
-	import { getBrowserThemeCtx } from './BrowserFrameThemeProvider.svelte';
+
+	import { page } from '$app/state';
 	import { sanityDataAttribute } from '$lib/attachments';
+
+	import { getBrowserThemeCtx } from './BrowserFrameThemeProvider.svelte';
 
 	let ctx = getBrowserThemeCtx();
 </script>

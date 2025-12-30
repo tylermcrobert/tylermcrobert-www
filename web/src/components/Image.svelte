@@ -15,14 +15,13 @@
 		type SanityImageSource,
 		type SvelteSanityImageProps
 	} from '@tylermcrobert/svelte-sanity-image';
-	import { getContext } from 'svelte';
 
 	import {
 		PUBLIC_SANITY_DATASET,
 		PUBLIC_SANITY_PROJECT_ID
 	} from '$env/static/public';
-	import { metadata } from '$lib/state';
 	import { getModuleContext } from '$lib/context/moduleContext';
+	import { metadata } from '$lib/state';
 
 	let { alt, priority: priorityProp, image, ...props }: ImageProps = $props();
 

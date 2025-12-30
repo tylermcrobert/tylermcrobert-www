@@ -7,7 +7,7 @@ export type NowPlayingData = {
 	isPlaying: boolean;
 };
 
-export default async function fetchNowPlaying(): Promise<NowPlayingData> {
+export async function fetchNowPlaying(): Promise<NowPlayingData> {
 	const req = await fetch(endpoint);
 	const data = await req.json();
 	const track = data.recenttracks.track[0];
