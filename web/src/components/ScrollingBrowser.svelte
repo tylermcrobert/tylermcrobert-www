@@ -12,7 +12,7 @@
 
 <div
 	style:--image-aspect={aspect}
-	class="bg-black px-[10%] window-landscape-tight:px-[15%] window-landscape-ultratight:px-[10%]"
+	class="bg-black px-[10%] not-window-landscape:px-[15%] window-landscape-tight:px-[15%] window-landscape-ultratight:px-[10%]"
 >
 	<div
 		class="scrollweb-wrapper @container not-window-landscape:hidden window-landscape-ultratight:hidden"
@@ -37,7 +37,7 @@
 
 	<!-- Non-scrolling version -->
 	<div
-		class="py-[15%] window-landscape:hidden window-landscape-ultratight:block"
+		class="py-[20%] window-landscape:hidden window-landscape-ultratight:block"
 	>
 		<div class="overflow-hidden rounded-sm">
 			<BrowserFrame />
