@@ -81,12 +81,16 @@
 			stroke-linecap="round"
 			stroke-linejoin="round"><path d="m107 19-7 7 7 7M135 33l7-7-7-7" /></g
 		>
-		<g
+
+		<!-- Plus -->
+
+		<path
+			d="M1406 18v16M1414 26h-16"
 			stroke="var(--browser-foreground)"
 			stroke-width="2.25"
 			stroke-linecap="round"
-			stroke-linejoin="round"><path d="M1406 18.5v16M1414 26.5h-16" /></g
-		>
+			stroke-linejoin="round"
+		/>
 
 		<!-- Address Bar -->
 
