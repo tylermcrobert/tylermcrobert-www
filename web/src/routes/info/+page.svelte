@@ -57,13 +57,9 @@
 				<DotHead>{isPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
 			</h2>
 			<h3 class="text-h1">
-				{#if isPlaying}
-					Right now I'm listening to “{censoredTrackName}” by {censoredArtist} on
-					Spotify.
-				{:else}
-					The last song I listened to on Spotify was “{censoredTrackName}” by
-					{censoredArtist}.
-				{/if}
+				{isPlaying
+					? `Right now I'm listening to “${censoredTrackName}” by ${censoredArtist} on Spotify.`
+					: `The last song I listened to on Spotify was “${censoredTrackName}” by ${censoredArtist}.`}
 			</h3>
 		{/if}
 	</div>
