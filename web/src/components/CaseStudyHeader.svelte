@@ -25,9 +25,9 @@
 	}: Props = $props();
 </script>
 
-<header class="wrapper grid-standard mb-standard pt-large">
+<header class="wrapper mb-standard grid-standard pt-large">
 	<h1 class="col-span-6">{NUMS[index + 1]} {title}</h1>
-	<h2 class="text-h1 col-span-6 max-w-rag-heading md:mb-small">
+	<h2 class="col-span-6 max-w-rag-heading border text-h1 md:mb-small">
 		{intro}
 	</h2>
 
@@ -37,7 +37,7 @@
 			{#each deliverables || [] as deliverable, i}
 				<li class="inline">
 					{#if i >= 1}
-						{' '}{DOT}&nbsp;{deliverable}
+						{i === 0 ? '' : ' '}{DOT}&nbsp;{deliverable}
 					{:else}
 						{deliverable}
 					{/if}
