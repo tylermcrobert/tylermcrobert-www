@@ -16,7 +16,7 @@
 
 <div
 	style:background={data.backgroundColor || 'var(--browser-section-background)'}
-	class="relative my-standard w-full bg-black p-[10%]"
+	class="relative my-standard flow-root w-full bg-black px-[10%]"
 >
 	{#if !IS_SCROLLING}
 		{@render standard()}
@@ -33,7 +33,7 @@
 {#snippet standard()}
 	<div
 		class={[
-			'relative z-10',
+			'relative z-10 my-[10%]',
 			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-sm'
 		]}
 	>
