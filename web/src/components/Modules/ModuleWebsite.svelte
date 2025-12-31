@@ -18,7 +18,7 @@
 	<div
 		class={[
 			'relative z-10',
-			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-sm'
+			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-md'
 		]}
 	>
 		{#if showFrame !== false}

@@ -88,12 +88,13 @@
 		<!-- Address Bar -->
 
 		<rect
-			x="457.5"
+			x="490"
 			y="11.5"
-			width="525"
+			width="460"
 			height="27"
-			rx="5.5"
-			stroke="var(--browser-stroke)"
+			rx="7"
+			stroke="rgba(0, 0, 0, 0.3)"
+			fill="rgba(0, 0, 0, 0.15)"
 		/>
 
 		<text
