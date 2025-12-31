@@ -3,8 +3,8 @@
 
 	import type { ModuleWebsite } from '$sanity';
 
+	import Media from '../../Media.svelte';
 	import BrowserFrame from './BrowserFrame.svelte';
-	import Media from './Media.svelte';
 
 	type Props = {
 		data: ModuleWebsite;
