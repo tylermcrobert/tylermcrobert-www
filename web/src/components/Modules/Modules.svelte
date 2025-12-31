@@ -1,11 +1,11 @@
 <script lang="ts">
-	import ModuleMobileWebsite from '$components/ModuleMobileWebsite.svelte';
 	import { sanityDataAttribute } from '$lib/attachments';
 	import type { Module } from '$sanity';
 
 	import ModuleContext from './ModuleContext.svelte';
 	import ModuleDiptych from './ModuleDiptych.svelte';
 	import MediaBlock from './ModuleMediaBlock.svelte';
+	import ModuleMobileWebsite from './ModuleMobileWebsite.svelte';
 	import ModulePlaylistBlock from './ModulePlaylistBlock.svelte';
 	import TextBlock from './ModuleTextBlock.svelte';
 	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
