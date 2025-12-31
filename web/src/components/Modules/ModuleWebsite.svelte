@@ -16,15 +16,15 @@
 
 <div
 	style:background={data.backgroundColor || 'var(--browser-section-background)'}
-	class="relative my-standard flow-root w-full bg-black px-[10%]"
+	class="relative my-standard flow-root w-full bg-black px-[10%] [@media(aspect-ratio>=1.75)]:px-[15%]"
 >
 	{#if !IS_SCROLLING}
 		{@render standard()}
 	{:else}
-		<div class="z-10 not-[@media(1/1<=aspect-ratio<=1.75)]:hidden">
+		<div class="z-10 not-[@media(1/1<=aspect-ratio<=2)]:hidden">
 			<ScrollingBrowser {data} {content} {browserChrome} />
 		</div>
-		<div class="[@media(1/1<=aspect-ratio<=1.75)]:hidden">
+		<div class="[@media(1/1<=aspect-ratio<=2)]:hidden">
 			{@render standard()}
 		</div>
 	{/if}
@@ -33,7 +33,7 @@
 {#snippet standard()}
 	<div
 		class={[
-			'relative z-10 my-[10%]',
+			'relative z-10 my-[10%] [@media(aspect-ratio>=1.75)]:my-[15%]',
 			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-sm'
 		]}
 	>
