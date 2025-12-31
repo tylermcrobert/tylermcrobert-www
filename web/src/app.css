@@ -48,33 +48,31 @@
 	--max-width-rag-heading: 17ch;
 }
 
-@layer base {
-	@font-face {
-		font-family: 'Suisse';
-		src: url('./lib/fonts/SuisseIntl-Regular.woff2') format('woff2');
-	}
+@font-face {
+	font-family: 'Suisse';
+	src: url('./lib/fonts/SuisseIntl-Regular.woff2') format('woff2');
+}
 
-	html {
-		@apply bg-background text-foreground antialiased;
-		@apply text-[18px] leading-[1.2] tracking-[0.02em] antialiased sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[calc(8px+1vw)];
-	}
+html {
+	@apply bg-background text-foreground antialiased;
+	@apply text-[18px] leading-[1.2] tracking-[0.02em] antialiased sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[calc(8px+1vw)];
+}
 
-	html,
-	body {
-		overscroll-behavior: none;
-	}
+html,
+body {
+	overscroll-behavior: none;
+}
 
-	body::-webkit-scrollbar {
-		@apply hidden;
-	}
+body::-webkit-scrollbar {
+	@apply hidden;
+}
 
-	br {
-		@apply hidden;
-	}
+br {
+	@apply hidden;
+}
 
-	hr {
-		@apply border-b-0 border-dashed border-black;
-	}
+hr {
+	@apply border-b-0 border-dashed border-black;
 }
 
 @utility indent {
