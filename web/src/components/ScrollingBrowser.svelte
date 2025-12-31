@@ -1,48 +1,46 @@
 <script lang="ts">
-	import type { MediaProjection } from '$sanity';
+	import { getImageDimensions } from '@tylermcrobert/svelte-sanity-image';
+
+	import type { ModuleWebsite } from '$sanity';
 
 	import BrowserFrame from './BrowserFrame.svelte';
 	import Media from './Media.svelte';
 
 	type Props = {
-		aspect: number;
-		asset: NonNullable<MediaProjection['asset']>;
+		data: ModuleWebsite;
 	};
-	let { aspect, asset }: Props = $props();
+
+	let { data }: Props = $props();
+
+	const aspect = $derived.by(() => {
+		if (data.media?.asset?._type === 'image') {
+			const { width, height } = getImageDimensions(data.media.asset.image);
+			return width / height;
+		}
+
+		throw new Error('Asset is not an image');
+	});
 </script>
 
-<div
-	style:--image-aspect={aspect}
-	class="bg-black px-[10%] not-window-landscape:px-[15%] window-landscape-tight:px-[15%] window-landscape-ultratight:px-[10%]"
->
-	<div
-		class="scrollweb-wrapper @container not-window-landscape:hidden window-landscape-ultratight:hidden"
-	>
-		<div class="h-(--scroll-distance)">
-			<div class="sticky top-0 grid h-(--total-height) place-items-center">
-				<div class="overflow-hidden rounded-sm">
+<div style:--image-aspect={aspect} class="scrollweb-wrapper @container">
+	<div class="h-(--scroll-distance)">
+		<div class="sticky top-0 grid h-(--total-height) place-items-center">
+			<div class="overflow-hidden rounded-sm">
+				{#if data.showFrame !== false}
 					<BrowserFrame />
+				{/if}
 
-					<div class="grid aspect-(--frame-aspect) overflow-hidden">
+				<div class="grid aspect-(--frame-aspect) overflow-hidden">
+					{#if data.media?.asset}
 						<Media
-							value={asset}
+							value={data.media.asset}
 							sizes="100vw"
 							alt={null}
 							class="translate-y-(--image-offset)"
 						/>
-					</div>
+					{/if}
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<!-- Non-scrolling version -->
-	<div
-		class="py-[20%] window-landscape:hidden window-landscape-ultratight:block"
-	>
-		<div class="overflow-hidden rounded-sm">
-			<BrowserFrame />
-			<Media value={asset} sizes="100vw" alt={null} />
 		</div>
 	</div>
 </div>
