@@ -486,6 +486,8 @@ export type PageBrowserFrame = {
 	frameForeground?: Color;
 	dots?: Color;
 	sectionBackground?: Color;
+	addressBarBackground?: Color;
+	addressBarStroke?: Color;
 	hostname?: string;
 };
 
@@ -496,6 +498,8 @@ export type BrowserFrame = {
 	frameForeground?: Color;
 	dots?: Color;
 	sectionBackground?: Color;
+	addressBarBackground?: Color;
+	addressBarStroke?: Color;
 };
 
 export type MuxVideo = {

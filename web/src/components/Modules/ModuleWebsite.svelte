@@ -13,7 +13,7 @@
 </script>
 
 <div
-	style:background={data.backgroundColor || 'var(--browser-section-background)'}
+	style:background={data.backgroundColor || 'var(--section-background)'}
 	class="relative my-standard flow-root w-full bg-black px-[10%] [@media(aspect-ratio>=1.75)]:px-[15%]"
 >
 	{#if !scrolling}
@@ -32,7 +32,7 @@
 	<div
 		class={[
 			'relative z-10 my-[10%] [@media(aspect-ratio>=1.75)]:my-[15%]',
-			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-sm'
+			showFrame !== false && 'overflow-hidden rounded-xs md:rounded-md'
 		]}
 	>
 		{@render browserChrome()}

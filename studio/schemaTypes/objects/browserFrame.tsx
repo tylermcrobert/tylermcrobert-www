@@ -47,6 +47,18 @@ export const browserFrame = defineType({
       type: 'color',
       validation: (Rule) => Rule.required(),
     }),
+
+    defineField({
+      name: 'addressBarBackground',
+      type: 'color',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'addressBarStroke',
+      type: 'color',
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 })
 

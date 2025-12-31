@@ -22,27 +22,36 @@
 
 	let { children, pageTheme, defaultTheme }: Props = $props();
 
-	let theme = $derived({
+	let mergedTheme = $derived({
 		...defaultTheme,
 		...pageTheme
 	}) as PageBrowserFrame;
 
+	const themeStrings = $derived({
+		dots: colorToString(mergedTheme?.dots),
+		frameBackground: colorToString(mergedTheme?.frameBackground),
+		frameForeground: colorToString(mergedTheme?.frameForeground),
+		sectionBackground: colorToString(mergedTheme?.sectionBackground),
+		addressBarBackground: colorToString(mergedTheme?.addressBarBackground),
+		addressBarStroke: colorToString(mergedTheme?.addressBarStroke)
+	});
+
 	setWebsiteModuleThemeCtx({
 		get theme() {
-			return theme;
+			return mergedTheme;
 		}
 	});
 </script>
 
 <div
 	class="contents"
-	style:--dots={colorToString(theme?.dots)}
-	style:--browser-background={colorToString(theme?.frameBackground)}
-	style:--browser-foreground={colorToString(theme?.frameForeground)}
-	style:--browser-section-background={colorToString(theme?.sectionBackground)}
-	style:--browser-text=""
-	style:--browser-stroke={`
-    color-mix(in srgb, var(--browser-foreground) 25%, transparent)`}
+	style:--chrome-dots={themeStrings.dots}
+	style:--section-background={themeStrings.sectionBackground}
+	style:--chrome-background={themeStrings.frameBackground}
+	style:--chrome-foreground={themeStrings.frameForeground}
+	style:--chrome-address-bar-stroke={themeStrings.addressBarStroke}
+	style:--chrome-address-bar-background={themeStrings.addressBarBackground}
+	style:--chrome-address-bar-text=""
 >
 	{@render children()}
 </div>
