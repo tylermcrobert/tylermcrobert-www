@@ -46,62 +46,52 @@
 
 	--max-width-rag-paragraph: 45ch;
 	--max-width-wrapper: 65rem;
-	--max-width-rag-heading: 17ch;
+	--max-width-rag-heading: 21ch;
 }
 
-@layer base {
-	@font-face {
-		font-family: 'Suisse';
-		src: url('./lib/fonts/SuisseIntl-Regular.woff2') format('woff2');
-	}
-
-	html {
-		@apply bg-background text-foreground antialiased;
-		@apply text-[18px] leading-[1.2] tracking-[0.02em] antialiased sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[calc(8px+1vw)];
-	}
-
-	html,
-	body {
-		overscroll-behavior: none;
-	}
-
-	body::-webkit-scrollbar {
-		@apply hidden;
-	}
-
-	br {
-		@apply hidden;
-	}
-
-	hr {
-		@apply border-b-0 border-dashed border-black;
-	}
-
-	.indent {
-		@apply indent-8;
-	}
+@font-face {
+	font-family: 'Suisse';
+	src: url('./lib/fonts/SuisseIntl-Regular.woff2') format('woff2');
 }
 
-@layer components {
-	.text-h1 {
-		@apply text-[1.78rem] leading-heading tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
-	}
-
-	.text-h1 br {
-		@apply hidden sm:block;
-	}
-
-	.text-h2 {
-		@apply max-w-[30ch] text-[26px] leading-heading;
-	}
+html {
+	@apply bg-background text-foreground antialiased;
+	@apply text-[18px] leading-[1.2] tracking-[0.02em] antialiased sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[calc(8px+1vw)];
 }
 
-@layer utilities {
-	.wrapper {
-		@apply mx-auto max-w-wrapper px-standard;
-	}
+html,
+body {
+	overscroll-behavior: none;
+}
 
-	.grid-standard {
-		@apply grid grid-cols-6 gap-standard;
-	}
+body::-webkit-scrollbar {
+	@apply hidden;
+}
+
+br {
+	@apply hidden;
+}
+
+hr {
+	@apply border-b-0 border-dashed border-black;
+}
+
+@utility indent {
+	text-indent: 2rem;
+}
+
+@utility text-h1 {
+	@apply text-[1.78rem] leading-heading tracking-[-.02ch] sm:whitespace-break-spaces md:text-[2.37rem] lg:text-[3.16rem];
+}
+
+@utility text-h2 {
+	@apply max-w-[30ch] text-[26px] leading-heading;
+}
+
+@utility wrapper {
+	@apply mx-auto max-w-wrapper px-standard;
+}
+
+@utility grid-standard {
+	@apply grid grid-cols-6 gap-standard;
 }

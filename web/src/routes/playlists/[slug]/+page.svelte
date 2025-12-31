@@ -5,6 +5,9 @@
 </script>
 
 <div class="wrapper mx-auto my-large">
-	<ModulePlaylistBlock data={{ ...data, _type: 'playlistBlock' }} showAll />
-	<a href="/playlists">See All &rarr;</a>
+	<ModulePlaylistBlock
+		data={{ ...data, _type: 'playlistBlock' }}
+		truncate={false}
+	/>
+	<a href="/playlists">See all pelaylists &rarr;</a>
 </div>

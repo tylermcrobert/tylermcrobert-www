@@ -3,7 +3,8 @@
 
 	import {
 		type ModuleContext,
-		setModuleContext	} from '$lib/context/moduleContext';
+		setModuleContext
+	} from '$lib/context/moduleContext';
 
 	interface Props extends ModuleContext {
 		children: Snippet;

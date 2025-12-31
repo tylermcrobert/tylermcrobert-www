@@ -32,6 +32,7 @@ export default [
       'simple-import-sort/exports': 'error',
       // '@typescript-eslint/consistent-type-imports': 'error',
       'import/no-default-export': 'error',
+      'svelte/no-useless-mustaches': 'off',
     },
   },
   {

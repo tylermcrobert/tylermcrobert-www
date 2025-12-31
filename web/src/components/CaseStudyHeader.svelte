@@ -25,19 +25,19 @@
 	}: Props = $props();
 </script>
 
-<header class="wrapper grid-standard mb-standard pt-large">
+<header class="wrapper mb-standard grid-standard pt-large">
 	<h1 class="col-span-6">{NUMS[index + 1]} {title}</h1>
-	<h2 class="text-h1 col-span-6 max-w-rag-heading md:mb-small">
+	<h2 class="col-span-6 max-w-rag-heading text-h1 md:mb-small">
 		{intro}
 	</h2>
 
 	<div class="col-span-6 md:col-span-3 md:max-w-[16em]">
-		<p class="indent md:mb-small md:indent-0">{date?.split('.')[0]}</p>
+		<p class="max-md:indent md:mb-small">{date?.split('.')[0]}</p>
 		<ul>
 			{#each deliverables || [] as deliverable, i}
 				<li class="inline">
 					{#if i >= 1}
-						{' '}{DOT}&nbsp;{deliverable}
+						{i === 0 ? '' : ' '}{DOT}&nbsp;{deliverable}
 					{:else}
 						{deliverable}
 					{/if}
@@ -46,7 +46,7 @@
 		</ul>
 	</div>
 
-	<div class="indent col-span-6 md:col-span-3">
+	<div class="col-span-6 indent md:col-span-3">
 		{#if description}
 			<div>
 				<RichText value={description} />

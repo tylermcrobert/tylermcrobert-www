@@ -7,7 +7,7 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="grid-standard col-span-6 grid-rows-2">
+<div class="col-span-6 grid-standard grid-rows-2">
 	{#if data.mainMedia?.asset}
 		<div
 			class={`col-span-3 row-span-2 overflow-hidden ${data.imageRight ? 'col-[4_/_span_3]' : ''}`.trim()}
