@@ -1,7 +1,7 @@
 <script lang="ts">
-	import BrowserFrameThemeProvider from '$components/BrowserFrameThemeProvider.svelte';
 	import CaseStudyHeader from '$components/CaseStudyHeader.svelte';
 	import HomeIndex from '$components/HomeIndex.svelte';
+	import BrowserFrameThemeProvider from '$components/Modules/Browser/BrowserFrameThemeProvider.svelte';
 	import Modules from '$components/Modules/Modules.svelte';
 	import type { BrowserFrame } from '$sanity';
 

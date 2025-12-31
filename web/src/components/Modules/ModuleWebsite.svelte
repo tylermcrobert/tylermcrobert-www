@@ -1,9 +1,10 @@
 <script lang="ts">
-	import BrowserFrame from '$components/BrowserFrame.svelte';
 	import Image from '$components/Image.svelte';
 	import Media from '$components/Media.svelte';
 	import ScrollingBrowser from '$components/ScrollingBrowser.svelte';
 	import type { ModuleWebsite } from '$sanity';
+
+	import BrowserFrame from './Browser/BrowserFrame.svelte';
 
 	type Props = { data: ModuleWebsite };
 
