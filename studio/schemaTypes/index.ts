@@ -14,7 +14,7 @@ import {textBlock} from './modules/textBlock'
 import {tripleImage} from './modules/tripleImage'
 import {website} from './modules/website'
 import aspect from './objects/aspect'
-import {browserFrame} from './objects/browserFrame'
+import {browserFrame, pageBrowserFrame} from './objects/browserFrame'
 import {link} from './objects/link'
 import {media, mediaPlaybackSettings} from './objects/media'
 import {metadata} from './objects/metadata'
@@ -28,6 +28,7 @@ import {
 
 export const schemaTypes = [
   browserFrame,
+  pageBrowserFrame,
   playlistBlock,
   mobileWebsiteItem,
   tripleImage,

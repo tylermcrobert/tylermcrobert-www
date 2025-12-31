@@ -346,13 +346,6 @@ export type Module = { _key: string } & (
  * PAGES
  ******************************************************************************/
 
-const WEB_FRAME_THEME_PROJECTION = groq`{
-  "dots": dots,
-  "frameBackground": frameBackground,
-  "frameForeground": frameForeground,
-  "sectionBackground": sectionBackground,
-  "style": style,
-}`;
 export const ROOT_SLUG_QUERY = groq`
   *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
     _type,
@@ -360,16 +353,13 @@ export const ROOT_SLUG_QUERY = groq`
 
     _type == 'caseStudy' => {
       "caseStudy": {
-        "theme": coalesce(
-          @.browserFrame${WEB_FRAME_THEME_PROJECTION},
-          *[_id == "settings"][0].defaultBrowserFrameV2${WEB_FRAME_THEME_PROJECTION}
-        ),
         intro,
         deliverables,
         date,
         title,
         description,
-        browserFrame
+        browserFrame,
+        "defaultBrowserFrame": *[_id == "settings"][0].defaultBrowserFrameV2
       },
     },
     

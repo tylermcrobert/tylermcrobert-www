@@ -2,27 +2,22 @@
 	import { stegaClean } from '@sanity/sveltekit';
 
 	import { page } from '$app/state';
-	import { sanityDataAttribute } from '$lib/attachments';
 
-	import { getBrowserThemeCtx } from './BrowserFrameThemeProvider.svelte';
+	import { getWebsiteModuleThemeCtx } from './WebsiteModuleThemeProvider.svelte';
 
-	let ctx = getBrowserThemeCtx();
+	let themeContext = getWebsiteModuleThemeCtx();
+	let isSimple = $derived(stegaClean(themeContext.theme?.style) === 'simple');
 </script>
 
-<span
-	class="relative z-10 -mb-px block"
-	{@attach sanityDataAttribute('browserFrame.style', {
-		path: ''
-	})}
->
-	{#if stegaClean(ctx.getStyle()) === 'simple'}
-		{@render browserFrameSimple()}
+<span class="relative z-10 -mb-px block">
+	{#if isSimple}
+		{@render browserChromeSimple()}
 	{:else}
-		{@render browserFrameAccurate()}
+		{@render browserChromeAccurate()}
 	{/if}
 </span>
 
-{#snippet browserFrameSimple()}
+{#snippet browserChromeSimple()}
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 439 13"
@@ -41,7 +36,7 @@
 	</svg>
 {/snippet}
 
-{#snippet browserFrameAccurate()}
+{#snippet browserChromeAccurate()}
 	<svg fill="none" viewBox="0 0 1440 52">
 		<path d="M0 0h1440v52H0Z" fill="var(--browser-background)" />
 		<!-- <line
@@ -115,7 +110,7 @@
 			dominant-baseline="middle"
 			letter-spacing=".6"
 		>
-			{page.data.caseStudy.title}
+			{themeContext.theme?.hostname || page.data.caseStudy.title}
 		</text>
 	</svg>
 {/snippet}

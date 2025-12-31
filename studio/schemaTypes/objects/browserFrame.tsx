@@ -49,3 +49,15 @@ export const browserFrame = defineType({
     }),
   ],
 })
+
+export const pageBrowserFrame = defineType({
+  ...browserFrame,
+  name: 'pageBrowserFrame',
+  fields: [
+    ...browserFrame.fields.map((field) => defineField({...field, validation: undefined})),
+    defineField({
+      name: 'hostname',
+      type: 'string',
+    }),
+  ],
+})

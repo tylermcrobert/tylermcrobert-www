@@ -1,7 +1,7 @@
 <script module>
-	type Theme = { getStyle: () => BrowserFrame['style'] };
+	type Theme = { theme: PageBrowserFrame | null };
 	const ctx = createContext<Theme>();
-	export const [getBrowserThemeCtx, setBrowserThemeCtx] = ctx;
+	export const [getWebsiteModuleThemeCtx, setWebsiteModuleThemeCtx] = ctx;
 </script>
 
 <script lang="ts">
@@ -11,18 +11,27 @@
 	 */
 	import { createContext, type Snippet } from 'svelte';
 
-	import type { BrowserFrame } from '$sanity';
+	import type { BrowserFrame, PageBrowserFrame } from '$sanity';
 	import { colorToString } from '$util/colorToRgba';
 
 	type Props = {
 		children: Snippet;
-		theme: BrowserFrame | null;
+		pageTheme: PageBrowserFrame | null;
+		defaultTheme: BrowserFrame | null;
 	};
 
-	let { children, theme }: Props = $props();
+	let { children, pageTheme, defaultTheme }: Props = $props();
 
-	// TODO: I don't like this. Feels clunky
-	setBrowserThemeCtx({ getStyle: () => theme?.style });
+	let theme = $derived({
+		...defaultTheme,
+		...pageTheme
+	}) as PageBrowserFrame;
+
+	setWebsiteModuleThemeCtx({
+		get theme() {
+			return theme;
+		}
+	});
 </script>
 
 <div
