@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { getImageDimensions } from '@tylermcrobert/svelte-sanity-image';
+	import type { Snippet } from 'svelte';
 
 	import type { ModuleWebsite } from '$sanity';
 
-	import Media from '../../Media.svelte';
-	import BrowserFrame from './BrowserFrame.svelte';
-
 	type Props = {
 		data: ModuleWebsite;
+		browserChrome: Snippet;
+		content: Snippet;
 	};
 
-	let { data }: Props = $props();
+	let { data, browserChrome, content }: Props = $props();
 
 	const aspect = $derived.by(() => {
 		if (data.media?.asset?._type === 'image') {
@@ -26,19 +26,10 @@
 	<div class="h-(--scroll-distance)">
 		<div class="sticky top-0 grid h-(--total-height) place-items-center">
 			<div class="overflow-hidden rounded-sm">
-				{#if data.showFrame !== false}
-					<BrowserFrame />
-				{/if}
+				{@render browserChrome()}
 
 				<div class="grid aspect-(--frame-aspect) overflow-hidden">
-					{#if data.media?.asset}
-						<Media
-							value={data.media.asset}
-							sizes="100vw"
-							alt={null}
-							class="translate-y-(--image-offset)"
-						/>
-					{/if}
+					{@render content()}
 				</div>
 			</div>
 		</div>
