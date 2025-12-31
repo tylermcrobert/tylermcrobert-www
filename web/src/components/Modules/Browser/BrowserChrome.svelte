@@ -39,14 +39,6 @@
 {#snippet browserChromeAccurate()}
 	<svg fill="none" viewBox="0 0 1440 52">
 		<path d="M0 0h1440v52H0Z" fill="var(--browser-background)" />
-		<!-- <line
-			x1="0"
-			y1="52"
-			x2="1440"
-			y2="52"
-			stroke="var(--browser-stroke)"
-			stroke-width="1"
-		/> -->
 
 		<rect
 			x="16"
@@ -75,12 +67,13 @@
 
 		<!-- FWD/BK -->
 
-		<g
+		<path
 			stroke="var(--browser-foreground)"
 			stroke-width="2.25"
 			stroke-linecap="round"
-			stroke-linejoin="round"><path d="m107 19-7 7 7 7M135 33l7-7-7-7" /></g
-		>
+			stroke-linejoin="round"
+			d="m107 19-7 7 7 7M135 33l7-7-7-7"
+		/>
 
 		<!-- Plus -->
 
