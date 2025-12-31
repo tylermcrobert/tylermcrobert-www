@@ -3,7 +3,7 @@
 	import Media from '$components/Media.svelte';
 	import type { ModuleWebsite } from '$sanity';
 
-	import BrowserFrame from './Browser/BrowserFrame.svelte';
+	import BrowserChrome from './Browser/BrowserChrome.svelte';
 
 	type Props = { data: ModuleWebsite };
 
@@ -22,7 +22,7 @@
 		]}
 	>
 		{#if showFrame !== false}
-			<BrowserFrame />
+			<BrowserChrome />
 		{/if}
 
 		{#if media?.asset}

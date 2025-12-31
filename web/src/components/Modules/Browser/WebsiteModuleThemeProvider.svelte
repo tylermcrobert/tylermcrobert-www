@@ -1,7 +1,7 @@
 <script module>
 	type Theme = { style: BrowserFrame['style'] };
 	const ctx = createContext<Theme>();
-	export const [getBrowserThemeCtx, setBrowserThemeCtx] = ctx;
+	export const [getWebsiteModuleThemeCtx, setWebsiteModuleThemeCtx] = ctx;
 </script>
 
 <script lang="ts">
@@ -21,7 +21,7 @@
 
 	let { children, theme }: Props = $props();
 
-	setBrowserThemeCtx({
+	setWebsiteModuleThemeCtx({
 		get style() {
 			return theme?.style;
 		}

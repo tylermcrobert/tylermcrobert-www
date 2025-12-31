@@ -4,9 +4,9 @@
 	import { page } from '$app/state';
 	import { sanityDataAttribute } from '$lib/attachments';
 
-	import { getBrowserThemeCtx } from './BrowserFrameThemeProvider.svelte';
+	import { getWebsiteModuleThemeCtx } from './WebsiteModuleThemeProvider.svelte';
 
-	let ctx = getBrowserThemeCtx();
+	let ctx = getWebsiteModuleThemeCtx();
 </script>
 
 <span
@@ -16,13 +16,13 @@
 	})}
 >
 	{#if stegaClean(ctx.style) === 'simple'}
-		{@render browserFrameSimple()}
+		{@render browserChromeSimple()}
 	{:else}
-		{@render browserFrameAccurate()}
+		{@render browserChromeAccurate()}
 	{/if}
 </span>
 
-{#snippet browserFrameSimple()}
+{#snippet browserChromeSimple()}
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 439 13"
@@ -41,7 +41,7 @@
 	</svg>
 {/snippet}
 
-{#snippet browserFrameAccurate()}
+{#snippet browserChromeAccurate()}
 	<svg fill="none" viewBox="0 0 1440 52">
 		<path d="M0 0h1440v52H0Z" fill="var(--browser-background)" />
 		<!-- <line
