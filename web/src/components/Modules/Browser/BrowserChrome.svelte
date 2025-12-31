@@ -2,20 +2,15 @@
 	import { stegaClean } from '@sanity/sveltekit';
 
 	import { page } from '$app/state';
-	import { sanityDataAttribute } from '$lib/attachments';
 
 	import { getWebsiteModuleThemeCtx } from './WebsiteModuleThemeProvider.svelte';
 
-	let ctx = getWebsiteModuleThemeCtx();
+	let themeContext = getWebsiteModuleThemeCtx();
+	let isSimple = $derived(stegaClean(themeContext.theme?.style) === 'simple');
 </script>
 
-<span
-	class="relative z-10 -mb-px block"
-	{@attach sanityDataAttribute('browserFrame.style', {
-		path: ''
-	})}
->
-	{#if stegaClean(ctx.style) === 'simple'}
+<span class="relative z-10 -mb-px block">
+	{#if isSimple}
 		{@render browserChromeSimple()}
 	{:else}
 		{@render browserChromeAccurate()}
@@ -115,7 +110,7 @@
 			dominant-baseline="middle"
 			letter-spacing=".6"
 		>
-			{page.data.caseStudy.title}
+			{themeContext.theme?.hostname || page.data.caseStudy.title}
 		</text>
 	</svg>
 {/snippet}

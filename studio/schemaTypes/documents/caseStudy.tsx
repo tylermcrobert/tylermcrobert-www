@@ -72,7 +72,7 @@ export default defineField({
 
     defineField({
       name: 'browserFrame',
-      type: 'browserFrame',
+      type: 'pageBrowserFrame',
     }),
   ],
 

@@ -1,5 +1,5 @@
 <script module>
-	type Theme = { style: BrowserFrame['style'] };
+	type Theme = { theme: PageBrowserFrame | null };
 	const ctx = createContext<Theme>();
 	export const [getWebsiteModuleThemeCtx, setWebsiteModuleThemeCtx] = ctx;
 </script>
@@ -11,19 +11,25 @@
 	 */
 	import { createContext, type Snippet } from 'svelte';
 
-	import type { BrowserFrame } from '$sanity';
+	import type { BrowserFrame, PageBrowserFrame } from '$sanity';
 	import { colorToString } from '$util/colorToRgba';
 
 	type Props = {
 		children: Snippet;
-		theme: BrowserFrame | null;
+		pageTheme: PageBrowserFrame | null;
+		defaultTheme: BrowserFrame | null;
 	};
 
-	let { children, theme }: Props = $props();
+	let { children, pageTheme, defaultTheme }: Props = $props();
+
+	let theme = $derived({
+		...defaultTheme,
+		...pageTheme
+	}) as PageBrowserFrame;
 
 	setWebsiteModuleThemeCtx({
-		get style() {
-			return theme?.style;
+		get theme() {
+			return theme;
 		}
 	});
 </script>
