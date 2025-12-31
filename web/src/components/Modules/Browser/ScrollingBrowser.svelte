@@ -28,7 +28,7 @@
 			<div class="w-full overflow-hidden rounded-sm">
 				{@render browserChrome()}
 
-				<div class="grid aspect-(--frame-aspect) overflow-hidden">
+				<div class="-mb-px grid aspect-(--frame-aspect) overflow-hidden">
 					{@render content()}
 				</div>
 			</div>
