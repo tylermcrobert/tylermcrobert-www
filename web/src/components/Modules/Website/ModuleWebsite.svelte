@@ -3,8 +3,8 @@
 	import Media from '$components/Media.svelte';
 	import type { ModuleWebsite } from '$sanity';
 
-	import BrowserChrome from './Browser/BrowserChrome.svelte';
-	import ScrollingBrowser from './Browser/ScrollingBrowser.svelte';
+	import BrowserChrome from './BrowserChrome.svelte';
+	import ScrollingBrowser from './ScrollingBrowser.svelte';
 
 	type Props = { data: ModuleWebsite };
 
@@ -19,7 +19,7 @@
 	{#if !scrolling}
 		{@render standard()}
 	{:else}
-		<div class="not-scrolling-browser-aspect-range:hidden z-10">
+		<div class="z-10 not-scrolling-browser-aspect-range:hidden">
 			<ScrollingBrowser {data} {content} {browserChrome} />
 		</div>
 		<div class="scrolling-browser-aspect-range:hidden">

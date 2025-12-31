@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import './components/Modules/Browser/moduleWebsite.css';
+@import './components/Modules/Website/moduleWebsite.css';
 
 @config '../tailwind.config.js';
 

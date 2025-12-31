@@ -5,12 +5,12 @@
 	import ModuleContext from './ModuleContext.svelte';
 	import ModuleDiptych from './ModuleDiptych.svelte';
 	import MediaBlock from './ModuleMediaBlock.svelte';
-	import ModuleMobileWebsite from './ModuleMobileWebsite.svelte';
 	import ModulePlaylistBlock from './ModulePlaylistBlock.svelte';
 	import TextBlock from './ModuleTextBlock.svelte';
 	import ModuleTimedSlides from './ModuleTimedSlides.svelte';
 	import ModuleTripleImage from './ModuleTripleImage.svelte';
-	import ModuleWebsite from './ModuleWebsite.svelte';
+	import ModuleMobileWebsite from './Website/ModuleMobileWebsite.svelte';
+	import ModuleWebsite from './Website/ModuleWebsite.svelte';
 
 	type Props = {
 		modules: Module[];
