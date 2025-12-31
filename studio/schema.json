@@ -2746,6 +2746,22 @@
           },
           "optional": true
         },
+        "addressBarBackground": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "color"
+          },
+          "optional": true
+        },
+        "addressBarStroke": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "color"
+          },
+          "optional": true
+        },
         "hostname": {
           "type": "objectAttribute",
           "value": {
@@ -2811,6 +2827,22 @@
           "optional": true
         },
         "sectionBackground": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "color"
+          },
+          "optional": true
+        },
+        "addressBarBackground": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "color"
+          },
+          "optional": true
+        },
+        "addressBarStroke": {
           "type": "objectAttribute",
           "value": {
             "type": "inline",

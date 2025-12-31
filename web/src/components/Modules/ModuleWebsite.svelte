@@ -12,7 +12,7 @@
 </script>
 
 <div
-	style:background={data.backgroundColor || 'var(--browser-section-background)'}
+	style:background={data.backgroundColor || 'var(--section-background)'}
 	class="relative my-standard w-full bg-black p-[10%]"
 >
 	<div
