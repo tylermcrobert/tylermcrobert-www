@@ -25,7 +25,7 @@
 <div style:--image-aspect={aspect} class="scrollweb-wrapper @container">
 	<div class="h-(--scroll-distance)">
 		<div class="sticky top-0 grid h-(--total-height) place-items-center">
-			<div class="w-full overflow-hidden rounded-sm">
+			<div class="w-full round-browser-frame">
 				{@render browserChrome()}
 
 				<div class="-mb-px grid aspect-(--frame-aspect) overflow-hidden">
