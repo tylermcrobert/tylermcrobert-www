@@ -9,16 +9,14 @@
 	type Props = { data: ModuleWebsite };
 
 	let { data }: Props = $props();
-	let { showFrame, backgroundImg, media } = $derived(data);
-
-	const IS_SCROLLING = true;
+	let { showFrame, backgroundImg, media, scrolling } = $derived(data);
 </script>
 
 <div
 	style:background={data.backgroundColor || 'var(--browser-section-background)'}
 	class="relative my-standard flow-root w-full bg-black px-[10%] [@media(aspect-ratio>=1.75)]:px-[15%]"
 >
-	{#if !IS_SCROLLING}
+	{#if !scrolling}
 		{@render standard()}
 	{:else}
 		<div class="z-10 not-[@media(1/1<=aspect-ratio<=2)]:hidden">

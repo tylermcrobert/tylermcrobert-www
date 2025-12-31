@@ -147,6 +147,7 @@ const MODULE_WEBSITE = `//groq
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
     showFrame,
+    scrolling,
     media${MEDIA_PROJECTION},
   }
 `;
@@ -156,7 +157,7 @@ export type ModuleWebsite = Nullable<{
 	media: MediaProjection;
 	backgroundColor: string;
 }> &
-	Pick<Website, 'showFrame' | 'backgroundImg'>;
+	Pick<Website, 'showFrame' | 'backgroundImg' | 'scrolling'>;
 
 /**
  * Diptych
