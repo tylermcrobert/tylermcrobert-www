@@ -3,7 +3,7 @@
 	import Media from '$components/Media.svelte';
 	import type { ModuleWebsite } from '$sanity';
 
-	import BrowserChrome from './Browser/BrowserChrome.svelte';
+	import BrowserChrome from './BrowserChrome.svelte';
 
 	type Props = { data: ModuleWebsite };
 

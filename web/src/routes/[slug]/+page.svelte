@@ -1,8 +1,8 @@
 <script lang="ts">
 	import CaseStudyHeader from '$components/CaseStudyHeader.svelte';
 	import HomeIndex from '$components/HomeIndex.svelte';
-	import WebsiteModuleThemeProvider from '$components/Modules/Browser/WebsiteModuleThemeProvider.svelte';
 	import Modules from '$components/Modules/Modules.svelte';
+	import WebsiteModuleThemeProvider from '$components/Modules/Website/WebsiteModuleThemeProvider.svelte';
 
 	let { data } = $props();
 
