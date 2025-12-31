@@ -9,12 +9,12 @@
 
 	type Props = {
 		data: ModulePlaylistBlock;
-		showAll?: boolean;
+		truncate?: boolean;
 	};
 
-	let { data, showAll = false }: Props = $props();
+	let { data, truncate = true }: Props = $props();
 
-	let isExpanded = $state(showAll ? true : false);
+	let isExpanded = $state(false);
 </script>
 
 {#if data.playlist}
@@ -26,7 +26,7 @@
 			<h2>{title}</h2>
 		</div>
 
-		<div class="grid-standard !gap-y-1">
+		<div class="grid-standard gap-y-1">
 			<div class="col-span-6 md:col-span-2">
 				<a href={link} target="_blank">
 					<DotHead noMarginBottom>LINK ↗</DotHead>
@@ -46,7 +46,7 @@
 			{#each tracks || [] as { title, duration, artists }, i}
 				{@const durFormatted = formatTime(duration || 0, 'mm:ss')}
 				{@const artistsFormatted = (artists || []).filter(censor).join(' & ')}
-				{@const hidden = i + 1 > LIMIT && !isExpanded}
+				{@const hidden = i + 1 > LIMIT && !(isExpanded || !truncate)}
 
 				<li class={['text-h1 mr-[0.4ch]', hidden ? 'hidden' : 'inline']}>
 					{NUMS[i + 1]}&nbsp;{censor(title!)}&mdash;{artistsFormatted} ({durFormatted})
@@ -54,7 +54,7 @@
 			{/each}
 		</ul>
 
-		{#if !showAll}
+		{#if truncate}
 			<div>
 				<button
 					onclick={() => (isExpanded = !isExpanded)}

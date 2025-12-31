@@ -81,26 +81,18 @@
 	text-indent: 2rem;
 }
 
-@layer components {
-	.text-h1 {
-		@apply text-[1.78rem] leading-heading tracking-[-.02ch] md:text-[2.37rem] lg:text-[3.16rem];
-	}
-
-	.text-h1 br {
-		@apply hidden sm:block;
-	}
-
-	.text-h2 {
-		@apply max-w-[30ch] text-[26px] leading-heading;
-	}
+@utility text-h1 {
+	@apply text-[1.78rem] leading-heading tracking-[-.02ch] sm:whitespace-break-spaces md:text-[2.37rem] lg:text-[3.16rem];
 }
 
-@layer utilities {
-	.wrapper {
-		@apply mx-auto max-w-wrapper px-standard;
-	}
+@utility text-h2 {
+	@apply max-w-[30ch] text-[26px] leading-heading;
+}
 
-	.grid-standard {
-		@apply grid grid-cols-6 gap-standard;
-	}
+@utility wrapper {
+	@apply mx-auto max-w-wrapper px-standard;
+}
+
+@utility grid-standard {
+	@apply grid grid-cols-6 gap-standard;
 }
