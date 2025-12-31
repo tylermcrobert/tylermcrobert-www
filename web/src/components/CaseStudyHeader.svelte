@@ -32,7 +32,7 @@
 	</h2>
 
 	<div class="col-span-6 md:col-span-3 md:max-w-[16em]">
-		<p class="indent md:mb-small md:indent-0">{date?.split('.')[0]}</p>
+		<p class="max-md:indent md:mb-small">{date?.split('.')[0]}</p>
 		<ul>
 			{#each deliverables || [] as deliverable, i}
 				<li class="inline">
@@ -46,7 +46,7 @@
 		</ul>
 	</div>
 
-	<div class="indent col-span-6 md:col-span-3">
+	<div class="col-span-6 indent md:col-span-3">
 		{#if description}
 			<div>
 				<RichText value={description} />

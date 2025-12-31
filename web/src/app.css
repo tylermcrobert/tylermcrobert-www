@@ -75,10 +75,10 @@
 	hr {
 		@apply border-b-0 border-dashed border-black;
 	}
+}
 
-	.indent {
-		@apply indent-8;
-	}
+@utility indent {
+	text-indent: 2rem;
 }
 
 @layer components {
