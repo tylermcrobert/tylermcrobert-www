@@ -15,7 +15,7 @@
 		path: ''
 	})}
 >
-	{#if stegaClean(ctx.getStyle()) === 'simple'}
+	{#if stegaClean(ctx.style) === 'simple'}
 		{@render browserFrameSimple()}
 	{:else}
 		{@render browserFrameAccurate()}

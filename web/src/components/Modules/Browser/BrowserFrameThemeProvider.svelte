@@ -1,5 +1,5 @@
 <script module>
-	type Theme = { getStyle: () => BrowserFrame['style'] };
+	type Theme = { style: BrowserFrame['style'] };
 	const ctx = createContext<Theme>();
 	export const [getBrowserThemeCtx, setBrowserThemeCtx] = ctx;
 </script>
@@ -21,8 +21,11 @@
 
 	let { children, theme }: Props = $props();
 
-	// TODO: I don't like this. Feels clunky
-	setBrowserThemeCtx({ getStyle: () => theme?.style });
+	setBrowserThemeCtx({
+		get style() {
+			return theme?.style;
+		}
+	});
 </script>
 
 <div
