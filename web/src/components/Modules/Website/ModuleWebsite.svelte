@@ -17,15 +17,15 @@
 >
 	<div
 		style:background={data.backgroundColor || 'var(--section-background)'}
-		class="relative my-standard flow-root w-full bg-black scrolling-browser-aspect-range:px-[10%]"
+		class="relative my-standard flow-root w-full bg-black"
 	>
 		{#if !scrolling}
 			{@render standard()}
 		{:else}
-			<div
-				class="z-10 mx-auto w-full max-w-[125vh] not-scrolling-browser-aspect-range:hidden"
-			>
-				<ScrollingBrowser {data} {content} {browserChrome} />
+			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
+				<div class="mx-[10%]">
+					<ScrollingBrowser {data} {content} {browserChrome} />
+				</div>
 			</div>
 			<div class="scrolling-browser-aspect-range:hidden">
 				{@render standard()}
