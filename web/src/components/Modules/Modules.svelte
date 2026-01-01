@@ -21,7 +21,7 @@
 	let { modules, documentId, documentType }: Props = $props();
 </script>
 
-<div class="wrapper mx-auto">
+<div>
 	{#each modules as data, index}
 		{@const path = `modules[_key=="${data._key}"]`}
 

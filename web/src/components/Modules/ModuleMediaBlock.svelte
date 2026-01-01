@@ -10,7 +10,7 @@
 </script>
 
 {#if data.media?.asset}
-	<div class="my-standard">
+	<div class="wrapper my-standard">
 		<Media
 			value={data.media.asset}
 			sizes="100vw"

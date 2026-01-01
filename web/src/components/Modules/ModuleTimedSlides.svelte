@@ -27,13 +27,15 @@
 	});
 </script>
 
-<div
-	class={['my-standard grid p-[10%]', { 'bg-black': !data.background }]}
-	style:background={data.background}
->
-	{#each data.images || [] as image, i}
-		<div class:opacity-0={i !== index} class="col-start-1 row-start-1">
-			<Image {image} sizes="90vw" alt={null} />
-		</div>
-	{/each}
+<div class="wrapper">
+	<div
+		class={['my-standard grid p-[10%]', { 'bg-black': !data.background }]}
+		style:background={data.background}
+	>
+		{#each data.images || [] as image, i}
+			<div class:opacity-0={i !== index} class="col-start-1 row-start-1">
+				<Image {image} sizes="90vw" alt={null} />
+			</div>
+		{/each}
+	</div>
 </div>

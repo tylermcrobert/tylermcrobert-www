@@ -9,7 +9,7 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="my-standard grid gap-standard sm:grid-cols-2">
+<div class="wrapper my-standard grid gap-standard sm:grid-cols-2">
 	{#each data.items || [] as item}
 		{#if item._type === 'diptych.media' && item.media?.asset}
 			<div {@attach sanityDataAttribute(`.items[_key=="${item._key}"]`)}>
