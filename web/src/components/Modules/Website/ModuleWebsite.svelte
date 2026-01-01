@@ -37,7 +37,7 @@
 {#snippet standard()}
 	<div
 		class={[
-			'relative z-10 m-[10%] tight-client-window:m-[15%]',
+			'relative z-10 m-[10%] scrolling-browser-aspect-range:tight-client-window:m-[15%]',
 			showFrame !== false && 'round-browser-frame'
 		]}
 	>
