@@ -13,25 +13,31 @@
 </script>
 
 <div
-	style:background={data.backgroundColor || 'var(--section-background)'}
-	class="relative my-standard flow-root w-full bg-black px-[10%] tight-client-window:px-[15%]"
+	class={!scrolling ? 'wrapper' : 'not-scrolling-browser-aspect-range:wrapper'}
 >
-	{#if !scrolling}
-		{@render standard()}
-	{:else}
-		<div class="z-10 not-scrolling-browser-aspect-range:hidden">
-			<ScrollingBrowser {data} {content} {browserChrome} />
-		</div>
-		<div class="scrolling-browser-aspect-range:hidden">
+	<div
+		style:background={data.backgroundColor || 'var(--section-background)'}
+		class="relative my-standard flow-root w-full bg-black"
+	>
+		{#if !scrolling}
 			{@render standard()}
-		</div>
-	{/if}
+		{:else}
+			<div
+				class="z-10 mx-[10%] not-scrolling-browser-aspect-range:hidden tight-client-window:mx-[15%]"
+			>
+				<ScrollingBrowser {data} {content} {browserChrome} />
+			</div>
+			<div class="scrolling-browser-aspect-range:hidden">
+				{@render standard()}
+			</div>
+		{/if}
+	</div>
 </div>
 
 {#snippet standard()}
 	<div
 		class={[
-			'relative z-10 my-[10%] tight-client-window:my-[15%]',
+			'relative z-10 m-[10%] tight-client-window:m-[15%]',
 			showFrame !== false && 'round-browser-frame'
 		]}
 	>
