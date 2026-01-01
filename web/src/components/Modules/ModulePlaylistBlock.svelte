@@ -15,10 +15,22 @@
 	let { data, truncate = true }: Props = $props();
 
 	let isExpanded = $state(false);
+
+	let tracks = $derived(
+		data.playlist?.tracks?.map(({ artists, duration, title }, i) => {
+			const artistsFormatted = (artists || []).map(censor).join(' & ');
+			const durFormatted = formatTime(duration || 0, 'mm:ss');
+			const num = NUMS[i + 1];
+			return {
+				hidden: truncate ? i + 1 > LIMIT && !isExpanded : false,
+				title: `${num}\u00A0${censor(title!)}—${artistsFormatted} (${durFormatted})`
+			};
+		})
+	);
 </script>
 
 {#if data.playlist}
-	{@const { title, link, date, duration, image, tracks } = data.playlist}
+	{@const { title, link, date, duration, image } = data.playlist}
 
 	<section class="wrapper my-medium flex flex-col gap-standard">
 		<div class="flex gap-4 text-h1">
@@ -43,13 +55,9 @@
 		</div>
 
 		<ul>
-			{#each tracks || [] as { title, duration, artists }, i}
-				{@const durFormatted = formatTime(duration || 0, 'mm:ss')}
-				{@const artistsFormatted = (artists || []).filter(censor).join(' & ')}
-				{@const hidden = truncate ? i + 1 > LIMIT && !isExpanded : false}
-
-				<li class={['mr-[0.4ch] text-h1', hidden ? 'hidden' : 'inline']}>
-					{NUMS[i + 1]}&nbsp;{censor(title!)}&mdash;{artistsFormatted} ({durFormatted})
+			{#each tracks || [] as track, i}
+				<li class={['mr-[0.4ch] text-h1', track.hidden ? 'hidden' : 'inline']}>
+					{track.title}
 				</li>
 			{/each}
 		</ul>
