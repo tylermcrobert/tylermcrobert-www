@@ -17,13 +17,13 @@
 >
 	<div
 		style:background={data.backgroundColor || 'var(--section-background)'}
-		class="relative my-standard flow-root w-full bg-black"
+		class="relative my-standard flow-root w-full bg-black scrolling-browser-aspect-range:px-[10%]"
 	>
 		{#if !scrolling}
 			{@render standard()}
 		{:else}
 			<div
-				class="z-10 mx-[10%] not-scrolling-browser-aspect-range:hidden tight-client-window:mx-[15%]"
+				class="z-10 mx-auto w-full max-w-[125vh] not-scrolling-browser-aspect-range:hidden"
 			>
 				<ScrollingBrowser {data} {content} {browserChrome} />
 			</div>
@@ -37,7 +37,7 @@
 {#snippet standard()}
 	<div
 		class={[
-			'relative z-10 m-[10%] scrolling-browser-aspect-range:tight-client-window:m-[15%]',
+			'relative z-10 m-[10%]',
 			showFrame !== false && 'round-browser-frame'
 		]}
 	>
