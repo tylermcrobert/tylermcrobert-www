@@ -20,7 +20,7 @@
 {#if data.playlist}
 	{@const { title, link, date, duration, image, tracks } = data.playlist}
 
-	<section class="mx-auto my-medium flex flex-col gap-standard">
+	<section class="my-medium flex flex-col gap-standard">
 		<div class="flex gap-4 text-h1">
 			<img src={image} alt={title} class="size-[1em] object-cover" />
 			<h2>{title}</h2>
@@ -46,7 +46,7 @@
 			{#each tracks || [] as { title, duration, artists }, i}
 				{@const durFormatted = formatTime(duration || 0, 'mm:ss')}
 				{@const artistsFormatted = (artists || []).filter(censor).join(' & ')}
-				{@const hidden = i + 1 > LIMIT && !(isExpanded || !truncate)}
+				{@const hidden = truncate ? i + 1 > LIMIT && !isExpanded : false}
 
 				<li class={['mr-[0.4ch] text-h1', hidden ? 'hidden' : 'inline']}>
 					{NUMS[i + 1]}&nbsp;{censor(title!)}&mdash;{artistsFormatted} ({durFormatted})

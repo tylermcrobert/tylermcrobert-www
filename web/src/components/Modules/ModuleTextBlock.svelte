@@ -8,7 +8,7 @@
 </script>
 
 {#if data.richText}
-	<div class="my-standard grid-cols-6 md:grid">
+	<div class="wrapper my-standard grid-cols-6 md:grid">
 		<div class="col-span-4 lg:col-span-3">
 			<RichText value={data.richText} />
 		</div>
