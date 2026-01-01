@@ -20,7 +20,7 @@
 {#if data.playlist}
 	{@const { title, link, date, duration, image, tracks } = data.playlist}
 
-	<section class="my-medium flex flex-col gap-standard">
+	<section class="wrapper my-medium flex flex-col gap-standard">
 		<div class="flex gap-4 text-h1">
 			<img src={image} alt={title} class="size-[1em] object-cover" />
 			<h2>{title}</h2>
