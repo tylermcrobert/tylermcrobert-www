@@ -17,8 +17,8 @@
 					value={item.media.asset}
 					alt={null}
 					sizes="(min-width: 768px), 50vw, 100vw"
-					imageProps={{ aspect: item.aspect }}
-					videoProps={{ aspect: item.aspect }}
+					imageProps={{ aspect: item.aspect || undefined }}
+					videoProps={{ aspect: item.aspect || undefined }}
 				/>
 			</div>
 		{:else if item._type === 'diptych.text' && item.richText}

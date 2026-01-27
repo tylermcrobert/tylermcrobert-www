@@ -1,6 +1,7 @@
 import { stegaClean } from '@sanity/sveltekit';
+import type { SanityImageSource } from '@tylermcrobert/svelte-sanity-image';
 
-import type { MediaProjectionVideo, SanityImageAsset } from '$sanity';
+import type { MediaProjectionVideo } from '$sanity';
 import { urlFor } from '$sanity/image';
 
 import type { VideoPlaybackProps, VideoProps } from './types';
@@ -12,7 +13,7 @@ function formatAspect(aspect: string): number {
 		.reduce((a, b) => a / b);
 }
 
-function getPoster(image: SanityImageAsset | null, aspect: number) {
+function getSanityPosterUrl(image: SanityImageSource | null, aspect: number) {
 	if (!image) return undefined;
 	return urlFor(image)
 		.width(1440)
@@ -68,16 +69,16 @@ function getPlaybackProps(
  */
 
 export function formatVideoProjection(video: MediaProjectionVideo): VideoProps {
-	const aspect = formatAspect(video.aspect);
+	const aspect = formatAspect(video.aspect!);
 	const poster = video.poster
-		? getPoster(video.poster, aspect)
-		: getMuxThumbnail(video.playbackId, 0); // TODO: GET POSTER TIME;
+		? getSanityPosterUrl(video.poster, aspect)
+		: getMuxThumbnail(video.playbackId!, 0); // TODO: GET POSTER TIME;
 	const playbackProps = getPlaybackProps(video);
 
 	return {
 		poster,
 		aspect,
-		playbackId: video.playbackId,
+		playbackId: video.playbackId!,
 		...playbackProps
 	};
 }

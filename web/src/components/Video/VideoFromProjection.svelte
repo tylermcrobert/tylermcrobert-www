@@ -12,7 +12,7 @@
 	} from './VideoFromProjection.util';
 
 	interface Props extends Partial<VideoProps> {
-		projection: MediaProjectionVideo;
+		projection: NonNullable<MediaProjectionVideo>;
 	}
 
 	let { aspect, projection, poster, ...props }: Props = $props();
@@ -48,9 +48,9 @@
 <Video
 	{...props}
 	{...playbackPresets[preset || 'autoplay']}
-	{playbackId}
-	aspect={aspect || parseAspectStr(projection.aspect)}
-	poster={poster || projection.poster
-		? getSanityPosterUrl(projection.poster, parseAspectStr(projection.aspect))
-		: getMuxThumbnailUrl(playbackId, 0.0)}
+	playbackId={playbackId!}
+	aspect={aspect || parseAspectStr(projection.aspect!)}
+	poster={poster || projection?.poster
+		? getSanityPosterUrl(projection.poster, parseAspectStr(projection!.aspect!))
+		: getMuxThumbnailUrl(playbackId!, 0.0)}
 />

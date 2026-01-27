@@ -1,4 +1,5 @@
-import type { SanityImageAsset } from '$sanity';
+import type { SanityImageSource } from '@tylermcrobert/svelte-sanity-image';
+
 import { urlFor } from '$sanity/image';
 
 const POSTER_WIDTH = 1280;
@@ -17,7 +18,7 @@ export function getMuxThumbnailUrl(
  * @returns poster image URL from Sanity
  */
 export function getSanityPosterUrl(
-	sanityImage: SanityImageAsset | null,
+	sanityImage: SanityImageSource | null,
 	videoAspect: number
 ) {
 	if (!sanityImage) return undefined;
