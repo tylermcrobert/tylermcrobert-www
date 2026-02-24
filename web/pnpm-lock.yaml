@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@mux/mux-video':
-        specifier: ^0.25.3
-        version: 0.25.3
+        specifier: ^0.30.2
+        version: 0.30.2
       '@portabletext/svelte':
         specifier: ^3.0.1
         version: 3.0.1(svelte@5.46.0)
@@ -1513,6 +1513,9 @@ packages:
   '@mux/mux-data-google-ima@0.2.8':
     resolution: {integrity: sha512-0ZEkHdcZ6bS8QtcjFcoJeZxJTpX7qRIledf4q1trMWPznugvtajCjCM2kieK/pzkZj1JM6liDRFs1PJSfVUs2A==}
 
+  '@mux/mux-data-google-ima@0.3.4':
+    resolution: {integrity: sha512-j8IOD5kw1qIOkbpipEQRGQ7vXB6+CArrhIAvtvj8YFqy0PHi7JcHk4WR3ZBVy5+5yaRCH+nzHkmJmGsg8g6O5g==}
+
   '@mux/mux-player-react@3.10.1':
     resolution: {integrity: sha512-9e/JPYI35tGt2v8pfibrhdYqNy5yyWgwKq3QImh/0FzA8qH8k2wrpboXyDZ0CmrFU624Y0L/Vu438vKsbX5mNg==}
     peerDependencies:
@@ -1529,20 +1532,20 @@ packages:
   '@mux/mux-player@3.10.1':
     resolution: {integrity: sha512-gClop9opBvInX0ysYpaHdxpTBlTGOutSHP06SD4LlJWERqATHV+YjcykXs6thRVvqMGZg/nJyVY3Uf9GAuTZXQ==}
 
-  '@mux/mux-video@0.25.3':
-    resolution: {integrity: sha512-078GgUuHju5IdBGdhfCtng5EDNmrV94i3VmkFXxUIUm6sO1PFP2GFMWCAcLna6n6nEE6KZ0eBtAnZnsnbOCuxA==}
-
   '@mux/mux-video@0.29.1':
     resolution: {integrity: sha512-/fZjusOZuDpmp0CFlNLnVWV85aK7AJeCEZ/MuDdKIPkTkNyt2QnQMsKBAxpLtG7AsmAROtegTc2uaOCLW9uTgw==}
 
-  '@mux/playback-core@0.29.1':
-    resolution: {integrity: sha512-ugywkgOu1sWZYzHWrr2lOJrpSnI19jYK9GWeEYlQAxpDgoImj6MW9KRzb/d2RRCUJYN7y65btFIRx++rKaHZHA==}
+  '@mux/mux-video@0.30.2':
+    resolution: {integrity: sha512-JwNH7FwLSmPGdU355LvCL1MWyrMFl2dy6mSzyqiHp+14eBaoRu1Os4Dg2khw5dECJSIm7Z4ZMeDnHQc/rj7/YQ==}
 
   '@mux/playback-core@0.31.4':
     resolution: {integrity: sha512-qQrNAAdJ7vjr1XEObE1hOUmuYngk/fjwmtYhpzkX4jJZwUC8I0rHjeFv7LXuCQD1D/mYJlWEpuyA0gPd6Y2eQw==}
 
   '@mux/playback-core@0.32.1':
     resolution: {integrity: sha512-d1iYtftbbnjgXhL8htT6I1Z9zPdrRVcLYbOjifr5dUoqCHsXXq4f/FDCK1P5a787ekNIEG/5BT2/vWeuvjqYig==}
+
+  '@mux/playback-core@0.33.1':
+    resolution: {integrity: sha512-lyfvZQuc5UebfJBqjZ+TiFHD3B08otJrNG+pYU2klv6ywYjpvnSCbWBif7YtaC4gIPUJjkErspXWND3w34ctIg==}
 
   '@noble/ed25519@3.0.0':
     resolution: {integrity: sha512-QyteqMNm0GLqfa5SoYbSC3+Pvykwpn95Zgth4MFVSMKBB75ELl9tX1LAVsN4c3HXOrakHsF2gL4zWDAYCcsnzg==}
@@ -3705,9 +3708,6 @@ packages:
   history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
 
-  hls.js@1.5.20:
-    resolution: {integrity: sha512-uu0VXUK52JhihhnN/MVVo1lvqNNuhoxkonqgO3IpjvQiGpJBdIXMGkofjQb/j9zvV7a1SW8U9g1FslWx/1HOiQ==}
-
   hls.js@1.6.15:
     resolution: {integrity: sha512-E3a5VwgXimGHwpRGV+WxRTKeSp2DW5DI5MWv34ulL3t5UNmyJWCQ1KmLEHbYzcfThfXG8amBL+fCYPneGHC4VA==}
 
@@ -4457,6 +4457,12 @@ packages:
 
   mux-embed@5.14.0:
     resolution: {integrity: sha512-vcuw2WWGQ3uh9HfJwaJ8JMlKN4l+8xGfFAUAYNJOcIxP2sPUoRvlu3SY00yg9YBKLfK9E6peaPl+HszWS0Iseg==}
+
+  mux-embed@5.16.1:
+    resolution: {integrity: sha512-XWeOG/nzrfRjdyDajW9VNiP0FuKZhEIHMh8Ybpo8uudQByRSOKH8qOaL+MEGdm7KAHzJunwoyYNodD059Spw/A==}
+
+  mux-embed@5.17.6:
+    resolution: {integrity: sha512-/RmlTtXtH4igmDC/+CApNm+UpnwGGvdMU2K5mC7QdD8U2m+XoMIIlmM0Yk9XP81eqQayjKieVBs9IOwTu2u5pA==}
 
   mux-embed@5.9.0:
     resolution: {integrity: sha512-wmunL3uoPhma/tWy8PrDPZkvJpXvSFBwbD3KkC4PG8Ztjfb1X3hRJwGUAQyRz7z99b/ovLm2UTTitrkvStjH4w==}
@@ -7457,6 +7463,10 @@ snapshots:
     dependencies:
       mux-embed: 5.9.0
 
+  '@mux/mux-data-google-ima@0.3.4':
+    dependencies:
+      mux-embed: 5.16.1
+
   '@mux/mux-player-react@3.10.1(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@mux/mux-player': 3.10.1(react@19.2.3)
@@ -7476,13 +7486,6 @@ snapshots:
     transitivePeerDependencies:
       - react
 
-  '@mux/mux-video@0.25.3':
-    dependencies:
-      '@mux/playback-core': 0.29.1
-      castable-video: 1.1.11
-      custom-media-element: 1.4.5
-      media-tracks: 0.3.4
-
   '@mux/mux-video@0.29.1':
     dependencies:
       '@mux/mux-data-google-ima': 0.2.8
@@ -7491,10 +7494,13 @@ snapshots:
       custom-media-element: 1.4.5
       media-tracks: 0.3.4
 
-  '@mux/playback-core@0.29.1':
+  '@mux/mux-video@0.30.2':
     dependencies:
-      hls.js: 1.5.20
-      mux-embed: 5.14.0
+      '@mux/mux-data-google-ima': 0.3.4
+      '@mux/playback-core': 0.33.1
+      castable-video: 1.1.11
+      custom-media-element: 1.4.5
+      media-tracks: 0.3.4
 
   '@mux/playback-core@0.31.4':
     dependencies:
@@ -7505,6 +7511,11 @@ snapshots:
     dependencies:
       hls.js: 1.6.15
       mux-embed: 5.14.0
+
+  '@mux/playback-core@0.33.1':
+    dependencies:
+      hls.js: 1.6.15
+      mux-embed: 5.17.6
 
   '@noble/ed25519@3.0.0': {}
 
@@ -10151,8 +10162,6 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.28.4
 
-  hls.js@1.5.20: {}
-
   hls.js@1.6.15: {}
 
   hoist-non-react-statics@3.3.2:
@@ -10858,6 +10867,10 @@ snapshots:
   mute-stream@3.0.0: {}
 
   mux-embed@5.14.0: {}
+
+  mux-embed@5.16.1: {}
+
+  mux-embed@5.17.6: {}
 
   mux-embed@5.9.0: {}
 
