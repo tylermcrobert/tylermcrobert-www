@@ -1,4 +1,4 @@
-import type { NowPlayingData } from '$lib/last.fm';
+import type { NowPlayingData } from '$lib/nowplaying/nowPlaying';
 
 export const nowPlaying = $state<{ data: NowPlayingData | null }>({
 	data: null

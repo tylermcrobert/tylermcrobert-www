@@ -8,7 +8,7 @@
 	import Metadata from '$components/Metadata.svelte';
 	import Navigation from '$components/Navigation.svelte';
 	import PreviewMode from '$components/PreviewMode.svelte';
-	import { fetchNowPlaying } from '$lib/last.fm';
+	import { fetchNowPlaying } from '$lib/nowplaying/nowPlaying';
 	import { setNowPlaying } from '$lib/state';
 
 	let { children, data } = $props();

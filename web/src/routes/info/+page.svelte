@@ -58,8 +58,8 @@
 			</h2>
 			<h3 class="text-h1">
 				{isPlaying
-					? `Right now I'm listening to “${censoredTrackName}” by ${censoredArtist} on Spotify.`
-					: `The last song I listened to on Spotify was “${censoredTrackName}” by ${censoredArtist}.`}
+					? `Right now I'm listening to “${censoredTrackName}” by ${censoredArtist} on Apple Music.`
+					: `The last song I listened to on Apple Music was “${censoredTrackName}” by ${censoredArtist}.`}
 			</h3>
 		{/if}
 	</div>
