@@ -15,8 +15,6 @@ export async function fetchNowPlaying(): Promise<NowPlayingData> {
 			throw new Error('Failed to fetch now playing');
 		}
 
-		console.log(data);
-
 		return {
 			trackName: data.track,
 			artist: data.artist,
