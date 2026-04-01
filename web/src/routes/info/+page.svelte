@@ -2,12 +2,12 @@
 	import DotHead from '$components/DotHead.svelte';
 	import Link from '$components/Link.svelte';
 	import { NUMS } from '$constants';
-	import { nowPlaying } from '$lib/state';
 	import { censor } from '$util/censor.js';
 	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
 	let { bio, clients, playlists, links } = $derived(data.infoPage);
+	let { nowPlaying } = $derived(data);
 </script>
 
 <section class="my-large">
@@ -46,13 +46,12 @@
 <hr />
 
 <section class="my-large">
-	<div class="wrapper my-medium">
-		{#if nowPlaying.data}
-			{@const { trackName, artist, isPlaying } = nowPlaying.data}
+	{#if nowPlaying}
+		{@const { trackName, artist, isPlaying } = nowPlaying}
+		{@const censoredTrackName = censor(trackName)}
+		{@const censoredArtist = censor(artist)}
 
-			{@const censoredTrackName = censor(trackName)}
-			{@const censoredArtist = censor(artist)}
-
+		<div class="wrapper my-medium">
 			<h2>
 				<DotHead>{isPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
 			</h2>
@@ -61,8 +60,8 @@
 					? `Right now I'm listening to “${censoredTrackName}” by ${censoredArtist} on Apple Music.`
 					: `The last song I listened to on Apple Music was “${censoredTrackName}” by ${censoredArtist}.`}
 			</h3>
-		{/if}
-	</div>
+		</div>
+	{/if}
 
 	<div class="wrapper my-medium">
 		<h2><DotHead>Featured playlists</DotHead></h2>

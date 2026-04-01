@@ -6,7 +6,7 @@ export type NowPlayingData = {
 	isPlaying: boolean;
 };
 
-export async function fetchNowPlaying(): Promise<NowPlayingData> {
+export async function fetchNowPlaying(): Promise<NowPlayingData | null> {
 	try {
 		const req = await fetch(endpoint);
 		const data = await req.json();
@@ -22,6 +22,6 @@ export async function fetchNowPlaying(): Promise<NowPlayingData> {
 		};
 	} catch (error) {
 		console.error('Error fetching now playing', error);
-		throw new Error('Failed to fetch now playing');
+		return null;
 	}
 }

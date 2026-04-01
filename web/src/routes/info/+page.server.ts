@@ -1,5 +1,5 @@
+import { fetchNowPlaying } from '$lib/nowplaying';
 import { type InfoQuery, infoQuery } from '$sanity';
-import { getPrerender } from '$util/getPrerender';
 
 export const load = async ({
 	locals: {
@@ -7,12 +7,12 @@ export const load = async ({
 	}
 }) => {
 	const infoPage = await client.fetch<InfoQuery>(infoQuery);
+	const nowPlaying = await fetchNowPlaying();
 
 	return {
+		nowPlaying,
 		infoPage,
 		metadata: infoPage.metadata,
 		pageTitle: infoPage.title
 	} satisfies App.PageReturn;
 };
-
-export const prerender = getPrerender();
