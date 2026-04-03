@@ -7,22 +7,22 @@
 
 	let { nowPlaying }: Props = $props();
 
-	const MAX_FIRST_SEGMENT = 12;
+	function separateFirstWords(text: string, limit: number = 10): string[] {
+		if (text.length <= limit) return [text];
 
-	function splitTextForRag(text: string): string[] {
-		const firstPart = text.slice(0, MAX_FIRST_SEGMENT);
-		const firstPartSpaces = firstPart.match(/ /g)?.length ?? 0;
+		const lastSpace = text.lastIndexOf(' ', limit);
+		const splitAt = lastSpace > 0 ? lastSpace : text.indexOf(' ');
 
-		const word = text.split(' ').filter(Boolean);
-		const firstWords = word.slice(0, firstPartSpaces + 1);
-		const restWords = word.slice(firstPartSpaces + 1);
+		if (splitAt === -1) return [text];
 
-		return [firstWords.join(' '), restWords.join(' ')];
+		const first = text.slice(0, splitAt);
+		const rest = text.slice(splitAt + 1);
+		return rest ? [first, rest] : [first];
 	}
 </script>
 
 <span>The last song I listened to was </span>
-{#each splitTextForRag(nowPlaying.trackName) as part, i}
+{#each separateFirstWords(nowPlaying.trackName) as part, i}
 	{#if i === 0}
 		<span class="border text-nowrap">
 			<img
