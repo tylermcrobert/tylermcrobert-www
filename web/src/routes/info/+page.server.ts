@@ -6,8 +6,10 @@ export const load = async ({
 		sanity: { client }
 	}
 }) => {
-	const infoPage = await client.fetch<InfoQuery>(infoQuery);
-	const nowPlaying = await fetchNowPlaying();
+	const [infoPage, nowPlaying] = await Promise.all([
+		client.fetch<InfoQuery>(infoQuery),
+		fetchNowPlaying()
+	]);
 
 	return {
 		nowPlaying,
