@@ -1,8 +1,8 @@
 <script lang="ts">
 	import DotHead from '$components/DotHead.svelte';
 	import Link from '$components/Link.svelte';
+	import NowPlayingRag from '$components/NowPlayingRag.svelte';
 	import { NUMS } from '$constants';
-	import { censor } from '$util/censor.js';
 	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
@@ -47,18 +47,12 @@
 
 <section class="my-large">
 	{#if nowPlaying}
-		{@const { trackName, artist, isPlaying } = nowPlaying}
-		{@const censoredTrackName = censor(trackName)}
-		{@const censoredArtist = censor(artist)}
-
 		<div class="wrapper my-medium">
 			<h2>
-				<DotHead>{isPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
+				<DotHead>Recently Played</DotHead>
 			</h2>
 			<h3 class="text-h1">
-				<span
-					>{`The last song I listened to was “${censoredTrackName}” by ${censoredArtist} on Apple Music.`}</span
-				>
+				<NowPlayingRag {nowPlaying} />
 			</h3>
 		</div>
 	{/if}
