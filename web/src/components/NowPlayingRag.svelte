@@ -36,4 +36,6 @@
 		<span>{` ${part}`}</span>
 	{/if}
 {/each}
-by {nowPlaying.artist} on Apple&nbsp;Music.
+<span>
+	by {nowPlaying.artist} on Apple&nbsp;Music.
+</span>
