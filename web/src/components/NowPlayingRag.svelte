@@ -28,7 +28,7 @@
 			<img
 				src={nowPlaying.artwork.replace('{w}', '300').replace('{h}', '300')}
 				alt="Apple Music"
-				class="relative -top-[0.05em] left-[0.05em] inline-block size-[0.85em] object-cover"
+				class="relative -top-[0.085em] left-[0.05em] inline-block size-[0.85em] object-cover"
 			/>
 			{part}
 		</span>
