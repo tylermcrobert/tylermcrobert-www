@@ -72,8 +72,14 @@
 							<span>{NUMS[i + 1]}</span>
 							<h3 class="max-w-[18ch]">{title}</h3>
 						</div>
-						<p class="col-span-2 hidden md:block">{date}</p>
-						<p class="col-span-2 flex justify-between gap-standard">
+						<p
+							class="col-span-2 hidden -tracking-[0.05ch] tabular-nums md:block"
+						>
+							{date}
+						</p>
+						<p
+							class="col-span-2 flex justify-between gap-standard -tracking-[0.05ch] tabular-nums"
+						>
 							{formatTime(duration || 0, 'hh:mm:ss')}<span>&rarr;</span>
 						</p>
 					</a>
