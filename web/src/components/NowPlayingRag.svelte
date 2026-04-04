@@ -24,7 +24,7 @@
 <span>The last song I listened to was </span>
 {#each separateFirstWords(nowPlaying.trackName) as part, i}
 	{#if i === 0}
-		<span class="border text-nowrap">
+		<span class="text-nowrap">
 			<img
 				src={nowPlaying.artwork.replace('{w}', '300').replace('{h}', '300')}
 				alt="Apple Music"
