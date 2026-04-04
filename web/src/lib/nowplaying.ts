@@ -4,6 +4,7 @@ export type NowPlayingData = {
 	trackName: string;
 	artist: string;
 	isPlaying: boolean;
+	artwork: string;
 };
 
 export async function fetchNowPlaying(): Promise<NowPlayingData | null> {
@@ -18,6 +19,7 @@ export async function fetchNowPlaying(): Promise<NowPlayingData | null> {
 		return {
 			trackName: data.track,
 			artist: data.artist,
+			artwork: data.artwork,
 			isPlaying: false // Apple doesn't provide this information
 		};
 	} catch (error) {
