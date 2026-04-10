@@ -30,7 +30,7 @@
 
 	{#if packageLoaded}
 		<media-play-button
-			class="absolute top-1/2 left-1/2 z-10 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-foreground"
+			class="absolute top-1/2 left-1/2 z-10 size-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-foreground md:size-40"
 		>
 			<span slot="play">PLAY</span>
 			<span slot="pause">PAUSE</span>
