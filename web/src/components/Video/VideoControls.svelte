@@ -1,10 +1,6 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 
-	import PauseIcon from './icons/PauseIcon.svelte';
-	import PlayIcon from './icons/PlayIcon.svelte';
-	import VolumeMuted from './icons/VolumeMuted.svelte';
-	import VolumePlaying from './icons/VolumePlaying.svelte';
 	import type { VideoProps } from './types';
 
 	interface Props extends Pick<VideoProps, 'aspect' | 'class' | 'poster'> {
@@ -24,7 +20,6 @@
 
 <media-controller
 	style:aspect-ratio={aspect}
-	style:--scrim-opacity={packageLoaded ? 0.4 : 0}
 	style:background={poster ? `url('${poster}') center / cover` : undefined}
 	class={[
 		'controller relative flex cursor-pointer text-white outline-hidden',
@@ -45,13 +40,15 @@
 		</media-play-button>
 
 		<div
-			class="absolute top-1/2 flex w-full justify-between bg-red-500 px-standard"
+			class="absolute top-1/2 z-10 flex w-full justify-between px-standard tabular-nums"
 		>
 			<media-time-display></media-time-display>
 			<media-duration-display></media-duration-display>
 		</div>
 
-		<media-mute-button class="absolute bottom-standard left-standard">
+		<media-mute-button
+			class="absolute bottom-standard left-1/2 z-10 -translate-x-1/2"
+		>
 			<span slot="high">MUTE</span>
 			<span slot="off">UNMUTE</span>
 		</media-mute-button>
@@ -60,7 +57,8 @@
 
 <style lang="postcss">
 	.controller {
-		--duration: 200ms;
+		--scrim-opacity: 0.3;
+		--duration: 150ms;
 		--ease: cubic-bezier(0.4, 0, 0.6, 1);
 
 		/* Overall */
@@ -93,12 +91,9 @@
 		transition: var(--duration) background-color var(--ease);
 	}
 
-	.controller:global([userinactive]):after {
-		background: rgba(0, 0, 0, 0);
-	}
-
-	.controller:global([userinactive]):after {
-		background: rgba(0, 0, 0, 0);
+	.controller:global(:not([mediapaused]):not(:hover)):after,
+	.controller:global(:not([mediapaused])[userinactive]):after {
+		--scrim-opacity: 0;
 	}
 
 	media-time-display,
