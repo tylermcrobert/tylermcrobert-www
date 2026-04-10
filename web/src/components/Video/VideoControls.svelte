@@ -24,7 +24,7 @@
 
 <media-controller
 	style:aspect-ratio={aspect}
-	style:--scrim-opacity={packageLoaded ? 0.2 : 0}
+	style:--scrim-opacity={packageLoaded ? 0.4 : 0}
 	style:background={poster ? `url('${poster}') center / cover` : undefined}
 	class={[
 		'controller relative flex cursor-pointer text-white outline-hidden',
@@ -34,35 +34,33 @@
 	{@render children?.()}
 
 	{#if packageLoaded}
-		<media-play-button class="z-10" slot="centered-chrome">
-			<span slot="play" class="w-8 md:w-14"><PlayIcon /></span>
-			<span slot="pause" class="w-8 md:w-14"><PauseIcon /></span>
+		<media-play-button
+			class="absolute top-1/2 left-1/2 z-10 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-foreground"
+		>
+			<span slot="play">PLAY</span>
+			<span slot="pause">PAUSE</span>
+
+			<media-duration-display></media-duration-display>
+			<media-time-display></media-time-display>
 		</media-play-button>
 
-		<media-control-bar
-			class="absolute inset-x-0 bottom-0 z-10 flex gap-5 px-6 py-4"
+		<div
+			class="absolute top-1/2 flex w-full justify-between bg-red-500 px-standard"
 		>
-			<media-mute-button>
-				<span slot="high" class="w-4"><VolumePlaying /></span>
-				<span slot="off" class="w-4"><VolumeMuted /></span>
-			</media-mute-button>
 			<media-time-display></media-time-display>
-			<media-time-range><span slot="preview"></span></media-time-range>
 			<media-duration-display></media-duration-display>
-		</media-control-bar>
-	{:else}
-		<!-- Initial play button -->
-		<span class="absolute inset-0 grid place-items-center">
-			<div class="w-8 md:w-14">
-				<PlayIcon />
-			</div>
-		</span>
+		</div>
+
+		<media-mute-button class="absolute bottom-standard left-standard">
+			<span slot="high">MUTE</span>
+			<span slot="off">UNMUTE</span>
+		</media-mute-button>
 	{/if}
 </media-controller>
 
 <style lang="postcss">
 	.controller {
-		--duration: 300ms;
+		--duration: 200ms;
 		--ease: cubic-bezier(0.4, 0, 0.6, 1);
 
 		/* Overall */
@@ -82,6 +80,8 @@
 		--media-range-thumb-opacity: 0;
 		--media-preview-time-margin: 0 0 -16px;
 		--media-range-track-border-radius: 999999px;
+
+		--media-font: inheret;
 	}
 
 	.controller:after {
@@ -99,23 +99,6 @@
 
 	.controller:global([userinactive]):after {
 		background: rgba(0, 0, 0, 0);
-	}
-
-	.controller:global([userinactive]) media-control-bar,
-	.controller:global(:not([mediahasplayed])) media-control-bar {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-
-	media-control-bar {
-		transition:
-			opacity var(--duration) var(--ease),
-			transform var(--duration) var(--ease);
-	}
-
-	media-control-bar:hover {
-		--media-range-thumb-transform: scale(2.5);
-		--media-range-thumb-opacity: 1;
 	}
 
 	media-time-display,
