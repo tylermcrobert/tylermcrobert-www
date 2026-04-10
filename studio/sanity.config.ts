@@ -10,7 +10,14 @@ import {structure} from './config/desk'
 import {presentationOptions} from './config/presentation'
 import {schemaTypes} from './schemaTypes'
 
-const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
+const CREATABLE_DOCTYPES = [
+  'page',
+  'playlist',
+  'webFrameTheme',
+  'context',
+  'caseStudy',
+  'videoDocument',
+]
 
 export default defineConfig({
   name: 'default',
