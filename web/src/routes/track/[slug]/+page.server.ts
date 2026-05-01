@@ -19,7 +19,7 @@ export const load = async ({ params }) => {
 				'A Memory: A Moment / The Sky Above: A River, An Ember / A Borrowed Tune: Bless the Telephone',
 			primaryVersion: {
 				date: '2026-04-30',
-				duration: 0,
+				duration: 343,
 				assetUrl: '/wistful.mp3'
 			}
 		};
