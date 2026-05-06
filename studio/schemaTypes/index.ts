@@ -5,6 +5,7 @@ import info from './documents/info'
 import {page} from './documents/page'
 import playlist from './documents/playlist'
 import {settings} from './documents/settings'
+import {videoDocument} from './documents/video'
 import diptych, {diptychMedia, diptychSpacer, diptychText} from './modules/diptych'
 import {mediaBlock} from './modules/mediaBlock'
 import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
@@ -27,6 +28,7 @@ import {
 } from './objects/richText'
 
 export const schemaTypes = [
+  videoDocument,
   browserFrame,
   pageBrowserFrame,
   playlistBlock,
