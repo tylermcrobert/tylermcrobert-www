@@ -74,7 +74,7 @@
 					<a
 						href={link}
 						target="_blank"
-						class="flex grid-cols-6 justify-between gap-standard md:grid"
+						class="flex grid-cols-6 justify-between gap-standard tabular-nums md:grid"
 					>
 						<div class="col-span-4 flex gap-2 md:col-span-2">
 							<span>{NUMS[i + 1]}</span>
