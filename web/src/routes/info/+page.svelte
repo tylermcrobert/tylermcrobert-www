@@ -3,11 +3,19 @@
 	import Link from '$components/Link.svelte';
 	import NowPlayingRag from '$components/NowPlayingRag.svelte';
 	import { NUMS } from '$constants';
+	import { fetchNowPlaying, type NowPlayingData } from '$lib/nowplaying.js';
 	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
 	let { bio, clients, playlists, links } = $derived(data.infoPage);
-	let { nowPlaying } = $derived(data);
+
+	let nowPlaying = $state<NowPlayingData | null>(null);
+
+	$effect(() => {
+		fetchNowPlaying().then((data) => {
+			nowPlaying = data;
+		});
+	});
 </script>
 
 <section class="my-large">

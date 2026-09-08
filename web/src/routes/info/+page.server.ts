@@ -1,4 +1,3 @@
-import { fetchNowPlaying } from '$lib/nowplaying';
 import { type InfoQuery, infoQuery } from '$sanity';
 
 export const load = async ({
@@ -6,13 +5,9 @@ export const load = async ({
 		sanity: { client }
 	}
 }) => {
-	const [infoPage, nowPlaying] = await Promise.all([
-		client.fetch<InfoQuery>(infoQuery),
-		fetchNowPlaying()
-	]);
+	const infoPage = await client.fetch<InfoQuery>(infoQuery);
 
 	return {
-		nowPlaying,
 		infoPage,
 		metadata: infoPage.metadata,
 		pageTitle: infoPage.title
