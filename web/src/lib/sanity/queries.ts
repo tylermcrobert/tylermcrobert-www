@@ -1,17 +1,8 @@
 import type { InputValue } from '@portabletext/svelte';
+import type { FilterByType, Get } from '@sanity/codegen';
 import groq from 'groq';
 
-import type {
-	DiptychMedia,
-	InfoQueryResult,
-	Media,
-	MediaBlock,
-	Playlist,
-	SanityImageAsset,
-	Settings,
-	SITE_QUERYResult,
-	Website
-} from './types';
+import type { InfoQueryResult, ROOT_SLUG_QUERYResult } from './types';
 
 /*******************************************************************************
  * PROJECTIONS
@@ -27,15 +18,7 @@ export const LINK_PROJECTION = groq`{
   }
 }`;
 
-export type LinkProjection = {
-	label: string;
-	href: string;
-	reference?: {
-		_type: string;
-		title: string;
-		slug: string;
-	};
-};
+export type LinkProjection = NonNullable<Get<InfoQueryResult, 'links', number, 'link'>>;
 
 const RICH_TEXT_PROJECTION = groq`{
   ...,
@@ -74,41 +57,14 @@ export const MEDIA_PROJECTION = groq`{
   ),
 }`;
 
-export type MediaProjectionVideo = Pick<
-	Media,
-	'customVideoPlayback' | 'playbackSettings' | 'poster'
-> & {
-	playbackId: string;
-	aspect: string;
-	poster: SanityImageAsset;
-};
-
-type MediaProjectionVideoAsset = {
-	_type: 'video';
-	video: MediaProjectionVideo;
-};
-
-type MediaProjectionImageAsset = {
-	_type: 'image';
-	image: SanityImageAsset;
-};
-
-export type MediaProjectionAsset =
-	| MediaProjectionVideoAsset
-	| MediaProjectionImageAsset;
-
-export type MediaProjection = {
-	_type: 'mediaProjection';
-	asset: MediaProjectionAsset | null;
-};
+export type MediaProjectionImage = Get<FilterByType<MediaProjectionAsset, 'image'>, 'image'>;
+export type MediaProjectionVideo = NonNullable<Get<FilterByType<MediaProjectionAsset, 'video'>, 'video'>>;
+export type MediaProjectionAsset = NonNullable<Get<MediaBlockProjection, 'media', 'asset'>>;
+export type MediaProjection = NonNullable<Get<MediaBlockProjection, 'media'>>;
 
 /*******************************************************************************
  * MODULES
  ******************************************************************************/
-
-/**
- * Text Block
- */
 
 const MODULE_TEXT_BLOCK = `// groq
   _type == 'textBlock' => {
@@ -116,31 +72,12 @@ const MODULE_TEXT_BLOCK = `// groq
   }
 `;
 
-export type ModuleTextBlock = Nullable<{
-	_type: 'textBlock';
-	richText: RichTextProjection;
-}>;
-
-/**
- * Media Block
- */
-
 const MODULE_MEDIA_BLOCK = `// groq
   _type == 'mediaBlock' => {
     media${MEDIA_PROJECTION},
     aspect
   }
 `;
-
-export type ModuleMediaBlock = Nullable<{
-	_type: 'mediaBlock';
-	media: MediaProjection;
-}> &
-	Pick<MediaBlock, 'aspect'>;
-
-/**
- * Website
- */
 
 const MODULE_WEBSITE = `//groq
   _type == 'website' => {
@@ -150,17 +87,6 @@ const MODULE_WEBSITE = `//groq
     media${MEDIA_PROJECTION},
   }
 `;
-
-export type ModuleWebsite = Nullable<{
-	_type: 'website';
-	media: MediaProjection;
-	backgroundColor: string;
-}> &
-	Pick<Website, 'showFrame' | 'backgroundImg'>;
-
-/**
- * Diptych
- */
 
 const MODULE_DIPTYCH = `//groq
   _type == 'diptych' => {
@@ -180,35 +106,6 @@ const MODULE_DIPTYCH = `//groq
   }
 `;
 
-type ModuleDiptychText = Nullable<{
-	_type: 'diptych.text';
-	richText: RichTextProjection;
-}>;
-
-type ModuleDiptychMedia = Pick<DiptychMedia, 'aspect'> &
-	Nullable<{
-		_type: 'diptych.media';
-		media: MediaProjection | null;
-	}>;
-
-type ModuleDiptychSpacer = Nullable<{
-	_type: 'diptych.spacer';
-}>;
-
-type ModuleDiptychItem =
-	| ModuleDiptychText
-	| ModuleDiptychMedia
-	| ModuleDiptychSpacer;
-
-export type ModuleDiptych = Nullable<{
-	_type: 'diptych';
-	items: (ModuleDiptychItem & { _key: string })[];
-}>;
-
-/**
- * Triple Image
- */
-
 const MODULE_TRIPLE_IMAGE = `//groq
   _type == 'tripleImage' => {
     mainMedia${MEDIA_PROJECTION},
@@ -217,18 +114,6 @@ const MODULE_TRIPLE_IMAGE = `//groq
     imageRight,
   }
 `;
-
-export type ModuleTripleImage = Nullable<{
-	_type: 'tripleImage';
-	mainMedia: MediaProjection;
-	secondaryMedia1: MediaProjection;
-	secondaryMedia2: MediaProjection;
-	imageRight: boolean;
-}>;
-
-/**
- * Mobile Website
- */
 
 const MODULE_MOBILE_WEBSITE = `//groq
   _type == 'mobileWebsite' => {
@@ -242,15 +127,6 @@ const MODULE_MOBILE_WEBSITE = `//groq
   }
 `;
 
-export type ModuleMobileWebsite = Nullable<{
-	_type: 'mobileWebsite';
-	themeBackground: string;
-	frames: Nullable<{
-		media: MediaProjection;
-		_key: string;
-	}>[];
-}>;
-
 /**
  * Timed Slides
  */
@@ -262,13 +138,6 @@ const MODULE_TIMED_SLIDES = `//groq
     'background': background.hex
   }
 `;
-
-export type ModuleTimedSlides = Nullable<{
-	_type: 'timedSlides';
-	seconds: number;
-	images: SanityImageAsset[];
-	background: string | undefined;
-}>;
 
 /**
  * Playlist Block
@@ -295,23 +164,6 @@ const MODULE_PLAYLIST_BLOCK = `//groq
   }
 `;
 
-type PlaylistBlockPlaylist = Nullable<{
-	slug: string;
-}> &
-	Pick<Playlist, 'title' | 'link' | 'duration' | 'date' | 'image'> & {
-		tracks: Nullable<{
-			title: string;
-			artists: string[];
-			duration: number;
-			image: string;
-		}>[];
-	};
-
-export type ModulePlaylistBlock = Nullable<{
-	_type: 'playlistBlock';
-	playlist: PlaylistBlockPlaylist;
-}>;
-
 /**
  * Modules
  */
@@ -330,6 +182,18 @@ const MODULES_PROJECTION = groq`{
 }
 `;
 
+type ModuleProjection = Get<ROOT_SLUG_QUERYResult, 'modules', number>;
+
+export type MediaBlockProjection = FilterByType<ModuleProjection, 'mediaBlock'>;
+export type ModuleTextBlock = FilterByType<ModuleProjection, 'textBlock'>;
+export type ModuleDiptych = FilterByType<ModuleProjection, 'diptych'>;
+export type ModuleTripleImage = FilterByType<ModuleProjection, 'tripleImage'>;
+export type ModuleWebsite = FilterByType<ModuleProjection, 'website'>;
+export type ModuleMediaBlock = FilterByType<ModuleProjection, 'mediaBlock'>;
+export type ModuleMobileWebsite = FilterByType<ModuleProjection, 'mobileWebsite'>;
+export type ModulePlaylistBlock = FilterByType<ModuleProjection, 'playlistBlock'>;
+export type ModuleTimedSlides = FilterByType<ModuleProjection, 'timedSlides'>;
+
 export type Module = { _key: string } & (
 	| ModuleMediaBlock
 	| ModuleTextBlock
@@ -337,8 +201,8 @@ export type Module = { _key: string } & (
 	| ModuleDiptych
 	| ModuleTripleImage
 	| ModuleMobileWebsite
-	| ModuleTimedSlides
 	| ModulePlaylistBlock
+	| ModuleTimedSlides
 );
 
 /*******************************************************************************
@@ -392,19 +256,6 @@ export const infoQuery = groq`
   }
 `;
 
-export type InfoPlaylist = Nullable<{
-	link: string;
-	title: string;
-	slug: string;
-}>;
-
-export type InfoQuery = {
-	links: Nullable<{
-		label: string;
-		link: LinkProjection;
-	}>[];
-} & InfoQueryResult;
-
 /**
  * Playlist
  */
@@ -419,7 +270,7 @@ export const PLAYLIST_QUERY = groq`
 
 export const SITE_QUERY = groq`{
   "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,
-  "settings": *[_id == "settings"][0]{
+  "settings": *[_id == "settings" && _type == "settings"][0]{
     metadata,
     siteTitle,
     googleAnalyticsId,
@@ -435,19 +286,6 @@ export const SITE_QUERY = groq`{
     }
   },
 }`;
-
-export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
-	Nullable<{
-		context: Nullable<{
-			slug: string;
-			title: string;
-			caseStudies: Nullable<{
-				slug: string;
-				title: string;
-			}>[];
-		}>;
-		settings: Pick<Settings, 'metadata' | 'siteTitle' | 'googleAnalyticsId'>;
-	}>;
 
 export const SITEMAP_QUERY = groq`{
   "info": *[_id == 'info'][0],

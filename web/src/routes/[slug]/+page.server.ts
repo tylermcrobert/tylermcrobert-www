@@ -6,13 +6,13 @@ import {
 	ROOT_SLUG_QUERY,
 	type ROOT_SLUG_QUERYResult,
 	SITE_QUERY,
-	type SiteQuery
+	type SITE_QUERYResult
 } from '$lib/sanity';
 import { client as clientImported } from '$sanity/client';
 import { getPrerender } from '$util/getPrerender.js';
 
 export const entries = async () => {
-	const site = await clientImported.fetch<SiteQuery>(SITE_QUERY, {
+	const site = await clientImported.fetch<SITE_QUERYResult>(SITE_QUERY, {
 		contextSlug: null
 	});
 

@@ -25,12 +25,12 @@
 	}: Props = $props();
 </script>
 
-{#if value?._type === 'video'}
+{#if value?._type === 'video' && value.video}
 	<VideoFromProjection
 		{...videoProps}
 		projection={value.video}
 		class={className}
 	/>
-{:else if value?._type === 'image'}
+{:else if value?._type === 'image' && value.image}
 	<Image {...imageProps} image={value.image} class={className} {alt} {sizes} />
 {/if}

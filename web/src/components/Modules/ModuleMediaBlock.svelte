@@ -15,8 +15,8 @@
 			value={data.media.asset}
 			sizes="100vw"
 			alt={null}
-			imageProps={{ aspect: data.aspect }}
-			videoProps={{ aspect: data.aspect }}
+			imageProps={{ aspect: data.aspect || undefined }}
+			videoProps={{ aspect: data.aspect || undefined }}
 		/>
 	</div>
 {/if}

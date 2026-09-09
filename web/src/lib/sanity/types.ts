@@ -2016,31 +2016,14 @@ export type PLAYLIST_QUERYResult = {
 	}> | null;
 } | null;
 // Variable: SITE_QUERY
-// Query: {  "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,  "settings": *[_id == "settings"][0]{    metadata,    siteTitle,    googleAnalyticsId,  },  "context": coalesce(    *[_type == "context" && slug.current == $contextSlug][0],    *[_id == "homepage"][0].context->  ) {    title,    caseStudies[]->{      "slug": slug.current,      title,    }  },}
+// Query: {  "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,  "settings": *[_id == "settings" && _type == "settings"][0]{    metadata,    siteTitle,    googleAnalyticsId,  },  "context": coalesce(    *[_type == "context" && slug.current == $contextSlug][0],    *[_id == "homepage"][0].context->  ) {    title,    caseStudies[]->{      "slug": slug.current,      title,    }  },}
 export type SITE_QUERYResult = {
 	homepageTitle: null | string;
-	settings:
-		| {
-				metadata: null;
-				siteTitle: null;
-				googleAnalyticsId: null;
-		  }
-		| {
-				metadata: Metadata | null;
-				siteTitle: null;
-				googleAnalyticsId: null;
-		  }
-		| {
-				metadata: SanityImageMetadata | null;
-				siteTitle: null;
-				googleAnalyticsId: null;
-		  }
-		| {
-				metadata: Metadata | null;
-				siteTitle: string | null;
-				googleAnalyticsId: string | null;
-		  }
-		| null;
+	settings: {
+		metadata: Metadata | null;
+		siteTitle: string | null;
+		googleAnalyticsId: string | null;
+	} | null;
 	context: {
 		title: string | null;
 		caseStudies: Array<{
@@ -2292,7 +2275,7 @@ declare module '@sanity/client' {
 		'\n  *[(_type == \'caseStudy\' || _type == \'page\') && slug.current == $slug][0]{\n    _type,\n    _id,\n\n    _type == \'caseStudy\' => {\n      "caseStudy": {\n        intro,\n        deliverables,\n        date,\n        title,\n        description,\n        browserFrame,\n        "defaultBrowserFrame": *[_id == "settings"][0].defaultBrowserFrameV2\n      },\n    },\n    \n    title,\n    metadata,\n    modules[]{\n  _type,\n  _key,\n  // groq\n  _type == \'mediaBlock\' => {\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    aspect\n  }\n,\n  // groq\n  _type == \'textBlock\' => {\n    richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n},\n  }\n,\n  //groq\n  _type == \'website\' => {\n    backgroundImg,\n    "backgroundColor": backgroundColor.hex,\n    showFrame,\n    media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n  }\n,\n  //groq\n  _type == \'diptych\' => {\n    items[]{\n      _key,\n      _type,\n\n      _type == \'diptych.media\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n        aspect,\n      },\n      \n      _type == \'diptych.text\' => {\n        richText[]{\n  ...,\n "markDefs": coalesce(\n    markDefs[]{\n      ...,\n      _type == "internalLink" => {\n        \'type\': @.reference->_type,\n        "slug": @.reference->slug.current\n      }\n    }, \n    []\n  )\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'tripleImage\' => {\n    mainMedia{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia1{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    secondaryMedia2{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n},\n    imageRight,\n  }\n,\n  //groq\n  _type == \'mobileWebsite\' => {\n    "themeBackground": theme->.background.hex,\n    frames[]{\n      _key,\n      _type == \'mobileWebsite.item\' => {\n        media{\n  "_type": "mediaProjection",\n  "asset": select(\n    defined(@.image) => {\n      "_type": "image",\n      "image": @.image\n    },\n    defined(@.video.asset) => {\n      "_type": "video",\n      "video": @.video.asset-> {\n        "playbackId": playbackId,\n        "aspect": data.aspect_ratio,\n        "poster": ^.poster,\n        "playbackSettings": ^.playbackSettings,\n        "customVideoPlayback": ^.customVideoPlayback,\n      }\n    },\n    null\n  ),\n}\n      }\n    }\n  }\n,\n  //groq\n  _type == \'timedSlides\' => {\n    images,\n    seconds,\n    \'background\': background.hex\n  }\n,\n  //groq\n  _type == \'playlistBlock\' => {\n    playlist->{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n  }\n\n}\n,\n  }\n': ROOT_SLUG_QUERYResult;
 		'\n  *[_type == \'info\' ][0]{\n    metadata,\n    bio,\n    title,\n    clients,\n    links[]{\n      label,\n      link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    },\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n      duration, \n      date \n    }\n  }\n': InfoQueryResult;
 		'\n  *[_type == \'playlist\' && slug.current == $slug][0]{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n': PLAYLIST_QUERYResult;
-		'{\n  "homepageTitle": *[_id == \'homepage\'][0].homepageMetaTitle,\n  "settings": *[_id == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;
+		'{\n  "homepageTitle": *[_id == \'homepage\'][0].homepageMetaTitle,\n  "settings": *[_id == "settings" && _type == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERYResult;
 		'{\n  "info": *[_id == \'info\'][0],\n  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  },\n  "pages": *[_type == "page"]{\n    "slug": slug.current,\n    _updatedAt,\n  }\n}': SITEMAP_QUERYResult;
 	}
 }
