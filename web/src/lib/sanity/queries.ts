@@ -2,7 +2,7 @@ import type { InputValue } from '@portabletext/svelte';
 import type { FilterByType, Get } from '@sanity/codegen';
 import groq from 'groq';
 
-import type { InfoQueryResult, ROOT_SLUG_QUERYResult, Settings, SITE_QUERYResult } from './types';
+import type { InfoQueryResult, ROOT_SLUG_QUERYResult } from './types';
 
 /*******************************************************************************
  * PROJECTIONS
@@ -18,15 +18,7 @@ export const LINK_PROJECTION = groq`{
   }
 }`;
 
-export type LinkProjection = {
-	label: string;
-	href: string;
-	reference?: {
-		_type: string;
-		title: string;
-		slug: string;
-	};
-};
+export type LinkProjection = NonNullable<Get<InfoQueryResult, 'links', number, 'link'>>;
 
 const RICH_TEXT_PROJECTION = groq`{
   ...,
@@ -66,16 +58,9 @@ export const MEDIA_PROJECTION = groq`{
 }`;
 
 export type MediaProjectionImage = Get<FilterByType<MediaProjectionAsset, 'image'>, 'image'>;
-export type MediaProjectionVideo = NonNullable<
-	Get<FilterByType<MediaProjectionAsset, 'video'>, 'video'>
->;
-
+export type MediaProjectionVideo = NonNullable<Get<FilterByType<MediaProjectionAsset, 'video'>, 'video'>>;
 export type MediaProjectionAsset = NonNullable<Get<MediaBlockProjection, 'media', 'asset'>>;
-
-export type MediaProjection = {
-	_type: 'mediaProjection';
-	asset: MediaProjectionAsset | null;
-};
+export type MediaProjection = NonNullable<Get<MediaBlockProjection, 'media'>>;
 
 /*******************************************************************************
  * MODULES
@@ -271,19 +256,6 @@ export const infoQuery = groq`
   }
 `;
 
-export type InfoPlaylist = Nullable<{
-	link: string;
-	title: string;
-	slug: string;
-}>;
-
-export type InfoQuery = {
-	links: Nullable<{
-		label: string;
-		link: LinkProjection;
-	}>[];
-} & InfoQueryResult;
-
 /**
  * Playlist
  */
@@ -298,7 +270,7 @@ export const PLAYLIST_QUERY = groq`
 
 export const SITE_QUERY = groq`{
   "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,
-  "settings": *[_id == "settings"][0]{
+  "settings": *[_id == "settings" && _type == "settings"][0]{
     metadata,
     siteTitle,
     googleAnalyticsId,
@@ -314,19 +286,6 @@ export const SITE_QUERY = groq`{
     }
   },
 }`;
-
-export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
-	Nullable<{
-		context: Nullable<{
-			slug: string;
-			title: string;
-			caseStudies: Nullable<{
-				slug: string;
-				title: string;
-			}>[];
-		}>;
-		settings: Pick<Settings, 'metadata' | 'siteTitle' | 'googleAnalyticsId'>;
-	}>;
 
 export const SITEMAP_QUERY = groq`{
   "info": *[_id == 'info'][0],

@@ -41,8 +41,10 @@
 					<ModuleMobileWebsite {data} />
 				{:else if data._type === 'playlistBlock'}
 					<ModulePlaylistBlock {data} />
+				{:else if data._type === 'timedSlides'}
+					<ModuleTimedSlides {data} />
 				{:else}
-					{console.warn('Cannot find module:', (data as any)._type)}
+					{console.warn('Cannot find module:', (data as Module)._type)}
 				{/if}
 			</section>
 		</ModuleContext>

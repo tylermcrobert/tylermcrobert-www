@@ -13,7 +13,7 @@
 		{
 			"files": "src/lib/sanity/queries.ts",
 			"options": {
-				"printWidth": 100
+				"printWidth": 120
 			}
 		}
 	],
