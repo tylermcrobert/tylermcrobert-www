@@ -4,15 +4,15 @@ import { error } from '@sveltejs/kit';
 import {
 	type Module,
 	ROOT_SLUG_QUERY,
-	type ROOT_SLUG_QUERYResult,
+	type ROOT_SLUG_QUERY_RESULT,
 	SITE_QUERY,
-	type SITE_QUERYResult
+	type SITE_QUERY_RESULT
 } from '$lib/sanity';
 import { client as clientImported } from '$sanity/client';
 import { getPrerender } from '$util/getPrerender.js';
 
 export const entries = async () => {
-	const site = await clientImported.fetch<SITE_QUERYResult>(SITE_QUERY, {
+	const site = await clientImported.fetch<SITE_QUERY_RESULT>(SITE_QUERY, {
 		contextSlug: null
 	});
 
@@ -39,7 +39,7 @@ export const load = async ({
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
 
-	const data = await client.fetch<ROOT_SLUG_QUERYResult>(ROOT_SLUG_QUERY, {
+	const data = await client.fetch<ROOT_SLUG_QUERY_RESULT>(ROOT_SLUG_QUERY, {
 		slug: params.slug
 	});
 

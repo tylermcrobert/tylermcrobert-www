@@ -11,27 +11,27 @@
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "lint": "eslint . --fix",
-    "typegen": "sanity schema extract && sanity typegen generate"
+    "typegen": "sanity schema extract --force && sanity typegen generate"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/color-input": "^4.0.3",
-    "@sanity/icons": "^3.7.4",
-    "@sanity/ui": "^3.1.0",
-    "@sanity/vision": "^4.11.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "sanity": "^4.11.0",
-    "sanity-plugin-media": "^4.0.0",
-    "sanity-plugin-mux-input": "^2.12.0",
+    "@sanity/color-input": "^6.1.4",
+    "@sanity/icons": "^5.2.1",
+    "@sanity/ui": "^4.2.0",
+    "@sanity/vision": "^6.13.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sanity": "^6.13.0",
+    "sanity-plugin-media": "^6.1.8",
+    "sanity-plugin-mux-input": "^5.0.12",
     "styled-components": "^6.1.19",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
-    "@types/react": "^19.2.2",
+    "@types/react": "^19.2.18",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
     "eslint": "^9.38.0",

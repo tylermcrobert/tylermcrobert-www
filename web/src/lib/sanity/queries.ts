@@ -2,7 +2,7 @@ import type { InputValue } from '@portabletext/svelte';
 import type { FilterByType, Get } from '@sanity/codegen';
 import groq from 'groq';
 
-import type { InfoQueryResult, ROOT_SLUG_QUERYResult } from './types';
+import type { InfoQueryResult, ROOT_SLUG_QUERY_RESULT } from './types';
 
 /*******************************************************************************
  * PROJECTIONS
@@ -182,7 +182,7 @@ const MODULES_PROJECTION = groq`{
 }
 `;
 
-type ModuleProjection = Get<ROOT_SLUG_QUERYResult, 'modules', number>;
+type ModuleProjection = Get<ROOT_SLUG_QUERY_RESULT, 'modules', number>;
 
 export type MediaBlockProjection = FilterByType<ModuleProjection, 'mediaBlock'>;
 export type ModuleTextBlock = FilterByType<ModuleProjection, 'textBlock'>;

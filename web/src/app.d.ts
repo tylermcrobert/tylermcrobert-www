@@ -2,7 +2,7 @@
 
 import type { SanityLocals } from '@sanity/sveltekit';
 
-import type { Metadata, SITE_QUERYResult } from '$sanity';
+import type { Metadata, SITE_QUERY_RESULT } from '$sanity';
 
 // for information about these interfaces
 declare global {
@@ -10,7 +10,7 @@ declare global {
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 		interface Locals extends SanityLocals {}
 
-		interface LayoutData extends Pick<SITE_QUERYResult> {
+		interface LayoutData extends Pick<SITE_QUERY_RESULT> {
 			previewEnabled: boolean;
 			siteMetadata: Metadata | null | undefined;
 			siteTitle: string | null | undefined;

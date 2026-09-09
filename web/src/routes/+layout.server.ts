@@ -1,4 +1,4 @@
-import { SITE_QUERY, type SITE_QUERYResult } from '$lib/sanity';
+import { SITE_QUERY, type SITE_QUERY_RESULT } from '$lib/sanity';
 
 export const load = async ({
 	url: { pathname },
@@ -8,7 +8,7 @@ export const load = async ({
 	cookies
 }) => {
 	const contextSlug = cookies.get('context')?.toString() || null;
-	const site = await client.fetch<SITE_QUERYResult>(SITE_QUERY, {
+	const site = await client.fetch<SITE_QUERY_RESULT>(SITE_QUERY, {
 		contextSlug
 	});
 	const { settings, homepageTitle, context } = site;

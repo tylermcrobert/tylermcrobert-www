@@ -1,5 +1,6 @@
 import {RichTextMinimalContainer} from '@components'
-import {DocumentIcon, LinkIcon} from '@sanity/icons'
+import {DocumentIcon} from '@sanity/icons/Document'
+import {LinkIcon} from '@sanity/icons/Link'
 import {INTERNAL_LINK_TYPES} from '@util'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
