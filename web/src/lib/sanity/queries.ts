@@ -207,6 +207,7 @@ export type ModuleWebsite = FilterByType<ModuleProjection, 'website'>;
 export type ModuleMediaBlock = FilterByType<ModuleProjection, 'mediaBlock'>;
 export type ModuleMobileWebsite = FilterByType<ModuleProjection, 'mobileWebsite'>;
 export type ModulePlaylistBlock = FilterByType<ModuleProjection, 'playlistBlock'>;
+export type ModuleTimedSlides = FilterByType<ModuleProjection, 'timedSlides'>;
 
 export type Module = { _key: string } & (
 	| ModuleMediaBlock
@@ -216,6 +217,7 @@ export type Module = { _key: string } & (
 	| ModuleTripleImage
 	| ModuleMobileWebsite
 	| ModulePlaylistBlock
+	| ModuleTimedSlides
 );
 
 /*******************************************************************************
