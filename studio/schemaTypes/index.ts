@@ -11,6 +11,7 @@ import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
 import {modules} from './modules/modules'
 import playlistBlock from './modules/playlist'
 import {textBlock} from './modules/textBlock'
+import {timedSlides} from './modules/timedSlides'
 import {tripleImage} from './modules/tripleImage'
 import {website} from './modules/website'
 import aspect from './objects/aspect'
@@ -32,6 +33,7 @@ export const schemaTypes = [
   playlistBlock,
   mobileWebsiteItem,
   tripleImage,
+  timedSlides,
   mobileWebsite,
   aspect,
   diptychSpacer,

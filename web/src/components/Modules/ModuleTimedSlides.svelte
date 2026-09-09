@@ -30,7 +30,7 @@
 <div class="wrapper">
 	<div
 		class={['my-standard grid p-[10%]', { 'bg-black': !data.background }]}
-		style:background={data.background}
+		style:background={data.background || 'var(--section-background)'}
 	>
 		{#each data.images || [] as image, i}
 			<div class:opacity-0={i !== index} class="col-start-1 row-start-1">

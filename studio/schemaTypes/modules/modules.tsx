@@ -10,6 +10,7 @@ export const modules = defineType({
     defineArrayMember({type: 'diptych'}),
     defineArrayMember({type: 'mobileWebsite'}),
     defineArrayMember({type: 'tripleImage'}),
+    defineArrayMember({type: 'timedSlides'}),
     defineArrayMember({type: 'playlistBlock'}),
   ],
   options: {

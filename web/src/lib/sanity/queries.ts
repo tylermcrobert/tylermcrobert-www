@@ -150,7 +150,7 @@ const MODULE_TIMED_SLIDES = `//groq
   _type == 'timedSlides' => {
     images,
     seconds,
-    'background': theme->background.hex
+    'background': background.hex
   }
 `;
 
