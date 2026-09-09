@@ -4,45 +4,70 @@
 	import type { ModuleWebsite } from '$sanity';
 
 	import BrowserChrome from './BrowserChrome.svelte';
+	import ScrollingBrowser from './ScrollingBrowser.svelte';
 
 	type Props = { data: ModuleWebsite };
 
 	let { data }: Props = $props();
-	let { showFrame, backgroundImg, media } = $derived(data);
+	let { showFrame, backgroundImg, media, scrolling } = $derived(data);
 </script>
 
-<div class="wrapper">
+<div
+	class={!scrolling ? 'wrapper' : 'not-scrolling-browser-aspect-range:wrapper'}
+>
 	<div
 		style:background={data.backgroundColor || 'var(--section-background)'}
-		class="relative my-standard w-full bg-black p-[10%]"
+		class="relative my-standard flow-root w-full bg-black"
 	>
-		<div
-			class={[
-				'relative z-10',
-				showFrame !== false && 'overflow-hidden rounded-xs md:rounded-md'
-			]}
-		>
-			{#if showFrame !== false}
-				<BrowserChrome />
-			{/if}
-
-			{#if media?.asset}
-				<div class="bg-white">
-					<Media sizes="80vw" value={media.asset} alt={null} />
+		{#if !scrolling}
+			{@render standard()}
+		{:else}
+			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
+				<div class="mx-[10%]">
+					<ScrollingBrowser {data} {content} {browserChrome} />
 				</div>
-			{/if}
-		</div>
-
-		{#if backgroundImg}
-			<div>
-				<Image
-					image={backgroundImg}
-					alt={null}
-					sizes="90vw"
-					aspect={1.5}
-					class="absolute inset-0 z-0 h-full w-full object-cover"
-				/>
+			</div>
+			<div class="scrolling-browser-aspect-range:hidden">
+				{@render standard()}
 			</div>
 		{/if}
 	</div>
 </div>
+
+{#snippet standard()}
+	<div
+		class={[
+			'relative z-10 m-[10%]',
+			showFrame !== false && 'round-browser-frame'
+		]}
+	>
+		{@render browserChrome()}
+		{@render content()}
+	</div>
+
+	{#if backgroundImg}
+		<div>
+			<Image
+				image={backgroundImg}
+				alt={null}
+				sizes="90vw"
+				aspect={1.5}
+				class="absolute inset-0 z-0 h-full w-full object-cover"
+			/>
+		</div>
+	{/if}
+{/snippet}
+
+{#snippet content()}
+	{#if media?.asset}
+		<div class="block bg-white">
+			<Media sizes="80vw" value={media.asset} alt={null} />
+		</div>
+	{/if}
+{/snippet}
+
+{#snippet browserChrome()}
+	{#if showFrame !== false}
+		<BrowserChrome />
+	{/if}
+{/snippet}

@@ -1806,6 +1806,13 @@
           },
           "optional": true
         },
+        "scrolling": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "backgroundImg": {
           "type": "objectAttribute",
           "value": {

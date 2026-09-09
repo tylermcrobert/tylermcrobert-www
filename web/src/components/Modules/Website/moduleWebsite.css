@@ -1,0 +1,9 @@
+@utility round-browser-frame {
+	@apply overflow-hidden rounded-sm md:rounded-md;
+}
+
+@custom-variant scrolling-browser-aspect-range {
+	@media (1/1 <= aspect-ratio <=2) {
+		@slot;
+	}
+}
