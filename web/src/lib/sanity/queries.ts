@@ -289,15 +289,15 @@ export const SITE_QUERY = defineQuery(`{
 
 export const SITEMAP_QUERY = defineQuery(`{
   "info": *[_id == 'info'][0],
-  "projects": *[_id == "homepage"][0].context->caseStudies[defined(@->slug.current)]->{ 
+  "projects": *[_type == "caseStudy" && _id in *[_id == "homepage"][0].context->caseStudies[]->_id]{
     title,
     "slug": slug.current,
     _updatedAt,
-  },
-  "pages": *[_type == "page" && defined(slug.current)]{
+  }[defined(slug)],
+  "pages": *[_type == "page"]{
     "slug": slug.current,
     _updatedAt,
-  }
+  }[defined(slug)]
 }`);
 
 /*******************************************************************************

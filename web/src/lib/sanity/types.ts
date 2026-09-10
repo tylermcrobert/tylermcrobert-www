@@ -1669,7 +1669,7 @@ export type SITE_QUERY_RESULT = {
 
 // Source: ../web/src/lib/sanity/queries.ts
 // Variable: SITEMAP_QUERY
-// Query: {  "info": *[_id == 'info'][0],  "projects": *[_id == "homepage"][0].context->caseStudies[defined(@->slug.current)]->{     title,    "slug": slug.current,    _updatedAt,  },  "pages": *[_type == "page" && defined(slug.current)]{    "slug": slug.current,    // _updatedAt,  }}
+// Query: {  "info": *[_id == 'info'][0],  "projects": *[_type == "caseStudy" && _id in *[_id == "homepage"][0].context->caseStudies[]->_id]{    title,    "slug": slug.current,    _updatedAt,  }[defined(slug)],  "pages": *[_type == "page"]{    "slug": slug.current,    _updatedAt,  }[defined(slug)]}
 export type SITEMAP_QUERY_RESULT = {
 	info:
 		| {
@@ -1860,11 +1860,12 @@ export type SITEMAP_QUERY_RESULT = {
 		| null;
 	projects: Array<{
 		title: string | null;
-		slug: string | null;
+		slug: string;
 		_updatedAt: string;
-	}> | null;
+	}>;
 	pages: Array<{
-		slug: string | null;
+		slug: string;
+		_updatedAt: string;
 	}>;
 };
 
@@ -1875,7 +1876,7 @@ declare global {
 		'\n  *[_type == \'info\' ][0]{\n    metadata,\n    bio,\n    title,\n    clients,\n    links[]{\n      label,\n      link{\n  label,\n  href,\n  reference-> {\n    _type,\n    title,\n    "slug": slug.current \n  }\n}\n    },\n    playlists[]-> {\n      "slug": slug.current,\n      link,\n      title,\n      duration, \n      date \n    }\n  }\n': InfoQueryResult;
 		'\n  *[_type == \'playlist\' && slug.current == $slug][0]{\n  "slug": slug.current,\n  link,\n  title,\n  duration, \n  date,\n  image,\n  tracks[]{\n    image,\n    title, \n    duration, \n    artists,\n  }\n}\n': PLAYLIST_QUERY_RESULT;
 		'{\n  "homepageTitle": *[_id == \'homepage\'][0].homepageMetaTitle,\n  "settings": *[_id == "settings" && _type == "settings"][0]{\n    metadata,\n    siteTitle,\n    googleAnalyticsId,\n  },\n  "context": coalesce(\n    *[_type == "context" && slug.current == $contextSlug][0],\n    *[_id == "homepage"][0].context->\n  ) {\n    title,\n    caseStudies[]->{\n      "slug": slug.current,\n      title,\n    }\n  },\n}': SITE_QUERY_RESULT;
-		'{\n  "info": *[_id == \'info\'][0],\n  "projects": *[_id == "homepage"][0].context->caseStudies[defined(@->slug.current)]->{ \n    title,\n    "slug": slug.current,\n    _updatedAt,\n  },\n  "pages": *[_type == "page" && defined(slug.current)]{\n    "slug": slug.current,\n    // _updatedAt,\n  }\n}': SITEMAP_QUERY_RESULT;
+		'{\n  "info": *[_id == \'info\'][0],\n  "projects": *[_type == "caseStudy" && _id in *[_id == "homepage"][0].context->caseStudies[]->_id]{\n    title,\n    "slug": slug.current,\n    _updatedAt,\n  }[defined(slug)],\n  "pages": *[_type == "page"]{\n    "slug": slug.current,\n    _updatedAt,\n  }[defined(slug)]\n}': SITEMAP_QUERY_RESULT;
 	}
 }
 // Lets @sanity/client releases that predate the global registry read it too
