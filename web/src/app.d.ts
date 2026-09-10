@@ -19,7 +19,7 @@ declare global {
 			contextTitle: string | null;
 			contextCaseStudies: {
 				title: string | null;
-				slug: string | null;
+				slug: string;
 			}[];
 			googleAnalyticsId: string | null;
 		}

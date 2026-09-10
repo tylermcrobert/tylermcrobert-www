@@ -1,7 +1,11 @@
-import { groq } from '@sanity/sveltekit';
 import { error } from '@sveltejs/kit';
 
-import { type Module, ROOT_SLUG_QUERY, SITE_QUERY } from '$lib/sanity';
+import {
+	type Module,
+	PAGE_SLUGS_QUERY,
+	ROOT_SLUG_QUERY,
+	SITE_QUERY
+} from '$lib/sanity';
 import { client as clientImported } from '$sanity/client';
 import { getPrerender } from '$util/getPrerender.js';
 
@@ -10,16 +14,11 @@ export const entries = async () => {
 		contextSlug: null
 	});
 
-	const pageSlugs: { slug: string }[] = await clientImported.fetch(
-		groq`*[_type == "page"]{ "slug": slug.current }`
-	);
+	const pageSlugs = await clientImported.fetch(PAGE_SLUGS_QUERY);
+	const caseStudiesSlugs =
+		site.context?.caseStudies?.map(({ slug }) => ({ slug })) ?? [];
 
-	return [
-		...pageSlugs,
-		...(site.context?.caseStudies
-			?.map(({ slug }) => ({ slug }))
-			.filter((page): page is { slug: string } => page.slug !== null) || [])
-	];
+	return [...pageSlugs, ...caseStudiesSlugs];
 };
 
 export const load = async ({

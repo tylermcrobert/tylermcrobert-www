@@ -232,6 +232,12 @@ export const ROOT_SLUG_QUERY = defineQuery(`
   }
 `);
 
+export const PAGE_SLUGS_QUERY = defineQuery(`
+  *[_type == "page"]{
+    "slug": slug.current,
+  }[defined(slug)]
+`);
+
 /**
  * Info
  */
@@ -280,10 +286,10 @@ export const SITE_QUERY = defineQuery(`{
     *[_id == "homepage"][0].context->
   ) {
     title,
-    caseStudies[]->{
-      "slug": slug.current,
-      title,
-    }
+    caseStudies[]{
+      "slug": @->slug.current,
+      "title": @->title,
+    }[defined(slug)]
   },
 }`);
 
