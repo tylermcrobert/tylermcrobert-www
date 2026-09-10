@@ -289,19 +289,19 @@ export const SITE_QUERY = defineQuery(`{
 
 export const SITEMAP_QUERY = defineQuery(`{
   "info": *[_id == 'info'][0],
-  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ 
+  "projects": *[_id == "homepage"][0].context->caseStudies[defined(@->slug.current)]->{ 
     title,
     "slug": slug.current,
     _updatedAt,
   },
-  "pages": *[_type == "page"]{
+  "pages": *[_type == "page" && defined(slug.current)]{
     "slug": slug.current,
     _updatedAt,
   }
 }`);
 
 /*******************************************************************************
- * UTILLS
+ * UTILS
  ******************************************************************************/
 
 export type Nullable<T> = {

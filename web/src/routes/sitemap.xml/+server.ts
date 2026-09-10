@@ -8,9 +8,7 @@ export async function GET({
 }) {
 	const { pages, projects, info } = await client.fetch(SITEMAP_QUERY);
 
-	const idk = [...pages, ...(projects || [])].filter(
-		(page): page is { slug: string; _updatedAt: string } => page.slug !== null
-	);
+	const allPages = [...pages, ...(projects || [])];
 
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset 
@@ -20,7 +18,7 @@ export async function GET({
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 
-    ${idk
+    ${allPages
 			.map(
 				(project) => `
         <url>
