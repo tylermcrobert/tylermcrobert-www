@@ -9,18 +9,6 @@ import {
 import { client as clientImported } from '$sanity/client';
 import { getPrerender } from '$util/getPrerender.js';
 
-export const entries = async () => {
-	const site = await clientImported.fetch(SITE_QUERY, {
-		contextSlug: null
-	});
-
-	const pageSlugs = await clientImported.fetch(PAGE_SLUGS_QUERY);
-	const caseStudiesSlugs =
-		site.context?.caseStudies?.map(({ slug }) => ({ slug })) ?? [];
-
-	return [...pageSlugs, ...caseStudiesSlugs];
-};
-
 export const load = async ({
 	parent,
 	params,
@@ -55,4 +43,22 @@ export const load = async ({
 	} satisfies App.PageReturn;
 };
 
+/**
+ * Prerendering for speed optimization
+ */
+
+/** get the slugs of all pages and case studies */
+export const entries = async () => {
+	const site = await clientImported.fetch(SITE_QUERY, {
+		contextSlug: null
+	});
+
+	const pageSlugs = await clientImported.fetch(PAGE_SLUGS_QUERY);
+	const caseStudiesSlugs =
+		site.context?.caseStudies?.map(({ slug }) => ({ slug })) ?? [];
+
+	return [...pageSlugs, ...caseStudiesSlugs];
+};
+
+/** prerender the page if the environment is production */
 export const prerender = getPrerender();
