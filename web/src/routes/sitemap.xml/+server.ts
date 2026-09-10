@@ -1,4 +1,4 @@
-import { SITEMAP_QUERY, type SITEMAP_QUERY_RESULT } from '$sanity';
+import { SITEMAP_QUERY } from '$sanity';
 
 export async function GET({
 	url,
@@ -6,8 +6,7 @@ export async function GET({
 		sanity: { client }
 	}
 }) {
-	const { pages, projects, info } =
-		await client.fetch<SITEMAP_QUERY_RESULT>(SITEMAP_QUERY);
+	const { pages, projects, info } = await client.fetch(SITEMAP_QUERY);
 
 	const idk = [...pages, ...(projects || [])].filter(
 		(page): page is { slug: string; _updatedAt: string } => page.slug !== null

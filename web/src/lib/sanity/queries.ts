@@ -1,6 +1,6 @@
 import type { InputValue } from '@portabletext/svelte';
 import type { FilterByType, Get } from '@sanity/codegen';
-import groq from 'groq';
+import { defineQuery } from 'groq';
 
 import type { InfoQueryResult, ROOT_SLUG_QUERY_RESULT } from './types';
 
@@ -8,7 +8,7 @@ import type { InfoQueryResult, ROOT_SLUG_QUERY_RESULT } from './types';
  * PROJECTIONS
  ******************************************************************************/
 
-export const LINK_PROJECTION = groq`{
+export const LINK_PROJECTION = /* groq */ `{
   label,
   href,
   reference-> {
@@ -20,7 +20,7 @@ export const LINK_PROJECTION = groq`{
 
 export type LinkProjection = NonNullable<Get<InfoQueryResult, 'links', number, 'link'>>;
 
-const RICH_TEXT_PROJECTION = groq`{
+const RICH_TEXT_PROJECTION = /* groq */ `{
   ...,
  "markDefs": coalesce(
     markDefs[]{
@@ -36,7 +36,7 @@ const RICH_TEXT_PROJECTION = groq`{
 
 export type RichTextProjection = InputValue;
 
-export const MEDIA_PROJECTION = groq`{
+export const MEDIA_PROJECTION = /* groq */ `{
   "_type": "mediaProjection",
   "asset": select(
     defined(@.image) => {
@@ -66,20 +66,20 @@ export type MediaProjection = NonNullable<Get<MediaBlockProjection, 'media'>>;
  * MODULES
  ******************************************************************************/
 
-const MODULE_TEXT_BLOCK = `// groq
+const MODULE_TEXT_BLOCK = /* groq */ `
   _type == 'textBlock' => {
     richText[]${RICH_TEXT_PROJECTION},
   }
 `;
 
-const MODULE_MEDIA_BLOCK = `// groq
+const MODULE_MEDIA_BLOCK = /* groq */ `
   _type == 'mediaBlock' => {
     media${MEDIA_PROJECTION},
     aspect
   }
 `;
 
-const MODULE_WEBSITE = `//groq
+const MODULE_WEBSITE = /* groq */ `
   _type == 'website' => {
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
@@ -88,7 +88,7 @@ const MODULE_WEBSITE = `//groq
   }
 `;
 
-const MODULE_DIPTYCH = `//groq
+const MODULE_DIPTYCH = /* groq */ `
   _type == 'diptych' => {
     items[]{
       _key,
@@ -106,7 +106,7 @@ const MODULE_DIPTYCH = `//groq
   }
 `;
 
-const MODULE_TRIPLE_IMAGE = `//groq
+const MODULE_TRIPLE_IMAGE = /* groq */ `
   _type == 'tripleImage' => {
     mainMedia${MEDIA_PROJECTION},
     secondaryMedia1${MEDIA_PROJECTION},
@@ -115,7 +115,7 @@ const MODULE_TRIPLE_IMAGE = `//groq
   }
 `;
 
-const MODULE_MOBILE_WEBSITE = `//groq
+const MODULE_MOBILE_WEBSITE = /* groq */ `
   _type == 'mobileWebsite' => {
     "themeBackground": theme->.background.hex,
     frames[]{
@@ -131,7 +131,7 @@ const MODULE_MOBILE_WEBSITE = `//groq
  * Timed Slides
  */
 
-const MODULE_TIMED_SLIDES = `//groq
+const MODULE_TIMED_SLIDES = /* groq */ `
   _type == 'timedSlides' => {
     images,
     seconds,
@@ -143,7 +143,7 @@ const MODULE_TIMED_SLIDES = `//groq
  * Playlist Block
  */
 
-const PLAYLIST_PROJECTION = groq`{
+const PLAYLIST_PROJECTION = /* groq */ `{
   "slug": slug.current,
   link,
   title,
@@ -158,7 +158,7 @@ const PLAYLIST_PROJECTION = groq`{
   }
 }`;
 
-const MODULE_PLAYLIST_BLOCK = `//groq
+const MODULE_PLAYLIST_BLOCK = /* groq */ `
   _type == 'playlistBlock' => {
     playlist->${PLAYLIST_PROJECTION}
   }
@@ -168,7 +168,7 @@ const MODULE_PLAYLIST_BLOCK = `//groq
  * Modules
  */
 
-const MODULES_PROJECTION = groq`{
+const MODULES_PROJECTION = /* groq */ `{
   _type,
   _key,
   ${MODULE_MEDIA_BLOCK},
@@ -209,7 +209,7 @@ export type Module = { _key: string } & (
  * PAGES
  ******************************************************************************/
 
-export const ROOT_SLUG_QUERY = groq`
+export const ROOT_SLUG_QUERY = defineQuery(`
   *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
     _type,
     _id,
@@ -230,13 +230,13 @@ export const ROOT_SLUG_QUERY = groq`
     metadata,
     modules[]${MODULES_PROJECTION},
   }
-`;
+`);
 
 /**
  * Info
  */
 
-export const infoQuery = groq`
+export const infoQuery = defineQuery(`
   *[_type == 'info' ][0]{
     metadata,
     bio,
@@ -254,21 +254,21 @@ export const infoQuery = groq`
       date 
     }
   }
-`;
+`);
 
 /**
  * Playlist
  */
 
-export const PLAYLIST_QUERY = groq`
+export const PLAYLIST_QUERY = defineQuery(`
   *[_type == 'playlist' && slug.current == $slug][0]${PLAYLIST_PROJECTION}
-`;
+`);
 
 /*******************************************************************************
  * GLOBAL
  ******************************************************************************/
 
-export const SITE_QUERY = groq`{
+export const SITE_QUERY = defineQuery(`{
   "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,
   "settings": *[_id == "settings" && _type == "settings"][0]{
     metadata,
@@ -285,9 +285,9 @@ export const SITE_QUERY = groq`{
       title,
     }
   },
-}`;
+}`);
 
-export const SITEMAP_QUERY = groq`{
+export const SITEMAP_QUERY = defineQuery(`{
   "info": *[_id == 'info'][0],
   "projects": *[_id == "homepage"][0].context->caseStudies[]->{ 
     title,
@@ -298,7 +298,7 @@ export const SITEMAP_QUERY = groq`{
     "slug": slug.current,
     _updatedAt,
   }
-}`;
+}`);
 
 /*******************************************************************************
  * UTILLS
