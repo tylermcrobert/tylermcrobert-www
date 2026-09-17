@@ -2,11 +2,11 @@ import type { InputValue } from '@portabletext/svelte';
 import type { FilterByType, Get } from '@sanity/codegen';
 import { defineQuery } from '@sanity/sveltekit';
 
-import type { InfoQueryResult, ROOT_SLUG_QUERY_RESULT } from './types';
+import type { INFO_QUERY_RESULT, ROOT_SLUG_QUERY_RESULT } from '$sanity/types';
 
-/*******************************************************************************
- * PROJECTIONS
- ******************************************************************************/
+/**
+ * Projections
+ */
 
 export const LINK_PROJECTION = /* groq */ `{
   label,
@@ -18,9 +18,7 @@ export const LINK_PROJECTION = /* groq */ `{
   }
 }`;
 
-export type LinkProjection = NonNullable<Get<InfoQueryResult, 'links', number, 'link'>>;
-
-const RICH_TEXT_PROJECTION = /* groq */ `{
+export const RICH_TEXT_PROJECTION = /* groq */ `{
   ...,
  "markDefs": coalesce(
     markDefs[]{
@@ -33,8 +31,6 @@ const RICH_TEXT_PROJECTION = /* groq */ `{
     []
   )
 }`;
-
-export type RichTextProjection = InputValue;
 
 export const MEDIA_PROJECTION = /* groq */ `{
   "_type": "mediaProjection",
@@ -57,14 +53,16 @@ export const MEDIA_PROJECTION = /* groq */ `{
   ),
 }`;
 
+export type LinkProjection = NonNullable<Get<INFO_QUERY_RESULT, 'links', number, 'link'>>;
+export type RichTextProjection = InputValue;
+export type MediaProjection = NonNullable<ModuleMediaBlock['media']>;
+export type MediaProjectionAsset = NonNullable<MediaProjection['asset']>;
 export type MediaProjectionImage = Get<FilterByType<MediaProjectionAsset, 'image'>, 'image'>;
 export type MediaProjectionVideo = NonNullable<Get<FilterByType<MediaProjectionAsset, 'video'>, 'video'>>;
-export type MediaProjectionAsset = NonNullable<Get<MediaBlockProjection, 'media', 'asset'>>;
-export type MediaProjection = NonNullable<Get<MediaBlockProjection, 'media'>>;
 
-/*******************************************************************************
- * MODULES
- ******************************************************************************/
+/**
+ * Modules
+ */
 
 const MODULE_TEXT_BLOCK = /* groq */ `
   _type == 'textBlock' => {
@@ -127,10 +125,6 @@ const MODULE_MOBILE_WEBSITE = /* groq */ `
   }
 `;
 
-/**
- * Timed Slides
- */
-
 const MODULE_TIMED_SLIDES = /* groq */ `
   _type == 'timedSlides' => {
     images,
@@ -138,10 +132,6 @@ const MODULE_TIMED_SLIDES = /* groq */ `
     'background': background.hex
   }
 `;
-
-/**
- * Playlist Block
- */
 
 const PLAYLIST_PROJECTION = /* groq */ `{
   "slug": slug.current,
@@ -164,11 +154,7 @@ const MODULE_PLAYLIST_BLOCK = /* groq */ `
   }
 `;
 
-/**
- * Modules
- */
-
-const MODULES_PROJECTION = /* groq */ `{
+export const MODULES_PROJECTION = /* groq */ `{
   _type,
   _key,
   ${MODULE_MEDIA_BLOCK},
@@ -182,32 +168,19 @@ const MODULES_PROJECTION = /* groq */ `{
 }
 `;
 
-type ModuleProjection = Get<ROOT_SLUG_QUERY_RESULT, 'modules', number>;
+export type Module = NonNullable<Get<ROOT_SLUG_QUERY_RESULT, 'modules', number>>;
+export type ModuleTextBlock = FilterByType<Module, 'textBlock'>;
+export type ModuleDiptych = FilterByType<Module, 'diptych'>;
+export type ModuleTripleImage = FilterByType<Module, 'tripleImage'>;
+export type ModuleWebsite = FilterByType<Module, 'website'>;
+export type ModuleMediaBlock = FilterByType<Module, 'mediaBlock'>;
+export type ModuleMobileWebsite = FilterByType<Module, 'mobileWebsite'>;
+export type ModulePlaylistBlock = FilterByType<Module, 'playlistBlock'>;
+export type ModuleTimedSlides = FilterByType<Module, 'timedSlides'>;
 
-export type MediaBlockProjection = FilterByType<ModuleProjection, 'mediaBlock'>;
-export type ModuleTextBlock = FilterByType<ModuleProjection, 'textBlock'>;
-export type ModuleDiptych = FilterByType<ModuleProjection, 'diptych'>;
-export type ModuleTripleImage = FilterByType<ModuleProjection, 'tripleImage'>;
-export type ModuleWebsite = FilterByType<ModuleProjection, 'website'>;
-export type ModuleMediaBlock = FilterByType<ModuleProjection, 'mediaBlock'>;
-export type ModuleMobileWebsite = FilterByType<ModuleProjection, 'mobileWebsite'>;
-export type ModulePlaylistBlock = FilterByType<ModuleProjection, 'playlistBlock'>;
-export type ModuleTimedSlides = FilterByType<ModuleProjection, 'timedSlides'>;
-
-export type Module = { _key: string } & (
-	| ModuleMediaBlock
-	| ModuleTextBlock
-	| ModuleWebsite
-	| ModuleDiptych
-	| ModuleTripleImage
-	| ModuleMobileWebsite
-	| ModulePlaylistBlock
-	| ModuleTimedSlides
-);
-
-/*******************************************************************************
- * PAGES
- ******************************************************************************/
+/**
+ * Pages
+ */
 
 export const ROOT_SLUG_QUERY = defineQuery(`
   *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
@@ -242,7 +215,7 @@ export const PAGE_SLUGS_QUERY = defineQuery(`
  * Info
  */
 
-export const infoQuery = defineQuery(`
+export const INFO_QUERY = defineQuery(`
   *[_type == 'info' ][0]{
     metadata,
     bio,
@@ -270,9 +243,9 @@ export const PLAYLIST_QUERY = defineQuery(`
   *[_type == 'playlist' && slug.current == $slug][0]${PLAYLIST_PROJECTION}
 `);
 
-/*******************************************************************************
- * GLOBAL
- ******************************************************************************/
+/**
+ * Global
+ */
 
 export const SITE_QUERY = defineQuery(`{
   "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,

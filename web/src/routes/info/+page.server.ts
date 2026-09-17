@@ -1,13 +1,13 @@
 import { redirect } from '@sveltejs/kit';
 
-import { infoQuery } from '$sanity';
+import { INFO_QUERY } from '$sanity';
 
 export const load = async ({
 	locals: {
 		sanity: { client }
 	}
 }) => {
-	const infoPage = await client.fetch(infoQuery);
+	const infoPage = await client.fetch(INFO_QUERY);
 
 	if (!infoPage) {
 		return redirect(302, '/');
