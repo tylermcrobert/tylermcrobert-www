@@ -1,7 +1,7 @@
+import { PUBLIC_SITE_URL } from '$env/static/public';
 import { SITEMAP_QUERY } from '$sanity';
 
 export async function GET({
-	url,
 	locals: {
 		sanity: { client }
 	}
@@ -22,7 +22,7 @@ export async function GET({
 			.map(
 				(project) => `
         <url>
-          <loc>${new URL(project.slug, url)}</loc>
+          <loc>${PUBLIC_SITE_URL}/${project.slug}</loc>
           <lastmod>${project._updatedAt}</lastmod>
           <priority>0.8</priority>
         </url>`
@@ -32,7 +32,7 @@ export async function GET({
     ${
 			info
 				? `<url>
-        <loc>${new URL('info', url)}</loc>
+        <loc>${PUBLIC_SITE_URL}/info</loc>
         <lastmod>${info?._updatedAt}</lastmod>
         <priority>0.8</priority>
       </url>

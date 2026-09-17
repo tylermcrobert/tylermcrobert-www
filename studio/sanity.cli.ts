@@ -4,7 +4,10 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineCliConfig({
   api: {
     projectId: process.env.SANITY_STUDIO_PROJECT_ID,
-    dataset: 'production',
+    dataset: process.env.SANITY_STUDIO_DATASET,
+  },
+  vite: {
+    plugins: [tsconfigPaths()],
   },
   schemaExtraction: {
     enabled: true,
@@ -15,8 +18,5 @@ export default defineCliConfig({
     schema: 'schema.json',
     generates: '../web/src/lib/sanity/types.ts',
     overloadClientMethods: true,
-  },
-  vite: {
-    plugins: [tsconfigPaths()],
   },
 })

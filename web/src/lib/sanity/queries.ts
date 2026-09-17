@@ -305,11 +305,3 @@ export const SITEMAP_QUERY = defineQuery(`{
     _updatedAt,
   }[defined(slug)]
 }`);
-
-/*******************************************************************************
- * UTILS
- ******************************************************************************/
-
-export type Nullable<T> = {
-	[P in keyof T]: T[P] | null;
-};
