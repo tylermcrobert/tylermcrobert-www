@@ -2,7 +2,7 @@ import {defineDocuments, type PresentationPluginOptions} from 'sanity/presentati
 
 export const presentationOptions: PresentationPluginOptions = {
   previewUrl: {
-    origin: process.env.SANITY_STUDIO_PREVIEW_LINK || '',
+    origin: process.env.SANITY_STUDIO_PREVIEW_LINK!,
     /*
      * Preview Mode - set this way to be recieved by visual-editing/svelte
      */

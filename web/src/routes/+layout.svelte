@@ -18,9 +18,10 @@
 	{/key}
 
 	<Metadata />
-	<ConsoleCredit />
 
 	{#if data.googleAnalyticsId}
 		<Analytics id={data.googleAnalyticsId} />
 	{/if}
 </PreviewMode>
+
+<ConsoleCredit />
