@@ -16,12 +16,9 @@
 		type SvelteSanityImageProps
 	} from '@tylermcrobert/svelte-sanity-image';
 
-	import {
-		PUBLIC_SANITY_DATASET,
-		PUBLIC_SANITY_PROJECT_ID
-	} from '$env/static/public';
 	import { getModuleContext } from '$lib/context/moduleContext';
 	import { metadata } from '$lib/state';
+	import { client } from '$sanity';
 
 	let { alt, priority: priorityProp, image, ...props }: ImageProps = $props();
 
@@ -31,11 +28,8 @@
 
 <Image
 	{...props}
+	{client}
 	{image}
-	client={{
-		projectId: PUBLIC_SANITY_PROJECT_ID,
-		dataset: PUBLIC_SANITY_DATASET
-	}}
 	alt={stegaClean(alt) || stegaClean(metadata.title) || null}
 	autoFormat
 	loading={priority ? 'eager' : 'lazy'}

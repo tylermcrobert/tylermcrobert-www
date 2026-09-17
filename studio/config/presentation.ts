@@ -3,13 +3,18 @@ import {defineDocuments, type PresentationPluginOptions} from 'sanity/presentati
 export const presentationOptions: PresentationPluginOptions = {
   previewUrl: {
     origin: process.env.SANITY_STUDIO_PREVIEW_LINK || '',
+    /*
+     * Preview Mode - set this way to be recieved by visual-editing/svelte
+     */
     previewMode: {
       enable: '/preview/enable',
       disable: '/preview/disable',
     },
   },
   resolve: {
-    // Automatically will switch to these documents when navigating in the Presentation Tool
+    /*
+     * Main Documents - automatically will switch to these documents when navigating in the Presentation Tool
+     */
     mainDocuments: defineDocuments([
       {route: '/', type: 'homepage'},
       {
@@ -22,7 +27,9 @@ export const presentationOptions: PresentationPluginOptions = {
       },
     ]),
 
-    // Adds link to Presentation Tool in in the structure
+    /*
+     * Locations - adds links to the Presentation Tool in the structure
+     */
     locations: {
       caseStudy: {
         select: {title: 'title', slug: 'slug.current'},
