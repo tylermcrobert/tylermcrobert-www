@@ -33,7 +33,7 @@ function getSpotifyPlaylistId(url: string) {
   return match ? match[1] : null
 }
 
-const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
+export const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
   const {value = {}, onChange, renderDefault} = props
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -83,5 +83,3 @@ const SpotifyFetch: React.FC<ObjectInputProps> = (props) => {
     </>
   )
 }
-
-export default SpotifyFetch

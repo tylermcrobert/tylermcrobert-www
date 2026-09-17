@@ -5,7 +5,7 @@ import {toPlainText} from '../../util/toPlainText'
 
 const TITLE = 'Diptych'
 
-export default defineType({
+export const diptych = defineType({
   title: TITLE,
   name: 'diptych',
   type: 'object',

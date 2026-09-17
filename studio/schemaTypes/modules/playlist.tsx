@@ -2,7 +2,7 @@ import {defineType} from 'sanity'
 
 const TITLE = 'Playlist Block'
 
-export default defineType({
+export const playlistBlock = defineType({
   title: TITLE,
   name: 'playlistBlock',
   type: 'object',

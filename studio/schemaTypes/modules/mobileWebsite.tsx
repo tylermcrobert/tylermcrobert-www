@@ -4,7 +4,7 @@ import {mediaRequired} from '../objects/media'
 
 const TITLE = 'Mobile Website'
 
-export default defineType({
+export const mobileWebsite = defineType({
   title: TITLE,
   name: 'mobileWebsite',
   type: 'object',
