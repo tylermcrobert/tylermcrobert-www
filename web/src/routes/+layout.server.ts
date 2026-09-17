@@ -1,4 +1,4 @@
-import { SITE_QUERY } from '$lib/sanity';
+import { SITE_QUERY } from '$sanity';
 
 export const load = async ({
 	url: { pathname },

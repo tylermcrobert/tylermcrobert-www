@@ -1,12 +1,12 @@
 import { error } from '@sveltejs/kit';
 
 import {
+	client as clientImported,
 	type Module,
 	PAGE_SLUGS_QUERY,
 	ROOT_SLUG_QUERY,
 	SITE_QUERY
-} from '$lib/sanity';
-import { client as clientImported } from '$sanity/client';
+} from '$sanity';
 import { getPrerender } from '$util/getPrerender.js';
 
 export const load = async ({
