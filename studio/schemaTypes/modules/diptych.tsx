@@ -1,6 +1,7 @@
-import {defineType} from 'sanity'
-import {toPlainText} from '../../util/toPlainText'
 import {mediaRequired, prepareMedia, selectMedia} from '@util'
+import {defineType} from 'sanity'
+
+import {toPlainText} from '../../util/toPlainText'
 
 const TITLE = 'Diptych'
 

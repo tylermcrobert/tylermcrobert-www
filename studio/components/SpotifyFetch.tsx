@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
 import {Box, Button} from '@sanity/ui'
-import {set, ObjectInputProps} from 'sanity'
+import React, {useState} from 'react'
+import {ObjectInputProps, set} from 'sanity'
 
 function formatOutput(data: any) {
   const oldestDate = data.tracks.items

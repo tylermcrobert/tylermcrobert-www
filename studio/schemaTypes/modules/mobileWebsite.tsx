@@ -1,4 +1,5 @@
 import {defineType} from 'sanity'
+
 import {mediaRequired} from '../objects/media'
 
 const TITLE = 'Mobile Website'
