@@ -1,6 +1,6 @@
 import type { InputValue } from '@portabletext/svelte';
 import type { FilterByType, Get } from '@sanity/codegen';
-import { defineQuery } from 'groq';
+import { defineQuery } from '@sanity/sveltekit';
 
 import type { InfoQueryResult, ROOT_SLUG_QUERY_RESULT } from './types';
 
