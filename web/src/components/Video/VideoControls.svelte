@@ -1,126 +1,157 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
+	import '@videojs/html/video/player';
+	import '@videojs/html/ui/container';
+	import '@videojs/html/ui/controls';
+	import '@videojs/html/ui/mute-button';
+	import '@videojs/html/ui/play-button';
+	import '@videojs/html/ui/time';
+	import '@videojs/html/ui/time-slider';
+	import '@videojs/html/ui/slider-value';
+	import '@videojs/html/ui/gesture';
+
+	import type { VideoPlayerStore } from '@videojs/html';
+	import type { VideoPlayerElement } from '@videojs/html/video';
+	import { type Snippet } from 'svelte';
+	import type { ClassValue } from 'svelte/elements';
 
 	import PauseIcon from './icons/PauseIcon.svelte';
 	import PlayIcon from './icons/PlayIcon.svelte';
 	import VolumeMuted from './icons/VolumeMuted.svelte';
 	import VolumePlaying from './icons/VolumePlaying.svelte';
-	import type { VideoProps } from './types';
 
-	interface Props extends Pick<VideoProps, 'aspect' | 'class' | 'poster'> {
+	interface Props {
 		children: Snippet;
+		class?: ClassValue;
+		hasSound?: boolean;
 	}
 
-	let { class: className, children, aspect, poster }: Props = $props();
+	let { children, class: className, hasSound }: Props = $props();
 
-	let packageLoaded = $state(false);
-
-	onMount(() => {
-		import('media-chrome').then(() => {
-			packageLoaded = true;
-		});
-	});
+	let store: VideoPlayerStore | undefined = $state();
+	let paused = $derived(store?.paused ?? true);
+	let userActive = $derived(store?.userActive);
+	let muted = $derived(store?.muted);
+	let started = $derived(store?.started);
 </script>
 
-<media-controller
-	style:aspect-ratio={aspect}
-	style:--scrim-opacity={packageLoaded ? 0.2 : 0}
-	style:background={poster ? `url('${poster}') center / cover` : undefined}
+<video-player
 	class={[
-		'controller relative flex cursor-pointer text-white outline-hidden',
+		'@container relative block cursor-pointer overflow-hidden',
 		className
 	]}
+	{@attach (player: VideoPlayerElement) => {
+		const sync = () => (store = player.store);
+		sync();
+		return player.store.subscribe(sync);
+	}}
 >
-	{@render children?.()}
+	<media-container
+		tabindex="-1"
+		class={[
+			'display-contents relative cursor-pointer overflow-hidden text-white'
+		]}
+	>
+		{@render children?.()}
+		{@render playPause()}
+		{@render controlBar()}
 
-	{#if packageLoaded}
-		<media-play-button class="z-10" slot="centered-chrome">
-			<span slot="play" class="w-8 md:w-14"><PlayIcon /></span>
-			<span slot="pause" class="w-8 md:w-14"><PauseIcon /></span>
-		</media-play-button>
+		<media-gesture
+			type="tap"
+			action="togglePaused"
+			pointer="mouse"
+			region="center"
+		></media-gesture>
+	</media-container>
+</video-player>
 
-		<media-control-bar
-			class="absolute inset-x-0 bottom-0 z-10 flex gap-5 px-6 py-4"
-		>
-			<media-mute-button>
-				<span slot="high" class="w-4"><VolumePlaying /></span>
-				<span slot="off" class="w-4"><VolumeMuted /></span>
+{#snippet playPause()}
+	{@const Icons = [PlayIcon, PauseIcon]}
+
+	<media-play-button
+		class={[
+			'absolute top-1/2 left-1/2 z-10 w-14 -translate-x-1/2 -translate-y-1/2',
+			'transition-all duration-300',
+			!userActive && !paused && 'translate-y-2.5 opacity-0'
+		]}
+	>
+		{#each Icons as Icon, index (index)}
+			{@const activeClass = 'scale-100 opacity-100 delay-50'}
+			{@const inactiveClass = '-translate-y-1/2 scale-50 opacity-0'}
+
+			<Icon
+				class={[
+					'absolute top-1/2 left-1/2 w-14 -translate-x-1/2 transition-all duration-200 @2xl:w-20 @4xl:w-22',
+					inactiveClass,
+					index === 0 && paused && activeClass, // play icon
+					index === 1 && !paused && activeClass // pause icon
+				]}
+			/>
+		{/each}
+	</media-play-button>
+{/snippet}
+
+{#snippet controlBar()}
+	<div
+		class={[
+			'absolute inset-x-0 bottom-0 z-10 flex h-16 items-center gap-5 px-6',
+			'transition-[opacity,translate] duration-300',
+			'bg-linear-to-b from-transparent to-black/30',
+			(!userActive || !started) && 'translate-y-2 opacity-0'
+		]}
+	>
+		{#if hasSound}
+			<media-mute-button
+				class="grid size-6 shrink-0 cursor-pointer place-items-center"
+			>
+				{#if muted}
+					<VolumeMuted />
+				{:else}
+					<VolumePlaying />
+				{/if}
 			</media-mute-button>
-			<media-time-display></media-time-display>
-			<media-time-range><span slot="preview"></span></media-time-range>
-			<media-duration-display></media-duration-display>
-		</media-control-bar>
-	{:else}
-		<!-- Initial play button -->
-		<span class="absolute inset-0 grid place-items-center">
-			<div class="w-8 md:w-14">
-				<PlayIcon />
-			</div>
-		</span>
-	{/if}
-</media-controller>
+		{/if}
 
-<style lang="postcss">
-	.controller {
-		--duration: 300ms;
-		--ease: cubic-bezier(0.4, 0, 0.6, 1);
+		<media-time type="current" class="tabular-nums"></media-time>
 
-		/* Overall */
-		--media-control-background: transparent;
-		--media-control-hover-background: transparent;
-		--media-primary-color: #fff;
+		{@render slider()}
 
-		/* Control Bar */
-		--media-button-padding: 0px;
-		--media-control-padding: 0px;
-		--media-tooltip-display: none;
+		<media-time type="duration" class="tabular-nums"></media-time>
+	</div>
+{/snippet}
 
-		/* Range */
-		--media-range-thumb-width: 4px;
-		--media-range-thumb-height: 4px;
-		--media-range-thumb-transition: transform 500ms ease, opacity 500ms ease;
-		--media-range-thumb-opacity: 0;
-		--media-preview-time-margin: 0 0 -16px;
-		--media-range-track-border-radius: 999999px;
-	}
+{#snippet slider()}
+	<media-time-slider class="group relative grid h-full flex-1 items-center">
+		<media-slider-track class="relative block h-1 rounded-full bg-current/30">
+			<media-slider-fill
+				class={[
+					'block h-full rounded-full bg-current',
+					'w-(--media-slider-fill) in-data-dragging:w-(--media-slider-pointer)'
+				]}
+			></media-slider-fill>
+		</media-slider-track>
 
-	.controller:after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background-color: rgba(0, 0, 0, var(--scrim-opacity));
-		pointer-events: none;
-		transition: var(--duration) background-color var(--ease);
-	}
+		<media-slider-thumb
+			class={[
+				'absolute top-1/2 z-10 size-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current transition-transform duration-300',
+				'left-(--media-slider-fill) in-data-dragging:left-(--media-slider-pointer)',
+				'group-data-pointing:scale-250'
+			]}
+		></media-slider-thumb>
 
-	.controller:global([userinactive]):after {
-		background: rgba(0, 0, 0, 0);
-	}
+		<div
+			class={[
+				'absolute top-1/2 z-0 hidden h-1 w-px -translate-y-1/2 group-data-pointing:block',
+				// Make black if the pointer is to the left of the fill, otherwise make it white
+				'left-(--media-slider-pointer) bg-[color-mix(in_srgb,black_calc(50%+50%*sign(calc(var(--media-slider-fill)-var(--media-slider-pointer)))),currentColor)]'
+			]}
+		></div>
 
-	.controller:global([userinactive]):after {
-		background: rgba(0, 0, 0, 0);
-	}
-
-	.controller:global([userinactive]) media-control-bar,
-	.controller:global(:not([mediahasplayed])) media-control-bar {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-
-	media-control-bar {
-		transition:
-			opacity var(--duration) var(--ease),
-			transform var(--duration) var(--ease);
-	}
-
-	media-control-bar:hover {
-		--media-range-thumb-transform: scale(2.5);
-		--media-range-thumb-opacity: 1;
-	}
-
-	media-time-display,
-	media-duration-display {
-		pointer-events: none;
-		user-select: none;
-	}
-</style>
+		<media-slider-value
+			type="pointer"
+			class={[
+				'pointer-events-none absolute top-1/2 -translate-x-1/2 -translate-y-[calc(50%+2rem)] whitespace-nowrap tabular-nums opacity-0 transition-opacity',
+				'left-(--media-slider-pointer) group-data-pointing:opacity-100'
+			]}
+		></media-slider-value>
+	</media-time-slider>
+{/snippet}

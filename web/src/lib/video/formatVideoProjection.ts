@@ -78,7 +78,7 @@ export function formatVideoProjection(video: MediaProjectionVideo): VideoProps {
 	return {
 		poster,
 		aspect,
-		playbackId: video.playbackId!,
+		src: `https://stream.mux.com/${video.playbackId}.m3u8`,
 		...playbackProps
 	};
 }

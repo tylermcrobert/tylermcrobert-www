@@ -43,14 +43,22 @@
 			loop: customVideoPlayback?.loop || undefined
 		}
 	});
+
+	const resolvedAspect = $derived(
+		aspect || parseAspectStr(projection.aspect!)
+	);
+	const resolvedPoster = $derived(
+		poster ??
+			(projection?.poster
+				? getSanityPosterUrl(projection.poster, resolvedAspect)
+				: getMuxThumbnailUrl(playbackId!, 0.0))
+	);
 </script>
 
 <Video
 	{...props}
 	{...playbackPresets[preset || 'autoplay']}
-	playbackId={playbackId!}
-	aspect={aspect || parseAspectStr(projection.aspect!)}
-	poster={poster || projection?.poster
-		? getSanityPosterUrl(projection.poster, parseAspectStr(projection!.aspect!))
-		: getMuxThumbnailUrl(playbackId!, 0.0)}
+	src={`https://stream.mux.com/${playbackId}.m3u8`}
+	aspect={resolvedAspect}
+	poster={resolvedPoster}
 />
