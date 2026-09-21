@@ -30,6 +30,7 @@
     "sanity": "^6.13.0",
     "sanity-plugin-media": "^6.1.8",
     "sanity-plugin-mux-input": "^5.0.12",
+    "sanity-plugin-video-player": "^0.1.0",
     "styled-components": "^6.1.19",
     "vite-tsconfig-paths": "^5.1.4"
   },

@@ -35,6 +35,9 @@ importers:
       sanity-plugin-mux-input:
         specifier: ^5.0.12
         version: 5.0.12(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sanity@6.13.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.2.2(@types/node@24.9.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.0)))(@sanity/sdk@3.1.0(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))(xstate@5.32.6))(@types/node@24.9.1)(@types/react@19.2.18)(esbuild@0.28.2)(immer@11.1.18)(jiti@2.7.0)(prismjs@1.27.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.7)(styled-components@6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(tsx@4.23.13)(typescript@5.9.3))(styled-components@6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+      sanity-plugin-video-player:
+        specifier: ^0.1.0
+        version: 0.1.0(9a0c2c9d3ea8c8f7be893b1b2c6ac3c1)
       styled-components:
         specifier: ^6.1.19
         version: 6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5168,6 +5171,19 @@ packages:
       react: ^19.2
       sanity: ^5 || ^6.0.0-0
       styled-components: ^6.1
+
+  sanity-plugin-video-player@0.1.0:
+    resolution: {integrity: sha512-2XcLOJS5ERRaX9lhvM3NSkjKFOHb5dWBbWad4NgAhH1uk51u1aQQH/Q2R99DVrP+K8DomD+aCsd6cZ6x+n4wnA==}
+    peerDependencies:
+      '@sanity/client': ^6 || ^7 || ^8
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+      sanity: ^6
+      sanity-plugin-mux-input: ^5
+      styled-components: ^6.1
+    peerDependenciesMeta:
+      sanity-plugin-mux-input:
+        optional: true
 
   sanity@6.13.0:
     resolution: {integrity: sha512-oxQTF2MXrpYHO8Gqje9tHuRmHUnOHMaq2GIKLCutXWx9EViSeXqVVbc91HpVK1U91UjqF5AXI3PscjIszXOv9A==}
@@ -11824,6 +11840,16 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
       - react-dom
+
+  sanity-plugin-video-player@0.1.0(9a0c2c9d3ea8c8f7be893b1b2c6ac3c1):
+    dependencies:
+      '@sanity/client': 8.6.1
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+      sanity: 6.13.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.2.2(@types/node@24.9.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.0)))(@sanity/sdk@3.1.0(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))(xstate@5.32.6))(@types/node@24.9.1)(@types/react@19.2.18)(esbuild@0.28.2)(immer@11.1.18)(jiti@2.7.0)(prismjs@1.27.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.7)(styled-components@6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(tsx@4.23.13)(typescript@5.9.3)
+      styled-components: 6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+    optionalDependencies:
+      sanity-plugin-mux-input: 5.0.12(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sanity@6.13.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.2.2(@types/node@24.9.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.0)))(@sanity/sdk@3.1.0(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))(xstate@5.32.6))(@types/node@24.9.1)(@types/react@19.2.18)(esbuild@0.28.2)(immer@11.1.18)(jiti@2.7.0)(prismjs@1.27.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.7)(styled-components@6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(tsx@4.23.13)(typescript@5.9.3))(styled-components@6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
 
   sanity@6.13.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.2.2(@types/node@24.9.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.0)))(@sanity/sdk@3.1.0(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))(xstate@5.32.6))(@types/node@24.9.1)(@types/react@19.2.18)(esbuild@0.28.2)(immer@11.1.18)(jiti@2.7.0)(prismjs@1.27.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.7)(styled-components@6.1.19(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(tsx@4.23.13)(typescript@5.9.3):
     dependencies:

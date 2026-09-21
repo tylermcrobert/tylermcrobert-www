@@ -2,9 +2,8 @@ import styled from 'styled-components'
 
 const MediaInputStyle = styled.div`
   container-type: inline-size;
-  /* border: 1px solid red; */
 
-  [data-testid*='media.video'] > [data-ui='Box'] {
+  [data-testid*='media.videoPlayer'] > [data-ui='Box'] {
     padding: 0 !important;
     border: 0;
 
@@ -30,11 +29,5 @@ const MediaInputStyle = styled.div`
 `
 
 export const MediaInput = ((props: any) => {
-  return (
-    <MediaInputStyle data-name="media-input">{props.renderDefault({...props})}</MediaInputStyle>
-  )
+  return <MediaInputStyle>{props.renderDefault({...props})}</MediaInputStyle>
 }) as any
-
-/**
- * Media Field
- */

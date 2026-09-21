@@ -29,6 +29,9 @@ importers:
       bad-words:
         specifier: ^4.0.0
         version: 4.0.0
+      sanity-plugin-video-player:
+        specifier: ^0.1.0
+        version: 0.1.0(@sanity/client@7.27.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity@5.31.2(@emotion/is-prop-valid@1.2.2)(@noble/hashes@2.4.0)(@oclif/core@4.14.0)(@sanity/cli-core@1.3.4(@noble/hashes@2.4.0)(@types/node@24.10.4)(babel-plugin-react-compiler@1.0.0)(lightningcss@1.30.2)(yaml@2.9.1))(@types/node@24.10.4)(@types/react@19.2.7)(babel-plugin-react-compiler@1.0.0)(jiti@2.7.0)(lightningcss@1.30.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.1.19(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.1.19(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
     devDependencies:
       '@eslint/compat':
         specifier: ^1.4.1
@@ -5319,6 +5322,19 @@ packages:
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+
+  sanity-plugin-video-player@0.1.0:
+    resolution: {integrity: sha512-2XcLOJS5ERRaX9lhvM3NSkjKFOHb5dWBbWad4NgAhH1uk51u1aQQH/Q2R99DVrP+K8DomD+aCsd6cZ6x+n4wnA==}
+    peerDependencies:
+      '@sanity/client': ^6 || ^7 || ^8
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+      sanity: ^6
+      sanity-plugin-mux-input: ^5
+      styled-components: ^6.1
+    peerDependenciesMeta:
+      sanity-plugin-mux-input:
+        optional: true
 
   sanity@5.31.2:
     resolution: {integrity: sha512-KzM5EV71eh98EMFhlF3uumtyefTbp6B41nWJJPk1rqMNYxULmufMVf9ixWKnjH5ACOpLsj6xBWqlzfwgumSkWA==}
@@ -11671,6 +11687,14 @@ snapshots:
   safe-buffer@5.2.1: {}
 
   safer-buffer@2.1.2: {}
+
+  sanity-plugin-video-player@0.1.0(@sanity/client@7.27.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity@5.31.2(@emotion/is-prop-valid@1.2.2)(@noble/hashes@2.4.0)(@oclif/core@4.14.0)(@sanity/cli-core@1.3.4(@noble/hashes@2.4.0)(@types/node@24.10.4)(babel-plugin-react-compiler@1.0.0)(lightningcss@1.30.2)(yaml@2.9.1))(@types/node@24.10.4)(@types/react@19.2.7)(babel-plugin-react-compiler@1.0.0)(jiti@2.7.0)(lightningcss@1.30.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.1.19(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.1.19(react-dom@19.3.0(react@19.3.0))(react@19.3.0)):
+    dependencies:
+      '@sanity/client': 7.27.0
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+      sanity: 5.31.2(@emotion/is-prop-valid@1.2.2)(@noble/hashes@2.4.0)(@oclif/core@4.14.0)(@sanity/cli-core@1.3.4(@noble/hashes@2.4.0)(@types/node@24.10.4)(babel-plugin-react-compiler@1.0.0)(lightningcss@1.30.2)(yaml@2.9.1))(@types/node@24.10.4)(@types/react@19.2.7)(babel-plugin-react-compiler@1.0.0)(jiti@2.7.0)(lightningcss@1.30.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.1.19(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3)
+      styled-components: 6.1.19(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
 
   sanity@5.31.2(@emotion/is-prop-valid@1.2.2)(@noble/hashes@2.4.0)(@oclif/core@4.14.0)(@sanity/cli-core@1.3.4(@noble/hashes@2.4.0)(@types/node@24.10.4)(babel-plugin-react-compiler@1.0.0)(lightningcss@1.30.2)(yaml@2.9.1))(@types/node@24.10.4)(@types/react@19.2.7)(babel-plugin-react-compiler@1.0.0)(jiti@2.7.0)(lightningcss@1.30.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.1.19(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3):
     dependencies:

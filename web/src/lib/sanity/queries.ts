@@ -34,31 +34,27 @@ export const RICH_TEXT_PROJECTION = /* groq */ `{
 
 export const MEDIA_PROJECTION = /* groq */ `{
   "_type": "mediaProjection",
-  "asset": select(
-    defined(@.image) => {
-      "_type": "image",
-      "image": @.image
-    },
-    defined(@.video.asset) => {
-      "_type": "video",
-      "video": @.video.asset-> {
-        "playbackId": playbackId,
-        "aspect": data.aspect_ratio,
-        "poster": ^.poster,
-        "playbackSettings": ^.playbackSettings,
-        "customVideoPlayback": ^.customVideoPlayback,
-      }
-    },
-    null
+  "video": select(
+    defined(videoPlayer.muxAsset.asset->playbackId) => videoPlayer {
+      "playbackId": coalesce(muxAsset.asset->playbackId, ''),
+      "aspect": muxAsset.asset->data.aspect_ratio,
+      "poster": poster.asset->url,
+      "playbackSettings": coalesce(playbackSettings, {
+        "_type": "playbackSettings",
+        "autoplay": true,
+        "controls": false,
+        "loop": true,
+        "muted": true
+      }),
+      "hasSound": hasSound
+    }
   ),
+  image
 }`;
 
 export type LinkProjection = NonNullable<Get<INFO_QUERY_RESULT, 'links', number, 'link'>>;
 export type RichTextProjection = InputValue;
 export type MediaProjection = NonNullable<ModuleMediaBlock['media']>;
-export type MediaProjectionAsset = NonNullable<MediaProjection['asset']>;
-export type MediaProjectionImage = Get<FilterByType<MediaProjectionAsset, 'image'>, 'image'>;
-export type MediaProjectionVideo = NonNullable<Get<FilterByType<MediaProjectionAsset, 'video'>, 'video'>>;
 
 /**
  * Modules

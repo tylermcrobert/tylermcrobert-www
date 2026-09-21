@@ -10,10 +10,10 @@
 	let { data }: Props = $props();
 </script>
 
-{#if data.media?.asset}
+{#if data.media}
 	<div class="wrapper my-standard" {@attach sanityDataAttribute('.media')}>
 		<Media
-			value={data.media.asset}
+			value={data.media}
 			sizes="100vw"
 			alt={null}
 			imageProps={{ aspect: data.aspect || undefined }}

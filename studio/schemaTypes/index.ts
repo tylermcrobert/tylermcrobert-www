@@ -17,7 +17,7 @@ import {website} from './modules/website'
 import {aspect} from './objects/aspect'
 import {browserFrame, pageBrowserFrame} from './objects/browserFrame'
 import {link} from './objects/link'
-import {media, mediaPlaybackSettings} from './objects/media'
+import {media} from './objects/media'
 import {metadata} from './objects/metadata'
 import {
   richText,
@@ -47,7 +47,6 @@ export const schemaTypes = [
   context,
   mediaBlock,
   media,
-  mediaPlaybackSettings,
   textBlock,
   modules,
   richTextInternalLink,

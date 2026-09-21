@@ -52,7 +52,8 @@
 		"@tylermcrobert/svelte-sanity-image": "^1.3.0",
 		"@videojs/html": "10.0.0-rc.2",
 		"@videojs/mux-video": "10.0.0-rc.2",
-		"bad-words": "^4.0.0"
+		"bad-words": "^4.0.0",
+		"sanity-plugin-video-player": "^0.1.0"
 	},
 	"pnpm": {
 		"overrides": {

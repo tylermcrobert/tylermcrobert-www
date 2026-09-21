@@ -1,13 +1,18 @@
 <script lang="ts">
+	import {
+		getAspectNumber,
+		muxToVideoProps
+	} from 'sanity-plugin-video-player/client';
 	import type { ClassValue } from 'svelte/elements';
 
 	import Image, { type ImageProps } from '$components/Image.svelte';
-	import type { VideoProps } from '$components/Video/types';
-	import VideoFromProjection from '$components/Video/VideoFromProjection.svelte';
-	import type { MediaProjectionAsset } from '$sanity';
+	import type { MediaProjection } from '$sanity';
+
+	import type { VideoProps } from './Video/types';
+	import Video from './Video/Video.svelte';
 
 	type Props = {
-		value: MediaProjectionAsset;
+		value: MediaProjection;
 		sizes: string;
 		alt: string | null;
 		class?: ClassValue;
@@ -25,12 +30,12 @@
 	}: Props = $props();
 </script>
 
-{#if value?._type === 'video' && value.video}
-	<VideoFromProjection
-		{...videoProps}
-		projection={value.video}
-		class={className}
-	/>
-{:else if value?._type === 'image' && value.image}
+{#if value?.video?.playbackId}
+	{@const parsed = muxToVideoProps(value.video)}
+	{@const aspect = getAspectNumber(value.video.aspect ?? '16:9')}
+	{@const hasSound = value.video.hasSound ?? true}
+
+	<Video {...videoProps} {...parsed} {aspect} class={className} {hasSound} />
+{:else if value?.image}
 	<Image {...imageProps} image={value.image} class={className} {alt} {sizes} />
 {/if}
