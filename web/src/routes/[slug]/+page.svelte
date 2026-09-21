@@ -33,6 +33,8 @@
 	<HomeIndex />
 {:else}
 	<div class="my-large">
-		<Modules {modules} {documentId} {documentType} />
+		<WebsiteModuleThemeProvider pageTheme={null} defaultTheme={null}>
+			<Modules {modules} {documentId} {documentType} />
+		</WebsiteModuleThemeProvider>
 	</div>
 {/if}
