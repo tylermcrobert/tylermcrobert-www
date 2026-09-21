@@ -80,7 +80,7 @@
 
 			<Icon
 				class={[
-					'absolute top-1/2 left-1/2 w-14 -translate-x-1/2 transition-all duration-200 @2xl:w-20 @4xl:w-22',
+					'absolute top-1/2 left-1/2 w-14 -translate-x-1/2 transition-all duration-200 @2xl:w-14',
 					inactiveClass,
 					index === 0 && paused && activeClass, // play icon
 					index === 1 && !paused && activeClass // pause icon
@@ -93,7 +93,7 @@
 {#snippet controlBar()}
 	<div
 		class={[
-			'absolute inset-x-0 bottom-0 z-10 flex h-16 items-center gap-5 px-6',
+			'absolute inset-x-0 bottom-0 z-10 flex h-12 items-center gap-5 px-4',
 			'transition-[opacity,translate] duration-300',
 			'bg-linear-to-b from-transparent to-black/30',
 			(!userActive || !started) && 'translate-y-2 opacity-0'
