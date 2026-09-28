@@ -66,7 +66,7 @@
 </video-player>
 
 {#snippet playPause()}
-	{@const Icons = [PlayIcon, PauseIcon]}
+	{const Icons = [PlayIcon, PauseIcon]}
 
 	<media-play-button
 		class={[
@@ -76,8 +76,8 @@
 		]}
 	>
 		{#each Icons as Icon, index (index)}
-			{@const activeClass = 'scale-100 opacity-100 delay-50'}
-			{@const inactiveClass = '-translate-y-1/2 scale-50 opacity-0'}
+			{const activeClass = 'scale-100 opacity-100 delay-50'}
+			{const inactiveClass = '-translate-y-1/2 scale-50 opacity-0'}
 
 			<Icon
 				class={[

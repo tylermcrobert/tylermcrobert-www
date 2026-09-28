@@ -31,9 +31,9 @@
 </script>
 
 {#if value?.video?.playbackId}
-	{@const parsed = muxToVideoProps(value.video)}
-	{@const aspect = getAspectNumber(value.video.aspect ?? '16:9')}
-	{@const hasSound = value.video.hasSound ?? true}
+	{const parsed = $derived(muxToVideoProps(value.video))}
+	{const aspect = $derived(getAspectNumber(value.video.aspect ?? '16:9'))}
+	{const hasSound = $derived(value.video.hasSound ?? true)}
 
 	<Video {...videoProps} {...parsed} {aspect} class={className} {hasSound} />
 {:else if value?.image}

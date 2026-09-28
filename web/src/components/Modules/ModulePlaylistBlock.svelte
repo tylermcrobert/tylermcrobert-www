@@ -30,7 +30,7 @@
 </script>
 
 {#if data.playlist}
-	{@const { title, link, date, duration, image } = data.playlist}
+	{const { title, link, date, duration, image } = $derived(data.playlist)}
 
 	<section class="wrapper my-medium flex flex-col gap-standard">
 		<div class="flex gap-4 text-h1">

@@ -23,7 +23,7 @@
 
 <div>
 	{#each modules as data, index (data._key)}
-		{@const path = `modules[_key=="${data._key}"]`}
+		{const path = `modules[_key=="${data._key}"]`}
 
 		<ModuleContext {index} {documentId} {documentType} {path}>
 			<section data-type={data._type} {@attach sanityDataAttribute()}>
