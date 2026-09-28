@@ -54,6 +54,7 @@
 		{@render children?.()}
 		{@render playPause()}
 		{@render controlBar()}
+		{@render scrim()}
 
 		<media-gesture
 			type="tap"
@@ -154,4 +155,13 @@
 			]}
 		></media-slider-value>
 	</media-time-slider>
+{/snippet}
+
+{#snippet scrim()}
+	<div
+		class={[
+			'pointer-events-none absolute inset-0 bg-black/20 transition-opacity duration-300',
+			(!userActive || !started) && 'opacity-0'
+		]}
+	></div>
 {/snippet}
