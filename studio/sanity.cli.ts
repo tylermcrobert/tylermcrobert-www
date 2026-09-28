@@ -1,5 +1,4 @@
 import {defineCliConfig} from 'sanity/cli'
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineCliConfig({
   api: {
@@ -7,7 +6,9 @@ export default defineCliConfig({
     dataset: process.env.SANITY_STUDIO_DATASET,
   },
   vite: {
-    plugins: [tsconfigPaths()],
+    resolve: {
+      tsconfigPaths: true,
+    },
   },
   schemaExtraction: {
     enabled: true,
