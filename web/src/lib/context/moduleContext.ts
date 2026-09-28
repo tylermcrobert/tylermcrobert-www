@@ -27,5 +27,5 @@ export type ModuleContext = {
 	path: string;
 };
 
-export const [getModuleContext, setModuleContext] =
+export const [getModuleContext, setModuleContext, hasModuleContext] =
 	createContext<ModuleContext>();

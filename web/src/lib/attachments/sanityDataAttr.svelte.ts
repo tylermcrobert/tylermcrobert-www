@@ -2,7 +2,7 @@ import { createDataAttribute } from '@sanity/sveltekit';
 import type { Attachment } from 'svelte/attachments';
 
 import { page } from '$app/state';
-import { getModuleContext } from '$lib/context/moduleContext';
+import { getModuleContext, hasModuleContext } from '$lib/context/moduleContext';
 
 /**
  * Attaches a Visual Editing `data-sanity` attribute using the current module context.
@@ -20,6 +20,11 @@ export const sanityDataAttribute = (
 	path: string | undefined = ''
 ): Attachment<HTMLElement> => {
 	if (!page.data.previewEnabled) return () => {};
+
+	if (!hasModuleContext()) {
+		console.warn('sanityDataAttribute: No module context found');
+		return () => {};
+	}
 
 	const moduleContext = getModuleContext();
 
