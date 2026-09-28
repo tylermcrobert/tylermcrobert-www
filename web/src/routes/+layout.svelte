@@ -5,6 +5,7 @@
 	import ConsoleCredit from '$components/ConsoleCredit.svelte';
 	import Metadata from '$components/Metadata.svelte';
 	import Navigation from '$components/Navigation.svelte';
+	import NowPlayingContext from '$components/NowPlayingContext.svelte';
 	import PreviewMode from '$components/PreviewMode.svelte';
 
 	let { children, data } = $props();
@@ -13,9 +14,11 @@
 <PreviewMode enabled={data.previewEnabled}>
 	<Navigation />
 
-	{#key data.pathname}
-		{@render children()}
-	{/key}
+	<NowPlayingContext>
+		{#key data.pathname}
+			{@render children()}
+		{/key}
+	</NowPlayingContext>
 
 	<Metadata />
 
