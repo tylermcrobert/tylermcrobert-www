@@ -3,7 +3,7 @@ import {defineType} from 'sanity'
 
 export const icon = () => '🙋🏼‍♀️'
 
-export default defineType({
+export const info = defineType({
   name: 'info',
   type: 'document',
   icon,

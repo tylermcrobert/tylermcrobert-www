@@ -1,8 +1,8 @@
 import {defineType} from 'sanity'
 
-import SpotifyFetch from '../../components/SpotifyFetch'
+import {SpotifyFetch} from '../../components/SpotifyFetch'
 
-export default defineType({
+export const playlist = defineType({
   name: 'playlist',
   type: 'document',
   icon: () => '💿',

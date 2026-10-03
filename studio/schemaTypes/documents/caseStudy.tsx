@@ -2,7 +2,7 @@ import {defineField} from 'sanity'
 
 export const icon = () => '🎨'
 
-export default defineField({
+export const caseStudy = defineField({
   name: 'caseStudy',
   type: 'document',
   icon,

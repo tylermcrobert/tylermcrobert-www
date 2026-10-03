@@ -2,9 +2,13 @@ import type { Attachment } from 'svelte/attachments';
 
 import { intersection } from '$lib/attachments';
 
-export function intersectionLoadMux(
-	onmuxload: () => void
-): Attachment<HTMLVideoElement> {
+export function loadMux({
+	eager,
+	onmuxload
+}: {
+	eager: boolean;
+	onmuxload: () => void;
+}): Attachment<HTMLVideoElement> {
 	let thresholdCrossed = $state(false);
 
 	return (element) => {
@@ -13,8 +17,8 @@ export function intersectionLoadMux(
 		})(element);
 
 		$effect(() => {
-			if (thresholdCrossed) {
-				import('@mux/mux-video').then(() => {
+			if (thresholdCrossed || eager) {
+				import('@videojs/html/media/mux-video').then(() => {
 					onmuxload();
 				});
 			}

@@ -11,14 +11,14 @@
 
 <div class="wrapper my-standard grid gap-standard sm:grid-cols-2">
 	{#each data.items || [] as item}
-		{#if item._type === 'diptych.media' && item.media?.asset}
+		{#if item._type === 'diptych.media' && item.media}
 			<div {@attach sanityDataAttribute(`.items[_key=="${item._key}"]`)}>
 				<Media
-					value={item.media.asset}
+					value={item.media}
 					alt={null}
 					sizes="(min-width: 768px), 50vw, 100vw"
-					imageProps={{ aspect: item.aspect }}
-					videoProps={{ aspect: item.aspect }}
+					imageProps={{ aspect: item.aspect || undefined }}
+					videoProps={{ aspect: item.aspect || undefined }}
 				/>
 			</div>
 		{:else if item._type === 'diptych.text' && item.richText}

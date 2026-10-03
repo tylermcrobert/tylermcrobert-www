@@ -59,9 +59,9 @@
 {/snippet}
 
 {#snippet content()}
-	{#if media?.asset}
+	{#if media}
 		<div class="block bg-white">
-			<Media sizes="80vw" value={media.asset} alt={null} />
+			<Media sizes="80vw" value={media} alt={null} />
 		</div>
 	{/if}
 {/snippet}

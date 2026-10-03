@@ -6,7 +6,8 @@
 	import { getWebsiteModuleThemeCtx } from './WebsiteModuleThemeProvider.svelte';
 
 	let themeContext = getWebsiteModuleThemeCtx();
-	let isSimple = $derived(stegaClean(themeContext.theme?.style) === 'simple');
+	let theme = $derived(themeContext.theme);
+	let isSimple = $derived(stegaClean(theme?.style) === 'simple');
 </script>
 
 <span class="relative z-10 -mb-px block">
@@ -115,7 +116,7 @@
 			dominant-baseline="middle"
 			letter-spacing=".6"
 		>
-			{themeContext.theme?.hostname || page.data.caseStudy.title}
+			{theme?.hostname || page.data.caseStudy?.title || page.data.pageTitle}
 		</text>
 	</svg>
 {/snippet}

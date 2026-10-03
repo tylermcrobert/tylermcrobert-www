@@ -1,12 +1,17 @@
-import { type InfoQuery, infoQuery } from '$sanity';
-import { getPrerender } from '$util/getPrerender';
+import { redirect } from '@sveltejs/kit';
+
+import { INFO_QUERY } from '$sanity';
 
 export const load = async ({
 	locals: {
 		sanity: { client }
 	}
 }) => {
-	const infoPage = await client.fetch<InfoQuery>(infoQuery);
+	const infoPage = await client.fetch(INFO_QUERY);
+
+	if (!infoPage) {
+		return redirect(302, '/');
+	}
 
 	return {
 		infoPage,
@@ -14,5 +19,3 @@ export const load = async ({
 		pageTitle: infoPage.title
 	} satisfies App.PageReturn;
 };
-
-export const prerender = getPrerender();

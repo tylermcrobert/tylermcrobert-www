@@ -1,55 +1,33 @@
+import {prepareVideo, selectVideo} from 'sanity-plugin-video-player'
+
 /**
- * For use in object previews. Selects the projected image and video assets. `path` selects the media object
+ * For use in object previews. Selects the projected image and video assets.
+ * `path` selects the media object.
  */
 export function selectMedia(path: string | null) {
   const p = path ? `${path}.` : ''
+
   return {
     image: `${p}image`,
     imageFileName: `${p}image.asset.originalFilename`,
-    posterFrame: `${p}posterFrame`,
-    videoPlaybackId: `${p}video.asset.playbackId`,
-    thumbTime: `${p}video.asset.thumbTime`,
-    videoFilename: `${p}video.asset.filename`,
+    ...selectVideo(path ? `${path}.videoPlayer` : 'videoPlayer'),
   }
 }
 
 /**
- * Takes the props selected from selectMedia and formats them for the preview
+ * Takes the props selected from selectMedia and formats them for the preview.
  */
-
 export function prepareMedia({
-  videoPlaybackId,
   image,
-  videoFilename,
-  posterFrame,
   imageFileName,
-  thumbTime,
+  ...video
 }: Record<keyof ReturnType<typeof selectMedia>, any>) {
-  if (!videoPlaybackId && !image) {
-    return {
-      subtitle: 'No media selected',
-    }
+  if (video.videoPlaybackId) {
+    return prepareVideo(video)
   }
 
-  if (videoPlaybackId) {
-    return {
-      subtitle: `Video${videoFilename ? `: ${videoFilename}` : ''}`,
-      media: (() => {
-        if (posterFrame) {
-          return posterFrame
-        }
-
-        if (videoPlaybackId) {
-          return () => (
-            <img
-              alt="Video thumbnail"
-              style={{width: '100%', height: '100%', objectFit: 'cover'}}
-              src={`https://image.mux.com/${videoPlaybackId}/thumbnail.jpg?fit=crop&width=100&height=100&time=${thumbTime || 0}`}
-            />
-          )
-        }
-      })(),
-    }
+  if (!image) {
+    return {subtitle: 'No media selected'}
   }
 
   return {

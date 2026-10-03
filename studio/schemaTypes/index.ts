@@ -1,22 +1,23 @@
-import caseStudy from './documents/caseStudy'
-import context from './documents/context'
+import {caseStudy} from './documents/caseStudy'
+import {context} from './documents/context'
 import {homepage} from './documents/homepage'
-import info from './documents/info'
+import {info} from './documents/info'
 import {page} from './documents/page'
-import playlist from './documents/playlist'
+import {playlist} from './documents/playlist'
 import {settings} from './documents/settings'
-import diptych, {diptychMedia, diptychSpacer, diptychText} from './modules/diptych'
+import {diptych, diptychMedia, diptychSpacer, diptychText} from './modules/diptych'
 import {mediaBlock} from './modules/mediaBlock'
-import mobileWebsite, {mobileWebsiteItem} from './modules/mobileWebsite'
+import {mobileWebsite, mobileWebsiteItem} from './modules/mobileWebsite'
 import {modules} from './modules/modules'
-import playlistBlock from './modules/playlist'
+import {playlistBlock} from './modules/playlist'
 import {textBlock} from './modules/textBlock'
+import {timedSlides} from './modules/timedSlides'
 import {tripleImage} from './modules/tripleImage'
 import {website} from './modules/website'
-import aspect from './objects/aspect'
+import {aspect} from './objects/aspect'
 import {browserFrame, pageBrowserFrame} from './objects/browserFrame'
 import {link} from './objects/link'
-import {media, mediaPlaybackSettings} from './objects/media'
+import {media} from './objects/media'
 import {metadata} from './objects/metadata'
 import {
   richText,
@@ -32,6 +33,7 @@ export const schemaTypes = [
   playlistBlock,
   mobileWebsiteItem,
   tripleImage,
+  timedSlides,
   mobileWebsite,
   aspect,
   diptychSpacer,
@@ -45,7 +47,6 @@ export const schemaTypes = [
   context,
   mediaBlock,
   media,
-  mediaPlaybackSettings,
   textBlock,
   modules,
   richTextInternalLink,

@@ -1,32 +1,13 @@
-import { groq } from '@sanity/sveltekit';
 import { error } from '@sveltejs/kit';
 
 import {
+	client as clientImported,
 	type Module,
+	PAGE_SLUGS_QUERY,
 	ROOT_SLUG_QUERY,
-	type ROOT_SLUG_QUERYResult,
-	SITE_QUERY,
-	type SiteQuery
-} from '$lib/sanity';
-import { client as clientImported } from '$sanity/client';
+	SITE_QUERY
+} from '$sanity';
 import { getPrerender } from '$util/getPrerender.js';
-
-export const entries = async () => {
-	const site = await clientImported.fetch<SiteQuery>(SITE_QUERY, {
-		contextSlug: null
-	});
-
-	const pageSlugs: { slug: string }[] = await clientImported.fetch(
-		groq`*[_type == "page"]{ "slug": slug.current }`
-	);
-
-	return [
-		...pageSlugs,
-		...((site.context?.caseStudies
-			?.map(({ slug }) => ({ slug }))
-			.filter(({ slug }) => slug !== null) as { slug: string }[]) || [])
-	];
-};
 
 export const load = async ({
 	parent,
@@ -39,7 +20,7 @@ export const load = async ({
 
 	const index = contextCaseStudies.findIndex(({ slug }) => slug == params.slug);
 
-	const data = await client.fetch<ROOT_SLUG_QUERYResult>(ROOT_SLUG_QUERY, {
+	const data = await client.fetch(ROOT_SLUG_QUERY, {
 		slug: params.slug
 	});
 
@@ -62,4 +43,22 @@ export const load = async ({
 	} satisfies App.PageReturn;
 };
 
+/**
+ * Prerendering for speed optimization
+ */
+
+/** get the slugs of all pages and case studies */
+export const entries = async () => {
+	const site = await clientImported.fetch(SITE_QUERY, {
+		contextSlug: null
+	});
+
+	const pageSlugs = await clientImported.fetch(PAGE_SLUGS_QUERY);
+	const caseStudiesSlugs =
+		site.context?.caseStudies?.map(({ slug }) => ({ slug })) ?? [];
+
+	return [...pageSlugs, ...caseStudiesSlugs];
+};
+
+/** prerender the page if the environment is production */
 export const prerender = getPrerender();

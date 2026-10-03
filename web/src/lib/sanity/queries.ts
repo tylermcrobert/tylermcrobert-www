@@ -1,23 +1,14 @@
 import type { InputValue } from '@portabletext/svelte';
-import groq from 'groq';
+import type { FilterByType, Get } from '@sanity/codegen';
+import { defineQuery } from '@sanity/sveltekit';
 
-import type {
-	DiptychMedia,
-	InfoQueryResult,
-	Media,
-	MediaBlock,
-	Playlist,
-	SanityImageAsset,
-	Settings,
-	SITE_QUERYResult,
-	Website
-} from './types';
+import type { INFO_QUERY_RESULT, ROOT_SLUG_QUERY_RESULT } from '$sanity/types';
 
-/*******************************************************************************
- * PROJECTIONS
- ******************************************************************************/
+/**
+ * Projections
+ */
 
-export const LINK_PROJECTION = groq`{
+export const LINK_PROJECTION = /* groq */ `{
   label,
   href,
   reference-> {
@@ -27,17 +18,7 @@ export const LINK_PROJECTION = groq`{
   }
 }`;
 
-export type LinkProjection = {
-	label: string;
-	href: string;
-	reference?: {
-		_type: string;
-		title: string;
-		slug: string;
-	};
-};
-
-const RICH_TEXT_PROJECTION = groq`{
+export const RICH_TEXT_PROJECTION = /* groq */ `{
   ...,
  "markDefs": coalesce(
     markDefs[]{
@@ -51,98 +32,48 @@ const RICH_TEXT_PROJECTION = groq`{
   )
 }`;
 
-export type RichTextProjection = InputValue;
-
-export const MEDIA_PROJECTION = groq`{
+export const MEDIA_PROJECTION = /* groq */ `{
   "_type": "mediaProjection",
-  "asset": select(
-    defined(@.image) => {
-      "_type": "image",
-      "image": @.image
-    },
-    defined(@.video.asset) => {
-      "_type": "video",
-      "video": @.video.asset-> {
-        "playbackId": playbackId,
-        "aspect": data.aspect_ratio,
-        "poster": ^.poster,
-        "playbackSettings": ^.playbackSettings,
-        "customVideoPlayback": ^.customVideoPlayback,
-      }
-    },
-    null
+  "video": select(
+    defined(videoPlayer.muxAsset.asset->playbackId) => videoPlayer {
+      "playbackId": coalesce(muxAsset.asset->playbackId, ''),
+      "aspect": muxAsset.asset->data.aspect_ratio,
+      "poster": poster.asset->url,
+      "playbackSettings": coalesce(playbackSettings, {
+        "_type": "playbackSettings",
+        "autoplay": true,
+        "controls": false,
+        "loop": true,
+        "muted": true
+      }),
+      "hasSound": hasSound
+    }
   ),
+  image
 }`;
 
-export type MediaProjectionVideo = Pick<
-	Media,
-	'customVideoPlayback' | 'playbackSettings' | 'poster'
-> & {
-	playbackId: string;
-	aspect: string;
-	poster: SanityImageAsset;
-};
-
-type MediaProjectionVideoAsset = {
-	_type: 'video';
-	video: MediaProjectionVideo;
-};
-
-type MediaProjectionImageAsset = {
-	_type: 'image';
-	image: SanityImageAsset;
-};
-
-export type MediaProjectionAsset =
-	| MediaProjectionVideoAsset
-	| MediaProjectionImageAsset;
-
-export type MediaProjection = {
-	_type: 'mediaProjection';
-	asset: MediaProjectionAsset | null;
-};
-
-/*******************************************************************************
- * MODULES
- ******************************************************************************/
+export type LinkProjection = NonNullable<Get<INFO_QUERY_RESULT, 'links', number, 'link'>>;
+export type RichTextProjection = InputValue;
+export type MediaProjection = NonNullable<ModuleMediaBlock['media']>;
 
 /**
- * Text Block
+ * Modules
  */
 
-const MODULE_TEXT_BLOCK = `// groq
+const MODULE_TEXT_BLOCK = /* groq */ `
   _type == 'textBlock' => {
     richText[]${RICH_TEXT_PROJECTION},
   }
 `;
 
-export type ModuleTextBlock = Nullable<{
-	_type: 'textBlock';
-	richText: RichTextProjection;
-}>;
-
-/**
- * Media Block
- */
-
-const MODULE_MEDIA_BLOCK = `// groq
+const MODULE_MEDIA_BLOCK = /* groq */ `
   _type == 'mediaBlock' => {
     media${MEDIA_PROJECTION},
     aspect
   }
 `;
 
-export type ModuleMediaBlock = Nullable<{
-	_type: 'mediaBlock';
-	media: MediaProjection;
-}> &
-	Pick<MediaBlock, 'aspect'>;
-
-/**
- * Website
- */
-
-const MODULE_WEBSITE = `//groq
+const MODULE_WEBSITE = /* groq */ `
   _type == 'website' => {
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
@@ -152,18 +83,7 @@ const MODULE_WEBSITE = `//groq
   }
 `;
 
-export type ModuleWebsite = Nullable<{
-	_type: 'website';
-	media: MediaProjection;
-	backgroundColor: string;
-}> &
-	Pick<Website, 'showFrame' | 'backgroundImg' | 'scrolling'>;
-
-/**
- * Diptych
- */
-
-const MODULE_DIPTYCH = `//groq
+const MODULE_DIPTYCH = /* groq */ `
   _type == 'diptych' => {
     items[]{
       _key,
@@ -181,36 +101,7 @@ const MODULE_DIPTYCH = `//groq
   }
 `;
 
-type ModuleDiptychText = Nullable<{
-	_type: 'diptych.text';
-	richText: RichTextProjection;
-}>;
-
-type ModuleDiptychMedia = Pick<DiptychMedia, 'aspect'> &
-	Nullable<{
-		_type: 'diptych.media';
-		media: MediaProjection | null;
-	}>;
-
-type ModuleDiptychSpacer = Nullable<{
-	_type: 'diptych.spacer';
-}>;
-
-type ModuleDiptychItem =
-	| ModuleDiptychText
-	| ModuleDiptychMedia
-	| ModuleDiptychSpacer;
-
-export type ModuleDiptych = Nullable<{
-	_type: 'diptych';
-	items: (ModuleDiptychItem & { _key: string })[];
-}>;
-
-/**
- * Triple Image
- */
-
-const MODULE_TRIPLE_IMAGE = `//groq
+const MODULE_TRIPLE_IMAGE = /* groq */ `
   _type == 'tripleImage' => {
     mainMedia${MEDIA_PROJECTION},
     secondaryMedia1${MEDIA_PROJECTION},
@@ -219,19 +110,7 @@ const MODULE_TRIPLE_IMAGE = `//groq
   }
 `;
 
-export type ModuleTripleImage = Nullable<{
-	_type: 'tripleImage';
-	mainMedia: MediaProjection;
-	secondaryMedia1: MediaProjection;
-	secondaryMedia2: MediaProjection;
-	imageRight: boolean;
-}>;
-
-/**
- * Mobile Website
- */
-
-const MODULE_MOBILE_WEBSITE = `//groq
+const MODULE_MOBILE_WEBSITE = /* groq */ `
   _type == 'mobileWebsite' => {
     "themeBackground": theme->.background.hex,
     frames[]{
@@ -243,39 +122,15 @@ const MODULE_MOBILE_WEBSITE = `//groq
   }
 `;
 
-export type ModuleMobileWebsite = Nullable<{
-	_type: 'mobileWebsite';
-	themeBackground: string;
-	frames: Nullable<{
-		media: MediaProjection;
-		_key: string;
-	}>[];
-}>;
-
-/**
- * Timed Slides
- */
-
-const MODULE_TIMED_SLIDES = `//groq
+const MODULE_TIMED_SLIDES = /* groq */ `
   _type == 'timedSlides' => {
     images,
     seconds,
-    'background': theme->background.hex
+    'background': background.hex
   }
 `;
 
-export type ModuleTimedSlides = Nullable<{
-	_type: 'timedSlides';
-	seconds: number;
-	images: SanityImageAsset[];
-	background: string | undefined;
-}>;
-
-/**
- * Playlist Block
- */
-
-const PLAYLIST_PROJECTION = groq`{
+const PLAYLIST_PROJECTION = /* groq */ `{
   "slug": slug.current,
   link,
   title,
@@ -290,34 +145,13 @@ const PLAYLIST_PROJECTION = groq`{
   }
 }`;
 
-const MODULE_PLAYLIST_BLOCK = `//groq
+const MODULE_PLAYLIST_BLOCK = /* groq */ `
   _type == 'playlistBlock' => {
     playlist->${PLAYLIST_PROJECTION}
   }
 `;
 
-type PlaylistBlockPlaylist = Nullable<{
-	slug: string;
-}> &
-	Pick<Playlist, 'title' | 'link' | 'duration' | 'date' | 'image'> & {
-		tracks: Nullable<{
-			title: string;
-			artists: string[];
-			duration: number;
-			image: string;
-		}>[];
-	};
-
-export type ModulePlaylistBlock = Nullable<{
-	_type: 'playlistBlock';
-	playlist: PlaylistBlockPlaylist;
-}>;
-
-/**
- * Modules
- */
-
-const MODULES_PROJECTION = groq`{
+export const MODULES_PROJECTION = /* groq */ `{
   _type,
   _key,
   ${MODULE_MEDIA_BLOCK},
@@ -331,22 +165,21 @@ const MODULES_PROJECTION = groq`{
 }
 `;
 
-export type Module = { _key: string } & (
-	| ModuleMediaBlock
-	| ModuleTextBlock
-	| ModuleWebsite
-	| ModuleDiptych
-	| ModuleTripleImage
-	| ModuleMobileWebsite
-	| ModuleTimedSlides
-	| ModulePlaylistBlock
-);
+export type Module = NonNullable<Get<ROOT_SLUG_QUERY_RESULT, 'modules', number>>;
+export type ModuleTextBlock = FilterByType<Module, 'textBlock'>;
+export type ModuleDiptych = FilterByType<Module, 'diptych'>;
+export type ModuleTripleImage = FilterByType<Module, 'tripleImage'>;
+export type ModuleWebsite = FilterByType<Module, 'website'>;
+export type ModuleMediaBlock = FilterByType<Module, 'mediaBlock'>;
+export type ModuleMobileWebsite = FilterByType<Module, 'mobileWebsite'>;
+export type ModulePlaylistBlock = FilterByType<Module, 'playlistBlock'>;
+export type ModuleTimedSlides = FilterByType<Module, 'timedSlides'>;
 
-/*******************************************************************************
- * PAGES
- ******************************************************************************/
+/**
+ * Pages
+ */
 
-export const ROOT_SLUG_QUERY = groq`
+export const ROOT_SLUG_QUERY = defineQuery(`
   *[(_type == 'caseStudy' || _type == 'page') && slug.current == $slug][0]{
     _type,
     _id,
@@ -367,13 +200,19 @@ export const ROOT_SLUG_QUERY = groq`
     metadata,
     modules[]${MODULES_PROJECTION},
   }
-`;
+`);
+
+export const PAGE_SLUGS_QUERY = defineQuery(`
+  *[_type == "page"]{
+    "slug": slug.current,
+  }[defined(slug)]
+`);
 
 /**
  * Info
  */
 
-export const infoQuery = groq`
+export const INFO_QUERY = defineQuery(`
   *[_type == 'info' ][0]{
     metadata,
     bio,
@@ -391,36 +230,23 @@ export const infoQuery = groq`
       date 
     }
   }
-`;
-
-export type InfoPlaylist = Nullable<{
-	link: string;
-	title: string;
-	slug: string;
-}>;
-
-export type InfoQuery = {
-	links: Nullable<{
-		label: string;
-		link: LinkProjection;
-	}>[];
-} & InfoQueryResult;
+`);
 
 /**
  * Playlist
  */
 
-export const PLAYLIST_QUERY = groq`
+export const PLAYLIST_QUERY = defineQuery(`
   *[_type == 'playlist' && slug.current == $slug][0]${PLAYLIST_PROJECTION}
-`;
+`);
 
-/*******************************************************************************
- * GLOBAL
- ******************************************************************************/
+/**
+ * Global
+ */
 
-export const SITE_QUERY = groq`{
+export const SITE_QUERY = defineQuery(`{
   "homepageTitle": *[_id == 'homepage'][0].homepageMetaTitle,
-  "settings": *[_id == "settings"][0]{
+  "settings": *[_id == "settings" && _type == "settings"][0]{
     metadata,
     siteTitle,
     googleAnalyticsId,
@@ -430,43 +256,22 @@ export const SITE_QUERY = groq`{
     *[_id == "homepage"][0].context->
   ) {
     title,
-    caseStudies[]->{
-      "slug": slug.current,
-      title,
-    }
+    caseStudies[]{
+      "slug": @->slug.current,
+      "title": @->title,
+    }[defined(slug)]
   },
-}`;
+}`);
 
-export type SiteQuery = Pick<SITE_QUERYResult, 'homepageTitle'> &
-	Nullable<{
-		context: Nullable<{
-			slug: string;
-			title: string;
-			caseStudies: Nullable<{
-				slug: string;
-				title: string;
-			}>[];
-		}>;
-		settings: Pick<Settings, 'metadata' | 'siteTitle' | 'googleAnalyticsId'>;
-	}>;
-
-export const SITEMAP_QUERY = groq`{
+export const SITEMAP_QUERY = defineQuery(`{
   "info": *[_id == 'info'][0],
-  "projects": *[_id == "homepage"][0].context->caseStudies[]->{ 
+  "projects": *[_type == "caseStudy" && _id in *[_id == "homepage"][0].context->caseStudies[]->_id]{
     title,
     "slug": slug.current,
     _updatedAt,
-  },
+  }[defined(slug)],
   "pages": *[_type == "page"]{
     "slug": slug.current,
     _updatedAt,
-  }
-}`;
-
-/*******************************************************************************
- * UTILLS
- ******************************************************************************/
-
-export type Nullable<T> = {
-	[P in keyof T]: T[P] | null;
-};
+  }[defined(slug)]
+}`);

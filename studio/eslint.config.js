@@ -3,7 +3,7 @@
 import studio from '@sanity/eslint-config-studio'
 import prettier from 'eslint-plugin-prettier'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import importPlugin from 'eslint-plugin-import'
+import {importX} from 'eslint-plugin-import-x'
 import * as typescriptEslint from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
 
@@ -15,7 +15,7 @@ export default [
     plugins: {
       prettier,
       'simple-import-sort': simpleImportSort,
-      import: importPlugin,
+      'import-x': importX,
       '@typescript-eslint': typescriptEslint,
     },
     languageOptions: {
@@ -31,14 +31,13 @@ export default [
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       // '@typescript-eslint/consistent-type-imports': 'error',
-      'import/no-default-export': 'error',
-      'svelte/no-useless-mustaches': 'off',
+      'import-x/no-default-export': 'error',
     },
   },
   {
     files: ['**/sanity.config.ts', '**/sanity.cli.ts'],
     rules: {
-      'import/no-default-export': 'off',
+      'import-x/no-default-export': 'off',
     },
   },
 ]

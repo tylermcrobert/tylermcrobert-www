@@ -1,52 +1,41 @@
 <script lang="ts">
+	import { loadMux } from './attachments/loadMux.svelte';
 	import { intersectionHandlePlayback } from './attachments/onScrollHandlePlayback.svelte';
-	import { intersectionLoadMux } from './attachments/onScrollLoadMux.svelte';
 	import type { VideoProps } from './types';
 	import VideoControls from './VideoControls.svelte';
 
 	let {
 		class: className,
-		playbackId,
 		autoplay,
 		controls,
 		poster,
 		aspect,
-		lazyLoadMuxVideoPackage = true,
+		eager = false,
+		hasSound = true,
 		...props
 	}: VideoProps = $props();
 
 	let isMuxLoaded = $state(false);
-
-	$effect(() => {
-		if (!lazyLoadMuxVideoPackage) {
-			isMuxLoaded = true;
-		}
-	});
 </script>
 
 {#snippet video()}
-	{@const shouldShowPoster = poster && !controls}
-	{@const posterStyle = `url('${poster}') center / cover`}
-
 	<mux-video
 		{...props}
-		playback-id={playbackId}
 		class={['block w-full', !controls && className]}
+		style:background={poster ? `url("${poster}") center / cover` : undefined}
 		style:--media-object-fit="cover"
-		style:background={shouldShowPoster ? posterStyle : undefined}
-		style:aspect-ratio={controls ? undefined : aspect}
-		disablepictureinpicture
+		style:aspect-ratio={aspect}
+		crossorigin="anonymous"
 		playsinline
-		slot="media"
-		{@attach isMuxLoaded
-			? intersectionHandlePlayback({ autoPlay: !!autoplay, autoPause: true })
-			: intersectionLoadMux(() => (isMuxLoaded = true))}
+		{@attach !isMuxLoaded
+			? loadMux({ eager, onmuxload: () => (isMuxLoaded = true) })
+			: intersectionHandlePlayback({ autoPlay: !!autoplay, autoPause: true })}
 	>
 	</mux-video>
 {/snippet}
 
 {#if controls}
-	<VideoControls {aspect} class={className} {poster}>
+	<VideoControls class={className} {hasSound}>
 		{@render video()}
 	</VideoControls>
 {:else}

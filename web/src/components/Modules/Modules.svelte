@@ -22,8 +22,8 @@
 </script>
 
 <div>
-	{#each modules as data, index}
-		{@const path = `modules[_key=="${data._key}"]`}
+	{#each modules as data, index (data._key)}
+		{const path = `modules[_key=="${data._key}"]`}
 
 		<ModuleContext {index} {documentId} {documentType} {path}>
 			<section data-type={data._type} {@attach sanityDataAttribute()}>
@@ -39,12 +39,12 @@
 					<ModuleTripleImage {data} />
 				{:else if data._type === 'mobileWebsite'}
 					<ModuleMobileWebsite {data} />
-				{:else if data._type === 'timedSlides'}
-					<ModuleTimedSlides {data} />
 				{:else if data._type === 'playlistBlock'}
 					<ModulePlaylistBlock {data} />
+				{:else if data._type === 'timedSlides'}
+					<ModuleTimedSlides {data} />
 				{:else}
-					{console.warn('Cannot find module:', data._type)}
+					{console.warn('Cannot find module:', (data as Module)._type)}
 				{/if}
 			</section>
 		</ModuleContext>

@@ -4,7 +4,7 @@ import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import prettier from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
+import { importX } from 'eslint-plugin-import-x';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
@@ -17,6 +17,7 @@ const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
+	{ ignores: ['src/lib/sanity/types.ts'] },
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs.recommended,
@@ -26,7 +27,7 @@ export default defineConfig(
 		files: ['./src/**'],
 		plugins: {
 			'simple-import-sort': simpleImportSort,
-			import: importPlugin
+			'import-x': importX
 		},
 		languageOptions: {
 			globals: { ...globals.browser, ...globals.node }
@@ -35,7 +36,7 @@ export default defineConfig(
 		rules: {
 			'simple-import-sort/imports': 'warn',
 			'simple-import-sort/exports': 'warn',
-			'import/no-default-export': 'error',
+			'import-x/no-default-export': 'warn',
 
 			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
 			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
@@ -44,7 +45,6 @@ export default defineConfig(
 			'svelte/no-navigation-without-resolve': 'off'
 		}
 	},
-
 	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {

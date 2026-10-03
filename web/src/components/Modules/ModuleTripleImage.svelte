@@ -8,12 +8,12 @@
 </script>
 
 <div class="wrapper grid-standard grid-rows-2">
-	{#if data.mainMedia?.asset}
+	{#if data.mainMedia}
 		<div
 			class={`col-span-3 row-span-2 overflow-hidden ${data.imageRight ? 'col-[4_/_span_3]' : ''}`.trim()}
 		>
 			<Media
-				value={data.mainMedia.asset}
+				value={data.mainMedia}
 				sizes="50vw"
 				alt={null}
 				imageProps={{ aspect: 2 / 3 }}
@@ -22,10 +22,10 @@
 		</div>
 	{/if}
 
-	{#if data.secondaryMedia1?.asset}
+	{#if data.secondaryMedia1}
 		<div class="col-span-3 overflow-hidden" class:row-start-1={data.imageRight}>
 			<Media
-				value={data.secondaryMedia1.asset}
+				value={data.secondaryMedia1}
 				sizes="50vw"
 				alt={null}
 				imageProps={{ aspect: 3 / 2 }}
@@ -34,10 +34,10 @@
 		</div>
 	{/if}
 
-	{#if data.secondaryMedia2?.asset}
+	{#if data.secondaryMedia2}
 		<div class="col-span-3 overflow-hidden">
 			<Media
-				value={data.secondaryMedia2.asset}
+				value={data.secondaryMedia2}
 				sizes="45vw"
 				alt={null}
 				imageProps={{ aspect: 3 / 2 }}

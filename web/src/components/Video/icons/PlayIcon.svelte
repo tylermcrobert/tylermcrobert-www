@@ -1,4 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 96 96">
+<script lang="ts">
+	import type { ClassValue } from 'svelte/elements';
+	const { class: className } = $props<{ class?: ClassValue }>();
+</script>
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	fill="none"
+	viewBox="0 0 96 96"
+	class={className}
+>
 	<path
 		class="fill-current"
 		d="M10 13.482c0-6.074 6.502-9.932 11.833-7.022l63.23 34.518c5.555 3.033 5.555 11.01 0 14.044L21.833 89.54C16.503 92.45 10 88.592 10 82.518V13.482Z"

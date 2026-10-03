@@ -1,18 +1,17 @@
 <script lang="ts">
 	import RichText from '$components/RichText/RichText.svelte';
 	import { DOT, NUMS } from '$constants';
-	import type { CaseStudy, Nullable } from '$sanity';
+	import type { ROOT_SLUG_QUERY_RESULT } from '$sanity';
 
-	type CaseStudyIntroProps = Nullable<
-		Required<
-			Pick<
-				CaseStudy,
-				'intro' | 'deliverables' | 'date' | 'title' | 'description'
-			>
-		>
-	>;
+	type CaseStudyFields = Extract<
+		ROOT_SLUG_QUERY_RESULT,
+		{ _type: 'caseStudy' }
+	>['caseStudy'];
 
-	type Props = CaseStudyIntroProps & { index: number };
+	type Props = Pick<
+		CaseStudyFields,
+		'intro' | 'deliverables' | 'date' | 'title' | 'description'
+	> & { index: number };
 
 	let {
 		//

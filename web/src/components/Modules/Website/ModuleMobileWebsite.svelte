@@ -17,13 +17,13 @@
 		style:background={data.themeBackground || 'var(--section-background)'}
 	>
 		{#each data.frames || [] as frame}
-			{#if frame.media?.asset}
+			{#if frame.media}
 				<div
 					class="w-full"
 					{@attach sanityDataAttribute(`frames[_key=="${frame._key}"]`)}
 				>
 					<Media
-						value={frame.media.asset}
+						value={frame.media}
 						sizes={`${100 / (data.frames?.length || 1)}vw`}
 						alt={null}
 					/>

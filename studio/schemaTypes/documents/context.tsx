@@ -2,7 +2,7 @@ import {defineField} from 'sanity'
 
 export const icon = () => '🗺️'
 
-export default defineField({
+export const context = defineField({
   name: 'context',
   type: 'document',
   icon,

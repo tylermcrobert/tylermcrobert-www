@@ -9,6 +9,12 @@
 			"options": {
 				"parser": "svelte"
 			}
+		},
+		{
+			"files": "src/lib/sanity/queries.ts",
+			"options": {
+				"printWidth": 120
+			}
 		}
 	],
 	"tailwindStylesheet": "./src/app.css"

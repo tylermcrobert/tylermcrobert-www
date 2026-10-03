@@ -13,8 +13,8 @@
 	let { data, browserChrome, content }: Props = $props();
 
 	const aspect = $derived.by(() => {
-		if (data.media?.asset?._type === 'image') {
-			const { width, height } = getImageDimensions(data.media.asset.image);
+		if (data.media?.image) {
+			const { width, height } = getImageDimensions(data.media.image);
 			return width / height;
 		}
 

@@ -1,10 +1,11 @@
-import {defineType} from 'sanity'
-import {toPlainText} from '../../util/toPlainText'
 import {mediaRequired, prepareMedia, selectMedia} from '@util'
+import {defineType} from 'sanity'
+
+import {toPlainText} from '../../util/toPlainText'
 
 const TITLE = 'Diptych'
 
-export default defineType({
+export const diptych = defineType({
   title: TITLE,
   name: 'diptych',
   type: 'object',

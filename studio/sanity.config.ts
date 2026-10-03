@@ -5,12 +5,13 @@ import {presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
 import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
+import {videoPlayer} from 'sanity-plugin-video-player'
 
 import {structure} from './config/desk'
 import {presentationOptions} from './config/presentation'
 import {schemaTypes} from './schemaTypes'
 
-const CREATABLE_DOCTYPES = ['page', 'playlist', 'webFrameTheme', 'context', 'caseStudy']
+const CREATABLE_DOCTYPES = ['page', 'playlist', 'context', 'caseStudy']
 
 export default defineConfig({
   name: 'default',
@@ -31,6 +32,7 @@ export default defineConfig({
     colorInput(),
     media(),
     muxInput({max_resolution_tier: '2160p'}),
+    videoPlayer({source: 'mux'}),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
 

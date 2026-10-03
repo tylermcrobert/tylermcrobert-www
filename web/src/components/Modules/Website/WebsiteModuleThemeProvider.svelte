@@ -1,4 +1,4 @@
-<script module>
+<script module lang="ts">
 	type Theme = { theme: PageBrowserFrame | null };
 	const ctx = createContext<Theme>();
 	export const [getWebsiteModuleThemeCtx, setWebsiteModuleThemeCtx] = ctx;

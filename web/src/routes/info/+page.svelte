@@ -1,13 +1,16 @@
 <script lang="ts">
 	import DotHead from '$components/DotHead.svelte';
 	import Link from '$components/Link.svelte';
+	import NowPlayingRag from '$components/NowPlayingRag.svelte';
 	import { NUMS } from '$constants';
-	import { nowPlaying } from '$lib/state';
-	import { censor } from '$util/censor.js';
+	import { getNowPlayingContext } from '$lib/context/nowPlayingContext.js';
 	import { formatTime } from '$util/msToTime';
 
 	let { data } = $props();
 	let { bio, clients, playlists, links } = $derived(data.infoPage);
+
+	const ctx = getNowPlayingContext();
+	let nowPlaying = $derived(ctx.current);
 </script>
 
 <section class="my-large">
@@ -46,23 +49,16 @@
 <hr />
 
 <section class="my-large">
-	<div class="wrapper my-medium">
-		{#if nowPlaying.data}
-			{@const { trackName, artist, isPlaying } = nowPlaying.data}
-
-			{@const censoredTrackName = censor(trackName)}
-			{@const censoredArtist = censor(artist)}
-
+	{#if nowPlaying}
+		<div class="wrapper my-medium">
 			<h2>
-				<DotHead>{isPlaying ? 'Now Playing' : 'Recently Played'}</DotHead>
+				<DotHead>Recently Played</DotHead>
 			</h2>
 			<h3 class="text-h1">
-				{isPlaying
-					? `Right now I'm listening to “${censoredTrackName}” by ${censoredArtist} on Spotify.`
-					: `The last song I listened to on Spotify was “${censoredTrackName}” by ${censoredArtist}.`}
+				<NowPlayingRag {nowPlaying} />
 			</h3>
-		{/if}
-	</div>
+		</div>
+	{/if}
 
 	<div class="wrapper my-medium">
 		<h2><DotHead>Featured playlists</DotHead></h2>
@@ -73,14 +69,20 @@
 					<a
 						href={link}
 						target="_blank"
-						class="flex grid-cols-6 justify-between gap-standard md:grid"
+						class="flex grid-cols-6 justify-between gap-standard tabular-nums md:grid"
 					>
 						<div class="col-span-4 flex gap-2 md:col-span-2">
 							<span>{NUMS[i + 1]}</span>
 							<h3 class="max-w-[18ch]">{title}</h3>
 						</div>
-						<p class="col-span-2 hidden md:block">{date}</p>
-						<p class="col-span-2 flex justify-between gap-standard">
+						<p
+							class="col-span-2 hidden -tracking-[0.05ch] tabular-nums md:block"
+						>
+							{date}
+						</p>
+						<p
+							class="col-span-2 flex justify-between gap-standard -tracking-[0.05ch] tabular-nums"
+						>
 							{formatTime(duration || 0, 'hh:mm:ss')}<span>&rarr;</span>
 						</p>
 					</a>

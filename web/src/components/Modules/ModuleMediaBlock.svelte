@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Media from '$components/Media.svelte';
+	import { sanityDataAttribute } from '$lib/attachments';
 	import type { ModuleMediaBlock } from '$sanity';
 
 	type Props = {
@@ -9,14 +10,14 @@
 	let { data }: Props = $props();
 </script>
 
-{#if data.media?.asset}
-	<div class="wrapper my-standard">
+{#if data.media}
+	<div class="wrapper my-standard" {@attach sanityDataAttribute('.media')}>
 		<Media
-			value={data.media.asset}
+			value={data.media}
 			sizes="100vw"
 			alt={null}
-			imageProps={{ aspect: data.aspect }}
-			videoProps={{ aspect: data.aspect }}
+			imageProps={{ aspect: data.aspect || undefined }}
+			videoProps={{ aspect: data.aspect || undefined }}
 		/>
 	</div>
 {/if}

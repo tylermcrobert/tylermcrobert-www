@@ -1,17 +1,14 @@
-import { SITEMAP_QUERY, type SITEMAP_QUERYResult } from '$sanity';
+import { PUBLIC_SITE_URL } from '$env/static/public';
+import { SITEMAP_QUERY } from '$sanity';
 
 export async function GET({
-	url,
 	locals: {
 		sanity: { client }
 	}
 }) {
-	const { pages, projects, info } =
-		await client.fetch<SITEMAP_QUERYResult>(SITEMAP_QUERY);
+	const { pages, projects, info } = await client.fetch(SITEMAP_QUERY);
 
-	const idk = [...pages, ...(projects || [])].filter(
-		(page): page is { slug: string; _updatedAt: string } => page.slug !== null
-	);
+	const allPages = [...pages, ...(projects || [])];
 
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset 
@@ -21,11 +18,11 @@ export async function GET({
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 
-    ${idk
+    ${allPages
 			.map(
 				(project) => `
         <url>
-          <loc>${new URL(project.slug, url)}</loc>
+          <loc>${PUBLIC_SITE_URL}/${project.slug}</loc>
           <lastmod>${project._updatedAt}</lastmod>
           <priority>0.8</priority>
         </url>`
@@ -35,7 +32,7 @@ export async function GET({
     ${
 			info
 				? `<url>
-        <loc>${new URL('info', url)}</loc>
+        <loc>${PUBLIC_SITE_URL}/info</loc>
         <lastmod>${info?._updatedAt}</lastmod>
         <priority>0.8</priority>
       </url>
