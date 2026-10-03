@@ -12,9 +12,7 @@
 	let { showFrame, backgroundImg, media, scrolling } = $derived(data);
 </script>
 
-<div
-	class={!scrolling ? 'wrapper' : 'not-scrolling-browser-aspect-range:wrapper'}
->
+<div class={!scrolling ? 'wrapper' : 'not-scrolling-browser-fits:wrapper'}>
 	<div
 		style:--padding="10%"
 		style:background={data.backgroundColor || 'var(--section-background)'}
@@ -23,12 +21,15 @@
 		{#if !scrolling}
 			{@render standard()}
 		{:else}
-			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
+			<!-- Show scrolling when condition is met -->
+			<div class="wrapper not-scrolling-browser-fits:hidden">
 				<div class="mx-(--padding)">
 					<ScrollingBrowser {data} {content} {browserChrome} />
 				</div>
 			</div>
-			<div class="scrolling-browser-aspect-range:hidden">
+
+			<!-- Show regular when condition is not met -->
+			<div class="scrolling-browser-fits:hidden">
 				{@render standard()}
 			</div>
 		{/if}

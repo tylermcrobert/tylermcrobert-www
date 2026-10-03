@@ -2,7 +2,7 @@
 	@apply overflow-hidden rounded-sm md:rounded-md;
 }
 
-@custom-variant scrolling-browser-aspect-range {
+@custom-variant scrolling-browser-fits {
 	@media (1/1 <= aspect-ratio <=2) {
 		@slot;
 	}
