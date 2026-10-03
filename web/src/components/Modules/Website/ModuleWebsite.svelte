@@ -22,6 +22,17 @@
 		{#if !scrolling}
 			{@render standard()}
 		{:else}
+			{#if backgroundImg}
+				<Image
+					image={backgroundImg}
+					alt={null}
+					sizes="90vw"
+					aspect={1.5}
+					class="sticky top-0 inset-0 h-dvh"
+				/>
+				<div class="-mb-[100vh]"></div>
+			{/if}
+
 			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
 				<div class="mx-[10%]">
 					<ScrollingBrowser {data} {content} {browserChrome} />
