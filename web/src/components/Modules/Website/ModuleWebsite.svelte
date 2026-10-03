@@ -16,6 +16,7 @@
 	class={!scrolling ? 'wrapper' : 'not-scrolling-browser-aspect-range:wrapper'}
 >
 	<div
+		style:--padding="10%"
 		style:background={data.backgroundColor || 'var(--section-background)'}
 		class="relative my-standard flow-root w-full bg-black"
 	>
@@ -23,7 +24,7 @@
 			{@render standard()}
 		{:else}
 			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
-				<div class="mx-[10%]">
+				<div class="mx-(--padding)">
 					<ScrollingBrowser {data} {content} {browserChrome} />
 				</div>
 			</div>
@@ -37,7 +38,7 @@
 {#snippet standard()}
 	<div
 		class={[
-			'relative z-10 m-[10%]',
+			'relative z-10 m-(--padding)',
 			showFrame !== false && 'round-browser-frame'
 		]}
 	>
