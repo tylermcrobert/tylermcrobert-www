@@ -23,9 +23,7 @@
 		{:else}
 			<!-- Show scrolling when condition is met -->
 			<div class="wrapper not-scrolling-browser-fits:hidden">
-				<div class="mx-(--padding)">
-					<ScrollingBrowser {data} {content} {browserChrome} />
-				</div>
+				<ScrollingBrowser {data} {content} {browserChrome} />
 			</div>
 
 			<!-- Show regular when condition is not met -->

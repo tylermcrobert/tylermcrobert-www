@@ -22,7 +22,10 @@
 	});
 </script>
 
-<div style:--image-aspect={aspect} class="scrollweb-wrapper @container">
+<div
+	style:--image-aspect={aspect}
+	class="scrollweb-wrapper @container mx-(--padding)"
+>
 	<div class="h-(--scroll-distance)">
 		<div class="sticky top-0 grid h-(--total-height) place-items-center">
 			<div class="w-full round-browser-frame">
