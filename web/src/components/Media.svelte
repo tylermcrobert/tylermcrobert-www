@@ -31,11 +31,12 @@
 </script>
 
 {#if value?.video?.playbackId}
-	{const parsed = $derived(muxToVideoProps(value.video))}
+	{const props = $derived(muxToVideoProps(value.video))}
 	{const aspect = $derived(getAspectNumber(value.video.aspect ?? '16:9'))}
-	{const hasSound = $derived(value.video.hasSound ?? true)}
 
-	<Video {...videoProps} {...parsed} {aspect} class={className} {hasSound} />
+	{#if props}
+		<Video {...videoProps} {...props} {aspect} class={className} />
+	{/if}
 {:else if value?.image}
 	<Image {...imageProps} image={value.image} class={className} {alt} {sizes} />
 {/if}
