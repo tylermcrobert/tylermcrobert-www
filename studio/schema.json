@@ -2580,13 +2580,6 @@
             }
           },
           "optional": true
-        },
-        "hasSound": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
         }
       }
     }

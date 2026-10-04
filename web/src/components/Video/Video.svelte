@@ -11,7 +11,6 @@
 		poster,
 		aspect,
 		eager = false,
-		hasSound = true,
 		...props
 	}: VideoProps = $props();
 
@@ -35,7 +34,7 @@
 {/snippet}
 
 {#if controls}
-	<VideoControls class={className} {hasSound}>
+	<VideoControls class={className}>
 		{@render video()}
 	</VideoControls>
 {:else}
