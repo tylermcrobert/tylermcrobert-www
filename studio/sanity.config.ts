@@ -35,6 +35,13 @@ export default defineConfig({
     videoPlayer({
       source: 'mux',
       showPoster: false,
+      additionalFields: [
+        {
+          name: 'method',
+          type: 'string',
+          options: {list: ['hls', 'mp4']},
+        },
+      ],
     }),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],

@@ -35,7 +35,13 @@
 	{const aspect = $derived(getAspectNumber(value.video.aspect ?? '16:9'))}
 
 	{#if props}
-		<Video {...videoProps} {...props} {aspect} class={className} />
+		<Video
+			{...videoProps}
+			{...props}
+			src={value.video.src ?? props.src}
+			{aspect}
+			class={className}
+		/>
 	{/if}
 {:else if value?.image}
 	<Image {...imageProps} image={value.image} class={className} {alt} {sizes} />

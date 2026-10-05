@@ -11,26 +11,31 @@
 		poster,
 		aspect,
 		eager = false,
+		src,
 		...props
 	}: VideoProps = $props();
 
-	let isMuxLoaded = $state(false);
+	const isMux = $derived(
+		!!src && /^https:\/\/stream\.mux\.com\/[^/?#]+\.m3u8(?:$|[?#])/.test(src)
+	);
 </script>
 
 {#snippet video()}
-	<mux-video
+	{let isMuxLoaded = $state(false)}
+
+	<svelte:element
+		this={isMux ? 'mux-video' : 'video'}
 		{...props}
-		class={['block w-full', !controls && className]}
+		{src}
+		class={['block w-full object-cover', !controls && className]}
 		style:background={poster ? `url("${poster}") center / cover` : undefined}
-		style:--media-object-fit="cover"
 		style:aspect-ratio={aspect}
-		crossorigin="anonymous"
+		style:--media-object-fit="cover"
 		playsinline
-		{@attach !isMuxLoaded
+		{@attach isMux && !isMuxLoaded
 			? loadMux({ eager, onmuxload: () => (isMuxLoaded = true) })
 			: intersectionHandlePlayback({ autoPlay: !!autoplay, autoPause: true })}
-	>
-	</mux-video>
+	></svelte:element>
 {/snippet}
 
 {#if controls}
