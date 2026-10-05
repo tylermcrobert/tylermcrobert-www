@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { intersection } from '$lib/attachments/intersectionObserver.svelte';
+
 	import { loadMux } from './attachments/loadMux.svelte';
 	import { intersectionHandlePlayback } from './attachments/onScrollHandlePlayback.svelte';
 	import type { VideoProps } from './types';
@@ -26,15 +28,24 @@
 	<svelte:element
 		this={isMux ? 'mux-video' : 'video'}
 		{...props}
-		{src}
+		src={isMux ? src : undefined}
 		class={['block w-full object-cover', !controls && className]}
 		style:background={poster ? `url("${poster}") center / cover` : undefined}
 		style:aspect-ratio={aspect}
 		style:--media-object-fit="cover"
 		playsinline
-		{@attach isMux && !isMuxLoaded
-			? loadMux({ eager, onmuxload: () => (isMuxLoaded = true) })
-			: intersectionHandlePlayback({ autoPlay: !!autoplay, autoPause: true })}
+		{@attach intersectionHandlePlayback({
+			autoPlay: !!autoplay,
+			autoPause: true
+		})}
+		crossorigin="anonymous"
+		{@attach intersection((entry) => {
+			if (isMux || entry.isIntersecting) return;
+			(entry.target as HTMLVideoElement)!.src = src!;
+		})}
+		{@attach isMux &&
+			!isMuxLoaded &&
+			loadMux({ eager, onmuxload: () => (isMuxLoaded = true) })}
 	></svelte:element>
 {/snippet}
 
