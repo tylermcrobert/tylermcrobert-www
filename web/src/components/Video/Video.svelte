@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { intersection } from '$lib/attachments/intersectionObserver.svelte';
-
-	import { loadMux } from './attachments/loadMux.svelte';
+	import { lazyLoad } from './attachments/lazyLoad.svelte';
 	import { intersectionHandlePlayback } from './attachments/onScrollHandlePlayback.svelte';
 	import type { VideoProps } from './types';
 	import VideoControls from './VideoControls.svelte';
@@ -23,7 +21,7 @@
 </script>
 
 {#snippet video()}
-	{let isMuxLoaded = $state(false)}
+	{let isLoaded = $state(false)}
 
 	<svelte:element
 		this={isMux ? 'mux-video' : 'video'}
@@ -34,22 +32,13 @@
 		style:aspect-ratio={aspect}
 		style:--media-object-fit="cover"
 		playsinline
-		{@attach intersectionHandlePlayback({
-			autoPlay: !!autoplay,
-			autoPause: true
-		})}
 		crossorigin="anonymous"
-		{@attach intersection(
-			(entry) => {
-				const video = entry.target as HTMLVideoElement;
-				if (isMux || !entry.isIntersecting || video.getAttribute('src')) return;
-				video.src = src!;
-			},
-			{ rootMargin: '0px 0px 50% 0px' }
-		)}
-		{@attach isMux &&
-			!isMuxLoaded &&
-			loadMux({ eager, onmuxload: () => (isMuxLoaded = true) })}
+		{@attach !isLoaded
+			? lazyLoad({ src: src!, isMux, eager, onload: () => (isLoaded = true) })
+			: intersectionHandlePlayback({
+					autoPlay: !!autoplay,
+					autoPause: true
+				})}
 	></svelte:element>
 {/snippet}
 
