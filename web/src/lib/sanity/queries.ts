@@ -36,7 +36,7 @@ export const MEDIA_PROJECTION = /* groq */ `{
   "_type": "mediaProjection",
   "video": select(
     defined(videoPlayer.muxAsset.asset->playbackId) => videoPlayer {
-      "playbackId": coalesce(muxAsset.asset->playbackId, ''),
+      "playbackId": muxAsset.asset->playbackId,
       "aspect": muxAsset.asset->data.aspect_ratio,
       "poster": poster.asset->url,
       "playbackSettings": coalesce(playbackSettings, {
@@ -46,7 +46,6 @@ export const MEDIA_PROJECTION = /* groq */ `{
         "loop": true,
         "muted": true
       }),
-      "hasSound": hasSound
     }
   ),
   image

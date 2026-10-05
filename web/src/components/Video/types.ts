@@ -12,9 +12,6 @@ export interface VideoProps extends VideoPropsBase {
 
 	/** Class name for the video container. */
 	class?: ClassValue;
-
-	/** Whether the video has audio. */
-	hasSound?: boolean;
 }
 
 /**

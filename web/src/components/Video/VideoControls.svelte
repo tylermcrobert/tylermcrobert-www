@@ -22,10 +22,9 @@
 	interface Props {
 		children: Snippet;
 		class?: ClassValue;
-		hasSound?: boolean;
 	}
 
-	let { children, class: className, hasSound }: Props = $props();
+	let { children, class: className }: Props = $props();
 
 	let store: VideoPlayerStore | undefined = $state();
 	let paused = $derived(store?.paused ?? true);
@@ -100,17 +99,15 @@
 			(!userActive || !started) && 'translate-y-2 opacity-0'
 		]}
 	>
-		{#if hasSound}
-			<media-mute-button
-				class="grid size-6 shrink-0 cursor-pointer place-items-center"
-			>
-				{#if muted}
-					<VolumeMuted />
-				{:else}
-					<VolumePlaying />
-				{/if}
-			</media-mute-button>
-		{/if}
+		<media-mute-button
+			class="grid size-6 shrink-0 cursor-pointer place-items-center"
+		>
+			{#if muted}
+				<VolumeMuted />
+			{:else}
+				<VolumePlaying />
+			{/if}
+		</media-mute-button>
 
 		<media-time type="current" class="tabular-nums"></media-time>
 

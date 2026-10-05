@@ -32,7 +32,10 @@ export default defineConfig({
     colorInput(),
     media(),
     muxInput({max_resolution_tier: '2160p'}),
-    videoPlayer({source: 'mux'}),
+    videoPlayer({
+      source: 'mux',
+      showPoster: false,
+    }),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
 
