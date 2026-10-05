@@ -39,10 +39,14 @@
 			autoPause: true
 		})}
 		crossorigin="anonymous"
-		{@attach intersection((entry) => {
-			if (isMux || entry.isIntersecting) return;
-			(entry.target as HTMLVideoElement)!.src = src!;
-		})}
+		{@attach intersection(
+			(entry) => {
+				const video = entry.target as HTMLVideoElement;
+				if (isMux || !entry.isIntersecting || video.getAttribute('src')) return;
+				video.src = src!;
+			},
+			{ rootMargin: '0px 0px 50% 0px' }
+		)}
 		{@attach isMux &&
 			!isMuxLoaded &&
 			loadMux({ eager, onmuxload: () => (isMuxLoaded = true) })}
