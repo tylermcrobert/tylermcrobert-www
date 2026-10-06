@@ -31,7 +31,12 @@ export default defineConfig({
 
     colorInput(),
     media(),
-    muxInput({max_resolution_tier: '2160p'}),
+    muxInput({
+      max_resolution_tier: '2160p',
+      static_renditions: ['highest'],
+      video_quality: 'premium',
+      disableUploadConfig: true,
+    }),
     videoPlayer({
       source: 'mux',
       showPoster: false,
