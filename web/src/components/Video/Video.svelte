@@ -15,9 +15,7 @@
 		...props
 	}: VideoProps = $props();
 
-	const isMux = $derived(
-		!!src && /^https:\/\/stream\.mux\.com\/[^/?#]+\.m3u8(?:$|[?#])/.test(src)
-	);
+	const isMux = $derived(!!src?.includes('mux.com') && src.includes('.m3u8'));
 </script>
 
 {#snippet video()}
