@@ -31,10 +31,22 @@ export default defineConfig({
 
     colorInput(),
     media(),
-    muxInput({max_resolution_tier: '2160p'}),
+    muxInput({
+      max_resolution_tier: '2160p',
+      static_renditions: ['highest'],
+      video_quality: 'premium',
+      disableUploadConfig: true,
+    }),
     videoPlayer({
       source: 'mux',
       showPoster: false,
+      additionalFields: [
+        {
+          name: 'method',
+          type: 'string',
+          options: {list: ['hls', 'mp4']},
+        },
+      ],
     }),
     ...(process.env.NODE_ENV === 'development' ? [visionTool()] : []),
   ],
