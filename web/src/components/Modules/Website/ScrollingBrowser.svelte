@@ -7,10 +7,10 @@
 	type Props = {
 		data: ModuleWebsite;
 		browserChrome: Snippet;
-		content: Snippet;
+		mediaContents: Snippet;
 	};
 
-	let { data, browserChrome, content }: Props = $props();
+	let { data, browserChrome, mediaContents }: Props = $props();
 
 	const aspect = $derived.by(() => {
 		if (data.media?.image) {
@@ -32,7 +32,7 @@
 				{@render browserChrome()}
 
 				<div class="-mb-px grid aspect-(--frame-aspect) overflow-hidden">
-					{@render content()}
+					{@render mediaContents()}
 				</div>
 			</div>
 		</div>

@@ -19,32 +19,14 @@
 		class="relative my-standard flow-root w-full bg-black"
 	>
 		{#if !scrolling}
-			{@render standard()}
+			{@render nonScrollingUI()}
 		{:else}
-			{#if backgroundImg}
-				<Image
-					image={backgroundImg}
-					alt={null}
-					sizes="90vw"
-					aspect={1.5}
-					class="sticky top-0 inset-0 h-dvh"
-				/>
-				<div class="-mb-[100vh]"></div>
-			{/if}
-
-			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
-				<ScrollingBrowser {data} {content} {browserChrome} />
-			</div>
-
-			<!-- Show regular when condition is not met -->
-			<div class="scrolling-browser-fits:hidden">
-				{@render standard()}
-			</div>
+			{@render scrollUI()}
 		{/if}
 	</div>
 </div>
 
-{#snippet standard()}
+{#snippet browserWithFrame()}
 	<div
 		class={[
 			'relative z-10 m-(--padding)',
@@ -52,8 +34,50 @@
 		]}
 	>
 		{@render browserChrome()}
-		{@render content()}
+		{@render mediaContents()}
 	</div>
+{/snippet}
+
+{#snippet mediaContents()}
+	{#if media}
+		<div class="block bg-white">
+			<Media sizes="80vw" value={media} alt={null} />
+		</div>
+	{/if}
+{/snippet}
+
+{#snippet browserChrome()}
+	{#if showFrame !== false}
+		<BrowserChrome />
+	{/if}
+{/snippet}
+
+{#snippet scrollUI()}
+	<div class="not-scrolling-browser-fits:hidden">
+		{#if backgroundImg}
+			<Image
+				image={backgroundImg}
+				alt={null}
+				sizes="90vw"
+				aspect={1.5}
+				class="sticky top-0 inset-0 h-dvh"
+			/>
+			<div class="-mb-[100vh]"></div>
+		{/if}
+
+		<div class="wrapper">
+			<ScrollingBrowser {data} {mediaContents} {browserChrome} />
+		</div>
+	</div>
+
+	<!-- Show regular when condition is not met -->
+	<div class="scrolling-browser-fits:hidden">
+		{@render browserWithFrame()}
+	</div>
+{/snippet}
+
+{#snippet nonScrollingUI()}
+	{@render browserWithFrame()}
 
 	{#if backgroundImg}
 		<div>
@@ -65,19 +89,5 @@
 				class="absolute inset-0 z-0 h-full w-full object-cover"
 			/>
 		</div>
-	{/if}
-{/snippet}
-
-{#snippet content()}
-	{#if media}
-		<div class="block bg-white">
-			<Media sizes="80vw" value={media} alt={null} />
-		</div>
-	{/if}
-{/snippet}
-
-{#snippet browserChrome()}
-	{#if showFrame !== false}
-		<BrowserChrome />
 	{/if}
 {/snippet}
