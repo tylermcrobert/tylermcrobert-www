@@ -36,6 +36,13 @@ export const MEDIA_PROJECTION = /* groq */ `{
   "_type": "mediaProjection",
   "video": select(
     defined(videoPlayer.muxAsset.asset->playbackId) => videoPlayer {
+      method,
+      "src": muxAsset.asset->{
+        "mp4": data.static_renditions.files[resolution == "highest" && status == "ready"][0].name,
+        "base": "https://stream.mux.com/" + playbackId
+      }{
+        "url": select(^.method == "mp4" && defined(mp4) => base + "/" + mp4, base + ".m3u8")
+      }.url,
       "playbackId": muxAsset.asset->playbackId,
       "aspect": muxAsset.asset->data.aspect_ratio,
       "poster": poster.asset->url,
