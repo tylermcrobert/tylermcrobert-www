@@ -33,9 +33,7 @@
 			{/if}
 
 			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
-				<div class="mx-[10%]">
-					<ScrollingBrowser {data} {content} {browserChrome} />
-				</div>
+				<ScrollingBrowser {data} {content} {browserChrome} />
 			</div>
 
 			<!-- Show regular when condition is not met -->
