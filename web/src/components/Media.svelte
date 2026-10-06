@@ -38,7 +38,7 @@
 		<Video
 			{...videoProps}
 			{...props}
-			src={value.video.src ?? props.src}
+			src={value.video.src}
 			{aspect}
 			class={className}
 		/>
