@@ -22,9 +22,17 @@ export const website = defineType({
     }),
 
     defineField({
+      name: 'scrolling',
+      type: 'boolean',
+    }),
+
+    defineField({
       name: 'backgroundImg',
       type: 'image',
       options: {hotspot: true},
+      hidden: ({parent}) => {
+        return parent?.scrolling
+      },
     }),
 
     defineField({

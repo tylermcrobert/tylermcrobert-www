@@ -84,6 +84,7 @@ const MODULE_WEBSITE = /* groq */ `
     backgroundImg,
     "backgroundColor": backgroundColor.hex,
     showFrame,
+    scrolling,
     media${MEDIA_PROJECTION},
   }
 `;
