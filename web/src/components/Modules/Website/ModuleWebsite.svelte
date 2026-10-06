@@ -21,8 +21,18 @@
 		{#if !scrolling}
 			{@render standard()}
 		{:else}
-			<!-- Show scrolling when condition is met -->
-			<div class="wrapper not-scrolling-browser-fits:hidden">
+			{#if backgroundImg}
+				<Image
+					image={backgroundImg}
+					alt={null}
+					sizes="90vw"
+					aspect={1.5}
+					class="sticky top-0 inset-0 h-dvh"
+				/>
+				<div class="-mb-[100vh]"></div>
+			{/if}
+
+			<div class="wrapper not-scrolling-browser-aspect-range:hidden">
 				<ScrollingBrowser {data} {content} {browserChrome} />
 			</div>
 

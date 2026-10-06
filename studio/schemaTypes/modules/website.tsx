@@ -30,9 +30,6 @@ export const website = defineType({
       name: 'backgroundImg',
       type: 'image',
       options: {hotspot: true},
-      hidden: ({parent}) => {
-        return parent?.scrolling
-      },
     }),
 
     defineField({
