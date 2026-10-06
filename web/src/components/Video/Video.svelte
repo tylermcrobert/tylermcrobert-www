@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { loadMux } from './attachments/loadMux.svelte';
+	import { lazyLoad } from './attachments/lazyLoad.svelte';
 	import { intersectionHandlePlayback } from './attachments/onScrollHandlePlayback.svelte';
 	import type { VideoProps } from './types';
 	import VideoControls from './VideoControls.svelte';
@@ -11,26 +11,33 @@
 		poster,
 		aspect,
 		eager = false,
+		src,
 		...props
 	}: VideoProps = $props();
 
-	let isMuxLoaded = $state(false);
+	const isMux = $derived(!!src?.includes('mux.com') && src.includes('.m3u8'));
 </script>
 
 {#snippet video()}
-	<mux-video
+	{let isLoaded = $state(false)}
+
+	<svelte:element
+		this={isMux ? 'mux-video' : 'video'}
 		{...props}
-		class={['block w-full', !controls && className]}
+		src={isMux ? src : undefined}
+		class={['block w-full object-cover', !controls && className]}
 		style:background={poster ? `url("${poster}") center / cover` : undefined}
-		style:--media-object-fit="cover"
 		style:aspect-ratio={aspect}
-		crossorigin="anonymous"
+		style:--media-object-fit="cover"
 		playsinline
-		{@attach !isMuxLoaded
-			? loadMux({ eager, onmuxload: () => (isMuxLoaded = true) })
-			: intersectionHandlePlayback({ autoPlay: !!autoplay, autoPause: true })}
-	>
-	</mux-video>
+		crossorigin="anonymous"
+		{@attach !isLoaded
+			? lazyLoad({ src: src!, isMux, eager, onload: () => (isLoaded = true) })
+			: intersectionHandlePlayback({
+					autoPlay: !!autoplay,
+					autoPause: true
+				})}
+	></svelte:element>
 {/snippet}
 
 {#if controls}

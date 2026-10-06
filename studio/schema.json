@@ -2541,6 +2541,23 @@
           },
           "optional": true
         },
+        "method": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "hls"
+              },
+              {
+                "type": "string",
+                "value": "mp4"
+              }
+            ]
+          },
+          "optional": true
+        },
         "poster": {
           "type": "objectAttribute",
           "value": {
